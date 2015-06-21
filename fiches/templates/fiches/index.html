@@ -1,0 +1,9 @@
+{% if latest_fiches %}
+<ul>
+  {% for f in latest_fiches %}
+  <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Aucune fiche</p>
+{% endif %}
