@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from fiches import views
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     # url(r'^$', 'firp.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
@@ -11,4 +11,4 @@ urlpatterns = patterns('',
     url(r'^(?P<fiche_id>\d+)/$', views.detailFiche, name='detail'),
     url(r'^creer/$', views.creerfiche),
     url(r'^$', views.index, name='index'),
-)
+]
