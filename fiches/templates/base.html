@@ -17,17 +17,32 @@
 </head>
 <body>
   <div class="page-header">
-    <h1><a href="/">Home</a></h1>
+    <h1><a href="/">Fiches de personnages</a></h1>
   </div>
 
-  <div id="sidebar">
-    {% block sidebar %}
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/creer/">Formulaire</a></li>
-    </ul>
-    {% endblock %}
-  </div>
+  <nav class="navbar navbar-default">
+
+      <div class="navbar-header">
+	<a class="navar-brand">Fiches rp</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+	<ul class="nav navbar-nav">
+	  <li><a href="/">Home</a></li>
+	  <li><a href="/creer/">Formulaire</a></li>
+	</ul>
+	<div class="navbar-right">
+	  <a class="btn btn-default navbar-btn">Login</a>
+	</div>
+      </div>
+  </nav>
+  <!-- <div id="sidebar"> -->
+  <!--   {% block sidebar %} -->
+  <!--   <ul> -->
+  <!--     <li><a href="/">Home</a></li> -->
+  <!--     <li><a href="/creer/">Formulaire</a></li> -->
+  <!--   </ul> -->
+  <!--   {% endblock %} -->
+  <!-- </div> -->
   <div id="content">
     {% block content %}this is the content{% endblock %}
   </div>

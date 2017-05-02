@@ -7,7 +7,9 @@
 {% if latest_fiches %}
 <ul>
   {% for f in latest_fiches %}
-  <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+  <div class="character">
+    <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+  </div>
   {% endfor %}
 </ul>
 {% else %}
