@@ -139,11 +139,14 @@ class Fiche(models.Model):
         ('h', "Homme"),
         ('f', "Femme")
     )))
-    race = models.CharField(max_length=40)
+    race = models.CharField(max_length=40,
+                            default = 'Humaine')
     taille = models.FloatField()
     poids = models.FloatField()
     profession = models.CharField(max_length=75,
                              default = 'Prostipute')
+    medaille = models.CharField(max_length = 3000,
+                                default = 'Non applicable/Aucune')
     etat = models.CharField(max_length=2,
                             choices = ETAT_CHOIX,
                             default = VIVANT)
@@ -152,7 +155,8 @@ class Fiche(models.Model):
         ('p', "Personnage joué"),
         ('a', "Personnage jouable"),
         ('n', "Personnage non joué")
-    )))
+                          )),
+                          default = "Personnage joué")
     jour_naissance = models.SmallIntegerField()
     mois_naissance = models.SmallIntegerField()
     annee_naissance = models.SmallIntegerField()
@@ -169,6 +173,6 @@ class FicheForm(ModelForm):
                   'prenom5', 'prenom6', 'prenom7', 'prenom8', 'titre',
                   'titre2', 'titre3', 'titre4', 'titre5', 'titre6', 'titre7', 'titre8',
                   'sexe', 'race', 'taille',
-                  'poids', 'profession', 'etat', 'pj', 'jour_naissance',
+                  'poids', 'profession', 'medaille', 'etat', 'pj', 'jour_naissance',
                   'mois_naissance', 'annee_naissance', 'zone_naissance',
                   'description', 'historique' ]

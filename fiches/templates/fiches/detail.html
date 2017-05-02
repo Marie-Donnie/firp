@@ -1,3 +1,9 @@
+
+{% extends "base.html" %}
+
+{% block title %}Fiche de {{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
+
+{% block content %}
 <h1>{{ fiche.prenom }} {{ fiche.nom }}</h1>
 <p>{{ fiche.get_pj_display }}</p>
 <ul>
@@ -20,7 +26,9 @@
   <li>Taille&nbsp;: {{ fiche.taille }}m</li>
   <li>Poids&nbsp;: {{ fiche.poids }}kg</li>
   <li>Profession&nbsp;: {{fiche.profession}}</li>
+  <li>Medaille&nbsp;: {{fiche.medaille}}</li>
   <li>État&nbsp;: {{ fiche.get_etat_display }}</li>
   <li>Description&nbsp;: {{ fiche.description }}</li>
   <li>Historique&nbsp;: {{ fiche.historique }}</li>
 </ul>
+{% endblock %}

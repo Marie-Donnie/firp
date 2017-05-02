@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+
 {% if latest_fiches %}
 <ul>
   {% for f in latest_fiches %}
@@ -7,3 +13,5 @@
 {% else %}
 <p>Aucune fiche</p>
 {% endif %}
+
+{% endblock %}
