@@ -82,6 +82,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/fiches/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'fiches/media')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
