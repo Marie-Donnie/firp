@@ -3,15 +3,18 @@ body {
 }
 
 h1 a {
-    color: #470002;
+    color: #830205;
 }
 
 .page-header {
+    border: 1px solid #470002;
+    border-radius: 5px;
     background-color: #000000;
-    margin-top: 0;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
     margin-bottom: 0;
     padding: 40px 40px 40px 40px;
-    border: 0;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
@@ -61,6 +64,9 @@ h1, h2, h3, h4 {
 .navbar-default {
     background-color: #000000;
     border-color: #470002;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 0;
 }
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
@@ -101,20 +107,28 @@ div.gallery img {
 }
 
 .panel {
-    border: 0;
+    border: 1px;
     background-color: #000000;
-
+    border-color: #470002;
 }
 
 .panel .panel-heading {
     background-image: url("/static/fiches/images/separator.jpg");
     background-color: #000000;
     padding: 10px 15px;
-    border: 0;
+    border: 1px solid #470002;
+    border-radius: 5px;
     color: #830205;
     margin-top: 0;
-    /* border-color: #470002; */
+    margin-left: 50px;
+    margin-right: 50px;
+    border-color: #470002;
     text-shadow: -1px -1px #000;
+}
+
+.panel h1.panel-heading {
+    border: 1px solid #470002;
+    border-radius: 5px;
 }
 
 #detail p {
@@ -145,4 +159,13 @@ li {
 
 p {
     font-size: 30px;
+}
+
+.media {
+    border: 1px solid #470002;
+    border-radius: 5px;
+    margin-top: 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
 }
