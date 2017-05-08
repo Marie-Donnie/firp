@@ -3,17 +3,22 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
+<div id="index" class ="panel panel-default">
 
-{% if latest_fiches %}
-<ul>
-  {% for f in latest_fiches %}
-  <div id="character" class="panel panel-default">
-    <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+  <h1 class="panel-heading">Liste des personnages</h1>
+  <div id="characters" class="panel-body">
+    {% if latest_fiches %}
+    <ul>
+      {% for f in latest_fiches %}
+      <div class="character">
+	<li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+      </div>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Aucune fiche</p>
+    {% endif %}
   </div>
-  {% endfor %}
-</ul>
-{% else %}
-<p>Aucune fiche</p>
-{% endif %}
 
+</div>
 {% endblock %}
