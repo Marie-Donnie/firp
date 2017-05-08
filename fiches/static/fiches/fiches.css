@@ -94,6 +94,8 @@ div.gallery img {
 }
 
 #detail .media-object {
+    margin: 20px;
+    border-radius: 8px;
     width: 500px;
     height: auto;
 }
