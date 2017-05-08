@@ -7,7 +7,7 @@
 {% if latest_fiches %}
 <ul>
   {% for f in latest_fiches %}
-  <div class="character">
+  <div id="character" class="panel panel-default">
     <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
   </div>
   {% endfor %}
