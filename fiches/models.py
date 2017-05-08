@@ -2,6 +2,19 @@
 from django.db import models
 from django.forms import ModelForm
 
+
+class IntegerRangeField(models.SmallIntegerField):
+    def __init__(self, verbose_name=None, name=None, min_value=None,
+                 max_value=None, **kwargs):
+        self.min_value, self.max_value = min_value, max_value
+        models.SmallIntegerField.__init__(self, verbose_name, name, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {'min_value': self.min_value, 'max_value': self.max_value}
+        defaults.update(kwargs)
+        return super(IntegerRangeField, self).formfield(**defaults)
+
+
 # Create your models here.
 
 VIVANT = 'VI'
@@ -112,7 +125,7 @@ class Fiche(models.Model):
     # prenom8 = models.CharField(max_length=50,
     #                            default='')
     autresprenoms = models.CharField(max_length=200,
-                                     default='')
+                                     default='Aucun')
     titre = models.CharField(max_length=75,
                              default='Aucun')
     # titre2 = models.CharField(max_length=75,
@@ -130,16 +143,17 @@ class Fiche(models.Model):
     # titre8 = models.CharField(max_length=75,
     #                           default='')
     autrestitres = models.CharField(max_length=500,
-                                    default='')
+                                    default='Aucun')
     sexe = models.CharField(max_length=1,
                             choices=((
                                 ('h', "Masculin"),
                                 ('f', "Féminin")
-                            )))
+                            )),
+                            default="Masculin")
     race = models.CharField(max_length=40,
                             default='Humaine')
-    taille = models.FloatField()
-    poids = models.FloatField()
+    taille = models.FloatField(default='1.70')
+    poids = models.FloatField(default='70')
     profession = models.CharField(max_length=75,
                                   default='Prostipute')
     medaille = models.CharField(max_length=3000,
@@ -154,16 +168,19 @@ class Fiche(models.Model):
                               ('n', "Personnage non joué")
                           )),
                           default="Personnage joué")
-    jour_naissance = models.SmallIntegerField()
-    mois_naissance = models.SmallIntegerField()
-    annee_naissance = models.SmallIntegerField()
+    jour_naissance = IntegerRangeField(default='1', min_value=1,
+                                       max_value=31)
+    mois_naissance = IntegerRangeField(default='1', min_value=1,
+                                       max_value=12)
+    annee_naissance = IntegerRangeField(default='0', min_value=-32000,
+                                        max_value=100)
     zone_naissance = models.SmallIntegerField(choices=ZONES_CHOIX)
     description = models.CharField(max_length=3000,
                                    default='A venir')
     historique = models.CharField(max_length=3000,
                                   default='A venir')
     image = models.ImageField(upload_to='images/',
-                              default='images/no-image.png')
+                              default='images/site/no-image.png')
 
 
 class FicheForm(ModelForm):
