@@ -1,6 +1,8 @@
 # coding=utf-8
 from django.db import models
 from django.forms import ModelForm
+from django.conf import settings
+from django.utils import timezone
 
 
 class IntegerRangeField(models.SmallIntegerField):
@@ -110,38 +112,10 @@ for (ri, (region, zones)) in zip(range(len(ZONES)), ZONES):
 class Fiche(models.Model):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
-    # prenom2 = models.CharField(max_length=50,
-    #                            default='')
-    # prenom3 = models.CharField(max_length=50,
-    #                            default='')
-    # prenom4 = models.CharField(max_length=50,
-    #                            default='')
-    # prenom5 = models.CharField(max_length=50,
-    #                            default='')
-    # prenom6 = models.CharField(max_length=50,
-    #                            default='')
-    # prenom7 = models.CharField(max_length=50,
-    #                            default='')
-    # prenom8 = models.CharField(max_length=50,
-    #                            default='')
     autresprenoms = models.CharField(max_length=200,
                                      default='Aucun')
     titre = models.CharField(max_length=75,
                              default='Aucun')
-    # titre2 = models.CharField(max_length=75,
-    #                           default='')
-    # titre3 = models.CharField(max_length=75,
-    #                           default='')
-    # titre4 = models.CharField(max_length=75,
-    #                           default='')
-    # titre5 = models.CharField(max_length=75,
-    #                           default='')
-    # titre6 = models.CharField(max_length=75,
-    #                           default='')
-    # titre7 = models.CharField(max_length=75,
-    #                           default='')
-    # titre8 = models.CharField(max_length=75,
-    #                           default='')
     autrestitres = models.CharField(max_length=500,
                                     default='Aucun')
     sexe = models.CharField(max_length=1,
@@ -179,7 +153,7 @@ class Fiche(models.Model):
                                    default='A venir')
     historique = models.CharField(max_length=3000,
                                   default='A venir')
-    image = models.ImageField(upload_to='images/',
+    image = models.ImageField(upload_to='images/persos/',
                               default='images/site/no-image.png')
 
 
@@ -191,3 +165,17 @@ class FicheForm(ModelForm):
                   'poids', 'profession', 'medaille', 'etat', 'pj',
                   'jour_naissance', 'mois_naissance', 'annee_naissance',
                   'zone_naissance', 'description', 'historique', 'image']
+
+
+class User(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    image = models.ImageField(upload_to='images/users/',
+                              default='images/site/no-image.png')
+    naissance = models.DateField()
+    creation = models.DateTimeField(default=timezone.now)
+
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['naissance', 'image']

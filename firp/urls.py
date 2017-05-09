@@ -10,7 +10,8 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^(?P<fiche_id>\d+)/$', views.detailFiche, name='detail'),
+    url(r'^fiches/(?P<fiche_id>\d+)/$', views.detailFiche, name='detail'),
     url(r'^creer/$', views.creerfiche),
     url(r'^$', views.index, name='index'),
+    url(r'^users/inscription$', views.inscription)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

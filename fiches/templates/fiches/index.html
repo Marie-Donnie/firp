@@ -6,18 +6,20 @@
 <div id="index" class ="panel panel-default">
 
   <h1 class="panel-heading">Liste des personnages</h1>
-  <div id="characters" class="panel-body">
-    {% if latest_fiches %}
-    <ul>
-      {% for f in latest_fiches %}
-      <div class="character">
-	<li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
-      </div>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>Aucune fiche</p>
-    {% endif %}
+  <div class="media">
+    <div id="characters" class="panel-body">
+      {% if latest_fiches %}
+      <ul>
+	{% for f in latest_fiches %}
+	<div class="character">
+	  <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+	</div>
+	{% endfor %}
+      </ul>
+      {% else %}
+      <p>Aucune fiche</p>
+      {% endif %}
+    </div>
   </div>
 
 </div>

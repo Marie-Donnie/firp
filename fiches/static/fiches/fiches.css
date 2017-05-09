@@ -101,9 +101,10 @@ div.gallery img {
 
 #detail .media-object {
     margin: 20px;
-    border-radius: 8px;
-    width: 500px;
+    width: 520px;
     height: auto;
+    border: 10px double #470002;
+    border-radius: 5px;
 }
 
 .panel {
