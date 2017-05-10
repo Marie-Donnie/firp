@@ -178,4 +178,4 @@ class User(models.Model):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['naissance', 'image']
+        fields = ['user', 'naissance', 'image']

@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from fiches.models import Fiche, FicheForm, User, UserForm
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User as UserA
 
 
 # Create your views here.
@@ -49,6 +50,12 @@ def inscription(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
+            user = UserA(username=form.username,
+                         first_name=form.first_name,
+                         last_name=form.last_name,
+                         password=form.password,
+                         email=form.email)
+            user.save()
             form.save()
             return HttpResponseRedirect('/')
     else:
