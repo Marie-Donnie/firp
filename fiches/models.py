@@ -3,7 +3,8 @@ from django.db import models
 from django.forms import ModelForm
 from django.conf import settings
 from django.utils import timezone
-
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 class IntegerRangeField(models.SmallIntegerField):
     def __init__(self, verbose_name=None, name=None, min_value=None,
@@ -175,7 +176,15 @@ class User(models.Model):
     creation = models.DateTimeField(default=timezone.now)
 
 
-class UserForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['user', 'naissance', 'image']
+class UserForm(forms.Form):
+    pseudo = forms.CharField(max_length=150)
+    mot_de_passe = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    email = forms.EmailField()
+    prenom = forms.CharField(max_length=30)
+    nom = forms.CharField(max_length=30)
+    naissance = forms.DateField()
+    # class Meta(UserCreationForm.Meta):
+    #     model = User
+    #     fields = '__all__'
+
+        # ['user', 'naissance', 'image']

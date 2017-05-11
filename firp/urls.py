@@ -10,6 +10,7 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url('^', include('django.contrib.auth.urls')),
     url(r'^fiches/(?P<fiche_id>\d+)/$', views.detailFiche, name='detail'),
     url(r'^creer/$', views.creerfiche),
     url(r'^$', views.index, name='index'),

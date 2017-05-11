@@ -50,12 +50,15 @@ def inscription(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
-            user = UserA(username=form.username,
-                         first_name=form.first_name,
-                         last_name=form.last_name,
-                         password=form.password,
-                         email=form.email)
-            user.save()
+            print(form.cleaned_data)
+            # user = User.objects.create(user=form.user, image=form.image,
+            #                            naissance=form.naissance)
+            # user = UserA(username=form.username,
+            #              first_name=form.first_name,
+            #              last_name=form.last_name,
+            #              password=form.password,
+            #              email=form.email)
+            # user.save()
             form.save()
             return HttpResponseRedirect('/')
     else:
