@@ -1,26 +1,20 @@
 {% extends "base.html" %}
 
 {% block title %}Index{% endblock %}
+{% block page-title %}Liste des personnages{% endblock %}
 
 {% block content %}
-<div id="index" class ="panel panel-default">
-
-  <h1 class="panel-heading">Liste des personnages</h1>
-  <div class="media">
-    <div id="characters" class="panel-body">
-      {% if latest_fiches %}
-      <ul>
-	{% for f in latest_fiches %}
-	<div class="character">
-	  <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
-	</div>
-	{% endfor %}
-      </ul>
-      {% else %}
-      <p>Aucune fiche</p>
-      {% endif %}
+<div class="panel-body">
+  {% if latest_fiches %}
+  <ul>
+    {% for f in latest_fiches %}
+    <div class="character">
+      <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
     </div>
-  </div>
-
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Aucune fiche</p>
+  {% endif %}
 </div>
 {% endblock %}

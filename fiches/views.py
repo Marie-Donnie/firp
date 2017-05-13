@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render
-from fiches.models import Fiche, FicheForm, User, UserForm
+from fiches.models import Fiche, FicheForm, User, UserForm, UserProfileForm
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User as UserA
+from django.template import RequestContext
 
 
 # Create your views here.
@@ -46,9 +47,9 @@ def logout_view(request):
     return HttpResponseRedirect('/')
 
 
-def inscription(request):
+def edit_user(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = UserForm(request.POST, user=request.user)
         if form.is_valid():
             print(form.cleaned_data)
             # user = User.objects.create(user=form.user, image=form.image,
@@ -62,6 +63,26 @@ def inscription(request):
             form.save()
             return HttpResponseRedirect('/')
     else:
-        form = UserForm()
+        form = UserForm(user=request.user)
 
     return render(request, 'fiches/inscription.html', {'form': form})
+
+
+def register(request):
+    if request.method == 'POST':
+        uf = UserForm(request.POST, prefix='user')
+        upf = UserProfileForm(request.POST, prefix='userprofile')
+        if uf.is_valid() * upf.is_valid():
+            user = uf.save()
+            userprofile = upf.save(commit=False)
+            userprofile.user = user
+            userprofile.save()
+            return HttpResponseRedirect('/')
+    else:
+        uf = UserForm(prefix='user')
+        upf = UserProfileForm(prefix='userprofile')
+        context = RequestContext(request)
+    return render(request,
+                  'registration/register.html',
+                  dict(userform=uf,
+                       userprofileform=upf))

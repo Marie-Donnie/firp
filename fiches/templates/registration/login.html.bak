@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block content %}
+<div id="form" class="panel panel-default">
+  <h1 class="panel-heading">Se connecter</h1>
+  <div class="media">
+    <div class="media-body">
+      <div class="panel-body">
+
+	<form action="" method="post">
+	  {% csrf_token %}
+	  {{ form.as_ul }}
+	  <input type="submit" value="Submit" />
+	</form>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

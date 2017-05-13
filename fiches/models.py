@@ -5,6 +5,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.contrib.auth.models import User
 
 class IntegerRangeField(models.SmallIntegerField):
     def __init__(self, verbose_name=None, name=None, min_value=None,
@@ -168,23 +169,39 @@ class FicheForm(ModelForm):
                   'zone_naissance', 'description', 'historique', 'image']
 
 
-class User(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+class UserProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     image = models.ImageField(upload_to='images/users/',
                               default='images/site/no-image.png')
     naissance = models.DateField()
     creation = models.DateTimeField(default=timezone.now)
 
 
-class UserForm(forms.Form):
-    pseudo = forms.CharField(max_length=150)
-    mot_de_passe = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    email = forms.EmailField()
-    prenom = forms.CharField(max_length=30)
-    nom = forms.CharField(max_length=30)
-    naissance = forms.DateField()
-    # class Meta(UserCreationForm.Meta):
+class UserProfileForm(ModelForm):
+    # pseudo = forms.CharField(max_length=150)
+    # mot_de_passe = forms.CharField(max_length=32, widget=forms.PasswordInput)
+    # email = forms.EmailField()
+    # prenom = forms.CharField(max_length=30)
+    # nom = forms.CharField(max_length=30)
+    # naissance = forms.DateField()
+    # class Meta:
     #     model = User
-    #     fields = '__all__'
+    #     fields = ['naissance', 'image']
 
-        # ['user', 'naissance', 'image']
+    # def __init__(self, *args, **kwargs):
+    #     user = kwargs.pop('user')
+    #     super(UserForm, self).__init__(*args, **kwargs)
+    #     self.user = user
+    class Meta:
+        model = UserProfile
+        exclude = ['user']
+        fields = ['image', 'naissance']
+        prefix = 'userprofile'
+
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name', 'password']
+        prefix = 'user'
+        # "__all__"

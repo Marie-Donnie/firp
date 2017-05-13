@@ -14,8 +14,9 @@ admin.site.register(Fiche, FicheAdmin)
 
 
 class UserAdministration(admin.ModelAdmin):
-    list_display = ('user', 'naissance')
+    list_display = ['username', 'first_name']
 
+admin.site.unregister(User)
 admin.site.register(User, UserAdministration)
 
 # class CustomUserAdmin(UserAdmin):

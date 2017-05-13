@@ -18,6 +18,7 @@
 <body>
   <div class="page-header">
     <h1><a href="/">Fiches de personnages</a></h1>
+    <img src="/fiches/media/images/site/garithos.jpg" class="image-garithos"/>
   </div>
 
   <nav class="navbar navbar-default">
@@ -27,8 +28,8 @@
 	<li><a href="/creer/">Formulaire</a></li>
       </ul>
       <div class="navbar-right">
-	<a class="btn btn-default navbar-btn">Login</a>
-	<a class="btn btn-default navbar-btn" href="/users/inscription">Sign in</a>
+	<a class="btn btn-default navbar-btn" href="/login/">Login</a>
+	<a class="btn btn-default navbar-btn" href="/enregistrer/">Sign in</a>
       </div>
     </div>
   </nav>
@@ -41,6 +42,18 @@
   <!--   {% endblock %} -->
   <!-- </div> -->
   <div id="content">
-    {% block content %}this is the content{% endblock %}
+    <div id="index" class ="panel panel-default">
+
+      <h1 class="panel-heading">{% block page-title %}Title{% endblock %}</h1>
+      <div class="media">
+	<div id="characters" class="panel-body">
+	  <div class="media-body">
+
+	    {% block content %}this is the content{% endblock %}
+
+	  </div>
+	</div>
+      </div>
+    </div>
   </div>
 </body>
