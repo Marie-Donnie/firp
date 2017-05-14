@@ -28,6 +28,9 @@
 	<li><a href="/creer/">Formulaire</a></li>
       </ul>
       <div class="navbar-right">
+	{% if user.is_authenticated %}
+	<span>Bienvenue, {{ user.username }} !</span>
+	{% endif %}
 	<a class="btn btn-default navbar-btn" href="/login/">Login</a>
 	<a class="btn btn-default navbar-btn" href="/enregistrer/">Sign in</a>
       </div>

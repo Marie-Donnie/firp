@@ -4,6 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User as UserA
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+import django
 
 
 # Create your views here.
@@ -18,6 +21,7 @@ def detailFiche(request, fiche_id):
     return render(request, 'fiches/detail.html', {'fiche': fiche})
 
 
+@login_required
 def creerfiche(request):
     if request.method == 'POST':
         form = FicheForm(request.POST or None)
@@ -31,15 +35,22 @@ def creerfiche(request):
 
 
 def authen(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        # return render(request, 'fiches/index.html', {'form': form})
-        return HttpResponseRedirect('/')
+    if request.method == 'POST':
+        print(request.POST['username'])
+        username = request.POST['username']
+        password = request.POST['password']
+        print(password)
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # return render(request, 'fiches/index.html', {'form': form})
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponseNotFound('<h1>User not found</h1>')
     else:
-        return HttpResponseNotFound('<h1>Page not found</h1>')
+        form = AuthenticationForm()
+
+    return render(request, 'registration/login.html', {'form': form})
 
 
 def logout_view(request):
@@ -51,7 +62,7 @@ def edit_user(request):
     if request.method == 'POST':
         form = UserForm(request.POST, user=request.user)
         if form.is_valid():
-            print(form.cleaned_data)
+            # print(form.cleaned_data)
             # user = User.objects.create(user=form.user, image=form.image,
             #                            naissance=form.naissance)
             # user = UserA(username=form.username,
@@ -70,7 +81,7 @@ def edit_user(request):
 
 def register(request):
     if request.method == 'POST':
-        uf = UserForm(request.POST, prefix='user')
+        uf = UserCreationForm(request.POST, prefix='user')
         upf = UserProfileForm(request.POST, prefix='userprofile')
         if uf.is_valid() * upf.is_valid():
             user = uf.save()
@@ -79,10 +90,13 @@ def register(request):
             userprofile.save()
             return HttpResponseRedirect('/')
     else:
-        uf = UserForm(prefix='user')
+        uf = UserCreationForm(prefix='user')
         upf = UserProfileForm(prefix='userprofile')
-        context = RequestContext(request)
     return render(request,
                   'registration/register.html',
                   dict(userform=uf,
                        userprofileform=upf))
+
+
+def password_reset(request):
+    pass
