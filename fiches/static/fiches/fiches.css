@@ -111,7 +111,7 @@ div.gallery img {
     height: auto;
 }
 
-#detail .media-object {
+.media-object {
     margin: 20px;
     width: 520px;
     height: auto;
@@ -182,7 +182,7 @@ p {
     font-size: 30px;
 }
 
-.media {
+.panel-body {
     border: 1px solid #470002;
     border-radius: 5px;
     margin-top: 0px;

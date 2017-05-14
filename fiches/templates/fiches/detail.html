@@ -5,40 +5,43 @@
 {% block page-title %}{{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
 
 {% block content %}
-<div class="panel-body">
-  <p>{{ fiche.get_pj_display }}</p>
-  <ul>
-    <li>Nom&nbsp;: {{ fiche.nom}}</li>
-    <li>Prénom&nbsp;: {{ fiche.prenom }}</li>
-    <!-- <div id="spoiler" style="display:none"> -->
-    <li>Autre prénom&nbsp;: {{ fiche.prenom2 }}</li>
-    <!-- </div> -->
-    <!-- <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/hide</button> -->
-    <li>Titres ou grade&nbsp;: {{ fiche.titre }}</li>
 
-    <li>Sexe&nbsp;: {{ fiche.get_sexe_display }}</li>
-    <li>Race&nbsp;: {{ fiche.race }}</li>
-    <li>Date de naissance&nbsp;: {{fiche.jour_naissance}}{% if fiche.jour_naissance == 01 %}er jour du{% else %}ème jour du
-      {% endif %}
-      {{fiche.mois_naissance}}{% if fiche.jour_mois == 01 %}er mois{% else %}ème mois
-      {% endif %}
-      de l'an {{fiche.annee_naissance}}</li>
-    <li>Zone de naissance&nbsp;: {{ fiche.get_zone_naissance_display }}</li>
-    <li>Taille&nbsp;: {{ fiche.taille }}m</li>
-    <li>Poids&nbsp;: {{ fiche.poids }} kg</li>
-    <li>Profession&nbsp;: {{fiche.profession}}</li>
-    <li>Medaille&nbsp;: {{fiche.medaille}}</li>
-    <li>État&nbsp;: {{ fiche.get_etat_display }}</li>
-    <li>Description&nbsp;: {{ fiche.description }}</li>
-    <li>Historique&nbsp;: {{ fiche.historique }}</li>
-  </ul>
-  <!-- <div class="gallery"> -->
+<div class="media">
+  <div class="media-body">
 
-</div>
-<!-- </div> -->
-<div class="media-right">
-  <a target="_blank" href={{ fiche.image.url }}>
-    <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
-  </a>
-</div>
+      <p>{{ fiche.get_pj_display }}</p>
+      <ul>
+	<li>Nom&nbsp;: {{ fiche.nom}}</li>
+	<li>Prénom&nbsp;: {{ fiche.prenom }}</li>
+	<!-- <div id="spoiler" style="display:none"> -->
+	<li>Autre prénom&nbsp;: {{ fiche.prenom2 }}</li>
+	<!-- </div> -->
+	<!-- <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/hide</button> -->
+	<li>Titres ou grade&nbsp;: {{ fiche.titre }}</li>
+
+	<li>Sexe&nbsp;: {{ fiche.get_sexe_display }}</li>
+	<li>Race&nbsp;: {{ fiche.race }}</li>
+	<li>Date de naissance&nbsp;: {{fiche.jour_naissance}}{% if fiche.jour_naissance == 01 %}er jour du{% else %}ème jour du
+	  {% endif %}
+	  {{fiche.mois_naissance}}{% if fiche.jour_mois == 01 %}er mois{% else %}ème mois
+	  {% endif %}
+	  de l'an {{fiche.annee_naissance}}</li>
+	<li>Zone de naissance&nbsp;: {{ fiche.get_zone_naissance_display }}</li>
+	<li>Taille&nbsp;: {{ fiche.taille }}m</li>
+	<li>Poids&nbsp;: {{ fiche.poids }} kg</li>
+	<li>Profession&nbsp;: {{fiche.profession}}</li>
+	<li>Medaille&nbsp;: {{fiche.medaille}}</li>
+	<li>État&nbsp;: {{ fiche.get_etat_display }}</li>
+	<li>Description&nbsp;: {{ fiche.description }}</li>
+	<li>Historique&nbsp;: {{ fiche.historique }}</li>
+      </ul>
+      <!-- <div class="gallery"> -->
+    </div>
+
+  <!-- </div> -->
+  <div class="media-right">
+    <a target="_blank" href={{ fiche.image.url }}>
+      <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
+    </a>
+  </div>
 {% endblock %}

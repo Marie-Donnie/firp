@@ -6,13 +6,12 @@
 
 {% block content %}
 
-<div class="panel-body">
   <form method="POST" action="">
     {% csrf_token %}
     {{userform.as_ul}}
     {{userprofileform.as_ul}}
     <input type="submit">
   </form>
-</div>
+
 
 {% endblock %}

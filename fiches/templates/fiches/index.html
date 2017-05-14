@@ -4,7 +4,6 @@
 {% block page-title %}Liste des personnages{% endblock %}
 
 {% block content %}
-<div class="panel-body">
   {% if latest_fiches %}
   <ul>
     {% for f in latest_fiches %}
@@ -16,5 +15,4 @@
   {% else %}
   <p>Aucune fiche</p>
   {% endif %}
-</div>
 {% endblock %}
