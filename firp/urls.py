@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # url('^', include('django.contrib.auth.urls')),
     url(r'^login/$', views.authen, name='login'),
-    # url(r'^logout/$', name='logout'),
+    url(r'^logout/$', views.logout_view, name='logout'),
     # url(r'^password_change/$', name='password_change'),
     # url(r'^password_change/done/$', name='password_change_done'),
     url(r'^password_reset/$', views.password_reset, name='password_reset'),
@@ -22,7 +22,7 @@ urlpatterns = [
     # url(r'^reset/done/$', name='password_reset_complete'),
     url(r'^fiches/(?P<fiche_id>\d+)/$', views.detailFiche, name='detail'),
     url(r'^creer/$', views.creerfiche),
-    url(r'^enregistrer/$', views.register),
+    url(r'^enregistrer/$', views.register_user),
     url(r'^$', views.index, name='index'),
     url(r'^users/informations$', views.edit_user)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,12 +1,11 @@
 from django.shortcuts import get_object_or_404, render
-from fiches.models import Fiche, FicheForm, User, UserForm, UserProfileForm
+from fiches.models import Fiche, FicheForm, User, UserForm, UserProfileForm, MyRegistrationForm
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User as UserA
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-import django
 
 
 # Create your views here.
@@ -79,23 +78,34 @@ def edit_user(request):
     return render(request, 'fiches/inscription.html', {'form': form})
 
 
-def register(request):
+# def register(request):
+#     if request.method == 'POST':
+#         uf = UserCreationForm(request.POST, prefix='user')
+#         upf = UserProfileForm(request.POST, prefix='userprofile')
+#         if uf.is_valid() * upf.is_valid():
+#             user = uf.save()
+#             userprofile = upf.save(commit=False)
+#             userprofile.user = user
+#             userprofile.save()
+#             return HttpResponseRedirect('/')
+#     else:
+#         uf = UserCreationForm(prefix='user')
+#         upf = UserProfileForm(prefix='userprofile')
+#     return render(request,
+#                   'registration/register.html',
+#                   dict(userform=uf,
+#                        userprofileform=upf))
+
+
+def register_user(request):
     if request.method == 'POST':
-        uf = UserCreationForm(request.POST, prefix='user')
-        upf = UserProfileForm(request.POST, prefix='userprofile')
-        if uf.is_valid() * upf.is_valid():
-            user = uf.save()
-            userprofile = upf.save(commit=False)
-            userprofile.user = user
-            userprofile.save()
+        form = MyRegistrationForm(request.POST)     # create form object
+        if form.is_valid():
+            form.save()
             return HttpResponseRedirect('/')
     else:
-        uf = UserCreationForm(prefix='user')
-        upf = UserProfileForm(prefix='userprofile')
-    return render(request,
-                  'registration/register.html',
-                  dict(userform=uf,
-                       userprofileform=upf))
+        form = MyRegistrationForm()
+    return render(request, 'registration/register.html', {'userform': form})
 
 
 def password_reset(request):

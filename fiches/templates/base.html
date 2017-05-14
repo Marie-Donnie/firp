@@ -30,9 +30,11 @@
       <div class="navbar-right">
 	{% if user.is_authenticated %}
 	<span>Bienvenue, {{ user.username }} !</span>
+	<a class="btn btn-default navbar-btn" href="/logout/">Se déconnecter</a>
+	{% else %}
+	<a class="btn btn-default navbar-btn" href="/login/">Se connecter</a>
+	<a class="btn btn-default navbar-btn" href="/enregistrer/">S'inscrire</a>
 	{% endif %}
-	<a class="btn btn-default navbar-btn" href="/login/">Login</a>
-	<a class="btn btn-default navbar-btn" href="/enregistrer/">Sign in</a>
       </div>
     </div>
   </nav>

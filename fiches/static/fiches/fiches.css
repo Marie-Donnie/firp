@@ -166,6 +166,10 @@ input {
     color: initial;
 }
 
+select {
+    color: initial;
+}
+
 a {
     color: #fff;
 }
