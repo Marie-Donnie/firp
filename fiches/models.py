@@ -6,6 +6,8 @@ from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
+
 
 class IntegerRangeField(models.SmallIntegerField):
     def __init__(self, verbose_name=None, name=None, min_value=None,
@@ -100,6 +102,32 @@ ZONES = (
         ("Toundra Boréenne"),
         ("Zul'Drak")
     )
+    ),
+    ("Pandarie", (
+        ("Désert de Tanlong"),
+        ("Etendues sauvages de Krasarang"),
+        ("La forêt de Jade"),
+        ("Sommet de Kun-Lai"),
+        ("Terres de l'Angoisse"),
+        ("Val de l'Eternel Printemps"),
+        ("Vallée des Quatre vents")
+    )
+    ),
+    ("Iles brisées", (
+        ("Azsuna"),
+        ("Haut-Roc"),
+        ("Suramar"),
+        ("Tornheim"),
+        ("Val'Sharah")
+    )
+    ),
+    ("Kezan", (
+        ("Kezan")
+    )
+    ),
+    ("Zandalar", (
+        ("Zandalar")
+    )
     )
 )
 
@@ -114,12 +142,12 @@ for (ri, (region, zones)) in zip(range(len(ZONES)), ZONES):
 class Fiche(models.Model):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
-    autresprenoms = models.CharField(max_length=200,
-                                     default='Aucun')
+    autres_prenoms = models.CharField(max_length=200,
+                                      default='Aucun')
     titre = models.CharField(max_length=75,
                              default='Aucun')
-    autrestitres = models.CharField(max_length=500,
-                                    default='Aucun')
+    autres_titres = models.CharField(max_length=500,
+                                     default='Aucun')
     sexe = models.CharField(max_length=1,
                             choices=((
                                 ('h', "Masculin"),
@@ -144,37 +172,59 @@ class Fiche(models.Model):
                               ('n', "Personnage non joué")
                           )),
                           default="Personnage joué")
-    jour_naissance = IntegerRangeField(default='1', min_value=1,
-                                       max_value=31)
-    mois_naissance = IntegerRangeField(default='1', min_value=1,
-                                       max_value=12)
-    annee_naissance = IntegerRangeField(default='0', min_value=-32000,
-                                        max_value=100)
-    zone_naissance = models.SmallIntegerField(choices=ZONES_CHOIX)
-    description = models.CharField(max_length=3000,
+    jour_de_naissance = IntegerRangeField(default='1', min_value=1,
+                                          max_value=31)
+    mois_de_naissance = IntegerRangeField(default='1', min_value=1,
+                                          max_value=12)
+    annee_de_naissance = IntegerRangeField(default='0', min_value=-32000,
+                                           max_value=100)
+    zone_de_naissance = models.SmallIntegerField(choices=ZONES_CHOIX,
+                                                 default=19,
+                                                 null=True)
+    ville_de_naissance = models.CharField(max_length=50,
+                                          default='Inconnu')
+    zone_de_residence = models.SmallIntegerField(choices=ZONES_CHOIX,
+                                                 default=19,
+                                                 null=True)
+    ville_de_residence = models.CharField(max_length=50,
+                                          default='Noirebois')
+    description = models.CharField(max_length=6000,
                                    default='A venir')
-    historique = models.CharField(max_length=3000,
+    historique = models.CharField(max_length=6000,
                                   default='A venir')
+    inventaire = models.CharField(max_length=6000,
+                                  default='A venir')
+    relations = models.CharField(max_length=6000,
+                                 default='Aucune')
     image = models.ImageField(upload_to='images/persos/',
                               default='images/site/no-image.png')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
-                                    null=True)
+                                 null=True,
+                                 related_name='fiches')
     aff_createur = models.BooleanField(default=True,
-                                          choices=(
-                                              (True, 'Oui'),
-                                              (False, 'Non'),
-                                          ))
+                                       choices=(
+                                           (True, 'Oui'),
+                                           (False, 'Non'),
+                                       ))
+    aff_inventaire = models.BooleanField(default=True,
+                                         choices=(
+                                             (True, 'Oui'),
+                                             (False, 'Non'),
+                                         ))
 
 
 class FicheForm(ModelForm):
     class Meta:
         model = Fiche
-        fields = ['nom', 'prenom', 'autresprenoms', 'titre',
-                  'autrestitres', 'sexe', 'race', 'taille',
+        fields = ['nom', 'prenom', 'autres_prenoms', 'titre',
+                  'autres_titres', 'sexe', 'race', 'taille',
                   'poids', 'profession', 'medaille', 'etat', 'pj',
-                  'jour_naissance', 'mois_naissance', 'annee_naissance',
-                  'zone_naissance', 'description', 'historique',
-                  'aff_createur', 'image']
+                  'jour_de_naissance', 'mois_de_naissance',
+                  'annee_de_naissance', 'zone_de_naissance',
+                  'ville_de_naissance', 'zone_de_residence',
+                  'ville_de_residence', 'description', 'historique',
+                  'inventaire', 'relations', 'aff_createur',
+                  'aff_inventaire', 'image']
 
 
 class UserProfile(models.Model):

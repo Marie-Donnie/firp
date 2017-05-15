@@ -5,11 +5,13 @@
 {% block page-title %}
 {{ fiche.prenom }} {{ fiche.nom }}
 {% endblock %}
-{% if fiche.aff_createur %}
+
 {% block user %}
-Créateur : {{ fiche.createur }}
-{% endblock %}
+{% if fiche.aff_createur %}
+Créateur : {{ fiche.createur.username }}
 {% endif %}
+{% endblock %}
+
 
 
 {% block content %}
@@ -22,19 +24,22 @@ Créateur : {{ fiche.createur }}
 	<li>Nom&nbsp;: {{ fiche.nom}}</li>
 	<li>Prénom&nbsp;: {{ fiche.prenom }}</li>
 	<!-- <div id="spoiler" style="display:none"> -->
-	<li>Autre prénom&nbsp;: {{ fiche.prenom2 }}</li>
+	<li>Autre prénom&nbsp;: {{ fiche.autres_prenoms }}</li>
 	<!-- </div> -->
 	<!-- <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/hide</button> -->
 	<li>Titres ou grade&nbsp;: {{ fiche.titre }}</li>
 
 	<li>Sexe&nbsp;: {{ fiche.get_sexe_display }}</li>
 	<li>Race&nbsp;: {{ fiche.race }}</li>
-	<li>Date de naissance&nbsp;: {{fiche.jour_naissance}}{% if fiche.jour_naissance == 01 %}er jour du{% else %}ème jour du
+	<li>Date de naissance&nbsp;: {{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
 	  {% endif %}
-	  {{fiche.mois_naissance}}{% if fiche.jour_mois == 01 %}er mois{% else %}ème mois
+	  {{fiche.mois_de_naissance}}{% if fiche.jour_mois_de_naissance == 01 %}er mois{% else %}ème mois
 	  {% endif %}
-	  de l'an {{fiche.annee_naissance}}</li>
-	<li>Zone de naissance&nbsp;: {{ fiche.get_zone_naissance_display }}</li>
+	  de l'an {{fiche.annee_de_naissance}}</li>
+	<li>Zone de naissance&nbsp;: {{ fiche.get_zone_de_naissance_display }} {{ fiche.zone_de_naissance }}</li>
+	<li>Ville de naissance&nbsp;: {{ fiche.ville_de_naissance }}</li>
+	<li>Zone de résidence&nbsp;: {{ fiche.get_zone_de_naissance_display }} {{ fiche.zone_de_naissance }}</li>
+	<li>Ville de résidence&nbsp;: {{ fiche.ville_de_residence }}</li>
 	<li>Taille&nbsp;: {{ fiche.taille }}m</li>
 	<li>Poids&nbsp;: {{ fiche.poids }} kg</li>
 	<li>Profession&nbsp;: {{fiche.profession}}</li>
@@ -42,6 +47,10 @@ Créateur : {{ fiche.createur }}
 	<li>État&nbsp;: {{ fiche.get_etat_display }}</li>
 	<li>Description&nbsp;: {{ fiche.description }}</li>
 	<li>Historique&nbsp;: {{ fiche.historique }}</li>
+	<li>Relations&nbsp;: {{ fiche.relations }}</li>
+	{% if fiche.aff_inventaire %}
+	<li>Inventaire&nbsp;: {{ fiche.inventaire }}</li>
+	{% endif %}
       </ul>
       <!-- <div class="gallery"> -->
     </div>
