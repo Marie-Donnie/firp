@@ -1,18 +1,32 @@
 from django.shortcuts import get_object_or_404, render
-from fiches.models import Fiche, FicheForm, User, UserForm, UserProfileForm, MyRegistrationForm
+from fiches.models import Fiche, FicheForm, UserForm, UserProfileForm, MyRegistrationForm
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User as UserA
+from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
-# Create your views here.
+# Displays the first name and name of the Fiche model
 def index(request):
     fiches = Fiche.objects.order_by('nom', 'prenom')
     context = {'latest_fiches': fiches}
     return render(request, 'fiches/index.html', context)
+
+
+# Displays the first name and name of the Fiche model
+def personnages(request):
+    fiches = Fiche.objects.order_by('nom', 'prenom')
+    context = {'latest_fiches': fiches}
+    return render(request, 'fiches/index.html', context)
+
+
+# Displays the username of the users
+def users(request):
+    users = User.objects.all().order_by('username')
+    context = {'utilisateurs': users}
+    return render(request, 'fiches/utilisateurs.html', context)
 
 
 def detailFiche(request, fiche_id):

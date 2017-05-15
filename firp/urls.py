@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^creer/$', views.creerfiche),
     url(r'^enregistrer/$', views.register_user),
     url(r'^$', views.index, name='index'),
-    url(r'^users/informations$', views.edit_user)
+    url(r'^users/informations$', views.edit_user),
+    url(r'^utilisateurs/$', views.users),
+    url(r'^personnages/$', views.personnages)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

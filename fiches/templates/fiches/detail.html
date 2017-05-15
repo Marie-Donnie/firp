@@ -2,7 +2,15 @@
 {% extends "base.html" %}
 
 {% block title %}Fiche de {{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
-{% block page-title %}{{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
+{% block page-title %}
+{{ fiche.prenom }} {{ fiche.nom }}
+{% endblock %}
+{% if fiche.aff_createur %}
+{% block user %}
+Créateur : {{ fiche.createur }}
+{% endblock %}
+{% endif %}
+
 
 {% block content %}
 

@@ -25,7 +25,8 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 	<li><a href="/">Home</a></li>
-	<li><a href="/creer/">Formulaire</a></li>
+	<li><a href="/personnages/">Personnages</a></li>
+	<li><a href="/creer/">Créer un personnage</a></li>
       </ul>
       <div class="navbar-right">
 	{% if user.is_authenticated %}
@@ -49,14 +50,16 @@
   <div id="content">
     <div id="index" class ="panel panel-default">
 
-      <h1 class="panel-heading">{% block page-title %}Title{% endblock %}</h1>
+      <div class="panel-heading">
+	<h1 id="page-title">{% block page-title %}Title{% endblock %}</h1>
+	<span id="creator">{% block user %}{% endblock %}</span>
+      </div>
+      <div id="characters" class="panel-body">
+	{% block content %}this is the content{% endblock %}
 
-	  <div id="characters" class="panel-body">
-	    {% block content %}this is the content{% endblock %}
-
-	  </div>
-	</div>
       </div>
     </div>
   </div>
+</div>
+</div>
 </body>

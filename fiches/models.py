@@ -157,6 +157,13 @@ class Fiche(models.Model):
                                   default='A venir')
     image = models.ImageField(upload_to='images/persos/',
                               default='images/site/no-image.png')
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                    null=True)
+    aff_createur = models.BooleanField(default=True,
+                                          choices=(
+                                              (True, 'Oui'),
+                                              (False, 'Non'),
+                                          ))
 
 
 class FicheForm(ModelForm):
@@ -166,7 +173,8 @@ class FicheForm(ModelForm):
                   'autrestitres', 'sexe', 'race', 'taille',
                   'poids', 'profession', 'medaille', 'etat', 'pj',
                   'jour_naissance', 'mois_naissance', 'annee_naissance',
-                  'zone_naissance', 'description', 'historique', 'image']
+                  'zone_naissance', 'description', 'historique',
+                  'aff_createur', 'image']
 
 
 class UserProfile(models.Model):

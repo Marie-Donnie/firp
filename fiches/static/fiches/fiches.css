@@ -40,10 +40,10 @@ h1 a {
     margin-left: 40px;
 }
 
-h1, h2, h3, h4 {
-    font-family: 'Arial', cursive;
-    color: #470002;
-}
+/* h1, h2, h3, h4 { */
+/*     font-family: 'Arial', cursive; */
+/*     color: #470002; */
+/* } */
 
 .date {
     color: #470002;
@@ -137,11 +137,13 @@ div.gallery img {
     margin-right: 50px;
     border-color: #470002;
     text-shadow: -1px -1px #000;
+    display: flex;
 }
 
-.panel h1.panel-heading {
+.panel-heading .h1 {
     border: 1px solid #470002;
     border-radius: 5px;
+    flex: 1;
 }
 
 /* #detail p { */
@@ -157,10 +159,7 @@ div.gallery img {
 /*     color: white; */
 /* } */
 
-a:focus, a:hover {
-    color: #a72121;
-    text-decoration: underline;
-}
+
 
 input {
     color: initial;
@@ -171,7 +170,22 @@ select {
 }
 
 a {
-    color: #fff;
+    color: #fefefe;
+}
+
+a:focus,
+a:hover {
+    color: #a72121;
+    text-decoration: underline;
+}
+
+.navbar-default .navbar-nav > li > a{
+    color: #fefefe;
+}
+
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
+    color: #a72121;
 }
 
 li {
@@ -189,4 +203,12 @@ p {
     margin-left: 50px;
     margin-right: 50px;
     margin-bottom: 10px;
+}
+
+#creator {
+    color: #fefefe;
+}
+
+#page-title{
+    flex: 1 ;
 }
