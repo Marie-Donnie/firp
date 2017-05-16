@@ -4,17 +4,18 @@
 {% block page-title %}Utilisateurs{% endblock %}
 
 {% block content %}
-{% if utilisateurs %}
+{% if latest_users %}
 <table style="width:100%">
   <tr>
     <th>Pseudo</th>
   </tr>
-  {% for u in utilisateurs %}
+  {% for u in latest_users %}
   <tr>
-    <td>{{ u.usernmae }}</td>
+    <td>{{ u.username }}</td>
   </tr>
+  {% endfor %}
 </table>
-{% endfor %}
+
 {% else %}
 <p>Aucun utilisateur</p>
 {% endif %}

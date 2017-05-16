@@ -8,46 +8,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
-# Displays the first name and name of the Fiche model
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+# Displays the first name and last name of the Fiche model
 def index(request):
     fiches = Fiche.objects.order_by('nom', 'prenom')
     context = {'latest_fiches': fiches}
+
     return render(request, 'fiches/index.html', context)
 
 
-# Displays the first name and name of the Fiche model
-def personnages(request):
-    fiches = Fiche.objects.order_by('nom', 'prenom')
-    context = {'latest_fiches': fiches}
-    return render(request, 'fiches/index.html', context)
-
-
-# Displays the username of the users
-def users(request):
-    users = User.objects.all().order_by('username')
-    context = {'utilisateurs': users}
-    return render(request, 'fiches/utilisateurs.html', context)
-
-
-def detailFiche(request, fiche_id):
-    fiche = get_object_or_404(Fiche, pk=fiche_id)
-    return render(request, 'fiches/detail.html', {'fiche': fiche})
-
-
-@login_required
-def creerfiche(request):
-    if request.method == 'POST':
-        form = FicheForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
-    else:
-        form = FicheForm()
-
-    return render(request, 'fiches/formulaire.html', {'form': form})
-
-
-def authen(request):
+def login_authen(request):
     if request.method == 'POST':
         print(request.POST['username'])
         username = request.POST['username']
@@ -56,7 +26,6 @@ def authen(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # return render(request, 'fiches/index.html', {'form': form})
             return HttpResponseRedirect('/')
         else:
             return HttpResponseNotFound('<h1>User not found</h1>')
@@ -68,7 +37,33 @@ def authen(request):
 
 def logout_view(request):
     logout(request)
+
     return HttpResponseRedirect('/')
+
+
+def register_user(request):
+    if request.method == 'POST':
+        form = MyRegistrationForm(request.POST)     # create form object
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = MyRegistrationForm()
+
+    return render(request, 'registration/register.html', {'userform': form})
+
+
+def password_reset(request):
+    pass
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+# Displays the username of the users
+def users(request):
+    users = User.objects.all().order_by('username')
+    print(users)
+    context = {'latest_users': users}
+    return render(request, 'fiches/utilisateurs.html', context)
 
 
 def edit_user(request):
@@ -92,35 +87,40 @@ def edit_user(request):
     return render(request, 'fiches/inscription.html', {'form': form})
 
 
-# def register(request):
-#     if request.method == 'POST':
-#         uf = UserCreationForm(request.POST, prefix='user')
-#         upf = UserProfileForm(request.POST, prefix='userprofile')
-#         if uf.is_valid() * upf.is_valid():
-#             user = uf.save()
-#             userprofile = upf.save(commit=False)
-#             userprofile.user = user
-#             userprofile.save()
-#             return HttpResponseRedirect('/')
-#     else:
-#         uf = UserCreationForm(prefix='user')
-#         upf = UserProfileForm(prefix='userprofile')
-#     return render(request,
-#                   'registration/register.html',
-#                   dict(userform=uf,
-#                        userprofileform=upf))
+def aff_user(request, user_id):
+    utilisateur = get_object_or_404(User, pk=user_id)
+
+    return render(request, 'fiches/utilisateur.html',
+                  {'utilisateur': utilisateur})
 
 
-def register_user(request):
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FICHES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+# Enables the creation of a Fiche
+@login_required
+def creer_fiche(request):
     if request.method == 'POST':
-        form = MyRegistrationForm(request.POST)     # create form object
+        data = request.POST.dict()
+        data['createur'] = User.objects.get(username=request.user).id
+        form = FicheForm(data or None)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
     else:
-        form = MyRegistrationForm()
-    return render(request, 'registration/register.html', {'userform': form})
+        form = FicheForm()
+
+    return render(request, 'fiches/formulaire.html', {'form': form})
 
 
-def password_reset(request):
-    pass
+# Display the request Fiche
+def detail_fiche(request, fiche_id):
+    fiche = get_object_or_404(Fiche, pk=fiche_id)
+
+    return render(request, 'fiches/detail.html', {'fiche': fiche})
+
+
+# Displays the first name and last name of the latests Fiche model instances
+def personnages(request):
+    fiches = Fiche.objects.order_by('nom', 'prenom')
+    context = {'latest_fiches': fiches}
+
+    return render(request, 'fiches/index.html', context)

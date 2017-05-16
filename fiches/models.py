@@ -214,6 +214,7 @@ class Fiche(models.Model):
 
 
 class FicheForm(ModelForm):
+
     class Meta:
         model = Fiche
         fields = ['nom', 'prenom', 'autres_prenoms', 'titre',
@@ -224,7 +225,17 @@ class FicheForm(ModelForm):
                   'ville_de_naissance', 'zone_de_residence',
                   'ville_de_residence', 'description', 'historique',
                   'inventaire', 'relations', 'aff_createur',
-                  'aff_inventaire', 'image']
+                  'aff_inventaire', 'image', 'createur']
+        widgets = {'createur': forms.HiddenInput()}
+
+    # def save(self, commit=True, createur=None):
+    #     fiche = super(FicheForm, self).save(commit=False)
+    #     fiche.createur = createur
+
+    #     if commit:
+    #         fiche.save()
+
+    #     return fiche
 
 
 class UserProfile(models.Model):
