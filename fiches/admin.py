@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 
 # from fiches.users import CustomUser, CustomUserChangeForm, UserForm
 
 # Register your models here.
-from fiches.models import Fiche, User
+from fiches.models import Fiche, UserProfile
 
 
 class FicheAdmin(admin.ModelAdmin):

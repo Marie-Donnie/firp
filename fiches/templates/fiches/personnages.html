@@ -6,7 +6,7 @@
   <ul>
     {% for f in latest_fiches %}
     <div class="character">
-      <li><a href="{% url 'detail' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+      <li><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
     </div>
     {% endfor %}
   </ul>
