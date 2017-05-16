@@ -8,12 +8,10 @@
 <p>Votre pseudo et mot de passe ne correspondent pas. Veuillez réessayer.</p>
 {% endif %}
 
-{% if next %}
+
 {% if user.is_authenticated %}
-<p>Vous n'avez pas accès à cette page. Peut-être êtes-vous connecté sur le mauvais compte ?</p>
 {% else %}
-<p>Veuillez vous connecter pour avoir accès à cette page.</p>
-{% endif %}
+<p>Vous n'avez pas accès à cette page. Veuillez vous connecter.</p>
 {% endif %}
 <form method="post" action="{% url 'login' %}">
   {% csrf_token %}

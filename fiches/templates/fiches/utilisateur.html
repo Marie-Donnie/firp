@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Profil de {{ utilisateur.username }}{% endblock %}
+{% block page-title %}{{ utilisateur.username }}{% endblock %}
+
+{% block user %}
+{% ifequal user.id utilisateur.id %}
+<a class="btn btn-default" href="utilisateurs/editer_profil">Editer</a>
+{% endifequal %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="media">
+  <div class="media-body">
+    <ul>
+      <li>Pseudo&nbsp;: {{ utilisateur.username }}</li>
+      <li>Inscription&nbsp;: {{ utilisateur.date_joined }}</li>
+    </ul>
+  </div>
+
+  <div class="media-right">
+    <a target="_blank">
+      <img class="media-object">
+    </a>
+  </div>
+</div>
+
+{% endblock %}

@@ -52,13 +52,12 @@ Créateur : {{ fiche.createur }}
 	<li>Inventaire&nbsp;: {{ fiche.inventaire }}</li>
 	{% endif %}
       </ul>
-      <!-- <div class="gallery"> -->
     </div>
 
-  <!-- </div> -->
   <div class="media-right">
     <a target="_blank" href={{ fiche.image.url }}>
       <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
     </a>
   </div>
+</div>
 {% endblock %}
