@@ -1,12 +1,7 @@
 # coding=utf-8
 from django.db import models
-from django.forms import ModelForm
 from django.conf import settings
 from django.utils import timezone
-from django.contrib.auth.forms import UserCreationForm
-from django import forms
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
 
 
 class IntegerRangeField(models.SmallIntegerField):
@@ -213,87 +208,9 @@ class Fiche(models.Model):
                                          ))
 
 
-class FicheForm(ModelForm):
-
-    class Meta:
-        model = Fiche
-        fields = ['nom', 'prenom', 'autres_prenoms', 'titre',
-                  'autres_titres', 'sexe', 'race', 'taille',
-                  'poids', 'profession', 'medaille', 'etat', 'pj',
-                  'jour_de_naissance', 'mois_de_naissance',
-                  'annee_de_naissance', 'zone_de_naissance',
-                  'ville_de_naissance', 'zone_de_residence',
-                  'ville_de_residence', 'description', 'historique',
-                  'inventaire', 'relations', 'aff_createur',
-                  'aff_inventaire', 'image', 'createur']
-        widgets = {'createur': forms.HiddenInput()}
-
-    # def save(self, commit=True, createur=None):
-    #     fiche = super(FicheForm, self).save(commit=False)
-    #     fiche.createur = createur
-
-    #     if commit:
-    #         fiche.save()
-
-    #     return fiche
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     image = models.ImageField(upload_to='images/users/',
                               default='images/site/no-image.png')
     naissance = models.DateField()
     creation = models.DateTimeField(default=timezone.now)
-
-
-class UserProfileForm(ModelForm):
-    # pseudo = forms.CharField(max_length=150)
-    # mot_de_passe = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    # email = forms.EmailField()
-    # prenom = forms.CharField(max_length=30)
-    # nom = forms.CharField(max_length=30)
-    # naissance = forms.DateField()
-    # class Meta:
-    #     model = User
-    #     fields = ['naissance', 'image']
-
-    # def __init__(self, *args, **kwargs):
-    #     user = kwargs.pop('user')
-    #     super(UserForm, self).__init__(*args, **kwargs)
-    #     self.user = user
-    class Meta:
-        model = UserProfile
-        exclude = ['user']
-        fields = ['image', 'naissance']
-        prefix = 'userprofile'
-
-
-class UserForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password']
-        prefix = 'user'
-        # "__all__"
-
-
-class MyRegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    first_name = forms.CharField(required=False)
-    last_name = forms.CharField(required=False)
-    birthday = forms.DateField(required=False)
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password1', 'password2')
-
-    def save(self, commit=True):
-        user = super(MyRegistrationForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.birthday = self.cleaned_data['birthday']
-
-        if commit:
-            user.save()
-
-        return user

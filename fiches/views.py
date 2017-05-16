@@ -1,11 +1,12 @@
 from django.shortcuts import get_object_or_404, render
-from fiches.models import Fiche, FicheForm, UserForm, UserProfileForm, MyRegistrationForm
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from fiches.models import Fiche, UserProfile
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from fiches.forms import FicheForm, UserForm, UserProfileForm, MyRegistrationForm
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
