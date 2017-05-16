@@ -117,11 +117,11 @@ ZONES = (
     )
     ),
     ("Kezan", (
-        ("Kezan")
+        ("Kezan"),
     )
     ),
     ("Zandalar", (
-        ("Zandalar")
+        ("Zandalar"),
     )
     )
 )
