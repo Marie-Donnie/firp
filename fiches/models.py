@@ -196,6 +196,8 @@ class Fiche(models.Model):
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='fiches')
+    pseudo = models.CharField(max_length=30,
+                              default="?")
     aff_createur = models.BooleanField(default=True,
                                        choices=(
                                            (True, 'Oui'),

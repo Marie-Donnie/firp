@@ -69,6 +69,6 @@ class FicheForm(ModelForm):
                   'annee_de_naissance', 'zone_de_naissance',
                   'ville_de_naissance', 'zone_de_residence',
                   'ville_de_residence', 'description', 'historique',
-                  'inventaire', 'relations', 'aff_createur',
+                  'inventaire', 'relations', 'pseudo', 'aff_createur',
                   'aff_inventaire', 'image', 'createur']
         widgets = {'createur': forms.HiddenInput()}
