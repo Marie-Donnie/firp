@@ -11,7 +11,7 @@
   </tr>
   {% for u in latest_users %}
   <tr>
-    <td>{{ u.username }}</td>
+    <td><a href="{% url 'utilisateur' u.id %}">{{ u.username }}</a></td>
   </tr>
   {% endfor %}
 </table>

@@ -17,6 +17,15 @@
     <ul>
       <li>Pseudo&nbsp;: {{ utilisateur.username }}</li>
       <li>Inscription&nbsp;: {{ utilisateur.date_joined }}</li>
+      <li>Personnages&nbsp;:
+	<ul id="liste_persos">
+	  {% for f in utilisateur.fiches.all %}
+	  {% if f.aff_createur %}
+	  <li><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+	  {% endif %}
+	  {% endfor %}
+	</ul>
+      </li>
     </ul>
   </div>
 
