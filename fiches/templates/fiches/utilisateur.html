@@ -5,7 +5,7 @@
 
 {% block user %}
 {% ifequal user.id utilisateur.id %}
-<a class="btn btn-default" href="utilisateurs/editer_profil">Editer</a>
+<a class="btn btn-default" href="{% url 'editer_utilisateur' user.id %}">Editer</a>
 {% endifequal %}
 {% endblock %}
 

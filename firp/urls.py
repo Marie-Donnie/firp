@@ -21,10 +21,15 @@ urlpatterns = [
     url(r'^enregistrer/$', views.register_user, name='enregistrer'),
     # Users
     url(r'^utilisateurs/$', views.users),
-    url(r'^utilisateurs/editer_profil$', views.edit_user),
-    url(r'^utilisateurs/(?P<user_id>\d+)/$', views.aff_user, name='utilisateur'),
+    url(r'^utilisateurs/editer_profil/(?P<user_id>\d+)/$', views.edit_user,
+        name='editer_utilisateur'),
+    url(r'^utilisateurs/(?P<user_id>\d+)/$', views.aff_user,
+        name='utilisateur'),
     # Fiches
     url(r'^personnages/$', views.personnages),
-    url(r'^fiches/(?P<fiche_id>\d+)/$', views.detail_fiche, name='detail_fiche'),
+    url(r'^fiches/(?P<fiche_id>\d+)/$', views.detail_fiche,
+        name='detail_fiche'),
+    url(r'^fiches/editer_fiche/(?P<fiche_id>\d+)/$', views.edit_fiche,
+        name='editer_fiche'),
     url(r'^creer/$', views.creer_fiche, name='creer_fiche')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

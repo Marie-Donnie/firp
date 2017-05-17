@@ -10,6 +10,11 @@
 {% if fiche.aff_createur %}
 Créateur : {{ fiche.createur }}
 {% endif %}
+{% if user.is_authenticated %}
+{% ifequal user.id fiche.createur.id %}
+<a class="btn btn-default" href="{% url 'editer_fiche' fiche.id %}">Editer</a>
+{% endifequal %}
+{% endif %}
 {% endblock %}
 
 

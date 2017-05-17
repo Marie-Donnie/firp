@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from fiches.models import Fiche, UserProfile
-from django.http import HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.template import RequestContext
@@ -67,25 +67,17 @@ def users(request):
     return render(request, 'fiches/utilisateurs.html', context)
 
 
-def edit_user(request):
+def edit_user(request, user_id):
     if request.method == 'POST':
         form = UserForm(request.POST, user=request.user)
         if form.is_valid():
-            # print(form.cleaned_data)
-            # user = User.objects.create(user=form.user, image=form.image,
-            #                            naissance=form.naissance)
-            # user = UserA(username=form.username,
-            #              first_name=form.first_name,
-            #              last_name=form.last_name,
-            #              password=form.password,
-            #              email=form.email)
-            # user.save()
             form.save()
             return HttpResponseRedirect('/')
     else:
-        form = UserForm(user=request.user)
+        utilisateur = User.objects.get(pk=user_id)
+        form = UserForm(request.POST, instance=utilisateur)
 
-    return render(request, 'fiches/inscription.html', {'form': form})
+    return render(request, 'registration/register.html', {'form': form})
 
 
 def aff_user(request, user_id):
@@ -125,3 +117,22 @@ def personnages(request):
     context = {'latest_fiches': fiches}
 
     return render(request, 'fiches/index.html', context)
+
+
+def edit_fiche(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    if request.user == fiche.createur:
+        if request.method == 'POST':
+            form = FicheForm(request.POST, user=request.user)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+        else:
+
+            form = FicheForm(request.POST, instance=fiche)
+
+        return render(request, 'fiches/formulaire.html', {'form': form})
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer cette fiche.")
