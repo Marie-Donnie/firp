@@ -216,6 +216,10 @@ class Fiche(models.Model):
 
 
 class UserProfile(models.Model):
+    nom = models.CharField(max_length=30,
+                           default="")
+    prenom = models.CharField(max_length=30,
+                              default="")
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 null=True,
                                 related_name='infos')

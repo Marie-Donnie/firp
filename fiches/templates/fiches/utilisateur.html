@@ -16,6 +16,11 @@
   <div class="media-body">
     <ul>
       <li>Pseudo&nbsp;: {{ utilisateur.username }}</li>
+      {% if utilisateur.infos %}
+      <li>Nom&nbsp;: {{ utilisateur.infos.nom }}</li>
+      <li>Prenom&nbsp;: {{ utilisateur.infos.prenom }}</li>
+      <li>Date de naissance&nbsp;: {{ utilisateur.infos.naissance }}</li>
+      {% endif %}
       <li>Inscription&nbsp;: {{ utilisateur.date_joined }}</li>
       <li>Personnages&nbsp;:
 	<ul id="liste_persos">
@@ -30,9 +35,14 @@
   </div>
 
   <div class="media-right">
-    <a target="_blank" href={{ utilisateur.image.url }}>
-      <img class="media-object" src={{ utilisateur.image.url }} alt="Portrait">
-    </a>
+      {% if utilisateur.infos %}
+    <a target="_blank" href={{ utilisateur.infos.image.url }}>
+      <img class="media-object" src={{ utilisateur.infos.image.url }} alt="Portrait">
+    {% else %}
+      <a target="_blank" href="/fiches/media/images/site/no-image.png">
+	<img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait">
+    {% endif %}
+      </a>
   </div>
 </div>
 

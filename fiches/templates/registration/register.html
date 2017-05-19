@@ -6,7 +6,7 @@
 
 {% block content %}
 
-  <form method="POST" action="">
+  <form enctype="multipart/form-data" method="POST" action="">
     {% csrf_token %}
     {{userform.as_ul}}
     {{userprofileform.as_ul}}

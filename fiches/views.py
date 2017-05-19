@@ -64,6 +64,7 @@ def users(request):
     context = {'latest_users': users}
     return render(request, 'fiches/utilisateurs.html', context)
 
+
 @login_required
 def edit_user(request):
     if request.method == 'POST':
@@ -75,6 +76,21 @@ def edit_user(request):
         form = MyRegistrationForm(instance=request.user)
 
     return render(request, 'registration/register.html', {'userform': form})
+
+
+@login_required
+def add_profile(request):
+    if request.method == 'POST':
+        data = request.POST.dict()
+        data['user'] = User.objects.get(username=request.user).id
+        form = UserProfileForm(data, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = UserProfileForm()
+
+    return render(request, 'fiches/profil.html', {'form': form})
 
 
 def aff_user(request, user_id):
