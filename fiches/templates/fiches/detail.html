@@ -41,9 +41,9 @@ Créateur : {{ fiche.createur }}
 	  {{fiche.mois_de_naissance}}{% if fiche.jour_mois_de_naissance == 01 %}er mois{% else %}ème mois
 	  {% endif %}
 	  de l'an {{fiche.annee_de_naissance}}</li>
-	<li>Zone de naissance&nbsp;: {{ fiche.get_zone_de_naissance_display }} {{ fiche.zone_de_naissance }}</li>
+	<li>Zone de naissance&nbsp;: {{ fiche.get_zone_de_naissance_display }}</li>
 	<li>Ville de naissance&nbsp;: {{ fiche.ville_de_naissance }}</li>
-	<li>Zone de résidence&nbsp;: {{ fiche.get_zone_de_naissance_display }} {{ fiche.zone_de_naissance }}</li>
+	<li>Zone de résidence&nbsp;: {{ fiche.get_zone_de_naissance_display }}</li>
 	<li>Ville de résidence&nbsp;: {{ fiche.ville_de_residence }}</li>
 	<li>Taille&nbsp;: {{ fiche.taille }}m</li>
 	<li>Poids&nbsp;: {{ fiche.poids }} kg</li>

@@ -191,7 +191,7 @@ class Fiche(models.Model):
                                   default='A venir')
     relations = models.CharField(max_length=6000,
                                  default='Aucune')
-    image = models.ImageField(upload_to='images/persos/',
+    image = models.ImageField(upload_to='images/persos',
                               default='images/site/no-image.png')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
@@ -212,7 +212,7 @@ class Fiche(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    image = models.ImageField(upload_to='images/users/',
+    image = models.ImageField(upload_to='images/users',
                               default='images/site/no-image.png')
     naissance = models.DateField()
     creation = models.DateTimeField(default=timezone.now)

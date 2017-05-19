@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^enregistrer/$', views.register_user, name='enregistrer'),
     # Users
     url(r'^utilisateurs/$', views.users),
-    url(r'^utilisateurs/editer_profil/(?P<user_id>\d+)/$', views.edit_user,
+    url(r'^utilisateurs/editer_profil/$', views.edit_user,
         name='editer_utilisateur'),
     url(r'^utilisateurs/(?P<user_id>\d+)/$', views.aff_user,
         name='utilisateur'),

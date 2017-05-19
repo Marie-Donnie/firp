@@ -20,10 +20,8 @@ def index(request):
 
 def login_authen(request):
     if request.method == 'POST':
-        print(request.POST['username'])
         username = request.POST['username']
         password = request.POST['password']
-        print(password)
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
@@ -66,18 +64,17 @@ def users(request):
     context = {'latest_users': users}
     return render(request, 'fiches/utilisateurs.html', context)
 
-
-def edit_user(request, user_id):
+@login_required
+def edit_user(request):
     if request.method == 'POST':
-        form = UserForm(request.POST, user=request.user)
+        form = MyRegistrationForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
     else:
-        utilisateur = User.objects.get(pk=user_id)
-        form = UserForm(request.POST, instance=utilisateur)
+        form = MyRegistrationForm(instance=request.user)
 
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'registration/register.html', {'userform': form})
 
 
 def aff_user(request, user_id):
@@ -94,7 +91,10 @@ def creer_fiche(request):
     if request.method == 'POST':
         data = request.POST.dict()
         data['createur'] = User.objects.get(username=request.user).id
-        form = FicheForm(data or None)
+        print(dict(request.POST))
+        print(dict(request.FILES))
+        print(dict(data))
+        form = FicheForm(data, request.FILES)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
@@ -118,18 +118,18 @@ def personnages(request):
 
     return render(request, 'fiches/index.html', context)
 
-
+@login_required
 def edit_fiche(request, fiche_id):
     fiche = Fiche.objects.get(pk=fiche_id)
     if request.user == fiche.createur:
         if request.method == 'POST':
-            form = FicheForm(request.POST, user=request.user)
+            form = FicheForm(request.POST, instance=fiche)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
         else:
 
-            form = FicheForm(request.POST, instance=fiche)
+            form = FicheForm(instance=fiche)
 
         return render(request, 'fiches/formulaire.html', {'form': form})
 
