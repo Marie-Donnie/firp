@@ -196,23 +196,29 @@ class Fiche(models.Model):
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='fiches')
-    pseudo = models.CharField(max_length=30,
-                              default="?")
-    aff_createur = models.BooleanField(default=True,
-                                       choices=(
-                                           (True, 'Oui'),
-                                           (False, 'Non'),
-                                       ))
-    aff_inventaire = models.BooleanField(default=True,
-                                         choices=(
-                                             (True, 'Oui'),
-                                             (False, 'Non'),
-                                         ))
+    pseudo_du_personnage = models.CharField(max_length=30,
+                                            default="?")
+    afficher_createur = models.BooleanField(default=True,
+                                            choices=(
+                                                (True, 'Oui'),
+                                                (False, 'Non'),
+                                            ))
+    afficher_inventaire = models.BooleanField(default=True,
+                                              choices=(
+                                                  (True, 'Oui'),
+                                                  (False, 'Non'),
+                                              ))
+    afficher_pseudo = models.BooleanField(default=True,
+                                          choices=(
+                                              (True, 'Oui'),
+                                              (False, 'Non'),
+                                          ))
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                null=True,
+                                related_name='infos')
     image = models.ImageField(upload_to='images/users',
                               default='images/site/no-image.png')
     naissance = models.DateField()
-    creation = models.DateTimeField(default=timezone.now)

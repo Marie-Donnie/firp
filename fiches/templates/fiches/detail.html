@@ -7,8 +7,11 @@
 {% endblock %}
 
 {% block user %}
-{% if fiche.aff_createur %}
+{% if fiche.afficher_createur %}
 Créateur : {{ fiche.createur }}
+{% endif %}
+{% if fiche.afficher_pseudo %}
+Personnage en jeu : {{ fiche.pseudo_du_personnage }}
 {% endif %}
 {% if user.is_authenticated %}
 {% ifequal user.id fiche.createur.id %}
@@ -53,7 +56,7 @@ Créateur : {{ fiche.createur }}
 	<li>Description&nbsp;: {{ fiche.description }}</li>
 	<li>Historique&nbsp;: {{ fiche.historique }}</li>
 	<li>Relations&nbsp;: {{ fiche.relations }}</li>
-	{% if fiche.aff_inventaire %}
+	{% if fiche.afficher_inventaire %}
 	<li>Inventaire&nbsp;: {{ fiche.inventaire }}</li>
 	{% endif %}
       </ul>

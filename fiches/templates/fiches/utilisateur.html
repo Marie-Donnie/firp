@@ -20,7 +20,7 @@
       <li>Personnages&nbsp;:
 	<ul id="liste_persos">
 	  {% for f in utilisateur.fiches.all %}
-	  {% if f.aff_createur %}
+	  {% if f.afficher_createur %}
 	  <li><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
 	  {% endif %}
 	  {% endfor %}
