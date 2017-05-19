@@ -173,6 +173,10 @@ a {
     color: #fefefe;
 }
 
+textarea {
+    color: initial;
+}
+
 a:focus,
 a:hover {
     color: #a72121;
