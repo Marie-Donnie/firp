@@ -91,9 +91,6 @@ def creer_fiche(request):
     if request.method == 'POST':
         data = request.POST.dict()
         data['createur'] = User.objects.get(username=request.user).id
-        print(dict(request.POST))
-        print(dict(request.FILES))
-        print(dict(data))
         form = FicheForm(data, request.FILES)
         if form.is_valid():
             form.save()
