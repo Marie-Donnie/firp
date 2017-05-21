@@ -20,6 +20,12 @@ class UserAdministration(admin.ModelAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdministration)
 
+
+class ProfileAdministration(admin.ModelAdmin):
+    list_display = ['nom', 'prenom']
+
+admin.site.register(UserProfile, ProfileAdministration)
+
 # class CustomUserAdmin(UserAdmin):
 #     # The forms to add and change user instances
 

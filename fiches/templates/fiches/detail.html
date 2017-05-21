@@ -8,10 +8,10 @@
 
 {% block user %}
 {% if fiche.afficher_createur %}
-Créateur : {{ fiche.createur }}
+<span>Créateur : {{ fiche.createur }}</span>
 {% endif %}
 {% if fiche.afficher_pseudo %}
-Personnage en jeu : {{ fiche.pseudo_du_personnage }}
+<span>Personnage en jeu : {{ fiche.pseudo_du_personnage }}</span>
 {% endif %}
 {% if user.is_authenticated %}
 {% ifequal user.id fiche.createur.id %}

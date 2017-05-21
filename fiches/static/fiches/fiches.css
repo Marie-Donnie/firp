@@ -90,7 +90,7 @@ h1 a {
 
 ul {
     list-style-type: none;
-    margin: 0;
+    margin: 10px 30px;
     padding: 0;
     overflow: hidden;
 }
@@ -194,6 +194,7 @@ a:hover {
 
 li {
     font-size: 15px;
+    margin: 2px;
 }
 
 p {
@@ -213,6 +214,38 @@ p {
     color: #fefefe;
 }
 
-#page-title{
+#page-title {
     flex: 1 ;
+}
+
+#creator {
+    display: flex;
+    flex-flow: column;
+}
+
+#creator .btn-default {
+    margin: 5px 0px;
+}
+
+.btn-default {
+    /* background-image: url("/static/fiches/images/button.png"); */
+    color: #ddd;
+    background: #470002;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid #6e1618;
+}
+
+.btn-default:focus,
+.btn-default:hover {
+    /* background-image: url("/static/fiches/images/button-hover.png"); */
+    color: #fefefe;
+    background: #7e0609;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid #6e1618;
 }
