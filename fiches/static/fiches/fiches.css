@@ -40,11 +40,6 @@ h1 a {
     margin-left: 40px;
 }
 
-/* h1, h2, h3, h4 { */
-/*     font-family: 'Arial', cursive; */
-/*     color: #470002; */
-/* } */
-
 .date {
     color: #470002;
 }
@@ -146,41 +141,13 @@ div.gallery img {
     flex: 1;
 }
 
-/* #detail p { */
-/*     color: white; */
-/*     /\* text-transform: uppercase; *\/ */
-/* } */
-
-/* #detail li { */
-/*     color: white; */
-/* } */
-
-/* form label{ */
-/*     color: white; */
-/* } */
-
-
-
-input {
-    color: initial;
-}
-
-select {
-    color: initial;
-}
-
-a {
-    color: #fefefe;
-}
-
-textarea {
-    color: initial;
-}
-
-a:focus,
-a:hover {
-    color: #a72121;
-    text-decoration: underline;
+.panel-body {
+    border: 1px solid #470002;
+    border-radius: 5px;
+    margin-top: 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
 }
 
 .navbar-default .navbar-nav > li > a{
@@ -190,24 +157,6 @@ a:hover {
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover {
     color: #a72121;
-}
-
-li {
-    font-size: 15px;
-    margin: 2px;
-}
-
-p {
-    font-size: 30px;
-}
-
-.panel-body {
-    border: 1px solid #470002;
-    border-radius: 5px;
-    margin-top: 0px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 10px;
 }
 
 #creator {
@@ -248,4 +197,35 @@ p {
     text-decoration: none;
     position: relative;
     border: 1px solid #6e1618;
+}
+
+input {
+    color: initial;
+}
+
+select {
+    color: initial;
+}
+
+textarea {
+    color: initial;
+}
+
+a {
+    color: #fefefe;
+}
+
+li {
+    font-size: 15px;
+    margin: 2px;
+}
+
+p {
+    font-size: 30px;
+}
+
+a:focus,
+a:hover {
+    color: #a72121;
+    text-decoration: underline;
 }
