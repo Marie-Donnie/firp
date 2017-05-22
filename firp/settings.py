@@ -66,7 +66,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-FR'
 
 TIME_ZONE = 'Europe/Paris'
 
@@ -136,3 +136,5 @@ AUTHENTICATION_BACKENDS = {
 }
 
 # AUTH_USER_MODEL = 'django.contrib.auth.models.User'
+
+FORMAT_MODULE_PATH = 'firp.formats'
