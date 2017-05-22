@@ -15,14 +15,14 @@
 <div class="media">
   <div class="media-body">
     <ul>
-      <li>Pseudo&nbsp;: {{ utilisateur.username }}</li>
+      <li><b>Pseudo&nbsp;: </b>{{ utilisateur.username }}</li>
       {% if utilisateur.infos %}
-      <li>Nom&nbsp;: {{ utilisateur.infos.nom }}</li>
-      <li>Prenom&nbsp;: {{ utilisateur.infos.prenom }}</li>
-      <li>Date de naissance&nbsp;: {{ utilisateur.infos.naissance }}</li>
+      <li><b>Nom&nbsp;: </b>{{ utilisateur.infos.nom }}</li>
+      <li><b>Prenom&nbsp;: </b>{{ utilisateur.infos.prenom }}</li>
+      <li><b>Date de naissance&nbsp;: </b>{{ utilisateur.infos.naissance }}</li>
       {% endif %}
-      <li>Inscription&nbsp;: {{ utilisateur.date_joined }}</li>
-      <li>Personnages&nbsp;:
+      <li><b>Inscription&nbsp;: </b>{{ utilisateur.date_joined }}</li>
+      <li><b>Personnages&nbsp;: </b>
 	<ul id="liste_persos">
 	  {% for f in utilisateur.fiches.all %}
 	  {% if f.afficher_createur %}
