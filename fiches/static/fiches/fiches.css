@@ -57,14 +57,6 @@ h1 a {
     width: 100%;
 }
 
-.character {
-    margin-bottom: 10px;
-}
-
-.character h1 a, .character h1 a:visited {
-    color: #470002;
-		 }
-
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
@@ -205,7 +197,12 @@ div.gallery img {
     border: 1px solid #6e1618;
 }
 
-input {
+
+#characters .form {
+    display: block;
+}
+
+input, textarea {
     color: initial;
 }
 
@@ -213,9 +210,6 @@ select {
     color: initial;
 }
 
-textarea {
-    color: initial;
-}
 
 a {
     color: #fefefe;
