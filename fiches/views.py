@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from fiches.forms import FicheForm, UserForm, UserProfileForm, MyRegistrationForm
+from django.db.models import Count
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -104,17 +105,21 @@ def aff_user(request, user_id):
 # Enables the creation of a Fiche
 @login_required
 def creer_fiche(request):
-    if request.method == 'POST':
-        data = request.POST.dict()
-        data['createur'] = User.objects.get(username=request.user).id
-        form = FicheForm(data, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
-    else:
-        form = FicheForm()
+    if request.user.fiches.count() < 16:
+        if request.method == 'POST':
+            data = request.POST.dict()
+            data['createur'] = User.objects.get(username=request.user).id
+            form = FicheForm(data, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+        else:
+            form = FicheForm()
 
-    return render(request, 'fiches/formulaire.html', {'form': form})
+        return render(request, 'fiches/formulaire.html', {'form': form})
+
+    else:
+        return HttpResponse("Vous ne pouvez pas faire plus de quinze fiches. Seuls les membres des Fils de Garithos le peuvent.")
 
 
 # Display the request Fiche
