@@ -56,7 +56,7 @@
 	<li><b>Description&nbsp;: </b>{{ fiche.description }}</li>
 	<li><b>Historique&nbsp;: </b>{{ fiche.historique }}</li>
 	<li><b>Relations&nbsp;: </b>{{ fiche.relations }}</li>
-	{% if fiche.afficher_inventaire %}
+	{% if fiche.afficher_inventaire or user.id == fiche.createur.id %}
 	<li><b>Inventaire&nbsp;: </b>{{ fiche.inventaire }}</li>
 	{% endif %}
       </ul>
