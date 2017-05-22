@@ -12,8 +12,8 @@ h1 a {
     border-radius: 5px;
     background-color: #000000;
     margin-top: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 7%;
+    margin-right: 7%;
     margin-bottom: 0;
     padding: 0 40px;
     display: flex;
@@ -32,13 +32,15 @@ h1 a {
     margin: 0;
 }
 
+#content {
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
 .image-garithos {
     height: 200px;
 }
 
-.content {
-    margin-left: 40px;
-}
 
 .date {
     color: #470002;
@@ -71,8 +73,8 @@ h1 a {
 .navbar-default {
     background-color: #000000;
     border-color: #470002;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 7%;
+    margin-right: 7%;
     margin-top: 0;
 }
 
@@ -106,9 +108,13 @@ div.gallery img {
     height: auto;
 }
 
+.media-right {
+    width : 45%;
+}
+
 .media-object {
     margin: 20px;
-    width: 520px;
+    width: 100%;
     height: auto;
     border: 10px double #470002;
     border-radius: 5px;
@@ -128,8 +134,8 @@ div.gallery img {
     border-radius: 5px;
     color: #830205;
     margin-top: 0;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 0;
+    margin-right: 0;
     border-color: #470002;
     text-shadow: -1px -1px #000;
     display: flex;
@@ -145,8 +151,8 @@ div.gallery img {
     border: 1px solid #470002;
     border-radius: 5px;
     margin-top: 0px;
-    margin-left: 50px;
-    margin-right: 50px;
+    /* margin-left: 50px; */
+    /* margin-right: 50px; */
     margin-bottom: 10px;
 }
 
@@ -217,7 +223,11 @@ a {
 
 li {
     font-size: 15px;
-    margin: 2px;
+    margin: 1%;
+}
+
+.navbar-nav > li {
+    margin: 0;
 }
 
 p {
