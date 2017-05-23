@@ -22,7 +22,7 @@ class UserProfileForm(ModelForm):
     #     self.user = user
     class Meta:
         model = UserProfile
-        fields = ['nom', 'prenom', 'naissance', 'image', 'user']
+        fields = ['naissance', 'image', 'user']
         widgets = {'user': forms.HiddenInput()}
 
 
@@ -35,22 +35,23 @@ class UserForm(ModelForm):
 
 
 class MyRegistrationForm(UserCreationForm):
-    # email = forms.EmailField(required=True)
-    # prenom = forms.CharField(required=True)
-    # nom = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    prenom = forms.CharField(required=True)
+    nom = forms.CharField(required=True)
     # date_de_naissance = forms.DateField(required=False)
     # image = forms.ImageField(required=False,
     #                          initial='images/site/no-image.png')
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2', 'email',
+                  'prenom', 'nom')
 
     def save(self, commit=True):
         user = super(MyRegistrationForm, self).save(commit=False)
-        # user.email = self.cleaned_data['email']
-        # user.first_name = self.cleaned_data['prenom']
-        # user.last_name = self.cleaned_data['nom']
+        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['prenom']
+        user.last_name = self.cleaned_data['nom']
         # user.birthday = self.cleaned_data['date_de_naissance']
         # user.image = self.cleaned_data['image']
 

@@ -96,7 +96,7 @@ def add_profile(request):
 
 def aff_user(request, user_id):
     utilisateur = get_object_or_404(User, pk=user_id)
-
+    print(utilisateur.email)
     return render(request, 'fiches/utilisateur.html',
                   {'utilisateur': utilisateur})
 

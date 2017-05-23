@@ -22,7 +22,7 @@ admin.site.register(User, UserAdministration)
 
 
 class ProfileAdministration(admin.ModelAdmin):
-    list_display = ['nom', 'prenom']
+    list_display = ['user']
 
 admin.site.register(UserProfile, ProfileAdministration)
 
