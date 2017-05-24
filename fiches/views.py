@@ -85,7 +85,7 @@ def profile(request):
     if hasattr(request.user, 'infos'):
         profil = User.objects.get(username=request.user).infos
         if request.method == 'POST':
-            form = UserProfileForm(request.POST, instance=profil)
+            form = UserProfileForm(request.POST, request.FILES, instance=profil)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -155,7 +155,7 @@ def edit_fiche(request, fiche_id):
     fiche = Fiche.objects.get(pk=fiche_id)
     if request.user == fiche.createur:
         if request.method == 'POST':
-            form = FicheForm(request.POST, instance=fiche)
+            form = FicheForm(request.POST, request.FILES, instance=fiche)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
