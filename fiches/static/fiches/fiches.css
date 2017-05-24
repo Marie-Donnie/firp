@@ -77,6 +77,14 @@ h1 a {
     border-color: #470002;
 }
 
+.navbar-right {
+    margin: 5px;
+}
+
+.navbar-collapse {
+    padding-right:0;
+}
+
 ul {
     list-style-type: none;
     margin: 10px 30px;
@@ -187,6 +195,7 @@ div.gallery img {
     text-decoration: none;
     position: relative;
     border: 1px solid #6e1618;
+    margin: 0px 3px;
 }
 
 .btn-default:focus,

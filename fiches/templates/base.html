@@ -31,7 +31,7 @@
       </ul>
       <div class="navbar-right">
 	{% if user.is_authenticated %}
-	<span>Bienvenue, {{ user.username }} !</span>
+	<span>Bienvenue, {{ user.username }} !  </span>
 	<a class="btn btn-default navbar-btn" href="/logout/">Se déconnecter</a>
 	{% else %}
 	<a class="btn btn-default navbar-btn" href="/login/">Se connecter</a>
