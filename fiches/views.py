@@ -81,18 +81,31 @@ def edit_user(request):
 
 
 @login_required
-def add_profile(request):
-    if request.method == 'POST':
-        data = request.POST.dict()
-        data['user'] = User.objects.get(username=request.user).id
-        form = UserProfileForm(data, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
-    else:
-        form = UserProfileForm()
+def profile(request):
+    if hasattr(request.user, 'infos'):
+        profil = User.objects.get(username=request.user).infos
+        if request.method == 'POST':
+            form = UserProfileForm(request.POST, instance=profil)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+        else:
+            form = UserProfileForm(instance=profil)
 
-    return render(request, 'fiches/profil.html', {'form': form})
+        return render(request, 'fiches/profil.html', {'form': form})
+
+    else:
+        if request.method == 'POST':
+            data = request.POST.dict()
+            data['user'] = User.objects.get(username=request.user).id
+            form = UserProfileForm(data, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+        else:
+            form = UserProfileForm()
+
+        return render(request, 'fiches/profil.html', {'form': form})
 
 
 def aff_user(request, user_id):

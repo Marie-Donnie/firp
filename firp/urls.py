@@ -23,8 +23,8 @@ urlpatterns = [
     url(r'^utilisateurs/$', views.users),
     url(r'^utilisateurs/editer_utilisateur/$', views.edit_user,
         name='editer_utilisateur'),
-    url(r'^utilisateurs/creer_profil/$', views.add_profile,
-        name='creer_profil'),
+    url(r'^utilisateurs/gestion_profil/$', views.profile,
+        name='gestion_profil'),
     url(r'^utilisateurs/(?P<user_id>\d+)/$', views.aff_user,
         name='utilisateur'),
     # Fiches
