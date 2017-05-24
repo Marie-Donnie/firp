@@ -16,7 +16,11 @@
 {% endblock %}
 {% block user %}
 {% if fiche.afficher_createur %}
+{% if fiche.createur %}
 <span><b>Créateur :</b> <a href="{% url 'utilisateur' fiche.createur.id %}">{{ fiche.createur }}</a></span>
+{% else %}
+<span><b>Créateur :</b> Aucun</span>
+{% endif %}
 {% endif %}
 {% if fiche.afficher_pseudo %}
 <span><b>Personnage en jeu :</b> {{ fiche.pseudo_du_personnage }}</span>

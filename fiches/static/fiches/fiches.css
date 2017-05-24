@@ -211,9 +211,27 @@ div.gallery img {
 }
 
 
-#characters .form {
-    display: block;
+#utilisateurs table, tr, td, th{
+    /* display: block; */
+    border: 1px solid #470002;
+    padding-left: 0;
+    padding-right: 0;
 }
+
+#utilisateurs table tr td a {
+    display:block;
+    height:100%;
+    width:100%;
+}
+
+#utilisateurs .media-object {
+    margin: 0px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    object-fit: cover;
+}
+
 
 input, textarea {
     color: initial;

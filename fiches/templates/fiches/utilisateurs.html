@@ -4,14 +4,25 @@
 {% block page-title %}Utilisateurs{% endblock %}
 
 {% block content %}
+<div id="utilisateurs">
 {% if latest_users %}
+
 <table style="width:100%">
   <tr>
     <th>Pseudo</th>
+    <th>Date d'inscription</th>
+    <th>Avatar</th>
   </tr>
   {% for u in latest_users %}
   <tr>
     <td><a href="{% url 'utilisateur' u.id %}">{{ u.username }}</a></td>
+    <td><a href="{% url 'utilisateur' u.id %}">{{ u.date_joined }}</a></td>
+      {% if u.infos %}
+      <td><a target="_blank" href="{% url 'utilisateur' u.id %}"><img class="media-object" src={{ u.infos.image.url }} alt="Portrait"></a></td>
+      {% else %}
+      <td><a target="_blank" href="{% url 'utilisateur' u.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
+      {% endif %}
+
   </tr>
   {% endfor %}
 </table>
@@ -19,4 +30,6 @@
 {% else %}
 <p>Aucun utilisateur</p>
 {% endif %}
+</div>
+
 {% endblock %}
