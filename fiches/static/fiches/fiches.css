@@ -157,21 +157,25 @@ div.gallery img {
     color: #a72121;
 }
 
-#creator {
-    color: #fefefe;
-}
-
 #page-title {
     flex: 1 ;
 }
 
 #creator {
+    color: #fefefe;
     display: flex;
     flex-flow: column;
 }
 
-#creator .btn-default {
-    margin: 5px 0px;
+#edition {
+    display: flex;
+    flex-flow: column;
+    margin: 0 10px;
+    align-items: center;
+}
+
+#edition .btn-default {
+    margin: 15% 0;
 }
 
 .btn-default {

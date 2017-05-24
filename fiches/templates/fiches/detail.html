@@ -6,18 +6,22 @@
 {{ fiche.prenom }} {{ fiche.nom }}
 {% endblock %}
 
-{% block user %}
-{% if fiche.afficher_createur %}
-<span><b>Créateur :</b> {{ fiche.createur }}</span>
-{% endif %}
-{% if fiche.afficher_pseudo %}
-<span><b>Personnage en jeu :</b> {{ fiche.pseudo_du_personnage }}</span>
-{% endif %}
+
+{% block edition %}
 {% if user.is_authenticated %}
 {% ifequal user.id fiche.createur.id %}
 <a class="btn btn-default" href="{% url 'editer_fiche' fiche.id %}">Editer</a>
 {% endifequal %}
 {% endif %}
+{% endblock %}
+{% block user %}
+{% if fiche.afficher_createur %}
+<span><b>Créateur :</b> <a href="{% url 'utilisateur' fiche.createur.id %}">{{ fiche.createur }}</a></span>
+{% endif %}
+{% if fiche.afficher_pseudo %}
+<span><b>Personnage en jeu :</b> {{ fiche.pseudo_du_personnage }}</span>
+{% endif %}
+<span><b>Date de création : </b> {{ fiche.creation }}</span>
 {% endblock %}
 
 

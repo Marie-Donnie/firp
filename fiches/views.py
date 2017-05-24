@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from fiches.forms import FicheForm, UserForm, UserProfileForm, MyRegistrationForm
 from django.db.models import Count
+from django.contrib.auth.decorators import user_passes_test
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

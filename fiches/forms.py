@@ -6,20 +6,6 @@ from django.contrib.auth.models import User
 
 
 class UserProfileForm(ModelForm):
-    # pseudo = forms.CharField(max_length=150)
-    # mot_de_passe = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    # email = forms.EmailField()
-    # prenom = forms.CharField(max_length=30)
-    # nom = forms.CharField(max_length=30)
-    # naissance = forms.DateField()
-    # class Meta:
-    #     model = User
-    #     fields = ['naissance', 'image']
-
-    # def __init__(self, *args, **kwargs):
-    #     user = kwargs.pop('user')
-    #     super(UserForm, self).__init__(*args, **kwargs)
-    #     self.user = user
     class Meta:
         model = UserProfile
         fields = ['naissance', 'image', 'user']
@@ -38,9 +24,6 @@ class MyRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     prenom = forms.CharField(required=True)
     nom = forms.CharField(required=True)
-    # date_de_naissance = forms.DateField(required=False)
-    # image = forms.ImageField(required=False,
-    #                          initial='images/site/no-image.png')
 
     class Meta:
         model = User
@@ -52,8 +35,6 @@ class MyRegistrationForm(UserCreationForm):
         user.email = self.cleaned_data['email']
         user.first_name = self.cleaned_data['prenom']
         user.last_name = self.cleaned_data['nom']
-        # user.birthday = self.cleaned_data['date_de_naissance']
-        # user.image = self.cleaned_data['image']
 
         if commit:
             user.save()

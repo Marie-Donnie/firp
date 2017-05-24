@@ -2,6 +2,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from datetime import datetime
 
 
 class IntegerRangeField(models.SmallIntegerField):
@@ -14,6 +15,11 @@ class IntegerRangeField(models.SmallIntegerField):
         defaults = {'min_value': self.min_value, 'max_value': self.max_value}
         defaults.update(kwargs)
         return super(IntegerRangeField, self).formfield(**defaults)
+
+
+class AutoDateTimeField(models.DateTimeField):
+    def pre_save(self, model_instance, add):
+        return datetime.datetime.now()
 
 
 # Create your models here.
@@ -213,6 +219,15 @@ class Fiche(models.Model):
                                               (True, 'Oui'),
                                               (False, 'Non'),
                                           ))
+    creation = models.DateField(default=timezone.now)
+
+    class Meta:
+        ordering = ["nom", "prenom"]
+        verbose_name = "fiche"
+        verbose_name_plural = "fiches"
+        default_related_name = 'fiches'
+        permissions = (("plus_de_15_fiches",
+                        "Peut faire plus de quinze fiches"),)
 
 
 class UserProfile(models.Model):
