@@ -161,8 +161,8 @@ class Fiche(models.Model):
     poids = models.FloatField(default='70')
     profession = models.CharField(max_length=75,
                                   default='Prostipute')
-    medaille = models.CharField(max_length=3000,
-                                default='Non applicable/Aucune')
+    medailles = models.CharField(max_length=3000,
+                                 default='Non applicable/Aucune')
     etat = models.CharField(max_length=2,
                             choices=ETAT_CHOIX,
                             default=VIVANT)
