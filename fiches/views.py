@@ -155,7 +155,9 @@ def edit_fiche(request, fiche_id):
     fiche = Fiche.objects.get(pk=fiche_id)
     if request.user == fiche.createur:
         if request.method == 'POST':
-            form = FicheForm(request.POST, request.FILES, instance=fiche)
+            data = request.POST.dict()
+            data['createur'] = User.objects.get(username=request.user).id
+            form = FicheForm(data, request.FILES, instance=fiche)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')

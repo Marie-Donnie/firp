@@ -15,14 +15,14 @@
 {% endif %}
 {% endblock %}
 {% block user %}
-{% if fiche.afficher_createur %}
+{% if fiche.afficher_createur or user.id == fiche.createur.id %}
 {% if fiche.createur %}
 <span><b>Créateur :</b> <a href="{% url 'utilisateur' fiche.createur.id %}">{{ fiche.createur }}</a></span>
 {% else %}
 <span><b>Créateur :</b> Aucun</span>
 {% endif %}
 {% endif %}
-{% if fiche.afficher_pseudo %}
+{% if fiche.afficher_pseudo or user.id == fiche.createur.id %}
 <span><b>Personnage en jeu :</b> {{ fiche.pseudo_du_personnage }}</span>
 {% endif %}
 <span><b>Date de création : </b> {{ fiche.creation }}</span>

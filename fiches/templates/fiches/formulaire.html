@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load l10n %}
 
 {% block title %}Créer un personnage{% endblock %}
 {% block page-title %}Créer un personnage{% endblock %}
@@ -9,52 +10,52 @@
 <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
 <div class="form-group">
-  <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text">
-<label for="id_prenom">Prenom&nbsp;</label> <input name="prenom" required="" id="id_prenom" maxlength="50" type="text">
-<label for="id_autres_prenoms">Autres prenoms&nbsp;</label> <input name="autres_prenoms" value="Aucun" required="" id="id_autres_prenoms" maxlength="200" type="text" size="50">
+  <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+<label for="id_prenom">Prenom&nbsp;</label> <input name="prenom" required="" id="id_prenom" maxlength="50" type="text" value="{{form.prenom.value|default_if_none:''}}">
+<label for="id_autres_prenoms">Autres prenoms&nbsp;</label> <input name="autres_prenoms" value="{{form.autres_prenoms.value|default:'Aucun'}}" required="" id="id_autres_prenoms" maxlength="200" type="text" size="50">
 </div>
 <div class="form-group">
   <span id="description"><b>Sexe </b></span>
   <label class="radio-inline" for="id_sexe">
-  <input type="radio" name="sexe" id="id_sexe" value="h" checked="checked"> Homme
+  <input type="radio" name="sexe" id="id_sexe" value="h" {% if form.sexe.value == 'h' or form.sexe.value == None %} checked="checked" {% endif %}> Homme
 </label>
 <label class="radio-inline" for="id_sexe">
-  <input type="radio" name="sexe" id="id_sexe" value="f"> Femme
+  <input type="radio" name="sexe" id="id_sexe" value="f" {% if form.sexe.value == 'f' %} checked="checked" {% endif %}> Femme
 </label>
 </div>
 <div class="form-group">
   <span id="description"><b>Etat du personnage </b></span>
 <label class="radio-inline" for="id_etat">
-  <input type="radio" name="etat" id="id_etat" value="VI" checked="checked"> Vivant
+  <input type="radio" name="etat" id="id_etat" value="VI" {% if form.etat.value == 'VI' or form.etat.value == None %} checked="checked" {% endif %}> Vivant
 </label>
 <label class="radio-inline" for="id_pj">
-  <input type="radio" name="etat" id="id_etat" value="MO"> Mort
+  <input type="radio" name="etat" id="id_etat" value="MO" {% if form.sexe.value == 'MO' %} checked="checked" {% endif %}> Mort
 </label>
 <label class="radio-inline" for="id_pj">
-  <input type="radio" name="etat" id="id_etat" value="DI"> Disparu
+  <input type="radio" name="etat" id="id_etat" value="DI" {% if form.sexe.value == 'DI' %} checked="checked" {% endif %}> Disparu
 </label>
 </div>
 <div class="form-group">
-<label for="id_race">Race&nbsp;</label> <input name="race" value="Humaine" required="" id="id_race" maxlength="40" type="text">
-<label for="id_taille">Taille&nbsp;</label> <input name="taille" value="1.70" step="any" required="" id="id_taille" type="number"><span>m</span>
-<label for="id_poids">Poids&nbsp;</label> <input name="poids" value="70" step="any" required="" id="id_poids" type="number"><span>kg</span>
+  <label for="id_race">Race&nbsp;</label> <input name="race" value="{{form.race.value|default:'Aucun'}}" required="" id="id_race" maxlength="40" type="text">
+<label for="id_taille">Taille&nbsp;</label> <input name="taille" value="{{form.taille.value|default:'1.70'|unlocalize}}" step="any" required="" id="id_taille" type="number"><span>m</span>
+<label for="id_poids">Poids&nbsp;</label> <input name="poids" value="{{form.poids.value|default:'70'|unlocalize}}" step="any" required="" id="id_poids" type="number"><span>kg</span>
 </div>
 <div class="form-group">
-  <label for="id_profession">Profession&nbsp;</label> <input name="profession" value="Prostipute" required="" id="id_profession" maxlength="75" type="text" size="75">
+  <label for="id_profession">Profession&nbsp;</label> <input name="profession" value="{{form.profession.value|default:'Prostipute'}}" required="" id="id_profession" maxlength="75" type="text" size="75">
 </div>
 <div class="form-group">
-  <label for="id_titre">Titre&nbsp;</label> <input name="titre" value="Aucun" required="" id="id_titre" maxlength="75" type="text" size="75">
+  <label for="id_titre">Titre&nbsp;</label> <input name="titre" value="{{form.titre.value|default:'Aucun'}}" required="" id="id_titre" maxlength="75" type="text" size="75">
 </div>
 <div class="form-group">
-<label for="id_autres_titres">Autres titres&nbsp;</label> <textarea class="form-control" name="autres_titres" id="id_autres_titres" required="" rows="3" cols="40" maxlength="500">Aucun</textarea>
+<label for="id_autres_titres">Autres titres&nbsp;</label> <textarea class="form-control" name="autres_titres" id="id_autres_titres" required="" rows="3" cols="40" maxlength="500">{{form.autres_titres.value|default:'Aucun'}}</textarea>
 </div>
 <div class="form-group">
-  <label for="id_medailles">Medailles&nbsp;</label> <textarea class="form-control" name="medailles" id="id_medailles" required="" rows="6" cols="40" maxlength="3000">Non applicable/Aucune</textarea>
+  <label for="id_medailles">Medailles&nbsp;</label> <textarea class="form-control" name="medailles" id="id_medailles" required="" rows="6" cols="40" maxlength="3000">{{form.medailles.value|default:'Non applicable/Aucune'}}</textarea>
 </div>
 <div class="form-group">
-<label for="id_jour_de_naissance">Jour de naissance&nbsp;</label> <input name="jour_de_naissance" value="1" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
-<label for="id_mois_de_naissance">Mois de naissance&nbsp;</label> <input name="mois_de_naissance" value="1" max="12" required="" id="id_mois_de_naissance" min="1" type="number">
-<label for="id_annee_de_naissance">Annee de naissance&nbsp;</label> <input name="annee_de_naissance" value="0" max="100" required="" id="id_annee_de_naissance" min="-32000" type="number">
+<label for="id_jour_de_naissance">Jour de naissance&nbsp;</label> <input name="jour_de_naissance" value="{{form.jour_de_naissance.value|default:'1'}}" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
+<label for="id_mois_de_naissance">Mois de naissance&nbsp;</label> <input name="mois_de_naissance" value="{{form.mois_de_naissance.value|default:'1'}}" max="12" required="" id="id_mois_de_naissance" min="1" type="number">
+<label for="id_annee_de_naissance">Annee de naissance&nbsp;</label> <input name="annee_de_naissance" value="{{form.annee_de_naissance.value|default:'0'}}" max="100" required="" id="id_annee_de_naissance" min="-32000" type="number">
 </div>
 <div class="form-group">
 <label for="id_zone_de_naissance">Zone de naissance&nbsp;</label> <select name="zone_de_naissance" id="id_zone_de_naissance">
@@ -223,7 +224,7 @@
 
   </optgroup>
 </select>
-<label for="id_ville_de_naissance">Ville de naissance&nbsp;</label> <input name="ville_de_naissance" value="Inconnu" required="" id="id_ville_de_naissance" maxlength="50" type="text" size="50">
+<label for="id_ville_de_naissance">Ville de naissance&nbsp;</label> <input name="ville_de_naissance" value="{{form.ville_de_naissance.value|default:'Inconnue'}}" required="" id="id_ville_de_naissance" maxlength="50" type="text" size="50">
 </div>
 <div class="form-group">
 <label for="id_zone_de_residence">Zone de residence&nbsp;</label> <select name="zone_de_residence" id="id_zone_de_residence">
@@ -392,32 +393,32 @@
 
   </optgroup>
 </select>
-<label for="id_ville_de_residence">Ville de residence&nbsp;</label> <input name="ville_de_residence" value="Noirebois" required="" id="id_ville_de_residence" maxlength="50" type="text" size="50">
+<label for="id_ville_de_residence">Ville de residence&nbsp;</label> <input name="ville_de_residence" value="{{form.ville_de_residence.value|default:'Noirebois'}}" required="" id="id_ville_de_residence" maxlength="50" type="text" size="50">
 </div>
 <div class="form-group">
-  <label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">A venir</textarea>
+  <label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">{{form.description.value|default:'A venir'}}</textarea>
     <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount1">0</span>/6000).</span>
-  <label for="id_historique">Historique&nbsp;</label> <textarea name="historique" class="form-control" id="id_historique" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_historique','charcount2');" onkeydown="countChars('id_historique','charcount2');" onmouseout="countChars('id_historique','charcount2');">A venir</textarea>
+  <label for="id_historique">Historique&nbsp;</label> <textarea name="historique" class="form-control" id="id_historique" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_historique','charcount2');" onkeydown="countChars('id_historique','charcount2');" onmouseout="countChars('id_historique','charcount2');">{{form.historique.value|default:'A venir'}}</textarea>
     <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
-<label for="id_relations">Relations&nbsp;</label> <textarea name="relations" class="form-control" id="id_relations" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_relations','charcount3');" onkeydown="countChars('id_relations','charcount3');" onmouseout="countChars('id_relations','charcount3');">Aucune</textarea>
+<label for="id_relations">Relations&nbsp;</label> <textarea name="relations" class="form-control" id="id_relations" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_relations','charcount3');" onkeydown="countChars('id_relations','charcount3');" onmouseout="countChars('id_relations','charcount3');">{{form.relations.value|default:'Aucune'}}</textarea>
   <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
-  <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">A venir</textarea>
+  <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
     <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
 </div>
 <div class="form-group">
   <span id="description"><b>Type de personnage </b></span>
 <label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="p" checked="checked"> Personnage joué
+  <input type="radio" name="pj" id="id_pj" value="p" {% if form.pj.value == 'p' or form.sexe.value == None %} checked="checked" {% endif %}> Personnage joué
 </label>
 <label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="a"> Personnage jouable
+  <input type="radio" name="pj" id="id_pj" value="a" {% if form.pj.value == 'a' or form.sexe.value == None %} checked="checked" {% endif %}> Personnage jouable
 </label>
 <label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="n"> Personnage non joué
+  <input type="radio" name="pj" id="id_pj" value="n" {% if form.pj.value == 'n' %} checked="checked" {% endif %}> Personnage non joué
 </label>
 </div>
 <div class="form-group">
-<label for="id_pseudo_du_personnage">Pseudo du personnage en jeu&nbsp;</label> <input name="pseudo_du_personnage" value="?" required="" id="id_pseudo_du_personnage" maxlength="30" type="text">
+<label for="id_pseudo_du_personnage">Pseudo du personnage en jeu&nbsp;</label> <input name="pseudo_du_personnage" value="{{form.pseudo_du_personnage.value|default:'?'}}" required="" id="id_pseudo_du_personnage" maxlength="30" type="text">
 </div>
 <div class="form-group">
   <label for="id_afficher_pseudo">Afficher pseudo du personnage&nbsp;</label> <input name="afficher_pseudo" checked="" id="id_afficher_pseudo" type="checkbox">
@@ -425,7 +426,13 @@
   <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" checked="" id="id_afficher_inventaire" type="checkbox">
 </div>
 <div class="form-group">
-  <label for="id_image">Image&nbsp;</label> <input name="image" id="id_image" type="file"><input name="createur" id="id_createur" type="hidden">
+  <label for="id_image">Image&nbsp;</label>
+  {% if form.image.value %}
+  Actuellement: <a href="{{MEDIA_URL}}{{form.image.value|default:'site/no-image.png'}}">{{form.image.value|default:'site/no-image.png'}}</a><br>
+  Modifier:
+  {% endif %}
+  <input name="image" id="id_image" type="file">
+  <input name="createur" id="id_createur" type="hidden" value="">
   </div>
 <input class="btn btn-default" type="submit" value="Valider" />
 </div>

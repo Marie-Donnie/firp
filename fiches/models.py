@@ -183,7 +183,7 @@ class Fiche(models.Model):
                                                  default=19,
                                                  null=True)
     ville_de_naissance = models.CharField(max_length=50,
-                                          default='Inconnu')
+                                          default='Inconnue')
     zone_de_residence = models.SmallIntegerField(choices=ZONES_CHOIX,
                                                  default=19,
                                                  null=True)
