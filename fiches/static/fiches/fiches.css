@@ -112,11 +112,11 @@ div.gallery img {
 }
 
 .media-object {
-    margin: 20px;
     width: 100%;
     height: auto;
     border: 10px double #470002;
     border-radius: 5px;
+    padding: 1%;
 }
 
 .panel {

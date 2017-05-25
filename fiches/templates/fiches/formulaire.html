@@ -1,12 +1,433 @@
 {% extends "base.html" %}
 
+
 {% block title %}Créer un personnage{% endblock %}
 {% block page-title %}Créer un personnage{% endblock %}
 
 {% block content %}
-<form enctype="multipart/form-data" action="" method="post">
+<div id="char_form">
+<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
-  {{ form.as_ul }}
-  <input class="btn btn-default" type="submit" value="Valider" />
+<div class="form-group">
+  <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text">
+<label for="id_prenom">Prenom&nbsp;</label> <input name="prenom" required="" id="id_prenom" maxlength="50" type="text">
+<label for="id_autres_prenoms">Autres prenoms&nbsp;</label> <input name="autres_prenoms" value="Aucun" required="" id="id_autres_prenoms" maxlength="200" type="text">
+</div>
+<div class="form-group">
+  <span><b>Sexe </b></span>
+  <label class="radio-inline" for="id_sexe">
+  <input type="radio" name="sexe" id="id_sexe" value="h" checked="checked"> Homme
+</label>
+<label class="radio-inline" for="id_sexe">
+  <input type="radio" name="sexe" id="id_sexe" value="f"> Femme
+</label>
+  <span><b>Etat du personnage </b></span>
+<label class="radio-inline" for="id_etat">
+  <input type="radio" name="etat" id="id_etat" value="VI" checked="checked"> Vivant
+</label>
+<label class="radio-inline" for="id_pj">
+  <input type="radio" name="etat" id="id_etat" value="MO"> Mort
+</label>
+<label class="radio-inline" for="id_pj">
+  <input type="radio" name="etat" id="id_etat" value="DI"> Disparu
+</label>
+</div>
+<div class="form-group">
+<label for="id_race">Race&nbsp;</label> <input name="race" value="Humaine" required="" id="id_race" maxlength="40" type="text">
+<label for="id_taille">Taille&nbsp;</label> <input name="taille" value="1.70" step="any" required="" id="id_taille" type="number">
+<label for="id_poids">Poids&nbsp;</label> <input name="poids" value="70" step="any" required="" id="id_poids" type="number">
+</div>
+<div class="form-group">
+  <label for="id_profession">Profession&nbsp;</label> <input name="profession" value="Prostipute" required="" id="id_profession" maxlength="75" type="text">
+</div>
+<div class="form-group">
+<label for="id_titre">Titre&nbsp;</label> <input name="titre" value="Aucun" required="" id="id_titre" maxlength="75" type="text">
+<label for="id_autres_titres">Autres titres&nbsp;</label> <textarea class="form-control" name="autres_titres" id="id_autres_titres" required="" rows="3" cols="40" maxlength="500">Aucun</textarea>
+</div>
+<div class="form-group">
+  <label for="id_medailles">Medailles&nbsp;</label> <textarea class="form-control" name="medailles" id="id_medailles" required="" rows="6" cols="40" maxlength="3000">Non applicable/Aucune</textarea>
+</div>
+<div class="form-group">
+<label for="id_jour_de_naissance">Jour de naissance&nbsp;</label> <input name="jour_de_naissance" value="1" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
+<label for="id_mois_de_naissance">Mois de naissance&nbsp;</label> <input name="mois_de_naissance" value="1" max="12" required="" id="id_mois_de_naissance" min="1" type="number">
+<label for="id_annee_de_naissance">Annee de naissance&nbsp;</label> <input name="annee_de_naissance" value="0" max="100" required="" id="id_annee_de_naissance" min="-32000" type="number">
+</div>
+<div class="form-group">
+<label for="id_zone_de_naissance">Zone de naissance&nbsp;</label> <select name="zone_de_naissance" id="id_zone_de_naissance">
+  <optgroup label="Royaumes de l'est">
+  <option value="0">Bois de la Pénombre</option>
+
+  <option value="1">Bois des Chants éternels</option>
+
+  <option value="2">Cap Strangleronce</option>
+
+  <option value="3">Clairières de Tirisfal</option>
+
+  <option value="4">Contreforts de Hautebrande</option>
+
+  <option value="5">Dun Morogh</option>
+
+  <option value="6">Défilé de Deuillevent</option>
+
+  <option value="7">Forêt d'Elwynn</option>
+
+  <option value="8">Forêt des Pins-Argentés</option>
+
+  <option value="9">Gilnéas</option>
+
+  <option value="10">Gorge des Vents brûlants</option>
+
+  <option value="11">Hautes-terres Arathies</option>
+
+  <option value="12">Hautes-terres du Crépuscule</option>
+
+  <option value="13">Kul'Tiras</option>
+
+  <option value="14">Les Carmines</option>
+
+  <option value="15">Les Hinterlands</option>
+
+  <option value="16">Les Paluns</option>
+
+  <option value="17">Les terres Fantômes</option>
+
+  <option value="18">Loch Modan</option>
+
+  <option value="19" selected="">Maleterres de l'Est</option>
+
+  <option value="20">Maleterres de l'Ouest</option>
+
+  <option value="21">Marais des Chagrins</option>
+
+  <option value="22">Marche de l'Ouest</option>
+
+  <option value="23">Noirebois</option>
+
+  <option value="24">Steppes Ardentes</option>
+
+  <option value="25">Strangleronce septentrionale</option>
+
+  <option value="26">Terres Foudroyées</option>
+
+  <option value="27">Terres Ingrates</option>
+
+  <option value="28">Île de Quel'Danas</option>
+
+  </optgroup>
+  <optgroup label="Kalimdor">
+  <option value="100">Azshara</option>
+
+  <option value="101">Berceau-de-l'Hiver</option>
+
+  <option value="102">Cratère d'Un'Goro</option>
+
+  <option value="103">Durotar</option>
+
+  <option value="104">Désolace</option>
+
+  <option value="105">Féralas</option>
+
+  <option value="106">Gangrebois</option>
+
+  <option value="107">Les Serres-Rocheuses</option>
+
+  <option value="108">Marécage d'Âprefange</option>
+
+  <option value="109">Mille pointes</option>
+
+  <option value="110">Mont Hyjal</option>
+
+  <option value="111">Mulgore</option>
+
+  <option value="112">Orneval</option>
+
+  <option value="113">Reflet-de-Lune</option>
+
+  <option value="114">Silithus</option>
+
+  <option value="115">Sombrivage</option>
+
+  <option value="116">Tanaris</option>
+
+  <option value="117">Tarides du Nord</option>
+
+  <option value="118">Tarides du Sud</option>
+
+  <option value="119">Teldrassil</option>
+
+  <option value="120">Uldum</option>
+
+  <option value="121">Îles de l'Écho</option>
+
+  </optgroup>
+  <optgroup label="Norfendre">
+  <option value="200">Bassin de Sholazar</option>
+
+  <option value="201">Désolation des dragons</option>
+
+  <option value="202">Fjord Hurlant</option>
+
+  <option value="203">Forêt du Chant de cristal</option>
+
+  <option value="204">Joug-d'hiver</option>
+
+  <option value="205">La Couronne de glace</option>
+
+  <option value="206">Les Grisonnes</option>
+
+  <option value="207">Les pics Foudroyés</option>
+
+  <option value="208">Toundra Boréenne</option>
+
+  <option value="209">Zul'Drak</option>
+
+  </optgroup>
+  <optgroup label="Pandarie">
+  <option value="300">Désert de Tanlong</option>
+
+  <option value="301">Etendues sauvages de Krasarang</option>
+
+  <option value="302">La forêt de Jade</option>
+
+  <option value="303">Sommet de Kun-Lai</option>
+
+  <option value="304">Terres de l'Angoisse</option>
+
+  <option value="305">Val de l'Eternel Printemps</option>
+
+  <option value="306">Vallée des Quatre vents</option>
+
+  </optgroup>
+  <optgroup label="Iles brisées">
+  <option value="400">Azsuna</option>
+
+  <option value="401">Haut-Roc</option>
+
+  <option value="402">Suramar</option>
+
+  <option value="403">Tornheim</option>
+
+  <option value="404">Val'Sharah</option>
+
+  </optgroup>
+  <optgroup label="Kezan">
+  <option value="500">Kezan</option>
+
+  </optgroup>
+  <optgroup label="Zandalar">
+  <option value="600">Zandalar</option>
+
+  </optgroup>
+</select>
+<label for="id_ville_de_naissance">Ville de naissance&nbsp;</label> <input name="ville_de_naissance" value="Inconnu" required="" id="id_ville_de_naissance" maxlength="50" type="text">
+</div>
+<div class="form-group">
+<label for="id_zone_de_residence">Zone de residence&nbsp;</label> <select name="zone_de_residence" id="id_zone_de_residence">
+  <optgroup label="Royaumes de l'est">
+  <option value="0">Bois de la Pénombre</option>
+
+  <option value="1">Bois des Chants éternels</option>
+
+  <option value="2">Cap Strangleronce</option>
+
+  <option value="3">Clairières de Tirisfal</option>
+
+  <option value="4">Contreforts de Hautebrande</option>
+
+  <option value="5">Dun Morogh</option>
+
+  <option value="6">Défilé de Deuillevent</option>
+
+  <option value="7">Forêt d'Elwynn</option>
+
+  <option value="8">Forêt des Pins-Argentés</option>
+
+  <option value="9">Gilnéas</option>
+
+  <option value="10">Gorge des Vents brûlants</option>
+
+  <option value="11">Hautes-terres Arathies</option>
+
+  <option value="12">Hautes-terres du Crépuscule</option>
+
+  <option value="13">Kul'Tiras</option>
+
+  <option value="14">Les Carmines</option>
+
+  <option value="15">Les Hinterlands</option>
+
+  <option value="16">Les Paluns</option>
+
+  <option value="17">Les terres Fantômes</option>
+
+  <option value="18">Loch Modan</option>
+
+  <option value="19" selected="">Maleterres de l'Est</option>
+
+  <option value="20">Maleterres de l'Ouest</option>
+
+  <option value="21">Marais des Chagrins</option>
+
+  <option value="22">Marche de l'Ouest</option>
+
+  <option value="23">Noirebois</option>
+
+  <option value="24">Steppes Ardentes</option>
+
+  <option value="25">Strangleronce septentrionale</option>
+
+  <option value="26">Terres Foudroyées</option>
+
+  <option value="27">Terres Ingrates</option>
+
+  <option value="28">Île de Quel'Danas</option>
+
+  </optgroup>
+  <optgroup label="Kalimdor">
+  <option value="100">Azshara</option>
+
+  <option value="101">Berceau-de-l'Hiver</option>
+
+  <option value="102">Cratère d'Un'Goro</option>
+
+  <option value="103">Durotar</option>
+
+  <option value="104">Désolace</option>
+
+  <option value="105">Féralas</option>
+
+  <option value="106">Gangrebois</option>
+
+  <option value="107">Les Serres-Rocheuses</option>
+
+  <option value="108">Marécage d'Âprefange</option>
+
+  <option value="109">Mille pointes</option>
+
+  <option value="110">Mont Hyjal</option>
+
+  <option value="111">Mulgore</option>
+
+  <option value="112">Orneval</option>
+
+  <option value="113">Reflet-de-Lune</option>
+
+  <option value="114">Silithus</option>
+
+  <option value="115">Sombrivage</option>
+
+  <option value="116">Tanaris</option>
+
+  <option value="117">Tarides du Nord</option>
+
+  <option value="118">Tarides du Sud</option>
+
+  <option value="119">Teldrassil</option>
+
+  <option value="120">Uldum</option>
+
+  <option value="121">Îles de l'Écho</option>
+
+  </optgroup>
+  <optgroup label="Norfendre">
+  <option value="200">Bassin de Sholazar</option>
+
+  <option value="201">Désolation des dragons</option>
+
+  <option value="202">Fjord Hurlant</option>
+
+  <option value="203">Forêt du Chant de cristal</option>
+
+  <option value="204">Joug-d'hiver</option>
+
+  <option value="205">La Couronne de glace</option>
+
+  <option value="206">Les Grisonnes</option>
+
+  <option value="207">Les pics Foudroyés</option>
+
+  <option value="208">Toundra Boréenne</option>
+
+  <option value="209">Zul'Drak</option>
+
+  </optgroup>
+  <optgroup label="Pandarie">
+  <option value="300">Désert de Tanlong</option>
+
+  <option value="301">Etendues sauvages de Krasarang</option>
+
+  <option value="302">La forêt de Jade</option>
+
+  <option value="303">Sommet de Kun-Lai</option>
+
+  <option value="304">Terres de l'Angoisse</option>
+
+  <option value="305">Val de l'Eternel Printemps</option>
+
+  <option value="306">Vallée des Quatre vents</option>
+
+  </optgroup>
+  <optgroup label="Iles brisées">
+  <option value="400">Azsuna</option>
+
+  <option value="401">Haut-Roc</option>
+
+  <option value="402">Suramar</option>
+
+  <option value="403">Tornheim</option>
+
+  <option value="404">Val'Sharah</option>
+
+  </optgroup>
+  <optgroup label="Kezan">
+  <option value="500">Kezan</option>
+
+  </optgroup>
+  <optgroup label="Zandalar">
+  <option value="600">Zandalar</option>
+
+  </optgroup>
+</select>
+<label for="id_ville_de_residence">Ville de residence&nbsp;</label> <input name="ville_de_residence" value="Noirebois" required="" id="id_ville_de_residence" maxlength="50" type="text">
+</div>
+<div class="form-group">
+  <label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">A venir</textarea>
+    <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount1">0</span>/6000).</span>
+  <label for="id_historique">Historique&nbsp;</label> <textarea name="historique" class="form-control" id="id_historique" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_historique','charcount2');" onkeydown="countChars('id_historique','charcount2');" onmouseout="countChars('id_historique','charcount2');">A venir</textarea>
+    <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
+<label for="id_relations">Relations&nbsp;</label> <textarea name="relations" class="form-control" id="id_relations" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_relations','charcount3');" onkeydown="countChars('id_relations','charcount3');" onmouseout="countChars('id_relations','charcount3');">Aucune</textarea>
+  <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
+  <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">A venir</textarea>
+    <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
+</div>
+<div class="form-group">
+  <span><b>Type de personnage </b></span>
+<label class="radio-inline" for="id_pj">
+  <input type="radio" name="pj" id="id_pj" value="p" checked="checked"> Personnage joué
+</label>
+<label class="radio-inline" for="id_pj">
+  <input type="radio" name="pj" id="id_pj" value="a"> Personnage jouable
+</label>
+<label class="radio-inline" for="id_pj">
+  <input type="radio" name="pj" id="id_pj" value="n"> Personnage non joué
+</label>
+</div>
+<div class="form-group">
+<label for="id_pseudo_du_personnage">Pseudo du personnage&nbsp;</label> <input name="pseudo_du_personnage" value="?" required="" id="id_pseudo_du_personnage" maxlength="30" type="text">
+</div>
+<div class="form-group">
+  <label for="id_afficher_pseudo">Afficher pseudo&nbsp;</label> <input name="afficher_pseudo" checked="" id="id_afficher_pseudo" type="checkbox">
+</div>
+<div class="form-group">
+  <label for="id_afficher_createur">Afficher créateur&nbsp;</label> <input name="afficher_createur" checked="" id="id_afficher_createur" type="checkbox">
+</div>
+<div class="form-group">
+  <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" checked="" id="id_afficher_inventaire" type="checkbox">
+</div>
+<div class="form-group">
+  <label for="id_image">Image&nbsp;</label> <input name="image" id="id_image" type="file"><input name="createur" id="id_createur" type="hidden">
+  </div>
+<input class="btn btn-default" type="submit" value="Valider" />
+</div>
 </form>
 {% endblock %}

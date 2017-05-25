@@ -62,4 +62,8 @@ class FicheForm(ModelForm):
                    'historique': forms.Textarea(),
                    'relations': forms.Textarea(),
                    'autres_titres': forms.Textarea(),
-                   'medailles': forms.Textarea(), }
+                   'medailles': forms.Textarea(),
+                   'afficher_pseudo': forms.CheckboxInput(),
+                   'afficher_createur': forms.CheckboxInput(),
+                   'afficher_inventaire': forms.CheckboxInput(),
+                   'pj': forms.RadioSelect(), }

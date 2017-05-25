@@ -151,10 +151,10 @@ class Fiche(models.Model):
                                      default='Aucun')
     sexe = models.CharField(max_length=1,
                             choices=((
-                                ('h', "Masculin"),
-                                ('f', "Féminin")
+                                ('h', "Homme"),
+                                ('f', "Femme")
                             )),
-                            default="Masculin")
+                            default="Homme")
     race = models.CharField(max_length=40,
                             default='Humaine')
     taille = models.FloatField(default='1.70')
