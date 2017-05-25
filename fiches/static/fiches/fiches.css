@@ -231,6 +231,22 @@ div.gallery img {
     object-fit: cover;
 }
 
+#char_form label {
+    margin-left: 1%;
+    margin-right: 0.5%;
+}
+
+#char_form input {
+    margin-right: 1%;
+}
+
+#char_form #description {
+    margin-left: 1%;
+}
+
+#char_form input[type=number]{
+    width: 5%;
+}
 
 input, textarea {
     color: initial;
