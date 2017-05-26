@@ -148,7 +148,7 @@ def personnages(request):
     fiches = Fiche.objects.order_by('nom', 'prenom')
     context = {'latest_fiches': fiches}
 
-    return render(request, 'fiches/index.html', context)
+    return render(request, 'fiches/personnages.html', context)
 
 @login_required
 def edit_fiche(request, fiche_id):

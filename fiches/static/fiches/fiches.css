@@ -210,20 +210,20 @@ div.gallery img {
 }
 
 
-#utilisateurs table, tr, td, th{
+#liste table, tr, td, th{
     /* display: block; */
     border: 1px solid #470002;
     padding-left: 0;
     padding-right: 0;
 }
 
-#utilisateurs table tr td a {
+#liste table tr td a {
     display:block;
     height:100%;
     width:100%;
 }
 
-#utilisateurs .media-object {
+#liste .media-object {
     margin: 0px;
     width: 40px;
     height: 40px;

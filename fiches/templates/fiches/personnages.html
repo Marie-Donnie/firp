@@ -1,16 +1,39 @@
+{% extends "base.html" %}
+
 {% block title %}Liste des personnages{% endblock %}
 {% block page-title %}Liste des personnages{% endblock %}
 
 {% block content %}
+<div id="liste">
   {% if latest_fiches %}
-  <ul>
+  <table style="width:100%">
+    <tr>
+      <th>Nom du personnage</th>
+      <th>Type</th>
+	<th>Etat</th>
+      <th>Ville de résidence</th>
+      <th>Date de création</th>
+      <th>Avatar</th>
+    </tr>
     {% for f in latest_fiches %}
-    <div class="character">
-      <li><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
-    </div>
+    <tr>
+      <!-- <div class="character"> -->
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_pj_display }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_etat_display }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.ville_de_residence }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.creation }}</a></td>
+      {% if f.image %}
+      <td><a target="_blank" href="{% url 'detail_fiche' f.id %}"><img class="media-object" src={{ f.image.url }} alt="Portrait"></a></td>
+      {% else %}
+      <td><a target="_blank" href="{% url 'detail_fiche' f.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
+      {% endif %}
+      <!-- </div> -->
+    </tr>
     {% endfor %}
-  </ul>
+  </table>
   {% else %}
   <p>Aucune fiche</p>
   {% endif %}
+</div>
 {% endblock %}
