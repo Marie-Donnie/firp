@@ -38,7 +38,7 @@
       </ul>
       <div class="navbar-right">
 	{% if user.is_authenticated %}
-	<span>Bienvenue, {{ user.username }} !  </span>
+	<span>Bienvenue, <a href="{% url 'utilisateur' user.id %}">{{ user.username }}</a> !  </span>
 	<a class="btn btn-default navbar-btn" href="/utilisateurs/gestion_profil/">Créer/editer profil</a>
 	<a class="btn btn-default navbar-btn" href="/logout/">Se déconnecter</a>
 	{% else %}

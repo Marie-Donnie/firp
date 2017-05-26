@@ -119,7 +119,8 @@ def aff_user(request, user_id):
 # Enables the creation of a Fiche
 @login_required
 def creer_fiche(request):
-    if request.user.fiches.count() < 16:
+    if ((request.user.fiches.count() < 16) or
+        (request.user.has_perm('fiches.plus_de_15_fiches'))):
         if request.method == 'POST':
             data = request.POST.dict()
             data['createur'] = User.objects.get(username=request.user).id
