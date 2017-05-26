@@ -128,6 +128,8 @@ def creer_fiche(request):
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
         else:
             form = FicheForm()
 
@@ -163,7 +165,6 @@ def edit_fiche(request, fiche_id):
                 form.save()
                 return HttpResponseRedirect('/')
         else:
-
             form = FicheForm(instance=fiche)
 
         return render(request, 'fiches/formulaire.html', {'form': form})

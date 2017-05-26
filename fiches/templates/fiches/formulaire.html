@@ -17,10 +17,10 @@
 <div class="form-group">
   <span id="description"><b>Sexe </b></span>
   <label class="radio-inline" for="id_sexe">
-  <input type="radio" name="sexe" id="id_sexe" value="h" {% if form.sexe.value == 'h' or form.sexe.value == None %} checked="checked" {% endif %}> Homme
+  <input type="radio" name="sexe" id="id_sexe" value="h" {% if form.sexe.value == 'h' or form.sexe.value == 'Homme' or form.sexe.value == None %} checked="checked" {% endif %}> Homme
 </label>
 <label class="radio-inline" for="id_sexe">
-  <input type="radio" name="sexe" id="id_sexe" value="f" {% if form.sexe.value == 'f' %} checked="checked" {% endif %}> Femme
+  <input type="radio" name="sexe" id="id_sexe" value="f" {% if form.sexe.value == 'f' or form.sexe.value == 'Femme' %} checked="checked" {% endif %}> Femme
 </label>
 </div>
 <div class="form-group">
@@ -407,14 +407,15 @@
 </div>
 <div class="form-group">
   <span id="description"><b>Type de personnage </b></span>
+
 <label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="p" {% if form.pj.value == 'p' or form.sexe.value == None %} checked="checked" {% endif %}> Personnage joué
+  <input type="radio" name="pj" id="id_pj" value="p" {% if form.pj.value == 'p' or form.pj.value|unlocalize == 'Personnage joué' or form.pj.value == None %} checked="checked" {% endif %}> Personnage joué
 </label>
 <label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="a" {% if form.pj.value == 'a' or form.sexe.value == None %} checked="checked" {% endif %}> Personnage jouable
+  <input type="radio" name="pj" id="id_pj" value="a" {% if form.pj.value == 'a' or form.pj.value == 'Personnage jouable' %} checked="checked" {% endif %}> Personnage jouable
 </label>
 <label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="n" {% if form.pj.value == 'n' %} checked="checked" {% endif %}> Personnage non joué
+  <input type="radio" name="pj" id="id_pj" value="n" {% if form.pj.value == 'n' or form.pj.value|unlocalize == 'Personnage non joué'%} checked="checked" {% endif %}> Personnage non joué
 </label>
 </div>
 <div class="form-group">
