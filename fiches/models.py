@@ -188,7 +188,7 @@ class Fiche(models.Model):
                                                  default=23,
                                                  null=True)
     ville_de_residence = models.CharField(max_length=50,
-                                          default='Noirebois')
+                                          default='Châtellerie')
     description = models.CharField(max_length=6000,
                                    default='A venir')
     historique = models.CharField(max_length=6000,
