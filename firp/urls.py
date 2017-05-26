@@ -19,6 +19,7 @@ urlpatterns = [
     # url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', name='password_reset_confirm'),
     # url(r'^reset/done/$', name='password_reset_complete'),
     url(r'^enregistrer/$', views.register_user, name='enregistrer'),
+    url(r'^accounts/', include('allauth.urls')),
     # Users
     url(r'^utilisateurs/$', views.users),
     url(r'^utilisateurs/editer_utilisateur/$', views.edit_user,
