@@ -180,12 +180,12 @@ class Fiche(models.Model):
     annee_de_naissance = IntegerRangeField(default='0', min_value=-32000,
                                            max_value=100)
     zone_de_naissance = models.SmallIntegerField(choices=ZONES_CHOIX,
-                                                 default=19,
+                                                 default=23,
                                                  null=True)
     ville_de_naissance = models.CharField(max_length=50,
                                           default='Inconnue')
     zone_de_residence = models.SmallIntegerField(choices=ZONES_CHOIX,
-                                                 default=19,
+                                                 default=23,
                                                  null=True)
     ville_de_residence = models.CharField(max_length=50,
                                           default='Noirebois')
