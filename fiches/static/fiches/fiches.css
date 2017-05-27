@@ -164,6 +164,14 @@ div.gallery img {
     color: #a72121;
 }
 
+.account {
+
+}
+
+.account input, textarea {
+    color: initial;
+}
+
 #page-title {
     flex: 1 ;
 }
@@ -270,9 +278,9 @@ li {
     margin: 0;
 }
 
-p {
-    font-size: 30px;
-}
+/* p { */
+/*     font-size: 30px; */
+/* } */
 
 a:focus,
 a:hover {
