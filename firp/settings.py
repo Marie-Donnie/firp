@@ -134,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_REDIRECT_URL = '/'
 
-LOGIN_URL = "/login/"
+LOGIN_URL = "/accounts/login/"
 
 AUTHENTICATION_BACKENDS = {
     'django.contrib.auth.backends.ModelBackend',
