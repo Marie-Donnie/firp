@@ -38,7 +38,7 @@ h1 a {
 }
 
 .image-garithos {
-    height: 200px;
+    width: 20%;
 }
 
 .date {
@@ -224,12 +224,14 @@ div.gallery img {
     border: 1px solid #470002;
     padding-left: 0;
     padding-right: 0;
+    text-align: center;
 }
 
 #liste table tr td a {
     display:block;
     height:100%;
     width:100%;
+    text-align: center;
 }
 
 #liste .media-object {
@@ -275,6 +277,11 @@ li {
     margin: 1%;
 }
 
+#pagination li {
+    margin: 0;
+}
+
+
 .navbar-nav > li {
     margin: 0;
 }
@@ -296,4 +303,25 @@ h3 {
 #details-panels h3{
     margin: 0;
     color: #bf0005;
+}
+
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #fefefe;
+    text-decoration: none;
+    background-color: #470002;
+    border: 1px solid #000;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover {
+    color: #fff;
+    background-color: #7e0609;
+    border-color: #000;
 }

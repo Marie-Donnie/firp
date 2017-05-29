@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block page-title %}Liste des personnages{% endblock %}
+
+{% block content %}
+{% for fiche in fiches %}
+    {{ fiche.nom }}{{fiche.prenom}}<br />
+{% endfor %}
+
+<nav aria-label="Page navigation" id="pagination">
+  <ul class="pagination">
+    {% if fiches.has_previous %}
+    <li>
+      <a href="?page={{ fiches.previous_page_number }}" aria-label="Précédent">
+	<span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% for p in paginator.page_range %}
+    <li><a href="?page={{ p }}">{{p}}</a></li>
+    {% endfor %}
+
+    {% if fiches.has_next %}
+    <li>
+      <a href="?page={{ fiches.next_page_number }}" aria-label="Suivant">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+</div>
+{% endblock %}

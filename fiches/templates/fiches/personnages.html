@@ -5,7 +5,7 @@
 
 {% block content %}
 <div id="liste">
-  {% if latest_fiches %}
+  {% if fiches %}
   <table style="width:100%">
     <tr>
       <th>Nom du personnage</th>
@@ -16,7 +16,7 @@
       <th>Date de création</th>
       <th>Avatar</th>
     </tr>
-    {% for f in latest_fiches %}
+    {% for f in fiches %}
     <tr>
       <!-- <div class="character"> -->
       <td><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></td>
@@ -34,6 +34,35 @@
     </tr>
     {% endfor %}
   </table>
+  <nav aria-label="Page navigation" id="pagination">
+    <ul class="pagination">
+      {% if fiches.has_previous %}
+      <li>
+	<a href="?page={{ fiches.previous_page_number }}" aria-label="Précédent">
+	  <span aria-hidden="true">&laquo;</span>
+	</a>
+      </li>
+      {% endif %}
+
+      {% for p in paginator.page_range %}
+      <li>
+	<a href="?page={{ p }}">
+	  {{p}}
+	</a>
+      </li>
+      {% endfor %}
+
+      {% if fiches.has_next %}
+      <li>
+	<a href="?page={{ fiches.next_page_number }}" aria-label="Suivant">
+          <span aria-hidden="true">&raquo;</span>
+	</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+
   {% else %}
   <p>Aucune fiche</p>
   {% endif %}

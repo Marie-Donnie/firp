@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from fiches.forms import FicheForm, UserForm, UserProfileForm, MyRegistrationForm
 from django.db.models import Count
 from django.contrib.auth.decorators import user_passes_test
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -148,10 +149,24 @@ def detail_fiche(request, fiche_id):
 
 # Displays the first name and last name of the latests Fiche model instances
 def personnages(request):
-    fiches = Fiche.objects.order_by('nom', 'prenom')
-    context = {'latest_fiches': fiches}
+    # fiches = Fiche.objects.order_by('nom', 'prenom')
+    fiches_list = Fiche.objects.order_by('nom', 'prenom')
+
+    paginator = Paginator(fiches_list, 10)
+    page = request.GET.get('page')
+    try:
+        fiches = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        fiches = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        fiches = paginator.page(paginator.num_pages)
+
+    context = {'fiches': fiches, 'paginator': paginator}
 
     return render(request, 'fiches/personnages.html', context)
+
 
 @login_required
 def edit_fiche(request, fiche_id):
@@ -172,3 +187,20 @@ def edit_fiche(request, fiche_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer cette fiche.")
+
+
+def listing(request):
+    fiches_list = Fiche.objects.all()
+    paginator = Paginator(fiches_list, 1)
+
+    page = request.GET.get('page')
+    try:
+        fiches = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        fiches = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        fiches = paginator.page(paginator.num_pages)
+
+    return render(request, 'fiches/test_pagination.html', {'fiches': fiches, 'paginator': paginator})
