@@ -10,7 +10,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^list/', views.listing, name='list'),
     # Users
     url(r'^utilisateurs/$', views.users),
     url(r'^utilisateurs/editer_utilisateur/$', views.edit_user,
