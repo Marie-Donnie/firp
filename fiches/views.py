@@ -187,20 +187,3 @@ def edit_fiche(request, fiche_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer cette fiche.")
-
-
-def listing(request):
-    fiches_list = Fiche.objects.all()
-    paginator = Paginator(fiches_list, 1)
-
-    page = request.GET.get('page')
-    try:
-        fiches = paginator.page(page)
-    # if page not an integer, display first page of results
-    except PageNotAnInteger:
-        fiches = paginator.page(1)
-    # if page is out of range, display the last page of results
-    except EmptyPage:
-        fiches = paginator.page(paginator.num_pages)
-
-    return render(request, 'fiches/test_pagination.html', {'fiches': fiches, 'paginator': paginator})
