@@ -63,8 +63,19 @@ def password_reset(request):
 # Displays the username of the users
 def users(request):
     users = User.objects.all().order_by('username')
-    print(users)
-    context = {'latest_users': users}
+    paginator = Paginator(users, 20)
+    page = request.GET.get('page')
+    try:
+        users_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        users_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        users_list = paginator.page(paginator.num_pages)
+
+    context = {'users_list': users_list}
+
     return render(request, 'fiches/utilisateurs.html', context)
 
 
@@ -152,7 +163,7 @@ def personnages(request):
     # fiches = Fiche.objects.order_by('nom', 'prenom')
     fiches_list = Fiche.objects.order_by('nom', 'prenom')
 
-    paginator = Paginator(fiches_list, 10)
+    paginator = Paginator(fiches_list, 20)
     page = request.GET.get('page')
     try:
         fiches = paginator.page(page)
@@ -163,7 +174,7 @@ def personnages(request):
     except EmptyPage:
         fiches = paginator.page(paginator.num_pages)
 
-    context = {'fiches': fiches, 'paginator': paginator}
+    context = {'fiches': fiches}
 
     return render(request, 'fiches/personnages.html', context)
 

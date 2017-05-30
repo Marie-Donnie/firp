@@ -6,36 +6,9 @@
 {% block content %}
 <div id="liste">
   {% if fiches %}
-  <table style="width:100%">
-    <tr>
-      <th>Nom du personnage</th>
-      <th>Type</th>
-      <th>Etat</th>
-      <th>Zone de résidence</th>
-      <th>Ville de résidence</th>
-      <th>Date de création</th>
-      <th>Avatar</th>
-    </tr>
-    {% for f in fiches %}
-    <tr>
-      <!-- <div class="character"> -->
-      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></td>
-      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_pj_display }}</a></td>
-      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_etat_display }}</a></td>
-            <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_zone_de_residence_display }}</a></td>
-      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.ville_de_residence }}</a></td>
-      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.creation }}</a></td>
-      {% if f.image %}
-      <td><a target="_blank" href="{% url 'detail_fiche' f.id %}"><img class="media-object" src={{ f.image.url }} alt="Portrait"></a></td>
-      {% else %}
-      <td><a target="_blank" href="{% url 'detail_fiche' f.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
-      {% endif %}
-      <!-- </div> -->
-    </tr>
-    {% endfor %}
-  </table>
+  <span>Page {{ fiches.number }} sur {{ fiches.paginator.num_pages }}</span>
   <nav aria-label="Page navigation" id="pagination">
-    <ul class="pagination">
+    <ul class="pagination pagination-sm">
       {% if fiches.has_previous %}
       <li>
 	<a href="?page={{ fiches.previous_page_number }}" aria-label="Précédent">
@@ -44,7 +17,7 @@
       </li>
       {% endif %}
 
-      {% for p in paginator.page_range %}
+      {% for p in fiches.paginator.page_range %}
       <li>
 	<a href="?page={{ p }}">
 	  {{p}}
@@ -61,10 +34,66 @@
       {% endif %}
     </ul>
   </nav>
+  <table style="width:100%">
+    <tr>
+      <th>Nom du personnage</th>
+      <th>Type</th>
+      <th>Etat</th>
+      <th>Zone de résidence</th>
+      <th>Ville de résidence</th>
+      <th>Date de création</th>
+      <th>Avatar</th>
+    </tr>
+    {% for f in fiches %}
+    <tr>
+      <!-- <div class="character"> -->
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_pj_display }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_etat_display }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_zone_de_residence_display }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.ville_de_residence }}</a></td>
+      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.creation }}</a></td>
+      {% if f.image %}
+      <td><a target="_blank" href="{% url 'detail_fiche' f.id %}"><img class="media-object" src={{ f.image.url }} alt="Portrait"></a></td>
+      {% else %}
+      <td><a target="_blank" href="{% url 'detail_fiche' f.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
+      {% endif %}
+      <!-- </div> -->
+    </tr>
+    {% endfor %}
+  </table>
+  <nav aria-label="Page navigation" id="pagination">
+    <ul class="pagination pagination-sm">
+      {% if fiches.has_previous %}
+      <li>
+	<a href="?page={{ fiches.previous_page_number }}" aria-label="Précédent">
+	  <span aria-hidden="true">&laquo;</span>
+	</a>
+      </li>
+      {% endif %}
+
+      {% for p in fiches.paginator.page_range %}
+      <li>
+	<a href="?page={{ p }}">
+	  {{p}}
+	</a>
+      </li>
+      {% endfor %}
+
+      {% if fiches.has_next %}
+      <li>
+	<a href="?page={{ fiches.next_page_number }}" aria-label="Suivant">
+          <span aria-hidden="true">&raquo;</span>
+	</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  <span>Page {{ fiches.number }} sur {{ fiches.paginator.num_pages }}</span>
 </div>
 
-  {% else %}
-  <p>Aucune fiche</p>
-  {% endif %}
-</div>
+{% else %}
+<p>Aucune fiche</p>
+{% endif %}
+
 {% endblock %}

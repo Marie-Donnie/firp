@@ -5,31 +5,86 @@
 
 {% block content %}
 <div id="liste">
-{% if latest_users %}
+  {% if users_list %}
+  <span>Page {{ users_list.number }} sur {{ users_list.paginator.num_pages }}</span>
+  <nav aria-label="Page navigation" id="pagination">
+    <ul class="pagination pagination-sm">
+      {% if users_list.has_previous %}
+      <li>
+	<a href="?page={{ users_list.previous_page_number }}" aria-label="Précédent">
+	  <span aria-hidden="true">&laquo;</span>
+	</a>
+      </li>
+      {% endif %}
 
-<table style="width:100%">
-  <tr>
-    <th>Pseudo</th>
-    <th>Date d'inscription</th>
-    <th>Avatar</th>
-  </tr>
-  {% for u in latest_users %}
-  <tr>
-    <td><a href="{% url 'utilisateur' u.id %}">{{ u.username }}</a></td>
-    <td><a href="{% url 'utilisateur' u.id %}">{{ u.date_joined }}</a></td>
+      {% for p in users_list.paginator.page_range %}
+      <li>
+	<a href="?page={{ p }}">
+	  {{p}}
+	</a>
+      </li>
+      {% endfor %}
+
+      {% if users_list.has_next %}
+      <li>
+	<a href="?page={{ users_list.next_page_number }}" aria-label="Suivant">
+          <span aria-hidden="true">&raquo;</span>
+	</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  <table style="width:100%">
+    <tr>
+      <th>Pseudo</th>
+      <th>Date d'inscription</th>
+      <th>Avatar</th>
+    </tr>
+    {% for u in users_list %}
+    <tr>
+      <td><a href="{% url 'utilisateur' u.id %}">{{ u.username }}</a></td>
+      <td><a href="{% url 'utilisateur' u.id %}">{{ u.date_joined }}</a></td>
       {% if u.infos %}
       <td><a target="_blank" href="{% url 'utilisateur' u.id %}"><img class="media-object" src={{ u.infos.image.url }} alt="Portrait"></a></td>
       {% else %}
       <td><a target="_blank" href="{% url 'utilisateur' u.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
       {% endif %}
 
-  </tr>
-  {% endfor %}
-</table>
+    </tr>
+    {% endfor %}
+  </table>
+  <nav aria-label="Page navigation" id="pagination">
+    <ul class="pagination pagination-sm">
+      {% if users_list.has_previous %}
+      <li>
+	<a href="?page={{ users_list.previous_page_number }}" aria-label="Précédent">
+	  <span aria-hidden="true">&laquo;</span>
+	</a>
+      </li>
+      {% endif %}
 
+      {% for p in users_list.paginator.page_range %}
+      <li>
+	<a href="?page={{ p }}">
+	  {{p}}
+	</a>
+      </li>
+      {% endfor %}
+
+      {% if users_list.has_next %}
+      <li>
+	<a href="?page={{ users_list.next_page_number }}" aria-label="Suivant">
+          <span aria-hidden="true">&raquo;</span>
+	</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  <span>Page {{ users_list.number }} sur {{ users_list.paginator.num_pages }}</span>
+</div>
 {% else %}
 <p>Aucun utilisateur</p>
 {% endif %}
-</div>
+
 
 {% endblock %}
