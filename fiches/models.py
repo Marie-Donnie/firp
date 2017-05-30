@@ -237,3 +237,34 @@ class UserProfile(models.Model):
     image = models.ImageField(upload_to='images/users',
                               default='images/site/no-image.png')
     naissance = models.DateField()
+
+
+class Objet(models.Model):
+    nom = models.CharField(max_length=75,
+                           default='Aucun')
+    qualite = models.CharField(max_length=1,
+                               choices=((
+                                   ('m', "Médiocre"),
+                                   ('c', "Commun"),
+                                   ('i', "Inhabituel"),
+                                   ('r', "Rare"),
+                                   ('e', "Epique"),
+                                   ('l', "Légendaire"),
+                               )),
+                               default="Commun")
+    description = models.CharField(max_length=200,
+                                   default='Aucun')
+    prix = models.IntegerField(default='0')
+    poids = models.IntegerField(default='0')
+
+
+class Magique(models.Model):
+    objet = models.OneToOneField(Objet,
+                                 null=True,
+                                 related_name='objet')
+    effet = models.CharField(max_length=100,
+                             default='Aucun')
+    autres_effets = models.CharField(max_length=100,
+                                     default='Aucun')
+    effet_ig = models.CharField(max_length=100,
+                                default='Aucun')
