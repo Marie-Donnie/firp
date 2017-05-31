@@ -4,19 +4,27 @@
 {% block page-title %}Confirmation suppression{% endblock %}
 
 {% block content %}
-<div>
-  <span id="center">{{fiche.nom}} {{fiche.prenom}}</span>
+<div id="center">
+  <h4>{{fiche.nom}} {{fiche.prenom}}</h4>
 </div>
 
-<div>
-Êtes-vous certain de supprimer cette fiche ?
+<div id="center">
+  Êtes-vous certain de supprimer cette fiche ?
+</div>
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input class="btn btn-default" type="submit" value="Oui">
-  </form>
-<!-- <a class="btn btn-default navbar-btn" href="{% url 'account_login' %}">Oui</a> -->
-<a class="btn btn-default" href="{% url 'account_signup' %}">Non</a>
 
+<div id="center">
+  <div class="row">
+    <div class="col-md-1 col-md-offset-5">
+      <form action="" method="post">
+	{% csrf_token %}
+	<input class="btn btn-default" type="submit" value="Oui">
+      </form>
+    </div>
+    <!-- <a class="btn btn-default navbar-btn" href="{% url 'account_login' %}">Oui</a> -->
+    <div class="col-md-1">
+      <a class="btn btn-default" href="{% url 'account_signup' %}">Non</a>
+    </div>
+  </div>
 </div>
 {% endblock %}

@@ -4,7 +4,8 @@
 {% block page-title %}Fiche supprimée : {{fiche.prenom}} {{fiche.nom}}{% endblock %}
 
 {% block content %}
-<div>Votre fiche "{{fiche.prenom}} {{fiche.nom}}" a bien été supprimée.
-Cliquez <a href="{% url 'index' %}">ici</a> pour revenir à la page d'accueil.</div>
+<div id="center">Votre fiche "{{fiche.prenom}} {{fiche.nom}}" a bien été supprimée.
+  Cliquez <a href="{% url 'index' %}">ici</a> pour revenir à la page d'accueil.</div>
+
 
 {% endblock %}
