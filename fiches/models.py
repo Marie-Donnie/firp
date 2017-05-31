@@ -221,6 +221,7 @@ class Fiche(models.Model):
                                           ))
     creation = models.DateField(default=timezone.now)
 
+
     class Meta:
         ordering = ["nom", "prenom"]
         verbose_name = "fiche"
@@ -250,6 +251,7 @@ class Objet(models.Model):
                                    ('r', "Rare"),
                                    ('e', "Epique"),
                                    ('l', "Légendaire"),
+                                   ('u', "Unique")
                                )),
                                default="Commun")
     description = models.CharField(max_length=200,
@@ -258,7 +260,7 @@ class Objet(models.Model):
     poids = models.IntegerField(default='0')
 
 
-class Magique(models.Model):
+class Equipement(models.Model):
     objet = models.OneToOneField(Objet,
                                  null=True,
                                  related_name='objet')
@@ -268,3 +270,9 @@ class Magique(models.Model):
                                      default='Aucun')
     effet_ig = models.CharField(max_length=100,
                                 default='Aucun')
+    force = IntegerRangeField(default='0', min_value=0,
+                              max_value=25)
+    intell = IntegerRangeField(default='0', min_value=0,
+                               max_value=25)
+    agi = IntegerRangeField(default='0', min_value=0,
+                            max_value=25)

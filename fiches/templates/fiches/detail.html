@@ -11,6 +11,7 @@
 {% if user.is_authenticated %}
 {% ifequal user.id fiche.createur.id %}
 <a class="btn btn-default" href="{% url 'editer_fiche' fiche.id %}">Editer</a>
+<a class="btn btn-default" href="{% url 'supprimer_fiche' fiche.id %}">Supprimer</a>
 {% endifequal %}
 {% endif %}
 {% endblock %}

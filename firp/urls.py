@@ -24,5 +24,7 @@ urlpatterns = [
         name='detail_fiche'),
     url(r'^fiches/editer_fiche/(?P<fiche_id>\d+)/$', views.edit_fiche,
         name='editer_fiche'),
+    url(r'^fiches/supprimer_fiche/(?P<fiche_id>\d+)/$', views.delete_fiche,
+        name='supprimer_fiche'),
     url(r'^creer/$', views.creer_fiche, name='creer_fiche')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

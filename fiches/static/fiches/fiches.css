@@ -190,20 +190,16 @@ div.gallery img {
     align-items: center;
 }
 
-#edition .btn-default {
-    margin: 15% 0;
-}
 
 .btn-default {
     /* background-image: url("/static/fiches/images/button.png"); */
     color: #ddd;
     background: #470002;
     font-weight: bold;
-    padding: 10px 15px;
+    padding: 7px 7px;
     text-decoration: none;
     position: relative;
     border: 1px solid #6e1618;
-    margin: 0px 3px;
 }
 
 .btn-default:focus,
@@ -212,7 +208,7 @@ div.gallery img {
     color: #fefefe;
     background: #7e0609;
     font-weight: bold;
-    padding: 10px 15px;
+    padding: 7px 7px;
     text-decoration: none;
     position: relative;
     border: 1px solid #6e1618;
@@ -324,4 +320,18 @@ h3 {
     color: #fff;
     background-color: #7e0609;
     border-color: #000;
+}
+
+#center {
+    text-align: center;
+}
+
+#bouton {
+    color: #ddd;
+    background: #470002;
+    font-weight: bold;
+    padding: 7px 7px;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid #6e1618;
 }

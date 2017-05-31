@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Confimation suppression{% endblock %}
+{% block page-title %}Confirmation suppression{% endblock %}
+
+{% block content %}
+<div>
+  <span id="center">{{fiche.nom}} {{fiche.prenom}}</span>
+</div>
+
+<div>
+Êtes-vous certain de supprimer cette fiche ?
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input class="btn btn-default" type="submit" value="Oui">
+  </form>
+<!-- <a class="btn btn-default navbar-btn" href="{% url 'account_login' %}">Oui</a> -->
+<a class="btn btn-default" href="{% url 'account_signup' %}">Non</a>
+
+</div>
+{% endblock %}

@@ -198,3 +198,17 @@ def edit_fiche(request, fiche_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer cette fiche.")
+
+
+@login_required
+def delete_fiche(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    if request.user == fiche.createur:
+        context = {'fiche': fiche}
+        if request.method == 'POST':
+            fiche.delete()
+            return render(request, 'fiches/fiche_supprimee.html', context)
+        else:
+            return render(request, 'fiches/confirmation_suppression.html', context)
+    else:
+        return HttpResponse("Vous ne pouvez pas supprimer cette fiche.")
