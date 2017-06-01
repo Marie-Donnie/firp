@@ -33,6 +33,29 @@ ETAT_CHOIX = (
     (DISPARU, 'Disparu'),
 )
 
+MEMBRES = (
+    ('1', 'Main gauche'),
+    ('2', 'Main droite'),
+    ('3', 'Tête'),
+    ('4', 'Epaules'),
+    ('5', 'Torse'),
+    ('6', 'Mains'),
+    ('7', 'Taille'),
+    ('8', 'Jambes'),
+    ('9', 'Pieds'),
+    ('10', 'Dos'),
+    ('11', 'Cou'),
+    ('12', 'Index gauche'),
+    ('13', 'Majeur gauche'),
+    ('14', 'Annulaire gauche'),
+    ('15', 'Auriculaire gauche'),
+    ('16', 'Index droit'),
+    ('17', 'Majeur droit'),
+    ('18', 'Annulaire droit'),
+    ('19', 'Auriculaire droit'),
+    ('20', 'Divers'),
+    )
+
 ZONES = (
     ("Royaumes de l'est", (
         ("Bois de la Pénombre"),
@@ -263,7 +286,7 @@ class Objet(models.Model):
 class Equipement(models.Model):
     objet = models.OneToOneField(Objet,
                                  null=True,
-                                 related_name='objet')
+                                 related_name='equipement')
     effet = models.CharField(max_length=100,
                              default='Aucun')
     autres_effets = models.CharField(max_length=100,
@@ -276,3 +299,12 @@ class Equipement(models.Model):
                                max_value=25)
     agi = IntegerRangeField(default='0', min_value=0,
                             max_value=25)
+    membres = models.SmallIntegerField(choices=MEMBRES,
+                                       default='5')
+
+
+class Case(models.Model):
+    nombre = models.SmallIntegerField(default='1'),
+    objet = models.ForeignKey(Objet,
+                              null=True,
+                              related_name='case')
