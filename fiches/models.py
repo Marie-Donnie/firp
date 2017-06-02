@@ -33,9 +33,9 @@ ETAT_CHOIX = (
     (DISPARU, 'Disparu'),
 )
 
-MEMBRES = (
-    ('1', 'Main gauche'),
-    ('2', 'Main droite'),
+MEMBRES = [
+    ('1', 'Main principale'),
+    ('2', 'Autre main'),
     ('3', 'Tête'),
     ('4', 'Epaules'),
     ('5', 'Torse'),
@@ -53,8 +53,8 @@ MEMBRES = (
     ('17', 'Majeur droit'),
     ('18', 'Annulaire droit'),
     ('19', 'Auriculaire droit'),
-    ('20', 'Divers'),
-    )
+    ('20', 'Divers')
+    ]
 
 ZONES = (
     ("Royaumes de l'est", (
@@ -283,10 +283,10 @@ class Objet(models.Model):
     poids = models.IntegerField(default='0')
 
 
-class Equipement(models.Model):
+class Armure(models.Model):
     objet = models.OneToOneField(Objet,
                                  null=True,
-                                 related_name='equipement')
+                                 related_name='armure')
     effet = models.CharField(max_length=100,
                              default='Aucun')
     autres_effets = models.CharField(max_length=100,
@@ -299,8 +299,8 @@ class Equipement(models.Model):
                                max_value=25)
     agi = IntegerRangeField(default='0', min_value=0,
                             max_value=25)
-    membres = models.SmallIntegerField(choices=MEMBRES,
-                                       default='5')
+    membre = models.SmallIntegerField(choices=MEMBRES,
+                                      default='5')
 
 
 class Case(models.Model):
@@ -308,3 +308,13 @@ class Case(models.Model):
     objet = models.ForeignKey(Objet,
                               null=True,
                               related_name='case')
+
+
+class Inventaire(models.Model):
+    cases = models.ManyToManyField(Case,
+                                   related_name='inventaire')
+
+
+class Equipement(models.Model):
+    objets = models.ManyToManyField(Armure,
+                                    related_name='equipement')

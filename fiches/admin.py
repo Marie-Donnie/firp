@@ -5,13 +5,43 @@ from django.contrib.auth.models import User
 # from fiches.users import CustomUser, CustomUserChangeForm, UserForm
 
 # Register your models here.
-from fiches.models import Fiche, UserProfile
+from fiches.models import Fiche, UserProfile, Objet, Armure, Case, Inventaire, Equipement
 
 
 class FicheAdmin(admin.ModelAdmin):
     list_display = ('nom', 'prenom', 'id')
 
 admin.site.register(Fiche, FicheAdmin)
+
+
+class ObjetAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'qualite', 'id')
+
+admin.site.register(Objet, ObjetAdmin)
+
+
+class ArmureAdmin(admin.ModelAdmin):
+    list_display = ('objet', 'membre', 'id')
+
+admin.site.register(Armure, ArmureAdmin)
+
+
+class CaseAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'objet')
+
+admin.site.register(Case, CaseAdmin)
+
+
+class InventaireAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+
+admin.site.register(Inventaire, InventaireAdmin)
+
+
+class EquipementAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+
+admin.site.register(Equipement, EquipementAdmin)
 
 
 class UserAdministration(admin.ModelAdmin):
