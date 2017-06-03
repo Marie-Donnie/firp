@@ -21,13 +21,13 @@ admin.site.register(Objet, ObjetAdmin)
 
 
 class ArmureAdmin(admin.ModelAdmin):
-    list_display = ('objet', 'membre', 'id')
+    list_display = ('get_nom', 'membre', 'id')
 
 admin.site.register(Armure, ArmureAdmin)
 
 
 class CaseAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'objet')
+    list_display = ('nombre', 'get_nom')
 
 admin.site.register(Case, CaseAdmin)
 

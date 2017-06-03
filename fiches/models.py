@@ -317,6 +317,9 @@ class Armure(models.Model):
         permissions = (("armure_ok",
                         "Peut faire des armures"),)
 
+    def get_nom(self):
+        return self.objet.nom
+
 
 class Case(models.Model):
     nombre = models.SmallIntegerField(default=1)
@@ -331,6 +334,9 @@ class Case(models.Model):
         default_related_name = 'case'
         permissions = (("case_ok",
                         "Peut faire des cases"),)
+
+    def get_nom(self):
+        return self.objet.nom
 
 
 class Inventaire(models.Model):
