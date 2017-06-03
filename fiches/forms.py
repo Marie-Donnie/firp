@@ -1,4 +1,4 @@
-from fiches.models import Fiche, UserProfile
+from fiches.models import Fiche, UserProfile, Objet, Armure, Case, Equipement, Inventaire
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
@@ -67,3 +67,44 @@ class FicheForm(ModelForm):
                    'afficher_createur': forms.CheckboxInput(),
                    'afficher_inventaire': forms.CheckboxInput(),
                    'pj': forms.RadioSelect(), }
+
+
+class ObjetForm(ModelForm):
+
+    class Meta:
+        model = Objet
+        fields = ['nom', 'qualite', 'description', 'prix', 'poids']
+        prefix = 'objet'
+
+
+class ArmureForm(ModelForm):
+
+    class Meta:
+        model = Armure
+        fields = ['objet', 'effet', 'autres_effets', 'effet_ig',
+                  'force', 'intell', 'agi', 'membre']
+        prefix = 'armure'
+
+
+class CaseForm(ModelForm):
+
+    class Meta:
+        model = Case
+        fields = ['nombre', 'objet']
+        prefix = 'case'
+
+
+class InventaireForm(ModelForm):
+
+    class Meta:
+        model = Inventaire
+        fields = ['cases']
+        prefix = 'inventaire'
+
+
+class EquipementForm(ModelForm):
+
+    class Meta:
+        model = Equipement
+        fields = ['objets']
+        prefix = 'equipement'

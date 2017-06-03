@@ -34,26 +34,26 @@ ETAT_CHOIX = (
 )
 
 MEMBRES = [
-    ('1', 'Main principale'),
-    ('2', 'Autre main'),
-    ('3', 'Tête'),
-    ('4', 'Epaules'),
-    ('5', 'Torse'),
-    ('6', 'Mains'),
-    ('7', 'Taille'),
-    ('8', 'Jambes'),
-    ('9', 'Pieds'),
-    ('10', 'Dos'),
-    ('11', 'Cou'),
-    ('12', 'Index gauche'),
-    ('13', 'Majeur gauche'),
-    ('14', 'Annulaire gauche'),
-    ('15', 'Auriculaire gauche'),
-    ('16', 'Index droit'),
-    ('17', 'Majeur droit'),
-    ('18', 'Annulaire droit'),
-    ('19', 'Auriculaire droit'),
-    ('20', 'Divers')
+    (1, 'Main principale'),
+    (2, 'Autre main'),
+    (3, 'Tête'),
+    (4, 'Epaules'),
+    (5, 'Torse'),
+    (6, 'Mains'),
+    (7, 'Taille'),
+    (8, 'Jambes'),
+    (9, 'Pieds'),
+    (10, 'Dos'),
+    (11, 'Cou'),
+    (12, 'Index gauche'),
+    (13, 'Majeur gauche'),
+    (14, 'Annulaire gauche'),
+    (15, 'Auriculaire gauche'),
+    (16, 'Index droit'),
+    (17, 'Majeur droit'),
+    (18, 'Annulaire droit'),
+    (19, 'Auriculaire droit'),
+    (20, 'Divers')
     ]
 
 ZONES = (
@@ -244,7 +244,6 @@ class Fiche(models.Model):
                                           ))
     creation = models.DateField(default=timezone.now)
 
-
     class Meta:
         ordering = ["nom", "prenom"]
         verbose_name = "fiche"
@@ -279,8 +278,16 @@ class Objet(models.Model):
                                default="Commun")
     description = models.CharField(max_length=200,
                                    default='Aucun')
-    prix = models.IntegerField(default='0')
-    poids = models.IntegerField(default='0')
+    prix = models.IntegerField(default=0)
+    poids = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ["nom"]
+        verbose_name = "objet"
+        verbose_name_plural = "objets"
+        default_related_name = 'objet'
+        permissions = (("objet_ok",
+                        "Peut faire des objets"),)
 
 
 class Armure(models.Model):
@@ -293,28 +300,58 @@ class Armure(models.Model):
                                      default='Aucun')
     effet_ig = models.CharField(max_length=100,
                                 default='Aucun')
-    force = IntegerRangeField(default='0', min_value=0,
+    force = IntegerRangeField(default=0, min_value=0,
                               max_value=25)
-    intell = IntegerRangeField(default='0', min_value=0,
+    intell = IntegerRangeField(default=0, min_value=0,
                                max_value=25)
-    agi = IntegerRangeField(default='0', min_value=0,
+    agi = IntegerRangeField(default=0, min_value=0,
                             max_value=25)
     membre = models.SmallIntegerField(choices=MEMBRES,
-                                      default='5')
+                                      default=5)
+
+    class Meta:
+        ordering = ["membre"]
+        verbose_name = "armure"
+        verbose_name_plural = "armures"
+        default_related_name = 'armure'
+        permissions = (("armure_ok",
+                        "Peut faire des armures"),)
 
 
 class Case(models.Model):
-    nombre = models.SmallIntegerField(default='1'),
+    nombre = models.SmallIntegerField(default=1)
     objet = models.ForeignKey(Objet,
                               null=True,
                               related_name='case')
+
+    class Meta:
+        ordering = ["nombre", "objet"]
+        verbose_name = "case"
+        verbose_name_plural = "cases"
+        default_related_name = 'case'
+        permissions = (("case_ok",
+                        "Peut faire des cases"),)
 
 
 class Inventaire(models.Model):
     cases = models.ManyToManyField(Case,
                                    related_name='inventaire')
 
+    class Meta:
+        verbose_name = "inventaire"
+        verbose_name_plural = "inventaires"
+        default_related_name = 'inventaire'
+        permissions = (("inventaire_ok",
+                        "Peut faire des inventaires"),)
+
 
 class Equipement(models.Model):
     objets = models.ManyToManyField(Armure,
                                     related_name='equipement')
+
+    class Meta:
+        verbose_name = "equipement"
+        verbose_name_plural = "equipements"
+        default_related_name = 'equipement'
+        permissions = (("equipement_ok",
+                        "Peut faire des équipements"),)
