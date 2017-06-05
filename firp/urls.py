@@ -26,5 +26,11 @@ urlpatterns = [
         name='editer_fiche'),
     url(r'^fiches/supprimer_fiche/(?P<fiche_id>\d+)/$', views.delete_fiche,
         name='supprimer_fiche'),
-    url(r'^creer/$', views.creer_fiche, name='creer_fiche')
+    url(r'^fiches/creer/$', views.creer_fiche, name='creer_fiche'),
+    # Objets
+    url(r'^objets/creer_objet/$', views.creer_objet, name='creer_objet'),
+    url(r'^objets/creer_armure/$', views.creer_armure, name='creer_armure'),
+    url(r'^objets/creer_case/$', views.creer_case, name='creer_case'),
+    url(r'^objets/creer_equipement/$', views.creer_equipement, name='creer_equipement'),
+    url(r'^objets/creer_inventaire/$', views.creer_inventaire, name='creer_inventaire')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

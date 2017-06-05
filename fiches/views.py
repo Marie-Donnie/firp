@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from fiches.forms import FicheForm, UserForm, UserProfileForm, MyRegistrationForm
+from fiches.forms import ObjetForm, ArmureForm, CaseForm, InventaireForm, EquipementForm
 from django.db.models import Count
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -212,3 +213,102 @@ def delete_fiche(request, fiche_id):
             return render(request, 'fiches/confirmation_suppression.html', context)
     else:
         return HttpResponse("Vous ne pouvez pas supprimer cette fiche.")
+
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
+@login_required
+def creer_objet(request):
+    if request.user.has_perm('fiches.objet_ok'):
+        if request.method == 'POST':
+            form = FicheForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = ObjetForm()
+
+        return render(request, 'fiches/objet.html', {'form': form})
+
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des objets.")
+
+
+@login_required
+def creer_armure(request):
+    if request.user.has_perm('fiches.armure_ok'):
+        if request.method == 'POST':
+            form = FicheForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = ArmureForm()
+
+        return render(request, 'fiches/armure.html', {'form': form})
+
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des armures.")
+
+
+@login_required
+def creer_case(request):
+    if request.user.has_perm('fiches.case_ok'):
+        if request.method == 'POST':
+            form = FicheForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = CaseForm()
+
+        return render(request, 'fiches/case.html', {'form': form})
+
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des cases d'inventaire.")
+
+
+@login_required
+def creer_inventaire(request):
+    if request.user.has_perm('fiches.inventaire_ok'):
+        if request.method == 'POST':
+            form = FicheForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = InventaireForm()
+
+        return render(request, 'fiches/inventaire.html', {'form': form})
+
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent gerer leur inventaire.")
+
+
+@login_required
+def creer_equipement(request):
+    if request.user.has_perm('fiches.equipement_ok'):
+        if request.method == 'POST':
+            form = FicheForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = EquipementForm()
+
+        return render(request, 'fiches/equipement.html', {'form': form})
+
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent gerer leur equipement.")

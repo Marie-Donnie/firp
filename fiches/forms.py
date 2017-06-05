@@ -73,7 +73,7 @@ class ObjetForm(ModelForm):
 
     class Meta:
         model = Objet
-        fields = ['nom', 'qualite', 'description', 'prix', 'poids']
+        fields = ['nom', 'qualite', 'description', 'prix', 'poids', 'image']
         prefix = 'objet'
 
 

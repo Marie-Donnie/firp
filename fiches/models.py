@@ -280,6 +280,8 @@ class Objet(models.Model):
                                    default='Aucun')
     prix = models.IntegerField(default=0)
     poids = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='images/users',
+                              default='images/site/WoWUnknownItem01.PNG')
 
     class Meta:
         ordering = ["nom"]

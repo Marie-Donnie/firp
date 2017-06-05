@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+
+{% block title %}Créer/éditer un objet{% endblock %}
+{% block page-title %}Créer/éditer un objet{% endblock %}
+
+{% block content %}
+<div id="char_form">
+<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+  {% csrf_token %}
+  {{ form.as_ul }}
+
+
+{% endblock %}
