@@ -9,7 +9,14 @@
 <div id="char_form">
 <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
-  {{ form.as_ul }}
+  <li><label for="id_objets">Objets&nbsp;:</label> <select name="objets" required="" multiple="multiple" id="id_objets">
 
+  {% for objet in objets %}
+  <option value="{{objet.id}}">{{objet.get_nom}}</option>
+  {% endfor %}
 
+</select></li>
+
+<input class="btn btn-default" type="submit" value="Valider" />
+</form>
 {% endblock %}

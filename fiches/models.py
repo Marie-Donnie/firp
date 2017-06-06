@@ -291,6 +291,9 @@ class Objet(models.Model):
         permissions = (("objet_ok",
                         "Peut faire des objets"),)
 
+    def has_equipement(self):
+        return hasattr(self, 'armure')
+
 
 class Armure(models.Model):
     objet = models.OneToOneField(Objet,

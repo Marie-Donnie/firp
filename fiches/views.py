@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from fiches.models import Fiche, UserProfile
+from fiches.models import Fiche, UserProfile, Objet, Armure, Case, Inventaire, Equipement
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -223,7 +223,7 @@ def delete_fiche(request, fiche_id):
 def creer_objet(request):
     if request.user.has_perm('fiches.objet_ok'):
         if request.method == 'POST':
-            form = FicheForm(request.POST, request.FILES)
+            form = ObjetForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -242,7 +242,7 @@ def creer_objet(request):
 def creer_armure(request):
     if request.user.has_perm('fiches.armure_ok'):
         if request.method == 'POST':
-            form = FicheForm(request.POST, request.FILES)
+            form = ArmureForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -261,7 +261,7 @@ def creer_armure(request):
 def creer_case(request):
     if request.user.has_perm('fiches.case_ok'):
         if request.method == 'POST':
-            form = FicheForm(request.POST, request.FILES)
+            form = CaseForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -280,7 +280,7 @@ def creer_case(request):
 def creer_inventaire(request):
     if request.user.has_perm('fiches.inventaire_ok'):
         if request.method == 'POST':
-            form = FicheForm(request.POST, request.FILES)
+            form = InventaireForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -299,7 +299,7 @@ def creer_inventaire(request):
 def creer_equipement(request):
     if request.user.has_perm('fiches.equipement_ok'):
         if request.method == 'POST':
-            form = FicheForm(request.POST, request.FILES)
+            form = EquipementForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -308,7 +308,11 @@ def creer_equipement(request):
         else:
             form = EquipementForm()
 
-        return render(request, 'fiches/equipement.html', {'form': form})
+        objets = Armure.objects.all()
+        print(objets)
+        context = {'form': form, 'objets': objets}
+
+        return render(request, 'fiches/equipement.html', context)
 
     else:
         return HttpResponse("Seuls les membres des Fils de Garithos peuvent gerer leur equipement.")
