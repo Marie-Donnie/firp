@@ -36,6 +36,16 @@
 </label>
 </div>
 <div class="form-group">
+  <span id="description"><b>Main directrice </b></span>
+
+<label class="radio-inline" for="id_main_dir">
+  <input type="radio" name="main_dir" id="id_main_dir" value="g" {% if form.main_dir.value == 'g' or form.main_dir.value|unlocalize == 'Gauche'%} checked="checked" {% endif %}> Gauche
+</label>
+<label class="radio-inline" for="id_main_dir">
+  <input type="radio" name="main_dir" id="id_main_dir" value="d" {% if form.main_dir.value == 'd' or form.main_dir.value == 'Droite' or form.main_dir.value == None %} checked="checked" {% endif %}> Droite
+</label>
+</div>
+<div class="form-group">
   <label for="id_race">Race&nbsp;</label> <input name="race" value="{{form.race.value|default:'Aucun'}}" required="" id="id_race" maxlength="40" type="text">
 <label for="id_taille">Taille&nbsp;</label> <input name="taille" value="{{form.taille.value|default:'1.70'|unlocalize}}" step="any" required="" id="id_taille" type="number"><span>m</span>
 <label for="id_poids">Poids&nbsp;</label> <input name="poids" value="{{form.poids.value|default:'70'|unlocalize}}" step="any" required="" id="id_poids" type="number"><span>kg</span>
@@ -426,6 +436,26 @@
   <label for="id_afficher_createur">Afficher créateur&nbsp;</label> <input name="afficher_createur" checked="" id="id_afficher_createur" type="checkbox">
   <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" checked="" id="id_afficher_inventaire" type="checkbox">
 </div>
+
+{% if perms.fiches.equipement_ok and perms.fiches.inventaire_ok %}
+<div class="form-group">
+  <label for="id_equipement">Equipement&nbsp;:</label> <select name="equipement" required="" multiple="multiple" id="id_equipement">
+
+  {% for equipement in equipements %}
+  <option value="{{equipement.id}}">{{equipement.nom}}</option>
+  {% endfor %}
+
+  </select>
+  <label for="id_inventaire">Inventaire&nbsp;:</label> <select name="inventaire" required="" multiple="multiple" id="id_inventaire">
+
+  {% for inventaire in inventaires %}
+  <option value="{{inventaire.id}}">{{inventaire.nom}}</option>
+  {% endfor %}
+
+  </select>
+  </div>
+{% endif %}
+
 <div class="form-group">
   <label for="id_image">Image&nbsp;</label>
   <span id="description">

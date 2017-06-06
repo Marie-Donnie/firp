@@ -9,7 +9,21 @@
 <div id="char_form">
 <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
-  {{ form.as_ul }}
+  <!-- {{ form.as_ul }} -->
+
+    <div class="form-group">
+  <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+
+  <li><label for="id_cases">Cases&nbsp;:</label> <select name="cases" required="" multiple="multiple" id="id_cases">
+
+  {% for case in cases %}
+  <option value="{{case.id}}">{{case.get_nom}}</option>
+  {% endfor %}
+
+</select></li>
+</div>
+<input class="btn btn-default" type="submit" value="Valider" />
+</form>
 
 
 {% endblock %}

@@ -55,7 +55,8 @@ class FicheForm(ModelForm):
                   'ville_de_residence', 'description', 'historique',
                   'inventaire', 'relations', 'pseudo_du_personnage',
                   'afficher_pseudo', 'afficher_createur',
-                  'afficher_inventaire', 'image', 'createur']
+                  'afficher_inventaire', 'image', 'main_dir',
+                  'inventaire_fdg', 'equipement', 'createur']
         widgets = {'createur': forms.HiddenInput(),
                    'inventaire': forms.Textarea(),
                    'description': forms.Textarea(),
@@ -66,7 +67,8 @@ class FicheForm(ModelForm):
                    'afficher_pseudo': forms.CheckboxInput(),
                    'afficher_createur': forms.CheckboxInput(),
                    'afficher_inventaire': forms.CheckboxInput(),
-                   'pj': forms.RadioSelect(), }
+                   'pj': forms.RadioSelect(),
+                   'main_dir': forms.RadioSelect(), }
 
 
 class ObjetForm(ModelForm):
@@ -82,7 +84,7 @@ class ArmureForm(ModelForm):
     class Meta:
         model = Armure
         fields = ['objet', 'effet', 'autres_effets', 'effet_ig',
-                  'force', 'intell', 'agi', 'membre']
+                  'force', 'intell', 'agi', 'membre', 'armure']
         prefix = 'armure'
 
 
@@ -98,7 +100,7 @@ class InventaireForm(ModelForm):
 
     class Meta:
         model = Inventaire
-        fields = ['cases']
+        fields = ['cases', 'nom']
         prefix = 'inventaire'
 
 
@@ -106,5 +108,5 @@ class EquipementForm(ModelForm):
 
     class Meta:
         model = Equipement
-        fields = ['objets']
+        fields = ['objets', 'nom']
         prefix = 'equipement'

@@ -45,15 +45,9 @@ MEMBRES = [
     (9, 'Pieds'),
     (10, 'Dos'),
     (11, 'Cou'),
-    (12, 'Index gauche'),
-    (13, 'Majeur gauche'),
-    (14, 'Annulaire gauche'),
-    (15, 'Auriculaire gauche'),
-    (16, 'Index droit'),
-    (17, 'Majeur droit'),
-    (18, 'Annulaire droit'),
-    (19, 'Auriculaire droit'),
-    (20, 'Divers')
+    (12, 'Doigt'),
+    (13, 'Poignets'),
+    (14, 'Divers')
     ]
 
 ZONES = (
@@ -227,6 +221,12 @@ class Fiche(models.Model):
                                  related_name='fiches')
     pseudo_du_personnage = models.CharField(max_length=30,
                                             default="?")
+    main_dir = models.CharField(max_length=1,
+                                choices=((
+                                    ('g', "Gauche"),
+                                    ('d', "Droite")
+                                )),
+                                default="Droite")
     afficher_createur = models.BooleanField(default=True,
                                             choices=(
                                                 (True, 'Oui'),
@@ -243,6 +243,14 @@ class Fiche(models.Model):
                                               (False, 'Non'),
                                           ))
     creation = models.DateField(default=timezone.now)
+    inventaire_fdg = models.OneToOneField('Inventaire',
+                                          blank=True,
+                                          null=True,
+                                          related_name='proprietaire')
+    equipement = models.OneToOneField('Equipement',
+                                      blank=True,
+                                      null=True,
+                                      related_name='proprietaire')
 
     class Meta:
         ordering = ["nom", "prenom"]
@@ -313,6 +321,7 @@ class Armure(models.Model):
                             max_value=25)
     membre = models.SmallIntegerField(choices=MEMBRES,
                                       default=5)
+    armure = models.SmallIntegerField(default=0)
 
     class Meta:
         ordering = ["membre"]
@@ -341,10 +350,12 @@ class Case(models.Model):
                         "Peut faire des cases"),)
 
     def get_nom(self):
-        return self.objet.nom
+        return (str(self.nombre) + " " + self.objet.nom)
 
 
 class Inventaire(models.Model):
+    nom = models.CharField(max_length=50,
+                           default="Inventaire")
     cases = models.ManyToManyField(Case,
                                    related_name='inventaire')
 
@@ -357,6 +368,8 @@ class Inventaire(models.Model):
 
 
 class Equipement(models.Model):
+    nom = models.CharField(max_length=50,
+                           default="Equipement")
     objets = models.ManyToManyField(Armure,
                                     related_name='equipement')
 

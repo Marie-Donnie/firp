@@ -132,11 +132,16 @@ def aff_user(request, user_id):
 # Enables the creation of a Fiche
 @login_required
 def creer_fiche(request):
-    if ((request.user.fiches.count() < 16) or
-        (request.user.has_perm('fiches.plus_de_15_fiches'))):
+    utilisateur = request.user
+    if ((utilisateur.fiches.count() < 16) or
+        (utilisateur.has_perm('fiches.plus_de_15_fiches'))):
         if request.method == 'POST':
             data = request.POST.dict()
-            data['createur'] = User.objects.get(username=request.user).id
+            data['createur'] = User.objects.get(username=utilisateur).id
+            if not(utilisateur.has_perm('fiches.equipement_ok') and
+                   utilisateur.has_perm('fiches.inventaire_ok')):
+                data['equipement'] = None
+                data['inventaire_fdg'] = None
             form = FicheForm(data, request.FILES)
             if form.is_valid():
                 form.save()
@@ -146,7 +151,11 @@ def creer_fiche(request):
         else:
             form = FicheForm()
 
-        return render(request, 'fiches/formulaire.html', {'form': form})
+        equipements = Equipement.objects.all()
+        inventaires = Inventaire.objects.all()
+        context = {'form': form, 'equipements': equipements,
+                   'inventaires': inventaires}
+        return render(request, 'fiches/formulaire.html', context)
 
     else:
         return HttpResponse("Vous ne pouvez pas faire plus de quinze fiches. Seuls les membres des Fils de Garithos le peuvent.")
@@ -289,7 +298,10 @@ def creer_inventaire(request):
         else:
             form = InventaireForm()
 
-        return render(request, 'fiches/inventaire.html', {'form': form})
+        cases = Case.objects.all()
+        context = {'form': form, 'cases': cases}
+
+        return render(request, 'fiches/inventaire.html', context)
 
     else:
         return HttpResponse("Seuls les membres des Fils de Garithos peuvent gerer leur inventaire.")
