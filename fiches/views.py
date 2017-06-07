@@ -142,6 +142,8 @@ def creer_fiche(request):
                    utilisateur.has_perm('fiches.inventaire_ok')):
                 data['equipement'] = None
                 data['inventaire_fdg'] = None
+            else:
+                data['inventaire'] = None
             form = FicheForm(data, request.FILES)
             if form.is_valid():
                 form.save()
@@ -192,10 +194,17 @@ def personnages(request):
 @login_required
 def edit_fiche(request, fiche_id):
     fiche = Fiche.objects.get(pk=fiche_id)
-    if request.user == fiche.createur:
+    utilisateur = request.user
+    if utilisateur == fiche.createur:
         if request.method == 'POST':
             data = request.POST.dict()
-            data['createur'] = User.objects.get(username=request.user).id
+            data['createur'] = User.objects.get(username=utilisateur).id
+            if not(utilisateur.has_perm('fiches.equipement_ok') and
+                   utilisateur.has_perm('fiches.inventaire_ok')):
+                data['equipement'] = None
+                data['inventaire_fdg'] = None
+            else:
+                data['inventaire'] = None
             form = FicheForm(data, request.FILES, instance=fiche)
             if form.is_valid():
                 form.save()
@@ -203,7 +212,12 @@ def edit_fiche(request, fiche_id):
         else:
             form = FicheForm(instance=fiche)
 
-        return render(request, 'fiches/formulaire.html', {'form': form})
+        equipements = Equipement.objects.all()
+        inventaires = Inventaire.objects.all()
+        context = {'form': form, 'equipements': equipements,
+                   'inventaires': inventaires}
+
+        return render(request, 'fiches/formulaire.html', context)
 
     else:
 
@@ -321,7 +335,6 @@ def creer_equipement(request):
             form = EquipementForm()
 
         objets = Armure.objects.all()
-        print(objets)
         context = {'form': form, 'objets': objets}
 
         return render(request, 'fiches/equipement.html', context)

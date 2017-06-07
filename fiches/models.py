@@ -211,6 +211,8 @@ class Fiche(models.Model):
     historique = models.CharField(max_length=6000,
                                   default='A venir')
     inventaire = models.CharField(max_length=6000,
+                                  null=True,
+                                  blank=True,
                                   default='A venir')
     relations = models.CharField(max_length=6000,
                                  default='Aucune')

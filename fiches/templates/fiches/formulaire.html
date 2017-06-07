@@ -7,469 +7,468 @@
 
 {% block content %}
 <div id="char_form">
-<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
-  {% csrf_token %}
-<div class="form-group">
-  <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
-<label for="id_prenom">Prenom&nbsp;</label> <input name="prenom" required="" id="id_prenom" maxlength="50" type="text" value="{{form.prenom.value|default_if_none:''}}">
-<label for="id_autres_prenoms">Autres prenoms&nbsp;</label> <input name="autres_prenoms" value="{{form.autres_prenoms.value|default:'Aucun'}}" required="" id="id_autres_prenoms" maxlength="200" type="text" size="50">
-</div>
-<div class="form-group">
-  <span id="description"><b>Sexe </b></span>
-  <label class="radio-inline" for="id_sexe">
-  <input type="radio" name="sexe" id="id_sexe" value="h" {% if form.sexe.value == 'h' or form.sexe.value == 'Homme' or form.sexe.value == None %} checked="checked" {% endif %}> Homme
-</label>
-<label class="radio-inline" for="id_sexe">
-  <input type="radio" name="sexe" id="id_sexe" value="f" {% if form.sexe.value == 'f' or form.sexe.value == 'Femme' %} checked="checked" {% endif %}> Femme
-</label>
-</div>
-<div class="form-group">
-  <span id="description"><b>Etat du personnage </b></span>
-<label class="radio-inline" for="id_etat">
-  <input type="radio" name="etat" id="id_etat" value="VI" {% if form.etat.value == 'VI' or form.etat.value == None %} checked="checked" {% endif %}> Vivant
-</label>
-<label class="radio-inline" for="id_pj">
-  <input type="radio" name="etat" id="id_etat" value="MO" {% if form.sexe.value == 'MO' %} checked="checked" {% endif %}> Mort
-</label>
-<label class="radio-inline" for="id_pj">
-  <input type="radio" name="etat" id="id_etat" value="DI" {% if form.sexe.value == 'DI' %} checked="checked" {% endif %}> Disparu
-</label>
-</div>
-<div class="form-group">
-  <span id="description"><b>Main directrice </b></span>
+  <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+      <label for="id_prenom">Prenom&nbsp;</label> <input name="prenom" required="" id="id_prenom" maxlength="50" type="text" value="{{form.prenom.value|default_if_none:''}}">
+      <label for="id_autres_prenoms">Autres prenoms&nbsp;</label> <input name="autres_prenoms" value="{{form.autres_prenoms.value|default:'Aucun'}}" required="" id="id_autres_prenoms" maxlength="200" type="text" size="50">
+    </div>
+    <div class="form-group">
+      <span id="description"><b>Sexe </b></span>
+      <label class="radio-inline" for="id_sexe">
+	<input type="radio" name="sexe" id="id_sexe" value="h" {% if form.sexe.value == 'h' or form.sexe.value == 'Homme' or form.sexe.value == None %} checked="checked" {% endif %}> Homme
+      </label>
+      <label class="radio-inline" for="id_sexe">
+	<input type="radio" name="sexe" id="id_sexe" value="f" {% if form.sexe.value == 'f' or form.sexe.value == 'Femme' %} checked="checked" {% endif %}> Femme
+      </label>
+    </div>
+    <div class="form-group">
+      <span id="description"><b>Etat du personnage </b></span>
+      <label class="radio-inline" for="id_etat">
+	<input type="radio" name="etat" id="id_etat" value="VI" {% if form.etat.value == 'VI' or form.etat.value == None %} checked="checked" {% endif %}> Vivant
+      </label>
+      <label class="radio-inline" for="id_pj">
+	<input type="radio" name="etat" id="id_etat" value="MO" {% if form.sexe.value == 'MO' %} checked="checked" {% endif %}> Mort
+      </label>
+      <label class="radio-inline" for="id_pj">
+	<input type="radio" name="etat" id="id_etat" value="DI" {% if form.sexe.value == 'DI' %} checked="checked" {% endif %}> Disparu
+      </label>
+    </div>
+    <div class="form-group">
+      <span id="description"><b>Main directrice </b></span>
 
-<label class="radio-inline" for="id_main_dir">
-  <input type="radio" name="main_dir" id="id_main_dir" value="g" {% if form.main_dir.value == 'g' or form.main_dir.value|unlocalize == 'Gauche'%} checked="checked" {% endif %}> Gauche
-</label>
-<label class="radio-inline" for="id_main_dir">
-  <input type="radio" name="main_dir" id="id_main_dir" value="d" {% if form.main_dir.value == 'd' or form.main_dir.value == 'Droite' or form.main_dir.value == None %} checked="checked" {% endif %}> Droite
-</label>
-</div>
-<div class="form-group">
-  <label for="id_race">Race&nbsp;</label> <input name="race" value="{{form.race.value|default:'Aucun'}}" required="" id="id_race" maxlength="40" type="text">
-<label for="id_taille">Taille&nbsp;</label> <input name="taille" value="{{form.taille.value|default:'1.70'|unlocalize}}" step="any" required="" id="id_taille" type="number"><span>m</span>
-<label for="id_poids">Poids&nbsp;</label> <input name="poids" value="{{form.poids.value|default:'70'|unlocalize}}" step="any" required="" id="id_poids" type="number"><span>kg</span>
-</div>
-<div class="form-group">
-  <label for="id_profession">Profession&nbsp;</label> <input name="profession" value="{{form.profession.value|default:'Prostipute'}}" required="" id="id_profession" maxlength="75" type="text" size="75">
-</div>
-<div class="form-group">
-  <label for="id_titre">Titre et/ou grade&nbsp;</label> <input name="titre" value="{{form.titre.value|default:'Aucun'}}" required="" id="id_titre" maxlength="75" type="text" size="75">
-</div>
-<div class="form-group">
-<label for="id_autres_titres">Autres titres&nbsp;</label> <textarea class="form-control" name="autres_titres" id="id_autres_titres" required="" rows="3" cols="40" maxlength="500">{{form.autres_titres.value|default:'Aucun'}}</textarea>
-</div>
-<div class="form-group">
-  <label for="id_medailles">Medailles&nbsp;</label> <textarea class="form-control" name="medailles" id="id_medailles" required="" rows="6" cols="40" maxlength="3000">{{form.medailles.value|default:'Non applicable/Aucune'}}</textarea>
-</div>
-<div class="form-group">
-<label for="id_jour_de_naissance">Jour de naissance&nbsp;</label> <input name="jour_de_naissance" value="{{form.jour_de_naissance.value|default:'1'}}" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
-<label for="id_mois_de_naissance">Mois de naissance&nbsp;</label> <input name="mois_de_naissance" value="{{form.mois_de_naissance.value|default:'1'}}" max="12" required="" id="id_mois_de_naissance" min="1" type="number">
-<label for="id_annee_de_naissance">Annee de naissance&nbsp;</label> <input name="annee_de_naissance" value="{{form.annee_de_naissance.value|default:'0'}}" max="100" required="" id="id_annee_de_naissance" min="-32000" type="number">
-</div>
-<div class="form-group">
-<label for="id_zone_de_naissance">Zone de naissance&nbsp;</label> <select name="zone_de_naissance" id="id_zone_de_naissance">
-  <optgroup label="Royaumes de l'est">
-  <option value="0" {% if form.zone_de_naissance.value == 0%} selected="" {% endif %}>Bois de la Pénombre</option>
+      <label class="radio-inline" for="id_main_dir">
+	<input type="radio" name="main_dir" id="id_main_dir" value="g" {% if form.main_dir.value == 'g' or form.main_dir.value|unlocalize == 'Gauche'%} checked="checked" {% endif %}> Gauche
+      </label>
+      <label class="radio-inline" for="id_main_dir">
+	<input type="radio" name="main_dir" id="id_main_dir" value="d" {% if form.main_dir.value == 'd' or form.main_dir.value == 'Droite' or form.main_dir.value == None %} checked="checked" {% endif %}> Droite
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="id_race">Race&nbsp;</label> <input name="race" value="{{form.race.value|default:'Aucun'}}" required="" id="id_race" maxlength="40" type="text">
+      <label for="id_taille">Taille&nbsp;</label> <input name="taille" value="{{form.taille.value|default:'1.70'|unlocalize}}" step="any" required="" id="id_taille" type="number"><span>m</span>
+      <label for="id_poids">Poids&nbsp;</label> <input name="poids" value="{{form.poids.value|default:'70'|unlocalize}}" step="any" required="" id="id_poids" type="number"><span>kg</span>
+    </div>
+    <div class="form-group">
+      <label for="id_profession">Profession&nbsp;</label> <input name="profession" value="{{form.profession.value|default:'Prostipute'}}" required="" id="id_profession" maxlength="75" type="text" size="75">
+    </div>
+    <div class="form-group">
+      <label for="id_titre">Titre et/ou grade&nbsp;</label> <input name="titre" value="{{form.titre.value|default:'Aucun'}}" required="" id="id_titre" maxlength="75" type="text" size="75">
+    </div>
+    <div class="form-group">
+      <label for="id_autres_titres">Autres titres&nbsp;</label> <textarea class="form-control" name="autres_titres" id="id_autres_titres" required="" rows="3" cols="40" maxlength="500">{{form.autres_titres.value|default:'Aucun'}}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="id_medailles">Medailles&nbsp;</label> <textarea class="form-control" name="medailles" id="id_medailles" required="" rows="6" cols="40" maxlength="3000">{{form.medailles.value|default:'Non applicable/Aucune'}}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="id_jour_de_naissance">Jour de naissance&nbsp;</label> <input name="jour_de_naissance" value="{{form.jour_de_naissance.value|default:'1'}}" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
+      <label for="id_mois_de_naissance">Mois de naissance&nbsp;</label> <input name="mois_de_naissance" value="{{form.mois_de_naissance.value|default:'1'}}" max="12" required="" id="id_mois_de_naissance" min="1" type="number">
+      <label for="id_annee_de_naissance">Annee de naissance&nbsp;</label> <input name="annee_de_naissance" value="{{form.annee_de_naissance.value|default:'0'}}" max="100" required="" id="id_annee_de_naissance" min="-32000" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_zone_de_naissance">Zone de naissance&nbsp;</label> <select name="zone_de_naissance" id="id_zone_de_naissance">
+	<optgroup label="Royaumes de l'est">
+	  <option value="0" {% if form.zone_de_naissance.value == 0%} selected="" {% endif %}>Bois de la Pénombre</option>
 
-  <option value="1" {% if form.zone_de_naissance.value == 1%} selected="" {% endif %}>Bois des Chants éternels</option>
+	  <option value="1" {% if form.zone_de_naissance.value == 1%} selected="" {% endif %}>Bois des Chants éternels</option>
 
-  <option value="2" {% if form.zone_de_naissance.value == 2%} selected="" {% endif %}>Cap Strangleronce</option>
+	  <option value="2" {% if form.zone_de_naissance.value == 2%} selected="" {% endif %}>Cap Strangleronce</option>
 
-  <option value="3" {% if form.zone_de_naissance.value == 3%} selected="" {% endif %}>Clairières de Tirisfal</option>
+	  <option value="3" {% if form.zone_de_naissance.value == 3%} selected="" {% endif %}>Clairières de Tirisfal</option>
 
-  <option value="4" {% if form.zone_de_naissance.value == 4%} selected="" {% endif %}>Contreforts de Hautebrande</option>
+	  <option value="4" {% if form.zone_de_naissance.value == 4%} selected="" {% endif %}>Contreforts de Hautebrande</option>
 
-  <option value="5" {% if form.zone_de_naissance.value == 5%} selected="" {% endif %}>Dun Morogh</option>
+	  <option value="5" {% if form.zone_de_naissance.value == 5%} selected="" {% endif %}>Dun Morogh</option>
 
-  <option value="6" {% if form.zone_de_naissance.value == 6%} selected="" {% endif %}>Défilé de Deuillevent</option>
+	  <option value="6" {% if form.zone_de_naissance.value == 6%} selected="" {% endif %}>Défilé de Deuillevent</option>
 
-  <option value="7" {% if form.zone_de_naissance.value == 7%} selected="" {% endif %}>Forêt dElwynn</option>
+	  <option value="7" {% if form.zone_de_naissance.value == 7%} selected="" {% endif %}>Forêt dElwynn</option>
 
-  <option value="8" {% if form.zone_de_naissance.value == 8%} selected="" {% endif %}>Forêt des Pins-Argentés</option>
+	  <option value="8" {% if form.zone_de_naissance.value == 8%} selected="" {% endif %}>Forêt des Pins-Argentés</option>
 
-  <option value="9" {% if form.zone_de_naissance.value == 9%} selected="" {% endif %}>Gilnéas</option>
+	  <option value="9" {% if form.zone_de_naissance.value == 9%} selected="" {% endif %}>Gilnéas</option>
 
-  <option value="10" {% if form.zone_de_naissance.value == 10%} selected="" {% endif %}>Gorge des Vents brûlants</option>
+	  <option value="10" {% if form.zone_de_naissance.value == 10%} selected="" {% endif %}>Gorge des Vents brûlants</option>
 
-  <option value="11" {% if form.zone_de_naissance.value == 11%} selected="" {% endif %}>Hautes-terres Arathies</option>
+	  <option value="11" {% if form.zone_de_naissance.value == 11%} selected="" {% endif %}>Hautes-terres Arathies</option>
 
-  <option value="12" {% if form.zone_de_naissance.value == 12%} selected="" {% endif %}>Hautes-terres du Crépuscule</option>
+	  <option value="12" {% if form.zone_de_naissance.value == 12%} selected="" {% endif %}>Hautes-terres du Crépuscule</option>
 
-  <option value="13" {% if form.zone_de_naissance.value == 13%} selected="" {% endif %}>Kul'Tiras</option>
+	  <option value="13" {% if form.zone_de_naissance.value == 13%} selected="" {% endif %}>Kul'Tiras</option>
 
-  <option value="14" {% if form.zone_de_naissance.value == 14%} selected="" {% endif %}>Les Carmines</option>
+	  <option value="14" {% if form.zone_de_naissance.value == 14%} selected="" {% endif %}>Les Carmines</option>
 
-  <option value="15" {% if form.zone_de_naissance.value == 15%} selected="" {% endif %}>Les Hinterlands</option>
+	  <option value="15" {% if form.zone_de_naissance.value == 15%} selected="" {% endif %}>Les Hinterlands</option>
 
-  <option value="16" {% if form.zone_de_naissance.value == 16%} selected="" {% endif %}>Les Paluns</option>
+	  <option value="16" {% if form.zone_de_naissance.value == 16%} selected="" {% endif %}>Les Paluns</option>
 
-  <option value="17" {% if form.zone_de_naissance.value == 17%} selected="" {% endif %}>Les terres Fantômes</option>
+	  <option value="17" {% if form.zone_de_naissance.value == 17%} selected="" {% endif %}>Les terres Fantômes</option>
 
-  <option value="18" {% if form.zone_de_naissance.value == 18%} selected="" {% endif %}>Loch Modan</option>
+	  <option value="18" {% if form.zone_de_naissance.value == 18%} selected="" {% endif %}>Loch Modan</option>
 
-  <option value="19" {% if form.zone_de_naissance.value == 19%} selected="" {% endif %}>Maleterres de l'Est</option>
+	  <option value="19" {% if form.zone_de_naissance.value == 19%} selected="" {% endif %}>Maleterres de l'Est</option>
 
-  <option value="20" {% if form.zone_de_naissance.value == 20%} selected="" {% endif %}>Maleterres de lOuest</option>
+	  <option value="20" {% if form.zone_de_naissance.value == 20%} selected="" {% endif %}>Maleterres de lOuest</option>
 
-  <option value="21" {% if form.zone_de_naissance.value == 21%} selected="" {% endif %}>Marais des Chagrins</option>
+	  <option value="21" {% if form.zone_de_naissance.value == 21%} selected="" {% endif %}>Marais des Chagrins</option>
 
-  <option value="22" {% if form.zone_de_naissance.value == 22%} selected="" {% endif %}>Marche de l'Ouest</option>
+	  <option value="22" {% if form.zone_de_naissance.value == 22%} selected="" {% endif %}>Marche de l'Ouest</option>
 
-  <option value="23" {% if form.zone_de_naissance.value == 23 or form.zone_de_naissance.value == None %} selected="" {% endif %}>Noirebois</option>
+	  <option value="23" {% if form.zone_de_naissance.value == 23 or form.zone_de_naissance.value == None %} selected="" {% endif %}>Noirebois</option>
 
-  <option value="24" {% if form.zone_de_naissance.value == 24%} selected="" {% endif %}>Steppes Ardentes</option>
+	  <option value="24" {% if form.zone_de_naissance.value == 24%} selected="" {% endif %}>Steppes Ardentes</option>
 
-  <option value="25" {% if form.zone_de_naissance.value == 25%} selected="" {% endif %}>Strangleronce septentrionale</option>
+	  <option value="25" {% if form.zone_de_naissance.value == 25%} selected="" {% endif %}>Strangleronce septentrionale</option>
 
-  <option value="26" {% if form.zone_de_naissance.value == 26%} selected="" {% endif %}>Terres Foudroyées</option>
+	  <option value="26" {% if form.zone_de_naissance.value == 26%} selected="" {% endif %}>Terres Foudroyées</option>
 
-  <option value="27" {% if form.zone_de_naissance.value == 27%} selected="" {% endif %}>Terres Ingrates</option>
+	  <option value="27" {% if form.zone_de_naissance.value == 27%} selected="" {% endif %}>Terres Ingrates</option>
 
-  <option value="28" {% if form.zone_de_naissance.value == 28%} selected="" {% endif %}>Île de QuelDanas</option>
+	  <option value="28" {% if form.zone_de_naissance.value == 28%} selected="" {% endif %}>Île de QuelDanas</option>
 
-  </optgroup>
-  <optgroup label="Kalimdor">
-  <option value="100" {% if form.zone_de_naissance.value == 100%} selected="" {% endif %}>Azshara</option>
+	</optgroup>
+	<optgroup label="Kalimdor">
+	  <option value="100" {% if form.zone_de_naissance.value == 100%} selected="" {% endif %}>Azshara</option>
 
-  <option value="101" {% if form.zone_de_naissance.value == 101%} selected="" {% endif %}>Berceau-de-l'Hiver</option>
+	  <option value="101" {% if form.zone_de_naissance.value == 101%} selected="" {% endif %}>Berceau-de-l'Hiver</option>
 
-  <option value="102" {% if form.zone_de_naissance.value == 102%} selected="" {% endif %}>Cratère d'Un'Goro</option>
+	  <option value="102" {% if form.zone_de_naissance.value == 102%} selected="" {% endif %}>Cratère d'Un'Goro</option>
 
-  <option value="103" {% if form.zone_de_naissance.value == 103%} selected="" {% endif %}>Durotar</option>
+	  <option value="103" {% if form.zone_de_naissance.value == 103%} selected="" {% endif %}>Durotar</option>
 
-  <option value="104" {% if form.zone_de_naissance.value == 104%} selected="" {% endif %}>Désolace</option>
+	  <option value="104" {% if form.zone_de_naissance.value == 104%} selected="" {% endif %}>Désolace</option>
 
-  <option value="105" {% if form.zone_de_naissance.value == 105%} selected="" {% endif %}>Féralas</option>
+	  <option value="105" {% if form.zone_de_naissance.value == 105%} selected="" {% endif %}>Féralas</option>
 
-  <option value="106" {% if form.zone_de_naissance.value == 106%} selected="" {% endif %}>Gangrebois</option>
+	  <option value="106" {% if form.zone_de_naissance.value == 106%} selected="" {% endif %}>Gangrebois</option>
 
-  <option value="107" {% if form.zone_de_naissance.value == 107%} selected="" {% endif %}>Les Serres-Rocheuses</option>
+	  <option value="107" {% if form.zone_de_naissance.value == 107%} selected="" {% endif %}>Les Serres-Rocheuses</option>
 
-  <option value="108" {% if form.zone_de_naissance.value == 108%} selected="" {% endif %}>Marécage d'Âprefange</option>
+	  <option value="108" {% if form.zone_de_naissance.value == 108%} selected="" {% endif %}>Marécage d'Âprefange</option>
 
-  <option value="109" {% if form.zone_de_naissance.value == 109%} selected="" {% endif %}>Mille pointes</option>
+	  <option value="109" {% if form.zone_de_naissance.value == 109%} selected="" {% endif %}>Mille pointes</option>
 
-  <option value="110" {% if form.zone_de_naissance.value == 110%} selected="" {% endif %}>Mont Hyjal</option>
+	  <option value="110" {% if form.zone_de_naissance.value == 110%} selected="" {% endif %}>Mont Hyjal</option>
 
-  <option value="111" {% if form.zone_de_naissance.value == 111%} selected="" {% endif %}>Mulgore</option>
+	  <option value="111" {% if form.zone_de_naissance.value == 111%} selected="" {% endif %}>Mulgore</option>
 
-  <option value="112" {% if form.zone_de_naissance.value == 112%} selected="" {% endif %}>Orneval</option>
+	  <option value="112" {% if form.zone_de_naissance.value == 112%} selected="" {% endif %}>Orneval</option>
 
-  <option value="113" {% if form.zone_de_naissance.value == 113%} selected="" {% endif %}>Reflet-de-Lune</option>
+	  <option value="113" {% if form.zone_de_naissance.value == 113%} selected="" {% endif %}>Reflet-de-Lune</option>
 
-  <option value="114" {% if form.zone_de_naissance.value == 114%} selected="" {% endif %}>Silithus</option>
+	  <option value="114" {% if form.zone_de_naissance.value == 114%} selected="" {% endif %}>Silithus</option>
 
-  <option value="115" {% if form.zone_de_naissance.value == 115%} selected="" {% endif %}>Sombrivage</option>
+	  <option value="115" {% if form.zone_de_naissance.value == 115%} selected="" {% endif %}>Sombrivage</option>
 
-  <option value="116" {% if form.zone_de_naissance.value == 116%} selected="" {% endif %}>Tanaris</option>
+	  <option value="116" {% if form.zone_de_naissance.value == 116%} selected="" {% endif %}>Tanaris</option>
 
-  <option value="117" {% if form.zone_de_naissance.value == 117%} selected="" {% endif %}>Tarides du Nord</option>
+	  <option value="117" {% if form.zone_de_naissance.value == 117%} selected="" {% endif %}>Tarides du Nord</option>
 
-  <option value="118" {% if form.zone_de_naissance.value == 118%} selected="" {% endif %}>Tarides du Sud</option>
+	  <option value="118" {% if form.zone_de_naissance.value == 118%} selected="" {% endif %}>Tarides du Sud</option>
 
-  <option value="119" {% if form.zone_de_naissance.value == 119%} selected="" {% endif %}>Teldrassil</option>
+	  <option value="119" {% if form.zone_de_naissance.value == 119%} selected="" {% endif %}>Teldrassil</option>
 
-  <option value="120" {% if form.zone_de_naissance.value == 120%} selected="" {% endif %}>Uldum</option>
+	  <option value="120" {% if form.zone_de_naissance.value == 120%} selected="" {% endif %}>Uldum</option>
 
-  <option value="121" {% if form.zone_de_naissance.value == 121%} selected="" {% endif %}>Îles de l'Écho</option>
+	  <option value="121" {% if form.zone_de_naissance.value == 121%} selected="" {% endif %}>Îles de l'Écho</option>
 
-  </optgroup>
-  <optgroup label="Norfendre">
-  <option value="200" {% if form.zone_de_naissance.value == 200%} selected="" {% endif %}>Bassin de Sholazar</option>
+	</optgroup>
+	<optgroup label="Norfendre">
+	  <option value="200" {% if form.zone_de_naissance.value == 200%} selected="" {% endif %}>Bassin de Sholazar</option>
 
-  <option value="201" {% if form.zone_de_naissance.value == 201%} selected="" {% endif %}>Désolation des dragons</option>
+	  <option value="201" {% if form.zone_de_naissance.value == 201%} selected="" {% endif %}>Désolation des dragons</option>
 
-  <option value="202" {% if form.zone_de_naissance.value == 202%} selected="" {% endif %}>Fjord Hurlant</option>
+	  <option value="202" {% if form.zone_de_naissance.value == 202%} selected="" {% endif %}>Fjord Hurlant</option>
 
-  <option value="203" {% if form.zone_de_naissance.value == 203%} selected="" {% endif %}>Forêt du Chant de cristal</option>
+	  <option value="203" {% if form.zone_de_naissance.value == 203%} selected="" {% endif %}>Forêt du Chant de cristal</option>
 
-  <option value="204" {% if form.zone_de_naissance.value == 204%} selected="" {% endif %}>Joug-d'hiver</option>
+	  <option value="204" {% if form.zone_de_naissance.value == 204%} selected="" {% endif %}>Joug-d'hiver</option>
 
-  <option value="205" {% if form.zone_de_naissance.value == 205%} selected="" {% endif %}>La Couronne de glace</option>
+	  <option value="205" {% if form.zone_de_naissance.value == 205%} selected="" {% endif %}>La Couronne de glace</option>
 
-  <option value="206" {% if form.zone_de_naissance.value == 206%} selected="" {% endif %}>Les Grisonnes</option>
+	  <option value="206" {% if form.zone_de_naissance.value == 206%} selected="" {% endif %}>Les Grisonnes</option>
 
-  <option value="207" {% if form.zone_de_naissance.value == 207%} selected="" {% endif %}>Les pics Foudroyés</option>
+	  <option value="207" {% if form.zone_de_naissance.value == 207%} selected="" {% endif %}>Les pics Foudroyés</option>
 
-  <option value="208" {% if form.zone_de_naissance.value == 208%} selected="" {% endif %}>Toundra Boréenne</option>
+	  <option value="208" {% if form.zone_de_naissance.value == 208%} selected="" {% endif %}>Toundra Boréenne</option>
 
-  <option value="209" {% if form.zone_de_naissance.value == 209%} selected="" {% endif %}>Zul'Drak</option>
+	  <option value="209" {% if form.zone_de_naissance.value == 209%} selected="" {% endif %}>Zul'Drak</option>
 
-  </optgroup>
-  <optgroup label="Pandarie">
-  <option value="300" {% if form.zone_de_naissance.value == 300%} selected="" {% endif %}>Désert de Tanlong</option>
+	</optgroup>
+	<optgroup label="Pandarie">
+	  <option value="300" {% if form.zone_de_naissance.value == 300%} selected="" {% endif %}>Désert de Tanlong</option>
 
-  <option value="301" {% if form.zone_de_naissance.value == 301%} selected="" {% endif %}>Etendues sauvages de Krasarang</option>
+	  <option value="301" {% if form.zone_de_naissance.value == 301%} selected="" {% endif %}>Etendues sauvages de Krasarang</option>
 
-  <option value="302" {% if form.zone_de_naissance.value == 302%} selected="" {% endif %}>La forêt de Jade</option>
+	  <option value="302" {% if form.zone_de_naissance.value == 302%} selected="" {% endif %}>La forêt de Jade</option>
 
-  <option value="303" {% if form.zone_de_naissance.value == 303%} selected="" {% endif %}>Sommet de Kun-Lai</option>
+	  <option value="303" {% if form.zone_de_naissance.value == 303%} selected="" {% endif %}>Sommet de Kun-Lai</option>
 
-  <option value="304" {% if form.zone_de_naissance.value == 304%} selected="" {% endif %}>Terres de l'Angoisse</option>
+	  <option value="304" {% if form.zone_de_naissance.value == 304%} selected="" {% endif %}>Terres de l'Angoisse</option>
 
-  <option value="305" {% if form.zone_de_naissance.value == 305%} selected="" {% endif %}>Val de l'Eternel Printemps</option>
+	  <option value="305" {% if form.zone_de_naissance.value == 305%} selected="" {% endif %}>Val de l'Eternel Printemps</option>
 
-  <option value="306" {% if form.zone_de_naissance.value == 306%} selected="" {% endif %}>Vallée des Quatre vents</option>
+	  <option value="306" {% if form.zone_de_naissance.value == 306%} selected="" {% endif %}>Vallée des Quatre vents</option>
 
-  </optgroup>
-  <optgroup label="Iles brisées">
-  <option value="400" {% if form.zone_de_naissance.value == 400%} selected="" {% endif %}>Azsuna</option>
+	</optgroup>
+	<optgroup label="Iles brisées">
+	  <option value="400" {% if form.zone_de_naissance.value == 400%} selected="" {% endif %}>Azsuna</option>
 
-  <option value="401" {% if form.zone_de_naissance.value == 401%} selected="" {% endif %}>Haut-Roc</option>
+	  <option value="401" {% if form.zone_de_naissance.value == 401%} selected="" {% endif %}>Haut-Roc</option>
 
-  <option value="402" {% if form.zone_de_naissance.value == 402%} selected="" {% endif %}>Suramar</option>
+	  <option value="402" {% if form.zone_de_naissance.value == 402%} selected="" {% endif %}>Suramar</option>
 
-  <option value="403" {% if form.zone_de_naissance.value == 403%} selected="" {% endif %}>Tornheim</option>
+	  <option value="403" {% if form.zone_de_naissance.value == 403%} selected="" {% endif %}>Tornheim</option>
 
-  <option value="404" {% if form.zone_de_naissance.value == 404%} selected="" {% endif %}>Val'Sharah</option>
+	  <option value="404" {% if form.zone_de_naissance.value == 404%} selected="" {% endif %}>Val'Sharah</option>
 
-  </optgroup>
-  <optgroup label="Kezan">
-  <option value="500" {% if form.zone_de_naissance.value == 500%} selected="" {% endif %}>Kezan</option>
+	</optgroup>
+	<optgroup label="Kezan">
+	  <option value="500" {% if form.zone_de_naissance.value == 500%} selected="" {% endif %}>Kezan</option>
 
-  </optgroup>
-  <optgroup label="Zandalar">
-  <option value="600" {% if form.zone_de_naissance.value == 600%} selected="" {% endif %}>Zandalar</option>
+	</optgroup>
+	<optgroup label="Zandalar">
+	  <option value="600" {% if form.zone_de_naissance.value == 600%} selected="" {% endif %}>Zandalar</option>
 
-  </optgroup>
-</select>
-<label for="id_ville_de_naissance">Ville de naissance&nbsp;</label> <input name="ville_de_naissance" value="{{form.ville_de_naissance.value|default:'Inconnue'}}" required="" id="id_ville_de_naissance" maxlength="50" type="text" size="50">
-</div>
-<div class="form-group">
-<label for="id_zone_de_residence">Zone de residence&nbsp;</label> <select name="zone_de_residence" id="id_zone_de_residence">
-  <optgroup label="Royaumes de l'est">
-  <option value="0" {% if form.zone_de_residence.value == 0%} selected="" {% endif %}>Bois de la Pénombre</option>
+	</optgroup>
+      </select>
+      <label for="id_ville_de_naissance">Ville de naissance&nbsp;</label> <input name="ville_de_naissance" value="{{form.ville_de_naissance.value|default:'Inconnue'}}" required="" id="id_ville_de_naissance" maxlength="50" type="text" size="50">
+    </div>
+    <div class="form-group">
+      <label for="id_zone_de_residence">Zone de residence&nbsp;</label> <select name="zone_de_residence" id="id_zone_de_residence">
+	<optgroup label="Royaumes de l'est">
+	  <option value="0" {% if form.zone_de_residence.value == 0%} selected="" {% endif %}>Bois de la Pénombre</option>
 
-  <option value="1" {% if form.zone_de_residence.value == 1%} selected="" {% endif %}>Bois des Chants éternels</option>
+	  <option value="1" {% if form.zone_de_residence.value == 1%} selected="" {% endif %}>Bois des Chants éternels</option>
 
-  <option value="2" {% if form.zone_de_residence.value == 2%} selected="" {% endif %}>Cap Strangleronce</option>
+	  <option value="2" {% if form.zone_de_residence.value == 2%} selected="" {% endif %}>Cap Strangleronce</option>
 
-  <option value="3" {% if form.zone_de_residence.value == 3%} selected="" {% endif %}>Clairières de Tirisfal</option>
+	  <option value="3" {% if form.zone_de_residence.value == 3%} selected="" {% endif %}>Clairières de Tirisfal</option>
 
-  <option value="4" {% if form.zone_de_residence.value == 4%} selected="" {% endif %}>Contreforts de Hautebrande</option>
+	  <option value="4" {% if form.zone_de_residence.value == 4%} selected="" {% endif %}>Contreforts de Hautebrande</option>
 
-  <option value="5" {% if form.zone_de_residence.value == 5%} selected="" {% endif %}>Dun Morogh</option>
+	  <option value="5" {% if form.zone_de_residence.value == 5%} selected="" {% endif %}>Dun Morogh</option>
 
-  <option value="6" {% if form.zone_de_residence.value == 6%} selected="" {% endif %}>Défilé de Deuillevent</option>
+	  <option value="6" {% if form.zone_de_residence.value == 6%} selected="" {% endif %}>Défilé de Deuillevent</option>
 
-  <option value="7" {% if form.zone_de_residence.value == 7%} selected="" {% endif %}>Forêt d'Elwynn</option>
+	  <option value="7" {% if form.zone_de_residence.value == 7%} selected="" {% endif %}>Forêt d'Elwynn</option>
 
-  <option value="8" {% if form.zone_de_residence.value == 8%} selected="" {% endif %}>Forêt des Pins-Argentés</option>
+	  <option value="8" {% if form.zone_de_residence.value == 8%} selected="" {% endif %}>Forêt des Pins-Argentés</option>
 
-  <option value="9" {% if form.zone_de_residence.value == 9%} selected="" {% endif %}>Gilnéas</option>
+	  <option value="9" {% if form.zone_de_residence.value == 9%} selected="" {% endif %}>Gilnéas</option>
 
-  <option value="10" {% if form.zone_de_residence.value == 10%} selected="" {% endif %}>Gorge des Vents brûlants</option>
+	  <option value="10" {% if form.zone_de_residence.value == 10%} selected="" {% endif %}>Gorge des Vents brûlants</option>
 
-  <option value="11" {% if form.zone_de_residence.value == 11%} selected="" {% endif %}>Hautes-terres Arathies</option>
+	  <option value="11" {% if form.zone_de_residence.value == 11%} selected="" {% endif %}>Hautes-terres Arathies</option>
 
-  <option value="12" {% if form.zone_de_residence.value == 12%} selected="" {% endif %}>Hautes-terres du Crépuscule</option>
+	  <option value="12" {% if form.zone_de_residence.value == 12%} selected="" {% endif %}>Hautes-terres du Crépuscule</option>
 
-  <option value="13" {% if form.zone_de_residence.value == 13%} selected="" {% endif %}>Kul'Tiras</option>
+	  <option value="13" {% if form.zone_de_residence.value == 13%} selected="" {% endif %}>Kul'Tiras</option>
 
-  <option value="14" {% if form.zone_de_residence.value == 14%} selected="" {% endif %}>Les Carmines</option>
+	  <option value="14" {% if form.zone_de_residence.value == 14%} selected="" {% endif %}>Les Carmines</option>
 
-  <option value="15" {% if form.zone_de_residence.value == 15%} selected="" {% endif %}>Les Hinterlands</option>
+	  <option value="15" {% if form.zone_de_residence.value == 15%} selected="" {% endif %}>Les Hinterlands</option>
 
-  <option value="16" {% if form.zone_de_residence.value == 16%} selected="" {% endif %}>Les Paluns</option>
+	  <option value="16" {% if form.zone_de_residence.value == 16%} selected="" {% endif %}>Les Paluns</option>
 
-  <option value="17" {% if form.zone_de_residence.value == 17%} selected="" {% endif %}>Les terres Fantômes</option>
+	  <option value="17" {% if form.zone_de_residence.value == 17%} selected="" {% endif %}>Les terres Fantômes</option>
 
-  <option value="18" {% if form.zone_de_residence.value == 18%} selected="" {% endif %}>Loch Modan</option>
+	  <option value="18" {% if form.zone_de_residence.value == 18%} selected="" {% endif %}>Loch Modan</option>
 
-  <option value="19" {% if form.zone_de_residence.value == 19%} selected="" {% endif %}>Maleterres de l'Est</option>
+	  <option value="19" {% if form.zone_de_residence.value == 19%} selected="" {% endif %}>Maleterres de l'Est</option>
 
-  <option value="20" {% if form.zone_de_residence.value == 20%} selected="" {% endif %}>Maleterres de lOuest</option>
+	  <option value="20" {% if form.zone_de_residence.value == 20%} selected="" {% endif %}>Maleterres de lOuest</option>
 
-  <option value="21" {% if form.zone_de_residence.value == 21%} selected="" {% endif %}>Marais des Chagrins</option>
+	  <option value="21" {% if form.zone_de_residence.value == 21%} selected="" {% endif %}>Marais des Chagrins</option>
 
-  <option value="22" {% if form.zone_de_residence.value == 22%} selected="" {% endif %}>Marche de l'Ouest</option>
+	  <option value="22" {% if form.zone_de_residence.value == 22%} selected="" {% endif %}>Marche de l'Ouest</option>
 
-  <option value="23" {% if form.zone_de_residence.value == 23 or form.zone_de_residence.value == None %} selected="" {% endif %}>Noirebois</option>
+	  <option value="23" {% if form.zone_de_residence.value == 23 or form.zone_de_residence.value == None %} selected="" {% endif %}>Noirebois</option>
 
-  <option value="24" {% if form.zone_de_residence.value == 24%} selected="" {% endif %}>Steppes Ardentes</option>
+	  <option value="24" {% if form.zone_de_residence.value == 24%} selected="" {% endif %}>Steppes Ardentes</option>
 
-  <option value="25" {% if form.zone_de_residence.value == 25%} selected="" {% endif %}>Strangleronce septentrionale</option>
+	  <option value="25" {% if form.zone_de_residence.value == 25%} selected="" {% endif %}>Strangleronce septentrionale</option>
 
-  <option value="26" {% if form.zone_de_residence.value == 26%} selected="" {% endif %}>Terres Foudroyées</option>
+	  <option value="26" {% if form.zone_de_residence.value == 26%} selected="" {% endif %}>Terres Foudroyées</option>
 
-  <option value="27" {% if form.zone_de_residence.value == 27%} selected="" {% endif %}>Terres Ingrates</option>
+	  <option value="27" {% if form.zone_de_residence.value == 27%} selected="" {% endif %}>Terres Ingrates</option>
 
-  <option value="28" {% if form.zone_de_residence.value == 28%} selected="" {% endif %}>Île de QuelDanas</option>
+	  <option value="28" {% if form.zone_de_residence.value == 28%} selected="" {% endif %}>Île de QuelDanas</option>
 
-  </optgroup>
-  <optgroup label="Kalimdor">
-  <option value="100" {% if form.zone_de_residence.value == 100%} selected="" {% endif %}>Azshara</option>
+	</optgroup>
+	<optgroup label="Kalimdor">
+	  <option value="100" {% if form.zone_de_residence.value == 100%} selected="" {% endif %}>Azshara</option>
 
-  <option value="101" {% if form.zone_de_residence.value == 101%} selected="" {% endif %}>Berceau-de-l'Hiver</option>
+	  <option value="101" {% if form.zone_de_residence.value == 101%} selected="" {% endif %}>Berceau-de-l'Hiver</option>
 
-  <option value="102" {% if form.zone_de_residence.value == 102%} selected="" {% endif %}>Cratère d'Un'Goro</option>
+	  <option value="102" {% if form.zone_de_residence.value == 102%} selected="" {% endif %}>Cratère d'Un'Goro</option>
 
-  <option value="103" {% if form.zone_de_residence.value == 103%} selected="" {% endif %}>Durotar</option>
+	  <option value="103" {% if form.zone_de_residence.value == 103%} selected="" {% endif %}>Durotar</option>
 
-  <option value="104" {% if form.zone_de_residence.value == 104%} selected="" {% endif %}>Désolace</option>
+	  <option value="104" {% if form.zone_de_residence.value == 104%} selected="" {% endif %}>Désolace</option>
 
-  <option value="105" {% if form.zone_de_residence.value == 105%} selected="" {% endif %}>Féralas</option>
+	  <option value="105" {% if form.zone_de_residence.value == 105%} selected="" {% endif %}>Féralas</option>
 
-  <option value="106" {% if form.zone_de_residence.value == 106%} selected="" {% endif %}>Gangrebois</option>
+	  <option value="106" {% if form.zone_de_residence.value == 106%} selected="" {% endif %}>Gangrebois</option>
 
-  <option value="107" {% if form.zone_de_residence.value == 107%} selected="" {% endif %}>Les Serres-Rocheuses</option>
+	  <option value="107" {% if form.zone_de_residence.value == 107%} selected="" {% endif %}>Les Serres-Rocheuses</option>
 
-  <option value="108" {% if form.zone_de_residence.value == 108%} selected="" {% endif %}>Marécage d'Âprefange</option>
+	  <option value="108" {% if form.zone_de_residence.value == 108%} selected="" {% endif %}>Marécage d'Âprefange</option>
 
-  <option value="109" {% if form.zone_de_residence.value == 109%} selected="" {% endif %}>Mille pointes</option>
+	  <option value="109" {% if form.zone_de_residence.value == 109%} selected="" {% endif %}>Mille pointes</option>
 
-  <option value="110" {% if form.zone_de_residence.value == 110%} selected="" {% endif %}>Mont Hyjal</option>
+	  <option value="110" {% if form.zone_de_residence.value == 110%} selected="" {% endif %}>Mont Hyjal</option>
 
-  <option value="111" {% if form.zone_de_residence.value == 111%} selected="" {% endif %}>Mulgore</option>
+	  <option value="111" {% if form.zone_de_residence.value == 111%} selected="" {% endif %}>Mulgore</option>
 
-  <option value="112" {% if form.zone_de_residence.value == 112%} selected="" {% endif %}>Orneval</option>
+	  <option value="112" {% if form.zone_de_residence.value == 112%} selected="" {% endif %}>Orneval</option>
 
-  <option value="113" {% if form.zone_de_residence.value == 113%} selected="" {% endif %}>Reflet-de-Lune</option>
+	  <option value="113" {% if form.zone_de_residence.value == 113%} selected="" {% endif %}>Reflet-de-Lune</option>
 
-  <option value="114" {% if form.zone_de_residence.value == 114%} selected="" {% endif %}>Silithus</option>
+	  <option value="114" {% if form.zone_de_residence.value == 114%} selected="" {% endif %}>Silithus</option>
 
-  <option value="115" {% if form.zone_de_residence.value == 115%} selected="" {% endif %}>Sombrivage</option>
+	  <option value="115" {% if form.zone_de_residence.value == 115%} selected="" {% endif %}>Sombrivage</option>
 
-  <option value="116" {% if form.zone_de_residence.value == 116%} selected="" {% endif %}>Tanaris</option>
+	  <option value="116" {% if form.zone_de_residence.value == 116%} selected="" {% endif %}>Tanaris</option>
 
-  <option value="117" {% if form.zone_de_residence.value == 117%} selected="" {% endif %}>Tarides du Nord</option>
+	  <option value="117" {% if form.zone_de_residence.value == 117%} selected="" {% endif %}>Tarides du Nord</option>
 
-  <option value="118" {% if form.zone_de_residence.value == 118%} selected="" {% endif %}>Tarides du Sud</option>
+	  <option value="118" {% if form.zone_de_residence.value == 118%} selected="" {% endif %}>Tarides du Sud</option>
 
-  <option value="119" {% if form.zone_de_residence.value == 119%} selected="" {% endif %}>Teldrassil</option>
+	  <option value="119" {% if form.zone_de_residence.value == 119%} selected="" {% endif %}>Teldrassil</option>
 
-  <option value="120" {% if form.zone_de_residence.value == 120%} selected="" {% endif %}>Uldum</option>
+	  <option value="120" {% if form.zone_de_residence.value == 120%} selected="" {% endif %}>Uldum</option>
 
-  <option value="121" {% if form.zone_de_residence.value == 121%} selected="" {% endif %}>Îles de l'Écho</option>
+	  <option value="121" {% if form.zone_de_residence.value == 121%} selected="" {% endif %}>Îles de l'Écho</option>
 
-  </optgroup>
-  <optgroup label="Norfendre">
-  <option value="200" {% if form.zone_de_residence.value == 200%} selected="" {% endif %}>Bassin de Sholazar</option>
+	</optgroup>
+	<optgroup label="Norfendre">
+	  <option value="200" {% if form.zone_de_residence.value == 200%} selected="" {% endif %}>Bassin de Sholazar</option>
 
-  <option value="201" {% if form.zone_de_residence.value == 201%} selected="" {% endif %}>Désolation des dragons</option>
+	  <option value="201" {% if form.zone_de_residence.value == 201%} selected="" {% endif %}>Désolation des dragons</option>
 
-  <option value="202" {% if form.zone_de_residence.value == 202%} selected="" {% endif %}>Fjord Hurlant</option>
+	  <option value="202" {% if form.zone_de_residence.value == 202%} selected="" {% endif %}>Fjord Hurlant</option>
 
-  <option value="203" {% if form.zone_de_residence.value == 203%} selected="" {% endif %}>Forêt du Chant de cristal</option>
+	  <option value="203" {% if form.zone_de_residence.value == 203%} selected="" {% endif %}>Forêt du Chant de cristal</option>
 
-  <option value="204" {% if form.zone_de_residence.value == 204%} selected="" {% endif %}>Joug-d'hiver</option>
+	  <option value="204" {% if form.zone_de_residence.value == 204%} selected="" {% endif %}>Joug-d'hiver</option>
 
-  <option value="205" {% if form.zone_de_residence.value == 205%} selected="" {% endif %}>La Couronne de glace</option>
+	  <option value="205" {% if form.zone_de_residence.value == 205%} selected="" {% endif %}>La Couronne de glace</option>
 
-  <option value="206" {% if form.zone_de_residence.value == 206%} selected="" {% endif %}>Les Grisonnes</option>
+	  <option value="206" {% if form.zone_de_residence.value == 206%} selected="" {% endif %}>Les Grisonnes</option>
 
-  <option value="207" {% if form.zone_de_residence.value == 207%} selected="" {% endif %}>Les pics Foudroyés</option>
+	  <option value="207" {% if form.zone_de_residence.value == 207%} selected="" {% endif %}>Les pics Foudroyés</option>
 
-  <option value="208" {% if form.zone_de_residence.value == 208%} selected="" {% endif %}>Toundra Boréenne</option>
+	  <option value="208" {% if form.zone_de_residence.value == 208%} selected="" {% endif %}>Toundra Boréenne</option>
 
-  <option value="209" {% if form.zone_de_residence.value == 209%} selected="" {% endif %}>Zul'Drak</option>
+	  <option value="209" {% if form.zone_de_residence.value == 209%} selected="" {% endif %}>Zul'Drak</option>
 
-  </optgroup>
-  <optgroup label="Pandarie">
-  <option value="300" {% if form.zone_de_residence.value == 300%} selected="" {% endif %}>Désert de Tanlong</option>
+	</optgroup>
+	<optgroup label="Pandarie">
+	  <option value="300" {% if form.zone_de_residence.value == 300%} selected="" {% endif %}>Désert de Tanlong</option>
 
-  <option value="301" {% if form.zone_de_residence.value == 301%} selected="" {% endif %}>Etendues sauvages de Krasarang</option>
+	  <option value="301" {% if form.zone_de_residence.value == 301%} selected="" {% endif %}>Etendues sauvages de Krasarang</option>
 
-  <option value="302" {% if form.zone_de_residence.value == 302%} selected="" {% endif %}>La forêt de Jade</option>
+	  <option value="302" {% if form.zone_de_residence.value == 302%} selected="" {% endif %}>La forêt de Jade</option>
 
-  <option value="303" {% if form.zone_de_residence.value == 303%} selected="" {% endif %}>Sommet de Kun-Lai</option>
+	  <option value="303" {% if form.zone_de_residence.value == 303%} selected="" {% endif %}>Sommet de Kun-Lai</option>
 
-  <option value="304" {% if form.zone_de_residence.value == 304%} selected="" {% endif %}>Terres de l'Angoisse</option>
+	  <option value="304" {% if form.zone_de_residence.value == 304%} selected="" {% endif %}>Terres de l'Angoisse</option>
 
-  <option value="305" {% if form.zone_de_residence.value == 305%} selected="" {% endif %}>Val de l'Eternel Printemps</option>
+	  <option value="305" {% if form.zone_de_residence.value == 305%} selected="" {% endif %}>Val de l'Eternel Printemps</option>
 
-  <option value="306" {% if form.zone_de_residence.value == 306%} selected="" {% endif %}>Vallée des Quatre vents</option>
+	  <option value="306" {% if form.zone_de_residence.value == 306%} selected="" {% endif %}>Vallée des Quatre vents</option>
 
-  </optgroup>
-  <optgroup label="Iles brisées">
-  <option value="400" {% if form.zone_de_residence.value == 400%} selected="" {% endif %}>Azsuna</option>
+	</optgroup>
+	<optgroup label="Iles brisées">
+	  <option value="400" {% if form.zone_de_residence.value == 400%} selected="" {% endif %}>Azsuna</option>
 
-  <option value="401" {% if form.zone_de_residence.value == 401%} selected="" {% endif %}>Haut-Roc</option>
+	  <option value="401" {% if form.zone_de_residence.value == 401%} selected="" {% endif %}>Haut-Roc</option>
 
-  <option value="402" {% if form.zone_de_residence.value == 402%} selected="" {% endif %}>Suramar</option>
+	  <option value="402" {% if form.zone_de_residence.value == 402%} selected="" {% endif %}>Suramar</option>
 
-  <option value="403" {% if form.zone_de_residence.value == 403%} selected="" {% endif %}>Tornheim</option>
+	  <option value="403" {% if form.zone_de_residence.value == 403%} selected="" {% endif %}>Tornheim</option>
 
-  <option value="404" {% if form.zone_de_residence.value == 404%} selected="" {% endif %}>Val'Sharah</option>
+	  <option value="404" {% if form.zone_de_residence.value == 404%} selected="" {% endif %}>Val'Sharah</option>
 
-  </optgroup>
-  <optgroup label="Kezan">
-  <option value="500" {% if form.zone_de_residence.value == 500%} selected="" {% endif %}>Kezan</option>
+	</optgroup>
+	<optgroup label="Kezan">
+	  <option value="500" {% if form.zone_de_residence.value == 500%} selected="" {% endif %}>Kezan</option>
 
-  </optgroup>
-  <optgroup label="Zandalar">
-  <option value="600" {% if form.zone_de_residence.value == 600%} selected="" {% endif %}>Zandalar</option>
+	</optgroup>
+	<optgroup label="Zandalar">
+	  <option value="600" {% if form.zone_de_residence.value == 600%} selected="" {% endif %}>Zandalar</option>
 
-  </optgroup>
-</select>
-<label for="id_ville_de_residence">Ville de residence&nbsp;</label> <input name="ville_de_residence" value="{{form.ville_de_residence.value|default:'Châtellerie'}}" required="" id="id_ville_de_residence" maxlength="50" type="text" size="50">
-</div>
-<div class="form-group">
-  <label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">{{form.description.value|default:'A venir'}}</textarea>
-    <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount1">0</span>/6000).</span>
-  <label for="id_historique">Historique&nbsp;</label> <textarea name="historique" class="form-control" id="id_historique" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_historique','charcount2');" onkeydown="countChars('id_historique','charcount2');" onmouseout="countChars('id_historique','charcount2');">{{form.historique.value|default:'A venir'}}</textarea>
-    <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
-<label for="id_relations">Relations&nbsp;</label> <textarea name="relations" class="form-control" id="id_relations" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_relations','charcount3');" onkeydown="countChars('id_relations','charcount3');" onmouseout="countChars('id_relations','charcount3');">{{form.relations.value|default:'Aucune'}}</textarea>
-  <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
-  <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
-    <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
-</div>
-<div class="form-group">
-  <span id="description"><b>Type de personnage </b></span>
+	</optgroup>
+      </select>
+      <label for="id_ville_de_residence">Ville de residence&nbsp;</label> <input name="ville_de_residence" value="{{form.ville_de_residence.value|default:'Châtellerie'}}" required="" id="id_ville_de_residence" maxlength="50" type="text" size="50">
+    </div>
+    <div class="form-group">
+      <label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">{{form.description.value|default:'A venir'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount1">0</span>/6000).</span>
+      <label for="id_historique">Historique&nbsp;</label> <textarea name="historique" class="form-control" id="id_historique" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_historique','charcount2');" onkeydown="countChars('id_historique','charcount2');" onmouseout="countChars('id_historique','charcount2');">{{form.historique.value|default:'A venir'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
+      <label for="id_relations">Relations&nbsp;</label> <textarea name="relations" class="form-control" id="id_relations" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_relations','charcount3');" onkeydown="countChars('id_relations','charcount3');" onmouseout="countChars('id_relations','charcount3');">{{form.relations.value|default:'Aucune'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
+      <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
+    </div>
+    <div class="form-group">
+      <span id="description"><b>Type de personnage </b></span>
 
-<label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="p" {% if form.pj.value == 'p' or form.pj.value|unlocalize == 'Personnage joué' or form.pj.value == None %} checked="checked" {% endif %}> Personnage joué
-</label>
-<label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="a" {% if form.pj.value == 'a' or form.pj.value == 'Personnage jouable' %} checked="checked" {% endif %}> Personnage jouable
-</label>
-<label class="radio-inline" for="id_pj">
-  <input type="radio" name="pj" id="id_pj" value="n" {% if form.pj.value == 'n' or form.pj.value|unlocalize == 'Personnage non joué'%} checked="checked" {% endif %}> Personnage non joué
-</label>
-</div>
-<div class="form-group">
-<label for="id_pseudo_du_personnage">Pseudo du personnage en jeu&nbsp;</label> <input name="pseudo_du_personnage" value="{{form.pseudo_du_personnage.value|default:'?'}}" required="" id="id_pseudo_du_personnage" maxlength="30" type="text">
-</div>
-<div class="form-group">
-  <label for="id_afficher_pseudo">Afficher pseudo du personnage&nbsp;</label> <input name="afficher_pseudo" checked="" id="id_afficher_pseudo" type="checkbox">
-  <label for="id_afficher_createur">Afficher créateur&nbsp;</label> <input name="afficher_createur" checked="" id="id_afficher_createur" type="checkbox">
-  <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" checked="" id="id_afficher_inventaire" type="checkbox">
-</div>
+      <label class="radio-inline" for="id_pj">
+	<input type="radio" name="pj" id="id_pj" value="p" {% if form.pj.value == 'p' or form.pj.value|unlocalize == 'Personnage joué' or form.pj.value == None %} checked="checked" {% endif %}> Personnage joué
+      </label>
+      <label class="radio-inline" for="id_pj">
+	<input type="radio" name="pj" id="id_pj" value="a" {% if form.pj.value == 'a' or form.pj.value == 'Personnage jouable' %} checked="checked" {% endif %}> Personnage jouable
+      </label>
+      <label class="radio-inline" for="id_pj">
+	<input type="radio" name="pj" id="id_pj" value="n" {% if form.pj.value == 'n' or form.pj.value|unlocalize == 'Personnage non joué'%} checked="checked" {% endif %}> Personnage non joué
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="id_pseudo_du_personnage">Pseudo du personnage en jeu&nbsp;</label> <input name="pseudo_du_personnage" value="{{form.pseudo_du_personnage.value|default:'?'}}" required="" id="id_pseudo_du_personnage" maxlength="30" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_afficher_pseudo">Afficher pseudo du personnage&nbsp;</label> <input name="afficher_pseudo" checked="" id="id_afficher_pseudo" type="checkbox">
+      <label for="id_afficher_createur">Afficher créateur&nbsp;</label> <input name="afficher_createur" checked="" id="id_afficher_createur" type="checkbox">
+      <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" checked="" id="id_afficher_inventaire" type="checkbox">
+    </div>
 
-{% if perms.fiches.equipement_ok and perms.fiches.inventaire_ok %}
-<div class="form-group">
-  <label for="id_equipement">Equipement&nbsp;:</label> <select name="equipement" required="" multiple="multiple" id="id_equipement">
+    {% if perms.fiches.equipement_ok and perms.fiches.inventaire_ok %}
+    <div class="form-group">
+      <label for="id_equipement">Equipement&nbsp;:</label> <select name="equipement" multiple="multiple" id="id_equipement">
 
-  {% for equipement in equipements %}
-  <option value="{{equipement.id}}">{{equipement.nom}}</option>
-  {% endfor %}
+	{% for equipement in equipements %}
+	<option value="{{equipement.id}}" {% if form.equipement.value == equipement.id %} selected="" {% endif %}>{{equipement.nom}}</option>
+	{% endfor %}
+      </select>
+      <label for="id_inventaire">Inventaire&nbsp;:</label> <select name="inventaire" multiple="multiple" id="id_inventaire">
 
-  </select>
-  <label for="id_inventaire">Inventaire&nbsp;:</label> <select name="inventaire" required="" multiple="multiple" id="id_inventaire">
+	{% for inventaire in inventaires %}
+	<option value="{{inventaire.id}}" {% if form.inventaire.value == inventaire.id %} selected="" {% endif %}>{{inventaire.nom}}</option>
+	{% endfor %}
 
-  {% for inventaire in inventaires %}
-  <option value="{{inventaire.id}}">{{inventaire.nom}}</option>
-  {% endfor %}
+      </select>
+    </div>
+    {% endif %}
 
-  </select>
-  </div>
-{% endif %}
-
-<div class="form-group">
-  <label for="id_image">Image&nbsp;</label>
-  <span id="description">
-  {% if form.image.value %}
-  Actuellement: <a href="{{MEDIA_URL}}{{form.image.value|default:'site/no-image.png'}}">{{form.image.value|default:'site/no-image.png'}}</a><br>
-  <span id="description">
-    Modifier:
-    </span>
-  {% endif %}
-  </span>
-  <input name="image" id="id_image" type="file">
-  <input name="createur" id="id_createur" type="hidden" value="">
-  </div>
-<input class="btn btn-default" type="submit" value="Valider" />
+    <div class="form-group">
+      <label for="id_image">Image&nbsp;</label>
+      <span id="description">
+	{% if form.image.value %}
+	Actuellement: <a href="{{MEDIA_URL}}{{form.image.value|default:'site/no-image.png'}}">{{form.image.value|default:'site/no-image.png'}}</a><br>
+	<span id="description">
+	  Modifier:
+	</span>
+	{% endif %}
+      </span>
+      <input name="image" id="id_image" type="file">
+      <input name="createur" id="id_createur" type="hidden" value="">
+    </div>
+    <input class="btn btn-default" type="submit" value="Valider" />
 </div>
 </form>
 {% endblock %}
