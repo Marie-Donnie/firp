@@ -117,14 +117,42 @@
     <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">
 	<div class="panel-heading">
+	  {% if fiche.inventaire %}
+	  <h3 class="panel-title">{{fiche.inventaire.nom}}</h3>
+	</div>
+	<div class="panel-body">
+	  {% for case in fiche.inventaire.cases.all %}
+	  {{case.get_nom}}
+	  {% endfor %}
+
+	  {% else %}
 	  <h3 class="panel-title">Inventaire</h3>
 	</div>
 	<div class="panel-body">
-	  {{fiche.inventaire|linebreaksbr}}
+	  {{fiche.inventaire_fdg}}
+	  {% endif %}
+	</div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if fiche.equipement %}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-defaut" id="details-panels">
+	<div class="panel-heading">
+	  <h3 class="panel-title">{{fiche.equipement.nom}}</h3>
+	</div>
+	<div class="panel-body">
+	  {% for armure in fiche.equipement.objets.all %}
+	  {{armure.get_nom}}
+	  {% endfor %}
 	</div>
       </div>
     </div>
   </div>
   {% endif %}
+
 </div>
 {% endblock %}
