@@ -114,15 +114,21 @@
     </div>
     {% endif %}
     {% if fiche.afficher_inventaire or user.id == fiche.createur.id %}
-    <div class="col-md-6">
+    {% if fiche.inventaire %}
+        <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">
 	<div class="panel-heading">
-	  {% if fiche.inventaire %}
 	  <h3 class="panel-title">Inventaire</h3>
 	</div>
 	<div class="panel-body">
 	  {{fiche.inventaire|linebreaksbr}}
-	  {% else %}
+	  	</div>
+      </div>
+    </div>
+	  {% elif fiche.inventaire_fdg %}
+	      <div class="col-md-6">
+      <div class="panel panel-defaut" id="details-panels">
+	<div class="panel-heading">
 	  <h3 class="panel-title">{{fiche.inventaire_fdg.nom}}</h3>
 	</div>
 	<div class="panel-body">
@@ -130,10 +136,11 @@
 	  {{case.get_nom}}
 	  {% endfor %}
 	  {{fiche.inventaire_fdg}}
-	  {% endif %}
-	</div>
+	  	</div>
       </div>
     </div>
+	  {% endif %}
+
     {% endif %}
   </div>
 
