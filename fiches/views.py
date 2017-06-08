@@ -274,7 +274,9 @@ def creer_armure(request):
         else:
             form = ArmureForm()
 
-        return render(request, 'fiches/armure.html', {'form': form})
+        objets = Objet.objects.all()
+        context = {'form': form, 'objets': objets}
+        return render(request, 'fiches/armure.html', context)
 
     else:
         return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des armures.")
@@ -293,7 +295,9 @@ def creer_case(request):
         else:
             form = CaseForm()
 
-        return render(request, 'fiches/case.html', {'form': form})
+        objets = Objet.objects.all()
+        context = {'form': form, 'objets': objets}
+        return render(request, 'fiches/case.html', context)
 
     else:
         return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des cases d'inventaire.")

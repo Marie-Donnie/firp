@@ -273,8 +273,7 @@ class UserProfile(models.Model):
 
 
 class Objet(models.Model):
-    nom = models.CharField(max_length=75,
-                           default='Aucun')
+    nom = models.CharField(max_length=75)
     qualite = models.CharField(max_length=1,
                                choices=((
                                    ('m', "Médiocre"),
@@ -286,8 +285,8 @@ class Objet(models.Model):
                                    ('u', "Unique")
                                )),
                                default="Commun")
-    description = models.CharField(max_length=200,
-                                   default='Aucun')
+    description = models.CharField(max_length=500,
+                                   default='Aucune')
     prix = models.IntegerField(default=0)
     poids = models.IntegerField(default=0)
     image = models.ImageField(upload_to='images/users',

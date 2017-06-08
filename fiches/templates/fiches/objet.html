@@ -9,7 +9,54 @@
 <div id="char_form">
 <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
-  {{ form.as_ul }}
+  <div class="form-group">
+  <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="75" type="text" value="{{form.nom.value|default_if_none:'Aucun'}}">
+  </div>
+    <div class="form-group">
+<label for="id_qualite">Qualité&nbsp;:</label> <select name="qualite" id="id_qualite">
+  <option value="m" {% if form.qualite.value == 'm' or form.qualite.value|unlocalize == 'Médiocre' %} selected="" {% endif %}>Médiocre</option>
+
+  <option value="c" {% if form.qualite.value == 'c' or form.qualite.value|unlocalize == 'Commun' or form.qualite.value == None %} selected="" {% endif %}>Commun</option>
+
+  <option value="i" {% if form.qualite.value == 'i' or form.qualite.value|unlocalize == 'Inhabituel' %} selected="" {% endif %}>Inhabituel</option>
+
+  <option value="r" {% if form.qualite.value == 'r' or form.qualite.value|unlocalize == 'Rare' %} selected="" {% endif %}>Rare</option>
+
+  <option value="e" {% if form.qualite.value == 'e' or form.qualite.value|unlocalize == 'Epique' %} selected="" {% endif %}>Epique</option>
+
+  <option value="l" {% if form.qualite.value == 'l' or form.qualite.value|unlocalize == 'Légendaire' %} selected="" {% endif %}>Légendaire</option>
+
+  <option value="u" {% if form.qualite.value == 'u' or form.qualite.value|unlocalize == 'Unique' %} selected="" {% endif %}>Unique</option>
+
+</select>
+</div>
+    <div class="form-group">
+<label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="5" cols="20" maxlength="500" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">{{form.description.value|default:'Aucune'}}</textarea>
+<span id="helpBlock" class="help-block">Limité à 500 caractères (<span id="charcount1">0</span>/500).</span>
+</div>
+    <div class="form-group">
+      <label for="id_prix">Prix&nbsp;:</label> <input name="prix"  value="{{form.prix.value|default:'0'}}" required="" id="id_prix" type="number"><span>pièces de cuivre</span>
+      </div>
+          <div class="form-group">
+	    <label for="id_poids">Poids&nbsp;:</label> <input name="poids"  value="{{form.poids.value|default:'0'}}" required="" id="id_poids" type="number"><span>grammes</span>
+	    </div>
+    <div class="form-group">
+      <label for="id_image">Image&nbsp;</label>
+      <span id="description">
+	{% if form.image.value %}
+	Actuellement: <a href="{{MEDIA_URL}}{{form.image.value|default:'site/WoWUnknownItem01.PNG'}}">{{form.image.value|default:'site/WoWUnknownItem01.PNG'}}</a><br>
+	<span id="description">
+	  Modifier:
+	</span>
+	{% endif %}
+      </span>
+      <input name="image" id="id_image" type="file">
+    </div>
 
 
+
+
+
+<input class="btn btn-default" type="submit" value="Valider" />
+</form>
 {% endblock %}

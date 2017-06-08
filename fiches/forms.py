@@ -77,6 +77,7 @@ class ObjetForm(ModelForm):
         model = Objet
         fields = ['nom', 'qualite', 'description', 'prix', 'poids', 'image']
         prefix = 'objet'
+        widgets = {'description': forms.Textarea(), }
 
 
 class ArmureForm(ModelForm):
