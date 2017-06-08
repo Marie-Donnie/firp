@@ -69,15 +69,18 @@ h1 a {
     margin-top: 0;
 }
 
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+/* .navbar-default .navbar-collapse, .navbar-default .navbar-form { */
+/* } */
+
+.navbar-right {
+    margin: 5px;
+}
+
+.container-fluid {
     background-image: url("/static/fiches/images/wood.jpg");
     background-size: 100% 100%;
     background-color: #000000;
     border-color: #470002;
-}
-
-.navbar-right {
-    margin: 5px;
 }
 
 .navbar-collapse {
@@ -154,6 +157,7 @@ div.gallery img {
     /* margin-left: 50px; */
     /* margin-right: 50px; */
     margin-bottom: 10px;
+    padding-bottom: 2%
 }
 
 .navbar-default .navbar-nav > li > a{

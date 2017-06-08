@@ -345,3 +345,23 @@ def creer_equipement(request):
 
     else:
         return HttpResponse("Seuls les membres des Fils de Garithos peuvent gerer leur equipement.")
+
+
+@login_required
+def objets(request):
+    objets_list = Objet.objects.order_by('nom')
+
+    paginator = Paginator(objets_list, 20)
+    page = request.GET.get('page')
+    try:
+        objets = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        objets = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        objets = paginator.page(paginator.num_pages)
+
+    context = {'objets': objets}
+
+    return render(request, 'fiches/objets.html', context)
