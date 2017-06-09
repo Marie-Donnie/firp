@@ -349,19 +349,35 @@ def creer_equipement(request):
 
 @login_required
 def objets(request):
-    objets_list = Objet.objects.order_by('nom')
+    if request.user.has_perm('fiches.objet_ok'):
+        objets_list = Objet.objects.order_by('nom')
 
-    paginator = Paginator(objets_list, 20)
-    page = request.GET.get('page')
-    try:
-        objets = paginator.page(page)
-    # if page not an integer, display first page of results
-    except PageNotAnInteger:
-        objets = paginator.page(1)
-    # if page is out of range, display the last page of results
-    except EmptyPage:
-        objets = paginator.page(paginator.num_pages)
+        paginator = Paginator(objets_list, 20)
+        page = request.GET.get('page')
+        try:
+            objets = paginator.page(page)
+            # if page not an integer, display first page of results
+        except PageNotAnInteger:
+            objets = paginator.page(1)
+            # if page is out of range, display the last page of results
+        except EmptyPage:
+            objets = paginator.page(paginator.num_pages)
 
-    context = {'objets': objets}
+        context = {'objets': objets}
 
-    return render(request, 'fiches/objets.html', context)
+        return render(request, 'fiches/objets.html', context)
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent voir la liste des objets.")
+
+
+def detail_objet(request, objet_id):
+    objet = get_object_or_404(Objet, pk=objet_id)
+    context = {'objet': objet}
+    return render(request, 'fiches/aff_objet.html', context)
+
+
+def detail_armure(request, armure_id):
+    armure = get_object_or_404(Armure, pk=armure_id)
+    objet = armure.objet
+    context = {'armure': armure, 'objet': objet}
+    return render(request, 'fiches/aff_armure.html', context)

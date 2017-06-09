@@ -4,3 +4,4 @@ secret_key
 db.sqlite3
 fiches/media
 #*#
+bower_components/

@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+
+{% block title %}{objet.nom}{% endblock %}
+{% block page-title %}
+{objet.nom}
+{% endblock %}
+
+
+{% block edition %}
+{% if user.is_authenticated %}
+<span>lol</span>
+<!-- <a class="btn btn-default" href="{% url 'editer_fiche' fiche.id %}">Editer</a> -->
+<!-- <a class="btn btn-default" href="{% url 'supprimer_fiche' fiche.id %}">Supprimer</a> -->
+{% endif %}
+{% endblock %}
+{% block user %}
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="media">
+  <div class="media-body">
+
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Description</h3>
+      </div>
+      <div class="panel-body">
+	<a target="_blank" href={{ objet.image.url }}>
+	  <img class="media-object" src={{ objet.image.url }} alt="Icône">
+	</a>
+	<ul>
+	  <li><b>Nom&nbsp;: </b>{{ objet.nom|capfirst }}</li>
+	  <li><b>Qualité&nbsp;:</b>{{ objet.qualite }}</li>
+	  <li><b>Description&nbsp;: </b>{{ objet.description }}</li>
+	  <li><b>Prix&nbsp;: </b>{{ objet.prix }} pièces de cuivre</li>
+	  <li><b>Poids&nbsp;: </b>{{ objet.poids }} grammes</li>
+	</ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

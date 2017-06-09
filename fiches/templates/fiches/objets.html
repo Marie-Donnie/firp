@@ -40,32 +40,30 @@
       <th>Nom</th>
       <th width="12%">Qualité</th>
       <th>Armure</th>
-      <!-- <th>Zone de résidence</th> -->
-      <!-- <th>Ville de résidence</th> -->
-      <!-- <th>Date de création</th> -->
     </tr>
     {% for o in objets %}
     <tr>
       <!-- <div class="character"> -->
-      {% if o.image %}
-      <td><a target="_blank" href="{% url 'detail_fiche' o.id %}"><img class="media-object" src={{ o.image.url }} alt="Portrait"></a></td>
-      {% else %}
-      <td><a target="_blank" href="{% url 'detail_fiche' o.id %}"><img class="media-object" src="/objets/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
-      {% endif %}
-      <td><a href="{% url 'detail_fiche' o.id %}">{{ o.nom }}</a></td>
-      <td><a href="{% url 'detail_fiche' o.id %}">{{ o.get_qualite_display }}</a></td>
       {% if o.has_equipement %}
-      <td><a href="{% url 'detail_fiche' o.id %}">{{ o.armure.get_membre_display }}</a></td>
+      {% if o.image %}
+      <td><a target="_blank" href="{% url 'detail_armure' o.id %}"><img class="media-object" src={{ o.image.url }} alt="Portrait"></a></td>
       {% else %}
-      <td><a href="{% url 'detail_fiche' o.id %}">-</a></td>
+      <td><a target="_blank" href="{% url 'detail_armure' o.id %}"><img class="media-object" src="/objets/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
       {% endif %}
-      <!-- <td><a href="{% url 'detail_fiche' o.id %}">{{ o.get_pj_display }}</a></td> -->
-      <!-- <td><a href="{% url 'detail_fiche' o.id %}">{{ o.get_etat_display }}</a></td> -->
-      <!-- <td><a href="{% url 'detail_fiche' o.id %}">{{ o.get_zone_de_residence_display }}</a></td> -->
-      <!-- <td><a href="{% url 'detail_fiche' o.id %}">{{ o.ville_de_residence }}</a></td> -->
-      <!-- <td><a href="{% url 'detail_fiche' o.id %}">{{ o.creation }}</a></td> -->
+      <td><a href="{% url 'detail_armure' o.id %}">{{ o.nom }}</a></td>
+      <td><a href="{% url 'detail_armure' o.id %}">{{ o.get_qualite_display }}</a></td>
 
-      <!-- </div> -->
+      <td><a href="{% url 'detail_armure' o.id %}">{{ o.armure.get_membre_display }}</a></td>
+      {% else %}
+      {% if o.image %}
+      <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src={{ o.image.url }} alt="Portrait"></a></td>
+      {% else %}
+      <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src="/objets/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
+      {% endif %}
+      <td><a href="{% url 'detail_objet' o.id %}">{{ o.nom }}</a></td>
+      <td><a href="{% url 'detail_objet' o.id %}">{{ o.get_qualite_display }}</a></td>
+      <td><a href="{% url 'detail_objet' o.id %}">-</a></td>
+      {% endif %}
     </tr>
     {% endfor %}
   </table>
