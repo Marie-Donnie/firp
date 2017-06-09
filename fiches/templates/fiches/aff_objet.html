@@ -1,17 +1,15 @@
 
 {% extends "base.html" %}
 
-{% block title %}{objet.nom}{% endblock %}
+{% block title %}{{ objet.nom }}{% endblock %}
 {% block page-title %}
-{objet.nom}
+{{ objet.nom }}
 {% endblock %}
 
 
 {% block edition %}
 {% if user.is_authenticated %}
 <span>lol</span>
-<!-- <a class="btn btn-default" href="{% url 'editer_fiche' fiche.id %}">Editer</a> -->
-<!-- <a class="btn btn-default" href="{% url 'supprimer_fiche' fiche.id %}">Supprimer</a> -->
 {% endif %}
 {% endblock %}
 {% block user %}
