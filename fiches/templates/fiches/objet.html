@@ -13,7 +13,7 @@
   <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="75" type="text" value="{{form.nom.value|default_if_none:'Aucun'}}">
   </div>
     <div class="form-group">
-<label for="id_qualite">Qualité&nbsp;:</label> <select name="qualite" id="id_qualite">
+<label for="id_qualite">Qualité&nbsp;</label> <select name="qualite" id="id_qualite">
   <option value="m" {% if form.qualite.value == 'm' or form.qualite.value|unlocalize == 'Médiocre' %} selected="" {% endif %}>Médiocre</option>
 
   <option value="c" {% if form.qualite.value == 'c' or form.qualite.value|unlocalize == 'Commun' or form.qualite.value == None %} selected="" {% endif %}>Commun</option>
@@ -35,10 +35,10 @@
 <span id="helpBlock" class="help-block">Limité à 500 caractères (<span id="charcount1">0</span>/500).</span>
 </div>
     <div class="form-group">
-      <label for="id_prix">Prix&nbsp;:</label> <input name="prix"  value="{{form.prix.value|default:'0'}}" required="" id="id_prix" type="number"><span>pièces de cuivre</span>
+      <label for="id_prix">Prix&nbsp;</label> <input name="prix"  value="{{form.prix.value|default:'0'}}" required="" id="id_prix" type="number"><span>pièces de cuivre</span>
       </div>
           <div class="form-group">
-	    <label for="id_poids">Poids&nbsp;:</label> <input name="poids"  value="{{form.poids.value|default:'0'}}" required="" id="id_poids" type="number"><span>grammes</span>
+	    <label for="id_poids">Poids&nbsp;</label> <input name="poids"  value="{{form.poids.value|default:'0'}}" required="" id="id_poids" type="number"><span>grammes</span>
 	    </div>
     <div class="form-group">
       <label for="id_image">Image&nbsp;</label>

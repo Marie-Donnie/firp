@@ -37,8 +37,8 @@ urlpatterns = [
         name='creer_equipement'),
     url(r'^objets/creer_inventaire/$', views.creer_inventaire,
         name='creer_inventaire'),
-    url(r'^objets/(?P<objet_id>\d+)/$', views.detail_objet,
+    url(r'^objets/objet/(?P<objet_id>\d+)/$', views.detail_objet,
         name='detail_objet'),
-    url(r'^objets/(?P<armure_id>\d+)/$', views.detail_armure,
+    url(r'^objets/armure/(?P<armure_id>\d+)/$', views.detail_armure,
         name='detail_armure')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

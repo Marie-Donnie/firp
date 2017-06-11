@@ -9,7 +9,6 @@
 
 {% block edition %}
 {% if user.is_authenticated %}
-<span>lol</span>
 {% endif %}
 {% endblock %}
 {% block user %}
@@ -20,26 +19,29 @@
 {% block content %}
 
 <div class="media">
-  <div class="media-body">
+  <div class="media-left media-middle">
 
-    <div class="panel panel-defaut" id="details-panels">
-      <div class="panel-heading">
-	<h3 class="panel-title">Description</h3>
-      </div>
-      <div class="panel-body">
+    <!-- <div class="panel panel-defaut" id="details-panels"> -->
+    <!--   <\!-- <div class="panel-heading"> -\-> -->
+    <!--   <\!-- 	<h3 class="panel-title">Description</h3> -\-> -->
+    <!--   <\!-- </div> -\-> -->
+    <!--   <div class="panel-body"> -->
 	<a target="_blank" href={{ objet.image.url }}>
-	  <img class="media-object" src={{ objet.image.url }} alt="Icône">
+	  <img id="icone" class="media-object" src={{ objet.image.url }} alt="Icône">
 	</a>
-	<ul>
-	  <li><b>Nom&nbsp;: </b>{{ objet.nom|capfirst }}</li>
-	  <li><b>Qualité&nbsp;:</b>{{ objet.qualite }}</li>
-	  <li><b>Description&nbsp;: </b>{{ objet.description }}</li>
-	  <li><b>Prix&nbsp;: </b>{{ objet.prix }} pièces de cuivre</li>
-	  <li><b>Poids&nbsp;: </b>{{ objet.poids }} grammes</li>
-	</ul>
-      </div>
+      <!-- </div> -->
     </div>
-
+    <div class="media-body">
+      <ul>
+	<li><b>Nom&nbsp;: </b>{{ objet.nom|capfirst }}</li>
+	<li><b>Qualité&nbsp;: </b>{{ objet.get_qualite_display }}</li>
+	<li><b>Description&nbsp;: </b>{{ objet.description }}</li>
+	<li><b>Prix&nbsp;: </b>{{ objet.prix }} pièces de cuivre</li>
+	<li><b>Poids&nbsp;: </b>{{ objet.poids }} grammes</li>
+      </ul>
+    </div>
+    	{% block armure %}
+	{% endblock %}
   </div>
 </div>
 {% endblock %}

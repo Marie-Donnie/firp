@@ -157,7 +157,7 @@ div.gallery img {
     /* margin-left: 50px; */
     /* margin-right: 50px; */
     margin-bottom: 10px;
-    padding-bottom: 2%
+    /* padding-bottom: 2% */
 }
 
 .navbar-default .navbar-nav > li > a{
@@ -342,4 +342,23 @@ h3 {
     text-decoration: none;
     position: relative;
     border: 1px solid #6e1618;
+}
+
+#icone {
+    width: 64px;
+    height: 64px;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+}
+
+#localisation h3{
+    color: #fefefe;
+    text-shadow: 1px 1px #fefefe;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#stat {
+    text-align: center;
 }

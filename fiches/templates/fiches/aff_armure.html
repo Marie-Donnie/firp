@@ -1,0 +1,97 @@
+{% extends "fiches/aff_objet.html" %}
+
+
+{% block armure %}
+<!-- <div class="media"> -->
+<!--   <div class="media-body"> -->
+<!--     <ul> -->
+<!-- <ul> -->
+<!-- <li><b>Localisation : </b>{{ armure.get_membre_display }}</li> -->
+<!-- </ul> -->
+
+<div class="row">
+  {% if armure.effet != 'Aucun' %}
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Effet</h3>
+      </div>
+      <div class="panel-body">
+	{{ armure.effet }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<div class="row">
+  {% if armure.autres_effets != 'Aucun' %}
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Effet</h3>
+      </div>
+      <div class="panel-body">
+	{{ armure.autres_effets|linebreaksbr }}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+<div class="col-md-6">
+  <div class="panel panel-defaut" id="details-panels">
+    <div class="panel-heading" id="localisation">
+      <h3 class="panel-title">{{ armure.get_membre_display }}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-4">
+	  <div class="panel panel-defaut" id="details-panels">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">Armure</h3>
+	    </div>
+	    <div class="panel-body" id="stat">
+	      {{ armure.armure }}
+	    </div>
+	  </div>
+	</div>
+	<div class="col-md-4">
+	  <div class="panel panel-defaut" id="details-panels">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">Force</h3>
+	    </div>
+	    <div class="panel-body" id="stat">
+	      {{ armure.force }}
+	    </div>
+	  </div>
+	</div>
+      </div>
+      <div class="row">
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-4">
+	  <div class="panel panel-defaut" id="details-panels">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">Agilité</h3>
+	    </div>
+	    <div class="panel-body" id="stat">
+	      {{ armure.agi }}
+	    </div>
+	  </div>
+	</div>
+	<div class="col-md-4">
+	  <div class="panel panel-defaut" id="details-panels">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">Intelligence</h3>
+	    </div>
+	    <div class="panel-body" id="stat">
+	      {{ armure.intell }}
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

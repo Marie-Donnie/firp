@@ -37,37 +37,37 @@
   <div class="media-body">
 
     <h3>{{ fiche.get_pj_display }} et {{ fiche.get_etat_display }}</h3>
-      <ul>
-	<li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}</li>
-	<li><b>Prénom&nbsp;: </b>{{ fiche.prenom|capfirst }}</li>
-	<!-- <div id="spoiler" style="display:none"> -->
-	{% if fiche.autres_prenoms != 'Aucun' %}
-	<li><b>Autre(s) prénom(s)&nbsp;: </b>{{ fiche.autres_prenoms|linebreaksbr }}</li>
+    <ul>
+      <li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}</li>
+      <li><b>Prénom&nbsp;: </b>{{ fiche.prenom|capfirst }}</li>
+      <!-- <div id="spoiler" style="display:none"> -->
+      {% if fiche.autres_prenoms != 'Aucun' %}
+      <li><b>Autre(s) prénom(s)&nbsp;: </b>{{ fiche.autres_prenoms|linebreaksbr }}</li>
+      {% endif %}
+      <!-- </div> -->
+      <!-- <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/hide</button> -->
+      {% if fiche.titre != 'Aucun' %}
+      <li><b>Titre(s) et/ou grade&nbsp;: </b>{{ fiche.titre|capfirst  }}</li>
+      {% endif %}
+      {% if fiche.autres_titres != 'Aucun' %}
+      <li><b>Autres titres&nbsp;: </b>{{ fiche.autres_titres|linebreaksbr }}</li>
+      {% endif %}
+      <li><b>Sexe&nbsp;: </b>{{ fiche.get_sexe_display }}</li>
+      <li><b>Race&nbsp;: </b>{{ fiche.race|capfirst }}</li>
+      <li><b>Date de naissance&nbsp;: </b>{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
 	{% endif %}
-	<!-- </div> -->
-	<!-- <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/hide</button> -->
-	{% if fiche.titre != 'Aucun' %}
-	<li><b>Titre(s) et/ou grade&nbsp;: </b>{{ fiche.titre|capfirst  }}</li>
+	{{fiche.mois_de_naissance}}{% if fiche.jour_mois_de_naissance == 01 %}er mois{% else %}ème mois
 	{% endif %}
-	{% if fiche.autres_titres != 'Aucun' %}
-	<li><b>Autres titres&nbsp;: </b>{{ fiche.autres_titres|linebreaksbr }}</li>
-	{% endif %}
-	<li><b>Sexe&nbsp;: </b>{{ fiche.get_sexe_display }}</li>
-	<li><b>Race&nbsp;: </b>{{ fiche.race|capfirst }}</li>
-	<li><b>Date de naissance&nbsp;: </b>{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
-	  {% endif %}
-	  {{fiche.mois_de_naissance}}{% if fiche.jour_mois_de_naissance == 01 %}er mois{% else %}ème mois
-	  {% endif %}
-	  de l'an {{fiche.annee_de_naissance}}</li>
-	<li><b>Zone de naissance&nbsp;: </b>{{ fiche.get_zone_de_naissance_display }}</li>
-	<li><b>Ville de naissance&nbsp;: </b>{{ fiche.ville_de_naissance|capfirst  }}</li>
-	<li><b>Zone de résidence&nbsp;: </b>{{ fiche.get_zone_de_residence_display }}</li>
-	<li><b>Ville de résidence&nbsp;: </b>{{ fiche.ville_de_residence|capfirst  }}</li>
-	<li><b>Taille&nbsp;: </b>{{ fiche.taille }}m</li>
-	<li><b>Poids&nbsp;: </b>{{ fiche.poids }} kg</li>
-	<li><b>Profession&nbsp;: </b>{{fiche.profession|capfirst }}</li>
-      </ul>
-    </div>
+	de l'an {{fiche.annee_de_naissance}}</li>
+      <li><b>Zone de naissance&nbsp;: </b>{{ fiche.get_zone_de_naissance_display }}</li>
+      <li><b>Ville de naissance&nbsp;: </b>{{ fiche.ville_de_naissance|capfirst  }}</li>
+      <li><b>Zone de résidence&nbsp;: </b>{{ fiche.get_zone_de_residence_display }}</li>
+      <li><b>Ville de résidence&nbsp;: </b>{{ fiche.ville_de_residence|capfirst  }}</li>
+      <li><b>Taille&nbsp;: </b>{{ fiche.taille }}m</li>
+      <li><b>Poids&nbsp;: </b>{{ fiche.poids }} kg</li>
+      <li><b>Profession&nbsp;: </b>{{fiche.profession|capfirst }}</li>
+    </ul>
+  </div>
 
   <div class="media-right">
     <a target="_blank" href={{ fiche.image.url }}>

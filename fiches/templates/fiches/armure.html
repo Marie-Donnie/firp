@@ -7,63 +7,76 @@
 
 {% block content %}
 <div id="char_form">
-<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
-  {% csrf_token %}
-  {{ form.as_ul }}
-<!--   <li><label for="id_objet">Objet&nbsp;:</label> <select name="objet" required="" id="id_objet"> -->
-<!--   <option value="" selected="">---------</option> -->
+  <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_objet">Objet&nbsp;:</label>
+      <select name="objet" required=""  id="id_objet">
 
-<!--   <option value="4">Objet object</option> -->
+	{% for objet in objets %}
+	<option value="{{objet.id}}">{{objet.nom}}</option>
+	{% endfor %}
 
-<!--   <option value="3">Objet object</option> -->
+      </select>
+    </div>
+    <div class="form-group">
 
-<!--   <option value="1">Objet object</option> -->
+      <label for="id_effet">Effet&nbsp;:</label> <input name="effet" value="Aucun" required="" id="id_effet" maxlength="100" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_autres_effets">Autres effets&nbsp;:</label> <input name="autres_effets" value="Aucun" required="" id="id_autres_effets" maxlength="100" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_effet_ig">Effet ig&nbsp;:</label> <input name="effet_ig" value="Aucun" required="" id="id_effet_ig" maxlength="100" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_force">Force&nbsp;:</label> <input name="force" value="0" max="25" required="" id="id_force" min="0" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_intell">Intell&nbsp;:</label> <input name="intell" value="0" max="25" required="" id="id_intell" min="0" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_agi">Agi&nbsp;:</label> <input name="agi" value="0" max="25" required="" id="id_agi" min="0" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_membre">Membre&nbsp;:</label> <select name="membre" id="id_membre">
+	<option value="1">Main principale</option>
 
-<!--   <option value="2">Objet object</option> -->
+	<option value="2">Autre main</option>
 
-<!-- </select></li> -->
-<!-- <li><label for="id_effet">Effet&nbsp;:</label> <input name="effet" value="Aucun" required="" id="id_effet" maxlength="100" type="text"></li> -->
-<!-- <li><label for="id_autres_effets">Autres effets&nbsp;:</label> <input name="autres_effets" value="Aucun" required="" id="id_autres_effets" maxlength="100" type="text"></li> -->
-<!-- <li><label for="id_effet_ig">Effet ig&nbsp;:</label> <input name="effet_ig" value="Aucun" required="" id="id_effet_ig" maxlength="100" type="text"></li> -->
-<!-- <li><label for="id_force">Force&nbsp;:</label> <input name="force" value="0" max="25" required="" id="id_force" min="0" type="number"></li> -->
-<!-- <li><label for="id_intell">Intell&nbsp;:</label> <input name="intell" value="0" max="25" required="" id="id_intell" min="0" type="number"></li> -->
-<!-- <li><label for="id_agi">Agi&nbsp;:</label> <input name="agi" value="0" max="25" required="" id="id_agi" min="0" type="number"></li> -->
-<!-- <li><label for="id_membre">Membre&nbsp;:</label> <select name="membre" id="id_membre"> -->
-<!--   <option value="1">Main principale</option> -->
+	<option value="3">Tête</option>
 
-<!--   <option value="2">Autre main</option> -->
+	<option value="4">Epaules</option>
 
-<!--   <option value="3">Tête</option> -->
+	<option value="5" selected="">Torse</option>
 
-<!--   <option value="4">Epaules</option> -->
+	<option value="6">Mains</option>
 
-<!--   <option value="5" selected="">Torse</option> -->
+	<option value="7">Taille</option>
 
-<!--   <option value="6">Mains</option> -->
+	<option value="8">Jambes</option>
 
-<!--   <option value="7">Taille</option> -->
+	<option value="9">Pieds</option>
 
-<!--   <option value="8">Jambes</option> -->
+	<option value="10">Dos</option>
 
-<!--   <option value="9">Pieds</option> -->
+	<option value="11">Cou</option>
 
-<!--   <option value="10">Dos</option> -->
+	<option value="12">Doigt</option>
 
-<!--   <option value="11">Cou</option> -->
+	<option value="13">Poignets</option>
 
-<!--   <option value="12">Doigt</option> -->
+	<option value="14">Divers</option>
 
-<!--   <option value="13">Poignets</option> -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_armure">Armure&nbsp;:</label> <input name="armure" value="0" required="" id="id_armure" type="number">
+    </div>
 
-<!--   <option value="14">Divers</option> -->
-
-<!-- </select></li> -->
-<!-- <li><label for="id_armure">Armure&nbsp;:</label> <input name="armure" value="0" required="" id="id_armure" type="number"></li> -->
-
-
-<input class="btn btn-default" type="submit" value="Valider" />
-</form>
+    <input class="btn btn-default" type="submit" value="Valider" />
+  </form>
 
 
 
-{% endblock %}
+  {% endblock %}
