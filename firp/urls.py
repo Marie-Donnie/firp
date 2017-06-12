@@ -40,5 +40,9 @@ urlpatterns = [
     url(r'^objets/objet/(?P<objet_id>\d+)/$', views.detail_objet,
         name='detail_objet'),
     url(r'^objets/armure/(?P<armure_id>\d+)/$', views.detail_armure,
-        name='detail_armure')
+        name='detail_armure'),
+    url(r'^fiches/editer_objet/(?P<objet_id>\d+)/$', views.edit_objet,
+        name='editer_objet'),
+    url(r'^fiches/editer_armure/(?P<armure_id>\d+)/$', views.edit_armure,
+        name='editer_armure')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

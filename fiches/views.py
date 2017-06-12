@@ -209,6 +209,8 @@ def edit_fiche(request, fiche_id):
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
         else:
             form = FicheForm(instance=fiche)
 
@@ -244,7 +246,7 @@ def delete_fiche(request, fiche_id):
 
 @login_required
 def creer_objet(request):
-    if request.user.has_perm('fiches.objet_ok'):
+    if request.user.has_perm('fiches.add_objet'):
         if request.method == 'POST':
             form = ObjetForm(request.POST, request.FILES)
             if form.is_valid():
@@ -381,3 +383,49 @@ def detail_armure(request, armure_id):
     objet = armure.objet
     context = {'armure': armure, 'objet': objet}
     return render(request, 'fiches/aff_armure.html', context)
+
+
+@login_required
+def edit_objet(request, objet_id):
+    objet = Objet.objects.get(pk=objet_id)
+    if request.user.has_perm('fiches.change_object'):
+        if request.method == 'POST':
+            form = ObjetForm(request.POST, request.FILES, instance=objet)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = ObjetForm(instance=objet)
+
+        context = {'form': form}
+
+        return render(request, 'fiches/objet.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer les objets.")
+
+
+@login_required
+def edit_armure(request, armure_id):
+    armure = Armure.objects.get(pk=armure_id)
+    if request.user.has_perm('fiches.change_armure'):
+        if request.method == 'POST':
+            form = ArmureForm(request.POST, request.FILES, instance=armure)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = ArmureForm(instance=armure)
+
+        objets = Objet.objects.all()
+        context = {'form': form, 'objets': objets}
+        return render(request, 'fiches/armure.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer les armures.")
