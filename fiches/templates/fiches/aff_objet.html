@@ -26,28 +26,22 @@
 
 <div class="media">
   <div class="media-left media-middle">
-
-    <!-- <div class="panel panel-defaut" id="details-panels"> -->
-    <!--   <\!-- <div class="panel-heading"> -\-> -->
-    <!--   <\!-- 	<h3 class="panel-title">Description</h3> -\-> -->
-    <!--   <\!-- </div> -\-> -->
-    <!--   <div class="panel-body"> -->
-	<a target="_blank" href={{ objet.image.url }}>
-	  <img id="icone" class="media-object" src={{ objet.image.url }} alt="Icône">
-	</a>
-      <!-- </div> -->
-    </div>
-    <div class="media-body">
-      <ul>
-	<li><b>Nom&nbsp;: </b>{{ objet.nom|capfirst }}</li>
-	<li><b>Qualité&nbsp;: </b>{{ objet.get_qualite_display }}</li>
-	<li><b>Description&nbsp;: </b>{{ objet.description }}</li>
-	<li><b>Prix&nbsp;: </b>{{ objet.prix }} pièces de cuivre</li>
-	<li><b>Poids&nbsp;: </b>{{ objet.poids }} grammes</li>
-      </ul>
-    </div>
-    	{% block armure %}
-	{% endblock %}
+    <a target="_blank" href={{ objet.image.url }}>
+      <img id="icone" class="media-object" src={{ objet.image.url }} alt="Icône">
+    </a>
+  </div>
+  <div class="media-body" id="objet-middle">
+    <ul>
+      <li><b>Nom&nbsp;: </b>{{ objet.nom|capfirst }}</li>
+      <li><b>Qualité&nbsp;: </b>{{ objet.get_qualite_display }}</li>
+      <li><b>Description&nbsp;: </b>{{ objet.description }}</li>
+      <li><b>Prix&nbsp;: </b>{{ objet.prix }} pièces de cuivre</li>
+      <li><b>Poids&nbsp;: </b>{{ objet.poids }} grammes</li>
+    </ul>
+  </div>
+  <div class="media-right" id="objet-right">
+    {% block armure %}
+    {% endblock %}
   </div>
 </div>
 {% endblock %}

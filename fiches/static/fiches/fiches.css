@@ -362,3 +362,16 @@ h3 {
 #stat {
     text-align: center;
 }
+
+#objet-right {
+    padding-top: 2%;
+    width : 60%;
+}
+
+#objet-middle {
+    vertical-align: middle;
+}
+
+#stats-panel {
+    padding: 0;
+}
