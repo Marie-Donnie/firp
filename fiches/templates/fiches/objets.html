@@ -38,7 +38,7 @@
     <tr>
       <th width="8%">Icône</th>
       <th>Nom</th>
-      <th width="12%">Qualité</th>
+      <!-- <th width="12%">Qualité</th> -->
       <th>Armure</th>
     </tr>
     {% for o in objets %}
@@ -50,8 +50,15 @@
       {% else %}
       <td><a target="_blank" href="{% url 'detail_armure' o.armure.id %}"><img class="media-object" src="/objets/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
       {% endif %}
-      <td><a href="{% url 'detail_armure' o.armure.id %}">{{ o.nom }}</a></td>
-      <td><a href="{% url 'detail_armure' o.armure.id %}">{{ o.get_qualite_display }}</a></td>
+      <td><a href="{% url 'detail_armure' o.armure.id %}" {% if o.qualite == 'm' %}id="objet-mediocre"
+	  {% elif o.qualite == 'c' %}id="objet-commun"
+	  {% elif o.qualite == 'i' %}id="objet-inhabituel"
+	  {% elif o.qualite == 'r' %}id="objet-rare"
+	  {% elif o.qualite == 'e' %}id="objet-epique"
+	  {% elif o.qualite == 'l' %}id="objet-legendaire"
+	  {% elif o.qualite == 'u' %}id="objet-unique"
+	  {% endif %}>{{ o.nom }}</a></td>
+      <!-- <td><a href="{% url 'detail_armure' o.armure.id %}">{{ o.get_qualite_display }}</a></td> -->
 
       <td><a href="{% url 'detail_armure' o.armure.id %}">{{ o.armure.get_membre_display }}</a></td>
       {% else %}
@@ -60,8 +67,15 @@
       {% else %}
       <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src="/objets/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
       {% endif %}
-      <td><a href="{% url 'detail_objet' o.id %}">{{ o.nom }}</a></td>
-      <td><a href="{% url 'detail_objet' o.id %}">{{ o.get_qualite_display }}</a></td>
+      <td><a href="{% url 'detail_objet' o.id %}" {% if o.qualite == 'm' %}id="objet-mediocre"
+	  {% elif o.qualite == 'c' %}id="objet-commun"
+	  {% elif o.qualite == 'i' %}id="objet-inhabituel"
+	  {% elif o.qualite == 'r' %}id="objet-rare"
+	  {% elif o.qualite == 'e' %}id="objet-epique"
+	  {% elif o.qualite == 'l' %}id="objet-legendaire"
+	  {% elif o.qualite == 'u' %}id="objet-unique"
+	  {% endif %}>{{ o.nom }}</a></td>
+      <!-- <td><a href="{% url 'detail_objet' o.id %}">{{ o.get_qualite_display }}</a></td> -->
       <td><a href="{% url 'detail_objet' o.id %}">-</a></td>
       {% endif %}
     </tr>

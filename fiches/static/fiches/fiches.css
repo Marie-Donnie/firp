@@ -235,7 +235,9 @@ div.gallery img {
 }
 
 #liste .media-object {
-    margin: 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     width: 40px;
     height: 40px;
     border: none;
@@ -305,6 +307,14 @@ h3 {
     color: #bf0005;
 }
 
+#details-panels h4{
+    margin: 0 auto;
+    color: #bf0005;
+    text-align: center;
+    color: #fefefe;
+    text-shadow: 1px 1px #fefefe;
+}
+
 .pagination > li > a, .pagination > li > span {
     position: relative;
     float: left;
@@ -352,12 +362,11 @@ h3 {
     padding: 0;
 }
 
-#localisation h3{
-    color: #fefefe;
-    text-shadow: 1px 1px #fefefe;
-    text-align: center;
-    vertical-align: middle;
-}
+/* #localisation h3{ */
+
+/*     text-align: center; */
+/*     vertical-align: middle; */
+/* } */
 
 #stat {
     text-align: center;
@@ -375,3 +384,37 @@ h3 {
 #stats-panel {
     padding: 0;
 }
+
+#objet-mediocre {
+    color: #9D9D9D;
+}
+
+#objet-commun {
+    color: white;
+}
+
+#objet-inhabituel {
+    color: #1EFF00;
+}
+
+#objet-rare {
+    color: #0070FF;
+}
+
+#objet-epique {
+    color: #a335ee;
+}
+
+#objet-legendaire {
+    color: #ff8000;
+}
+
+#objet-unique {
+    color: #E6CC80;
+}
+
+/* #details-panel { */
+/*     margin-left: auto; */
+/*     margin-right: auto; */
+/*     width: 100%; */
+/* } */

@@ -32,8 +32,14 @@
   </div>
   <div class="media-body" id="objet-middle">
     <ul>
-      <li><b>Nom&nbsp;: </b>{{ objet.nom|capfirst }}</li>
-      <li><b>Qualité&nbsp;: </b>{{ objet.get_qualite_display }}</li>
+      <li {% if objet.qualite == 'm' %}id="objet-mediocre"
+	  {% elif objet.qualite == 'c' %}id="objet-commun"
+	  {% elif objet.qualite == 'i' %}id="objet-inhabituel"
+	  {% elif objet.qualite == 'r' %}id="objet-rare"
+	  {% elif objet.qualite == 'e' %}id="objet-epique"
+	  {% elif objet.qualite == 'l' %}id="objet-legendaire"
+	  {% elif objet.qualite == 'u' %}id="objet-unique"
+	  {% endif %}><b>{{ objet.nom|capfirst }}</b></li>
       <li><b>Description&nbsp;: </b>{{ objet.description }}</li>
       <li><b>Prix&nbsp;: </b>{{ objet.prix }} pièces de cuivre</li>
       <li><b>Poids&nbsp;: </b>{{ objet.poids }} grammes</li>
