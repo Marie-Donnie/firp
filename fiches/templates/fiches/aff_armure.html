@@ -11,33 +11,37 @@
 
 <div class="row">
   {% if armure.effet != 'Aucun' %}
-  <div class="col-md-8">
+  <div class="col-md-10">
     <div class="panel panel-defaut" id="details-panels">
       <div class="panel-heading">
 	<h4 class="panel-title">Effet</h3>
       </div>
       <div class="panel-body">
 	{{ armure.effet }}
+	{% if armure.autres_effets != 'Aucun' %}
+	<br>
+	{{ armure.autres_effets|linebreaksbr }}
+	{% endif %}
       </div>
     </div>
   </div>
 </div>
 {% endif %}
 <div class="row">
-  {% if armure.autres_effets != 'Aucun' %}
-  <div class="col-md-8">
+  {% if armure.effet_ig != 'Aucun' %}
+  <div class="col-md-10">
     <div class="panel panel-defaut" id="details-panels">
       <div class="panel-heading">
-	<h4 class="panel-title">Effet</h4>
+	<h4 class="panel-title">Effet en jeu</h4>
       </div>
       <div class="panel-body">
-	{{ armure.autres_effets|linebreaksbr }}
+	{{ armure.effet_ig|linebreaksbr }}
       </div>
     </div>
   </div>
   {% endif %}
 </div>
-<div class="col-md-8" id="stats-panel">
+<div class="col-md-10" id="stats-panel">
   <div class="panel panel-defaut" id="details-panels">
     <div class="panel-heading" id="localisation">
       <h4 class="panel-title">Equipe : {{ armure.get_membre_display }}</h4>
