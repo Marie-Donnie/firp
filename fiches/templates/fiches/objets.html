@@ -48,7 +48,7 @@
       {% if o.image %}
       <td><a target="_blank" href="{% url 'detail_armure' o.armure.id %}"><img class="media-object" src={{ o.image.url }} alt="Portrait"></a></td>
       {% else %}
-      <td><a target="_blank" href="{% url 'detail_armure' o.armure.id %}"><img class="media-object" src="/objets/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
+      <td><a target="_blank" href="{% url 'detail_armure' o.armure.id %}"><img class="media-object" src="/fiches/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
       {% endif %}
       <td><a href="{% url 'detail_armure' o.armure.id %}" {% if o.qualite == 'm' %}id="objet-mediocre"
 	  {% elif o.qualite == 'c' %}id="objet-commun"
@@ -65,7 +65,7 @@
       {% if o.image %}
       <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src={{ o.image.url }} alt="Portrait"></a></td>
       {% else %}
-      <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src="/objets/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
+      <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src="/fiches/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
       {% endif %}
       <td><a href="{% url 'detail_objet' o.id %}" {% if o.qualite == 'm' %}id="objet-mediocre"
 	  {% elif o.qualite == 'c' %}id="objet-commun"
