@@ -32,3 +32,13 @@ def p_cuivre(value):
     reste = reste % 100
     p_cuivre = reste
     return p_cuivre
+
+
+@register.filter
+def kilos(value):
+    return value // 1000
+
+
+@register.filter
+def grammes(value):
+    return value % 1000

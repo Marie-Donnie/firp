@@ -48,7 +48,12 @@
 	{{ objet.prix|p_argent }} <img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Souverains">
 	{{ objet.prix|p_cuivre }} <img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Souverains">
       </li>
-      <li><b>Poids&nbsp;: </b>{{ objet.poids }} grammes</li>
+      <li><b>Poids&nbsp;: </b>
+	{% if objet.poids|kilos != 0 %}
+	{{ objet.poids|kilos }} kilos et&nbsp;
+	{% endif %}
+	{{ objet.poids|grammes }} grammes
+      </li>
     </ul>
   </div>
   <div class="media-right" id="objet-right">
