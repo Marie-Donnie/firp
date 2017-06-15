@@ -11,17 +11,19 @@
   {% csrf_token %}
   <!-- {{ form.as_ul }} -->
 
+  <div class="form-group">
+    <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+  </div>
     <div class="form-group">
-  <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+    <label for="id_cases">Cases&nbsp;:</label>
+      <select size="15" name="cases" required="" multiple="multiple" id="id_cases" class="form-control">
 
-  <li><label for="id_cases">Cases&nbsp;:</label> <select name="cases" required="" multiple="multiple" id="id_cases">
+	{% for case in cases %}
+	<option value="{{case.id}}">{{case.get_nom}}</option>
+	{% endfor %}
 
-  {% for case in cases %}
-  <option value="{{case.id}}">{{case.get_nom}}</option>
-  {% endfor %}
-
-</select></li>
-</div>
+    </select>
+  </div>
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>
 

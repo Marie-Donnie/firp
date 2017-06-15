@@ -41,8 +41,14 @@ urlpatterns = [
         name='detail_objet'),
     url(r'^objets/armure/(?P<armure_id>\d+)/$', views.detail_armure,
         name='detail_armure'),
-    url(r'^fiches/editer_objet/(?P<objet_id>\d+)/$', views.edit_objet,
+    url(r'^objets/editer_objet/(?P<objet_id>\d+)/$', views.edit_objet,
         name='editer_objet'),
-    url(r'^fiches/editer_armure/(?P<armure_id>\d+)/$', views.edit_armure,
-        name='editer_armure')
+    url(r'^objets/editer_armure/(?P<armure_id>\d+)/$', views.edit_armure,
+        name='editer_armure'),
+    url(r'^objets/editer_case/(?P<case_id>\d+)/$', views.edit_case,
+        name='editer_case'),
+    url(r'^objets/editer_inventaire/(?P<inventaire_id>\d+)/$',
+        views.edit_inventaire, name='editer_inventaire'),
+    url(r'^objets/editer_equipement/(?P<equipement_id>\d+)/$',
+        views.edit_equipement, name='editer_equipement')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

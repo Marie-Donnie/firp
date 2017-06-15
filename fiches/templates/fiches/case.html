@@ -9,7 +9,20 @@
 <div id="char_form">
 <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
-  {{ form.as_ul }}
+  <div class="form-group">
+    <label for="id_nombre">Nombre&nbsp;:</label> <input name="nombre" min="0" value="{{form.nombre.value|default:'1'}}" required="" id="id_nombre" type="number">
+  </div>
+  <div class="form-group">
+    <label for="id_objet">Objet&nbsp;:</label>
+    <select name="objet" required="" id="id_objet">
+
+      {% for objet in objets %}
+      <option value="{{objet.id}}"{% if form.objet.value == objet.id %} selected="" {% endif %}>{{objet.nom}}</option>
+      {% endfor %}
+
+    </select>
+  </div>
+
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>
 

@@ -14,7 +14,7 @@
   <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
 
   <li><label for="id_objets">Objets&nbsp;:</label>
-    <select name="objets" required="" multiple="multiple" id="id_objets" class="form-control">
+    <select size="14" name="objets" required="" multiple="multiple" id="id_objets" class="form-control">
 
   {% for objet in objets %}
   <option value="{{objet.id}}">{{objet.get_nom}}</option>

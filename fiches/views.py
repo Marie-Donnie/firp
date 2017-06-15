@@ -413,7 +413,7 @@ def edit_armure(request, armure_id):
     armure = Armure.objects.get(pk=armure_id)
     if request.user.has_perm('fiches.change_armure'):
         if request.method == 'POST':
-            form = ArmureForm(request.POST, request.FILES, instance=armure)
+            form = ArmureForm(request.POST, instance=armure)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -429,3 +429,72 @@ def edit_armure(request, armure_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer les armures.")
+
+
+@login_required
+def edit_case(request, case_id):
+    case = Case.objects.get(pk=case_id)
+    if request.user.has_perm('fiches.change_case'):
+        if request.method == 'POST':
+            form = CaseForm(request.POST, instance=case)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = CaseForm(instance=case)
+
+        objets = Objet.objects.all()
+        context = {'form': form, 'objets': objets}
+        return render(request, 'fiches/case.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer les cases.")
+
+
+@login_required
+def edit_inventaire(request, inventaire_id):
+    inventaire = Inventaire.objects.get(pk=inventaire_id)
+    if request.user.has_perm('fiches.change_inventaire'):
+        if request.method == 'POST':
+            form = InventaireForm(request.POST, instance=inventaire)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = InventaireForm(instance=inventaire)
+
+        cases = Case.objects.all()
+        context = {'form': form, 'cases': cases}
+        return render(request, 'fiches/inventaire.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer les inventaires.")
+
+
+@login_required
+def edit_equipement(request, equipement_id):
+    equipement = Equipement.objects.get(pk=equipement_id)
+    if request.user.has_perm('fiches.change_equipement'):
+        if request.method == 'POST':
+            form = EquipementForm(request.POST, instance=equipement)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = EquipementForm(instance=equipement)
+
+        objets = Armure.objects.all()
+        context = {'form': form, 'objets': objets}
+        return render(request, 'fiches/equipement.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer les equipements.")

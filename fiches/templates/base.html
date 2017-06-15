@@ -39,10 +39,6 @@
 	<ul class="nav navbar-nav">
       	  <li><a href="{% url 'index' %}">Accueil</a></li>
       	  <li><a href="{% url 'personnages' %}">Personnages</a></li>
-	  <!-- 	<li><a href="/fiches/creer/">Créer un personnage</a></li> -->
-	  <!-- 	<li><a href="/objets/">Objets</a></li> -->
-	  <!-- <a class="btn btn-default navbar-btn" href="{% url 'index' %}">Accueil</a> -->
-	  <!-- <a class="btn btn-default navbar-btn" href="{% url 'personnages' %}">Personnages</a> -->
 	  <li class="dropdown">
             <a href="{% url 'objets' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Objets <span class="caret"></span></a>
 	    <ul class="dropdown-menu">
@@ -51,13 +47,11 @@
 	      <li><a href="{% url 'creer_objet' %}">Créer un objet</a></li>
 	      <li><a href="{% url 'creer_armure' %}">Créer une armure</a></li>
 	      <li><a href="{% url 'creer_case' %}">Créer une case</a></li>
-	      <li><a href="{% url 'creer_equipement' %}">Créer un équipement</a></li>
 	      <li><a href="{% url 'creer_inventaire' %}">Créer un inventaire</a></li>
+	      <li><a href="{% url 'creer_equipement' %}">Créer un équipement</a></li>
 	    </ul>
 	  </li>
 	</ul>
-	<!-- <li><a href="/utilisateurs/">Utilisateurs</a></li> -->
-	<!-- </ul> -->
 	<div class="navbar-right">
 	  {% if user.is_authenticated %}
 	  <span>Bienvenue, <a href="{% url 'utilisateur' user.id %}">{{ user.username }}</a> !  </span>
