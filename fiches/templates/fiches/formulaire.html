@@ -439,16 +439,16 @@
 
     {% if perms.fiches.equipement_ok and perms.fiches.inventaire_ok %}
     <div class="form-group">
-      <label for="id_equipement">Equipement&nbsp;:</label> <select name="equipement" multiple="multiple" id="id_equipement">
+      <label for="id_equipement">Equipement&nbsp;:</label> <select name="equipement" id="id_equipement">
 
 	{% for equipement in equipements %}
 	<option value="{{equipement.id}}" {% if form.equipement.value == equipement.id %} selected="" {% endif %}>{{equipement.nom}}</option>
 	{% endfor %}
       </select>
-      <label for="id_inventaire">Inventaire&nbsp;:</label> <select name="inventaire" multiple="multiple" id="id_inventaire">
+      <label for="id_inventaire_fdg">Inventaire&nbsp;:</label> <select name="inventaire_fdg" id="id_inventaire_fdg">
 
 	{% for inventaire in inventaires %}
-	<option value="{{inventaire.id}}" {% if form.inventaire.value == inventaire.id %} selected="" {% endif %}>{{inventaire.nom}}</option>
+	<option value="{{inventaire.id}}" {% if form.inventaire_fdg.value == inventaire.id %} selected="" {% endif %}>{{inventaire.nom}}</option>
 	{% endfor %}
 
       </select>

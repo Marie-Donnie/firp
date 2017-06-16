@@ -115,31 +115,30 @@
     {% endif %}
     {% if fiche.afficher_inventaire or user.id == fiche.createur.id %}
     {% if fiche.inventaire %}
-        <div class="col-md-6">
+    <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">
 	<div class="panel-heading">
 	  <h3 class="panel-title">Inventaire</h3>
 	</div>
 	<div class="panel-body">
 	  {{fiche.inventaire|linebreaksbr}}
-	  	</div>
+	</div>
       </div>
     </div>
-	  {% elif fiche.inventaire_fdg %}
-	      <div class="col-md-6">
+    {% elif fiche.inventaire_fdg %}
+    <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">
 	<div class="panel-heading">
 	  <h3 class="panel-title">{{fiche.inventaire_fdg.nom}}</h3>
 	</div>
 	<div class="panel-body">
 	  {% for case in fiche.inventaire_fdg.cases.all %}
-	  {{case.get_nom}}
+	  - {{case.get_nom}}<br>
 	  {% endfor %}
-	  {{fiche.inventaire_fdg}}
-	  	</div>
+	</div>
       </div>
     </div>
-	  {% endif %}
+    {% endif %}
 
     {% endif %}
   </div>
@@ -153,13 +152,14 @@
 	</div>
 	<div class="panel-body">
 	  {% for armure in fiche.equipement.objets.all %}
-	  {{armure.get_nom}}
+	  - {{armure.get_nom}}<br>
 	  {% endfor %}
 	</div>
       </div>
     </div>
   </div>
   {% endif %}
-
 </div>
+
+
 {% endblock %}
