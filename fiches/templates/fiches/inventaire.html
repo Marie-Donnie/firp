@@ -19,7 +19,7 @@
       <select size="15" name="cases" required="" multiple="multiple" id="id_cases" class="form-control">
 
 	{% for case in cases %}
-	<option value="{{case.id}}">{{case.get_nom}}</option>
+	<option value="{{case.id}}"{% if case.id in form.cases.value %} selected="" {% endif %}>{{case.get_nom}}</option>
 	{% endfor %}
 
     </select>

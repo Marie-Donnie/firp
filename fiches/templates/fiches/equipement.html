@@ -11,16 +11,17 @@
   {% csrf_token %}
 
   <div class="form-group">
-  <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
-
-  <li><label for="id_objets">Objets&nbsp;:</label>
+    <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+    </div>
+  <div class="form-group">
+  <label for="id_objets">Objets&nbsp;:</label>
     <select size="14" name="objets" required="" multiple="multiple" id="id_objets" class="form-control">
 
   {% for objet in objets %}
-  <option value="{{objet.id}}">{{objet.get_nom}}</option>
+  <option value="{{objet.id}}"{% if objet.id in form.objets.value %} selected="" {% endif %}>{{objet.get_nom}}</option>
   {% endfor %}
 
-</select></li>
+</select>
 </div>
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>

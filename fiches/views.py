@@ -468,8 +468,9 @@ def edit_inventaire(request, inventaire_id):
         else:
             form = InventaireForm(instance=inventaire)
 
+        cases_perso = inventaire.cases.all()
         cases = Case.objects.all()
-        context = {'form': form, 'cases': cases}
+        context = {'form': form, 'cases': cases, 'cases_perso': cases_perso}
         return render(request, 'fiches/inventaire.html', context)
 
     else:
