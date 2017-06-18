@@ -46,6 +46,7 @@
 	      <li><a href="{% url 'creer_fiche' %}">Créer un personnage</a></li>
 	    </ul>
 	  </li>
+	  {% if perms.fiches.objet_ok %}
 	  <li class="dropdown">
             <a href="{% url 'objets' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dd-btn">Objets <span class="caret"></span></a>
 	    <ul class="dropdown-menu">
@@ -58,6 +59,7 @@
 	      <li><a href="{% url 'creer_equipement' %}">Créer un équipement</a></li>
 	    </ul>
 	  </li>
+	  {% endif %}
 	</ul>
 	<div class="navbar-right">
 	  {% if user.is_authenticated %}
