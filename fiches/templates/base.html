@@ -39,7 +39,7 @@
 	<ul class="nav navbar-nav">
       	  <li><a href="{% url 'index' %}">Accueil</a></li>
 	  <li class="dropdown">
-            <a href="{% url 'personnages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dd-btn">Personnages <span class="caret"></span></a>
+            <a href="{% url 'personnages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personnages <span class="caret"></span></a>
 	    <ul class="dropdown-menu">
       	      <li><a href="{% url 'personnages' %}">Personnages</a></li>
 	      <li role="separator" class="divider"></li>
@@ -48,7 +48,7 @@
 	  </li>
 	  {% if perms.fiches.objet_ok %}
 	  <li class="dropdown">
-            <a href="{% url 'objets' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="dd-btn">Objets <span class="caret"></span></a>
+            <a href="{% url 'objets' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Objets <span class="caret"></span></a>
 	    <ul class="dropdown-menu">
 	      <li><a href="{% url 'objets' %}">Objets</a></li>
 	      <li role="separator" class="divider"></li>
