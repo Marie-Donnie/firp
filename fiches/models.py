@@ -434,23 +434,23 @@ class Avant_garde(Rpg):
     charisme = IntegerRangeField(default=1, min_value=1,
                                  max_value=10)
     force_men = IntegerRangeField(default=1, min_value=1,
-                                 max_value=10)
+                                  max_value=10)
     pv = models.SmallIntegerField(default=11)
     ps = models.SmallIntegerField(default=0)
     pf = models.SmallIntegerField(default=0)
     niveau = models.SmallIntegerField(default=1)
     xp = models.SmallIntegerField(default=0)
     blessures = models.CharField(max_length=800,
-                                  null=True,
-                                  blank=True,
-                                  default='Sans')
+                                 null=True,
+                                 blank=True,
+                                 default='Sans')
     troubles_ment = models.CharField(max_length=800,
-                                  null=True,
-                                  blank=True,
-                                  default='Sans')
-    classe = models.ForeignKey('Classe',
-                            blank=True,
-                            null=True)
+                                     null=True,
+                                     blank=True,
+                                     default='Sans')
+    classe = models.ForeignKey('Classe_ag',
+                               blank=True,
+                               null=True)
 
 
 class Classe_ag(models.Model):
