@@ -167,7 +167,12 @@ def creer_fiche(request):
 def detail_fiche(request, fiche_id):
     fiche = get_object_or_404(Fiche, pk=fiche_id)
 
-    return render(request, 'fiches/detail.html', {'fiche': fiche})
+    if (fiche.inventaire_fdg.cases.count() < 25):
+        nb = 25 - fiche.inventaire_fdg.cases.count()
+    else:
+        nb = 0
+    context = {'fiche': fiche, 'range': range(nb)}
+    return render(request, 'fiches/detail.html', context)
 
 
 # Displays the first name and last name of the latests Fiche model instances
