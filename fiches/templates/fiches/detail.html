@@ -1,6 +1,26 @@
 
 {% extends "base.html" %}
 
+{% block script %}
+$(function () {
+
+$('[data-toggle="objet-tooltip"]').on('mouseenter', getTooltip)
+
+function getTooltip() {
+  var elem = this;
+  var tooltipUrl = elem.getAttribute('href') + 'tooltip/';
+  $.ajax(tooltipUrl)
+  .done(function(data) {
+    $(elem).tooltip({html: true, placement: 'right', title: data});
+    $(elem).tooltip('show');
+    $(elem).off('mouseenter', getTooltip);
+  });
+}
+
+});
+{% endblock %}
+
+
 {% block title %}Fiche de {{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
 {% block page-title %}
 {{ fiche.prenom }} {{ fiche.nom }}
@@ -133,11 +153,11 @@
 	</div>
 	<div class="panel-body">
 	  {% for case in fiche.inventaire_fdg.cases.all %}
-	  <a target="_blank" href="{% url 'detail_objet' case.objet.id %}"><img class="media-object" src={{ case.objet.image.url }} alt="Objet" id=icone></a>
+	  <a target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip"><img class="media-object" src={{ case.objet.image.url }} alt="Objet" id="icone"></a>
 	  <!-- - {{case.get_nom}}<br> -->
 	  {% endfor %}
 	  {% for i in range %}
-	  <img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id=icone>
+	  <img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">
 	  {% endfor %}
 	</div>
       </div>

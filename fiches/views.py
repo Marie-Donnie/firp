@@ -504,3 +504,16 @@ def edit_equipement(request, equipement_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer les equipements.")
+
+
+def tooltip_objet(request, objet_id):
+    objet = get_object_or_404(Objet, pk=objet_id)
+    context = {'objet': objet}
+    return render(request, 'fiches/tooltip_objet.html', context)
+
+
+def tooltip_armure(request, armure_id):
+    armure = get_object_or_404(Armure, pk=armure_id)
+    objet = armure.objet
+    context = {'armure': armure, 'objet': objet}
+    return render(request, 'fiches/tooltip_armure.html', context)

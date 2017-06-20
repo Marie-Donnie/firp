@@ -1,0 +1,24 @@
+{% extends "fiches/tooltip_objet.html" %}
+
+
+{% block armure %}
+{% if armure.effet != 'Aucun' %}
+<li>
+Effet(s): {{ armure.effet }}
+{% if armure.autres_effets != 'Aucun' %}
+<br>
+{{ armure.autres_effets|linebreaksbr }}
+{% endif %}
+</li>
+{% endif %}
+{% if armure.effet_ig != 'Aucun' %}
+  <li>Effet en jeu : 	{{ armure.effet_ig|linebreaksbr }}</li>
+
+  {% endif %}
+  <li>Localisation : {{ armure.get_membre_display }}<br></li>
+  <li>Armure : {{ armure.armure }}<br></li>
+  <li>Force : {{ armure.force }}<br></li>
+  <li>Agilité : {{ armure.agi }}<br></li>
+  <li>Intelligence : {{ armure.intell }}</li>
+
+{% endblock %}
