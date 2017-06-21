@@ -187,6 +187,20 @@ function getTooltip() {
 	  {% for armure in fiche.equipement.objets.all %}
 	  - {{armure.get_nom}}<br>
 	  {% endfor %}
+	  {% if fiche.equipement.get_tete %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' fiche.equipement.get_tete.id %}" data-toggle="objet-tooltip">
+	    <img class="inventory-object" src={{ fiche.equipement.get_tete.objet.image.url }} alt="Tête" id="icone">
+	  </a>
+	  {% else %}
+	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Head.PNG alt="Tête" id="icone">
+	  {% endif %}
+	  {% if fiche.equipement.get_torse %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' fiche.equipement.get_torse.id %}" data-toggle="objet-tooltip">
+	    <img class="inventory-object" src={{ fiche.equipement.get_torse.objet.image.url }} alt="Tête" id="icone">
+	  </a>
+	  {% else %}
+	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Chest.PNG alt="Tête" id="icone">
+	  {% endif %}
 	</div>
       </div>
     </div>

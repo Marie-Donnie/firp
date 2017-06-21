@@ -172,7 +172,7 @@ def detail_fiche(request, fiche_id):
     else:
         nb = 0
     context = {'fiche': fiche, 'range': range(nb)}
-    # print(fiche.equipement.get_torse()[0].objet.nom)
+    print(fiche.equipement.get_torse().objet.nom)
     return render(request, 'fiches/detail.html', context)
 
 
