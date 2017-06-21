@@ -4,17 +4,17 @@
 {% block armure %}
 {% if armure.effet != 'Aucun' %}
 <li>
-Effet(s): {{ armure.effet }}
+<b>Effet(s):</b> {{ armure.effet }}
 {% if armure.autres_effets != 'Aucun' %}
 <br>
 {{ armure.autres_effets|linebreaksbr }}
 {% endif %}
 </li>
 {% endif %}
-{% if armure.effet_ig != 'Aucun' %}
-  <li>Effet en jeu : 	{{ armure.effet_ig|linebreaksbr }}</li>
+<!-- {% if armure.effet_ig != 'Aucun' %} -->
+<!--   <li>Effet en jeu : 	{{ armure.effet_ig|linebreaksbr }}</li> -->
 
-  {% endif %}
+<!--   {% endif %} -->
   <li><b>Localisation :</b> {{ armure.get_membre_display }}<br></li>
   <li><b>Armure :</b> {{ armure.armure }}<br></li>
   <li><b>Force :</b> {{ armure.force }}<br></li>
