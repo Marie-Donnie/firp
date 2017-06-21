@@ -340,7 +340,8 @@ class Armure(models.Model):
 
 
 class Case(models.Model):
-    nombre = models.SmallIntegerField(default=1)
+    nombre = IntegerRangeField(default=1, min_value=0,
+                               max_value=99)
     objet = models.ForeignKey(Objet,
                               null=True,
                               related_name='case')
@@ -383,6 +384,113 @@ class Equipement(models.Model):
         default_related_name = 'equipement'
         permissions = (("equipement_ok",
                         "Peut faire des équipements"),)
+
+    def get_mp(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 1:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_am(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 2:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_tete(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 3:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_epaules(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 4:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_torse(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 5:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_mains(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 6:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_taille(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 7:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_jambes(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 8:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_pieds(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 9:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_dos(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 10:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_cou(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 11:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_doigts(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 12:
+                ret.append(i)
+        if ret.length < 8:
+            for x in xrange(8 - ret.length):
+                ret.append(None)
+        return ret
+
+    def get_poignets(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 13:
+                ret.append(i)
+        return ret[0] if ret else ret
+
+    def get_divers(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 14:
+                ret.append(i)
+        if ret.length < 10:
+            for x in xrange(10 - ret.length):
+                ret.append(None)
+        return ret
+
+    # def get_equipement(self):
+    #     return self.get_mp() + self.get_am() + self.get_tete() + self.get_epaules() + self.get_torse() + self.get_mains() + self.get_taille() + self.get_jambes() + self.get_pieds() + self.get_dos() + self.get_cou() + self.get_doigts() + self.get_poignets() + self.get_divers()
 
 
 class Rpg(models.Model):

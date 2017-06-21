@@ -153,8 +153,15 @@ function getTooltip() {
 	</div>
 	<div class="panel-body">
 	  <div class="inventory">
-	  {% for case in fiche.inventaire_fdg.cases.all %}
-	  <a target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip"><img class="media-object" src={{ case.objet.image.url }} alt="Objet" id="icone"></a>
+	    {% for case in fiche.inventaire_fdg.cases.all %}
+	    <!-- <div class="container"> -->
+	    <a class="number-inventory" target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip">
+	      <img class="inventory-object" src={{ case.objet.image.url }} alt="Objet" id="icone">
+	      {% if case.nombre > 1 %}
+		<span class="bottomright">{{case.nombre}}</span>
+		{% endif %}
+	      </a>
+	    <!-- </div> -->
 	  <!-- - {{case.get_nom}}<br> -->
 	  {% endfor %}
 	  {% for i in range %}

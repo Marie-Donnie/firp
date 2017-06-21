@@ -456,3 +456,30 @@ h3 {
   display: flex;
   flex-wrap: wrap;
 }
+
+/* .container { */
+/*     position: relative; */
+/* } */
+
+.bottomright {
+    position: absolute;
+    bottom: 0px;
+    right: 5px;
+    font-size: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 2px red, -2px -2px 2px red, 2px -2px 2px red, -2px 2px 2px red;
+    font-weight: bold;
+}
+
+.inventory-object {
+    width: 64px;
+    height: 64px;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.number-inventory {
+    position: relative;
+}
