@@ -123,6 +123,10 @@ div.gallery img {
     padding: 1%;
 }
 
+.media {
+    overflow: visible;
+}
+
 .panel {
     border: 1px;
     background-color: #000000;

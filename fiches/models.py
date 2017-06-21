@@ -467,8 +467,8 @@ class Equipement(models.Model):
         for i in self.objets.all():
             if i.membre == 12:
                 ret.append(i)
-        if ret.length < 8:
-            for x in xrange(8 - ret.length):
+        if len(ret) < 8:
+            for x in xrange(8 - len(ret)):
                 ret.append(None)
         return ret
 
@@ -484,8 +484,8 @@ class Equipement(models.Model):
         for i in self.objets.all():
             if i.membre == 14:
                 ret.append(i)
-        if ret.length < 10:
-            for x in xrange(10 - ret.length):
+        if len(ret) < 10:
+            for x in xrange(10 - len(ret)):
                 ret.append(None)
         return ret
 
