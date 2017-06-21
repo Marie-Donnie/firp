@@ -11,7 +11,7 @@ function getTooltip() {
   var tooltipUrl = elem.getAttribute('href') + 'tooltip/';
   $.ajax(tooltipUrl)
   .done(function(data) {
-    $(elem).tooltip({html: true, placement: 'right', title: data});
+    $(elem).tooltip({html: true, placement: 'top', title: data});
     $(elem).tooltip('show');
     $(elem).off('mouseenter', getTooltip);
   });
@@ -152,6 +152,7 @@ function getTooltip() {
 	  <h3 class="panel-title">{{fiche.inventaire_fdg.nom}}</h3>
 	</div>
 	<div class="panel-body">
+	  <div class="inventory">
 	  {% for case in fiche.inventaire_fdg.cases.all %}
 	  <a target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip"><img class="media-object" src={{ case.objet.image.url }} alt="Objet" id="icone"></a>
 	  <!-- - {{case.get_nom}}<br> -->
@@ -159,6 +160,7 @@ function getTooltip() {
 	  {% for i in range %}
 	  <img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">
 	  {% endfor %}
+	  </div>
 	</div>
       </div>
     </div>

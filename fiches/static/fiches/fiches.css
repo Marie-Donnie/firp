@@ -451,3 +451,8 @@ h3 {
     border: 1px solid #950004;
     padding: 0;
 }
+
+.inventory {
+  display: flex;
+  flex-wrap: wrap;
+}
