@@ -12,14 +12,14 @@ urlpatterns = [
     # Users
     url(r'^utilisateurs/$', views.users,
         name='utilisateurs'),
-    url(r'^utilisateurs/editer_utilisateur/$', views.edit_user,
-        name='editer_utilisateur'),
     url(r'^utilisateurs/gestion_profil/$', views.profile,
         name='gestion_profil'),
     url(r'^utilisateurs/(?P<user_id>\d+)/$', views.aff_user,
         name='utilisateur'),
     # Fiches
     url(r'^personnages/$', views.personnages,
+        name='personnages'),
+    url(r'^personnages/search=(?P<requete>)$', views.personnages,
         name='personnages'),
     url(r'^fiches/(?P<fiche_id>\d+)/$', views.detail_fiche,
         name='detail_fiche'),

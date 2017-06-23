@@ -3,9 +3,22 @@
 {% block title %}Profil de {{ utilisateur.username }}{% endblock %}
 {% block page-title %}{{ utilisateur.username }}{% endblock %}
 
+{% block script %}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+{% endblock %}
+
+{% block edition %}
+{% ifequal user.id utilisateur.id %}
+<a class="btn btn-default navbar-btn" href="{% url 'gestion_profil' %}" data-toggle="tooltip" title="Ajouter ou changer votre image de profil et votre date de naissance">Créer/editer profil</a>
+{% endifequal %}
+{% endblock %}
+
 {% block user %}
 {% ifequal user.id utilisateur.id %}
-<a class="btn btn-default" href="{% url 'editer_utilisateur' %}">Editer</a>
+<a class="btn btn-default navbar-btn" href="{% url 'account_set_password' %}" data-toggle="tooltip" title="Changer le mot de passe de votre compte">Changer le mot de passe</a>
+<a class="btn btn-default navbar-btn" href="{% url 'account_email' %}" data-toggle="tooltip" title="Ajouter un email ou changer votre email principal">Gestion des emails</a>
 {% endifequal %}
 {% endblock %}
 
@@ -17,8 +30,6 @@
     <ul>
       <li><b>Pseudo&nbsp;: </b>{{ utilisateur.username }}</li>
       {% if utilisateur.infos %}
-      <li><b>Nom&nbsp;: </b>{{ utilisateur.infos.nom }}</li>
-      <li><b>Prenom&nbsp;: </b>{{ utilisateur.infos.prenom }}</li>
       <li><b>Date de naissance&nbsp;: </b>{{ utilisateur.infos.naissance }}</li>
       {% endif %}
       <li><b>Inscription&nbsp;: </b>{{ utilisateur.date_joined }}</li>

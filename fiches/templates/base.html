@@ -62,15 +62,15 @@
 	    </ul>
 	  </li>
 	  {% endif %}
+	  <li><a href="{% url 'utilisateurs' %}">Utilisateurs</a></li>
 	</ul>
 	<div class="navbar-right">
 	  {% if user.is_authenticated %}
 	  <span>Bienvenue, <a href="{% url 'utilisateur' user.id %}">{{ user.username }}</a> !  </span>
-	  <a class="btn btn-default navbar-btn" href="/utilisateurs/gestion_profil/">Créer/editer profil</a>
 	  <a class="btn btn-default navbar-btn" href="{% url 'account_logout' %}">Se déconnecter</a>
 	  {% else %}
-	  <a class="btn btn-default navbar-btn" href="{% url 'account_login' %}">Se connecter</a>
 	  <a class="btn btn-default navbar-btn" href="{% url 'account_signup' %}">S'inscrire</a>
+	  <a class="btn btn-default navbar-btn" href="{% url 'account_login' %}">Se connecter</a>
 	  {% endif %}
 	</div>
       </div>

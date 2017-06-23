@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from fiches.forms import FicheForm, UserForm, UserProfileForm, MyRegistrationForm
+from fiches.forms import FicheForm, UserProfileForm
 from fiches.forms import ObjetForm, ArmureForm, CaseForm, InventaireForm, EquipementForm
 from django.db.models import Count
 from django.contrib.auth.decorators import user_passes_test
@@ -20,44 +20,6 @@ def index(request):
     context = {'latest_fiches': fiches}
 
     return render(request, 'fiches/index.html', context)
-
-
-def login_authen(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect('/')
-        else:
-            return HttpResponseNotFound('<h1>User not found</h1>')
-    else:
-        form = AuthenticationForm()
-
-    return render(request, 'registration/login.html', {'form': form})
-
-
-def logout_view(request):
-    logout(request)
-
-    return HttpResponseRedirect('/')
-
-
-def register_user(request):
-    if request.method == 'POST':
-        form = MyRegistrationForm(request.POST)     # create form object
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
-    else:
-        form = MyRegistrationForm()
-
-    return render(request, 'registration/register.html', {'userform': form})
-
-
-def password_reset(request):
-    pass
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -78,19 +40,6 @@ def users(request):
     context = {'users_list': users_list}
 
     return render(request, 'fiches/utilisateurs.html', context)
-
-
-@login_required
-def edit_user(request):
-    if request.method == 'POST':
-        form = MyRegistrationForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/')
-    else:
-        form = MyRegistrationForm(instance=request.user)
-
-    return render(request, 'registration/register.html', {'userform': form})
 
 
 @login_required

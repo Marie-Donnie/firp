@@ -12,34 +12,34 @@ class UserProfileForm(ModelForm):
         widgets = {'user': forms.HiddenInput()}
 
 
-class UserForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password']
-        prefix = 'user'
-        # "__all__"
+# class UserForm(ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ['username', 'email', 'first_name', 'last_name', 'password']
+#         prefix = 'user'
+#         # "__all__"
 
 
-class MyRegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    prenom = forms.CharField(required=True)
-    nom = forms.CharField(required=True)
+# class MyRegistrationForm(UserCreationForm):
+#     email = forms.EmailField(required=True)
+#     prenom = forms.CharField(required=True)
+#     nom = forms.CharField(required=True)
 
-    class Meta:
-        model = User
-        fields = ('username', 'password1', 'password2', 'email',
-                  'prenom', 'nom')
+#     class Meta:
+#         model = User
+#         fields = ('username', 'password1', 'password2', 'email',
+#                   'prenom', 'nom')
 
-    def save(self, commit=True):
-        user = super(MyRegistrationForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
-        user.first_name = self.cleaned_data['prenom']
-        user.last_name = self.cleaned_data['nom']
+#     def save(self, commit=True):
+#         user = super(MyRegistrationForm, self).save(commit=False)
+#         user.email = self.cleaned_data['email']
+#         user.first_name = self.cleaned_data['prenom']
+#         user.last_name = self.cleaned_data['nom']
 
-        if commit:
-            user.save()
+#         if commit:
+#             user.save()
 
-        return user
+#         return user
 
 
 class FicheForm(ModelForm):
