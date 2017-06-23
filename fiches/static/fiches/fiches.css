@@ -224,11 +224,13 @@ div.gallery img {
 
 
 #liste table, tr, td, th{
-    /* display: block; */
     border: 1px solid #470002;
     padding-left: 0;
     padding-right: 0;
     text-align: center;
+    vertical-align: middle;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 #liste table tr td a {
@@ -236,6 +238,9 @@ div.gallery img {
     height:100%;
     width:100%;
     text-align: center;
+    vertical-align: middle;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 #liste .media-object {
