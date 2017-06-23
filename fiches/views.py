@@ -120,7 +120,11 @@ def detail_fiche(request, fiche_id):
         nb = 25 - fiche.inventaire_fdg.cases.count()
     else:
         nb = 0
-    context = {'fiche': fiche, 'range': range(nb)}
+
+    effets, effets_ig, force, intell, agi, armure = fiche.equipement.effets()
+    context = {'fiche': fiche, 'range': range(nb), 'effets': effets,
+               'effets_ig': effets_ig, 'force': force, 'intell': intell,
+               'agi': agi, 'armure': armure}
     print(fiche.equipement.get_torse().objet.nom)
     return render(request, 'fiches/detail.html', context)
 

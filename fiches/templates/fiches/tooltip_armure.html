@@ -15,10 +15,10 @@
 <!--   <li>Effet en jeu : 	{{ armure.effet_ig|linebreaksbr }}</li> -->
 
 <!--   {% endif %} -->
-  <li><b>Localisation :</b> {{ armure.get_membre_display }}<br></li>
-  <li><b>Armure :</b> {{ armure.armure }}<br></li>
-  <li><b>Force :</b> {{ armure.force }}<br></li>
-  <li><b>Agilité :</b> {{ armure.agi }}<br></li>
-  <li><b>Intelligence :</b> {{ armure.intell }}</li>
+  <!-- <li><b>Localisation :</b> {{ armure.get_membre_display }}<br></li> -->
+  {% if armure.armure != 0 %}<li><b>Armure :</b> {{ armure.armure }}<br></li>{% endif %}
+  {% if armure.force != 0 %}<li><b>Force :</b> {{ armure.force }}<br></li>{% endif %}
+  {% if armure.agi != 0 %}<li><b>Agilité :</b> {{ armure.agi }}<br></li>{% endif %}
+  {% if armure.intell != 0 %}<li><b>Intelligence :</b> {{ armure.intell }}</li>{% endif %}
 
 {% endblock %}

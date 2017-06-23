@@ -390,77 +390,77 @@ class Equipement(models.Model):
         for i in self.objets.all():
             if i.membre == 1:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_am(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 2:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_tete(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 3:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_epaules(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 4:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_torse(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 5:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_mains(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 6:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_taille(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 7:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_jambes(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 8:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_pieds(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 9:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_dos(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 10:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_cou(self):
         ret = []
         for i in self.objets.all():
             if i.membre == 11:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_doigts(self):
         ret = []
@@ -477,7 +477,7 @@ class Equipement(models.Model):
         for i in self.objets.all():
             if i.membre == 13:
                 ret.append(i)
-        return ret[0] if ret else ret
+        return ret[0] if ret else None
 
     def get_divers(self):
         ret = []
@@ -488,6 +488,48 @@ class Equipement(models.Model):
             for x in xrange(10 - len(ret)):
                 ret.append(None)
         return ret
+
+    def effets(self):
+        effets = []
+        effets_ig = []
+        force = 0
+        intell = 0
+        agi = 0
+        armure = 0
+        methods = [self.get_mp, self.get_am, self.get_tete, self.get_epaules,
+                   self.get_torse, self.get_mains, self.get_taille,
+                   self.get_jambes, self.get_pieds, self.get_dos, self.get_cou,
+                   self.get_poignets]
+        for method in methods:
+            objet = method()
+            print(objet)
+            if objet is not None:
+                effets.append(objet.effet)
+                effets.append(objet.autres_effets)
+                effets_ig.append(objet.effet_ig)
+                force += objet.force
+                intell += objet.intell
+                agi += objet.agi
+                armure += objet.armure
+        for anneau in self.get_doigts():
+            if anneau is not None:
+                effets.append(anneau.effet)
+                effets.append(anneau.autres_effets)
+                effets_ig.append(anneau.effet_ig)
+                force += anneau.force
+                intell += anneau.intell
+                agi += anneau.agi
+                armure += anneau.armure
+        for diver in self.get_divers():
+            if diver is not None:
+                effets.append(diver.effet)
+                effets.append(diver.autres_effets)
+                effets_ig.append(diver.effet_ig)
+                force += diver.force
+                intell += diver.intell
+                agi += diver.agi
+                armure += diver.armure
+        return effets, effets_ig, force, intell, agi, armure
 
     # def get_equipement(self):
     #     return self.get_mp() + self.get_am() + self.get_tete() + self.get_epaules() + self.get_torse() + self.get_mains() + self.get_taille() + self.get_jambes() + self.get_pieds() + self.get_dos() + self.get_cou() + self.get_doigts() + self.get_poignets() + self.get_divers()

@@ -9,7 +9,7 @@
 	  {% elif objet.qualite == 'l' %}id="objet-legendaire"
 	  {% elif objet.qualite == 'u' %}id="objet-unique"
 	  {% endif %}><b>{{ objet.nom|capfirst }}</b></li>
-      <li><b>Description&nbsp;: </b>{{ objet.description }}</li>
+      <li><!-- <b>Description&nbsp;: </b> -->{{ objet.description }}</li>
       <li><b>Prix&nbsp;: </b>
 	{{ objet.prix|p_or }} <img id="money" src="/fiches/media/images/site/UI-GoldIcon.PNG" alt="Souverains">
 	{{ objet.prix|p_argent }} <img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Souverains">
