@@ -56,7 +56,7 @@ function getTooltip() {
 <div class="media">
   <div class="media-body">
 
-    <h3>{{ fiche.get_pj_display }} et {{ fiche.get_etat_display }}</h3>
+    <h3>{{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}</h3>
     <ul>
       <li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}</li>
       <li><b>Prénom&nbsp;: </b>{{ fiche.prenom|capfirst }}</li>
