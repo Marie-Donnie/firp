@@ -1,9 +1,12 @@
-from fiches.models import Fiche, UserProfile, Objet, Armure, Case, Equipement, Inventaire
+from fiches.models import *
+# Fiche, UserProfile, Objet, Armure, Case, Equipement
+# from fiches.models import Inventaire, Rpg, Avant_Garde, Classe
+from rpg.avant_garde.models import *
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from django.contrib.auth.models import User
 
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 class UserProfileForm(ModelForm):
     class Meta:
@@ -12,36 +15,7 @@ class UserProfileForm(ModelForm):
         widgets = {'user': forms.HiddenInput()}
 
 
-# class UserForm(ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ['username', 'email', 'first_name', 'last_name', 'password']
-#         prefix = 'user'
-#         # "__all__"
-
-
-# class MyRegistrationForm(UserCreationForm):
-#     email = forms.EmailField(required=True)
-#     prenom = forms.CharField(required=True)
-#     nom = forms.CharField(required=True)
-
-#     class Meta:
-#         model = User
-#         fields = ('username', 'password1', 'password2', 'email',
-#                   'prenom', 'nom')
-
-#     def save(self, commit=True):
-#         user = super(MyRegistrationForm, self).save(commit=False)
-#         user.email = self.cleaned_data['email']
-#         user.first_name = self.cleaned_data['prenom']
-#         user.last_name = self.cleaned_data['nom']
-
-#         if commit:
-#             user.save()
-
-#         return user
-
-
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FICHES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 class FicheForm(ModelForm):
 
     class Meta:
@@ -70,6 +44,8 @@ class FicheForm(ModelForm):
                    'pj': forms.RadioSelect(),
                    'main_dir': forms.RadioSelect(), }
 
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 class ObjetForm(ModelForm):
 
@@ -111,3 +87,45 @@ class EquipementForm(ModelForm):
         model = Equipement
         fields = ['objets', 'nom']
         prefix = 'equipement'
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class RpgForm(ModelForm):
+
+    class Meta:
+        model = Rpg
+        fields = ['nom']
+        prefix = 'rpg'
+
+
+class Avant_GardeForm(RpgForm):
+
+    class Meta:
+        model = Avant_garde
+        fields = '__all__'
+        prefix = 'a_g'
+
+
+class Classe_agForm(ModelForm):
+
+    class Meta:
+        model = Classe_ag
+        fields = ['nom']
+        prefix = 'class_ag'
+
+
+class FantassinForm(Classe_agForm):
+
+    class Meta:
+        model = Fantassin
+        fields = '__all__'
+        prefix = 'fantassin'
+
+
+class ApothicaireForm(Classe_agForm):
+
+    class Meta:
+        model = Apothicaire
+        fields = '__all__'
+        prefix = 'apothicaire'

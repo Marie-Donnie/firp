@@ -3,26 +3,11 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from datetime import datetime
+from rpg.avant_garde.models import Rpg
+from functions import IntegerRangeField
 
 
-class IntegerRangeField(models.SmallIntegerField):
-    def __init__(self, verbose_name=None, name=None, min_value=None,
-                 max_value=None, **kwargs):
-        self.min_value, self.max_value = min_value, max_value
-        models.SmallIntegerField.__init__(self, verbose_name, name, **kwargs)
-
-    def formfield(self, **kwargs):
-        defaults = {'min_value': self.min_value, 'max_value': self.max_value}
-        defaults.update(kwargs)
-        return super(IntegerRangeField, self).formfield(**defaults)
-
-
-class AutoDateTimeField(models.DateTimeField):
-    def pre_save(self, model_instance, add):
-        return datetime.datetime.now()
-
-
-# Create your models here.
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FICHES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 VIVANT = 'VI'
 MORT = 'MO'
@@ -253,7 +238,7 @@ class Fiche(models.Model):
                                       blank=True,
                                       null=True,
                                       related_name='proprietaire')
-    rpg = models.ForeignKey('Rpg',
+    rpg = models.ForeignKey(Rpg,
                             blank=True,
                             null=True)
 
@@ -266,6 +251,8 @@ class Fiche(models.Model):
                         "Peut faire plus de quinze fiches"),)
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 null=True,
@@ -274,6 +261,8 @@ class UserProfile(models.Model):
                               default='images/site/no-image.png')
     naissance = models.DateField()
 
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 class Objet(models.Model):
     nom = models.CharField(max_length=75)
@@ -530,170 +519,3 @@ class Equipement(models.Model):
                 agi += diver.agi
                 armure += diver.armure
         return effets, effets_ig, force, intell, agi, armure
-
-    # def get_equipement(self):
-    #     return self.get_mp() + self.get_am() + self.get_tete() + self.get_epaules() + self.get_torse() + self.get_mains() + self.get_taille() + self.get_jambes() + self.get_pieds() + self.get_dos() + self.get_cou() + self.get_doigts() + self.get_poignets() + self.get_divers()
-
-
-class Rpg(models.Model):
-    nom = models.CharField(max_length=50,
-                           default="Classique")
-
-    class Meta:
-        verbose_name = "rpg"
-        verbose_name_plural = "rpgs"
-        default_related_name = 'rpg'
-        permissions = (("plusieurs_rpgs",
-                        "Participe à d'autres campagnes"),)
-
-
-class Avant_garde(Rpg):
-    race_rpg = models.CharField(max_length=1,
-                                choices=((
-                                    ('n', "Nain"),
-                                    ('e', "Haut-elfe"),
-                                    ('h', "Humain")
-                                )),
-                                default="Humain")
-    ex_prof = models.SmallIntegerField(choices=((
-        (1, "Forgeron"),
-        (2, "Chasseur"),
-        (3, "Cuisinier"),
-        (4, "Tavernier"),
-        (5, "Facteur d'arc"),
-        (6, "Tanneur"),
-        (7, "Architecte"),
-        (8, "Ebéniste"),
-        (9, "Autre métier")
-    )),
-                                       default=9)
-    cap_combat = IntegerRangeField(default=1, min_value=1,
-                                   max_value=10)
-    cap_tir = IntegerRangeField(default=1, min_value=1,
-                                max_value=10)
-    force = IntegerRangeField(default=1, min_value=1,
-                              max_value=10)
-    endu = IntegerRangeField(default=1, min_value=1,
-                             max_value=10)
-    perce = IntegerRangeField(default=1, min_value=1,
-                              max_value=10)
-    agi = IntegerRangeField(default=1, min_value=1,
-                            max_value=10)
-    intell = IntegerRangeField(default=1, min_value=1,
-                               max_value=10)
-    charisme = IntegerRangeField(default=1, min_value=1,
-                                 max_value=10)
-    force_men = IntegerRangeField(default=1, min_value=1,
-                                  max_value=10)
-    pv = models.SmallIntegerField(default=11)
-    ps = models.SmallIntegerField(default=0)
-    pf = models.SmallIntegerField(default=0)
-    niveau = models.SmallIntegerField(default=1)
-    xp = models.SmallIntegerField(default=0)
-    blessures = models.CharField(max_length=800,
-                                 null=True,
-                                 blank=True,
-                                 default='Sans')
-    troubles_ment = models.CharField(max_length=800,
-                                     null=True,
-                                     blank=True,
-                                     default='Sans')
-    classe = models.ForeignKey('Classe_ag',
-                               blank=True,
-                               null=True)
-
-
-class Classe_ag(models.Model):
-    nom = models.CharField(max_length=50,
-                           default="Fantassin")
-
-
-class Fantassin(Classe_ag):
-    intim = IntegerRangeField(default=0, min_value=1,
-                              max_value=100)
-    parer_fleches = IntegerRangeField(default=0, min_value=1,
-                                      max_value=100)
-    athle = models.BooleanField(default=False,
-                                choices=(
-                                    (True, 'Oui'),
-                                    (False, 'Non'),
-                                ))
-    resistant = models.BooleanField(default=False,
-                                    choices=(
-                                        (True, 'Oui'),
-                                        (False, 'Non'),
-                                    ))
-    cc = IntegerRangeField(default=0, min_value=1,
-                           max_value=100)
-    prot = IntegerRangeField(default=0, min_value=1,
-                             max_value=100)
-    epeiste = models.BooleanField(default=False,
-                                  choices=(
-                                      (True, 'Oui'),
-                                      (False, 'Non'),
-                                  ))
-    crane_dur = models.BooleanField(default=False,
-                                    choices=(
-                                        (True, 'Oui'),
-                                        (False, 'Non'),
-                                    ))
-    equitation = IntegerRangeField(default=0, min_value=1,
-                                   max_value=100)
-    maitr_glaive = models.BooleanField(default=False,
-                                       choices=(
-                                           (True, 'Oui'),
-                                           (False, 'Non'),
-                                       ))
-    maitr_arm_lourde = models.BooleanField(default=False,
-                                           choices=(
-                                               (True, 'Oui'),
-                                               (False, 'Non'),
-                                           ))
-    feroce = models.BooleanField(default=False,
-                                 choices=(
-                                     (True, 'Oui'),
-                                     (False, 'Non'),
-                                 ))
-    implacable = models.BooleanField(default=False,
-                                     choices=(
-                                         (True, 'Oui'),
-                                         (False, 'Non'),
-                                     ))
-
-
-class Apothicaire(Classe_ag):
-    medecine = IntegerRangeField(default=0, min_value=1,
-                                 max_value=100)
-    chirurgie = IntegerRangeField(default=0, min_value=1,
-                                  max_value=100)
-    poison = IntegerRangeField(default=0, min_value=1,
-                               max_value=100)
-    guerisseur = models.BooleanField(default=False,
-                                     choices=(
-                                         (True, 'Oui'),
-                                         (False, 'Non'),
-                                     ))
-    alchimie = IntegerRangeField(default=0, min_value=1,
-                                 max_value=100)
-    equitation = IntegerRangeField(default=0, min_value=1,
-                                   max_value=100)
-    maitr_scalpel = models.BooleanField(default=False,
-                                        choices=(
-                                            (True, 'Oui'),
-                                            (False, 'Non'),
-                                        ))
-    lancer_fioles = models.BooleanField(default=False,
-                                        choices=(
-                                            (True, 'Oui'),
-                                            (False, 'Non'),
-                                        ))
-    maitr_guerisseur = models.BooleanField(default=False,
-                                           choices=(
-                                               (True, 'Oui'),
-                                               (False, 'Non'),
-                                           ))
-    enfumeur = models.BooleanField(default=False,
-                                   choices=(
-                                       (True, 'Oui'),
-                                       (False, 'Non'),
-                                   ))

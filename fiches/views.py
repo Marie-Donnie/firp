@@ -224,9 +224,7 @@ def delete_fiche(request, fiche_id):
         return HttpResponse("Vous ne pouvez pas supprimer cette fiche.")
 
 
-
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
-
 
 @login_required
 def creer_objet(request):
@@ -496,3 +494,6 @@ def tooltip_armure(request, armure_id):
     objet = armure.objet
     context = {'armure': armure, 'objet': objet}
     return render(request, 'fiches/tooltip_armure.html', context)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
