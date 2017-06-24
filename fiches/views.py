@@ -116,15 +116,31 @@ def creer_fiche(request):
 def detail_fiche(request, fiche_id):
     fiche = get_object_or_404(Fiche, pk=fiche_id)
 
-    if (fiche.inventaire_fdg.cases.count() < 25):
-        nb = 25 - fiche.inventaire_fdg.cases.count()
+    if (fiche.inventaire_fdg.cases.count() < 30):
+        nb = 30 - fiche.inventaire_fdg.cases.count()
     else:
         nb = 0
 
+    mp = fiche.equipement.get_mp()
+    am = fiche.equipement.get_am()
+    tete = fiche.equipement.get_tete()
+    epaules = fiche.equipement.get_epaules()
+    torse = fiche.equipement.get_torse()
+    mains = fiche.equipement.get_mains()
+    taille = fiche.equipement.get_taille()
+    jambes = fiche.equipement.get_jambes()
+    dos = fiche.equipement.get_dos()
+    cou = fiche.equipement.get_cou()
+    poignets = fiche.equipement.get_poignets()
+    doigts = fiche.equipement.get_doigts()
+    divers = fiche.equipement.get_divers()
     effets, effets_ig, force, intell, agi, armure = fiche.equipement.effets()
     context = {'fiche': fiche, 'range': range(nb), 'effets': effets,
                'effets_ig': effets_ig, 'force': force, 'intell': intell,
-               'agi': agi, 'armure': armure}
+               'agi': agi, 'armure': armure, 'mp': mp, 'am': am, 'tete': tete,
+               'epaules': epaules, 'torse': torse, 'mains': mains,
+               'taille': taille, 'jambes': jambes, 'dos': dos, 'cou': cou,
+               'poignets': poignets, 'doigts': doigts, 'divers': divers}
     print(fiche.equipement.get_torse().objet.nom)
     return render(request, 'fiches/detail.html', context)
 
