@@ -152,24 +152,27 @@ class Fantassin(models.Model):
                                          (True, 'Oui'),
                                          (False, 'Non'),
                                      ))
+    perso = models.OneToOneField(Avant_garde,
+                                 null=True,
+                                 related_name='fantassin')
 
 
 
 class Apothicaire(models.Model):
-    medecine = IntegerRangeField(default=0, min_value=1,
+    medecine = IntegerRangeField(default=0, min_value=0,
                                  max_value=100)
-    chirurgie = IntegerRangeField(default=0, min_value=1,
+    chirurgie = IntegerRangeField(default=0, min_value=0,
                                   max_value=100)
-    poison = IntegerRangeField(default=0, min_value=1,
+    poison = IntegerRangeField(default=0, min_value=0,
                                max_value=100)
     guerisseur = models.BooleanField(default=False,
                                      choices=(
                                          (True, 'Oui'),
                                          (False, 'Non'),
                                      ))
-    alchimie = IntegerRangeField(default=0, min_value=1,
+    alchimie = IntegerRangeField(default=0, min_value=0,
                                  max_value=100)
-    equitation = IntegerRangeField(default=0, min_value=1,
+    equitation = IntegerRangeField(default=0, min_value=0,
                                    max_value=100)
     maitr_scalpel = models.BooleanField(default=False,
                                         choices=(
@@ -191,3 +194,6 @@ class Apothicaire(models.Model):
                                        (True, 'Oui'),
                                        (False, 'Non'),
                                    ))
+    perso = models.OneToOneField(Avant_garde,
+                                 null=True,
+                                 related_name='apothicaire')

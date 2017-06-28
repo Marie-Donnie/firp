@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 from models import *
 
 
@@ -25,6 +26,7 @@ class FantassinForm(ModelForm):
         model = Fantassin
         fields = '__all__'
         prefix = 'fantassin'
+        widgets = {'perso': forms.HiddenInput()}
 
 
 class ApothicaireForm(ModelForm):
@@ -33,3 +35,4 @@ class ApothicaireForm(ModelForm):
         model = Apothicaire
         fields = '__all__'
         prefix = 'apothicaire'
+        widgets = {'perso': forms.HiddenInput()}

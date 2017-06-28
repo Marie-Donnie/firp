@@ -82,8 +82,7 @@ def creer_fiche(request):
         if request.method == 'POST':
             data = request.POST.dict()
             data['createur'] = User.objects.get(username=utilisateur).id
-            if not(utilisateur.has_perm('fiches.equipement_ok') and
-                   utilisateur.has_perm('fiches.inventaire_ok')):
+            if not(utilisateur.has_perm('fiches.equipement_ok')):
                 data['equipement'] = None
                 data['inventaire_fdg'] = None
             else:

@@ -44,13 +44,13 @@
     {% for f in fiches %}
     <tr>
       <!-- <div class="character"> -->
-      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></td>
-      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_classe_display }}</a></td>
-      <td><a href="{% url 'detail_fiche' f.id %}">{{ f.get_grade_display }}</a></td>
+      <td><a href="{% url 'detail_perso' f.id %}">{{ f.nom }} {{ f.prenom }}</a></td>
+      <td><a href="{% url 'detail_perso' f.id %}">{{ f.get_classe_display }}</a></td>
+      <td><a href="{% url 'detail_perso' f.id %}">{{ f.get_grade_rp_display }}</a></td>
       {% if f.image %}
-      <td><a target="_blank" href="{% url 'detail_fiche' f.id %}"><img class="media-object" src={{ f.image.url }} alt="Portrait"></a></td>
+      <td><a target="_blank" href="{% url 'detail_perso' f.id %}"><img class="media-object" src={{ f.image.url }} alt="Portrait"></a></td>
       {% else %}
-      <td><a target="_blank" href="{% url 'detail_fiche' f.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
+      <td><a target="_blank" href="{% url 'detail_perso' f.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
       {% endif %}
       <!-- </div> -->
     </tr>

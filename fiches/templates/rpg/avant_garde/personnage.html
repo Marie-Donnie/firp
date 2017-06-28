@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block script %}
+{% endblock %}
+
+
+{% block title %}Fiche de {{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
+{% block page-title %}
+{{ fiche.prenom }} {{ fiche.nom }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="media">
+  <div class="media-body">
+
+    <h3>{{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}</h3>
+    <ul>
+      <li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}&nbsp;{{ fiche.prenom|capfirst }}</li>
+      <li><b>Sexe&nbsp;: </b>{{ fiche.get_sexe_display }}</li>
+      <li><b>Race&nbsp;: </b>{{ fiche.get_race_display|capfirst }}</li>
+      <li><b>Date de naissance&nbsp;: </b>{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
+	{% endif %}
+	{{fiche.mois_de_naissance}}{% if fiche.jour_mois_de_naissance == 01 %}er mois{% else %}ème mois
+	{% endif %}
+	de l'an {{fiche.annee_de_naissance}}</li>
+      <li><b>Ville de naissance&nbsp;: </b>{{ fiche.ville_de_naissance|capfirst  }}</li>
+      <li><b>Ancienne Profession&nbsp;: </b>
+      {% if fiche.ex_prof != 9 %}
+	{{fiche.get_ex_prof_display|capfirst }}
+	{% else %}
+	{{fiche.autre_metier|capfirst}}
+	{% endif %}
+      </li>
+      <li><b>Grade&nbsp;: </b>{{ fiche.get_grade_rp_display|capfirst }}</li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

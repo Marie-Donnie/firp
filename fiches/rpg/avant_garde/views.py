@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from fiches.rpg.avant_garde.forms import *
+from fiches.rpg.avant_garde.models import *
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -31,24 +32,28 @@ def creer_base(request):
 
 
 @login_required
-def creer_apothicaire(request, base_id):
+def creer_apothicaire(request, ag_id):
     utilisateur = request.user
     if (utilisateur.has_perm('fiche.add_avant_garde')):
-        if request.method == 'POST':
-            data = request.POST.dict()
-            data['nom'] = 'Avant garde'
-            form = FicheForm(data)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
+        perso = get_object_or_404(Avant_garde, pk=ag_id)
+        if (perso.classe == 4):
+            if request.method == 'POST':
+                data = request.POST.dict()
+                data['perso'] = perso.id
+                form = ApothicaireForm(data)
+                if form.is_valid():
+                    form.save()
+                    return HttpResponseRedirect('/')
+                else:
+                    print(form.errors)
             else:
-                print(form.errors)
+                form = ApothicaireForm()
+
+            context = {'form': form}
+
+            return render(request, 'rpg/avant_garde/apothicaire.html', context)
         else:
-            form = Avant_gardeForm()
-
-        context = {'form': form}
-
-        return render(request, 'global_form.html', context)
+            return HttpResponse("La classe apothicaire ne correspond pas a celle du personnage.")
 
     else:
         return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
@@ -71,3 +76,11 @@ def persos_ag(request):
     context = {'fiches': fiches}
 
     return render(request, 'rpg/avant_garde/personnages.html', context)
+
+
+def detail_perso(request, perso_id):
+    fiche = get_object_or_404(Avant_garde, pk=perso_id)
+
+    context = {'fiche': fiche}
+
+    return render(request, 'rpg/avant_garde/personnage.html', context)

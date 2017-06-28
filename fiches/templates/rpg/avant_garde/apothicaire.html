@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+
+{% block script %}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({html: true, placement: 'right'})
+})
+{% endblock %}
+
+{% block title %}Créer un apothicaire{% endblock %}
+{% block page-title %}Créer un apothicaire{% endblock %}
+
+{% block content %}
+<div id="char_form">
+<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+  {% csrf_token %}
+  {{form.as_ul}}
+
+</div>
+<input class="btn btn-default" type="submit" value="Valider" />
+</form>
+{% endblock %}
