@@ -1,8 +1,8 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from fiches import views
 from django.conf.urls.static import static
 from django.conf import settings
+from fiches import views
 
 urlpatterns = [
     # General
@@ -54,5 +54,9 @@ urlpatterns = [
     url(r'^objets/editer_inventaire/(?P<inventaire_id>\d+)/$',
         views.edit_inventaire, name='editer_inventaire'),
     url(r'^objets/editer_equipement/(?P<equipement_id>\d+)/$',
-        views.edit_equipement, name='editer_equipement')
+        views.edit_equipement, name='editer_equipement'),
+    # RPG
+    url(r'^', include('fiches.rpg.avant_garde.urls')),
+    # url(r'^avant_garde/creer_perso/(?P<perso_id>\d+)/$', views.creer_base,
+    #     name='creer_perso'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,29 +2,32 @@
 from django.db import models
 from fiches.functions import IntegerRangeField
 
-
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-class Rpg(models.Model):
-    nom = models.CharField(max_length=50,
-                           default="Classique")
-
-    class Meta:
-        verbose_name = "rpg"
-        verbose_name_plural = "rpgs"
-        default_related_name = 'rpg'
-        permissions = (("plusieurs_rpgs",
-                        "Participe à d'autres campagnes"),)
-
-
-class Avant_garde(Rpg):
-    race_rpg = models.CharField(max_length=1,
-                                choices=((
+class Avant_garde(models.Model):
+    nom = models.CharField(max_length=50)
+    prenom = models.CharField(max_length=50)
+    sexe = models.CharField(max_length=1,
+                            choices=((
+                                ('h', "Homme"),
+                                ('f', "Femme")
+                            )),
+                            default="Homme")
+    jour_de_naissance = IntegerRangeField(default='1', min_value=1,
+                                          max_value=31)
+    mois_de_naissance = IntegerRangeField(default='1', min_value=1,
+                                          max_value=12)
+    annee_de_naissance = IntegerRangeField(default='0', min_value=-32000,
+                                           max_value=100)
+    ville_de_naissance = models.CharField(max_length=50,
+                                          default='Inconnue')
+    race = models.CharField(max_length=1,
+                            choices=((
                                     ('n', "Nain"),
                                     ('e', "Haut-elfe"),
                                     ('h', "Humain")
                                 )),
-                                default="Humain")
+                            default="Humain")
     ex_prof = models.SmallIntegerField(choices=((
         (1, "Forgeron"),
         (2, "Chasseur"),
@@ -37,6 +40,16 @@ class Avant_garde(Rpg):
         (9, "Autre métier")
     )),
                                        default=9)
+    autre_metier = models.CharField(max_length=30,
+                                    default="Aucun")
+    grade_rp = models.SmallIntegerField(choices=((
+        (1, "Soldat"),
+        (2, "Caporal"),
+        (3, "Sergent"),
+        (4, "Lieutenant"),
+        (5, "Capitaine")
+    )),
+                                        default=1)
     cap_combat = IntegerRangeField(default=1, min_value=1,
                                    max_value=10)
     cap_tir = IntegerRangeField(default=1, min_value=1,
@@ -68,17 +81,27 @@ class Avant_garde(Rpg):
                                      null=True,
                                      blank=True,
                                      default='Sans')
-    classe = models.ForeignKey('Classe_ag',
-                               blank=True,
-                               null=True)
+    image = models.ImageField(upload_to='images/persos',
+                              default='images/site/no-image.png')
+    classe = models.SmallIntegerField(choices=((
+        (1, "Fantassin"),
+        (2, "Arbalétrier"),
+        (3, "Eclaireur"),
+        (4, "Apothicaire de combat"),
+        (5, "Apprenti sorcier")
+    )),
+                                       default=1)
 
 
-class Classe_ag(models.Model):
-    nom = models.CharField(max_length=50,
-                           default="Fantassin")
+# class Classe_ag(models.Model):
+#     nom = models.CharField(max_length=50,
+#                            default="Fantassin")
+
+#     # class Meta:
+#     #     abstract = True
 
 
-class Fantassin(Classe_ag):
+class Fantassin(models.Model):
     intim = IntegerRangeField(default=0, min_value=1,
                               max_value=100)
     parer_fleches = IntegerRangeField(default=0, min_value=1,
@@ -131,7 +154,8 @@ class Fantassin(Classe_ag):
                                      ))
 
 
-class Apothicaire(Classe_ag):
+
+class Apothicaire(models.Model):
     medecine = IntegerRangeField(default=0, min_value=1,
                                  max_value=100)
     chirurgie = IntegerRangeField(default=0, min_value=1,

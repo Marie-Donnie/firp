@@ -1,16 +1,11 @@
 from django.shortcuts import get_object_or_404, render
-from fiches.models import Fiche, UserProfile, Objet, Armure, Case, Inventaire, Equipement
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from fiches.forms import FicheForm, UserProfileForm
-from fiches.forms import ObjetForm, ArmureForm, CaseForm, InventaireForm, EquipementForm
-from django.db.models import Count
-from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from fiches.models import *
+from fiches.forms import *
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -494,6 +489,3 @@ def tooltip_armure(request, armure_id):
     objet = armure.objet
     context = {'armure': armure, 'objet': objet}
     return render(request, 'fiches/tooltip_armure.html', context)
-
-
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

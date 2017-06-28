@@ -1,9 +1,6 @@
-from fiches.models import *
-# Fiche, UserProfile, Objet, Armure, Case, Equipement
-# from fiches.models import Inventaire, Rpg, Avant_Garde, Classe
-from rpg.avant_garde.models import *
 from django.forms import ModelForm
 from django import forms
+from fiches.models import *
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -87,45 +84,3 @@ class EquipementForm(ModelForm):
         model = Equipement
         fields = ['objets', 'nom']
         prefix = 'equipement'
-
-
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
-
-class RpgForm(ModelForm):
-
-    class Meta:
-        model = Rpg
-        fields = ['nom']
-        prefix = 'rpg'
-
-
-class Avant_GardeForm(RpgForm):
-
-    class Meta:
-        model = Avant_garde
-        fields = '__all__'
-        prefix = 'a_g'
-
-
-class Classe_agForm(ModelForm):
-
-    class Meta:
-        model = Classe_ag
-        fields = ['nom']
-        prefix = 'class_ag'
-
-
-class FantassinForm(Classe_agForm):
-
-    class Meta:
-        model = Fantassin
-        fields = '__all__'
-        prefix = 'fantassin'
-
-
-class ApothicaireForm(Classe_agForm):
-
-    class Meta:
-        model = Apothicaire
-        fields = '__all__'
-        prefix = 'apothicaire'

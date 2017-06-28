@@ -3,7 +3,6 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from datetime import datetime
-from rpg.avant_garde.models import Rpg
 from functions import IntegerRangeField
 
 
@@ -238,9 +237,9 @@ class Fiche(models.Model):
                                       blank=True,
                                       null=True,
                                       related_name='proprietaire')
-    rpg = models.ForeignKey(Rpg,
-                            blank=True,
-                            null=True)
+    # rpg = models.ForeignKey(Rpg,
+    #                         blank=True,
+    #                         null=True)
 
     class Meta:
         ordering = ["nom", "prenom"]

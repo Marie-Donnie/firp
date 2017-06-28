@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+
+{% block script %}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({html: true, placement: 'right'})
+})
+{% endblock %}
+
+{% block title %}Créer une fiche d'avant-garde{% endblock %}
+{% block page-title %}Créer une fiche d'avant-garde{% endblock %}
+
+{% block content %}
+<div id="char_form">
+<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+  {% csrf_token %}
+  <!-- {{form.as_ul}} -->
+
+  <h2>Général</h2><br>
+  <div class="form-group">
+  <label for="id_nom">Nom&nbsp;:</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text">
+  <label for="id_prenom">Prenom&nbsp;:</label> <input name="prenom" required="" id="id_prenom" maxlength="50" type="text">
+  </div>
+      <div class="form-group">
+<label for="id_sexe">Sexe&nbsp;:</label> <select name="sexe" id="id_sexe">
+  <option value="h">Homme</option>
+
+  <option value="f">Femme</option>
+
+</select>
+      </div>
+      <div class="form-group">
+<label for="id_jour_de_naissance">Jour de naissance&nbsp;:</label> <input name="jour_de_naissance" value="1" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
+<label for="id_mois_de_naissance">Mois de naissance&nbsp;:</label> <input name="mois_de_naissance" value="1" max="12" required="" id="id_mois_de_naissance" min="1" type="number">
+<label for="id_annee_de_naissance">Annee de naissance&nbsp;:</label> <input name="annee_de_naissance" value="0" max="100" required="" id="id_annee_de_naissance" min="-32000" type="number">
+      </div>
+      <div class="form-group">
+<label for="id_ville_de_naissance">Ville de naissance&nbsp;:</label> <input name="ville_de_naissance" value="Inconnue" required="" id="id_ville_de_naissance" maxlength="50" type="text">
+      </div>
+      <div class="form-group">
+<label for="id_race">Race&nbsp;:</label> <select name="race" id="id_race" data-toggle="tooltip" title="<ul><li><b>Humain :</b> Profil normal</li>
+<li><b>Nain :</b> +1 PV, + 1 Force, + 1 Endurance, - 2 Agilité</li>
+<li><b>Haut-Elfe :</b> + 1 Agilité, + 1 Capacité de tir, + 1 Perception, - 1 PV, - 1 Endurance</li></ul>">
+  <option value="n">Nain</option>
+
+  <option value="e">Haut-elfe</option>
+
+  <option value="h">Humain</option>
+
+</select>
+      </div>
+      <div class="form-group">
+<label for="id_ex_prof">Ancienne Profession&nbsp;:</label> <select name="ex_prof" id="id_ex_prof" data-toggle="tooltip" title="Soldat de base, les grades peuvent augmenter durant la campagne, si le personnage est déjà existant, il conserve son grade, les volontaires peuvent tirer leur grade aux dés (un soldat commence niveau 1, un caporal niveau 2, un sergent niveau 3, un lieutenant niveau 4 et un capitaine niveau 5)
+">
+  <option value="1">Forgeron</option>
+
+  <option value="2">Chasseur</option>
+
+  <option value="3">Cuisinier</option>
+
+  <option value="4">Tavernier</option>
+
+  <option value="5">Facteur d'arc</option>
+
+  <option value="6">Tanneur</option>
+
+  <option value="7">Architecte</option>
+
+  <option value="8">Ebéniste</option>
+
+  <option value="9" selected="">Autre métier</option>
+
+</select>
+  <label for="id_autre_metier">Autre métier&nbsp;:</label> <input name="autre_metier" value="Aucun" id="id_autre_metier" maxlength="30" type="text">
+      </div>
+  <div class="form-group">
+      <label for="id_grade_rp">Grade rp&nbsp;:</label> <select name="grade_rp" id="id_grade_rp">
+  <option value="1" selected="">Soldat</option>
+
+  <option value="2">Caporal</option>
+
+  <option value="3">Sergent</option>
+
+  <option value="4">Lieutenant</option>
+
+  <option value="5">Capitaine</option>
+
+      </select>
+  </div>
+  <h2>Profil</h2><br>
+
+  <div class="form-group">
+    <label for="id_cap_combat">Capacité combat&nbsp;:</label> <input name="cap_combat" value="1" max="10" required="" id="id_cap_combat" min="1" type="number" data-toggle="tooltip" title="Valeur de 1 à 10, la valeur moyenne d'un fantassin est de 4. Elle détermine la capacité que vous avez à attaquer votre adversaire et s'oppose directement à la capacité de combat de l'adversaire.">
+  </div>
+  <div class="form-group">
+    <label for="id_cap_tir">Capacité de  tir&nbsp;:</label> <input name="cap_tir" value="1" max="10" required="" id="id_cap_tir" min="1" type="number" data-toggle="tooltip" title="">
+  </div>
+  <div class="form-group">
+    <label for="id_force">Force&nbsp;:</label> <input name="force" value="1" max="10" required="" id="id_force" min="1" type="number" data-toggle="tooltip" title="">
+  </div>
+  <div class="form-group">
+    <label for="id_endu">Endurance&nbsp;:</label> <input name="endu" value="1" max="10" required="" id="id_endu" min="1" type="number" data-toggle="tooltip" title="">
+  </div>
+  <div class="form-group">
+    <label for="id_perce">Perception&nbsp;:</label> <input name="perce" value="1" max="10" required="" id="id_perce" min="1" type="number" data-toggle="tooltip" title="">
+  </div>
+  <div class="form-group">
+    <label for="id_agi">Agilité&nbsp;:</label> <input name="agi" value="1" max="10" required="" id="id_agi" min="1" type="number" data-toggle="tooltip" title="">
+  </div>
+  <div class="form-group">
+    <label for="id_intell">Intelligence&nbsp;:</label> <input name="intell" value="1" max="10" required="" id="id_intell" min="1" type="number" data-toggle="tooltip" title="">
+  </div>
+  <div class="form-group">
+    <label for="id_charisme">Charisme&nbsp;:</label> <input name="charisme" value="1" max="10" required="" id="id_charisme" min="1" type="number" data-toggle="tooltip" title="">
+  </div>
+  <div class="form-group">
+<label for="id_force_men">Force mentale&nbsp;:</label> <input name="force_men" value="1" max="10" required="" id="id_force_men" min="1" type="number" data-toggle="tooltip" title="">
+  </div>
+
+
+  <h2>Profil secondaire</h2><br>
+
+    <div class="form-group">
+      <label for="id_classe">Classe&nbsp;:</label> <select name="classe" id="id_classe">
+  <option value="1" selected="">Fantassin</option>
+
+  <option value="2">Arbalétrier</option>
+
+  <option value="3">Eclaireur</option>
+
+  <option value="4">Apothicaire de combat</option>
+
+  <option value="5">Apprenti sorcier</option>
+
+      </select>
+      <span id=red>! REQUIS !</span>
+  </div>
+
+    <div class="form-group">
+      <label for="id_pv">Points de vie&nbsp;:</label> <input name="pv" value="11" required="" id="id_pv" type="number" data-toggle="tooltip" title="">
+    </div>
+    <div class="form-group">
+      <label for="id_ps">Points de stress&nbsp;:</label> <input name="ps" value="0" required="" id="id_ps" type="number" data-toggle="tooltip" title="">
+    </div>
+    <div class="form-group">
+      <label for="id_pf">Points de folie&nbsp;:</label> <input name="pf" value="0" required="" id="id_pf" type="number" data-toggle="tooltip" title="">
+    </div>
+    <div class="form-group">
+      <label for="id_niveau">Niveau&nbsp;:</label> <input name="niveau" value="1" required="" id="id_niveau" type="number" data-toggle="tooltip" title="">
+    </div>
+    <div class="form-group">
+      <label for="id_xp">Points d'expérience&nbsp;:</label> <input name="xp" value="0" required="" id="id_xp" type="number" data-toggle="tooltip" title="">
+    </div>
+    <div class="form-group">
+      <label for="id_blessures">Blessures&nbsp;:</label> <input name="blessures" value="Sans" id="id_blessures" maxlength="800" type="text" data-toggle="tooltip" title="">
+    </div>
+    <div class="form-group">
+<label for="id_troubles_ment">Troubles mentaux&nbsp;:</label> <input name="troubles_ment" value="Sans" id="id_troubles_ment" maxlength="800" type="text" data-toggle="tooltip" title="">
+    </div>
+    <label for="id_image">Image&nbsp;:</label> <input name="image" id="id_image" type="file">
+
+
+
+</div>
+<input class="btn btn-default" type="submit" value="Valider" />
+</form>
+{% endblock %}
