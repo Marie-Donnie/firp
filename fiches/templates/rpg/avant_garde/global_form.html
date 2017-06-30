@@ -221,18 +221,22 @@ $(function () {
       <textarea class="form-control" name="troubles_ment" value="Sans" id="id_troubles_ment" maxlength="800" rows="10" cols="40"></textarea>
     </div>
   <div class="form-group">
-  <label for="id_objets">Avantages&nbsp;:</label>
+  <label for="id_avants">Avantages&nbsp;:</label>
     <select size="10" name="objets" required="" multiple="multiple" id="id_avants" class="form-control">
       {% for avant in form.avants %}
-  <option value="{{objet.id}}"{% if avant.id in form.avant.value %} selected="" {% endif %}>{{get_avant_display}}</option>
+  <option value="{{avant.value}}"{% if avant.id in form.avants.value %} selected="" {% endif %}>{{avant}}</option>
   {% endfor %}
     </select>
     </div>
+  <div class="form-group">
+  <label for="id_desavants">Désavantages&nbsp;:</label>
+    <select size="10" name="desavants" required="" multiple="multiple" id="id_desavants" class="form-control">
+      {% for desavant in form.desavants %}
+  <option value="{{desavant.value}}"{% if desavant.id in form.desavants.value %} selected="" {% endif %}>{{desavant}}</option>
+  {% endfor %}
+    </select>
 
-
-
-
-
+    </div>
 
     <label for="id_image">Image&nbsp;:</label> <input name="image" id="id_image" type="file">
 
