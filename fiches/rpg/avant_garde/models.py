@@ -177,6 +177,10 @@ class Avant_garde(models.Model):
                                   blank=True,
                                   default='Sans')
 
+    class Meta:
+        ordering = ["nom", "prenom"]
+        permissions = (("avant_garde", "A accès à l'avant-garde"),)
+
 
 class Fantassin(models.Model):
     intim = IntegerRangeField(default=0, min_value=1,
