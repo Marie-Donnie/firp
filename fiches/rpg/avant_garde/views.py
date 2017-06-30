@@ -32,6 +32,28 @@ def creer_base(request):
 
 
 @login_required
+def editer_base(request):
+    utilisateur = request.user
+    if (utilisateur.has_perm('fiche.add_avant_garde')):
+        if request.method == 'POST':
+            form = Avant_GardeForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = Avant_GardeForm()
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/global_form.html', context)
+
+    else:
+        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+
+
+@login_required
 def creer_apothicaire(request, ag_id):
     utilisateur = request.user
     if (utilisateur.has_perm('fiche.add_avant_garde')):

@@ -160,6 +160,12 @@ class Fiche(models.Model):
                             default='Humaine')
     taille = models.FloatField(default='1.70')
     poids = models.FloatField(default='70')
+    c_yeux = models.CharField(max_length=30,
+                              default='Marron')
+    c_cheveux = models.CharField(max_length=30,
+                                 default='Brun')
+    signes_dis = models.CharField(max_length=200,
+                                  default='Aucun')
     profession = models.CharField(max_length=75,
                                   default='Prostipute')
     medailles = models.CharField(max_length=3000,

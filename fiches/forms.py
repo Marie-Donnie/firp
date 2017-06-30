@@ -19,7 +19,8 @@ class FicheForm(ModelForm):
         model = Fiche
         fields = ['nom', 'prenom', 'autres_prenoms', 'titre',
                   'autres_titres', 'sexe', 'race', 'taille',
-                  'poids', 'profession', 'medailles', 'etat', 'pj',
+                  'poids', 'c_yeux', 'c_cheveux', 'signes_dis',
+                  'profession', 'medailles', 'etat', 'pj',
                   'jour_de_naissance', 'mois_de_naissance',
                   'annee_de_naissance', 'zone_de_naissance',
                   'ville_de_naissance', 'zone_de_residence',
