@@ -192,27 +192,27 @@ $(function () {
 
     <div class="form-group">
       <label for="id_pv">Points de vie&nbsp;:</label>
-      <input name="pv" value="{{form.pv.value|default:11}}" required="" id="id_pv" type="number" data-toggle="tooltip" title=""><br>
+      <input name="pv" value="{{form.pv.value|default:11}}" required="" id="id_pv" type="number" data-toggle="tooltip" title=""  min="0" ><br>
       <span>Sur 1d10, de 1 à 6 = 11 PV, de 7 à 8 = 12 PV, de 9 à 10 = 13 PV. Quand un personnage tombe à 0 PV et qu'il est sauvé par ses camarade, il peut subir une mutilation.</span>
     </div>
     <div class="form-group">
       <label for="id_ps">Points de stress&nbsp;:</label>
-      <input name="ps" value="{{form.ps.value|default:0}}" required="" id="id_ps" type="number" data-toggle="tooltip" title=""><br>
+      <input name="ps" value="{{form.ps.value|default:0}}" required="" id="id_ps" type="number" data-toggle="tooltip" title="" min="0" ><br>
       <span>Les points de stress sont l'accumulation des difficultés des combats, tout les 10 points, elles déclenchent un effet momentanée et rajoute 1 point de folie.</span>
     </div>
     <div class="form-group">
       <label for="id_pf">Points de folie&nbsp;:</label>
-      <input name="pf" value="{{form.pf.value|default:0}}" required="" id="id_pf" type="number" data-toggle="tooltip" title=""><br>
+      <input name="pf" value="{{form.pf.value|default:0}}" required="" id="id_pf" type="number" data-toggle="tooltip" title="" min="0" ><br>
       <span>Les points de folie représentent la dégradation du mental du personnage, plus ils sont élevés plus le personnage risque de recevoir un trouble psychologique.</span>
     </div>
     <div class="form-group">
       <label for="id_niveau">Niveau&nbsp;:</label>
-      <input name="niveau" value="{{form.niveau.value|default:1}}" required="" id="id_niveau" type="number" data-toggle="tooltip" title="">
+      <input name="niveau" value="{{form.niveau.value|default:1}}" required="" id="id_niveau" type="number" data-toggle="tooltip" title="" min="0" >
       <span>Débute au niveau 1.</span>
     </div>
     <div class="form-group">
       <label for="id_xp">Points d'expérience&nbsp;:</label>
-      <input name="xp" value="{{form.xp.value|default:0}}" required="" id="id_xp" type="number" data-toggle="tooltip" title=""><span>Débute à 0/100</span>
+      <input name="xp" value="{{form.xp.value|default:0}}" required="" id="id_xp" type="number" data-toggle="tooltip" title="" min="0" ><span>Débute à 0/100</span>
     </div>
     <div class="form-group">
       <label for="id_blessures">Blessures&nbsp;:</label>

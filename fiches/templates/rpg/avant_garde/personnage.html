@@ -51,7 +51,28 @@
 	{% endif %}
       </li>
       <li><b>Grade&nbsp;: </b>{{ fiche.get_grade_rp_display|capfirst }}</li>
+      <li><b>Capacité de combat&nbsp;: </b>{{ fiche.cap_combat }}</li>
+      <li><b>Capacité de tir&nbsp;: </b>{{ fiche.cap_tir }}</li>
+      <li><b>Force&nbsp;: </b>{{ fiche.force }}</li>
+      <li><b>Endurance&nbsp;: </b>{{ fiche.endu }}</li>
+      <li><b>Perception&nbsp;: </b>{{ fiche.perce }}</li>
+      <li><b>Agilité&nbsp;: </b>{{ fiche.agi }}</li>
+      <li><b>Intelligence&nbsp;: </b>{{ fiche.intell }}</li>
+      <li><b>Charisme&nbsp;: </b>{{ fiche.charisme }}</li>
+      <li><b>Force mentale&nbsp;: </b>{{ fiche.force_men}}</li>
     </ul>
+    <h4 class="progress-label">Expérience </h4>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.xp.value}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 40%">
+	{{fiche.xp}}%
+      </div>
+    </div>
+    <h4 class="progress-label">Points de stress </h4>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.ps.value}}" aria-valuemin="0" aria-valuemax="10" style="min-width: 2em; width: 40%">
+	{{fiche.ps}}
+      </div>
+    </div>
   </div>
   <div class="media-right">
     <a target="_blank" href={{ fiche.image.url }}>
