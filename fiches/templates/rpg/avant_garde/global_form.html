@@ -8,8 +8,8 @@ $(function () {
 })
 {% endblock %}
 
-{% block title %}Créer une fiche d'avant-garde{% endblock %}
-{% block page-title %}Créer une fiche d'avant-garde{% endblock %}
+{% block title %}Créer/éditer une fiche d'avant-garde{% endblock %}
+{% block page-title %}Créer/éditer une fiche d'avant-garde{% endblock %}
 
 {% block content %}
 <div id="char_form">
@@ -20,17 +20,19 @@ $(function () {
   <h2>Général</h2><br>
   <div class="form-group">
     <label for="id_nom">Nom&nbsp;:</label>
-    <input name="nom" required="" id="id_nom" maxlength="50" type="text">
+    <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
     <label for="id_prenom">Prenom&nbsp;:</label>
-    <input name="prenom" required="" id="id_prenom" maxlength="50" type="text">
+    <input name="prenom" required="" id="id_prenom" maxlength="50" type="text" value="{{form.prenom.value|default_if_none:''}}">
   </div>
-  <div class="form-group">
-    <label for="id_sexe">Sexe&nbsp;:</label>
-    <select name="sexe" id="id_sexe">
-      <option value="h">Homme</option>
-      <option value="f">Femme</option>
-    </select>
-  </div>
+    <div class="form-group">
+      <span id="description"><b>Sexe </b></span>
+      <label class="radio-inline" for="id_sexe">
+	<input type="radio" name="sexe" id="id_sexe" value="h" {% if form.sexe.value == 'h' or form.sexe.value == 'Homme' or form.sexe.value == None %} checked="checked" {% endif %}> Homme
+      </label>
+      <label class="radio-inline" for="id_sexe">
+	<input type="radio" name="sexe" id="id_sexe" value="f" {% if form.sexe.value == 'f' or form.sexe.value == 'Femme' %} checked="checked" {% endif %}> Femme
+      </label>
+    </div>
   <div class="form-group">
     <span id="description"><b>Etat du personnage </b></span>
     <label class="radio-inline" for="id_etat">
@@ -44,23 +46,23 @@ $(function () {
     </label>
   </div>
       <div class="form-group">
-	<label for="id_jour_de_naissance">Jour de naissance&nbsp;:</label>
-	<input name="jour_de_naissance" value="1" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
-	<label for="id_mois_de_naissance">Mois de naissance&nbsp;:</label>
-	<input name="mois_de_naissance" value="1" max="12" required="" id="id_mois_de_naissance" min="1" type="number">
-	<label for="id_annee_de_naissance">Annee de naissance&nbsp;:</label>
-	<input name="annee_de_naissance" value="0" max="100" required="" id="id_annee_de_naissance" min="-32000" type="number">
+	<label for="id_jour_de_naissance">Jour de naissance&nbsp;</label>
+	<input name="jour_de_naissance" value="{{form.jour_de_naissance.value|default:'1'}}" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
+	<label for="id_mois_de_naissance">Mois de naissance&nbsp;</label>
+	<input name="mois_de_naissance" value="{{form.mois_de_naissance.value|default:'1'}}" max="12" required="" id="id_mois_de_naissance" min="1" type="number">
+	<label for="id_annee_de_naissance">Annee de naissance&nbsp;</label>
+	<input name="annee_de_naissance" value="{{form.annee_de_naissance.value|default:'0'}}" max="100" required="" id="id_annee_de_naissance" min="-32000" type="number">
       </div>
       <div class="form-group">
-	<label for="id_ville_de_naissance">Ville de naissance&nbsp;:</label>
-	<input name="ville_de_naissance" value="Inconnue" required="" id="id_ville_de_naissance" maxlength="50" type="text">
+	<label for="id_ville_de_naissance">Ville de naissance&nbsp;</label>
+	<input name="ville_de_naissance" value="{{form.ville_de_naissance.value|default:'Inconnue'}}" required="" id="id_ville_de_naissance" maxlength="50" type="text" size="50">
       </div>
       <div class="form-group">
 	<label for="id_race">Race&nbsp;:</label>
 	<select name="race" id="id_race" data-toggle="tooltip" title="">
-	  <option value="n">Nain</option>
-	  <option value="e">Haut-elfe</option>
-	  <option value="h">Humain</option>
+	  <option value="n"{% if form.race.value == 'n' or form.race.value == 'Nain'%} selected="" {% endif %}>Nain</option>
+	  <option value="e"{% if form.race.value == 'e' or form.race.value == 'Haut-elfe'%} selected="" {% endif %}>Haut-elfe</option>
+	  <option value="h"{% if form.race.value == 'h' or form.race.value == 'Humain' or form.race.value == None %} selected="" {% endif %}>Humain</option>
 	</select>
 	<span>
 	  <ul>
@@ -83,26 +85,26 @@ $(function () {
       <div class="form-group">
 <label for="id_ex_prof">Ancienne Profession&nbsp;:</label> <select name="ex_prof" id="id_ex_prof" data-toggle="tooltip" title="Soldat de base, les grades peuvent augmenter durant la campagne, si le personnage est déjà existant, il conserve son grade, les volontaires peuvent tirer leur grade aux dés (un soldat commence niveau 1, un caporal niveau 2, un sergent niveau 3, un lieutenant niveau 4 et un capitaine niveau 5)
 ">
-  <option value="1">Forgeron</option>
+  <option value="1" {% if form.ex_prof.value == 1%} selected="" {% endif %}>Forgeron</option>
 
-  <option value="2">Chasseur</option>
+  <option value="2" {% if form.ex_prof.value == 2%} selected="" {% endif %}>Chasseur</option>
 
-  <option value="3">Cuisinier</option>
+  <option value="3" {% if form.ex_prof.value == 3%} selected="" {% endif %}>Cuisinier</option>
 
-  <option value="4">Tavernier</option>
+  <option value="4" {% if form.ex_prof.value == 4%} selected="" {% endif %}>Tavernier</option>
 
-  <option value="5">Facteur d'arc</option>
+  <option value="5" {% if form.ex_prof.value == 5%} selected="" {% endif %}>Facteur d'arc</option>
 
-  <option value="6">Tanneur</option>
+  <option value="6" {% if form.ex_prof.value == 6%} selected="" {% endif %}>Tanneur</option>
 
-  <option value="7">Architecte</option>
+  <option value="7" {% if form.ex_prof.value == 7%} selected="" {% endif %}>Architecte</option>
 
-  <option value="8">Ebéniste</option>
+  <option value="8" {% if form.ex_prof.value == 8%} selected="" {% endif %}>Ebéniste</option>
 
-  <option value="9" selected="">Autre métier</option>
+  <option value="9"  {% if form.ex_prof.value == 9 or form.ex_prof.value == None %} selected="" {% endif %}>Autre métier</option>
 
 </select>
-<label for="id_autre_metier">Autre métier&nbsp;:</label> <input name="autre_metier" value="Aucun" id="id_autre_metier" maxlength="30" type="text">
+<label for="id_autre_metier">Autre métier&nbsp;:</label> <input name="autre_metier" value="{{form.autre_metier.value|default:'Aucun'}}" id="id_autre_metier" maxlength="30" type="text">
 <span>
   <ul>
     <li><b>Forgeron :</b> Débloque la compétence Forge à 1d20 pts, qui permet de rendre de la durabilité à l'équipement endommagé. (- 5 pts de création)</li>
@@ -118,11 +120,11 @@ $(function () {
       </div>
   <div class="form-group">
       <label for="id_grade_rp">Grade rp&nbsp;:</label> <select name="grade_rp" id="id_grade_rp">
-  <option value="1" selected="">Soldat</option>
-  <option value="2">Caporal</option>
-  <option value="3">Sergent</option>
-  <option value="4">Lieutenant</option>
-  <option value="5">Capitaine</option>
+  <option value="1" {% if form.grade_rp.value == 1 or form.grade_rp.value == None %} selected="" {% endif %}>Soldat</option>
+  <option value="2" {% if form.grade_rp.value == 2%} selected="" {% endif %}>Caporal</option>
+  <option value="3" {% if form.grade_rp.value == 3%} selected="" {% endif %}>Sergent</option>
+  <option value="4" {% if form.grade_rp.value == 4%} selected="" {% endif %}>Lieutenant</option>
+  <option value="5" {% if form.grade_rp.value == 5%} selected="" {% endif %}>Capitaine</option>
       </select><br><br>
       <span>
 	Soldat de base, les grades peuvent augmenter durant la campagne, si le personnage est déjà existant, il conserve son grade, les volontaires peuvent tirer leur grade aux dés (un soldat commence niveau 1, un caporal niveau 2, un sergent niveau 3, un lieutenant niveau 4 et un capitaine niveau 5)
@@ -133,39 +135,39 @@ $(function () {
   <span>Vous disposez de 34 points à allouer.</span><br><br>
 
   <div class="form-group">
-    <label for="id_cap_combat">Capacité combat&nbsp;:</label> <input name="cap_combat" value="1" max="10" required="" id="id_cap_combat" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_cap_combat">Capacité combat&nbsp;:</label> <input name="cap_combat" value="{{form.cap_combat.value|default:1}}" max="10" required="" id="id_cap_combat" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne d'un fantassin est de 4. Elle détermine la capacité que vous avez à attaquer votre adversaire et s'oppose directement à la capacité de combat de l'adversaire.</span>
   </div>
   <div class="form-group">
-    <label for="id_cap_tir">Capacité de  tir&nbsp;:</label> <input name="cap_tir" value="1" max="10" required="" id="id_cap_tir" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_cap_tir">Capacité de  tir&nbsp;:</label> <input name="cap_tir" value="{{form.cap_tir.value|default:1}}" max="10" required="" id="id_cap_tir" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne d'un arbalétrier est de 5. Elle détermine la capacité que vous avez à toucher un adversaire à distance.</span>
   </div>
   <div class="form-group">
-    <label for="id_force">Force&nbsp;:</label> <input name="force" value="1" max="10" required="" id="id_force" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_force">Force&nbsp;:</label> <input name="force" value="{{form.force.value|default:1}}" max="10" required="" id="id_force" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 4. La force détermine les dégâts fait à votre adversaire, chaque point de force ajoute un point de dégât à votre arme.</span>
   </div>
   <div class="form-group">
-    <label for="id_endu">Endurance&nbsp;:</label> <input name="endu" value="1" max="10" required="" id="id_endu" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_endu">Endurance&nbsp;:</label> <input name="endu" value="{{form.endu.value|default:1}}" max="10" required="" id="id_endu" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 4. L'endurance détermine la résistance aux dégâts, aux poisons et à l'alcool. Chaque point d'endurance réduit de un point les dégâts reçu.</span>
   </div>
   <div class="form-group">
-    <label for="id_perce">Perception&nbsp;:</label> <input name="perce" value="1" max="10" required="" id="id_perce" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_perce">Perception&nbsp;:</label> <input name="perce" value="{{form.perce.value|default:1}}" max="10" required="" id="id_perce" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 4. La perception détermine la vision d'un personnage et son attention aux détails du monde alentour.</span>
   </div>
   <div class="form-group">
-    <label for="id_agi">Agilité&nbsp;:</label> <input name="agi" value="1" max="10" required="" id="id_agi" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_agi">Agilité&nbsp;:</label> <input name="agi" value="{{form.agi.value|default:1}}" max="10" required="" id="id_agi" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 4. L'agilité détermine la rapidité d'action d'un personnage et sa souplesse. Elle détermine donc l'initiative de combat.</span>
   </div>
   <div class="form-group">
-    <label for="id_intell">Intelligence&nbsp;:</label> <input name="intell" value="1" max="10" required="" id="id_intell" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_intell">Intelligence&nbsp;:</label> <input name="intell" value="{{form.intell.value|default:1}}" max="10" required="" id="id_intell" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 3. L'intelligence détermine les savoirs d'un personnage et ses facultés technique précises. Elle détermine également le mana d'un sorcier.</span>
   </div>
   <div class="form-group">
-    <label for="id_charisme">Charisme&nbsp;:</label> <input name="charisme" value="1" max="10" required="" id="id_charisme" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_charisme">Charisme&nbsp;:</label> <input name="charisme" value="{{form.charisme.value|default:1}}" max="10" required="" id="id_charisme" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 3. Le charisme détermine la capacité d'un personnage à se faire apprécier et respecter, ATTENTION le charisme ne représente pas la sociabilité.</span>
   </div>
   <div class="form-group">
-    <label for="id_force_men">Force mentale&nbsp;:</label> <input name="force_men" value="1" max="10" required="" id="id_force_men" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_force_men">Force mentale&nbsp;:</label> <input name="force_men" value="{{form.force_men.value|default:1}}" max="10" required="" id="id_force_men" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne d'un soldat est de 5. La force mentale détermine la capacité d'un personnage à résister à l'accumulation de stress, à la folie et à la peur.</span>
   </div>
 
@@ -174,15 +176,15 @@ $(function () {
 
     <div class="form-group">
       <label for="id_classe">Classe&nbsp;:</label> <select name="classe" id="id_classe">
-  <option value="1" selected="">Fantassin</option>
+  <option value="1" {% if form.classe.value == 0 or form.classe.value == None %} selected="" {% endif %}>Fantassin</option>
 
-  <option value="2">Arbalétrier</option>
+  <option value="2" {% if form.classe.value == 0%} selected="" {% endif %}>Arbalétrier</option>
 
-  <option value="3">Eclaireur</option>
+  <option value="3" {% if form.classe.value == 0%} selected="" {% endif %}>Eclaireur</option>
 
-  <option value="4">Apothicaire de combat</option>
+  <option value="4" {% if form.classe.value == 0%} selected="" {% endif %}>Apothicaire de combat</option>
 
-  <option value="5">Apprenti sorcier</option>
+  <option value="5" {% if form.classe.value == 0%} selected="" {% endif %}>Apprenti sorcier</option>
 
       </select>
       <span id=red>! REQUIS !</span>
@@ -190,27 +192,27 @@ $(function () {
 
     <div class="form-group">
       <label for="id_pv">Points de vie&nbsp;:</label>
-      <input name="pv" value="11" required="" id="id_pv" type="number" data-toggle="tooltip" title=""><br>
+      <input name="pv" value="{{form.pv.value|default:11}}" required="" id="id_pv" type="number" data-toggle="tooltip" title=""><br>
       <span>Sur 1d10, de 1 à 6 = 11 PV, de 7 à 8 = 12 PV, de 9 à 10 = 13 PV. Quand un personnage tombe à 0 PV et qu'il est sauvé par ses camarade, il peut subir une mutilation.</span>
     </div>
     <div class="form-group">
       <label for="id_ps">Points de stress&nbsp;:</label>
-      <input name="ps" value="0" required="" id="id_ps" type="number" data-toggle="tooltip" title=""><br>
+      <input name="ps" value="{{form.ps.value|default:0}}" required="" id="id_ps" type="number" data-toggle="tooltip" title=""><br>
       <span>Les points de stress sont l'accumulation des difficultés des combats, tout les 10 points, elles déclenchent un effet momentanée et rajoute 1 point de folie.</span>
     </div>
     <div class="form-group">
       <label for="id_pf">Points de folie&nbsp;:</label>
-      <input name="pf" value="0" required="" id="id_pf" type="number" data-toggle="tooltip" title=""><br>
+      <input name="pf" value="{{form.pf.value|default:0}}" required="" id="id_pf" type="number" data-toggle="tooltip" title=""><br>
       <span>Les points de folie représentent la dégradation du mental du personnage, plus ils sont élevés plus le personnage risque de recevoir un trouble psychologique.</span>
     </div>
     <div class="form-group">
       <label for="id_niveau">Niveau&nbsp;:</label>
-      <input name="niveau" value="1" required="" id="id_niveau" type="number" data-toggle="tooltip" title="">
+      <input name="niveau" value="{{form.niveau.value|default:1}}" required="" id="id_niveau" type="number" data-toggle="tooltip" title="">
       <span>Débute au niveau 1.</span>
     </div>
     <div class="form-group">
       <label for="id_xp">Points d'expérience&nbsp;:</label>
-      <input name="xp" value="0" required="" id="id_xp" type="number" data-toggle="tooltip" title=""><span>Débute à 0/100</span>
+      <input name="xp" value="{{form.xp.value|default:0}}" required="" id="id_xp" type="number" data-toggle="tooltip" title=""><span>Débute à 0/100</span>
     </div>
     <div class="form-group">
       <label for="id_blessures">Blessures&nbsp;:</label>
@@ -238,7 +240,8 @@ $(function () {
 
     </div>
 
-    <label for="id_image">Image&nbsp;:</label> <input name="image" id="id_image" type="file">
+  <label for="id_image">Image&nbsp;:</label>
+  <input name="image" id="id_image" type="file" value="">
 
 
 

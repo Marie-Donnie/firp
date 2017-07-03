@@ -9,6 +9,23 @@
 {{ fiche.prenom }} {{ fiche.nom }}
 {% endblock %}
 
+{% block edition %}
+{% if user.is_authenticated %}
+{% ifequal user.id fiche.createur.id %}
+<a class="btn btn-default" href="{% url 'editer_perso' fiche.id %}">Editer</a>
+{% endifequal %}
+{% endif %}
+{% endblock %}
+{% block user %}
+{% if fiche.afficher_createur or user.id == fiche.createur.id %}
+{% if fiche.createur %}
+<span><b>Créateur :</b> <a href="{% url 'utilisateur' fiche.createur.id %}">{{ fiche.createur }}</a></span>
+{% else %}
+<span><b>Créateur :</b> Aucun</span>
+{% endif %}
+{% endif %}
+{% endblock %}
+
 
 {% block content %}
 
