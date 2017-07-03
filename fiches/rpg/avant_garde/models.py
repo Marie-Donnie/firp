@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.db import models
+from django.conf import settings
 from fiches.functions import IntegerRangeField
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -176,6 +177,10 @@ class Avant_garde(models.Model):
                                   null=True,
                                   blank=True,
                                   default='Sans')
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 null=True,
+                                 related_name='avant_garde')
+
 
     class Meta:
         ordering = ["nom", "prenom"]

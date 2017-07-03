@@ -8,8 +8,10 @@ urlpatterns = [
     url(r'^avant_garde/$', views.persos_ag, name='avant_garde_persos'),
     url(r'^avant_garde/personnage/(?P<perso_id>\d+)/$', views.detail_perso,
         name='detail_perso'),
+    url(r'^avant_garde/editer_personnage/(?P<base_id>\d+)/$',
+        views.editer_base, name='editer_perso'),
     url(r'^avant_garde/creer_perso/$', views.creer_base,
         name='creer_perso'),
-    url(r'^avant_garde/creer_apothicaire/(?P<ag_id>\d+)/$', views.creer_apothicaire,
-        name='creer_apo'),
+    url(r'^avant_garde/creer_apothicaire/(?P<ag_id>\d+)/$',
+        views.creer_apothicaire, name='creer_apo'),
 ]

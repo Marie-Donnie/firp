@@ -34,13 +34,13 @@ $(function () {
   <div class="form-group">
     <span id="description"><b>Etat du personnage </b></span>
     <label class="radio-inline" for="id_etat">
-      <input type="radio" name="etat" id="id_etat" value="VI" {% if form.etat.value == 'v' or form.etat.value == None %} checked="checked" {% endif %}> Vivant
+      <input type="radio" name="etat" id="id_etat" value="v" {% if form.etat.value == 'v' or form.etat.value == 'Vivant' or form.etat.value == None %} checked="checked" {% endif %}> Vivant
     </label>
     <label class="radio-inline" for="id_pj">
-      <input type="radio" name="etat" id="id_etat" value="MO" {% if form.etat.value == 'm' %} checked="checked" {% endif %}> Mort
+      <input type="radio" name="etat" id="id_etat" value="m" {% if form.etat.value == 'm' or form.etat.value == 'Mort' %} checked="checked" {% endif %}> Mort
     </label>
     <label class="radio-inline" for="id_pj">
-      <input type="radio" name="etat" id="id_etat" value="DI" {% if form.etat.value == 'd' %} checked="checked" {% endif %}> Disparu
+      <input type="radio" name="etat" id="id_etat" value="d" {% if form.etat.value == 'd' or form.etat.value == 'Disparu' %} checked="checked" {% endif %}> Disparu
     </label>
   </div>
       <div class="form-group">
@@ -214,15 +214,15 @@ $(function () {
     </div>
     <div class="form-group">
       <label for="id_blessures">Blessures&nbsp;:</label>
-      <textarea class="form-control" name="blessures" value="Sans" id="id_blessures" maxlength="800" rows="10" cols="40"></textarea>
+      <textarea class="form-control" name="blessures" id="id_blessures" maxlength="800" rows="10" cols="40">{{form.blessures.value|default:'Sans'}}</textarea>
     </div>
     <div class="form-group">
       <label for="id_troubles_ment">Troubles mentaux&nbsp;:</label>
-      <textarea class="form-control" name="troubles_ment" value="Sans" id="id_troubles_ment" maxlength="800" rows="10" cols="40"></textarea>
+      <textarea class="form-control" name="troubles_ment" id="id_troubles_ment" maxlength="800" rows="10" cols="40">{{form.troubles_ment.value|default:'Sans'}}</textarea>
     </div>
-  <div class="form-group">
+    <div class="form-group">
   <label for="id_avants">Avantages&nbsp;:</label>
-    <select size="10" name="objets" required="" multiple="multiple" id="id_avants" class="form-control">
+    <select size="10" name="avants" required="" multiple="multiple" id="id_avants" class="form-control">
       {% for avant in form.avants %}
   <option value="{{avant.value}}"{% if avant.id in form.avants.value %} selected="" {% endif %}>{{avant}}</option>
   {% endfor %}

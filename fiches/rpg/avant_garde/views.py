@@ -14,7 +14,9 @@ def creer_base(request):
     utilisateur = request.user
     if (utilisateur.has_perm('fiche.add_avant_garde')):
         if request.method == 'POST':
-            form = Avant_GardeForm(request.POST, request.FILES)
+            data = request.POST.dict()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            form = Avant_GardeForm(data, request.FILES)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -32,25 +34,28 @@ def creer_base(request):
 
 
 @login_required
-def editer_base(request):
+def editer_base(request, base_id):
+    base = Avant_garde.objects.get(pk=base_id)
     utilisateur = request.user
-    if (utilisateur.has_perm('fiche.add_avant_garde')):
+    if utilisateur == base.createur:
         if request.method == 'POST':
-            form = Avant_GardeForm(request.POST, request.FILES)
+            data = request.POST.dict()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            form = Avant_GardeForm(data, request.FILES, instance=base)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
             else:
                 print(form.errors)
         else:
-            form = Avant_GardeForm()
+            form = Avant_GardeForm(instance=base)
 
         context = {'form': form}
 
         return render(request, 'rpg/avant_garde/global_form.html', context)
 
     else:
-        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+        return HttpResponse("Vous ne pouvez pas editer cette fiche de l'avant-garde.")
 
 
 @login_required

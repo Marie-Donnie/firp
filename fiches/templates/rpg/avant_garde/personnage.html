@@ -36,6 +36,14 @@
       <li><b>Grade&nbsp;: </b>{{ fiche.get_grade_rp_display|capfirst }}</li>
     </ul>
   </div>
+  <div class="media-right">
+    <a target="_blank" href={{ fiche.image.url }}>
+      <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
+    </a>
+  </div>
+
+
+
 </div>
 
 {% endblock %}
