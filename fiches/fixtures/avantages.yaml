@@ -1,0 +1,198 @@
+- model: fiches.avantages
+  pk: 1
+  fields:
+    nom:  Ambidextre
+    description: Peut combattre avec une arme dans chaque main sans malus
+    points: 5
+- model: fiches.avantages
+  pk: 2
+  fields:
+    nom: Attaque rapide
+    description: Permet d'attaquer deux fois avec une action complète
+    points: 3
+- model: fiches.avantages
+  pk: 3
+  fields:
+    nom: Attaque éclair
+    description: Permet d'attaquer trois fois avec une action complète, nécessite attaque rapide
+    points: 4
+- model: fiches.avantages
+  pk: 4
+  fields:
+    nom: Blasé
+    description: Ne gagne pas de points de stress dans les situations stressantes ordinaires comme le combat
+    points: 2
+- model: fiches.avantages
+  pk: 5
+  fields:
+    nom: Bon tireur
+    description: Aucun malus a cause d'un tir à très longue portée
+    points: 2
+- model: fiches.avantages
+  pk: 6
+  fields:
+    nom: Bonne réputation
+    description: Vous avez bonne réputation au sein de l'avant-garde
+    points: 1
+- model: fiches.avantages
+  pk: 7
+  fields:
+    nom: Charge berserk
+    description: + 2 CC et + 1 F au tour de charge
+    points: 2
+- model: fiches.avantages
+  pk: 8
+  fields:
+    nom: Cible rapide
+    description: -2 à la CT d'un tireur vous prenant en cible quand vous courez
+    points: 2
+- model: fiches.avantages
+  pk: 9
+  fields:
+    nom: Combat aveugle
+    description: Subit la moitié du malus de combat en cas de vision réduite
+    points: 2
+- model: fiches.avantages
+  pk: 10
+  fields:
+    nom: Constitution solide
+    description: + 1 PV
+    points: 1
+- model: fiches.avantages
+  pk: 11
+  fields:
+    nom: Contre attaque
+    description: Attaque à -2 en CC après une parade réussie
+    points: 2
+- model: fiches.avantages
+  pk: 12
+  fields:
+    nom: Coup infaillible
+    description: Ajoute +2 de dégâts avec les armes de corps à corps
+    points: 2
+- model: fiches.avantages
+  pk: 13
+  fields:
+    nom: Discipline de fer
+    description: Vous pouvez relancer les test de peur ratés
+    points: 2
+- model: fiches.avantages
+  pk: 14
+  fields:
+    nom: Endurci
+    description: Vous êtes moins susceptible de tomber malade
+    points: 1
+- model: fiches.avantages
+  pk: 15
+  fields:
+    nom: Décadence
+    description: Résistance très élevée aux drogues et à l'alcool
+    points: 1
+- model: fiches.avantages
+  pk: 16
+  fields:
+    nom: Désarmement
+    description: Peut forcer un adversaire à lâcher son arme
+    points: 1
+- model: fiches.avantages
+  pk: 17
+  fields:
+    nom: Grand orateur
+    description: Affecte plus de personnes par ses propos
+    points: 3
+- model: fiches.avantages
+  pk: 18
+  fields:
+    nom: Grand praticien
+    description: Déverrouille la compétence chirurgie en lui donnant 20 pts de base
+    points: 3
+- model: fiches.avantages
+  pk: 19
+  fields:
+    nom: Génie
+    description: Déverouille des compétences bonus, + 3 INT
+    points: 7
+- model: fiches.avantages
+  pk: 20
+  fields:
+    nom: Haine
+    description: Rajoute + 1 en CC contre ces adversaires
+    points: 1
+- model: fiches.avantages
+  pk: 21
+  fields:
+    nom: Imitation
+    description: Permet d'imiter les voix
+    points: 3
+- model: fiches.avantages
+  pk: 22
+  fields:
+    nom: Litanie de haine
+    description: En braillant des incitations à la haine, vous faites bénéficier votre bonus de haine aux alliés alentours
+    points: 3
+- model: fiches.avantages
+  pk: 23
+  fields:
+    nom: Maître du combat
+    description: Annule le bonus de surnombre
+    points: 3
+- model: fiches.avantages
+  pk: 24
+  fields:
+    nom: Elu du néant
+    description: + 50 pts de mana, nécessite apprenti sorcier
+    points: 3
+- model: fiches.avantages
+  pk: 25
+  fields:
+    nom: Pas de côté
+    description: Permet d'esquiver une attaque par tour sur un test d'agilité
+    points: 3
+- model: fiches.avantages
+  pk: 26
+  fields:
+    nom: Sans peur
+    description: Immunisé contre la peur - pas contre la folie -
+    points: 10
+- model: fiches.avantages
+  pk: 27
+  fields:
+    nom: Sens aiguisé
+    description: +20 aux tests sur ce sens
+    points: 3
+- model: fiches.avantages
+  pk: 28
+  fields:
+    nom: Sommeil léger
+    description: Compte comme étant éveillé quand il dort
+    points: 1
+- model: fiches.avantages
+  pk: 29
+  fields:
+    nom: Tir double
+    description: Peut tirer deux fois sur un tour
+    points: 3
+- model: fiches.avantages
+  pk: 30
+  fields:
+    nom: Tir en mouvement
+    description: Pas de malus de tir sur un tir en mouvement
+    points: 2
+- model: fiches.avantages
+  pk: 31
+  fields:
+    nom: Vivacité
+    description: Permet de se relever en action gratuite
+    points: 2
+- model: fiches.avantages
+  pk: 32
+  fields:
+    nom: Voix troublante
+    description: +10 en intimidation, - 10 en sociabilité
+    points: 1
+- model: fiches.avantages
+  pk: 33
+  fields:
+    nom: Aucun
+    description: Aucun avantage
+    points: 0

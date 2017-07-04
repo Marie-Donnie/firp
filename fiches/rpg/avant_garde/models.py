@@ -65,6 +65,7 @@ DESAVANTAGES = [
     (20, "Aucun")
 ]
 
+
 class Avant_garde(models.Model):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
@@ -283,3 +284,9 @@ class Apothicaire(models.Model):
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
                                  related_name='apothicaire')
+
+
+class Avantages(models.Model):
+    nom = models.CharField(max_length=50, default="Aucun")
+    description = models.CharField(max_length=100)
+    points = models.SmallIntegerField(default=0)

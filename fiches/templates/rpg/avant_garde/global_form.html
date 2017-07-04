@@ -223,11 +223,81 @@ $(function () {
       <textarea class="form-control" name="troubles_ment" id="id_troubles_ment" maxlength="800" rows="10" cols="40">{{form.troubles_ment.value|default:'Sans'}}</textarea>
     </div>
     <div class="form-group">
-  <label for="id_avants">Avantages&nbsp;:</label>
-    <select size="10" name="avants" required="" multiple="multiple" id="id_avants" class="form-control">
-      {% for avant in form.avants %}
-  <option value="{{avant.value}}"{% if avant.id in form.avants.value %} selected="" {% endif %}>{{avant}}</option>
-  {% endfor %}
+      <label for="id_avants">Avantages&nbsp;:</label>
+
+      <select size="10" name="avants" required="" multiple="multiple" id="id_avants" class="form-control">
+
+
+  <option value="1" {% if 1 in form.avants.value %} selected="" {% endif %}>Ambidextre</option>
+
+  <option value="2" {% if 2 in form.avants.value %} selected="" {% endif %}>Attaque rapide</option>
+
+  <option value="3" {% if 3 in form.avants.value %} selected="" {% endif %}>Attaque éclair</option>
+
+  <option value="4" {% if 4 in form.avants.value %} selected="" {% endif %}>Blasé</option>
+
+  <option value="5" {% if 5 in form.avants.value %} selected="" {% endif %}>Bon tireur</option>
+
+  <option value="6" {% if 6 in form.avants.value %} selected="" {% endif %}>Bonne réputation</option>
+
+  <option value="7">Charge berserk</option>
+
+  <option value="8">Cible rapide</option>
+
+  <option value="9">Combat aveugle</option>
+
+  <option value="10">Constitution solide</option>
+
+  <option value="11">Contre attaque</option>
+
+  <option value="12">Coup infaillible</option>
+
+  <option value="13">Discipline de fer</option>
+
+  <option value="14">Endurci</option>
+
+  <option value="15">Décadence</option>
+
+  <option value="16">Désarmement</option>
+
+  <option value="17">Grand orateur</option>
+
+  <option value="18">Grand praticien</option>
+
+  <option value="19">Génie</option>
+
+  <option value="20">Haine (nom de la race)</option>
+
+  <option value="21">Imitation</option>
+
+  <option value="22">Litanie de haine</option>
+
+  <option value="23">Maître du combat</option>
+
+  <option value="24">Elu du néant</option>
+
+  <option value="25">Pas de côté</option>
+
+  <option value="26">Sans peur</option>
+
+  <option value="27">Sens aiguisé (nom du sens)</option>
+
+  <option value="28">Sommeil léger</option>
+
+  <option value="29">Tir double</option>
+
+  <option value="30">Tir en mouvement</option>
+
+  <option value="31">Vivacité</option>
+
+  <option value="32">Voix troublante</option>
+
+  <option value="33" selected="">Aucun</option>
+
+
+  <!--     {% for avant in form.avants %} -->
+  <!-- <option value="{{avant.value}}"{% if avant.id in form.avants.value %} selected="" {% endif %}>{{avant}}</option> -->
+  <!-- {% endfor %} -->
     </select>
     </div>
   <div class="form-group">

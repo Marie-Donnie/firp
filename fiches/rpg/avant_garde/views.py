@@ -26,7 +26,6 @@ def creer_base(request):
             form = Avant_GardeForm()
 
         context = {'form': form}
-
         return render(request, 'rpg/avant_garde/global_form.html', context)
 
     else:
@@ -51,7 +50,7 @@ def editer_base(request, base_id):
             form = Avant_GardeForm(instance=base)
 
         context = {'form': form}
-
+        print(base.avants)
         return render(request, 'rpg/avant_garde/global_form.html', context)
 
     else:

@@ -74,3 +74,9 @@ class ApothicaireAdmin(admin.ModelAdmin):
     list_display = ('id',)
 
 admin.site.register(Apothicaire, ApothicaireAdmin)
+
+
+class AvantagesAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'points', 'description', 'id')
+
+admin.site.register(Avantages, AvantagesAdmin)
