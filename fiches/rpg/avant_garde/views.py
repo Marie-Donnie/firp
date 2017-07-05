@@ -14,7 +14,7 @@ def creer_base(request):
     utilisateur = request.user
     if (utilisateur.has_perm('fiche.add_avant_garde')):
         if request.method == 'POST':
-            data = request.POST.dict()
+            data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
             form = Avant_GardeForm(data, request.FILES)
             if form.is_valid():
@@ -25,7 +25,10 @@ def creer_base(request):
         else:
             form = Avant_GardeForm()
 
-        context = {'form': form}
+        avantages = Avantages.objects.all()
+        desavantages = Desavantages.objects.all()
+        context = {'form': form, 'avantages': avantages,
+                   'desavantages': desavantages}
         return render(request, 'rpg/avant_garde/global_form.html', context)
 
     else:
@@ -38,7 +41,7 @@ def editer_base(request, base_id):
     utilisateur = request.user
     if utilisateur == base.createur:
         if request.method == 'POST':
-            data = request.POST.dict()
+            data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
             form = Avant_GardeForm(data, request.FILES, instance=base)
             if form.is_valid():
@@ -49,7 +52,10 @@ def editer_base(request, base_id):
         else:
             form = Avant_GardeForm(instance=base)
 
-        context = {'form': form}
+        avantages = Avantages.objects.all()
+        desavantages = Desavantages.objects.all()
+        context = {'form': form, 'avantages': avantages,
+                   'desavantages': desavantages}
         print(base.avants)
         return render(request, 'rpg/avant_garde/global_form.html', context)
 
@@ -64,7 +70,7 @@ def creer_apothicaire(request, ag_id):
         perso = get_object_or_404(Avant_garde, pk=ag_id)
         if (perso.classe == 4):
             if request.method == 'POST':
-                data = request.POST.dict()
+                data = request.POST.copy()
                 data['perso'] = perso.id
                 form = ApothicaireForm(data)
                 if form.is_valid():

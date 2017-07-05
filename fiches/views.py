@@ -53,7 +53,7 @@ def profile(request):
 
     else:
         if request.method == 'POST':
-            data = request.POST.dict()
+            data = request.POST.copy()
             data['user'] = User.objects.get(username=request.user).id
             form = UserProfileForm(data, request.FILES)
             if form.is_valid():
@@ -80,7 +80,7 @@ def creer_fiche(request):
     if ((utilisateur.fiches.count() < 16) or
         (utilisateur.has_perm('fiches.plus_de_15_fiches'))):
         if request.method == 'POST':
-            data = request.POST.dict()
+            data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
             if not(utilisateur.has_perm('fiches.equipement_ok')):
                 data['equipement'] = None
@@ -175,7 +175,7 @@ def edit_fiche(request, fiche_id):
     utilisateur = request.user
     if utilisateur == fiche.createur:
         if request.method == 'POST':
-            data = request.POST.dict()
+            data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
             if not(utilisateur.has_perm('fiches.equipement_ok') and
                    utilisateur.has_perm('fiches.inventaire_ok')):

@@ -76,7 +76,13 @@ class ApothicaireAdmin(admin.ModelAdmin):
 admin.site.register(Apothicaire, ApothicaireAdmin)
 
 
-class AvantagesAdmin(admin.ModelAdmin):
+class AvantageAdmin(admin.ModelAdmin):
     list_display = ('nom', 'points', 'description', 'id')
 
-admin.site.register(Avantages, AvantagesAdmin)
+admin.site.register(Avantages, AvantageAdmin)
+
+
+class DesavantageAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'points', 'description', 'id')
+
+admin.site.register(Desavantages, DesavantageAdmin)

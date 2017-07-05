@@ -1,0 +1,144 @@
+- model: fiches.desavantages
+  pk: 1
+  fields:
+    nom: Boiteux
+    description: Après avoir perdu un morceau de chair/autre blessure non guérissable, vous boitez de façon irrémédiable, - 1 AG et impossible de sprinter
+    points: 2
+- model: fiches.desavantages
+  pk: 2
+  fields:
+    nom: Dérangé
+    description: Votre personnage commence avec 20 points de folie
+    points: 2
+- model: fiches.desavantages
+  pk: 3
+  fields:
+    nom: Borgne
+    description: Vous avez perdu un œil avant de rentrer à l'avant-garde, -1 CT
+    points: 2
+- model: fiches.desavantages
+  pk: 4
+  fields:
+    nom: Doigt perdu
+    description: Vous avez perdu un doigt, ce qui affecte votre capacité de combat, -10 aux tests de tirs
+    points: 2
+- model: fiches.desavantages
+  pk: 5
+  fields:
+    nom: Peur (nom de la race ou de l'animal)
+    description: Vous avez développé une peur tenace d'un certain type d'adversaires
+    points: 2
+- model: fiches.desavantages
+  pk: 6
+  fields:
+    nom: Nerveux
+    description: Vous gagnez deux fois plus de points de stress
+    points: 2
+- model: fiches.desavantages
+  pk: 7
+  fields:
+    nom: Lâche
+    description: Vous avez plus rapidement et facilement peur, -10 aux tests de peur
+    points: 2
+- model: fiches.desavantages
+  pk: 8
+  fields:
+    nom: Apprécie les orcs.
+    description: Vous appréciez une race peu aimée par Noirebois, cela facilité vos interactions avec cette espèce, mais vous donne mauvaise réputation au sein de l'avant-garde
+    points: 3
+- model: fiches.desavantages
+  pk: 9
+  fields:
+    nom: Apprécie les elfes de sang.
+    description: Vous appréciez une race peu aimée par Noirebois, cela facilité vos interactions avec cette espèce, mais vous donne mauvaise réputation au sein de l'avant-garde
+    points: 3
+- model: fiches.desavantages
+  pk: 10
+  fields:
+    nom: Apprécie les trolls.
+    description: Vous appréciez une race peu aimée par Noirebois, cela facilité vos interactions avec cette espèce, mais vous donne mauvaise réputation au sein de l'avant-garde
+    points: 3
+- model: fiches.desavantages
+  pk: 11
+  fields:
+    nom: Apprécie les sorciers
+    description: Vous appréciez une race peu aimée par Noirebois, cela facilité vos interactions avec cette espèce, mais vous donne mauvaise réputation au sein de l'avant-garde
+    points: 2
+- model: fiches.desavantages
+  pk: 12
+  fields:
+    nom: Tolère les morts-vivants
+    description: Vous appréciez une race peu aimée par Noirebois, cela facilité vos interactions avec cette espèce, mais vous donne mauvaise réputation au sein de l'avant-garde
+    points: 4
+- model: fiches.desavantages
+  pk: 13
+  fields:
+    nom: Malchanceux
+    description: Quoi qu'il se passe, il vous arrivera toujours les pires choses, toujours
+    points: 5
+- model: fiches.desavantages
+  pk: 14
+  fields:
+    nom: Maladroit
+    description: Vous n'êtes pas très doué, plage d'échec critique monté jusqu'à 5
+    points: 3
+- model: fiches.desavantages
+  pk: 15
+  fields:
+    nom: Débile
+    description: Vous n'avez jamais eu d'autre métier que de frapper des gens, vous ne pouvez donc pas en prendre et ne pouvez pas être apothicaire ou apprenti sorcier, Limite l'intelligence à 4
+    points: 2
+- model: fiches.desavantages
+  pk: 16
+  fields:
+    nom: Sommeil lourd
+    description: Vous avez beaucoup plus de mal à vous sortir du sommeil
+    points: 1
+- model: fiches.desavantages
+  pk: 17
+  fields:
+    nom: Lourdaud
+    description: Met une action complète à se relever
+    points: 2
+- model: fiches.desavantages
+  pk: 18
+  fields:
+    nom: Âme damnée
+    description: Gagne deux fois plus de points de corruption. Apprenti sorcier uniquement
+    points: 4
+- model: fiches.desavantages
+  pk: 19
+  fields:
+    nom: Mauvaise réputation
+    description: Vous avez fait quelque chose de mal, et l'avant-garde ne vous aime pas
+    points: 3
+- model: fiches.desavantages
+  pk: 20
+  fields:
+    nom: Maladif
+    description: Vous avez plus de chance de tomber malade
+    points: 2
+- model: fiches.desavantages
+  pk: 21
+  fields:
+    nom: Constitution faible
+    description: -1 PV
+    points: 1
+- model: fiches.desavantages
+  pk: 22
+  fields:
+    nom: Faible résistance
+    description: Ne tiens pratiquement pas l'alcool et les drogues
+    points: 1
+- model: fiches.desavantages
+  pk: 23
+  fields:
+    nom: Dépendance (nom du type d'alcool/drogue)
+    description: Vous êtes dépendant et devez vous trouver de quoi satisfaire cette dépendance (les points de création augmentent selon la rareté de l'alcool/drogue)
+    points: 2
+- model: fiches.desavantages
+  pk: 24
+  fields:
+    nom: Aucun
+    description: Vous n'avez pas de désavantages
+    points: 0

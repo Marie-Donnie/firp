@@ -166,10 +166,8 @@ class Avant_garde(models.Model):
                               ('n', "Personnage non joué")
                           )),
                           default="Personnage joué")
-    avants = models.SmallIntegerField(choices=AVANTAGES,
-                                      default=33)
-    desavants = models.SmallIntegerField(choices=DESAVANTAGES,
-                                         default=20)
+    avants = models.ManyToManyField('Avantages')
+    desavants = models.ManyToManyField('Desavantages')
     inventaire = models.CharField(max_length=800,
                                   null=True,
                                   blank=True,
@@ -181,7 +179,6 @@ class Avant_garde(models.Model):
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='avant_garde')
-
 
     class Meta:
         ordering = ["nom", "prenom"]
@@ -287,6 +284,12 @@ class Apothicaire(models.Model):
 
 
 class Avantages(models.Model):
+    nom = models.CharField(max_length=50, default="Aucun")
+    description = models.CharField(max_length=100)
+    points = models.SmallIntegerField(default=0)
+
+
+class Desavantages(models.Model):
     nom = models.CharField(max_length=50, default="Aucun")
     description = models.CharField(max_length=100)
     points = models.SmallIntegerField(default=0)
