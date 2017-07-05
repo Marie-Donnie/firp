@@ -42,3 +42,8 @@ def kilos(value):
 @register.filter
 def grammes(value):
     return value % 1000
+
+
+@register.filter
+def pourcent(value, arg):
+    return (value * 100) / arg

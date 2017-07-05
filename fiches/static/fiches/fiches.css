@@ -498,7 +498,6 @@ h3 {
     color: red;
 }
 
-/* .progress-label { */
-/*     float: left; */
-/*     margin-right: 1em; */
-/* } */
+.progress-bar {
+    background-image: linear-gradient(to bottom,#540507 0,#470002 100%);
+}
