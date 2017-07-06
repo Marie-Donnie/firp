@@ -15,6 +15,10 @@ def creer_base(request):
     if (utilisateur.has_perm('fiche.add_avant_garde')):
         if request.method == 'POST':
             data = request.POST.copy()
+            if not 'avants' in data:
+                data['avants'] = Avantages.objects.get(pk=1)
+            if not 'desavants' in data:
+                data['desavants'] = Desavantages.objects.get(pk=1)
             data['createur'] = User.objects.get(username=utilisateur).id
             form = Avant_GardeForm(data, request.FILES)
             if form.is_valid():
@@ -42,6 +46,10 @@ def editer_base(request, base_id):
     if utilisateur == base.createur:
         if request.method == 'POST':
             data = request.POST.copy()
+            if not 'avants' in data:
+                data['avants'] = Avantages.objects.get(pk=1)
+            if not 'desavants' in data:
+                data['desavants'] = Desavantages.objects.get(pk=1)
             data['createur'] = User.objects.get(username=utilisateur).id
             form = Avant_GardeForm(data, request.FILES, instance=base)
             if form.is_valid():

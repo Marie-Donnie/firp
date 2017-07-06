@@ -63,21 +63,29 @@
       <li><b>Charisme&nbsp;: </b>{{ fiche.charisme }}</li>
       <li><b>Force mentale&nbsp;: </b>{{ fiche.force_men}}</li>
       <li><b>Traits&nbsp;: </b><ul>
-	  {% for desavant in fiche.desavants.all %}
-	  <li id=desavantages>{{desavant.nom}} : {{desavant.description}}</li>
-	  {% endfor %}
 	  {% for avant in fiche.avants.all %}
-	  <li id=avantages>{{avant.nom}} : {{avant.description}}</li>
+	  <li id=avantages>
+	    {% if avant.id != 1 %}
+	    {{avant.nom}} :
+	    {% endif %}
+	    {{avant.description}}</li>
+	  {% endfor %}
+	  {% for desavant in fiche.desavants.all %}
+	  <li id=desavantages>
+	    {% if desavant.id != 1 %}
+	    {{desavant.nom}} :
+	    {% endif %}
+	    {{desavant.description}}</li>
 	  {% endfor %}
 	  </ul>
     </ul>
-    <h4 class="progress-label">Expérience </h4>
+    <h4 class="progress-label">Niveau : {{fiche.xp}}. Expérience nécessaire pour le prochain niveau : </h4>
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.xp}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{fiche.xp|pourcent:100}}%">
 	{{fiche.xp}}%
       </div>
     </div>
-    <h4 class="progress-label">Points de stress </h4>
+    <h4 class="progress-label">Folie : {{fiche.pf}}. Points de stress :</h4>
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.ps}}" aria-valuemin="0" aria-valuemax="10" style="min-width: 2em; width: {{fiche.ps|pourcent:10}}%">
 	{{fiche.ps}}

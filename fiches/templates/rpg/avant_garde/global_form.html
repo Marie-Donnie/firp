@@ -227,25 +227,36 @@ $(function () {
 
       <select size="10" name="avants" multiple="multiple" id="id_avants" class="form-control">
 	{% for avantage in avantages %}
+	{% if avantage.id != 1 %}
 	<option value="{{avantage.id}}"{% if avantage.id in form.avants.value %} selected="" {% endif %}>{{avantage.nom}} : {{avantage.description}} (-{{avantage.points}} points de création)</option>
-
+	{% endif %}
 	{% endfor %}
     </select>
     </div>
   <div class="form-group">
   <label for="id_desavants">Désavantages&nbsp;:</label>
   <select size="10" name="desavants" multiple="multiple" id="id_desavants" class="form-control">
-	{% for desavantage in desavantages %}
+    {% for desavantage in desavantages %}
+    {% if desavantage.id != 1 %}
 	<option value="{{desavantage.id}}"{% if desavantage.id in form.desavants.value %} selected="" {% endif %}>{{desavantage.nom}} : {{desavantage.description}} (-{{desavantage.points}} points de création)</option>
-
+	{% endif %}
 	{% endfor %}
     </select>
 
   </div>
 
-  <label for="id_image">Image&nbsp;:</label>
-  <input name="image" id="id_image" type="file" value="">
-
+  <div class="form-group">
+    <label for="id_image">Image&nbsp;:</label>
+    <span id="description">
+      {% if form.image.value %}
+      Actuellement: <a href="{{MEDIA_URL}}{{form.image.value|default:'site/no-image.png'}}">{{form.image.value|default:'site/no-image.png'}}</a><br>
+      <span id="description">
+	Modifier:
+      </span>
+      {% endif %}
+    </span>
+    <input name="image" id="id_image" type="file" value="">
+  </div>
 
 
 </div>

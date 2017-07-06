@@ -2,14 +2,8 @@
   pk: 1
   fields:
     nom: Aucun
-    description: Vous n'avez pas de désavantages
+    description: Aucun désavantages
     points: 0
-- model: fiches.desavantages
-  pk: 24
-  fields:
-    nom: Boiteux
-    description: Après avoir perdu un morceau de chair/autre blessure non guérissable, vous boitez de façon irrémédiable, - 1 AG et impossible de sprinter
-    points: 2
 - model: fiches.desavantages
   pk: 2
   fields:
@@ -141,4 +135,10 @@
   fields:
     nom: Dépendance (nom du type d'alcool/drogue)
     description: Vous êtes dépendant et devez vous trouver de quoi satisfaire cette dépendance (les points de création augmentent selon la rareté de l'alcool/drogue)
+    points: 2
+- model: fiches.desavantages
+  pk: 24
+  fields:
+    nom: Boiteux
+    description: Après avoir perdu un morceau de chair/autre blessure non guérissable, vous boitez de façon irrémédiable, - 1 AG et impossible de sprinter
     points: 2
