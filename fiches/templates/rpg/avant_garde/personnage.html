@@ -6,9 +6,9 @@
 {% endblock %}
 
 
-{% block title %}Fiche de {{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
+{% block title %}Fiche de {{ fiche.prenom|capfirst }} {{ fiche.nom|capfirst }}{% endblock %}
 {% block page-title %}
-{{ fiche.prenom }} {{ fiche.nom }}
+{{ fiche.prenom|capfirst }} {{ fiche.nom|capfirst }}
 {% endblock %}
 
 {% block edition %}
@@ -62,6 +62,14 @@
       <li><b>Intelligence&nbsp;: </b>{{ fiche.intell }}</li>
       <li><b>Charisme&nbsp;: </b>{{ fiche.charisme }}</li>
       <li><b>Force mentale&nbsp;: </b>{{ fiche.force_men}}</li>
+      <li><b>Traits&nbsp;: </b><ul>
+	  {% for desavant in fiche.desavants.all %}
+	  <li id=desavantages>{{desavant.nom}} : {{desavant.description}}</li>
+	  {% endfor %}
+	  {% for avant in fiche.avants.all %}
+	  <li id=avantages>{{avant.nom}} : {{avant.description}}</li>
+	  {% endfor %}
+	  </ul>
     </ul>
     <h4 class="progress-label">Expérience </h4>
     <div class="progress">

@@ -423,6 +423,14 @@ h3 {
     color: #E6CC80;
 }
 
+#avantages {
+    color: #d60006;
+}
+
+#desavantages{
+    color: #019203;
+}
+
 .dropdown-menu {
     color: #fff;
     background: #470002;

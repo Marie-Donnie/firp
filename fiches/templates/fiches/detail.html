@@ -21,9 +21,9 @@ function getTooltip() {
 {% endblock %}
 
 
-{% block title %}Fiche de {{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
+{% block title %}Fiche de {{ fiche.prenom|capfirst }} {{ fiche.nom|capfirst }}{% endblock %}
 {% block page-title %}
-{{ fiche.prenom }} {{ fiche.nom }}
+{{ fiche.prenom|capfirst }} {{ fiche.nom|capfirst }}
 {% endblock %}
 
 

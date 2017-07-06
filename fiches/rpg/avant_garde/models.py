@@ -232,10 +232,6 @@ class Avantages(models.Model):
         ordering = ["nom"]
         default_related_name = "avantage"
 
-    def get_nom(self):
-        nom = self.nom + " : " + self.description + " (-" + str(self.points) + " points de création)"
-        return nom
-
 
 class Desavantages(models.Model):
     nom = models.CharField(max_length=50, default="Aucun")
@@ -245,6 +241,3 @@ class Desavantages(models.Model):
     class Meta:
         ordering = ["nom"]
         default_related_name = "désavantage"
-
-    def get_nom(self):
-        return self.nom + " : " + self.description + " (+" + str(self.points) + " points de création)"
