@@ -1,6 +1,12 @@
 - model: fiches.avantages
   pk: 1
   fields:
+    nom: Aucun
+    description: Aucun avantage
+    points: 0
+- model: fiches.avantages
+  pk: 33
+  fields:
     nom:  Ambidextre
     description: Peut combattre avec une arme dans chaque main sans malus
     points: 5
@@ -190,9 +196,3 @@
     nom: Voix troublante
     description: +10 en intimidation, - 10 en sociabilité
     points: 1
-- model: fiches.avantages
-  pk: 33
-  fields:
-    nom: Aucun
-    description: Aucun avantage
-    points: 0

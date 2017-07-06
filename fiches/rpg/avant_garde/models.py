@@ -6,66 +6,6 @@ from fiches.functions import IntegerRangeField
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 
-AVANTAGES = [
-    (1, "Ambidextre"),
-    (2, "Attaque rapide"),
-    (3, "Attaque éclair"),
-    (4, "Blasé"),
-    (5, "Bon tireur"),
-    (6, "Bonne réputation"),
-    (7, "Charge berserk"),
-    (8, "Cible rapide"),
-    (9, "Combat aveugle"),
-    (10, "Constitution solide"),
-    (11, "Contre attaque"),
-    (12, "Coup infaillible"),
-    (13, "Discipline de fer"),
-    (14, "Endurci"),
-    (15, "Décadence"),
-    (16, "Désarmement"),
-    (17, "Grand orateur"),
-    (18, "Grand praticien"),
-    (19, "Génie"),
-    (20, "Haine (nom de la race)"),
-    (21, "Imitation"),
-    (22, "Litanie de haine"),
-    (23, "Maître du combat"),
-    (24, "Elu du néant"),
-    (25, "Pas de côté"),
-    (26, "Sans peur"),
-    (27, "Sens aiguisé (nom du sens)"),
-    (28, "Sommeil léger"),
-    (29, "Tir double"),
-    (30, "Tir en mouvement"),
-    (31, "Vivacité"),
-    (32, "Voix troublante"),
-    (33, "Aucun")
-]
-
-DESAVANTAGES = [
-    (1, "Boiteux"),
-    (2, "Dérangé"),
-    (3, "Borgne"),
-    (4, "Doigt perdu"),
-    (5, "Peur (nom de la race ou de l'animal)"),
-    (6, "Nerveux"),
-    (7, "Lâche"),
-    (8, "Apprécie (Tolère pour les morts-vivants) les (orcs, sorciers, trolls, elfes de sang, morts-vivants)"),
-    (9, "Malchanceux"),
-    (10, "Maladroit"),
-    (11, "Débile"),
-    (12, "Sommeil lourd"),
-    (13, "Lourdaud"),
-    (14, "Âme damnée"),
-    (15, "Mauvaise réputation"),
-    (16, "Maladif"),
-    (17, "Constitution faible"),
-    (18, "Faible résistance"),
-    (19, "Dépendance (nom du type d'alcool/drogue)"),
-    (20, "Aucun")
-]
-
-
 class Avant_garde(models.Model):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
@@ -288,8 +228,23 @@ class Avantages(models.Model):
     description = models.CharField(max_length=100)
     points = models.SmallIntegerField(default=0)
 
+    class Meta:
+        ordering = ["nom"]
+        default_related_name = "avantage"
+
+    def get_nom(self):
+        nom = self.nom + " : " + self.description + " (-" + str(self.points) + " points de création)"
+        return nom
+
 
 class Desavantages(models.Model):
     nom = models.CharField(max_length=50, default="Aucun")
     description = models.CharField(max_length=100)
     points = models.SmallIntegerField(default=0)
+
+    class Meta:
+        ordering = ["nom"]
+        default_related_name = "désavantage"
+
+    def get_nom(self):
+        return self.nom + " : " + self.description + " (+" + str(self.points) + " points de création)"

@@ -227,7 +227,7 @@ $(function () {
 
       <select size="10" name="avants" multiple="multiple" id="id_avants" class="form-control">
 	{% for avantage in avantages %}
-	<option value="{{avantage.id}}"{% if avantage.id in form.avants.value %} selected="" {% endif %}>{{avantage.nom}}</option>
+	<option value="{{avantage.id}}"{% if avantage.id in form.avants.value %} selected="" {% endif %}>{{avantage.nom}} : {{avantage.description}} (-{{avantage.points}} points de création)</option>
 
 	{% endfor %}
     </select>
@@ -236,12 +236,12 @@ $(function () {
   <label for="id_desavants">Désavantages&nbsp;:</label>
   <select size="10" name="desavants" multiple="multiple" id="id_desavants" class="form-control">
 	{% for desavantage in desavantages %}
-	<option value="{{desavantage.id}}"{% if desavantage.id in form.desavants.value %} selected="" {% endif %}>{{desavantage.nom}}</option>
+	<option value="{{desavantage.id}}"{% if desavantage.id in form.desavants.value %} selected="" {% endif %}>{{desavantage.nom}} : {{desavantage.description}} (-{{desavantage.points}} points de création)</option>
 
 	{% endfor %}
     </select>
 
-    </div>
+  </div>
 
   <label for="id_image">Image&nbsp;:</label>
   <input name="image" id="id_image" type="file" value="">
