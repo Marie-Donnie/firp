@@ -72,18 +72,18 @@ def editer_base(request, base_id):
 
 
 @login_required
-def creer_apothicaire(request, ag_id):
+def creer_apothicaire(request, perso_id):
     utilisateur = request.user
     if (utilisateur.has_perm('fiche.add_avant_garde')):
-        perso = get_object_or_404(Avant_garde, pk=ag_id)
-        if (perso.classe == 4):
+        perso = get_object_or_404(Avant_garde, pk=perso_id)
+        if (utilisateur == perso.createur) and (perso.classe == 4):
             if request.method == 'POST':
                 data = request.POST.copy()
                 data['perso'] = perso.id
                 form = ApothicaireForm(data)
                 if form.is_valid():
-                    form.save()
-                    return HttpResponseRedirect('/')
+                    save_it = form.save()
+                    return redirect('detail_perso', perso_id=save_it.id)
                 else:
                     print(form.errors)
             else:
@@ -94,6 +94,34 @@ def creer_apothicaire(request, ag_id):
             return render(request, 'rpg/avant_garde/apothicaire.html', context)
         else:
             return HttpResponse("La classe apothicaire ne correspond pas a celle du personnage.")
+
+    else:
+        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+
+
+@login_required
+def creer_fantassin(request, perso_id):
+    utilisateur = request.user
+    if (utilisateur.has_perm('fiche.add_avant_garde')):
+        perso = get_object_or_404(Avant_garde, pk=perso_id)
+        if (utilisateur == perso.createur) and (perso.classe == 1):
+            if request.method == 'POST':
+                data = request.POST.copy()
+                data['perso'] = perso.id
+                form = FantassinForm(data)
+                if form.is_valid():
+                    save_it = form.save()
+                    return redirect('detail_perso', perso_id=save_it.id)
+                else:
+                    print(form.errors)
+            else:
+                form = FantassinForm()
+
+            context = {'form': form}
+
+            return render(request, 'rpg/avant_garde/fantassin.html', context)
+        else:
+            return HttpResponse("La classe fantassin ne correspond pas a celle du personnage.")
 
     else:
         return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")

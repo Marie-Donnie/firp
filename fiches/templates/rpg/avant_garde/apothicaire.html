@@ -8,16 +8,81 @@ $(function () {
 })
 {% endblock %}
 
-{% block title %}Créer un apothicaire{% endblock %}
-{% block page-title %}Créer un apothicaire{% endblock %}
+{% block title %}Créer/éditer un apothicaire{% endblock %}
+{% block page-title %}Créer/éditer un apothicaire{% endblock %}
 
 {% block content %}
 <div id="char_form">
-<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
-  {% csrf_token %}
-  {{form.as_ul}}
+
+  <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+    {% csrf_token %}
+    <!-- {{form.as_ul}} -->
+    <ul>
+    <li><h4>Niveau 1</h4></li>
+    <div class="form-group">
+      <label for="id_medecine">Médecine&nbsp;:</label> <input name="medecine" value="0" max="100" required="" id="id_medecine" min="0" type="number">
+    </div>
+
+    <li><h4>Niveau 2</h4></li>
+    <div class="form-group">
+      <label for="id_chirurgie">Chirurgie&nbsp;:</label> <input name="chirurgie" value="0" max="100" required="" id="id_chirurgie" min="0" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_poison">Poison&nbsp;:</label> <input name="poison" value="0" max="100" required="" id="id_poison" min="0" type="number">
+    </div>
+    <li><h4>Niveau 3</h4></li>
+    <div class="form-group">
+      <label for="id_guerisseur">Guérisseur&nbsp;:</label> <select name="guerisseur" id="id_guerisseur">
+	<option value="True">Oui</option>
+
+	<option value="False" selected="">Non</option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_alchimie">Alchimie&nbsp;:</label> <input name="alchimie" value="0" max="100" required="" id="id_alchimie" min="0" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_equitation">Equitation&nbsp;:</label> <input name="equitation" value="0" max="100" required="" id="id_equitation" min="0" type="number">
+    </div>
+    <li><h4>Niveau 4</h4></li>
+    <div class="form-group">
+      <label for="id_maitr_scalpel">Maîtrise du scalpel&nbsp;:</label> <select name="maitr_scalpel" id="id_maitr_scalpel">
+	<option value="True">Oui</option>
+
+	<option value="False" selected="">Non</option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_lancer_fioles">Lancer de fioles&nbsp;:</label> <select name="lancer_fioles" id="id_lancer_fioles">
+	<option value="True">Oui</option>
+
+	<option value="False" selected="">Non</option>
+
+      </select>
+    </div>
+    <li><h4>Niveau 5</h4></li>
+    <div class="form-group">
+      <label for="id_maitr_guerisseur">Maitre guérisseur&nbsp;:</label> <select name="maitr_guerisseur" id="id_maitr_guerisseur">
+	<option value="True">Oui</option>
+
+	<option value="False" selected="">Non</option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_enfumeur">Enfumeur&nbsp;:</label> <select name="enfumeur" id="id_enfumeur">
+	<option value="True">Oui</option>
+
+	<option value="False" selected="">Non</option>
+
+      </select><input name="perso" id="id_perso" type="hidden">
+    </div>
+    </ul>
+    <input class="btn btn-default" type="submit" value="Valider" />
+  </form>
 
 </div>
-<input class="btn btn-default" type="submit" value="Valider" />
-</form>
+
 {% endblock %}
