@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -89,8 +89,8 @@ def creer_fiche(request):
                 data['inventaire'] = None
             form = FicheForm(data, request.FILES)
             if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
+                save_it = form.save()
+                return redirect('detail_fiche', fiche_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -185,8 +185,8 @@ def edit_fiche(request, fiche_id):
                 data['inventaire'] = None
             form = FicheForm(data, request.FILES, instance=fiche)
             if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
+                save_it = form.save()
+                return redirect('detail_fiche', fiche_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -226,8 +226,8 @@ def creer_objet(request):
         if request.method == 'POST':
             form = ObjetForm(request.POST, request.FILES)
             if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
+                save_it = form.save()
+                return redirect('detail_objet', objet_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -245,8 +245,8 @@ def creer_armure(request):
         if request.method == 'POST':
             form = ArmureForm(request.POST, request.FILES)
             if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
+                save_it = form.save()
+                return redirect('detail_armure', armure_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -368,8 +368,8 @@ def edit_objet(request, objet_id):
         if request.method == 'POST':
             form = ObjetForm(request.POST, request.FILES, instance=objet)
             if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
+                save_it = form.save()
+                return redirect('detail_objet', objet_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -391,8 +391,8 @@ def edit_armure(request, armure_id):
         if request.method == 'POST':
             form = ArmureForm(request.POST, instance=armure)
             if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
+                save_it = form.save()
+                return redirect('detail_armure', armure_id=save_it.id)
             else:
                 print(form.errors)
         else:
