@@ -79,9 +79,14 @@
 	  {% endfor %}
 	  </ul>
     </ul>
-    <h4 class="progress-label">Niveau : {{fiche.xp}}. Expérience nécessaire pour le prochain niveau : </h4>
+    <h4 class="progress-label">Niveau : {{fiche.niveau}}. Expérience nécessaire pour le prochain niveau : </h4>
     <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.xp}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{fiche.xp|pourcent:100}}%">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.xp}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 									{% if fiche.niveau == 1 %} {{fiche.xp|pourcent:100}}%"
+	    {% elif fiche.niveau == 2 %} {{fiche.xp|pourcent:200}}%"
+	    {% elif fiche.niveau == 3 %} {{fiche.xp|pourcent:400}}%"
+	    {% elif fiche.niveau == 4 %} {{fiche.xp|pourcent:800}}%"
+	    {% elif fiche.niveau == 5 %} {{fiche.xp|pourcent:1600}}%"
+	   {% endif %}>
 	{{fiche.xp}}%
       </div>
     </div>
