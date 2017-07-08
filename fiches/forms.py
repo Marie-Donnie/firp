@@ -67,7 +67,8 @@ class CaseForm(ModelForm):
 
     class Meta:
         model = Case
-        fields = ['nombre', 'objet']
+        fields = ['nombre', 'objet', 'createur']
+        widgets = {'createur': forms.HiddenInput(), }
         prefix = 'case'
 
 

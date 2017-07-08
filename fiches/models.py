@@ -339,6 +339,9 @@ class Case(models.Model):
     objet = models.ForeignKey(Objet,
                               null=True,
                               related_name='case')
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 null=True,
+                                 related_name='cases')
 
     class Meta:
         ordering = ["nombre", "objet"]

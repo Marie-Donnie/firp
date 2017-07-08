@@ -264,7 +264,9 @@ def creer_armure(request):
 def creer_case(request):
     if request.user.has_perm('fiches.case_ok'):
         if request.method == 'POST':
-            form = CaseForm(request.POST, request.FILES)
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=request.user).id
+            form = CaseForm(data, request.FILES)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -294,7 +296,7 @@ def creer_inventaire(request):
         else:
             form = InventaireForm()
 
-        cases = Case.objects.all()
+        cases = Case.objects.filter(createur=request.user)
         context = {'form': form, 'cases': cases}
 
         return render(request, 'fiches/inventaire.html', context)
@@ -412,7 +414,9 @@ def edit_case(request, case_id):
     case = Case.objects.get(pk=case_id)
     if request.user.has_perm('fiches.change_case'):
         if request.method == 'POST':
-            form = CaseForm(request.POST, instance=case)
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=request.user).id
+            form = CaseForm(data, instance=case)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
@@ -445,7 +449,7 @@ def edit_inventaire(request, inventaire_id):
             form = InventaireForm(instance=inventaire)
 
         cases_perso = inventaire.cases.all()
-        cases = Case.objects.all()
+        cases = Case.objects.filter(createur=request.user)
         context = {'form': form, 'cases': cases, 'cases_perso': cases_perso}
         return render(request, 'fiches/inventaire.html', context)
 
