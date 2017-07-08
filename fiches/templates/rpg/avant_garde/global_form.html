@@ -104,7 +104,8 @@ $(function () {
   <option value="9"  {% if form.ex_prof.value == 9 or form.ex_prof.value == None %} selected="" {% endif %}>Autre métier</option>
 
 </select>
-<label for="id_autre_metier">Autre métier&nbsp;:</label> <input name="autre_metier" value="{{form.autre_metier.value|default:'Aucun'}}" id="id_autre_metier" maxlength="30" type="text">
+<label for="id_autre_metier">Autre métier&nbsp;:</label>
+<input name="autre_metier" value="{{form.autre_metier.value|default:'Aucun'}}" id="id_autre_metier" maxlength="30" type="text">
 <span>
   <ul>
     <li><b>Forgeron :</b> Débloque la compétence Forge à 1d20 pts, qui permet de rendre de la durabilité à l'équipement endommagé. (- 5 pts de création)</li>
@@ -119,7 +120,8 @@ $(function () {
   </span>
       </div>
   <div class="form-group">
-      <label for="id_grade_rp">Grade rp&nbsp;:</label> <select name="grade_rp" id="id_grade_rp">
+    <label for="id_grade_rp">Grade rp&nbsp;:</label>
+    <select name="grade_rp" id="id_grade_rp">
   <option value="1" {% if form.grade_rp.value == 1 or form.grade_rp.value == None %} selected="" {% endif %}>Soldat</option>
   <option value="2" {% if form.grade_rp.value == 2%} selected="" {% endif %}>Caporal</option>
   <option value="3" {% if form.grade_rp.value == 3%} selected="" {% endif %}>Sergent</option>
@@ -135,39 +137,48 @@ $(function () {
   <span>Vous disposez de 34 points à allouer.</span><br><br>
 
   <div class="form-group">
-    <label for="id_cap_combat">Capacité combat&nbsp;:</label> <input name="cap_combat" value="{{form.cap_combat.value|default:1}}" max="10" required="" id="id_cap_combat" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_cap_combat">Capacité combat&nbsp;:</label>
+    <input name="cap_combat" value="{{form.cap_combat.value|default:1}}" max="10" required="" id="id_cap_combat" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne d'un fantassin est de 4. Elle détermine la capacité que vous avez à attaquer votre adversaire et s'oppose directement à la capacité de combat de l'adversaire.</span>
   </div>
   <div class="form-group">
-    <label for="id_cap_tir">Capacité de  tir&nbsp;:</label> <input name="cap_tir" value="{{form.cap_tir.value|default:1}}" max="10" required="" id="id_cap_tir" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_cap_tir">Capacité de  tir&nbsp;:</label>
+    <input name="cap_tir" value="{{form.cap_tir.value|default:1}}" max="10" required="" id="id_cap_tir" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne d'un arbalétrier est de 5. Elle détermine la capacité que vous avez à toucher un adversaire à distance.</span>
   </div>
   <div class="form-group">
-    <label for="id_force">Force&nbsp;:</label> <input name="force" value="{{form.force.value|default:1}}" max="10" required="" id="id_force" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_force">Force&nbsp;:</label>
+    <input name="force" value="{{form.force.value|default:1}}" max="10" required="" id="id_force" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 4. La force détermine les dégâts fait à votre adversaire, chaque point de force ajoute un point de dégât à votre arme.</span>
   </div>
   <div class="form-group">
-    <label for="id_endu">Endurance&nbsp;:</label> <input name="endu" value="{{form.endu.value|default:1}}" max="10" required="" id="id_endu" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_endu">Endurance&nbsp;:</label>
+    <input name="endu" value="{{form.endu.value|default:1}}" max="10" required="" id="id_endu" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 4. L'endurance détermine la résistance aux dégâts, aux poisons et à l'alcool. Chaque point d'endurance réduit de un point les dégâts reçu.</span>
   </div>
   <div class="form-group">
-    <label for="id_perce">Perception&nbsp;:</label> <input name="perce" value="{{form.perce.value|default:1}}" max="10" required="" id="id_perce" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_perce">Perception&nbsp;:</label>
+    <input name="perce" value="{{form.perce.value|default:1}}" max="10" required="" id="id_perce" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 4. La perception détermine la vision d'un personnage et son attention aux détails du monde alentour.</span>
   </div>
   <div class="form-group">
-    <label for="id_agi">Agilité&nbsp;:</label> <input name="agi" value="{{form.agi.value|default:1}}" max="10" required="" id="id_agi" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_agi">Agilité&nbsp;:</label>
+    <input name="agi" value="{{form.agi.value|default:1}}" max="10" required="" id="id_agi" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 4. L'agilité détermine la rapidité d'action d'un personnage et sa souplesse. Elle détermine donc l'initiative de combat.</span>
   </div>
   <div class="form-group">
-    <label for="id_intell">Intelligence&nbsp;:</label> <input name="intell" value="{{form.intell.value|default:1}}" max="10" required="" id="id_intell" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_intell">Intelligence&nbsp;:</label>
+    <input name="intell" value="{{form.intell.value|default:1}}" max="10" required="" id="id_intell" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 3. L'intelligence détermine les savoirs d'un personnage et ses facultés technique précises. Elle détermine également le mana d'un sorcier.</span>
   </div>
   <div class="form-group">
-    <label for="id_charisme">Charisme&nbsp;:</label> <input name="charisme" value="{{form.charisme.value|default:1}}" max="10" required="" id="id_charisme" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_charisme">Charisme&nbsp;:</label>
+    <input name="charisme" value="{{form.charisme.value|default:1}}" max="10" required="" id="id_charisme" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne humaine est de 3. Le charisme détermine la capacité d'un personnage à se faire apprécier et respecter, ATTENTION le charisme ne représente pas la sociabilité.</span>
   </div>
   <div class="form-group">
-    <label for="id_force_men">Force mentale&nbsp;:</label> <input name="force_men" value="{{form.force_men.value|default:1}}" max="10" required="" id="id_force_men" min="1" type="number" data-toggle="tooltip" title=""><br>
+    <label for="id_force_men">Force mentale&nbsp;:</label>
+    <input name="force_men" value="{{form.force_men.value|default:1}}" max="10" required="" id="id_force_men" min="1" type="number" data-toggle="tooltip" title=""><br>
     <span>Valeur de 1 à 10, la valeur moyenne d'un soldat est de 5. La force mentale détermine la capacité d'un personnage à résister à l'accumulation de stress, à la folie et à la peur.</span>
   </div>
 
@@ -175,7 +186,8 @@ $(function () {
   <h2>Profil secondaire</h2><br>
 
     <div class="form-group">
-      <label for="id_classe">Classe&nbsp;:</label> <select name="classe" id="id_classe">
+      <label for="id_classe">Classe&nbsp;:</label>
+      <select name="classe" id="id_classe">
   <option value="1" {% if form.classe.value == 0 or form.classe.value == None %} selected="" {% endif %}>Fantassin</option>
 
   <option value="2" {% if form.classe.value == 0%} selected="" {% endif %}>Arbalétrier</option>
@@ -212,7 +224,7 @@ $(function () {
     </div>
     <div class="form-group">
       <label for="id_xp">Points d'expérience&nbsp;:</label>
-      <input name="xp" value="{{form.xp.value|default:0}}" required="" id="id_xp" type="number" data-toggle="tooltip" title="" min="0" ><span>Débute à 0/100</span>
+      <input name="xp" value="{{form.xp.value|default:0}}" required="" id="id_xp" type="number" data-toggle="tooltip" title="" min="0" ><span>Débute à 0</span>
     </div>
     <div class="form-group">
       <label for="id_blessures">Blessures&nbsp;:</label>
@@ -252,7 +264,11 @@ $(function () {
     </select>
 
   </div>
-
+  <div class="form-group">
+    <label for="id_peur">Peur&nbsp;:</label> <input name="peur" value="{{form.peur.value|default:'Aucun'}}" id="id_peur" maxlength="80" type="text">
+    <label for="id_dependances">Dépendances&nbsp;:</label> <input name="dependances" value="{{form.dependances.value|default:'Aucun'}}" id="id_dependances" maxlength="80" type="text">
+    <span>Si désavantages choisis</span>
+  </div>
   <div class="form-group">
     <label for="id_image">Image&nbsp;:</label>
     <span id="description">
