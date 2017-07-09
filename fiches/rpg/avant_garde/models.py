@@ -148,6 +148,8 @@ class Fantassin(models.Model):
                                         (True, 'Oui'),
                                         (False, 'Non'),
                                     ))
+    escalade = IntegerRangeField(default=0, min_value=0,
+                                 max_value=100)
     cc = IntegerRangeField(default=0, min_value=1,
                            max_value=100)
     prot = IntegerRangeField(default=0, min_value=1,
@@ -229,6 +231,152 @@ class Apothicaire(models.Model):
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
                                  related_name='apothicaire')
+
+
+class Arbaletrier(models.Model):
+    focalisation = IntegerRangeField(default=0, min_value=0,
+                                     max_value=100)
+    couvert = IntegerRangeField(default=0, min_value=0,
+                                max_value=100)
+    escalade = IntegerRangeField(default=0, min_value=0,
+                                 max_value=100)
+    coup_crit = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    visee_prec = models.BooleanField(default=False,
+                                     choices=(
+                                         (True, 'Oui'),
+                                         (False, 'Non'),
+                                     ))
+    vigilance = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    maitr_arba = models.BooleanField(default=False,
+                                     choices=(
+                                         (True, 'Oui'),
+                                         (False, 'Non'),
+                                     ))
+    equitation = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    dissimulation = IntegerRangeField(default=0, min_value=0,
+                                      max_value=100)
+    as_du_tir = models.BooleanField(default=False,
+                                    choices=(
+                                        (True, 'Oui'),
+                                        (False, 'Non'),
+                                    ))
+    perso = models.OneToOneField(Avant_garde,
+                                 null=True,
+                                 related_name='arbaletrier')
+
+
+class Eclaireur(models.Model):
+    dissimulation = IntegerRangeField(default=0, min_value=0,
+                                      max_value=100)
+    vigilance = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    oeil_aigle = models.BooleanField(default=False,
+                                     choices=(
+                                         (True, 'Oui'),
+                                         (False, 'Non'),
+                                     ))
+    vif = models.BooleanField(default=False,
+                              choices=(
+                                  (True, 'Oui'),
+                                  (False, 'Non'),
+                              ))
+    escalade = IntegerRangeField(default=0, min_value=0,
+                                 max_value=100)
+    equitation = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    pistage = IntegerRangeField(default=0, min_value=0,
+                                max_value=100)
+    deguisement = IntegerRangeField(default=0, min_value=0,
+                                    max_value=100)
+    vigilant = models.BooleanField(default=False,
+                                   choices=(
+                                       (True, 'Oui'),
+                                       (False, 'Non'),
+                                   ))
+    rx_eclairs = models.BooleanField(default=False,
+                                     choices=(
+                                         (True, 'Oui'),
+                                         (False, 'Non'),
+                                     ))
+    natation = IntegerRangeField(default=0, min_value=0,
+                                 max_value=100)
+    contorsion = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    trap = IntegerRangeField(default=0, min_value=0,
+                             max_value=100)
+    depl_silenc = IntegerRangeField(default=0, min_value=0,
+                                    max_value=100)
+    assassin = IntegerRangeField(default=0, min_value=0,
+                                 max_value=100)
+    maitr_anim = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    art_silenc = models.BooleanField(default=False,
+                                     choices=(
+                                         (True, 'Oui'),
+                                         (False, 'Non'),
+                                     ))
+    rodeur = models.BooleanField(default=False,
+                                 choices=(
+                                     (True, 'Oui'),
+                                     (False, 'Non'),
+                                 ))
+    perso = models.OneToOneField(Avant_garde,
+                                 null=True,
+                                 related_name='eclaireur')
+
+
+class Sorcier(models.Model):
+    boule_feu = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    trait_feu = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    contresort = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    nova_feu = IntegerRangeField(default=0, min_value=0,
+                                 max_value=100)
+    souffle_dragon = IntegerRangeField(default=0, min_value=0,
+                                       max_value=100)
+    bouclier_mana = models.BooleanField(default=False,
+                                        choices=(
+                                            (True, 'Oui'),
+                                            (False, 'Non'),
+                                        ))
+    portail = IntegerRangeField(default=0, min_value=0,
+                                max_value=100)
+    pilier_feu = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    explo_pyro = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    transfert = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    bouclier_feu = models.BooleanField(default=False,
+                                       choices=(
+                                           (True, 'Oui'),
+                                           (False, 'Non'),
+                                       ))
+    desamorcer_pieges = IntegerRangeField(default=0, min_value=0,
+                                          max_value=100)
+    enchant = IntegerRangeField(default=0, min_value=0,
+                                max_value=100)
+    pluie_feu = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    bombe_vivante = IntegerRangeField(default=0, min_value=0,
+                                      max_value=100)
+    annul_male = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    ana_magique = IntegerRangeField(default=0, min_value=0,
+                                    max_value=100)
+    grand_sorcier = models.BooleanField(default=False,
+                                        choices=(
+                                            (True, 'Oui'),
+                                            (False, 'Non'),
+                                        ))
+    perso = models.OneToOneField(Avant_garde,
+                                 null=True,
+                                 related_name='sorcier')
 
 
 class Avantages(models.Model):

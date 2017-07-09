@@ -16,4 +16,10 @@ urlpatterns = [
         views.creer_apothicaire, name='creer_apo'),
     url(r'^avant_garde/creer_fantassin/(?P<perso_id>\d+)/$',
         views.creer_fantassin, name='creer_fantassin'),
+    url(r'^avant_garde/creer_arbaletrier/(?P<perso_id>\d+)/$',
+        views.creer_arbaletrier, name='creer_arbaletrier'),
+    url(r'^avant_garde/creer_eclaireur/(?P<perso_id>\d+)/$',
+        views.creer_eclaireur, name='creer_eclaireur'),
+    url(r'^avant_garde/creer_sorcier/(?P<perso_id>\d+)/$',
+        views.creer_sorcier, name='creer_sorcier'),
 ]

@@ -127,6 +127,90 @@ def creer_fantassin(request, perso_id):
         return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
 
 
+@login_required
+def creer_arbaletrier(request, perso_id):
+    utilisateur = request.user
+    if (utilisateur.has_perm('fiche.add_avant_garde')):
+        perso = get_object_or_404(Avant_garde, pk=perso_id)
+        if (utilisateur == perso.createur) and (perso.classe == 1):
+            if request.method == 'POST':
+                data = request.POST.copy()
+                data['perso'] = perso.id
+                form = ArbaletrierForm(data)
+                if form.is_valid():
+                    save_it = form.save()
+                    return redirect('detail_perso', perso_id=save_it.id)
+                else:
+                    print(form.errors)
+            else:
+                form = ArbaletrierForm()
+
+            context = {'form': form}
+
+            return render(request, 'rpg/avant_garde/arbaletrier.html', context)
+        else:
+            return HttpResponse("La classe arbaletrier ne correspond pas a celle du personnage.")
+
+    else:
+        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+
+
+@login_required
+def creer_eclaireur(request, perso_id):
+    utilisateur = request.user
+    if (utilisateur.has_perm('fiche.add_avant_garde')):
+        perso = get_object_or_404(Avant_garde, pk=perso_id)
+        if (utilisateur == perso.createur) and (perso.classe == 1):
+            if request.method == 'POST':
+                data = request.POST.copy()
+                data['perso'] = perso.id
+                form = EclaireurForm(data)
+                if form.is_valid():
+                    save_it = form.save()
+                    return redirect('detail_perso', perso_id=save_it.id)
+                else:
+                    print(form.errors)
+            else:
+                form = EclaireurForm()
+
+            context = {'form': form}
+
+            return render(request, 'rpg/avant_garde/eclaireur.html', context)
+        else:
+            return HttpResponse("La classe eclaireur ne correspond pas a celle du personnage.")
+
+    else:
+        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+
+
+@login_required
+def creer_sorcier(request, perso_id):
+    utilisateur = request.user
+    if (utilisateur.has_perm('fiche.add_avant_garde')):
+        perso = get_object_or_404(Avant_garde, pk=perso_id)
+        if (utilisateur == perso.createur) and (perso.classe == 1):
+            if request.method == 'POST':
+                data = request.POST.copy()
+                data['perso'] = perso.id
+                form = SorcierForm(data)
+                if form.is_valid():
+                    save_it = form.save()
+                    return redirect('detail_perso', perso_id=save_it.id)
+                else:
+                    print(form.errors)
+            else:
+                form = SorcierForm()
+
+            context = {'form': form}
+
+            return render(request, 'rpg/avant_garde/sorcier.html', context)
+        else:
+            return HttpResponse("La classe sorcier ne correspond pas a celle du personnage.")
+
+    else:
+        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+
+
 def persos_ag(request):
     fiches_list = Avant_garde.objects.order_by('nom', 'prenom')
 

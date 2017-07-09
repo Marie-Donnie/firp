@@ -36,3 +36,30 @@ class ApothicaireForm(ModelForm):
         fields = '__all__'
         prefix = 'apothicaire'
         widgets = {'perso': forms.HiddenInput()}
+
+
+class ArbaletrierForm(ModelForm):
+
+    class Meta:
+        model = Arbaletrier
+        fields = '__all__'
+        prefix = 'arbaletrier'
+        widgets = {'perso': forms.HiddenInput()}
+
+
+class EclaireurForm(ModelForm):
+
+    class Meta:
+        model = Eclaireur
+        fields = '__all__'
+        prefix = 'eclaireur'
+        widgets = {'perso': forms.HiddenInput()}
+
+
+class SorcierForm(ModelForm):
+
+    class Meta:
+        model = Sorcier
+        fields = '__all__'
+        prefix = 'sorcier'
+        widgets = {'perso': forms.HiddenInput()}
