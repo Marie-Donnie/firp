@@ -40,7 +40,8 @@ class FicheForm(ModelForm):
                    'afficher_createur': forms.CheckboxInput(),
                    'afficher_inventaire': forms.CheckboxInput(),
                    'pj': forms.RadioSelect(),
-                   'main_dir': forms.RadioSelect(), }
+                   'main_dir': forms.RadioSelect(),
+                   'equipement': forms.HiddenInput(), }
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

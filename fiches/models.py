@@ -31,7 +31,8 @@ MEMBRES = [
     (11, 'Cou'),
     (12, 'Doigt'),
     (13, 'Poignets'),
-    (14, 'Divers')
+    (14, 'Divers'),
+    (15, 'Arme de secours')
     ]
 
 ZONES = (
@@ -357,7 +358,7 @@ class Case(models.Model):
 
 class Inventaire(models.Model):
     nom = models.CharField(max_length=50,
-                           default="Inventaire")
+                           default="Inventaire ")
     cases = models.ManyToManyField(Case,
                                    related_name='inventaire')
 
@@ -371,7 +372,7 @@ class Inventaire(models.Model):
 
 class Equipement(models.Model):
     nom = models.CharField(max_length=50,
-                           default="Equipement")
+                           default="Equipement ")
     objets = models.ManyToManyField(Armure,
                                     related_name='equipement')
 
@@ -486,6 +487,13 @@ class Equipement(models.Model):
                 ret.append(None)
         return ret
 
+    def get_autre_arme(self):
+        ret = []
+        for i in self.objets.all():
+            if i.membre == 15:
+                ret.append(i)
+        return ret[0] if ret else None
+
     def effets(self):
         effets = []
         effets_ig = []
@@ -496,7 +504,7 @@ class Equipement(models.Model):
         methods = [self.get_mp, self.get_am, self.get_tete, self.get_epaules,
                    self.get_torse, self.get_mains, self.get_taille,
                    self.get_jambes, self.get_pieds, self.get_dos, self.get_cou,
-                   self.get_poignets]
+                   self.get_poignets, self.get_autre_arme]
         for method in methods:
             objet = method()
             print(objet)
@@ -527,3 +535,9 @@ class Equipement(models.Model):
                 agi += diver.agi
                 armure += diver.armure
         return effets, effets_ig, force, intell, agi, armure
+
+
+# class PieceEquipement(models.Model):
+#     armure = models.ForeignKey(Armure)
+#     equipement = models.ForeignKey(Equipement)
+#     quantite = models.PositiveSmallIntegerField(default=1)

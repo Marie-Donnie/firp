@@ -67,7 +67,6 @@ def profile(request):
 
 def aff_user(request, user_id):
     utilisateur = get_object_or_404(User, pk=user_id)
-    print(utilisateur.email)
     return render(request, 'fiches/utilisateur.html',
                   {'utilisateur': utilisateur})
 
@@ -77,18 +76,26 @@ def aff_user(request, user_id):
 @login_required
 def creer_fiche(request):
     utilisateur = request.user
+    # Checks wether user can create another fiche or not
     if ((utilisateur.fiches.count() < 16) or
         (utilisateur.has_perm('fiches.plus_de_15_fiches'))):
         if request.method == 'POST':
+            # request.POST is not editable, so we have to copy it to hard code a value
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
+            # not fdg users are not allowed to have an equipement and detailed inventaire
             if not(utilisateur.has_perm('fiches.equipement_ok')):
                 data['equipement'] = None
                 data['inventaire_fdg'] = None
             else:
                 data['inventaire'] = None
+                name = data['prenom']
+                data['equipement'] = Equipement.objects.create(nom='Equipement de '+name).id
+                data['inventaire_fdg'] = Inventaire.objects.create(nom='Inventaire de '+name).id
+            # get the completed form
             form = FicheForm(data, request.FILES)
             if form.is_valid():
+                # get the saved form to redirect to the created fiche
                 save_it = form.save()
                 return redirect('detail_fiche', fiche_id=save_it.id)
             else:
@@ -96,10 +103,7 @@ def creer_fiche(request):
         else:
             form = FicheForm()
 
-        equipements = Equipement.objects.all()
-        inventaires = Inventaire.objects.all()
-        context = {'form': form, 'equipements': equipements,
-                   'inventaires': inventaires}
+        context = {'form': form}
         return render(request, 'fiches/formulaire.html', context)
 
     else:
@@ -121,6 +125,7 @@ def detail_fiche(request, fiche_id):
     if fiche.equipement:
         mp = fiche.equipement.get_mp()
         am = fiche.equipement.get_am()
+        aa = fiche.equipement.get_autre_arme()
         tete = fiche.equipement.get_tete()
         epaules = fiche.equipement.get_epaules()
         torse = fiche.equipement.get_torse()
@@ -134,14 +139,15 @@ def detail_fiche(request, fiche_id):
         divers = fiche.equipement.get_divers()
         effets, effets_ig, force, intell, agi, armure = fiche.equipement.effets()
     else:
-        mp, am, tete, epaules, torse = None, None, None, None, None
+        mp, am, aa, tete, epaules, torse = None, None, None, None, None, None
         mains, taille, jambes, dos, cou = None, None, None, None, None
         poignets, doigts, divers = None, None, None
         effets, effets_ig, force = None, None, None
         intell, agi, armure = None, None, None
-    context = {'fiche': fiche, 'range': range(nb), 'effets': effets,
-               'effets_ig': effets_ig, 'force': force, 'intell': intell,
-               'agi': agi, 'armure': armure, 'mp': mp, 'am': am, 'tete': tete,
+    context = {'fiche': fiche,
+               'range': range(nb), 'effets': effets, 'effets_ig': effets_ig,
+               'force': force, 'intell': intell, 'agi': agi,
+               'armure': armure, 'mp': mp, 'am': am, 'aa': aa, 'tete': tete,
                'epaules': epaules, 'torse': torse, 'mains': mains,
                'taille': taille, 'jambes': jambes, 'dos': dos, 'cou': cou,
                'poignets': poignets, 'doigts': doigts, 'divers': divers}

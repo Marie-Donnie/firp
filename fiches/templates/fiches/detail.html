@@ -54,7 +54,7 @@ function getTooltip() {
 {% block content %}
 
 <div class="media">
-  <div class="media-body">
+  <div class="media-body" id="detail-perso">
 
     <h3>{{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}</h3>
     <ul>
@@ -114,6 +114,7 @@ function getTooltip() {
       {{fiche.historique|linebreaksbr}}
     </div>
   </div>
+  {% if fiche.relations != 'Aucune' %}
   <div class="panel panel-defaut" id="details-panels">
     <div class="panel-heading">
       <h3 class="panel-title">Relations</h3>
@@ -122,7 +123,7 @@ function getTooltip() {
       {{fiche.relations|linebreaksbr}}
     </div>
   </div>
-
+  {% endif %}
   <div class="row">
     {% if fiche.medailles != 'Non applicable/Aucune' %}
     <div class="col-md-6">
@@ -152,7 +153,10 @@ function getTooltip() {
     <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">
 	<div class="panel-heading">
-	  <h3 class="panel-title">{{fiche.inventaire_fdg.nom}}</h3>
+	  <h3 class="panel-title">{{fiche.inventaire_fdg.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+	  {% if user.id == fiche.createur.id %}
+	  <a href="{% url 'editer_inventaire' fiche.inventaire_fdg.id %}">Editer</a>
+	  {% endif %}
 	</div>
 	<div class="panel-body">
 	  <div class="inventory">
@@ -184,7 +188,10 @@ function getTooltip() {
     <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">
 	<div class="panel-heading">
-	  <h3 class="panel-title">{{fiche.equipement.nom}}</h3>
+	  <h3 class="panel-title">{{fiche.equipement.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+	  {% if user.id == fiche.createur.id %}
+	  <a href="{% url 'editer_equipement' fiche.equipement.id %}">Editer</a>
+	  {% endif %}
 	</div>
 	<div class="panel-body">
 	  {% if mp %}
@@ -200,6 +207,13 @@ function getTooltip() {
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-SecondaryHand.PNG alt="Autre main" id="icone">
+	  {% endif %}
+	  {% if aa %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' aa.id %}" data-toggle="objet-tooltip">
+	    <img class="inventory-object" src={{ am.objet.image.url }} alt="Autre arme" id="icone">
+	  </a>
+	  {% else %}
+	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Ammo.PNG alt="Autre main" id="icone">
 	  {% endif %}
 	  {% if tete %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' tete.id %}" data-toggle="objet-tooltip">
@@ -298,18 +312,18 @@ function getTooltip() {
       <div class="panel-heading">
 	<h3 class="panel-title">Statistiques</h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" id="center">
 	<b>Effets :</b>
 	{% for effet in effets %}
 	{% if effet != 'Aucun' %}
 	{{ effet|linebreaksbr }}<br>
 	{% endif %}
-	{% endfor %}
+	{% endfor %}<br>
 	<b>Effets en jeu :</b>	{% for effet in effets_ig %}
 	{% if effet != 'Aucun' %}
 	{{ effet|linebreaksbr }}<br>
 	{% endif %}
-	{% endfor %}
+	{% endfor %}<br>
 	<b>Armure :</b> {{ armure }}<br>
 	<b>Force :</b> {{ force }}<br>
 	<b>Agilité :</b> {{ agi }}<br>

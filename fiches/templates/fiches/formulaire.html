@@ -447,23 +447,23 @@
       <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" checked="" id="id_afficher_inventaire" type="checkbox">
     </div>
 
-    {% if perms.fiches.equipement_ok and perms.fiches.inventaire_ok %}
-    <div class="form-group">
-      <label for="id_equipement">Equipement&nbsp;:</label> <select name="equipement" id="id_equipement">
-	<option value="" {% if form.equipement.value == None %} selected="" {% endif %}>Aucun</option>
-	{% for equipement in equipements %}
-	<option value="{{equipement.id}}" {% if form.equipement.value == equipement.id %} selected="" {% endif %}>{{equipement.nom}}</option>
-	{% endfor %}
-      </select>
-      <label for="id_inventaire_fdg">Inventaire&nbsp;:</label> <select name="inventaire_fdg" id="id_inventaire_fdg">
-	<option value="" {% if form.inventaire_fdg.value == None %} selected="" {% endif %}>Aucun</option>
-	{% for inventaire in inventaires %}
-	<option value="{{inventaire.id}}" {% if form.inventaire_fdg.value == inventaire.id %} selected="" {% endif %}>{{inventaire.nom}}</option>
-	{% endfor %}
+    <!-- {% if perms.fiches.equipement_ok and perms.fiches.inventaire_ok %} -->
+    <!-- <div class="form-group"> -->
+    <!--   <label for="id_equipement">Equipement&nbsp;:</label> <select name="equipement" id="id_equipement"> -->
+    <!-- 	<option value="" {% if form.equipement.value == None %} selected="" {% endif %}>Aucun</option> -->
+    <!-- 	{% for equipement in equipements %} -->
+    <!-- 	<option value="{{equipement.id}}" {% if form.equipement.value == equipement.id %} selected="" {% endif %}>{{equipement.nom}}</option> -->
+    <!-- 	{% endfor %} -->
+    <!--   </select> -->
+    <!--   <label for="id_inventaire_fdg">Inventaire&nbsp;:</label> <select name="inventaire_fdg" id="id_inventaire_fdg"> -->
+    <!-- 	<option value="" {% if form.inventaire_fdg.value == None %} selected="" {% endif %}>Aucun</option> -->
+    <!-- 	{% for inventaire in inventaires %} -->
+    <!-- 	<option value="{{inventaire.id}}" {% if form.inventaire_fdg.value == inventaire.id %} selected="" {% endif %}>{{inventaire.nom}}</option> -->
+    <!-- 	{% endfor %} -->
 
-      </select>
-    </div>
-    {% endif %}
+    <!--   </select> -->
+    <!-- </div> -->
+    <!-- {% endif %} -->
 
     <div class="form-group">
       <label for="id_image">Image&nbsp;</label>
