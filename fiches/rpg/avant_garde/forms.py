@@ -63,3 +63,13 @@ class SorcierForm(ModelForm):
         fields = '__all__'
         prefix = 'sorcier'
         widgets = {'perso': forms.HiddenInput()}
+
+
+class CampagneForm(ModelForm):
+
+    class Meta:
+        model = Campagne
+        fields = '__all__'
+        prefix = 'campagne'
+        widgets = {'objectif': forms.Textarea(),
+                   'fini': forms.RadioSelect(), }

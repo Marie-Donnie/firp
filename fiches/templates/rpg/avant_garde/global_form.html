@@ -119,6 +119,15 @@ $(function () {
 <li>Autres métiers (0 pts de création)</li>
   </span>
       </div>
+      <div class="form-group">
+      <label for="id_campagne">Campagnes de l'avant-garde &nbsp;:</label>
+
+      <select size="4" name="campagne" multiple="multiple" id="id_campagne" class="form-control">
+	{% for campagne in campagnes %}
+	<option value="{{campagne.id}}"{% if campagne.id in form.campagnes.value %} selected="" {% endif %}>{{campagne.nom}} : {{campagne.objectif}}</option>
+	{% endfor %}
+    </select>
+    </div>
   <div class="form-group">
     <label for="id_grade_rp">Grade rp&nbsp;:</label>
     <select name="grade_rp" id="id_grade_rp">

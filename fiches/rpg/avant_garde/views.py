@@ -31,8 +31,9 @@ def creer_base(request):
 
         avantages = Avantages.objects.all()
         desavantages = Desavantages.objects.all()
+        campagnes = Campagne.objects.all()
         context = {'form': form, 'avantages': avantages,
-                   'desavantages': desavantages}
+                   'desavantages': desavantages, 'campagnes': campagnes}
         return render(request, 'rpg/avant_garde/global_form.html', context)
 
     else:

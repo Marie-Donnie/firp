@@ -6,6 +6,27 @@ from fiches.functions import IntegerRangeField
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 
+class Campagne(models.Model):
+    nom = models.CharField(max_length=50)
+    mois_debut = IntegerRangeField(default='1', min_value=1,
+                                   max_value=12)
+    mois_fin = IntegerRangeField(default='1', min_value=1,
+                                 max_value=12)
+    annee_debut = IntegerRangeField(default='37', min_value=24,
+                                    max_value=100)
+    annee_fin = IntegerRangeField(default='37', min_value=24,
+                                  max_value=100)
+    objectif = models.CharField(max_length=100,
+                                default='Tuer.')
+    fini = models.BooleanField(default=False,
+                               choices=(
+                                   (True, 'Oui'),
+                                   (False, 'Non'),
+                               ))
+    image = models.ImageField(upload_to='images/rpg/campagne',
+                              default='images/site/avant-garde.jpg')
+
+
 class Avant_garde(models.Model):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
@@ -124,6 +145,7 @@ class Avant_garde(models.Model):
                                    null=True,
                                    blank=True,
                                    default='Sans')
+    campagne = models.ManyToManyField(Campagne)
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='avant_garde')
