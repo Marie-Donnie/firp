@@ -145,7 +145,8 @@ class Avant_garde(models.Model):
                                    null=True,
                                    blank=True,
                                    default='Sans')
-    campagne = models.ManyToManyField(Campagne)
+    campagne = models.ManyToManyField(Campagne,
+                                      blank=True)
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='avant_garde')
