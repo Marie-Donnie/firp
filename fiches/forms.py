@@ -85,5 +85,13 @@ class EquipementForm(ModelForm):
 
     class Meta:
         model = Equipement
-        fields = ['objets', 'nom']
+        fields = ['nom']
         prefix = 'equipement'
+
+
+class PieceEquipementForm(ModelForm):
+
+    class Meta:
+        model = Piece_equipement
+        fields = '__all__'
+        prefix = 'piece_equipement'

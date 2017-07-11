@@ -422,8 +422,10 @@
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
       <label for="id_relations">Relations&nbsp;</label> <textarea name="relations" class="form-control" id="id_relations" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_relations','charcount3');" onkeydown="countChars('id_relations','charcount3');" onmouseout="countChars('id_relations','charcount3');">{{form.relations.value|default:'Aucune'}}</textarea>
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
+      {% if not perms.fiches.inventaire_ok %}
       <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
+      {% endif %}
     </div>
     <div class="form-group">
       <span id="description"><b>Type de personnage </b></span>

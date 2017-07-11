@@ -2,27 +2,32 @@
 
 {% load l10n %}
 
-{% block title %}Créer/éditer l'équipement{% endblock %}
-{% block page-title %}Créer/éditer l'équipement{% endblock %}
+{% block title %}Editer l'équipement{% endblock %}
+{% block page-title %}Editer l'équipement{% endblock %}
 
 {% block content %}
 <div id="char_form">
-<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
-  {% csrf_token %}
-
-  <div class="form-group">
-    <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+  <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+    {% csrf_token %}
+    <!-- {{ form.as_ul }} -->
+    <div class="form-group">
+      <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
     </div>
-  <div class="form-group">
-  <label for="id_objets">Objets&nbsp;:</label>
-    <select size="14" name="objets" required="" multiple="multiple" id="id_objets" class="form-control">
 
-  {% for objet in objets %}
-  <option value="{{objet.id}}"{% if objet.id in form.objets.value %} selected="" {% endif %}>{{objet.get_nom}}</option>
-  {% endfor %}
+    <div class="form-group">
+      <label for="id_objets">Objets&nbsp;:</label>
+      <select size="14" name="objets" required="" multiple="multiple" id="id_objets">
+    	{% for objet in objets %}
+    	<option value="{{objet.id}}"{% if objet.id in form.objets.value %} selected="" {% endif %}>{{objet.get_nom}}</option>
+    	{% endfor %}
+      </select>
+    	{% for objet in objets %}
+      <input name="{{objet.id}}" value="{{objet.quantite.value|default:'1'}}" max="10" required="" id="id_quantite" min="1" type="number">
+    	{% endfor %}
+    </div>
 
-</select>
+    <input class="btn btn-default" type="submit" value="Valider" />
+  </form>
+
 </div>
-<input class="btn btn-default" type="submit" value="Valider" />
-</form>
 {% endblock %}

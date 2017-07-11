@@ -374,7 +374,7 @@ class Equipement(models.Model):
     nom = models.CharField(max_length=50,
                            default="Equipement ")
     objets = models.ManyToManyField(Armure,
-                                    related_name='equipement')
+                                    through='Piece_equipement')
 
     class Meta:
         verbose_name = "equipement"
@@ -537,7 +537,7 @@ class Equipement(models.Model):
         return effets, effets_ig, force, intell, agi, armure
 
 
-# class PieceEquipement(models.Model):
-#     armure = models.ForeignKey(Armure)
-#     equipement = models.ForeignKey(Equipement)
-#     quantite = models.PositiveSmallIntegerField(default=1)
+class Piece_equipement(models.Model):
+    armure = models.ForeignKey(Armure)
+    equipement = models.ForeignKey(Equipement)
+    quantite = models.PositiveSmallIntegerField(default=1)
