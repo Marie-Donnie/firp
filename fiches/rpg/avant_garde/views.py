@@ -132,7 +132,7 @@ def creer_arbaletrier(request, perso_id):
     utilisateur = request.user
     if (utilisateur.has_perm('fiche.add_avant_garde')):
         perso = get_object_or_404(Avant_garde, pk=perso_id)
-        if (utilisateur == perso.createur) and (perso.classe == 1):
+        if (utilisateur == perso.createur) and (perso.classe == 2):
             if request.method == 'POST':
                 data = request.POST.copy()
                 data['perso'] = perso.id
@@ -160,7 +160,7 @@ def creer_eclaireur(request, perso_id):
     utilisateur = request.user
     if (utilisateur.has_perm('fiche.add_avant_garde')):
         perso = get_object_or_404(Avant_garde, pk=perso_id)
-        if (utilisateur == perso.createur) and (perso.classe == 1):
+        if (utilisateur == perso.createur) and (perso.classe == 3):
             if request.method == 'POST':
                 data = request.POST.copy()
                 data['perso'] = perso.id
@@ -188,7 +188,7 @@ def creer_sorcier(request, perso_id):
     utilisateur = request.user
     if (utilisateur.has_perm('fiche.add_avant_garde')):
         perso = get_object_or_404(Avant_garde, pk=perso_id)
-        if (utilisateur == perso.createur) and (perso.classe == 1):
+        if (utilisateur == perso.createur) and (perso.classe == 5):
             if request.method == 'POST':
                 data = request.POST.copy()
                 data['perso'] = perso.id

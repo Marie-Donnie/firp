@@ -138,54 +138,38 @@ class Fantassin(models.Model):
                               max_value=100)
     parer_fleches = IntegerRangeField(default=0, min_value=1,
                                       max_value=100)
-    athle = models.BooleanField(default=False,
-                                choices=(
-                                    (True, 'Oui'),
-                                    (False, 'Non'),
-                                ))
-    resistant = models.BooleanField(default=False,
-                                    choices=(
-                                        (True, 'Oui'),
-                                        (False, 'Non'),
-                                    ))
+    athle_resi = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Athlétisme"),
+        (3, "Résistant")
+    )),
+                                          default=1)
     escalade = IntegerRangeField(default=0, min_value=0,
                                  max_value=100)
     cc = IntegerRangeField(default=0, min_value=1,
                            max_value=100)
     prot = IntegerRangeField(default=0, min_value=1,
                              max_value=100)
-    epeiste = models.BooleanField(default=False,
-                                  choices=(
-                                      (True, 'Oui'),
-                                      (False, 'Non'),
-                                  ))
-    crane_dur = models.BooleanField(default=False,
-                                    choices=(
-                                        (True, 'Oui'),
-                                        (False, 'Non'),
-                                    ))
+    epe_craned = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Epéiste"),
+        (3, "Crâne dûr")
+    )),
+                                          default=1)
     equitation = IntegerRangeField(default=0, min_value=1,
                                    max_value=100)
-    maitr_glaive = models.BooleanField(default=False,
-                                       choices=(
-                                           (True, 'Oui'),
-                                           (False, 'Non'),
-                                       ))
-    maitr_arm_lourde = models.BooleanField(default=False,
-                                           choices=(
-                                               (True, 'Oui'),
-                                               (False, 'Non'),
-                                           ))
-    feroce = models.BooleanField(default=False,
-                                 choices=(
-                                     (True, 'Oui'),
-                                     (False, 'Non'),
-                                 ))
-    implacable = models.BooleanField(default=False,
-                                     choices=(
-                                         (True, 'Oui'),
-                                         (False, 'Non'),
-                                     ))
+    glaive_lourde = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Maîtriste du glaive"),
+        (3, "Maîtrise de l'armure lourde")
+    )),
+                                          default=1)
+    feroce_impla = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Féroce"),
+        (3, "Implacable")
+    )),
+                                          default=1)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
                                  related_name='fantassin')
@@ -208,26 +192,18 @@ class Apothicaire(models.Model):
                                  max_value=100)
     equitation = IntegerRangeField(default=0, min_value=0,
                                    max_value=100)
-    maitr_scalpel = models.BooleanField(default=False,
-                                        choices=(
-                                            (True, 'Oui'),
-                                            (False, 'Non'),
-                                        ))
-    lancer_fioles = models.BooleanField(default=False,
-                                        choices=(
-                                            (True, 'Oui'),
-                                            (False, 'Non'),
-                                        ))
-    maitr_guerisseur = models.BooleanField(default=False,
-                                           choices=(
-                                               (True, 'Oui'),
-                                               (False, 'Non'),
-                                           ))
-    enfumeur = models.BooleanField(default=False,
-                                   choices=(
-                                       (True, 'Oui'),
-                                       (False, 'Non'),
-                                   ))
+    scalpel_fioles = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Maîtrise du scalpel"),
+        (3, "Art du lancer de fioles")
+    )),
+                                          default=1)
+    guerisseur_enfum = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Maître guérisseur"),
+        (3, "Enfumeur")
+    )),
+                                          default=1)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
                                  related_name='apothicaire')
@@ -273,16 +249,12 @@ class Eclaireur(models.Model):
                                       max_value=100)
     vigilance = IntegerRangeField(default=0, min_value=0,
                                   max_value=100)
-    oeil_aigle = models.BooleanField(default=False,
-                                     choices=(
-                                         (True, 'Oui'),
-                                         (False, 'Non'),
-                                     ))
-    vif = models.BooleanField(default=False,
-                              choices=(
-                                  (True, 'Oui'),
-                                  (False, 'Non'),
-                              ))
+    aigle_vif = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Œil d'aigle"),
+        (3, "Vif")
+    )),
+                                          default=1)
     escalade = IntegerRangeField(default=0, min_value=0,
                                  max_value=100)
     equitation = IntegerRangeField(default=0, min_value=0,
@@ -291,16 +263,12 @@ class Eclaireur(models.Model):
                                 max_value=100)
     deguisement = IntegerRangeField(default=0, min_value=0,
                                     max_value=100)
-    vigilant = models.BooleanField(default=False,
-                                   choices=(
-                                       (True, 'Oui'),
-                                       (False, 'Non'),
-                                   ))
-    rx_eclairs = models.BooleanField(default=False,
-                                     choices=(
-                                         (True, 'Oui'),
-                                         (False, 'Non'),
-                                     ))
+    vigilant_rx = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Vigilant"),
+        (3, "Réflexes éclaireurs")
+    )),
+                                          default=1)
     natation = IntegerRangeField(default=0, min_value=0,
                                  max_value=100)
     contorsion = IntegerRangeField(default=0, min_value=0,
@@ -313,16 +281,12 @@ class Eclaireur(models.Model):
                                  max_value=100)
     maitr_anim = IntegerRangeField(default=0, min_value=0,
                                    max_value=100)
-    art_silenc = models.BooleanField(default=False,
-                                     choices=(
-                                         (True, 'Oui'),
-                                         (False, 'Non'),
-                                     ))
-    rodeur = models.BooleanField(default=False,
-                                 choices=(
-                                     (True, 'Oui'),
-                                     (False, 'Non'),
-                                 ))
+    silen_rodeur = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Art de la mort silencieuse"),
+        (3, "Rôdeur")
+    )),
+                                          default=1)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
                                  related_name='eclaireur')

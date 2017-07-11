@@ -18,7 +18,7 @@
 {% elif fiche.classe == 2 %}<a class="btn btn-default" href="{% url 'creer_arbaletrier' fiche.id %}">Créer classe</a>
 {% elif fiche.classe == 3 %}<a class="btn btn-default" href="{% url 'creer_eclaireur' fiche.id %}">Créer classe</a>
 {% elif fiche.classe == 4 %}<a class="btn btn-default" href="{% url 'creer_apo' fiche.id %}">Créer classe</a>
-{% elif fiche.classe == 5 %}<a class="btn btn-default" href="{% url 'creer_sorcier fiche.id %}">Créer classe</a>
+{% elif fiche.classe == 5 %}<a class="btn btn-default" href="{% url 'creer_sorcier' fiche.id %}">Créer classe</a>
 {% endif %}
 <a class="btn btn-default" href="{% url 'editer_perso' fiche.id %}">Editer</a>
 {% endifequal %}
