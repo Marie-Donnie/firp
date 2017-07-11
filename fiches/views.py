@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponseRedirect, HttpResponseNotFound
-from django.http import HttpResponse, QueryDict
+from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -468,27 +467,11 @@ def edit_inventaire(request, inventaire_id):
 @login_required
 def edit_equipement(request, equipement_id):
     equipement = Equipement.objects.get(pk=equipement_id)
-    print("objets : ")
-    print(equipement.objets)
     if request.user.has_perm('fiches.change_equipement'):
         if request.method == 'POST':
-            data = request.POST.copy()
-            form = EquipementForm(data, instance=equipement)
+            form = EquipementForm(request.POST, instance=equipement)
             if form.is_valid():
-                save_it = form.save()
-                for p_equi in data.getlist('objets'):
-                    print(p_equi)
-                    print(save_it)
-                    query = data.copy()
-                    query_d = QueryDict(mutable=True)
-                    query_d.__setitem__('equipement', save_it)
-                    piece = get_object_or_404(Armure, pk=p_equi)
-                    query_d.__setitem__('armure', piece)
-                    query_d.__setitem__('quantite', data[p_equi])
-
-                    formu = PieceEquipementForm(query_d)
-                    print(query_d)
-
+                form.save()
                 return HttpResponseRedirect('/')
             else:
                 print(form.errors)
