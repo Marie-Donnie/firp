@@ -87,3 +87,13 @@ class EquipementForm(ModelForm):
         model = Equipement
         fields = ['objets', 'nom']
         prefix = 'equipement'
+
+
+class QueteForm(ModelForm):
+
+    class Meta:
+        model = Quete
+        fields = '__all__'
+        prefix = 'quete'
+        widgets = {'objectif': forms.Textarea(),
+                   'accomplie': forms.RadioSelect(), }

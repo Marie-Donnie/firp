@@ -244,9 +244,6 @@ class Fiche(models.Model):
                                       blank=True,
                                       null=True,
                                       related_name='proprietaire')
-    # rpg = models.ForeignKey(Rpg,
-    #                         blank=True,
-    #                         null=True)
 
     class Meta:
         ordering = ["nom", "prenom"]
@@ -255,6 +252,9 @@ class Fiche(models.Model):
         default_related_name = 'fiches'
         permissions = (("plus_de_15_fiches",
                         "Peut faire plus de quinze fiches"),)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.nom, self.prenom)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -300,6 +300,9 @@ class Objet(models.Model):
 
     def has_equipement(self):
         return hasattr(self, 'armure')
+
+    def __unicode__(self):
+        return u'%s %s' % (self.nom)
 
 
 class Armure(models.Model):
@@ -368,6 +371,9 @@ class Inventaire(models.Model):
         default_related_name = 'inventaire'
         permissions = (("inventaire_ok",
                         "Peut faire des inventaires"),)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.nom)
 
 
 class Equipement(models.Model):
@@ -536,8 +542,60 @@ class Equipement(models.Model):
                 armure += diver.armure
         return effets, effets_ig, force, intell, agi, armure
 
+    def __unicode__(self):
+        return u'%s %s' % (self.nom)
 
-# class PieceEquipement(models.Model):
-#     armure = models.ForeignKey(Armure)
-#     equipement = models.ForeignKey(Equipement)
-#     quantite = models.PositiveSmallIntegerField(default=1)
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class Quete(models.Model):
+    nom = models.CharField(max_length=75)
+    objectif = models.CharField(max_length=200)
+    cible = models.CharField(max_length=75,
+                             default='Aucune')
+    requis = models.CharField(max_length=100,
+                              default='Rien')
+    zone = models.SmallIntegerField(choices=ZONES_CHOIX,
+                                    default=23,
+                                    null=True)
+    localisation = models.CharField(max_length=75)
+    x = models.SmallIntegerField(default=0)
+    y = models.SmallIntegerField(default=0)
+    nb_combattants = models.SmallIntegerField(default=1)
+    difficulte = models.SmallIntegerField(choices=((
+        (1, "Facile"),
+        (2, "Moyenne"),
+        (3, "Difficile"),
+        (4, "Très difficile"),
+        (5, "Suicidaire")
+    )),
+                                          default=2)
+    recompense = models.CharField(max_length=100,
+                                  default='Aucune')
+    gloire = models.SmallIntegerField(default=0)
+    accomplie = models.BooleanField(default=False,
+                                    choices=(
+                                        (True, 'Oui'),
+                                        (False, 'Non'),
+                                    ))
+    reservee = models.ForeignKey(Fiche,
+                                 blank=True,
+                                 null=True,
+                                 related_name='quete_reservee')
+    leader = models.ForeignKey(Fiche,
+                               null=True,
+                               blank=True,
+                               related_name='quete_reussie')
+    ennemi = models.ImageField(upload_to='images/site/quest',
+                               default='images/site/quest/Portraits/FollowerPortrait_NoPortrait.png')
+
+    class Meta:
+        ordering = ["nom", "difficulte"]
+        verbose_name = "quête"
+        verbose_name_plural = "quêtes"
+        default_related_name = 'quete'
+        permissions = (("quete_ok",
+                        "Peut prendre des quêtes"),)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.nom)

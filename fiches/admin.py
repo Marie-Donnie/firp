@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django import forms
 from fiches.models import *
+from fiches.forms import *
 from fiches.rpg.avant_garde.models import *
 from fiches.rpg.avant_garde.forms import *
 
@@ -113,3 +114,10 @@ class CampagneAdmin(admin.ModelAdmin):
     form = CampagneForm
 
 admin.site.register(Campagne, CampagneAdmin)
+
+
+class QueteAdmin(admin.ModelAdmin):
+    list_display = ('nom',)
+    form = QueteForm
+
+admin.site.register(Quete, QueteAdmin)
