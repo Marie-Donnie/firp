@@ -2,6 +2,7 @@
 *~
 secret_key
 db.sqlite3
-fiches/media
+fiches/media/images/persos/
+fiches/media/images/users/
 #*#
 bower_components/
