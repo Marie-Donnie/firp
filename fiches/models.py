@@ -302,7 +302,7 @@ class Objet(models.Model):
         return hasattr(self, 'armure')
 
     def __unicode__(self):
-        return u'%s %s' % (self.nom)
+        return u'%s' % (self.nom)
 
 
 class Armure(models.Model):
@@ -373,7 +373,7 @@ class Inventaire(models.Model):
                         "Peut faire des inventaires"),)
 
     def __unicode__(self):
-        return u'%s %s' % (self.nom)
+        return u'%s' % (self.nom)
 
 
 class Equipement(models.Model):
@@ -543,7 +543,7 @@ class Equipement(models.Model):
         return effets, effets_ig, force, intell, agi, armure
 
     def __unicode__(self):
-        return u'%s %s' % (self.nom)
+        return u'%s' % (self.nom)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -588,6 +588,7 @@ class Quete(models.Model):
                                related_name='quete_reussie')
     ennemi = models.ImageField(upload_to='images/site/quest',
                                default='images/site/quest/Portraits/FollowerPortrait_NoPortrait.png')
+    creation = models.DateField(default=timezone.now)
 
     class Meta:
         ordering = ["nom", "difficulte"]
@@ -598,4 +599,4 @@ class Quete(models.Model):
                         "Peut prendre des quêtes"),)
 
     def __unicode__(self):
-        return u'%s %s' % (self.nom)
+        return u'%s' % (self.nom)

@@ -1,1 +1,0 @@
-{% load i18n %}{% trans "Votre compte a été activé pour" %} {{ site.name }}

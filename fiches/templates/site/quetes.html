@@ -1,0 +1,19 @@
+{% extends "site/base.html" %}
+
+{% load filters %}
+
+{% block script %}
+{% endblock %}
+
+
+{% block title %}Quêtes{% endblock %}
+
+
+{% block content %}
+
+{% for quete in quetes %}
+<a href="{% url 'quete' quete.id %}">{{quete.nom}}</a><br>
+
+{% endfor %}
+
+{% endblock %}

@@ -498,3 +498,22 @@ def tooltip_armure(request, armure_id):
     objet = armure.objet
     context = {'armure': armure, 'objet': objet}
     return render(request, 'fiches/tooltip_armure.html', context)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
+def quetes(request):
+    quetes = Quete.objects.all().order_by('accomplie', 'creation', 'nom')
+
+    context = {'quetes': quetes}
+
+    return render(request, 'site/quetes.html', context)
+
+
+def quete(request, quete_id):
+    quete = get_object_or_404(Quete, pk=quete_id)
+
+    context = {'quete': quete}
+
+    return render(request, 'site/quete.html', context)
