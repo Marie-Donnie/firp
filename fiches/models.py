@@ -550,7 +550,7 @@ class Equipement(models.Model):
 
 class Quete(models.Model):
     nom = models.CharField(max_length=75)
-    objectif = models.CharField(max_length=200)
+    objectif = models.CharField(max_length=600)
     cible = models.CharField(max_length=75,
                              default='Aucune')
     requis = models.CharField(max_length=100,
@@ -567,17 +567,19 @@ class Quete(models.Model):
         (2, "Moyenne"),
         (3, "Difficile"),
         (4, "Très difficile"),
-        (5, "Suicidaire")
+        (5, "Suicidaire"),
+        (6, "Inconnue")
     )),
                                           default=2)
     recompense = models.CharField(max_length=100,
                                   default='Aucune')
     gloire = models.SmallIntegerField(default=0)
-    accomplie = models.BooleanField(default=False,
-                                    choices=(
-                                        (True, 'Oui'),
-                                        (False, 'Non'),
-                                    ))
+    etat = models.SmallIntegerField(choices=((
+        (1, "En attente"),
+        (2, "Réservée"),
+        (3, "Accomplie")
+    )),
+                                    default=1)
     reservee = models.ForeignKey(Fiche,
                                  blank=True,
                                  null=True,

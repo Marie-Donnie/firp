@@ -22,9 +22,14 @@
   <title>{% block title %}Default Title{% endblock %}</title>
 </head>
 <body>
-      <div id="body">
-	{% block content %}Contenu par défaut. Vous ne devriez pas être là :o{% endblock %}
 
-      </div>
+
+    {% block header %}Titre{% endblock %}
+
+
+  <div id="body">
+    {% block content %}Contenu par défaut. Vous ne devriez pas être là :o{% endblock %}
+
+  </div>
 
 </body>

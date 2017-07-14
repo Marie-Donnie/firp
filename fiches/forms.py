@@ -96,4 +96,4 @@ class QueteForm(ModelForm):
         fields = '__all__'
         prefix = 'quete'
         widgets = {'objectif': forms.Textarea(),
-                   'accomplie': forms.RadioSelect(), }
+                   'etat': forms.RadioSelect(), }

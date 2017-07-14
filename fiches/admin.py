@@ -117,7 +117,7 @@ admin.site.register(Campagne, CampagneAdmin)
 
 
 class QueteAdmin(admin.ModelAdmin):
-    list_display = ('nom',)
+    list_display = ('nom', 'difficulte', 'id')
     form = QueteForm
 
 admin.site.register(Quete, QueteAdmin)

@@ -7,13 +7,68 @@
 
 
 {% block title %}Quêtes{% endblock %}
-
+{% block header %}{% endblock %}
 
 {% block content %}
 
+<div id="quest-body">
+
+  <div class="page-header" id="quest-header">
+    <h1>Registre de quêtes</h1>
+
+  </div>
+
 {% for quete in quetes %}
-<a href="{% url 'quete' quete.id %}">{{quete.nom}}</a><br>
+
+  <div class="media" id="quest">
+    <a href="{% url 'quete' quete.id %}">
+  {% if forloop.counter0|divisibleby:'2' %}
+  <div class="media-left media-middle">
+
+      {% if quete.difficulte == 1 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier1.PNG" alt="Facile">
+      {% elif quete.difficulte == 2 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier2.PNG" alt="Moyenne">
+      {% elif quete.difficulte == 3 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier3.PNG" alt="Difficile">
+      {% elif quete.difficulte == 4 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier4.PNG" alt="Très difficile">
+      {% elif quete.difficulte == 5 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier6.PNG" alt="Suicidaire">
+      {% endif %}
+
+  </div>
+  {% endif %}
+  <div class="media-body">
+    <h4 class="media-heading"><a href="{% url 'quete' quete.id %}">{{quete.nom}}</a></h4>
+    {{quete.objectif}}
+  </div>
+  {% if not forloop.counter0|divisibleby:'2' %}
+  <div class="media-right media-middle">
+    <a href="{% url 'quete' quete.id %}">
+      {% if quete.difficulte == 1 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier1.PNG" alt="Facile">
+      {% elif quete.difficulte == 2 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier2.PNG" alt="Moyenne">
+      {% elif quete.difficulte == 3 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier3.PNG" alt="Difficile">
+      {% elif quete.difficulte == 4 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier4.PNG" alt="Très difficile">
+      {% elif quete.difficulte == 5 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier6.PNG" alt="Suicidaire">
+      {% endif %}
+    </a>
+  </div>
+  {% endif %}
+    </a>
+</div>
+
+
 
 {% endfor %}
+
+
+
+</div>
 
 {% endblock %}

@@ -504,7 +504,7 @@ def tooltip_armure(request, armure_id):
 
 
 def quetes(request):
-    quetes = Quete.objects.all().order_by('accomplie', 'creation', 'nom')
+    quetes = Quete.objects.all().order_by('etat', 'creation', 'difficulte', 'nom')
 
     context = {'quetes': quetes}
 
