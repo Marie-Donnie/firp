@@ -20,7 +20,7 @@
 
 {% for quete in quetes %}
 
-  <div class="media" id="quest">
+  <div class="media" id="quest-short">
     <a href="{% url 'quete' quete.id %}">
   {% if forloop.counter0|divisibleby:'2' %}
   <div class="media-left media-middle">

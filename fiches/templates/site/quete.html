@@ -7,10 +7,35 @@
 
 
 {% block title %}{{quete.nom}}{% endblock %}
-
+{% block header %}{% endblock %}
 
 {% block content %}
 
-{{quete.nom}}
+<div id="quest-body">
 
+  <div class="page-header" id="quest-header">
+    <h1>Registre de quêtes</h1>
+
+  </div>
+
+  <div class="media" id="quest-display">
+    <div class="media-body">
+      {{quete.nom}}<br>
+      {{quete.objectif}}
+
+    </div>
+    {% if quete.cible != 'Aucune' and quete.ennemi %}
+    <div class="media-right media-top quest-target">
+      <img class="quest-portrait" src={{quete.ennemi.url}} alt="Ennemi portrait">
+      <img class="quest-portrait-frame" src="/fiches/media/images/site/quest/UI-TargetingFrame-Elite.PNG" alt="Elite portrait frame">
+    </div>
+    {% endif %}
+
+
+
+
+
+
+
+  </div>
 {% endblock %}

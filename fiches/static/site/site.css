@@ -16,7 +16,7 @@ a:hover {
     color: #fefefe;
 }
 
-#quest.media {
+#quest-short.media {
     width: 90%;
     background-color: #000000;
     background-image: url("/static/site/images/parchment-light.jpg");
@@ -52,4 +52,25 @@ a:hover {
     margin: 2% 0% 3% 0px;
     font-size: 283%;
     font-family: fantasy;
+}
+
+#quest-display {
+    width: 80%;
+    margin: auto;
+}
+
+.quest-target {
+    height: 200px;
+    position: relative;
+}
+
+.quest-portrait-frame {
+    height: 200px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.quest-portrait {
+    transform: translate(-85px, 25px) scale(0.9);
 }

@@ -588,7 +588,7 @@ class Quete(models.Model):
                                null=True,
                                blank=True,
                                related_name='quete_reussie')
-    ennemi = models.ImageField(upload_to='images/site/quest',
+    ennemi = models.ImageField(upload_to='images/site/quest/ennemis',
                                default='images/site/quest/Portraits/FollowerPortrait_NoPortrait.png')
     creation = models.DateField(default=timezone.now)
 
