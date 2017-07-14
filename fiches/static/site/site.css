@@ -17,7 +17,7 @@ a:hover {
 }
 
 #quest-short.media {
-    width: 90%;
+    width: 80%;
     background-color: #000000;
     background-image: url("/static/site/images/parchment-light.jpg");
     padding: 10px 15px;
@@ -26,6 +26,10 @@ a:hover {
     margin: 4% auto;
     color: #000;
     display: flex;
+}
+
+#quest-short:hover {
+    cursor: pointer;
 }
 
 #quest-body {
@@ -56,7 +60,8 @@ a:hover {
 
 #quest-display {
     width: 80%;
-    margin: auto;
+    margin: 3% auto;
+    color: #000;
 }
 
 .quest-target {
@@ -72,5 +77,13 @@ a:hover {
 }
 
 .quest-portrait {
-    transform: translate(-85px, 25px) scale(0.9);
+    transform: translate(-85px, 25px) scale(0.84);
+}
+
+.quest-portrait-name {
+    color: #fff;
+    position: absolute;
+    width: 170px;
+    text-align: center;
+    transform: translate(-289px, -75px) scale(1.3);
 }

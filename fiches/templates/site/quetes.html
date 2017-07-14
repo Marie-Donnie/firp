@@ -20,8 +20,7 @@
 
 {% for quete in quetes %}
 
-  <div class="media" id="quest-short">
-    <a href="{% url 'quete' quete.id %}">
+  <div class="media" id="quest-short" onclick="document.location='{% url 'quete' quete.id %}'">
   {% if forloop.counter0|divisibleby:'2' %}
   <div class="media-left media-middle">
 
@@ -35,6 +34,8 @@
       <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier4.PNG" alt="Très difficile">
       {% elif quete.difficulte == 5 %}
       <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier6.PNG" alt="Suicidaire">
+      {% elif quete.difficulte == 6 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/ACHIEVEMENT_GUILDPERK_LADYLUCK.PNG" alt="Inconnu">
       {% endif %}
 
   </div>
@@ -56,11 +57,12 @@
       <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier4.PNG" alt="Très difficile">
       {% elif quete.difficulte == 5 %}
       <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier6.PNG" alt="Suicidaire">
+      {% elif quete.difficulte == 6 %}
+      <img class="media-object" src="/fiches/media/images/site/quest/ACHIEVEMENT_GUILDPERK_LADYLUCK.PNG" alt="Inconnu">
       {% endif %}
     </a>
   </div>
   {% endif %}
-    </a>
 </div>
 
 
