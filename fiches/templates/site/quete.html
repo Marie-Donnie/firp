@@ -11,44 +11,45 @@
 
 {% block content %}
 
-<div id="quest-body">
+<div class="quest-body">
 
-  <div class="page-header" id="quest-header">
-    <h1>Registre de quêtes</h1>
+  <div class="page-header" id="quest-header" onclick="document.location='{% url 'quetes' %}'">
+    <div class="quest-head">
+      <h1>Registre de quêtes</h1>
+    </div> <!-- quest-head -->
+  </div>   <!-- page-header -->
 
-  </div>
+  <div class="black">
+    <div class="media" id="quest-display">
+      <div class="media-body quest-attributes">
+	<h4 class="media-heading quest-name">{{quete.nom}}</h4>
+	{{quete.objectif}}<br>
+	{{quete.requis}}<br>
+	{{quete.get_zone_display}}<br>
+	Nombre de combattants conseillés :&nbsp;
+	{% if quete.nb_combattants == 0 %}?
+	{% else %}{{quete.nb_combattants}}
+	{% endif %}<br>
+	{{quete.get_difficulte_display}}<br>
+	{{quete.recompense}}<br>
+	{{quete.gloire}}<br>
+	{% if quete.etat == 1 %}
+	{% elif quete.etat == 2 %}<a href="{% url 'detail_fiche' quete.reservee.id %}">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</a>
+	{% elif quete.etat == 3 %}<a href="{% url 'detail_fiche' quete.leader.id %}">{{ quete.leader.nom }} {{ quete.leader.prenom }}</a>
+	{% endif %}
+      </div> <!-- media-body -->
 
-  <div class="media" id="quest-display">
-    <div class="media-body">
-      <h4 class="media-heading">{{quete.nom}}</h4>
-      {{quete.objectif}}<br>
-      {{quete.requis}}<br>
-      {{quete.get_zone_display}}<br>
-      Nombre de combattants conseillés :&nbsp;
-      {% if quete.nb_combattants == 0 %}?
-      {% else %}{{quete.nb_combattants}}
-      {% endif %}<br>
-      {{quete.get_difficulte_display}}<br>
-      {{quete.recompense}}<br>
-      {{quete.gloire}}<br>
-      {% if quete.etat == 1 %}
-      {% elif quete.etat == 2 %}<a href="{% url 'detail_fiche' quete.reservee.id %}">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</a>
-      {% elif quete.etat == 3 %}<a href="{% url 'detail_fiche' quete.leader.id %}">{{ quete.leader.nom }} {{ quete.leader.prenom }}</a>
+      {% if quete.cible != 'Aucune' and quete.ennemi %}
+
+      <div class="quest-target">
+	<img class="quest-portrait" src={{quete.ennemi.url}} alt="Ennemi portrait">
+	<img class="quest-portrait-frame" src="/fiches/media/images/site/quest/UI-TargetingFrame-Elite.PNG" alt="Elite portrait frame">
+	<span class="quest-portrait-name">{{quete.cible}}</span>
+      </div> <!-- media-right -->
       {% endif %}
-    </div>
-    {% if quete.cible != 'Aucune' and quete.ennemi %}
-    <div class="media-right media-top quest-target">
-      <img class="quest-portrait" src={{quete.ennemi.url}} alt="Ennemi portrait">
-      <img class="quest-portrait-frame" src="/fiches/media/images/site/quest/UI-TargetingFrame-Elite.PNG" alt="Elite portrait frame">
-      <span class="quest-portrait-name">{{quete.cible}}</span>
-    </div>
-    {% endif %}
+    </div> <!-- media -->
 
+  </div> <!-- black -->
+</div>	 <!-- quest-body -->
 
-
-
-
-
-
-  </div>
 {% endblock %}

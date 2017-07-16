@@ -32,15 +32,30 @@ a:hover {
     cursor: pointer;
 }
 
-#quest-body {
+.quest-body {
     width: 80%;
-    background-image: url("/static/site/images/parchment-light2.jpg");
+    background-color: #000;
     margin: 0% auto;
     padding: 0% 0% 4% 0%;
     border-radius: 5px;
 }
 
 #quest-header {
+    background-image: url("/static/site/images/parchment-light2.jpg");
+    padding: 0px 0px 0px 0px;
+    margin: 5px 0px 0px 0px;
+    border-bottom: 0;
+    border: 5px ridge #edd5a9;
+    border-radius: 3px;
+}
+
+#quest-header:hover {
+    cursor: pointer;
+    outline: 2px solid #edd5a9;
+    border-radius: 5px;
+}
+
+.quest-head {
     background-image: url("/static/site/images/TitleBannerlarge.PNG");
     background-repeat: no-repeat;
     padding: 5px 1px;
@@ -59,9 +74,14 @@ a:hover {
 }
 
 #quest-display {
-    width: 80%;
+    background: url("/static/site/images/page.PNG") no-repeat center;
+    width: 1000px;
+    height: 900px;
     margin: 3% auto;
     color: #000;
+    background-size: cover;
+    border: 5px groove #edd5a9;
+    border-radius: 3px;
 }
 
 .quest-target {
@@ -72,12 +92,12 @@ a:hover {
 .quest-portrait-frame {
     height: 200px;
     position: absolute;
-    right: 0;
+    left: 170px;
     bottom: 0;
 }
 
 .quest-portrait {
-    transform: translate(-85px, 25px) scale(0.84);
+    transform: translate(417px, 25px) scale(0.84);
 }
 
 .quest-portrait-name {
@@ -85,7 +105,7 @@ a:hover {
     position: absolute;
     width: 170px;
     text-align: center;
-    transform: translate(-289px, -75px) scale(1.3);
+    transform: translate(88px, 52px) scale(1.1);
 }
 
 .quest-icon {
@@ -93,6 +113,33 @@ a:hover {
     width: 26px;
 }
 
-/* .quest-lead { */
-/*     color: #b0adae; */
-/* } */
+.back {
+    background-color: #000;
+    background-image: url("/static/site/images/parchment-light2.jpg");
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 5px ridge #edd5a9;
+    border-radius: 3px;
+}
+
+.black {
+    background-color: #000;
+}
+
+.quest-attributes {
+    padding-top: 100px;
+    padding-left: 150px;
+    padding-right: 100px;
+    height: 500px;
+}
+
+.quest-name {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0px 20px 40px 20px;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 2px 2px #a97209;
+}

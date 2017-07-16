@@ -11,71 +11,70 @@
 
 {% block content %}
 
-<div id="quest-body">
+<div class="quest-body">
 
-  <div class="page-header" id="quest-header">
-    <h1>Registre de quêtes</h1>
-
+  <div class="page-header" id="quest-header" onclick="document.location='{% url 'quetes' %}'">
+    <div class="quest-head">
+      <h1>Registre de quêtes</h1>
+    </div>
   </div>
 
-{% for quete in quetes %}
+  <div class="back">
+    {% for quete in quetes %}
 
-  <div class="media" id="quest-short" onclick="document.location='{% url 'quete' quete.id %}'">
-  {% if forloop.counter0|divisibleby:'2' %}
-  <div class="media-left media-middle">
+    <div class="media" id="quest-short" onclick="document.location='{% url 'quete' quete.id %}'">
+      {% if forloop.counter0|divisibleby:'2' %}
+      <div class="media-left media-middle">
 
-      {% if quete.difficulte == 1 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier1.PNG" alt="Facile">
-      {% elif quete.difficulte == 2 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier2.PNG" alt="Moyenne">
-      {% elif quete.difficulte == 3 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier3.PNG" alt="Difficile">
-      {% elif quete.difficulte == 4 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier4.PNG" alt="Très difficile">
-      {% elif quete.difficulte == 5 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier6.PNG" alt="Suicidaire">
-      {% elif quete.difficulte == 6 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/ACHIEVEMENT_GUILDPERK_LADYLUCK.PNG" alt="Inconnu">
+	{% if quete.difficulte == 1 %}
+	<img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier1.PNG" alt="Facile">
+	{% elif quete.difficulte == 2 %}
+	<img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier2.PNG" alt="Moyenne">
+	{% elif quete.difficulte == 3 %}
+	<img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier3.PNG" alt="Difficile">
+	{% elif quete.difficulte == 4 %}
+	<img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier4.PNG" alt="Très difficile">
+	{% elif quete.difficulte == 5 %}
+	<img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier6.PNG" alt="Suicidaire">
+	{% elif quete.difficulte == 6 %}
+	<img class="media-object" src="/fiches/media/images/site/quest/ACHIEVEMENT_GUILDPERK_LADYLUCK.PNG" alt="Inconnu">
+	{% endif %}
+
+      </div> <!-- media-left -->
       {% endif %}
-
-  </div>
-  {% endif %}
-  <div class="media-body">
-    <h4 class="media-heading">
-      <a href="{% url 'quete' quete.id %}"><b>{{quete.nom}}</b></a>
-      {% if quete.etat == 2 %} <img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-services.PNG" alt="Reservée"><a href="{% url 'detail_fiche' quete.reservee.id %}"><span class="quest-lead">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</span></a>
-      {% elif quete.etat == 3 %} <img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-scroll.PNG" alt="Accomplie"><a href="{% url 'detail_fiche' quete.leader.id %}"><span class="quest-lead">{{ quete.leader.nom }} {{ quete.leader.prenom }}</span></a>
+      <div class="media-body">
+	<h4 class="media-heading">
+	  <a href="{% url 'quete' quete.id %}"><b>{{quete.nom}}</b></a>
+	  {% if quete.etat == 2 %} <img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-services.PNG" alt="Reservée"><a href="{% url 'detail_fiche' quete.reservee.id %}"><span class="quest-lead">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</span></a>
+	  {% elif quete.etat == 3 %} <img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-scroll.PNG" alt="Accomplie"><a href="{% url 'detail_fiche' quete.leader.id %}"><span class="quest-lead">{{ quete.leader.nom }} {{ quete.leader.prenom }}</span></a>
+	  {% endif %}
+	</h4>
+	{{quete.objectif}}
+      </div> <!-- media-body -->
+      {% if not forloop.counter0|divisibleby:'2' %}
+      <div class="media-right media-middle">
+	<a href="{% url 'quete' quete.id %}">
+	  {% if quete.difficulte == 1 %}
+	  <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier1.PNG" alt="Facile">
+	  {% elif quete.difficulte == 2 %}
+	  <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier2.PNG" alt="Moyenne">
+	  {% elif quete.difficulte == 3 %}
+	  <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier3.PNG" alt="Difficile">
+	  {% elif quete.difficulte == 4 %}
+	  <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier4.PNG" alt="Très difficile">
+	  {% elif quete.difficulte == 5 %}
+	  <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier6.PNG" alt="Suicidaire">
+	  {% elif quete.difficulte == 6 %}
+	  <img class="media-object" src="/fiches/media/images/site/quest/ACHIEVEMENT_GUILDPERK_LADYLUCK.PNG" alt="Inconnu">
+	  {% endif %}
+	</a>
+      </div> <!-- media-right -->
       {% endif %}
-    </h4>
-    {{quete.objectif}}
-  </div>
-  {% if not forloop.counter0|divisibleby:'2' %}
-  <div class="media-right media-middle">
-    <a href="{% url 'quete' quete.id %}">
-      {% if quete.difficulte == 1 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier1.PNG" alt="Facile">
-      {% elif quete.difficulte == 2 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier2.PNG" alt="Moyenne">
-      {% elif quete.difficulte == 3 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier3.PNG" alt="Difficile">
-      {% elif quete.difficulte == 4 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier4.PNG" alt="Très difficile">
-      {% elif quete.difficulte == 5 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/Achievement_LegionPVP4Tier6.PNG" alt="Suicidaire">
-      {% elif quete.difficulte == 6 %}
-      <img class="media-object" src="/fiches/media/images/site/quest/ACHIEVEMENT_GUILDPERK_LADYLUCK.PNG" alt="Inconnu">
-      {% endif %}
-    </a>
-  </div>
-  {% endif %}
-</div>
+    </div> <!-- media -->
+    {% endfor %}
+  </div> <!-- back -->
 
 
-
-{% endfor %}
-
-
-
-</div>
+</div> <!-- quest-body -->
 
 {% endblock %}
