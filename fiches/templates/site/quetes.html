@@ -41,7 +41,12 @@
   </div>
   {% endif %}
   <div class="media-body">
-    <h4 class="media-heading"><a href="{% url 'quete' quete.id %}">{{quete.nom}}</a></h4>
+    <h4 class="media-heading">
+      <a href="{% url 'quete' quete.id %}"><b>{{quete.nom}}</b></a>
+      {% if quete.etat == 2 %} <img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-services.PNG" alt="Reservée"><a href="{% url 'detail_fiche' quete.reservee.id %}"><span class="quest-lead">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</span></a>
+      {% elif quete.etat == 3 %} <img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-scroll.PNG" alt="Accomplie"><a href="{% url 'detail_fiche' quete.leader.id %}"><span class="quest-lead">{{ quete.leader.nom }} {{ quete.leader.prenom }}</span></a>
+      {% endif %}
+    </h4>
     {{quete.objectif}}
   </div>
   {% if not forloop.counter0|divisibleby:'2' %}
