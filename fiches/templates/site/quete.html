@@ -23,20 +23,24 @@
     <div class="media" id="quest-display">
       <div class="media-body quest-attributes">
 	<h4 class="media-heading quest-name">{{quete.nom}}</h4>
-	{{quete.objectif}}<br>
-	{{quete.requis}}<br>
-	{{quete.get_zone_display}}<br>
-	Nombre de combattants conseillés :&nbsp;
-	{% if quete.nb_combattants == 0 %}?
-	{% else %}{{quete.nb_combattants}}
-	{% endif %}<br>
-	{{quete.get_difficulte_display}}<br>
-	{{quete.recompense}}<br>
-	{{quete.gloire}}<br>
-	{% if quete.etat == 1 %}
-	{% elif quete.etat == 2 %}<a href="{% url 'detail_fiche' quete.reservee.id %}">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</a>
-	{% elif quete.etat == 3 %}<a href="{% url 'detail_fiche' quete.leader.id %}">{{ quete.leader.nom }} {{ quete.leader.prenom }}</a>
-	{% endif %}
+	<span class="quest-objective">{{quete.objectif}}<br></span>
+	<span class="quest-other-attributes">
+	  <b>Lieu : </b>{{quete.get_zone_display}}<br>
+	  {% if quete.requis != 'Rien' %}
+	  <b>Requis : </b>{{quete.requis}}<br>
+	  {% endif %}
+	  <b>Nombre de combattants conseillés : </b>
+	  {% if quete.nb_combattants == 0 %}?
+	  {% else %}{{quete.nb_combattants}}
+	  {% endif %}<br>
+	  <b>Difficulté : </b>{{quete.get_difficulte_display}}<br>
+	  <b>Récompense : </b>{{quete.recompense}}<br>
+	  <b>Gloire : </b>{{quete.gloire}} points de gloire<br>
+	  {% if quete.etat == 1 %}
+	  {% elif quete.etat == 2 %}<a href="{% url 'detail_fiche' quete.reservee.id %}">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</a>
+	  {% elif quete.etat == 3 %}<a href="{% url 'detail_fiche' quete.leader.id %}">{{ quete.leader.nom }} {{ quete.leader.prenom }}</a>
+	  {% endif %}
+	</span>
       </div> <!-- media-body -->
 
       {% if quete.cible != 'Aucune' and quete.ennemi %}
