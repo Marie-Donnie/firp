@@ -37,8 +37,8 @@
 	  <b>Récompense : </b>{{quete.recompense}}<br>
 	  <b>Gloire : </b>{{quete.gloire}} point{{quete.gloire|pluralize}} de gloire<br>
 	  {% if quete.etat == 1 %}
-	  {% elif quete.etat == 2 %}<a href="{% url 'detail_fiche' quete.reservee.id %}">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</a>
-	  {% elif quete.etat == 3 %}<a href="{% url 'detail_fiche' quete.leader.id %}">{{ quete.leader.nom }} {{ quete.leader.prenom }}</a>
+	  {% elif quete.etat == 2 %}<b>Réservée par : </b><a href="{% url 'detail_fiche' quete.reservee.id %}">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</a>
+	  {% elif quete.etat == 3 %}<b>Accomplie par : </b><a href="{% url 'detail_fiche' quete.leader.id %}">{{ quete.leader.nom }} {{ quete.leader.prenom }}</a>
 	  {% endif %}
 	</span>
       </div> <!-- media-body -->
