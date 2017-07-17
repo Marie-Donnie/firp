@@ -88,7 +88,7 @@ a:hover {
     height: 200px;
     position: relative;
     left: 280px;
-    top: 56px;
+    top: 0px;
 }
 
 .quest-portrait-frame {
@@ -134,13 +134,14 @@ a:hover {
     padding-left: 150px;
     padding-right: 100px;
     height: 550px;
+    font-size: 20px;
 }
 
 .quest-name {
     margin-top: 0;
     margin-bottom: 0;
-    padding: 0px 20px 60px 20px;
-    font-size: 30px;
+    padding: 0px 20px 50px 20px;
+    font-size: 38px;
     color: #fff;
     text-align: center;
     text-shadow: 2px 2px #a97209;
@@ -149,6 +150,7 @@ a:hover {
 .quest-objective {
     margin: 0px 20px 20px 20px;
     display: block;
+    text-align: center;
 }
 
 .quest-other-attributes {

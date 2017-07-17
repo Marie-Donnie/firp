@@ -25,7 +25,7 @@
 	<h4 class="media-heading quest-name">{{quete.nom}}</h4>
 	<span class="quest-objective">{{quete.objectif}}<br></span>
 	<span class="quest-other-attributes">
-	  <b>Lieu : </b>{{quete.get_zone_display}}<br>
+	  <b>Lieu : </b>{{quete.get_zone_display}} - {{quete.localisation}}<br>
 	  {% if quete.requis != 'Rien' %}
 	  <b>Requis : </b>{{quete.requis}}<br>
 	  {% endif %}
@@ -35,7 +35,7 @@
 	  {% endif %}<br>
 	  <b>Difficulté : </b>{{quete.get_difficulte_display}}<br>
 	  <b>Récompense : </b>{{quete.recompense}}<br>
-	  <b>Gloire : </b>{{quete.gloire}} points de gloire<br>
+	  <b>Gloire : </b>{{quete.gloire}} point{{quete.gloire|pluralize}} de gloire<br>
 	  {% if quete.etat == 1 %}
 	  {% elif quete.etat == 2 %}<a href="{% url 'detail_fiche' quete.reservee.id %}">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</a>
 	  {% elif quete.etat == 3 %}<a href="{% url 'detail_fiche' quete.leader.id %}">{{ quete.leader.nom }} {{ quete.leader.prenom }}</a>
