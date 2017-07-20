@@ -181,7 +181,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # Misago apps
-    'misago.admin',
+    # 'misago.admin',
     'misago.acl',
     'misago.core',
     'misago.conf',

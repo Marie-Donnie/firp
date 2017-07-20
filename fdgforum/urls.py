@@ -45,7 +45,7 @@ urlpatterns = [
         ),
         name='django-i18n'
     ),
-
+    # url(r'^admin/', include(admin.site.urls)),
     url(r'^index$', views.index, name='index'),
     # Users
     url(r'^utilisateurs/$', views.users,
