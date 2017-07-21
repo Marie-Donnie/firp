@@ -29,7 +29,6 @@ from fiches.rpg.avant_garde.forms import *
 class FicheAdmin(admin.ModelAdmin):
     list_display = ('nom', 'prenom', 'id')
 
-print(Fiche)
 admin.site.register(Fiche, FicheAdmin)
 
 
