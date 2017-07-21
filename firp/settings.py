@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'stopforumspam',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,6 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'stopforumspam.middleware.StopForumSpamMiddleware',
 )
 
 ROOT_URLCONF = 'firp.urls'
@@ -165,3 +167,15 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 1048576
 EMAIL_HOST = 'localhost'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# You can control how often at most the update should be performed
+
+SFS_CACHE_EXPIRE = 1  # day
+
+# ...and how long back the log should remember the rejection of POSTS and IPs
+
+SFS_LOG_EXPIRE = 1  # days
+
+# To check ALL POST requests:
+
+SFS_ALL_POST_REQUESTS = True
