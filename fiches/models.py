@@ -139,7 +139,7 @@ ZONES_CHOIX = []
 for (ri, (region, zones)) in zip(range(len(ZONES)), ZONES):
     nums = range(len(zones))
     nums = map(lambda n: ri * 100 + n, nums)
-    ZONES_CHOIX.append((region, zip(nums, zones)))
+    ZONES_CHOIX.append((region, list(zip(nums, zones))))
 
 
 class Fiche(models.Model):

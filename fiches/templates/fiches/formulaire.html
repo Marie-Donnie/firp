@@ -442,9 +442,9 @@
       <label for="id_pseudo_du_personnage">Pseudo du personnage en jeu&nbsp;</label> <input name="pseudo_du_personnage" value="{{form.pseudo_du_personnage.value|default:'?'}}" required="" id="id_pseudo_du_personnage" maxlength="30" type="text">
     </div>
     <div class="form-group">
-      <label for="id_afficher_pseudo">Afficher pseudo du personnage&nbsp;</label> <input name="afficher_pseudo" checked="" id="id_afficher_pseudo" type="checkbox">
-      <label for="id_afficher_createur">Afficher créateur&nbsp;</label> <input name="afficher_createur" checked="" id="id_afficher_createur" type="checkbox">
-      <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" checked="" id="id_afficher_inventaire" type="checkbox">
+      <label for="id_afficher_pseudo">Afficher pseudo du personnage&nbsp;</label> <input name="afficher_pseudo" {% if form.afficher_pseudo.value or form.afficher_pseudo.value == None %}checked=""{% endif %} id="id_afficher_pseudo" type="checkbox">
+      <label for="id_afficher_createur">Afficher créateur&nbsp;</label> <input name="afficher_createur" {% if form.afficher_createur.value or form.afficher_createur.value == None %}checked=""{% endif %} id="id_afficher_createur" type="checkbox">
+      <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" {% if form.afficher_inventaire.value or form.afficher_inventaire.value == None %}checked=""{% endif %} id="id_afficher_inventaire" type="checkbox">
     </div>
 
     <!-- {% if perms.fiches.equipement_ok and perms.fiches.inventaire_ok %} -->
