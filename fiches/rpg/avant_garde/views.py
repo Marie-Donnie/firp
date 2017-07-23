@@ -264,3 +264,29 @@ def edit_fantassin(request, perso_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
+
+@login_required
+def edit_apothicaire(request, perso_id):
+    apothicaire = Apothicaire.objects.get(pk=perso_id)
+    utilisateur = request.user
+    if utilisateur == apothicaire.perso.createur:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            data['perso'] = apothicaire.perso.id
+            form = ApothicaireForm(data, request.FILES, instance=apothicaire)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=apothicaire.perso.id)
+            else:
+                print(form.errors)
+        else:
+            form = ApothicaireForm(instance=apothicaire)
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/apothicaire.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer ce personnage.")

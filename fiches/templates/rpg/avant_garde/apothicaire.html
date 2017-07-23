@@ -12,77 +12,110 @@ $(function () {
 {% block page-title %}Créer/éditer un apothicaire{% endblock %}
 
 {% block content %}
-<div id="char_form">
+
+<div class="media">
+<div class="media-body">
+  <b>Niveau 1</b>
+  <ul>
+<li>Médecine : De 0 à 100, Permet d'appliquer les premiers soins aux blessés et préparer des anti-poisons.</li>
+<li>+ 1 Intelligence</li>
+<b>Niveau 2</b>
+<ul>
+<li>  Chirurgie : De 0 à 100, permet d'éviter les mutilations et sauver les blessés graves.<br>
+OU<br>
+Poison : De 0 à 100, permet de concocter de poisons</li>
+<li>  + 1 Force Mentale</li>
+    </ul>
+<b>Niveau 3</b>
+<ul>
+<li>  Trait Guérisseur (+ 1 Intelligence, augmente les pv rendus par la médecine de 1)<br>
+OU<br>
+Alchimie : De 0 à 100, permet de concocter des fioles contenant des produits mortels et les lancer sur les adversaires</li>
+<li>Equitation : De 0 à 100, permet de monter à cheval</li>
+ <li> + 1 Force Mentale</li>
+    </ul>
+<b>Niveau 4</b>
+<ul>
+  <li>Trait maîtrise du scalpel (+ 1 Intelligence, rajoute 30 points à la compétence chirurgie)<br>
+OU<br>
+Trait Art du lancer de fioles (+ 1 Capacité de tir)</li>
+ <li> + 1 Force Mentale</li>
+    </ul>
+<b>Niveau 5</b>
+  <ul>
+<li>Trait Maître guérisseur (+ 1 Intelligence, + 1 Force Mentale, Augmente les pv rendus par la médecine de 1)<br>
+OU<br>
+Trait Enfumeur (+ 1 Capacité de Tir, permet de toucher les morts-vivants avec les fioles, dote le médecin d'un masque à gaz)</li>
+<li>+ 1 Force Mentale</li>
+  </ul>
+</div>
+
+
+<div class="media-right media-middle" id="char_form">
 
   <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
     {% csrf_token %}
     <!-- {{form.as_ul}} -->
-    <ul>
-    <li><h4>Niveau 1</h4></li>
+
+
+
+
+    <h4>Niveau 1</h4>
     <div class="form-group">
-      <label for="id_medecine">Médecine&nbsp;:</label> <input name="medecine" value="0" max="100" required="" id="id_medecine" min="0" type="number">
+      <label for="id_medecine">Médecine&nbsp;:</label> <input name="medecine" value="{{form.medecine.value|default:'0'}}" max="100" required="" id="id_medecine" min="0" type="number">
     </div>
 
-    <li><h4>Niveau 2</h4></li>
+    <h4>Niveau 2</h4>
     <div class="form-group">
-      <label for="id_chirurgie">Chirurgie&nbsp;:</label> <input name="chirurgie" value="0" max="100" required="" id="id_chirurgie" min="0" type="number">
+      <label for="id_chirurgie">Chirurgie&nbsp;:</label> <input name="chirurgie" value="{{form.chirurgie.value|default:'0'}}" max="100" required="" id="id_chirurgie" min="0" type="number">
+      <span>OU</span>
+      <label for="id_poison">Poison&nbsp;:</label> <input name="poison" value="{{form.poison.value|default:'0'}}" max="100" required="" id="id_poison" min="0" type="number">
     </div>
-    <div class="form-group">
-      <label for="id_poison">Poison&nbsp;:</label> <input name="poison" value="0" max="100" required="" id="id_poison" min="0" type="number">
-    </div>
-    <li><h4>Niveau 3</h4></li>
+    <h4>Niveau 3</h4>
     <div class="form-group">
       <label for="id_guerisseur">Guérisseur&nbsp;:</label> <select name="guerisseur" id="id_guerisseur">
-	<option value="True">Oui</option>
+    	<option value="True"{% if form.guerisseur.value %} selected="" {% endif %}>Oui</option>
 
-	<option value="False" selected="">Non</option>
+    	<option value="False"{% if not form.guerisseur.value or form.guerisseur.value == None %} selected="" {% endif %}>Non</option>
 
       </select>
+      <span>&nbsp;OU</span>
+      <label for="id_alchimie">Alchimie&nbsp;:</label> <input name="alchimie" value="{{form.alchimie.value|default:'0'}}" max="100" required="" id="id_alchimie" min="0" type="number">
     </div>
     <div class="form-group">
-      <label for="id_alchimie">Alchimie&nbsp;:</label> <input name="alchimie" value="0" max="100" required="" id="id_alchimie" min="0" type="number">
+      <label for="id_equitation">Equitation&nbsp;:</label> <input name="equitation" value="{{form.equitation.value|default:'0'}}" max="100" required="" id="id_equitation" min="0" type="number">
     </div>
-    <div class="form-group">
-      <label for="id_equitation">Equitation&nbsp;:</label> <input name="equitation" value="0" max="100" required="" id="id_equitation" min="0" type="number">
-    </div>
-    <li><h4>Niveau 4</h4></li>
+    <h4>Niveau 4</h4>
     <div class="form-group">
       <label for="id_maitr_scalpel">Maîtrise du scalpel&nbsp;:</label> <select name="maitr_scalpel" id="id_maitr_scalpel">
-	<option value="True">Oui</option>
+    	<option value="True"{% if form.maitr_scalpel.value %} selected="" {% endif %}>Oui</option>
 
-	<option value="False" selected="">Non</option>
-
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="id_lancer_fioles">Lancer de fioles&nbsp;:</label> <select name="lancer_fioles" id="id_lancer_fioles">
-	<option value="True">Oui</option>
-
-	<option value="False" selected="">Non</option>
-
-      </select>
-    </div>
-    <li><h4>Niveau 5</h4></li>
-    <div class="form-group">
-      <label for="id_maitr_guerisseur">Maitre guérisseur&nbsp;:</label> <select name="maitr_guerisseur" id="id_maitr_guerisseur">
-	<option value="True">Oui</option>
-
-	<option value="False" selected="">Non</option>
+    	<option value="False"{% if not form.maitr_scalpel.value or form.maitr_scalpel.value == None %} selected="" {% endif %}>Non</option>
 
       </select>
     </div>
     <div class="form-group">
-      <label for="id_enfumeur">Enfumeur&nbsp;:</label> <select name="enfumeur" id="id_enfumeur">
-	<option value="True">Oui</option>
+    <label for="id_scalpel_fioles">Maîtrise du scalpel/Art du lancer de fioles&nbsp;:</label> <select id="id_scalpel_fioles" name="scalpel_fioles">
+<option value="1"  {% if form.scalpel_fioles.value == 1 or form.scalpel_fioles.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+<option value="2" {% if form.scalpel_fioles.value == 2 %} selected="" {% endif %}>Maîtrise du scalpel</option>
+<option value="3"{% if form.scalpel_fioles.value == 3 %} selected="" {% endif %}>Art du lancer de fioles</option>
+    </select>
 
-	<option value="False" selected="">Non</option>
-
-      </select><input name="perso" id="id_perso" type="hidden">
     </div>
-    </ul>
+    <h4>Niveau 5</h4>
+    <div class="form-group">
+    <label for="id_guerisseur_enfum">Maître guérisseur/Enfumeur&nbsp;:</label> <select id="id_guerisseur_enfum" name="guerisseur_enfum">
+<option value="1"  {% if form.guerisseur_enfum.value == 1 or form.guerisseur_enfum.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+<option value="2"{% if form.guerisseur_enfum.value == 2 %} selected="" {% endif %}>Maître guérisseur</option>
+<option value="3"{% if form.guerisseur_enfum.value == 3 %} selected="" {% endif %}>Enfumeur</option>
+</select>
+      <input name="perso" id="id_perso" type="hidden">
+    </div>
+
     <input class="btn btn-default" type="submit" value="Valider" />
   </form>
 
+</div>
 </div>
 
 {% endblock %}
