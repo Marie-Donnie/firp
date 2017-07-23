@@ -83,8 +83,8 @@ def creer_apothicaire(request, perso_id):
                 data['perso'] = perso.id
                 form = ApothicaireForm(data)
                 if form.is_valid():
-                    save_it = form.save()
-                    return redirect('detail_perso', perso_id=save_it.id)
+                    form.save()
+                    return redirect('detail_perso', perso_id=perso_id)
                 else:
                     print(form.errors)
             else:
@@ -111,8 +111,8 @@ def creer_fantassin(request, perso_id):
                 data['perso'] = perso.id
                 form = FantassinForm(data)
                 if form.is_valid():
-                    save_it = form.save()
-                    return redirect('detail_perso', perso_id=save_it.id)
+                    form.save()
+                    return redirect('detail_perso', perso_id=perso_id)
                 else:
                     print(form.errors)
             else:
@@ -139,8 +139,8 @@ def creer_arbaletrier(request, perso_id):
                 data['perso'] = perso.id
                 form = ArbaletrierForm(data)
                 if form.is_valid():
-                    save_it = form.save()
-                    return redirect('detail_perso', perso_id=save_it.id)
+                    form.save()
+                    return redirect('detail_perso', perso_id=perso_id)
                 else:
                     print(form.errors)
             else:
@@ -167,8 +167,8 @@ def creer_eclaireur(request, perso_id):
                 data['perso'] = perso.id
                 form = EclaireurForm(data)
                 if form.is_valid():
-                    save_it = form.save()
-                    return redirect('detail_perso', perso_id=save_it.id)
+                    form.save()
+                    return redirect('detail_perso', perso_id=perso_id)
                 else:
                     print(form.errors)
             else:
@@ -195,8 +195,8 @@ def creer_sorcier(request, perso_id):
                 data['perso'] = perso.id
                 form = SorcierForm(data)
                 if form.is_valid():
-                    save_it = form.save()
-                    return redirect('detail_perso', perso_id=save_it.id)
+                    form.save()
+                    return redirect('detail_perso', perso_id=perso_id)
                 else:
                     print(form.errors)
             else:
@@ -237,3 +237,30 @@ def detail_perso(request, perso_id):
     context = {'fiche': fiche}
 
     return render(request, 'rpg/avant_garde/personnage.html', context)
+
+
+@login_required
+def edit_fantassin(request, perso_id):
+    fantassin = Fantassin.objects.get(pk=perso_id)
+    utilisateur = request.user
+    if utilisateur == fantassin.perso.createur:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            data['perso'] = fantassin.perso.id
+            form = FantassinForm(data, request.FILES, instance=fantassin)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=fantassin.perso.id)
+            else:
+                print(form.errors)
+        else:
+            form = FantassinForm(instance=fantassin)
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/fantassin.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer ce personnage.")

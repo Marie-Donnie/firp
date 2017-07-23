@@ -14,7 +14,8 @@
 {% block edition %}
 {% if user.is_authenticated %}
 {% ifequal user.id fiche.createur.id %}
-{% if fiche.classe == 1 %}<a class="btn btn-default" href="{% url 'creer_fantassin' fiche.id %}">Créer classe</a>
+{% if fiche.classe == 1 %}
+{% if not fiche.fantassin %}<a class="btn btn-default" href="{% url 'creer_fantassin' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_fantassin' fiche.fantassin.id %}">Editer classe</a> {% endif %}
 {% elif fiche.classe == 2 %}<a class="btn btn-default" href="{% url 'creer_arbaletrier' fiche.id %}">Créer classe</a>
 {% elif fiche.classe == 3 %}<a class="btn btn-default" href="{% url 'creer_eclaireur' fiche.id %}">Créer classe</a>
 {% elif fiche.classe == 4 %}<a class="btn btn-default" href="{% url 'creer_apo' fiche.id %}">Créer classe</a>
@@ -25,12 +26,10 @@
 {% endif %}
 {% endblock %}
 {% block user %}
-{% if fiche.afficher_createur or user.id == fiche.createur.id %}
 {% if fiche.createur %}
 <span><b>Créateur :</b> <a href="{% url 'utilisateur' fiche.createur.id %}">{{ fiche.createur }}</a></span>
 {% else %}
 <span><b>Créateur :</b> Aucun</span>
-{% endif %}
 {% endif %}
 {% endblock %}
 
