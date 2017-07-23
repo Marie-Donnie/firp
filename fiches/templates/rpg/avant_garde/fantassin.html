@@ -60,61 +60,60 @@ $(function () {
   {% csrf_token %}
   <h4>Niveau 1</h4>
   <div class="form-group">
-    <label for="id_intim">Intimidation&nbsp;:</label> <input id="id_intim" max="100" min="1" name="intim" value="0" type="number">
+    <label for="id_intim">Intimidation&nbsp;:</label> <input id="id_intim" max="100" min="0" name="intim" value="{{form.intim.value|default:'0'}}" type="number">
   </div>
   <div class="form-group">
-    <label for="id_parer_fleches">Parer les flèches&nbsp;:</label> <input id="id_parer_fleches" max="100" min="1" name="parer_fleches" value="0" type="number">
+    <label for="id_parer_fleches">Parer les flèches&nbsp;:</label> <input id="id_parer_fleches" max="100" min="0" name="parer_fleches" value="{{form.parer_fleches.value|default:'0'}}" type="number">
   </div>
   <h4>Niveau 2</h4>
   <div class="form-group">
     <label for="id_athle_resi">Athlétisme/résistant&nbsp;:</label> <select id="id_athle_resi" name="athle_resi">
-      <option value="1" selected="selected">N'a pas le niveau</option>
-      <option value="2">Athlétisme</option>
-      <option value="3">Résistant</option>
+      <option value="1" {% if form.athle_resi.value == 1 or form.athle_resi.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+      <option value="2"{% if form.athle_resi.value == 2 %} selected="" {% endif %}>Athlétisme</option>
+      <option value="3"{% if form.athle_resi.value == 3 %} selected="" {% endif %}>Résistant</option>
     </select>
   </div>
   <div class="form-group">
-    <label for="id_escalade">Escalade&nbsp;:</label> <input id="id_escalade" max="100" min="0" name="escalade" value="0" type="number">
+    <label for="id_escalade">Escalade&nbsp;:</label> <input id="id_escalade" max="100" min="0" name="escalade" value="{{form.escalade.value|default:'0'}}" type="number">
     <span>OU</span>
-    <label for="id_cc">Coup critique&nbsp;:</label> <input id="id_cc" max="100" min="1" name="cc" value="0" type="number">
+    <label for="id_cc">Coup critique&nbsp;:</label> <input id="id_cc" max="100" min="0" name="cc" value="{{form.cc.value|default:'0'}}" type="number">
   </div>
   <div class="form-group">
-    <label for="id_prot">Protection&nbsp;:</label> <input id="id_prot" max="100" min="1" name="prot" value="0" type="number">
+    <label for="id_prot">Protection&nbsp;:</label> <input id="id_prot" max="100" min="0" name="prot" value="{{form.prot.value|default:'0'}}" type="number">
   </div>
   <h4>Niveau 3</h4>
   <div class="form-group">
     <label for="id_epe_craned">Épéiste/crâne dur&nbsp;:</label> <select id="id_epe_craned" name="epe_craned">
-      <option value="1" selected="selected">N'a pas le niveau</option>
-      <option value="2">Épéiste</option>
-      <option value="3">Crâne dûr</option>
+      <option value="1" {% if form.epe_craned.value == 1 or form.epe_craned.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+      <option value="2"{% if form.epe_craned.value == 2 %} selected="" {% endif %}>Épéiste</option>
+      <option value="3"{% if form.epe_craned.value == 3 %} selected="" {% endif %}>Crâne dûr</option>
     </select>
   </div>
   <div class="form-group">
-    <label for="id_equitation">Équitation&nbsp;:</label> <input id="id_equitation" max="100" min="1" name="equitation" value="0" type="number">
+    <label for="id_equitation">Équitation&nbsp;:</label> <input id="id_equitation" max="100" min="0" name="equitation" value="{{form.equitation.value|default:'0'}}" type="number">
   </div>
   <h4>Niveau 4</h4>
   <div class="form-group">
     <label for="id_glaive_lourde">Glaive/armure lourde&nbsp;:</label> <select id="id_glaive_lourde" name="glaive_lourde">
-      <option value="1" selected="selected">N'a pas le niveau</option>
-      <option value="2">Maîtriste du glaive</option>
-      <option value="3">Maîtrise de l'armure lourde</option>
+      <option value="1" {% if form.glaive_lourde.value == 1 or form.glaive_lourde.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+      <option value="2"{% if form.glaive_lourde.value == 2 %} selected="" {% endif %}>Maîtriste du glaive</option>
+      <option value="3"{% if form.glaive_lourde.value == 3 %} selected="" {% endif %}>Maîtrise de l'armure lourde</option>
     </select>
   </div>
     <h4>Niveau 5</h4>
   <div class="form-group">
     <label for="id_feroce_impla">Féroce/implacable&nbsp;:</label> <select id="id_feroce_impla" name="feroce_impla">
-      <option value="1" selected="selected">N'a pas le niveau</option>
-      <option value="2">Féroce</option>
-      <option value="3">Implacable</option>
+      <option value="1" {% if form.feroce_impla.value == 1 or form.feroce_impla.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+      <option value="2"{% if form.feroce_impla.value == 2 %} selected="" {% endif %}>Féroce</option>
+      <option value="3"{% if form.feroce_impla.value == 3 %} selected="" {% endif %}>Implacable</option>
     </select>
   </div>
 <input id="id_perso" name="perso" type="hidden">
 
-
-
-</div>
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>
+
+</div>
 
 </div>
 {% endblock %}

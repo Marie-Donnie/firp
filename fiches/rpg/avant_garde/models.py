@@ -157,9 +157,9 @@ class Avant_garde(models.Model):
 
 
 class Fantassin(models.Model):
-    intim = IntegerRangeField(default=0, min_value=1,
+    intim = IntegerRangeField(default=0, min_value=0,
                               max_value=100)
-    parer_fleches = IntegerRangeField(default=0, min_value=1,
+    parer_fleches = IntegerRangeField(default=0, min_value=0,
                                       max_value=100)
     athle_resi = models.SmallIntegerField(choices=((
         (1, "Niveau inférieur"),
@@ -169,9 +169,9 @@ class Fantassin(models.Model):
                                           default=1)
     escalade = IntegerRangeField(default=0, min_value=0,
                                  max_value=100)
-    cc = IntegerRangeField(default=0, min_value=1,
+    cc = IntegerRangeField(default=0, min_value=0,
                            max_value=100)
-    prot = IntegerRangeField(default=0, min_value=1,
+    prot = IntegerRangeField(default=0, min_value=0,
                              max_value=100)
     epe_craned = models.SmallIntegerField(choices=((
         (1, "Niveau inférieur"),
@@ -179,7 +179,7 @@ class Fantassin(models.Model):
         (3, "Crâne dûr")
     )),
                                           default=1)
-    equitation = IntegerRangeField(default=0, min_value=1,
+    equitation = IntegerRangeField(default=0, min_value=0,
                                    max_value=100)
     glaive_lourde = models.SmallIntegerField(choices=((
         (1, "Niveau inférieur"),
