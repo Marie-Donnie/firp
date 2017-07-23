@@ -4,15 +4,71 @@
 {% block page-title %}Liste des personnages{% endblock %}
 
 {% block content %}
-  {% if latest_fiches %}
-  <ul>
-    {% for f in latest_fiches %}
-    <div class="character">
-      <li><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      	<div class="panel-heading">
+	  <h3 class="panel-title">Créer des fiches</h3>
+	</div>
+	Dublabla
     </div>
-    {% endfor %}
-  </ul>
-  {% else %}
-  <p>Aucune fiche</p>
-  {% endif %}
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      	<div class="panel-heading">
+	  <h3 class="panel-title">Créer des fiches</h3>
+	</div>
+	Dublabla
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      	<div class="panel-heading">
+	  <h3 class="panel-title">Créer des fiches</h3>
+	</div>
+	Dublabla
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      	<div class="panel-heading">
+	  <h3 class="panel-title">Créer des fiches</h3>
+	</div>
+	Dublabla
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      	<div class="panel-heading">
+	  <h3 class="panel-title">Créer des fiches</h3>
+	</div>
+	Dublabla
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      	<div class="panel-heading">
+	  <h3 class="panel-title">Dernières fiches créées</h3>
+	</div>
+	{% if latest_fiches %}
+	<ul>
+	  {% for f in latest_fiches %}
+	  <div class="character">
+	    <li><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+	  </div>
+	  {% endfor %}
+	</ul>
+	{% else %}
+	<p>Aucune fiche</p>
+	{% endif %}
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}

@@ -11,7 +11,7 @@ from fiches.forms import *
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 # Displays the first name and last name of the Fiche model
 def index(request):
-    fiches = Fiche.objects.order_by('nom', 'prenom')
+    fiches = Fiche.objects.order_by('-creation')[:6]
     context = {'latest_fiches': fiches}
 
     return render(request, 'fiches/index.html', context)
