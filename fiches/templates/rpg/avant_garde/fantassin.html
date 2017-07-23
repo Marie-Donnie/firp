@@ -12,12 +12,109 @@ $(function () {
 {% block page-title %}Créer/éditer un fantassin{% endblock %}
 
 {% block content %}
-<div id="char_form">
+
+<div class="media">
+<div class="media-body">
+  <b>Niveau 1</b>
+  <ul>
+    <li>Intimidation : De 0 à 100, détermine la capacité à intimider la personne à laquelle le personnage parle</li>
+    <li>Parer les flèches : De 0 à 100, Permet de parer les flèches et autres projectiles tirer sur le personnage à l'aide d'un bouclier</li>
+  </ul>
+  <b>Niveau 2</b>
+  <ul>
+    <li>Trait athlétisme (+ 1 en Force)<br>
+      OU<br>
+      Trait résistant (+ 1 en Endurance)</li>
+    <li>Escalade : De 0 à 100, détermine la capacité à... escalader</li>
+    <li>Coup critique : De 0 à 100, augmente la plage critique d'un point tout les 10 points<br>
+      OU<br>
+      Protection : De 0 à 100, permet d'encaisser le coup à la place d'un camarade proche</li>
+  </ul>
+  <b>Niveau 3</b>
+  <ul>
+    <li>Trait épéiste (+ 1 en Capacité de combat)<br>
+      OU<br>
+      Trait Crâne dur (+ 2 PV)</li>
+    <li>Equitation : De 0 à 100, permet de monter à cheval</li>
+    <li>+ 1 Force Mentale</li>
+  </ul>
+  <b>Niveau 4</b>
+  <ul>
+    <li>Trait maîtrise du glaive (Rajoute 2 pts de dégâts au glaive)<br>
+      OU<br>
+      Trait Maîtrise de l'armure lourde (Rajoute 2 de sauvegarde d'armure à l'armure lourde)</li>
+    <li>+ 1 Force Mentale</li>
+  </ul>
+  <b>Niveau 5</b>
+  <ul>
+    <li>Trait Féroce (+ 1 Force, + 1 Capacité de combat, annule le bonus des morts-vivants)<br>
+      OU<br>
+      Trait Implacable (+ 1 Endurance, + 2 PV, Permet de rester conscient sous 0 pv avec un test d'endurance)</li>
+    <li>+ 1 Force Mentale</li>
+  </ul>
+</div>
+
+
+<div class="media-right media-middle" id="char_form">
 <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
-  {{form.as_ul}}
+  <h4>Niveau 1</h4>
+  <div class="form-group">
+    <label for="id_intim">Intimidation&nbsp;:</label> <input id="id_intim" max="100" min="1" name="intim" value="0" type="number">
+  </div>
+  <div class="form-group">
+    <label for="id_parer_fleches">Parer les flèches&nbsp;:</label> <input id="id_parer_fleches" max="100" min="1" name="parer_fleches" value="0" type="number">
+  </div>
+  <h4>Niveau 2</h4>
+  <div class="form-group">
+    <label for="id_athle_resi">Athlétisme/résistant&nbsp;:</label> <select id="id_athle_resi" name="athle_resi">
+      <option value="1" selected="selected">N'a pas le niveau</option>
+      <option value="2">Athlétisme</option>
+      <option value="3">Résistant</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="id_escalade">Escalade&nbsp;:</label> <input id="id_escalade" max="100" min="0" name="escalade" value="0" type="number">
+    <span>OU</span>
+    <label for="id_cc">Coup critique&nbsp;:</label> <input id="id_cc" max="100" min="1" name="cc" value="0" type="number">
+  </div>
+  <div class="form-group">
+    <label for="id_prot">Protection&nbsp;:</label> <input id="id_prot" max="100" min="1" name="prot" value="0" type="number">
+  </div>
+  <h4>Niveau 3</h4>
+  <div class="form-group">
+    <label for="id_epe_craned">Épéiste/crâne dur&nbsp;:</label> <select id="id_epe_craned" name="epe_craned">
+      <option value="1" selected="selected">N'a pas le niveau</option>
+      <option value="2">Épéiste</option>
+      <option value="3">Crâne dûr</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="id_equitation">Équitation&nbsp;:</label> <input id="id_equitation" max="100" min="1" name="equitation" value="0" type="number">
+  </div>
+  <h4>Niveau 4</h4>
+  <div class="form-group">
+    <label for="id_glaive_lourde">Glaive/armure lourde&nbsp;:</label> <select id="id_glaive_lourde" name="glaive_lourde">
+      <option value="1" selected="selected">N'a pas le niveau</option>
+      <option value="2">Maîtriste du glaive</option>
+      <option value="3">Maîtrise de l'armure lourde</option>
+    </select>
+  </div>
+    <h4>Niveau 5</h4>
+  <div class="form-group">
+    <label for="id_feroce_impla">Féroce/implacable&nbsp;:</label> <select id="id_feroce_impla" name="feroce_impla">
+      <option value="1" selected="selected">N'a pas le niveau</option>
+      <option value="2">Féroce</option>
+      <option value="3">Implacable</option>
+    </select>
+  </div>
+<input id="id_perso" name="perso" type="hidden">
+
+
 
 </div>
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>
+
+</div>
 {% endblock %}
