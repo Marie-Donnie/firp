@@ -62,7 +62,7 @@ admin.site.register(Equipement, EquipementAdmin)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 class A_gAdmin(admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = ('id', 'nom', 'prenom')
 
 admin.site.register(Avant_garde, A_gAdmin)
 
