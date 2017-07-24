@@ -316,3 +316,29 @@ def edit_arbaletrier(request, perso_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
+
+@login_required
+def edit_eclaireur(request, perso_id):
+    eclaireur = Eclaireur.objects.get(pk=perso_id)
+    utilisateur = request.user
+    if utilisateur == eclaireur.perso.createur:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            data['perso'] = eclaireur.perso.id
+            form = EclaireurForm(data, request.FILES, instance=eclaireur)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=eclaireur.perso.id)
+            else:
+                print(form.errors)
+        else:
+            form = EclaireurForm(instance=eclaireur)
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/eclaireur.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer ce personnage.")

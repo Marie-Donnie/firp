@@ -28,4 +28,6 @@ urlpatterns = [
         views.edit_apothicaire, name='editer_apothicaire'),
     url(r'^avant_garde/editer_arbaletrier/(?P<perso_id>\d+)/$',
         views.edit_arbaletrier, name='editer_arbaletrier'),
+    url(r'^avant_garde/editer_eclaireur/(?P<perso_id>\d+)/$',
+        views.edit_eclaireur, name='editer_eclaireur'),
 ]

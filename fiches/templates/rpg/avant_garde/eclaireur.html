@@ -12,12 +12,123 @@ $(function () {
 {% block page-title %}Créer/éditer un éclaireur{% endblock %}
 
 {% block content %}
-<div id="char_form">
-<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
-  {% csrf_token %}
-  {{form.as_ul}}
+
+<div class="media">
+  <div class="media-body">
+    <b>Niveau 1</b>
+    <ul>
+      <li>Dissimulation : De 0 à 100, permet de se cacher dans l'environnement</li>
+      <li>Vigilance : De 0 à 100, permet de remarquer ce que tout le monde ne peut pas voir, rajoute deux points aux test de perception par dizaine de points</li>
+    </ul>
+    <b>Niveau 2</b>
+    <ul>
+      <li>Trait Œil d'aigle (+ 1 en Perception)<br>
+	OU<br>
+	Trait Vif (+ 1 en Agilité)</li>
+      <li>Escalade : De 0 à 100, détermine la capacité à... escalader</li>
+      <li>Equitation : De 0 à 100, permet de monter à cheval</li>
+      <li>Pistage : De 0 à 100, Permet de suivre des traces<br>
+	OU<br>
+	Déguisement : De 0 à 100, permet de créer un déguisement convaincant pour tromper l'ennemi</li>
+      <li>+ 1 Force Mentale</li>
+    </ul>
+    <b>Niveau 3</b>
+    <ul>
+      <li>Trait Vigilant (+ 1 en Perception)<br>
+	OU<br>
+	Trait Réflexes éclairs (+ 1 en Agilité)</li>
+      <li>Natation : De 0 à 100, permet de nager</li>
+      <li>Contorsionnisme : De 0 à 100, permet de se glisser dans les endroits les plus étroits ou s'échapper de liens</li>
+      <li>Trappage : de 0 à 100, permet de poser et fabriquer des pièges<br>
+	OU<br>
+	Déplacement silencieux : de 0 à 100, permet de ne pratiquement plus faire de bruit en avançant</li>
+      <li>+ 1 Force Mentale</li>
+    </ul>
+    <b>Niveau 4</b>
+    <ul>
+      <li>Assassinat : De 0 à 100, augmente la plage critique de 2 points tout les 10 points<br>
+	OU<br>
+	Maîtrise animale : de 0 à 100, permet de calmer les animaux voir de les faire combattre pour vous</li>
+      <li>+ 1 Force Mentale</li>
+    </ul>
+    <b>Niveau 5</b>
+    <ul>
+      <li>Trait Art de la mort silencieuse (+ 1 Capacité de tir, + 1 Capacité de combat, + 1 Agilité, + 10 plage critique)<br>
+	OU<br>
+	Trait Rôdeur (+ 1 Agilité, + 2 Perception, Peut dresser un animal)</li>
+      <li>+ 1 Force Mentale</li>
+    </ul>
+  </div>
+
+  <div class="media-right media-middle" id="char_form">
+    <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+      {% csrf_token %}
+      <h4>Niveau 1</h4>
+      <div class="form-group">
+	<label for="id_dissimulation">Dissimulation&nbsp;:</label> <input name="dissimulation" value="{{form.dissimulation.value|default:'0'}}" max="100" required="" id="id_dissimulation" min="0" type="number">
+      </div>
+      <div class="form-group">
+	<label for="id_vigilance">Vigilance&nbsp;:</label> <input name="vigilance" value="{{form.vigilance.value|default:'0'}}" max="100" required="" id="id_vigilance" min="0" type="number">
+      </div>
+      <h4>Niveau 2</h4>
+      <div class="form-group">
+	<label for="id_aigle_vif">Œil d'aigle/vif&nbsp;:</label> <select name="aigle_vif" id="id_aigle_vif">
+	  <option value="1" {% if form.aigle_vif.value == 1 or form.aigle_vif.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+	  <option value="2"{% if form.aigle_vif.value == 2 %} selected="" {% endif %}>Œil d'aigle</option>
+	  <option value="3"{% if form.aigle_vif.value == 3 %} selected="" {% endif %}>Vif</option>
+	</select>
+      </div>
+      <div class="form-group">
+	<label for="id_escalade">Escalade&nbsp;:</label> <input name="escalade" value="{{form.escalade.value|default:'0'}}" max="100" required="" id="id_escalade" min="0" type="number">
+      </div>
+      <div class="form-group">
+	<label for="id_equitation">Équitation&nbsp;:</label> <input name="equitation" value="{{form.equitation.value|default:'0'}}" max="100" required="" id="id_equitation" min="0" type="number">
+      </div>
+      <div class="form-group">
+	<label for="id_pistage">Pistage&nbsp;:</label> <input name="pistage" value="{{form.pistage.value|default:'0'}}" max="100" required="" id="id_pistage" min="0" type="number">
+        <span>OU</span>
+	<label for="id_deguisement">Déguisement&nbsp;:</label> <input name="deguisement" value="{{form.deguisement.value|default:'0'}}" max="100" required="" id="id_deguisement" min="0" type="number">
+      </div>
+      <h4>Niveau 3</h4>
+      <div class="form-group">
+	<label for="id_vigilant_rx">Vigilant/réflexes éclairs&nbsp;:</label> <select name="vigilant_rx" id="id_vigilant_rx">
+	  <option value="1" {% if form.vigilant_rx.value == 1 or form.vigilant_rx.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+	  <option value="2"{% if form.vigilant_rx.value == 2 %} selected="" {% endif %}>Vigilant</option>
+	  <option value="3"{% if form.vigilant_rx.value == 3 %} selected="" {% endif %}>Réflexes éclaireurs</option>
+	</select>
+      </div>
+      <div class="form-group">
+	<label for="id_natation">Natation&nbsp;:</label> <input name="natation" value="{{form.natation.value|default:'0'}}" max="100" required="" id="id_natation" min="0" type="number">
+      </div>
+      <div class="form-group">
+	<label for="id_contorsion">Contorsion&nbsp;:</label> <input name="contorsion" value="{{form.contorsion.value|default:'0'}}" max="100" required="" id="id_contorsion" min="0" type="number">
+      </div>
+      <div class="form-group">
+	<label for="id_trap">Trappage&nbsp;:</label> <input name="trap" value="{{form.trap.value|default:'0'}}" max="100" required="" id="id_trap" min="0" type="number">
+        <span>OU</span>
+	<label for="id_depl_silenc">Déplacement silencieux&nbsp;:</label> <input name="depl_silenc" value="{{form.depl_silenc.value|default:'0'}}" max="100" required="" id="id_depl_silenc" min="0" type="number">
+      </div>
+      <h4>Niveau 4</h4>
+      <div class="form-group">
+	<label for="id_assassin">Assassin&nbsp;:</label> <input name="assassin" value="{{form.assassin.value|default:'0'}}" max="100" required="" id="id_assassin" min="0" type="number">
+	<span>OU</span>
+	<label for="id_maitr_anim">Maîtrise animale&nbsp;:</label> <input name="maitr_anim" value="{{form.maitr_anim.value|default:'0'}}" max="100" required="" id="id_maitr_anim" min="0" type="number">
+      </div>
+      <h4>Niveau 5</h4>
+      <div class="form-group">
+	<label for="id_silen_rodeur">Art de la mort silencieuse/rôdeur&nbsp;:</label> <select name="silen_rodeur" id="id_silen_rodeur">
+	  <option value="1"{% if form.silen_rodeur.value == 1 or form.silen_rodeur.value == None %} selected="" {% endif %}>N'a pas le niveau</option>
+	  <option value="2"{% if form.silen_rodeur.value == 2 %} selected="" {% endif %}>Art de la mort silencieuse</option>
+	  <option value="3"{% if form.silen_rodeur.value == 3 %} selected="" {% endif %}>Rôdeur</option>
+	</select>
+      </div>
+
+      <input name="perso" id="id_perso" type="hidden">
+
+      <input class="btn btn-default" type="submit" value="Valider" />
+    </form>
+  </div>
+
 
 </div>
-<input class="btn btn-default" type="submit" value="Valider" />
-</form>
 {% endblock %}
