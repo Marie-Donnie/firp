@@ -160,10 +160,7 @@ div.gallery img {
     border: 1px solid #470002;
     border-radius: 5px;
     margin-top: 0px;
-    /* margin-left: 50px; */
-    /* margin-right: 50px; */
-    margin-bottom: 10px;
-    /* padding-bottom: 2% */
+    margin-bottom: 40px;
 }
 
 .navbar-default .navbar-nav > li > a{
@@ -516,4 +513,23 @@ h3 {
     padding-left: 2%;
     padding-top: 2%;
     padding-bottom: 1%
+}
+
+.pres-image {
+    display: block;
+    margin: 3% auto;
+    width: 50%;
+    border-radius: 2%;
+}
+
+.pres-text {
+    display: block;
+    margin: 3% 20%
+}
+
+.pres-text:first-letter {
+    font-size:44px;
+    float:left;
+    line-height: 44px;
+    margin: 1px;
 }

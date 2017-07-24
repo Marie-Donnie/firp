@@ -9,6 +9,8 @@ from fiches.rpg.avant_garde.models import *
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AVANT-GARDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 @login_required
 def creer_base(request):
     utilisateur = request.user
@@ -71,6 +73,41 @@ def editer_base(request, base_id):
     else:
         return HttpResponse("Vous ne pouvez pas editer cette fiche de l'avant-garde.")
 
+
+def persos_ag(request):
+    fiches_list = Avant_garde.objects.order_by('nom', 'prenom')
+
+    paginator = Paginator(fiches_list, 20)
+    page = request.GET.get('page')
+    try:
+        fiches = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        fiches = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        fiches = paginator.page(paginator.num_pages)
+
+    context = {'fiches': fiches}
+
+    return render(request, 'rpg/avant_garde/personnages.html', context)
+
+
+def detail_perso(request, perso_id):
+    fiche = get_object_or_404(Avant_garde, pk=perso_id)
+
+    context = {'fiche': fiche}
+
+    return render(request, 'rpg/avant_garde/personnage.html', context)
+
+
+def presentation(request):
+    context = {}
+    return render(request, 'rpg/avant_garde/presentation.html', context)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CLASSES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CREATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 @login_required
 def creer_apothicaire(request, perso_id):
@@ -212,32 +249,7 @@ def creer_sorcier(request, perso_id):
         return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
 
 
-def persos_ag(request):
-    fiches_list = Avant_garde.objects.order_by('nom', 'prenom')
-
-    paginator = Paginator(fiches_list, 20)
-    page = request.GET.get('page')
-    try:
-        fiches = paginator.page(page)
-    # if page not an integer, display first page of results
-    except PageNotAnInteger:
-        fiches = paginator.page(1)
-    # if page is out of range, display the last page of results
-    except EmptyPage:
-        fiches = paginator.page(paginator.num_pages)
-
-    context = {'fiches': fiches}
-
-    return render(request, 'rpg/avant_garde/personnages.html', context)
-
-
-def detail_perso(request, perso_id):
-    fiche = get_object_or_404(Avant_garde, pk=perso_id)
-
-    context = {'fiche': fiche}
-
-    return render(request, 'rpg/avant_garde/personnage.html', context)
-
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDITION %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 @login_required
 def edit_fantassin(request, perso_id):

@@ -6,6 +6,7 @@ from fiches.rpg.avant_garde import views
 urlpatterns = [
     # General
     url(r'^avant_garde/$', views.persos_ag, name='avant_garde_persos'),
+    url(r'^avant_garde/presentation$', views.presentation, name='avant_garde_pres'),
     url(r'^avant_garde/personnage/(?P<perso_id>\d+)/$', views.detail_perso,
         name='detail_perso'),
     url(r'^avant_garde/editer_personnage/(?P<base_id>\d+)/$',

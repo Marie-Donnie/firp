@@ -63,9 +63,10 @@
 	  {% endif %}
 	  {% if perms.avant_garde.avant_garde %}
 	  <li class="dropdown">
-            <a href="{% url 'avant_garde_persos' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Avant-garde <span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Avant-garde <span class="caret"></span></a>
 	    <ul class="dropdown-menu">
 	      <li>Avant-garde</li>
+	      <li><a href="{% url 'avant_garde_pres' %}">Présentation</a></li>
 	      <li><a href="{% url 'avant_garde_persos' %}">Personnages</a></li>
 	      <li><a href="{% url 'creer_perso' %}">Créer un personnage</a></li>
 	      <li role="separator" class="divider"></li>

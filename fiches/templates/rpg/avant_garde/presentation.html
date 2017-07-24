@@ -1,0 +1,465 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+
+{% block script %}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({html: true, placement: 'right'})
+})
+{% endblock %}
+
+{% block title %}Présentation de l'avant-garde{% endblock %}
+{% block page-title %}{% endblock %}
+
+{% block content %}
+
+<img class="pres-image" src="/fiches/media/images/site/rpg/avant-garde.jpg" alt="Avant-garde">
+
+<div class="pres-text">
+A Noirebois, quand on a assez de compétences et surtout de la chance en suffisance sur un champ de bataille - comme moi -, on survit à quelques campagnes et on se taille une place dans les vétérans. Vétéran, c'est bien, mais ça fait pas tomber l'or dans les mains ni les paysannes; alors on peut attendre, attendre et attendre, devenir plus rusé, faire ami-ami avec un officier et peut-être caresser l'espoir de recevoir une promotion... Mais l'autre alternative est ma préférée.<br><br> L'autre alternative c'est l'avant-garde, et l'avant-garde c'est la certitude d'avoir l'affectation qu'on veut voir une promotion, d'être désiré par tout les officiers, arraché par tout les bataillons. En gros, c'est l'échelle la plus rapide pour montre au sommet. Une compagnie complète de vétérans, montés pour une expédition loin de la maison pouvant s'étaler sur de très longues durées. Certaines fois, elle ne revient pas, mais quand elle le fait, c'est les bras chargés de nouvelles informations ou de nouveaux objets vitaux pour notre région... Et de l'or pour ses membres. <br> <br>L'avant-garde... C'est l'aventure ! Le dépaysement total, la quête épique de la recherche d'un artefact, d'un trésor, d'une arme, ou de n'importe quoi; des combats contre des créatures inconnues et dangereuses et les rencontres avec les espèces exotiques. Ah, l'avant-garde... C'est aussi la famine, la maladie quand les réserves médicales se vident, la fatigue, la douleur, la mort. C'est un minimum assuré de cinquante pourcent de pertes, et dans ce qu'il reste, un quart de mutilés ou de traumatisés. C'est la certitude qu'en rentrant, tes affaires auront été séparées entre ta famille et tes amis, que tes gamins t'appelleront monsieur, et que le petit dernier aura les oreilles pointues. Mais bon, il faut ce qu'il faut. <br><br>C'est pour ça que je signe pour l'avant-garde, et comme l'a dit le sergent Skolkra : "Tu verras gamin, c'est beau à en chialer."
+</div>
+
+<img id="center" src="/fiches/media/images/site/UI-HorizontalBreak.PNG" alt="separation">
+
+
+<div class="pres-text">
+Nom :
+Prénom :
+Date de naissance :
+Sexe :
+Race : - Humain : Profil normal
+- Nain : +1 PV, + 1 Force, + 1 Endurance, - 2 Agilité
+- Haut-Elfe : + 1 Agilité, + 1 Capacité de tir, + 1 Perception, - 1 PV, - 1 Endurance
+Ville natale :
+Ancienne profession : - Forgeron : Débloque la compétence Forge à 1d20 pts, qui permet de rendre de la durabilité à l'équipement endommagé. (- 5 pts de création)
+- Chasseur : Débloque la compétence Chasse à 1d20 pts, qui permet de chasser des animaux pour récupérer de la nourriture (- 2 pts de création)
+- Cuisinier : Débloque le trait Cuistot qui augmente le moral lié à la nourriture (- 2 pts de création)
+- Tavernier : Débloque la compétence Distillation à 1d20 pts, qui permet de créer son propre alcool (- 3 pts de création)
+- Facteur d'arc : Débloque la compétence Fabrication de flèches à 1d20 pts, qui permet de fabriquer des flèches et des carreaux (- 3 pts de création)
+- Tanneur : Débloque le trait Tanneur qui permet de fabriquer des tentes et des vêtements à partir de la fourrure et du cuir des animaux (- 2 pts de création)
+- Architecte : Débloque le trait Architecte qui permet de créer des plans pour la construction de vrais bâtiments (- 5 pts de création)
+- Ebéniste : Débloque le trait Construction qui permet de fabriquer des abris à base de bois (- 2 pts de création)
+- Autres métiers (0 pts de création)
+
+Grade : Soldat de base, les grades peuvent augmenter durant la campagne, si le personnage est déjà existant, il conserve son grade, les volontaires peuvent tirer leur grade aux dés (un soldat commence niveau 1, un caporal niveau 2, un sergent niveau 3, un lieutenant niveau 4 et un capitaine niveau 5)
+
+
+PROFIL
+
+Capacité de combat : Valeur de 1 à 10, la valeur moyenne d'un fantassin est de 4. Elle détermine la capacité que vous avez à attaquer votre adversaire et s'oppose directement à la capacité de combat de l'adversaire.
+Capacité de tir : Valeur de 1 à 10, la valeur moyenne d'un arbalétrier est de 5. Elle détermine la capacité que vous avez à toucher un adversaire à distance.
+Force : Valeur de 1 à 10, la valeur moyenne humaine est de 4. La force détermine les dégâts fait à votre adversaire, chaque point de force ajoute un point de dégât à votre arme.
+Endurance : Valeur de 1 à 10, la valeur moyenne humaine est de 4. L'endurance détermine la résistance aux dégâts, aux poisons et à l'alcool. Chaque point d'endurance réduit de un point les dégâts reçu.
+Perception : Valeur de 1 à 10, la valeur moyenne humaine est de 4. La perception détermine la vision d'un personnage et son attention aux détails du monde alentour.
+Agilité : Valeur de 1 à 10, la valeur moyenne humaine est de 4. L'agilité détermine la rapidité d'action d'un personnage et sa souplesse. Elle détermine donc l'initiative de combat
+Intelligence : Valeur de 1 à 10, la valeur moyenne humaine est de 3. L'intelligence détermine les savoirs d'un personnage et ses facultés technique précises. Elle détermine également le mana d'un sorcier
+Charisme : Valeur de 1 à 10, la valeur moyenne humaine est de 3. Le charisme détermine la capacité d'un personnage à se faire apprécier et respecter, ATTENTION le charisme ne représente pas la sociabilité.
+Force mentale : Valeur de 1 à 10, la valeur moyenne d'un soldat est de 5. La force mentale détermine la capacité d'un personnage à résister à l'accumulation de stress, à la folie et à la peur.
+
+Vous disposez de 34 points à allouer
+
+
+PROFIL SECONDAIRE
+
+Points de vie : Sur 1d10, de 1 à 6 = 11 PV, de 7 à 8 = 12 PV, de 9 à 10 = 13 PV. Quand un personnage tombe à 0 PV et qu'il est sauvé par ses camarade, il peut subir une mutilation.
+Points de stress : Les points de stress sont l'accumulation des difficultés des combats, tout les 10 points, elles déclenchent un effet momentanée et rajoute 1 point de folie
+Points de folie : Les points de folie représentent la dégradation du mental du personnage, plus ils sont élevés plus le personnage risque de recevoir un trouble psychologique
+
+Niveau : Débute au niveau 1
+Points d'expérience : Débute à 0/100
+
+Blessures : Listing des blessures
+
+Trouble mental : Listing des troubles mentaux
+
+
+COMPETENCES
+
+Classe : Au choix - Fantassin : Le fantassin est le soldat de base de Noirebois, il est capable de bien encaisser les dégâts et d'en causer à ses adversaires. (Caractéristique(s) principale(s) : Capacité de combat, Force, Endurance, Force mentale)
+- Arbalétrier : L'arbalétrier tire profit de ses attaques à distances pour abattre ses adversaires d'un seul carreau. (Caractéristique(s) principale(s) : Capacité de tir, Force mentale)
+- Eclaireur : Vital dans l'avant-garde, l'éclaireur permet d'avoir une idée des forces ennemies et d'éviter les pièges. (Caractéristique(s) principale(s) : Perception, Agilité, Force mentale)
+- Apothicaire de combat : Inutile de le dire, sans prêtre et soins magiques, les apothicaires deviennent une nécessité pour survivre, leur médecine traditionnelle pourra en sauver plus d'un, et abréger les souffrances des autres. (Caractéristiques principales : Intelligence, Force mentale)
+- Apprenti sorcier : UN SEUL DISPONIBLE, il est l'apprenti du sorcier de l'avant-garde et sait utiliser la magie de ce fait. (Caractéristique principale : Intelligence, Force mentale)
+
+FANTASSIN
+Niveau 1
+Intimidation : De 0 à 100, détermine la capacité à intimider la personne à laquelle le personnage parle
+Parer les flèches : De 0 à 100, Permet de parer les flèches et autres projectiles tirer sur le personnage à l'aide d'un bouclier
+Niveau 2
+Trait athlétisme (+ 1 en Force)
+OU
+Trait résistant (+ 1 en Endurance)
+Escalade : De 0 à 100, détermine la capacité à... escalader
+Coup critique : De 0 à 100, augmente la plage critique d'un point tout les 10 points
+OU
+Protection : De 0 à 100, permet d'encaisser le coup à la place d'un camarade proche
+Niveau 3
+Trait épéiste (+ 1 en Capacité de combat)
+OU
+Trait Crâne dur (+ 2 PV)
+Equitation : De 0 à 100, permet de monter à cheval
++ 1 Force Mentale
+Niveau 4
+Trait maîtrise du glaive (Rajoute 2 pts de dégâts au glaive)
+OU
+Trait Maîtrise de l'armure lourde (Rajoute 2 de sauvegarde d'armure à l'armure lourde)
++ 1 Force Mentale
+Niveau 5
+Trait Féroce (+ 1 Force, + 1 Capacité de combat, annule le bonus des morts-vivants)
+OU
+Trait Implacable (+ 1 Endurance, + 2 PV, Permet de rester conscient sous 0 pv avec un test d'endurance)
++ 1 Force Mentale
+
+ARBALETRIER
+Niveau 1
+Focalisation : De 0 à 100, Détermine la concentration du personnage sur le tir, tout les 10 points, augmente la chance de toucher de 1 au rand
+A couvert : De 0 à 100, détermine la capacité du personnage à tirer profit de son couvert, augmente de 2 points le bonus de couvert tout les 10 points
+Niveau 2
+Trait Tireur d'élite (+ 1 en Capacité de tir)
+Escalade : De 0 à 100, détermine la capacité à... escalader
+Coup critique : De 0 à 100, augmente la plage critique d'un point tout les 10 points
+Niveau 3
+Trait Visée précise (+ 1 en Capacité de tir)
+Vigilance : De 0 à 100, permet de remarquer ce que tout le monde ne peut pas voir, rajoute deux points aux test de perception par dizaine de points
++ 1 Force Mentale
+Niveau 4
+Trait maîtrise de l'arbalète (L'arbalète ignore deux points d'armure supplémentaire)
+Equitation : De 0 à 100, permet de monter à cheval
+Niveau 5
+Trait As du tir (+ 1 en Capacité de tir, augmente la plage critique de 10 points)
+Dissimulation : De 0 à 100, permet de se cacher dans l'environnement
++ 1 Force Mentale
+
+ECLAIREUR
+Niveau 1
+Dissimulation : De 0 à 100, permet de se cacher dans l'environnement
+Vigilance : De 0 à 100, permet de remarquer ce que tout le monde ne peut pas voir, rajoute deux points aux test de perception par dizaine de points
+Niveau 2
+Trait Œil d'aigle (+ 1 en Perception)
+OU
+Trait Vif (+ 1 en Agilité)
+Escalade : De 0 à 100, détermine la capacité à... escalader
+Equitation : De 0 à 100, permet de monter à cheval
+Pistage : De 0 à 100, Permet de suivre des traces
+OU
+Déguisement : De 0 à 100, permet de créer un déguisement convaincant pour tromper l'ennemi
++ 1 Force Mentale
+Niveau 3
+Trait Vigilant (+ 1 en Perception)
+OU
+Trait Réflexes éclairs (+ 1 en Agilité)
+Natation : De 0 à 100, permet de nager
+Contorsionnisme : De 0 à 100, permet de se glisser dans les endroits les plus étroits ou s'échapper de liens
+Trappage : de 0 à 100, permet de poser et fabriquer des pièges
+OU
+Déplacement silencieux : de 0 à 100, permet de ne pratiquement plus faire de bruit en avançant
++ 1 Force Mentale
+Niveau 4
+Assassinat : De 0 à 100, augmente la plage critique de 2 points tout les 10 points
+OU
+Maîtrise animale : de 0 à 100, permet de calmer les animaux voir de les faire combattre pour vous
++ 1 Force Mentale
+Niveau 5
+Trait Art de la mort silencieuse (+ 1 Capacité de tir, + 1 Capacité de combat, + 1 Agilité, + 10 plage critique)
+OU
+Trait Rôdeur (+ 1 Agilité, + 2 Perception, Peut dresser un animal)
++ 1 Force Mentale
+
+APOTHICAIRE
+Niveau 1
+Médecine : De 0 à 100, Permet d'appliquer les premiers soins aux blessés et préparer des anti-poisons.
++ 1 Intelligence
+Niveau 2
+Chirurgie : De 0 à 100, permet d'éviter les mutilations et sauver les blessés graves.
+OU
+Poison : De 0 à 100, permet de concocter de poisons
++ 1 Force Mentale
+Niveau 3
+Trait Guérisseur (+ 1 Intelligence, augmente les pv rendus par la médecine de 1)
+OU
+Alchimie : De 0 à 100, permet de concocter des fioles contenant des produits mortels et les lancer sur les adversaires
+Equitation : De 0 à 100, permet de monter à cheval
++ 1 Force Mentale
+Niveau 4
+Trait maîtrise du scalpel (+ 1 Intelligence, rajoute 30 points à la compétence chirurgie)
+OU
+Trait Art du lancer de fioles (+ 1 Capacité de tir)
++ 1 Force Mentale
+Niveau 5
+Trait Maître guérisseur (+ 1 Intelligence, + 1 Force Mentale, Augmente les pv rendus par la médecine de 1)
+OU
+Trait Enfumeur (+ 1 Capacité de Tir, permet de toucher les morts-vivants avec les fioles, dote le médecin d'un masque à gaz)
++ 1 Force Mentale
+
+APPRENTI SORCIER
+Niveau 1
+Boule de feu : De 0 à 100, Détermine le jet de mana à effectuer pour lancer la boule de feu
+Trait de feu : De 0 à 100, Détermine le jet de mana à effectuer pour le sort trait de feu
+Contresort : De 0 à 100, détermine le jet de mana à effectuer pour le sort contresort
++ 1 Intelligence
+Niveau 2
+Nova de feu : De 0 à 100, Détermine le jet de mana à effectuer pour le sort nova de feu
+Souffle du dragon : De 0 à 100, Détermine le jet de mana à effectuer pour le sort souffle du dragon
+Bouclier de mana : 100
+Portail : De 0 à 100, Détermine le jet de mana à effectuer pour le sort portail
++ 1 Intelligence
+Niveau 3
+Pilier de feu : De 0 à 100, Détermine le jet de mana à effectuer pour le sort pilier de feu
+Explosion pyrotechnique : De 0 à 100, détermine le jet de mana à effectuer pour le sort pilier de feu
+Transfert : De 0 à 100, détermine le jet de mana à effectuer pour le sort transfert
+Bouclier de feu : 100
+Désamorcer les pièges magiques : De 0 à 100, permet au sorcier de désamorcer un piège magique
+OU
+Enchantement : De 0 à 100, permet d'enchanter l'équipement avec le matériel adéquat
++ 1 Intelligence
++ 1 Force Mentale
+Niveau 4
+Pluie de feu : De 0 à 100, détermine le jet de mana à effectuer pour le sort pluie de feu
+Bombe vivante : De 0 à 100, détermine le jet de mana à effectuer pour le sort bombe vivante
+Annuler la malédiction : De 0 à 100, permet d'enlever une malédiction frappant un personnage
+OU
+Analyse magique : De 0 à 100, permet d'analyser et découvrir les effets d'un objet magique
++ 1 Intelligence
++ 1 Force Mentale
+Niveau 5
+Trait Grand Sorcier (+ 100 pts de mana)
++ 1 Intelligence
++ 1 Force Mentale
+
+TRAITS
+
+Avantages
+Ambidextre : Peut combattre avec une arme dans chaque main sans malus (- 5 pts de création)
+Attaque rapide : Permet d'attaquer deux fois avec une action complète (- 3 pts de création)
+Attaque éclair : Permet d'attaquer trois fois avec une action complète (- 4 pts de création, nécessite attaque rapide)
+Blasé : Ne gagne pas de points de stress dans les situations stressant ordinaire - ex : combat (- 2 pts de création)
+Bon tireur : Aucun malus a cause d'un tir à très longue portée (- 2 pts de création)
+Bonne réputation : Vous avez bonne réputation au sein de l'avant-garde (- 1 pts de création)
+Charge berserk : + 2 CC et + 1 F au tour de charge (- 2 pts de création)
+Cible rapide : - 2 à la CT d'un tireur vous prenant en cible quand vous courez (- 2 pts de création)
+Combat aveugle : Subit la moitié du malus de combat en cas de vision réduite (- 2 pts de création)
+Constitution solide : + 1 PV (- 1 pts de création)
+Contre attaque : Attaque à -2 en CC après une parade réussie (- 2 pts de création)
+Coup infaillible : Ajoute +2 de dégâts avec les armes de corps à corps (- 2 pts de création)
+Discipline de fer : Vous pouvez relancer les test de peur ratés (- 2 pts de création)
+Endurci : Vous êtes moins susceptible de tomber malade (- 1 pts de création)
+Décadence : Résistance très élevée aux drogues et à l'alcool (- 1 pts de création)
+Désarmement : Peut forcer un adversaire à lâcher son arme (-1 pts de création)
+Grand orateur : Affecte plus de personne par ses propos (- 3 pts de création)
+Grand praticien : Déverrouille la compétence chirurgie en lui donnant 20 pts de base (- 3 pts de création, nécessite apothicaire)
+Génie : Déverouille des compétences bonus, + 3 INT (- 7 pts de création)
+Haine (nom de la race) : Rajoute + 1 en CC contre ces adversaires (- 1 pts de création)
+Imitation : Permet d'imiter les voix (- 3 pts de création)
+Litanie de haine : En braillant des incitations à la haine, vous faites bénéficier votre bonus de haine aux alliés alentours (- 3 pts de création)
+Maître du combat : Annule le bonus de surnombre (- 3 pts de création)
+Elu du néant : + 50 pts de mana (- 4 pts de création, nécessite apprenti sorcier)
+Pas de côté : Permet d'esquiver une attaque par tour sur un test d'agilité (- 3 pts de création)
+Sans peur : Immunisé contre la peur - pas contre la folie - (- 10 pts de création)
+Sens aiguisé (nom du sens) : +20 aux tests sur ce sens (- 3 pts de création)
+Sommeil léger : Compte comme étant éveillé quand il dort (- 1 pts de création)
+Tir double : Peut tirer deux fois sur un tour (- 3 pts de création)
+Tir en mouvement : Pas de malus de tir sur un tir en mouvement (- 2 pts de création)
+Vivacité : Permet de se relever en action gratuite (- 2 pts de création)
+Voix troublante : +10 en intimidation, - 10 en sociabilité (- 1 pts de création)
+
+Désavantages
+Boiteux : Après avoir perdu un morceau de chair/autre blessure non guérissable, vous boitez de façon irrémédiable, - 1 AG et impossible de sprinter (+ 2 pts de création)
+Dérangé : Votre personnage commence avec 20 points de folie (+ 2 pts de création)
+Borgne : Vous avez perdu un œil avant de rentrer à l'avant-garde, -1 CT (+ 2 pts de création)
+Doigt perdu : Vous avez perdu un doigt, ce qui affecte votre capacité de combat, -10 aux tests de tirs (+ 2 pts de création)
+Peur (nom de la race ou de l'animal) : Vous avez développé une peur tenace d'un certain type d'adversaires (+ 2 pts de création)
+Nerveux : Vous gagnez deux fois plus de points de stress (+ 2 pts de création)
+Lâche : Vous avez plus rapidement et facilement peur, - 10 aux tests de peur (+ 2 pts de création)
+Apprécie (Tolère pour les morts-vivants) les (orcs, sorciers, trolls, elfes de sang, morts-vivants) : Vous appréciez une race peu aimée par Noirebois, cela facilité vos interactions avec cette espèce, mais vous donne mauvaise réputation au sein de l'avant-garde (+ 2 (sorciers) + 3 (Orcs/Trolls/elfes de sang) + 4 (morts-vivants))
+Malchanceux : Quoi qu'il se passe, il vous arrivera toujours les pires choses, toujours (+ 5 pts de création)
+Maladroit : Vous n'êtes pas très doué, plage d'échec critique monté jusqu'à 5 (+ 3 pts de création)
+Débile : Vous n'avez jamais eu d'autre métier que de frapper des gens, vous ne pouvez donc pas en prendre et ne pouvez pas être apothicaire ou apprenti sorcier, Limite l'intelligence à 4 (+ 2 pts de création)
+Sommeil lourd : Vous avez beaucoup plus de mal à vous sortir du sommeil (+ 1 pts de création)
+Lourdaud : Met une action complète à se relever (+ 2 pts de création)
+Âme damnée : Gagne deux fois plus de points de corruption (+ 4 pts de création, apprenti sorcier uniquement)
+Mauvaise réputation : Vous avez fait quelque chose de mal, et l'avant-garde ne vous aime pas (+ 3 pts de création)
+Maladif : Vous avez plus de chance de tomber malade (+ 2 pts de création)
+Constitution faible : - 1 PV (+1 pts de création)
+Faible résistance : Ne tiens pratiquement pas l'alcool et les drogues (+ 1 pts de création)
+Dépendance (nom du type d'alcool/drogue) : Vous êtes dépendant et devez vous trouver de quoi satisfaire cette dépendance (+ 2 pts de création pour la vodka ou la cigarette, augmente selon la rareté de l'alcool/drogue)
+
+EQUIPEMENT
+
+Armure :
+Tête : Nom (PA/Durabilité)
+Torse : Nom (PA/Durabilité)
+Bras gauche : Nom (PA/Durabilité)
+Bras droit : Nom (PA/Durabilité)
+Jambe gauche : Nom (PA/Durabilité)
+Jambe droite : Nom (PA/Durabilité)
+Vêtements : Nom (Effets)
+
+Ceinture :
+Emplacement d'arme : Nom (Dégâts / Effets / Durabilité)
+Emplacement d'arme secondaire OU de carquois OU d'armes de jets OU sacoche : Nom (Dégâts / Effets / Durabilité OU Nombres de carreaux sur contenance OU Dégâts / Effets / Nombres d'armes de jets sur contenance OU Contenance)
+Gourde
+Emplacement de sacoche 1 : Nom (Contenance)
+Emplacement de sacoche 2 : Nom (Contenance)
+
+Objets magiques :
+Annulaire gauche : Nom (Effets)
+Index gauche : Nom (Effets)
+Annulaire droit : Nom (Effets)
+Index droit : Nom (Effets)
+Cou : Nom (Effets)
+
+Dos :
+Emplacement de cape : Nom (Effets)
+Emplacement d'arbalète OU d'arc : Nom (Dégâts / Effets / Durabilité)
+OU
+Emplacement d'arme à deux mains : Nom (Dégâts / Effets / Durabilité)
+OU
+Emplacement de bouclier : Nom (PA / Durabilité)
+OU
+Emplacement de sac à dos : Nom (Contenance)
+
+INVENTAIRE
+
+Nom du contenant (Contenu sur contenance)
+Listing des objets
+
+</div>
+
+<div class="pres-text">
+BLESSURES, MUTILATIONS, MORT ET SOINS
+
+BLESSURES ET MORT
+
+Quand un personnage tombe à 0 pv, il tombe inconscient suite à une blessure de trop, à partir de ce moment, le personnage ne peut plus être soigné avec les premiers soins et risque gros, la blessure est déterminée en faisant deux rand 6 (le premier étant le dizaine) pour avoir un résultat sur 66 sur ce tableau
+
+11-15 MORT
+Le personnage est tout simplement mort de sa blessure, ou du temps d'attente avant d'être soigné, l'aventure est finie pour lui, il n'y a plus rien à faire
+
+16-21 BLESSURES MULTIPLES
+Le personnage n'est pas mort, mais a subi de nombreuses blessures. Lancez un rand 6 pour déterminer le nombre de blessures que vous avez et tirez autant de fois que le résultat du rand sur ce tableau, relancez le résultat "mort" et "blessures multiples"
+
+22 BLESSURE A LA JAMBE
+Faites un rand 6, sur un 1 la jambe est tellement amochée qu'il faut l'amputer, l'agilité est divisée par deux et le personnage incapable de courir, de 2 à 6, la jambe est fracturée et le guerrier en gardera des séquelles à vie, il perd 1 en agilité et est incapable de sprinter
+
+23 BLESSURE AU BRAS
+Faites un rand 6, sur un 1 le bras est tellement amochée qu'il faut l'amputer, la capacité de combat est divisée par deux, de 2 à 6, le bras est fracturé et le guerrier en gardera des séquelles à vie, il perd 1 en CC
+
+24 FOLIE
+Le personnage a mentalement très mal encaissé sa blessure et gagne rand 20 pts de folie
+
+25 DOIGT PERDU
+Votre personnage a perdu un doigt pendant la bataille, si ce n'est pas très inquiétant, c'est embêtant pour tirer, - 1 à la CT
+
+26 BLESSURE AU TORSE
+Le personnage est gravement touché au torse mais finit par guérir, il reste cependant affaibli à vie et soufre d'un -1 en endurance
+
+31 OEIL CREVE
+Le personnage a perdu un œil dans le combat, il subit un - 1 à la CT et à la perception. Si le personnage se retrouve avec les deux yeux crevés il gagne le désavantage "Aveugle", sa CT diminue de 5 (jusqu'à un minimum de 0) et sa perception est divisée de moitié arrondi à l'inférieur
+
+32-34 VIEILLE BLESSURE
+Le personnage survit et ne garde aucune séquelle apparente si ce n'est des douleurs chronique, avant chaque event faites un rand 10, sur un 1 votre personnage souffre de sa blessure et subit une pénalité de 1 à toutes ses statistiques pendant l'event
+
+35 TRAUMATISME NERVEUX
+Le système nerveux du personnage a été touché, il perd -1 en agilité
+
+36 BLESSURE A LA MAIN
+La main du personnage est très abimée, il perd - 1 à sa CC
+
+41-55 RECUPERATION TOTALE
+Le personnage se remet parfaitement de sa blessure
+
+56 RANCUNE
+Le personnage s'est rétablit complètement, mais est mentalement traumatisé par l'expérience, faites un rand 6 et référez vous à ce tableau
+1 - Votre personnage a développée la "peur" de la race qui lui a infligée cette blessure (si cette race est la sienne, il a peur du groupe ou de l'individu responsable)
+2-3 - Votre personnage développe la "haine" du responsable direct de sa blessure
+4-5 - Votre personnage développe la "haine" du groupe responsable de sa blessure
+6 - Votre personnage développe la "haine" de la race responsable de sa blessure (si cette race est la sienne, même résultant que 4-5)
+
+61 COUP A LA TÊTE
+Votre personnage a reçu un sale coup à la tête qui lui a retourné le cerveau :
+La première fois que ce résultat est tiré, vous perdez -1 en intelligence
+La seconde fois, vous perdez -1 en intelligence et devenez "amnésique"
+La troisième fois, vous perdez -1 en intelligence et devenez "débile"
+
+62-63 ENDURCI
+Votre personnage a survécu à une sale blessure et se fiche de ce qui peut bien se passer, la première fois que vous tirez ce résultat vous gagnez le trait "Blasé", la seconde fois vous gagnez le trait "Sans peur"
+
+64 HORRIBLES BALAFRES
+Votre visage a été tellement mutilé par la blessure que vous provoquez à présent la peur
+
+65-66 SURVIE MIRACULEUSE
+Vous êtes forcément béni par la Lumière pour avoir survécu a une telle blessure, vous gagnez 20 pts d'expériences.
+
+SOINS ET OPERATIONS
+
+SOINS
+Pour soigner quelqu'un, votre cible doit être en dehors d'un combat (elle ne doit pas combattre activement lors du soin) et vous devez posséder un objet de soin. Chaque objet de soin à une valeur de soin basique qui redonnera ce nombre de pv à votre cible, MAIS, si vous réussissez votre test de médecine, vous rendez le double des pv à votre cible
+
+OPERATIONS
+Les opérations se jouent après un event pour les personnages tombez à 0 PV, le personnage a 0 PV lance d'abord le jet de blessure, si le résultat est mauvais, vous, apothicaire, pouvez l'opérer a l'aide d'un test de chirurgie. Cependant, une opération n'est pas sans risque et vous pouvez très bien aggraver son cas. Faites un test de chirurgie pour opérer votre patient, si vous réussissez le test (a difficulté de 20), fantastique, votre patient n'a rien, si votre test est réussi mais a moins de 20 pts, le patient peut relancer son jet de blessure et choisir celui qu'il conserve. Si votre test est un échec vous de moins de 20 pts, vous avez aggravez l'état de votre patient et augmenté les dégâts reçu, si le test est un échec de plus de 20 pts vous avez... abrégé les souffrances de votre patient
+
+</div>
+
+<div class="pres-text">
+CRAFTING
+
+CHASSE
+Tous les 10 pts en chasse, un chasseur peut traquer une proie pour en ramener la viande, il y a trois types de proies :
+- Les petites, comme les lapins, les rats, les écureuils, le test a faire est un test de CC ou de CT a +10, elle rapporte 5 unités de nourriture
+- Les standards, comme les renards, les cerfs, le test à faire est un test de CC ou de CT standard, elle rapporte 10 unités de nourriture
+- Les grandes, comme les araignées géantes, les grizzly, le test à faire est un test de CC ou de CT à - 10, en cas d'échec le chasseur perd 1 à 3 pv, elle rapporte 20 unités de nourriture
+
+DISTILLATION
+La distillation permet de créer différents alcool
+- Tord-boyaux étrange : Demande 5 pts de distillation, l'alcool est mauvais mais peut sustenter une addiction à l'alcool, il fait un bon désinfectant, +2 FM quand bu, rend aveugle sur un échec critique, bon combustible
+- Tord-Boyaux maison : Demande 10 pts de distillation, l'alcool est mauvais mais peut sustenter une addiction à l'alcool, il fait un bon désinfectant, +2 FM quand bu, combustible convenable
+- Alcool maison : Demande 20 pts de distillation, l'alcool est décent, il augmente le moral global, il fait un bon désinfectant, +1 FM quand bu, combustible légèrement convenable
+- Alcool de maître : Demande 50 pts de distillation, l'alcool est excellent, il augmente fortement le mort, il fait un bon désinfectant, bonne valeur de troc, +1 FM quand bu, combustible légèrement convenable
+- Tord-boyaux surprise : Demande 100 pts de distillation, l'alcool a un gout horrible, il fait un excellent désinfectant et peut servir à purifier n'importe quelle plaie, insensible à la peur quand bu, excellent combustible, explosif convenable, rend aveugle sous 10
+
+FABRICATION DE FLECHES
+Permet de fabriquer 1 flèche ou 1 carreau tout les 10 pts en fabrication de flèche
+Permet de construire un arc à 20 pts
+Permet de construire un arc long à 50 pts
+Permet de construire une arbalète à 80 pts
+
+TANNEUR
+Permet de fabriquer 1 vêtement en fourrure ou couverture avec un animal standard
+Permet de construire une tente avec deux animaux standars ou un grand
+Permet de construire une cape en fourrure avec un animal standard ou trois animaux petits
+Permet de construire une armure de cuir avec un animal grand
+
+MEDECINE
+Permet de fabriquer 1 bandage tout les 5pts (+ 1 pv)
+Permet de fabriquer 1 cataplasme tout les 10pts (+ 2 pv)
+Permet de fabriquer 1 cataplasme puissant tout les 20 pts (+ 4 pv)
+Permet de fabriquer 1 cataplasme de maître tout les 50 pts (+ 8pv)
+Permet de fabriquer 1 onguent médicinal tout les 100 pts (Rend tout les pv)
+
+FORGE
+Permet de rendre 1 pt de durabilité tout les 5 pts
+Permet de construire une arme a partir de 30 pts
+Permet de construire une armure en maille a partir de 40 pts
+Permet de construire une armure de plaque à partir de 60 pts
+Permet de construire une armure de mithril ou de thorium a partir de 100 pts
+</div>
+<div class="pres-text">
+APPRENDRE ET S'AMELIORER
+
+Maintenant que l'aventure a bien commencée, il va falloir vous améliorer et maîtriser un domaine plus vaste de compétence, pour se faire, vous pouvez à présent augmenter certaines compétences et caractéristiques, ou apprendre de nouvelles compétences, contre de l'expérience.
+
+APPRENDRE UNE COMPETENCE
+Pour apprendre une compétence, vous devez disposer de 100 points d'expérience à dépenser pour apprendre ladite compétence. Mais vous ne pouvez cependant pas l'apprendre n'importe comment, vous devez trouver quelqu'un disposé à vous apprendre cette compétence (et la possédant déjà de base)
+
+AMELIORER SA COMPETENCE
+Une compétence a peine maitrisée ne s'avère pas souvent utile, et il est vite nécessaire de se perfectionner, vous pouvez dépenser 50 points d'expérience pour gagner 10 points dans l'une de vos compétences, vous devez cependant trouver quelqu'un de plus fort que vous dans ce domaine pour vous entrainer.
+
+APPRENDRE UN METIER
+Comme pour une compétence, il est possible d'apprendre les rudiments d'un métier auprès de quelqu'un s'y connaissant, comme la chasse, la cuisine, la réparation d'armures, la taille de flèches, pour apprendre un métier, vous devez dépenser 200 points d'expérience, et disposer d'un entraineur ayant ce métier
+
+AMELIORER UNE CARACTERISTIQUE
+Tout comme pour vos compétences, il va devenir important de développer des caractéristiques. Tout ne s'améliore pas aussi vite cependant. Quand vous dépensez des points d'expérience pour augmenter une caractéristique, vous gagnez un point dedans, attention, plus une caractéristique est élevée, plus il est difficile d'apprendre. Tout comme pour le reste, vous avez besoin d'un entraineur plus fort que vous dans ce domaine. Pour augmenter une caractéristique d'une valeur de 1 jusqu'à 4, vous devez dépenser 100 points d'expérience par point de caractéristique. Pour améliorer une compétence d'une valeur de 4 jusqu'à 6, vous devez dépenser 200 points d'expérience. De 6 jusqu' 8, 400 points d'expérience. Il est impossible d'élever votre caractéristique au dessus de 8 de cette façon. L'intelligence et le charisme ne peuvent être augmenté que jusqu'à 6 de cette façon. La force mentale ne peut pas être augmentée.
+
+</div>
+
+{% endblock %}
