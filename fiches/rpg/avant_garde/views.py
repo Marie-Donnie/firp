@@ -342,3 +342,29 @@ def edit_eclaireur(request, perso_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
+
+@login_required
+def edit_sorcier(request, perso_id):
+    sorcier = Sorcier.objects.get(pk=perso_id)
+    utilisateur = request.user
+    if utilisateur == sorcier.perso.createur:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            data['perso'] = sorcier.perso.id
+            form = SorcierForm(data, request.FILES, instance=sorcier)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=sorcier.perso.id)
+            else:
+                print(form.errors)
+        else:
+            form = SorcierForm(instance=sorcier)
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/sorcier.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer ce personnage.")

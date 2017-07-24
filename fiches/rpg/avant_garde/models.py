@@ -311,11 +311,6 @@ class Sorcier(models.Model):
                                  max_value=100)
     souffle_dragon = IntegerRangeField(default=0, min_value=0,
                                        max_value=100)
-    bouclier_mana = models.BooleanField(default=False,
-                                        choices=(
-                                            (True, 'Oui'),
-                                            (False, 'Non'),
-                                        ))
     portail = IntegerRangeField(default=0, min_value=0,
                                 max_value=100)
     pilier_feu = IntegerRangeField(default=0, min_value=0,
@@ -324,11 +319,6 @@ class Sorcier(models.Model):
                                    max_value=100)
     transfert = IntegerRangeField(default=0, min_value=0,
                                   max_value=100)
-    bouclier_feu = models.BooleanField(default=False,
-                                       choices=(
-                                           (True, 'Oui'),
-                                           (False, 'Non'),
-                                       ))
     desamorcer_pieges = IntegerRangeField(default=0, min_value=0,
                                           max_value=100)
     enchant = IntegerRangeField(default=0, min_value=0,
@@ -341,11 +331,6 @@ class Sorcier(models.Model):
                                    max_value=100)
     ana_magique = IntegerRangeField(default=0, min_value=0,
                                     max_value=100)
-    grand_sorcier = models.BooleanField(default=False,
-                                        choices=(
-                                            (True, 'Oui'),
-                                            (False, 'Non'),
-                                        ))
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
                                  related_name='sorcier')

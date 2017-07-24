@@ -19,8 +19,8 @@
 {% elif fiche.classe == 2 %}{% if not fiche.arbaletrier %}<a class="btn btn-default" href="{% url 'creer_arbaletrier' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_arbaletrier' fiche.arbaletrier.id %}">Editer classe</a> {% endif %}
 {% elif fiche.classe == 3 %}{% if not fiche.eclaireur %}<a class="btn btn-default" href="{% url 'creer_eclaireur' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_eclaireur' fiche.eclaireur.id %}">Editer classe</a> {% endif %}
 {% elif fiche.classe == 4 %}
-{% if not fiche.apothicaire %}<a class="btn btn-default" href="{% url 'creer_apo' fiche.id %}">Créer classe</a>{% else %} <a class="btn btn-default" href="{% url 'editer_apothicaire' fiche.apothicaire.id %}">Editer classe</a> {% endif %}
-{% elif fiche.classe == 5 %}<a class="btn btn-default" href="{% url 'creer_sorcier' fiche.id %}">Créer classe</a>
+{% if not fiche.apothicaire %}<a class="btn btn-default" href="{% url 'creer_apothicaire' fiche.id %}">Créer classe</a>{% else %} <a class="btn btn-default" href="{% url 'editer_apothicaire' fiche.apothicaire.id %}">Editer classe</a> {% endif %}
+{% elif fiche.classe == 5 %}{% if not fiche.sorcier %}<a class="btn btn-default" href="{% url 'creer_sorcier' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_sorcier' fiche.sorcier.id %}">Editer classe</a> {% endif %}
 {% endif %}
 <a class="btn btn-default" href="{% url 'editer_perso' fiche.id %}">Editer</a>
 {% endifequal %}

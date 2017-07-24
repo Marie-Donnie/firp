@@ -12,12 +12,110 @@ $(function () {
 {% block page-title %}Créer/éditer un sorcier{% endblock %}
 
 {% block content %}
-<div id="char_form">
+
+<div class="media">
+<div class="media-body">
+  <b>Niveau 1</b>
+  <ul>
+<li>Boule de feu : De 0 à 100, Détermine le jet de mana à effectuer pour lancer la boule de feu</li>
+<li>Trait de feu : De 0 à 100, Détermine le jet de mana à effectuer pour le sort trait de feu</li>
+<li>Contresort : De 0 à 100, détermine le jet de mana à effectuer pour le sort contresort</li>
+<li>+ 1 Intelligence</li>
+</ul>
+  <b>Niveau 2</b>
+  <ul>
+<li>Nova de feu : De 0 à 100, Détermine le jet de mana à effectuer pour le sort nova de feu</li>
+<li>Souffle du dragon : De 0 à 100, Détermine le jet de mana à effectuer pour le sort souffle du dragon</li>
+<li>Bouclier de mana : 100</li>
+<li>Portail : De 0 à 100, Détermine le jet de mana à effectuer pour le sort portail</li>
+<li>+ 1 Intelligence</li>
+</ul>
+  <b>Niveau 3</b>
+  <ul>
+<li>Pilier de feu : De 0 à 100, Détermine le jet de mana à effectuer pour le sort pilier de feu</li>
+<li>Explosion pyrotechnique : De 0 à 100, détermine le jet de mana à effectuer pour le sort pilier de feu</li>
+<li>Transfert : De 0 à 100, détermine le jet de mana à effectuer pour le sort transfert</li>
+<li>Bouclier de feu : 100</li>
+<li>Désamorcer les pièges magiques : De 0 à 100, permet au sorcier de désamorcer un piège magique<br>
+      OU<br>
+Enchantement : De 0 à 100, permet d'enchanter l'équipement avec le matériel adéquat</li>
+<li>+ 1 Intelligence</li>
+<li>+ 1 Force Mentale</li>
+</ul>
+  <b>Niveau 4</b>
+  <ul>
+<li>Pluie de feu : De 0 à 100, détermine le jet de mana à effectuer pour le sort pluie de feu</li>
+<li>Bombe vivante : De 0 à 100, détermine le jet de mana à effectuer pour le sort bombe vivante</li>
+<li>Annuler la malédiction : De 0 à 100, permet d'enlever une malédiction frappant un personnage<br>
+      OU<br>
+Analyse magique : De 0 à 100, permet d'analyser et découvrir les effets d'un objet magique</li>
+<li>+ 1 Intelligence</li>
+<li>+ 1 Force Mentale</li>
+</ul>
+  <b>Niveau 5</b>
+  <ul>
+<li>Trait Grand Sorcier (+ 100 pts de mana)</li>
+<li>+ 1 Intelligence</li>
+<li>+ 1 Force Mentale</li>
+</ul>
+</div>
+
+<div class="media-right media-middle" id="char_form">
 <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
-  {{form.as_ul}}
-
+  <h4>Niveau 1</h4>
+  <div class="form-group">
+    <label for="id_boule_feu">Boule de feu&nbsp;:</label> <input name="boule_feu" value="{{form.boule_feu.value|default:'0'}}" max="100" required="" id="id_boule_feu" min="0" type="number">
 </div>
+  <div class="form-group">
+<label for="id_trait_feu">Trait de feu&nbsp;:</label> <input name="trait_feu" value="{{form.trait_feu.value|default:'0'}}" max="100" required="" id="id_trait_feu" min="0" type="number">
+</div>
+  <div class="form-group">
+<label for="id_contresort">Contresort&nbsp;:</label> <input name="contresort" value="{{form.contresort.value|default:'0'}}" max="100" required="" id="id_contresort" min="0" type="number">
+  </div>
+    <h4>Niveau 2</h4>
+  <div class="form-group">
+<label for="id_nova_feu">Nova de feu&nbsp;:</label> <input name="nova_feu" value="{{form.nova_feu.value|default:'0'}}" max="100" required="" id="id_nova_feu" min="0" type="number">
+</div>
+  <div class="form-group">
+<label for="id_souffle_dragon">Souffle du dragon&nbsp;:</label> <input name="souffle_dragon" value="{{form.souffle_dragon.value|default:'0'}}" max="100" required="" id="id_souffle_dragon" min="0" type="number">
+</div>
+  <div class="form-group">
+<label for="id_portail">Portail&nbsp;:</label> <input name="portail" value="{{form.portail.value|default:'0'}}" max="100" required="" id="id_portail" min="0" type="number">
+</div>
+    <h4>Niveau 3</h4>
+  <div class="form-group">
+<label for="id_pilier_feu">Pilier de feu&nbsp;:</label> <input name="pilier_feu" value="{{form.pilier_feu.value|default:'0'}}" max="100" required="" id="id_pilier_feu" min="0" type="number">
+</div>
+  <div class="form-group">
+<label for="id_explo_pyro">Explosion pyrotechnique&nbsp;:</label> <input name="explo_pyro" value="{{form.explo_pyro.value|default:'0'}}" max="100" required="" id="id_explo_pyro" min="0" type="number">
+</div>
+  <div class="form-group">
+    <label for="id_transfert">Transfert&nbsp;:</label> <input name="transfert" value="{{form.transfert.value|default:'0'}}" max="100" required="" id="id_transfert" min="0" type="number">
+</div>
+  <div class="form-group">
+<label for="id_desamorcer_pieges">Désamorcer pièges&nbsp;:</label> <input name="desamorcer_pieges" value="{{form.desamorcer_pieges.value|default:'0'}}" max="100" required="" id="id_desamorcer_pieges" min="0" type="number">
+    <span>OU</span>
+<label for="id_enchant">Enchantement&nbsp;:</label> <input name="enchant" value="{{form.enchant.value|default:'0'}}" max="100" required="" id="id_enchant" min="0" type="number">
+</div>
+    <h4>Niveau 4</h4>
+  <div class="form-group">
+<label for="id_pluie_feu">Pluie de feu&nbsp;:</label> <input name="pluie_feu" value="{{form.pluie_feu.value|default:'0'}}" max="100" required="" id="id_pluie_feu" min="0" type="number">
+</div>
+  <div class="form-group">
+<label for="id_bombe_vivante">Bombe vivante&nbsp;:</label> <input name="bombe_vivante" value="{{form.bombe_vivant.value|default:'0'}}" max="100" required="" id="id_bombe_vivante" min="0" type="number">
+</div>
+  <div class="form-group">
+<label for="id_annul_male">Annuler malédiction&nbsp;:</label> <input name="annul_male" value="{{form.annul_male.value|default:'0'}}" max="100" required="" id="id_annul_male" min="0" type="number">
+    <span>OU</span>
+<label for="id_ana_magique">Analyse magique&nbsp;:</label> <input name="ana_magique" value="{{form.ana_magique.value|default:'0'}}" max="100" required="" id="id_ana_magique" min="0" type="number">
+</div>
+  <input name="perso" id="id_perso" type="hidden">
+
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>
+
+</div>
+
+</div>
 {% endblock %}
