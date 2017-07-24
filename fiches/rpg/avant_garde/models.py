@@ -26,6 +26,9 @@ class Campagne(models.Model):
     image = models.ImageField(upload_to='images/rpg/campagne',
                               default='images/site/avant-garde.jpg')
 
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
 
 class Avant_garde(models.Model):
     nom = models.CharField(max_length=50)
@@ -155,6 +158,9 @@ class Avant_garde(models.Model):
         ordering = ["nom", "prenom"]
         permissions = (("avant_garde", "A accès à l'avant-garde"),)
 
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
 
 class Fantassin(models.Model):
     intim = IntegerRangeField(default=0, min_value=0,
@@ -197,6 +203,8 @@ class Fantassin(models.Model):
                                  null=True,
                                  related_name='fantassin')
 
+    def __unicode__(self):
+        return u'%s' % (self.perso.nom)
 
 
 class Apothicaire(models.Model):
@@ -231,6 +239,9 @@ class Apothicaire(models.Model):
                                  null=True,
                                  related_name='apothicaire')
 
+    def __unicode__(self):
+        return u'%s' % (self.perso.nom)
+
 
 class Arbaletrier(models.Model):
     focalisation = IntegerRangeField(default=0, min_value=0,
@@ -250,6 +261,9 @@ class Arbaletrier(models.Model):
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
                                  related_name='arbaletrier')
+
+    def __unicode__(self):
+        return u'%s' % (self.perso.nom)
 
 
 class Eclaireur(models.Model):
@@ -299,6 +313,9 @@ class Eclaireur(models.Model):
                                  null=True,
                                  related_name='eclaireur')
 
+    def __unicode__(self):
+        return u'%s' % (self.perso.nom)
+
 
 class Sorcier(models.Model):
     boule_feu = IntegerRangeField(default=0, min_value=0,
@@ -335,6 +352,9 @@ class Sorcier(models.Model):
                                  null=True,
                                  related_name='sorcier')
 
+    def __unicode__(self):
+        return u'%s' % (self.perso.nom)
+
 
 class Avantages(models.Model):
     nom = models.CharField(max_length=50, default="Aucun")
@@ -345,6 +365,9 @@ class Avantages(models.Model):
         ordering = ["nom"]
         default_related_name = "avantage"
 
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
 
 class Desavantages(models.Model):
     nom = models.CharField(max_length=50, default="Aucun")
@@ -354,3 +377,6 @@ class Desavantages(models.Model):
     class Meta:
         ordering = ["nom"]
         default_related_name = "désavantage"
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
