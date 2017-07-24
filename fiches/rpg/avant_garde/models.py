@@ -241,27 +241,12 @@ class Arbaletrier(models.Model):
                                  max_value=100)
     coup_crit = IntegerRangeField(default=0, min_value=0,
                                   max_value=100)
-    visee_prec = models.BooleanField(default=False,
-                                     choices=(
-                                         (True, 'Oui'),
-                                         (False, 'Non'),
-                                     ))
     vigilance = IntegerRangeField(default=0, min_value=0,
                                   max_value=100)
-    maitr_arba = models.BooleanField(default=False,
-                                     choices=(
-                                         (True, 'Oui'),
-                                         (False, 'Non'),
-                                     ))
     equitation = IntegerRangeField(default=0, min_value=0,
                                    max_value=100)
     dissimulation = IntegerRangeField(default=0, min_value=0,
                                       max_value=100)
-    as_du_tir = models.BooleanField(default=False,
-                                    choices=(
-                                        (True, 'Oui'),
-                                        (False, 'Non'),
-                                    ))
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
                                  related_name='arbaletrier')

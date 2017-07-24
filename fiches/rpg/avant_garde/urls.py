@@ -26,4 +26,6 @@ urlpatterns = [
         views.edit_fantassin, name='editer_fantassin'),
     url(r'^avant_garde/editer_apothicaire/(?P<perso_id>\d+)/$',
         views.edit_apothicaire, name='editer_apothicaire'),
+    url(r'^avant_garde/editer_arbaletrier/(?P<perso_id>\d+)/$',
+        views.edit_arbaletrier, name='editer_arbaletrier'),
 ]

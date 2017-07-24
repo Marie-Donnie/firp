@@ -12,12 +12,81 @@ $(function () {
 {% block page-title %}Créer/éditer un arbalétrier{% endblock %}
 
 {% block content %}
-<div id="char_form">
+
+
+
+<div class="media">
+  <div class="media-body">
+    <b>Niveau 1</b>
+    <ul>
+      <li>Focalisation : De 0 à 100, Détermine la concentration du personnage sur le tir, tout les 10 points, augmente la chance de toucher de 1 au rand</li>
+      <li>A couvert : De 0 à 100, détermine la capacité du personnage à tirer profit de son couvert, augmente de 2 points le bonus de couvert tout les 10 points</li>
+    </ul>
+    <b>Niveau 2</b>
+    <ul>
+      <li>Trait Tireur d'élite (+ 1 en Capacité de tir)</li>
+      <li>Escalade : De 0 à 100, détermine la capacité à... escalader</li>
+      <li>Coup critique : De 0 à 100, augmente la plage critique d'un point tout les 10 points</li>
+    </ul>
+    <b>Niveau 3</b>
+    <ul>
+      <li>Trait Visée précise (+ 1 en Capacité de tir)</li>
+      <li>Vigilance : De 0 à 100, permet de remarquer ce que tout le monde ne peut pas voir, rajoute deux points aux test de perception par dizaine de points</li>
+      <li>+ 1 Force Mentale</li>
+    </ul>
+    <b>Niveau 4</b>
+    <ul>
+      <li>Trait maîtrise de l'arbalète (L'arbalète ignore deux points d'armure supplémentaire)</li>
+      <li>Equitation : De 0 à 100, permet de monter à cheval</li>
+    </ul>
+    <b>Niveau 5</b>
+    <ul>
+      <li>Trait As du tir (+ 1 en Capacité de tir, augmente la plage critique de 10 points)</li>
+      <li>Dissimulation : De 0 à 100, permet de se cacher dans l'environnement</li>
+      <li>+ 1 Force Mentale</li>
+    </ul>
+  </div>
+
+
+<div class="media-right media-middle" id="char_form">
 <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
   {% csrf_token %}
-  {{form.as_ul}}
+  <h4>Niveau 1</h4>
+  <div class="form-group">
+    <label for="id_focalisation">Focalisation&nbsp;:</label> <input name="focalisation" value="{{form.focalisation.value|default:'0'}}" max="100" required="" id="id_focalisation" min="0" type="number">
+  </div>
+  <div class="form-group">
+    <label for="id_couvert">À couvert&nbsp;:</label> <input name="couvert" value="{{form.couvert.value|default:'0'}}" max="100" required="" id="id_couvert" min="0" type="number">
+  </div>
+  <h4>Niveau 2</h4>
+  <div class="form-group">
+    <label for="id_escalade">Escalade&nbsp;:</label> <input name="escalade" value="{{form.escalade.value|default:'0'}}" max="100" required="" id="id_escalade" min="0" type="number">
+  </div>
+  <div class="form-group">
 
-</div>
+    <label for="id_coup_crit">Coup critique&nbsp;:</label> <input name="coup_crit" value="{{form.coup_crit.value|default:'0'}}" max="100" required="" id="id_coup_crit" min="0" type="number">
+  </div>
+  <h4>Niveau 3</h4>
+  <div class="form-group">
+    <label for="id_vigilance">Vigilance&nbsp;:</label> <input name="vigilance" value="{{form.vigilance.value|default:'0'}}" max="100" required="" id="id_vigilance" min="0" type="number">
+  </div>
+  <h4>Niveau 4</h4>
+  <div class="form-group">
+    <label for="id_equitation">Équitation&nbsp;:</label> <input name="equitation" value="{{form.equitration.value|default:'0'}}"max="100" required="" id="id_equitation" min="0" type="number">
+  </div>
+  <h4>Niveau 5</h4>
+  <div class="form-group">
+    <label for="id_dissimulation">Dissimulation&nbsp;:</label> <input name="dissimulation" value="{{form.dissimulation.value|default:'0'}}" max="100" required="" id="id_dissimulation" min="0" type="number">
+  </div>
+
+
+</select><input name="perso" id="id_perso" type="hidden">
+
+
+
+
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>
+</div>
+</div>
 {% endblock %}

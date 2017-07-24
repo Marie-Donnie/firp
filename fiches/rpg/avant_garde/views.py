@@ -290,3 +290,29 @@ def edit_apothicaire(request, perso_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
+
+@login_required
+def edit_arbaletrier(request, perso_id):
+    arbaletrier = Arbaletrier.objects.get(pk=perso_id)
+    utilisateur = request.user
+    if utilisateur == arbaletrier.perso.createur:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            data['perso'] = arbaletrier.perso.id
+            form = ArbaletrierForm(data, request.FILES, instance=arbaletrier)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=arbaletrier.perso.id)
+            else:
+                print(form.errors)
+        else:
+            form = ArbaletrierForm(instance=arbaletrier)
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/arbaletrier.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer ce personnage.")
