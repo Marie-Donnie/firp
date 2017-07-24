@@ -85,7 +85,15 @@
 	  {% endfor %}
 	  </ul>
     </ul>
-    <h4 class="progress-label">Niveau : {{fiche.niveau}}. Expérience nécessaire pour le prochain niveau : </h4>
+
+  </div>     <!-- media-body -->
+  <div class="media-right">
+    <a target="_blank" href={{ fiche.image.url }}>
+      <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
+    </a>
+  </div> <!-- media-right -->
+  <div>
+    <h4 class="progress-label">Niveau : {{fiche.niveau}}{% if fiche.niveau < 6 %}. Expérience nécessaire pour le prochain niveau : </h4>
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.xp}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 									{% if fiche.niveau == 1 %} {{fiche.xp|pourcent:100}}%"
 	    {% elif fiche.niveau == 2 %} {{fiche.xp|pourcent:200}}%"
@@ -94,21 +102,17 @@
 	    {% elif fiche.niveau == 5 %} {{fiche.xp|pourcent:1600}}%"
 	   {% endif %}>
 	{{fiche.xp}}%
-      </div>
-    </div>
+      </div> <!-- progress-bar -->
+    </div>   <!-- progress -->
+    {% else %}</h4>
+{% endif %}
     <h4 class="progress-label">Folie : {{fiche.pf}}. Points de stress :</h4>
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.ps}}" aria-valuemin="0" aria-valuemax="10" style="min-width: 2em; width: {{fiche.ps|pourcent:10}}%">
 	{{fiche.ps}}
-      </div>
+      </div> <!-- progress-bar -->
+    </div>   <!-- progress -->
     </div>
-  </div>
-  <div class="media-right">
-    <a target="_blank" href={{ fiche.image.url }}>
-      <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
-    </a>
-  </div>
-
 
 
 </div>
