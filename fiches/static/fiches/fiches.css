@@ -542,7 +542,7 @@ h3 {
 }
 
 .a-g-classes {
-    margin: 1% 0%;
+    margin: 2% 0%;
 }
 
 .a-g-class {
@@ -550,7 +550,7 @@ h3 {
     border-radius : 10px;
     background-image: -webkit-linear-gradient(top, #001000, #1e0101);
     background-image: linear-gradient(to bottom, #001000, #1e0101);
-    margin: 2% auto;
+    margin: 0% auto;
 }
 
 .level {
