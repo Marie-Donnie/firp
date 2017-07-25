@@ -530,12 +530,29 @@ h3 {
 
 .pres-text {
     display: block;
-    margin: 3% 20%
+    margin: 3% 20%;
+    font-size: 16px;
 }
 
 .pres-text:first-letter {
-    font-size:44px;
+    font-size:52px;
     float:left;
-    line-height: 44px;
-    margin: 1px;
+    line-height: 52px;
+    margin: 2px;
+}
+
+.a-g-classes {
+    margin: 1% 0%;
+}
+
+.a-g-class {
+    border: 2px solid #470002;
+    border-radius : 10px;
+    background-image: -webkit-linear-gradient(top, #001000, #1e0101);
+    background-image: linear-gradient(to bottom, #001000, #1e0101);
+    margin: 2% auto;
+}
+
+.level {
+    width: 20px;
 }
