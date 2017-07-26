@@ -556,3 +556,7 @@ h3 {
 .level {
     width: 20px;
 }
+
+#md-4-wo-padding {
+    padding: 0% 0%;
+}

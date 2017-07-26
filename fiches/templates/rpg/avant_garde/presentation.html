@@ -93,7 +93,7 @@ $(function () {
 </div>
   <div class="a-g-classes">
     <!-- <div class="row"> -->
-    <div class="col-md-4">
+    <div class="col-md-4" id="md-4-wo-padding">
     <div class="a-g-class">
       <h4 id="center">
 	<img src="/fiches/media/images/site/rpg/INV_Helmet_02.PNG" alt="Fantassin">&nbsp;<b>FANTASSIN</b><br>
@@ -186,10 +186,10 @@ OU<br>
     <b>+ 1 Force Mentale</b>
   </div>
 </div>
-<div class="col-md-4">
+<div class="col-md-4" id="md-4-wo-padding">
 <div class="a-g-class">
   <h4 id="center">
-    <img src="/fiches/media/images/site/rpg/INV_Weapon_Crossbow_04.PNG" alt="Arbalétrier">&nbsp;<b>ARBALETRIER</b><br>
+    <img src="/fiches/media/images/site/rpg/INV_Weapon_Crossbow_04.PNG" alt="Arbalétrier">&nbsp;<b>ARBALÉTRIER</b><br>
   </h4>
       <span id="center">
 	<img class="level" src="/fiches/media/images/site/rpg/Achievement_PVP_H_01.PNG" alt="Niveau 1">
@@ -278,9 +278,9 @@ OU<br>
     <b>+ 1 Force Mentale</b><br>
   </div>
 </div>
-  <div class="a-g-class col-md-4">
+  <div class="a-g-class col-md-4" id="md-4-wo-padding">
     <h4 id="center">
-      <img src="/fiches/media/images/site/rpg/Ability_Hunter_EagleEye.PNG" alt="Éclaireur">&nbsp;<b>ECLAIREUR</b><br></h4>
+      <img src="/fiches/media/images/site/rpg/Ability_Hunter_EagleEye.PNG" alt="Éclaireur">&nbsp;<b>ÉCLAIREUR</b><br></h4>
     <span id="center">
       <img class="level" src="/fiches/media/images/site/rpg/Achievement_PVP_H_01.PNG" alt="Niveau 1">
       <b>Niveau 1</b>
@@ -393,7 +393,7 @@ OU<br>
 <br>
 </div>
 <div class="pres-text">
-  E<br>QUIPEMENT<br>
+  É<br>QUIPEMENT<br>
   <br>
   <b>Armure :</b><br>
   <b>Tête :</b> Nom (PA/Durabilité)<br>
@@ -463,7 +463,7 @@ OU<br>
   26 BLESSURE AU TORSE<br>
   Le personnage est gravement touché au torse mais finit par guérir, il reste cependant affaibli à vie et soufre d'un -1 en endurance<br>
   <br>
-  31 OEIL CREVE<br>
+  31 ŒIL CREVÉ<br>
   Le personnage a perdu un œil dans le combat, il subit un - 1 à la CT et à la perception. Si le personnage se retrouve avec les deux yeux crevés il gagne le désavantage "Aveugle", sa CT diminue de 5 (jusqu'à un minimum de 0) et sa perception est divisée de moitié arrondi à l'inférieur<br>
   <br>
   32-34 VIEILLE BLESSURE<br>
@@ -472,10 +472,10 @@ OU<br>
   35 TRAUMATISME NERVEUX<br>
   Le système nerveux du personnage a été touché, il perd -1 en agilité<br>
   <br>
-  36 BLESSURE A LA MAIN<br>
+  36 BLESSURE À LA MAIN<br>
   La main du personnage est très abimée, il perd - 1 à sa CC<br>
   <br>
-  41-55 RECUPERATION TOTALE<br>
+  41-55 RÉCUPÉRATION TOTALE<br>
   Le personnage se remet parfaitement de sa blessure<br>
   <br>
   56 RANCUNE<br>
@@ -500,12 +500,12 @@ OU<br>
   65-66 SURVIE MIRACULEUSE<br>
   Vous êtes forcément béni par la Lumière pour avoir survécu a une telle blessure, vous gagnez 20 pts d'expériences.<br>
   <br>
-  SOINS ET OPERATIONS<br>
+  SOINS ET OPÉRATIONS<br>
   <br>
   SOINS<br>
   Pour soigner quelqu'un, votre cible doit être en dehors d'un combat (elle ne doit pas combattre activement lors du soin) et vous devez posséder un objet de soin. Chaque objet de soin à une valeur de soin basique qui redonnera ce nombre de pv à votre cible, MAIS, si vous réussissez votre test de médecine, vous rendez le double des pv à votre cible<br>
   <br>
-  OPERATIONS<br>
+  OPÉRATIONS<br>
   Les opérations se jouent après un event pour les personnages tombez à 0 PV, le personnage a 0 PV lance d'abord le jet de blessure, si le résultat est mauvais, vous, apothicaire, pouvez l'opérer a l'aide d'un test de chirurgie. Cependant, une opération n'est pas sans risque et vous pouvez très bien aggraver son cas. Faites un test de chirurgie pour opérer votre patient, si vous réussissez le test (a difficulté de 20), fantastique, votre patient n'a rien, si votre test est réussi mais a moins de 20 pts, le patient peut relancer son jet de blessure et choisir celui qu'il conserve. Si votre test est un échec vous de moins de 20 pts, vous avez aggravez l'état de votre patient et augmenté les dégâts reçu, si le test est un échec de plus de 20 pts vous avez... abrégé les souffrances de votre patient<br>
 
 </div>
@@ -554,20 +554,20 @@ OU<br>
   Permet de construire une armure de mithril ou de thorium a partir de 100 pts<br>
 </div>
 <div class="pres-text">
-  A<br>PPRENDRE ET S'AMELIORER<br>
+  A<br>PPRENDRE ET S'AMÉLIORER<br>
   <br>
   Maintenant que l'aventure a bien commencée, il va falloir vous améliorer et maîtriser un domaine plus vaste de compétence, pour se faire, vous pouvez à présent augmenter certaines compétences et caractéristiques, ou apprendre de nouvelles compétences, contre de l'expérience.<br>
   <br>
   APPRENDRE UNE COMPETENCE<br>
   Pour apprendre une compétence, vous devez disposer de 100 points d'expérience à dépenser pour apprendre ladite compétence. Mais vous ne pouvez cependant pas l'apprendre n'importe comment, vous devez trouver quelqu'un disposé à vous apprendre cette compétence (et la possédant déjà de base)<br>
   <br>
-  AMELIORER SA COMPETENCE<br>
+  AMÉLIORER SA COMPETENCE<br>
   Une compétence a peine maitrisée ne s'avère pas souvent utile, et il est vite nécessaire de se perfectionner, vous pouvez dépenser 50 points d'expérience pour gagner 10 points dans l'une de vos compétences, vous devez cependant trouver quelqu'un de plus fort que vous dans ce domaine pour vous entrainer.<br>
   <br>
   APPRENDRE UN METIER<br>
   Comme pour une compétence, il est possible d'apprendre les rudiments d'un métier auprès de quelqu'un s'y connaissant, comme la chasse, la cuisine, la réparation d'armures, la taille de flèches, pour apprendre un métier, vous devez dépenser 200 points d'expérience, et disposer d'un entraineur ayant ce métier<br>
   <br>
-  AMELIORER UNE CARACTERISTIQUE<br>
+  AMÉLIORER UNE CARACTÉRISTIQUE<br>
   Tout comme pour vos compétences, il va devenir important de développer des caractéristiques. Tout ne s'améliore pas aussi vite cependant. Quand vous dépensez des points d'expérience pour augmenter une caractéristique, vous gagnez un point dedans, attention, plus une caractéristique est élevée, plus il est difficile d'apprendre. Tout comme pour le reste, vous avez besoin d'un entraineur plus fort que vous dans ce domaine. Pour augmenter une caractéristique d'une valeur de 1 jusqu'à 4, vous devez dépenser 100 points d'expérience par point de caractéristique. Pour améliorer une compétence d'une valeur de 4 jusqu'à 6, vous devez dépenser 200 points d'expérience. De 6 jusqu' 8, 400 points d'expérience. Il est impossible d'élever votre caractéristique au dessus de 8 de cette façon. L'intelligence et le charisme ne peuvent être augmenté que jusqu'à 6 de cette façon. La force mentale ne peut pas être augmentée.<br>
 
 </div>
