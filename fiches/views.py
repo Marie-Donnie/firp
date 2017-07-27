@@ -1,4 +1,5 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect, render_to_response
+from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -15,6 +16,13 @@ def index(request):
     context = {'latest_fiches': fiches}
 
     return render(request, 'fiches/index.html', context)
+
+
+def handler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
