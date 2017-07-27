@@ -12,7 +12,7 @@ from fiches.forms import *
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 # Displays the first name and last name of the Fiche model
 def index(request):
-    fiches = Fiche.objects.order_by('-creation')[:6]
+    fiches = Fiche.objects.order_by('-creation')[:16]
     context = {'latest_fiches': fiches}
 
     return render(request, 'fiches/index.html', context)
@@ -23,6 +23,10 @@ def handler404(request):
                                   context_instance=RequestContext(request))
     response.status_code = 404
     return response
+
+
+def conseils(request):
+    return render(request, 'fiches/conseils.html', {})
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

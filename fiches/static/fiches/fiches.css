@@ -562,7 +562,8 @@ h3 {
 }
 
 h3.panel-title {
-    color: #9c0002;
+    color: #d43e40;
+    margin: 0% auto;
 }
 
 .rules {
@@ -573,13 +574,14 @@ h3.panel-title {
 
 .index-container {
     position: relative;
-    width: 50%;
+    width: 80%;
+    margin: 4% auto;
 }
-.index-container:hover .image {
+.index-container:hover .index-image {
   opacity: 0.3;
 }
 
-.index-container:hover .middle {
+.index-container:hover .index-middle {
   opacity: 1;
 }
 
