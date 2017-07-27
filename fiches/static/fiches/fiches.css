@@ -610,3 +610,19 @@ h3.panel-title {
   font-size: 16px;
   padding: 16px 32px;
 }
+
+.form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+    padding-top: 0px;
+    margin-top: 0;
+    margin-bottom: 3px;
+}
+
+.github-logo {
+    width: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+footer {
+    margin-bottom: 2%;
+}
