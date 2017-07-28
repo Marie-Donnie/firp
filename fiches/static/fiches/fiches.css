@@ -625,4 +625,10 @@ h3.panel-title {
 
 footer {
     margin-bottom: 2%;
+    padding-bottom: 70px;
+}
+
+#bottom-bar {
+    width: 300px;
+
 }

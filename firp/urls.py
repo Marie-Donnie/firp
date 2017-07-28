@@ -6,7 +6,6 @@ from fiches import views
 
 urlpatterns = [
     # General
-    url(r'^$', views.index, name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^conseils/$', views.conseils, name='conseils'),
@@ -18,6 +17,7 @@ urlpatterns = [
     url(r'^utilisateurs/(?P<user_id>\d+)/$', views.aff_user,
         name='utilisateur'),
     # Fiches
+    url(r'^fiches$', views.index, name='index'),
     url(r'^personnages/$', views.personnages,
         name='personnages'),
     url(r'^personnages/search=(?P<requete>)$', views.personnages,
