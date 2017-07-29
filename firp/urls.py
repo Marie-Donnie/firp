@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^utilisateurs/(?P<user_id>\d+)/$', views.aff_user,
         name='utilisateur'),
     # Fiches
-    url(r'^fiches$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^personnages/$', views.personnages,
         name='personnages'),
     url(r'^personnages/search=(?P<requete>)$', views.personnages,

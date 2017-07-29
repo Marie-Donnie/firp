@@ -131,17 +131,23 @@
     <a target="_self" href="">
       <img class="navbar-button" src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG" alt="Carte">
     </a>
-  </div>
-  <div class="navbar-right">
+  <!-- </div> -->
+  <!-- <div class="navbar-right"> -->
     {% if user.is_authenticated %}
         <a target="_self" href="{% url 'utilisateur' user.id %}">
       <img class="navbar-button" src="/fiches/media/images/site/UI-MicroButton-Raid-Up.PNG" alt="Utilisateur">
-    </a>
-	  <a class="btn btn-default navbar-btn" href="{% url 'account_logout' %}">Se déconnecter</a>
-	  {% else %}
-	  <a class="btn btn-default navbar-btn" href="{% url 'account_signup' %}">S'inscrire</a>
-	  <a class="btn btn-default navbar-btn" href="{% url 'account_login' %}">Se connecter</a>
-	  {% endif %}
+	</a>
+	<a target="_self" href="{% url 'account_logout' %}">
+	  <img class="navbar-button" src="/fiches/media/images/site/logout.PNG" alt="Se déconnecter">
+	</a>
+	{% else %}
+	<a target="_self" href="{% url 'account_signup' %}">
+	  <img class="navbar-button" src="/fiches/media/images/site/register.PNG" alt="S'inscrire">
+	</a>
+	<a target="_self" href="{% url 'account_login' %}">
+	  <img class="navbar-button" src="/fiches/media/images/site/login.PNG" alt="Se connecter">
+	</a>
+	{% endif %}
   </div>
 </nav>
 </body>
