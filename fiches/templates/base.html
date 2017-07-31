@@ -115,39 +115,34 @@
 </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom" id="bottom-bar">
-  <div class="container">
-    <a target="_self" href="">
-      <img class="navbar-button" src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG" alt="Carte">
+  <div class="container" id="bottom-bar-container">
+    <a target="_self" href="{% url 'index' %}" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG" alt="Fiches">
     </a>
-    <a target="_self" href="{% url 'index' %}">
-      <img class="navbar-button" src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG" alt="Fiches">
+    <a target="_self" href="{% url 'quetes' %}" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-QUEST-UP.PNG" alt="Quêtes">
     </a>
-    <a target="_self" href="{% url 'quetes' %}">
-      <img class="navbar-button" src="/fiches/media/images/site/UI-MICROBUTTON-QUEST-UP.PNG" alt="Quêtes">
+    <a target="_self" href="" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-SOCIALS-UP.PNG" alt="Forum">
     </a>
-    <a target="_self" href="">
-      <img class="navbar-button" src="/fiches/media/images/site/UI-MICROBUTTON-SOCIALS-UP.PNG" alt="Forum">
+    <a target="_self" href="" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG" alt="Carte">
     </a>
-    <a target="_self" href="">
-      <img class="navbar-button" src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG" alt="Carte">
-    </a>
-  <!-- </div> -->
-  <!-- <div class="navbar-right"> -->
     {% if user.is_authenticated %}
-        <a target="_self" href="{% url 'utilisateur' user.id %}">
-      <img class="navbar-button" src="/fiches/media/images/site/UI-MicroButton-Raid-Up.PNG" alt="Utilisateur">
-	</a>
-	<a target="_self" href="{% url 'account_logout' %}">
-	  <img class="navbar-button" src="/fiches/media/images/site/logout.PNG" alt="Se déconnecter">
-	</a>
-	{% else %}
-	<a target="_self" href="{% url 'account_signup' %}">
-	  <img class="navbar-button" src="/fiches/media/images/site/register.PNG" alt="S'inscrire">
-	</a>
-	<a target="_self" href="{% url 'account_login' %}">
-	  <img class="navbar-button" src="/fiches/media/images/site/login.PNG" alt="Se connecter">
-	</a>
-	{% endif %}
+    <a target="_self" href="{% url 'utilisateur' user.id %}" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Raid-Up.PNG" alt="Utilisateur">
+    </a>
+    <a target="_self" href="{% url 'account_logout' %}" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/logout.PNG" alt="Se déconnecter">
+    </a>
+    {% else %}
+    <a target="_self" href="{% url 'account_signup' %}" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/register.PNG" alt="S'inscrire">
+    </a>
+    <a target="_self" href="{% url 'account_login' %}" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/login.PNG" alt="Se connecter">
+    </a>
+    {% endif %}
   </div>
 </nav>
 </body>

@@ -629,6 +629,22 @@ footer {
 }
 
 #bottom-bar {
-    width: 300px;
+    margin: 0px 70px 0px auto;
+    background-image: url("/fiches/media/images/site/bottom-bar.png");
+    background-size: 210px 50px;
+    width: 210px;
+    height: 50px;
+}
 
+.bottom-bar-button {
+    margin: 0px -3px;
+}
+
+#bottom-bar-container {
+    margin: 6px auto;
+    width: 210px;
+}
+
+.bottom-bar-images {
+    height: 40px;
 }
