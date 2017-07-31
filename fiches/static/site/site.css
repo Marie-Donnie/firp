@@ -123,6 +123,7 @@ a:hover {
     overflow: hidden;
     border: 5px ridge #edd5a9;
     border-radius: 3px;
+    margin: 3% auto;
 }
 
 .black {
