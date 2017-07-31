@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'stopforumspam',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -184,3 +185,14 @@ SFS_LOG_EXPIRE = 1  # days
 # To check ALL POST requests:
 
 SFS_ALL_POST_REQUESTS = True
+
+
+with open('recaptcha_sk') as f:
+    recaptcha_sk = f.read().strip()
+
+RECAPTCHA_PUBLIC_KEY = '6LegJysUAAAAAAPuJRH5DpjfqWAeg-8ksUuHX_uG'
+RECAPTCHA_PRIVATE_KEY = recaptcha_sk
+
+RECAPTCHA_USE_SSL = True
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'fiches.forms.AllauthSignupForm'

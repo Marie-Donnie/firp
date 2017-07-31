@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from django import forms
+from captcha.fields import ReCaptchaField
 from fiches.models import *
 
 
@@ -10,6 +11,15 @@ class UserProfileForm(ModelForm):
         model = UserProfile
         fields = ['naissance', 'image', 'user']
         widgets = {'user': forms.HiddenInput()}
+
+
+class AllauthSignupForm(forms.Form):
+
+    captcha = ReCaptchaField()
+
+    def signup(self, request, user):
+        """ Required, or else it throws deprecation warnings """
+        pass
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FICHES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
