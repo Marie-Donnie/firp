@@ -616,35 +616,3 @@ h3.panel-title {
     margin-top: 0;
     margin-bottom: 3px;
 }
-
-.github-logo {
-    width: 20px;
-    background-color: white;
-    border-radius: 10px;
-}
-
-footer {
-    margin-bottom: 2%;
-    padding-bottom: 70px;
-}
-
-#bottom-bar {
-    margin: 0px 70px 0px auto;
-    background-image: url("/fiches/media/images/site/bottom-bar.png");
-    background-size: 210px 50px;
-    width: 210px;
-    height: 50px;
-}
-
-.bottom-bar-button {
-    margin: 0px -3px;
-}
-
-#bottom-bar-container {
-    margin: 6px auto;
-    width: 210px;
-}
-
-.bottom-bar-images {
-    height: 40px;
-}
