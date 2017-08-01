@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block title %}Profil de {{ utilisateur.username }}{% endblock %}
-{% block page-title %}{{ utilisateur.username }}{% endblock %}
+{% block title %}Profil de {{ utilisateur.username|capfirst }}{% endblock %}
+{% block page-title %}{{ utilisateur.username|capfirst }}{% endblock %}
 
 {% block script %}
 $(function () {
