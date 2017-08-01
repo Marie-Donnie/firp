@@ -513,7 +513,6 @@ class Equipement(models.Model):
                    self.get_poignets, self.get_autre_arme]
         for method in methods:
             objet = method()
-            print(objet)
             if objet is not None:
                 effets.append(objet.effet)
                 effets.append(objet.autres_effets)
