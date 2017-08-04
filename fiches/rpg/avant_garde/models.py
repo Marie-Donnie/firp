@@ -95,6 +95,7 @@ class Avant_garde(models.Model):
     force_men = IntegerRangeField(default=1, min_value=1,
                                   max_value=10)
     pv = models.SmallIntegerField(default=11)
+    pv_max = models.SmallIntegerField(default=11)
     ps = models.SmallIntegerField(default=0)
     pf = models.SmallIntegerField(default=0)
     niveau = models.SmallIntegerField(default=1)

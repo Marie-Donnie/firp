@@ -212,9 +212,13 @@ $(function () {
   </div>
 
     <div class="form-group">
-      <label for="id_pv">Points de vie&nbsp;:</label>
+      <label for="id_pv_max">Points de vie maximum&nbsp;:</label>
+      <input name="pv_max" value="{{form.pv_max.value|default:11}}" required="" id="id_pv_max" type="number" data-toggle="tooltip" title=""  min="0" >
+      <label for="id_pv">Points de vie actuels&nbsp;:</label>
       <input name="pv" value="{{form.pv.value|default:11}}" required="" id="id_pv" type="number" data-toggle="tooltip" title=""  min="0" ><br>
       <span>Sur 1d10, de 1 à 6 = 11 PV, de 7 à 8 = 12 PV, de 9 à 10 = 13 PV. Quand un personnage tombe à 0 PV et qu'il est sauvé par ses camarade, il peut subir une mutilation.</span>
+
+      <span>Pour la création, utilisez les points de vie maximum pour les points de vie actuels.</span>
     </div>
     <div class="form-group">
       <label for="id_ps">Points de stress&nbsp;:</label>
