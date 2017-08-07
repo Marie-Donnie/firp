@@ -48,9 +48,8 @@
     </div>
     <div class="panel-body">
       <div class="row">
-	<div class="col-md-2">
-	</div>
-	<div class="col-md-4">
+	{% if armure.armure != 0 %}
+	<div class="col-md-3">
 	  <div class="panel panel-defaut" id="details-panels">
 	    <div class="panel-heading">
 	      <h3 class="panel-title">Armure</h3>
@@ -60,7 +59,9 @@
 	    </div>
 	  </div>
 	</div>
-	<div class="col-md-4">
+	{% endif %}
+	{% if armure.force != 0 %}
+	<div class="col-md-3">
 	  <div class="panel panel-defaut" id="details-panels">
 	    <div class="panel-heading">
 	      <h3 class="panel-title">Force</h3>
@@ -70,11 +71,9 @@
 	    </div>
 	  </div>
 	</div>
-      </div>
-      <div class="row">
-	<div class="col-md-2">
-	</div>
-	<div class="col-md-4">
+	{% endif %}
+	{% if armure.agi != 0 %}
+	<div class="col-md-3">
 	  <div class="panel panel-defaut" id="details-panels">
 	    <div class="panel-heading">
 	      <h3 class="panel-title">Agilité</h3>
@@ -84,7 +83,9 @@
 	    </div>
 	  </div>
 	</div>
-	<div class="col-md-4">
+	{% endif %}
+	{% if armure.intell != 0 %}
+	<div class="col-md-3">
 	  <div class="panel panel-defaut" id="details-panels">
 	    <div class="panel-heading">
 	      <h3 class="panel-title">Intelligence</h3>
@@ -94,6 +95,7 @@
 	    </div>
 	  </div>
 	</div>
+	{% endif %}
       </div>
     </div>
   </div>

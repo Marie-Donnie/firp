@@ -45,11 +45,13 @@
       {% if objet.description != 'Aucune' %}
       <li><b>Description&nbsp;: </b>{{ objet.description }}</li>
       {% endif %}
+      {% if objet.prix != 0 %}
       <li><b>Prix&nbsp;: </b>
 	{{ objet.prix|p_or }} <img id="money" src="/fiches/media/images/site/UI-GoldIcon.PNG" alt="Souverains">
 	{{ objet.prix|p_argent }} <img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Souverains">
 	{{ objet.prix|p_cuivre }} <img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Souverains">
       </li>
+      {% endif %}
       <li><b>Poids&nbsp;: </b>
 	{% if objet.poids|kilos != 0 %}
 	{{ objet.poids|kilos }} kilos et&nbsp;

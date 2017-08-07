@@ -147,6 +147,7 @@ def detail_fiche(request, fiche_id):
         dos = fiche.equipement.get_dos()
         cou = fiche.equipement.get_cou()
         poignets = fiche.equipement.get_poignets()
+        pieds = fiche.equipement.get_pieds()
         doigts = fiche.equipement.get_doigts()
         divers = fiche.equipement.get_divers()
         effets, effets_ig, force, intell, agi, armure = fiche.equipement.effets()
@@ -156,13 +157,15 @@ def detail_fiche(request, fiche_id):
         poignets, doigts, divers = None, None, None
         effets, effets_ig, force = None, None, None
         intell, agi, armure = None, None, None
+        pieds = None
     context = {'fiche': fiche,
                'range': range(nb), 'effets': effets, 'effets_ig': effets_ig,
                'force': force, 'intell': intell, 'agi': agi,
                'armure': armure, 'mp': mp, 'am': am, 'aa': aa, 'tete': tete,
                'epaules': epaules, 'torse': torse, 'mains': mains,
                'taille': taille, 'jambes': jambes, 'dos': dos, 'cou': cou,
-               'poignets': poignets, 'doigts': doigts, 'divers': divers}
+               'poignets': poignets, 'doigts': doigts, 'divers': divers,
+               'pieds': pieds}
     return render(request, 'fiches/detail.html', context)
 
 

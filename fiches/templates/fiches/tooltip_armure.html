@@ -4,10 +4,10 @@
 {% block armure %}
 {% if armure.effet != 'Aucun' %}
 <li>
-<b>Effet(s):</b> {{ armure.effet }}
+<b>Effet(s):</b> {{ armure.effet|truncatewords:7 }}
 {% if armure.autres_effets != 'Aucun' %}
 <br>
-{{ armure.autres_effets|linebreaksbr }}
+{{ armure.autres_effets|linebreaksbr|truncatewords:7 }}
 {% endif %}
 </li>
 {% endif %}
