@@ -21,14 +21,14 @@
     </div>
     <div class="form-group">
 
-      <label for="id_effet">Effet&nbsp;:</label> <input name="effet" value="{{form.effet.value|default_if_none:'Aucun'}}" required="" id="id_effet" maxlength="100" class="form-control" type="text">
+      <label for="id_effet">Effet&nbsp;:</label> <input name="effet" value="{{form.effet.value|default_if_none:'Aucun'}}" required="" id="id_effet" maxlength="300" class="form-control" type="text">
     </div>
     <div class="form-group">
-      <label for="id_autres_effets">Autres effets&nbsp;</label> <textarea class="form-control" name="autres_effets" id="id_autres_effets" required="" rows="5" cols="20" maxlength="100" onkeyup="countChars('id_autres_effets','charcount1');" onkeydown="countChars('id_autres_effets','charcount1');" onmouseout="countChars('id_autres_effets','charcount1');">{{form.autres_effets.value|default_if_none:'Aucun'}}</textarea>
-<span id="helpBlock" class="help-block">Limité à 100 caractères (<span id="charcount1">0</span>/100).</span>
+      <label for="id_autres_effets">Autres effets&nbsp;</label> <textarea class="form-control" name="autres_effets" id="id_autres_effets" required="" rows="5" cols="20" maxlength="300" onkeyup="countChars('id_autres_effets','charcount1');" onkeydown="countChars('id_autres_effets','charcount1');" onmouseout="countChars('id_autres_effets','charcount1');">{{form.autres_effets.value|default_if_none:'Aucun'}}</textarea>
+<span id="helpBlock" class="help-block">Limité à 300 caractères (<span id="charcount1">0</span>/300).</span>
     </div>
     <div class="form-group">
-      <label for="id_effet_ig">Effet ig&nbsp;:</label> <input name="effet_ig" value="{{form.effet_ig.value|default_if_none:'Aucun'}}" required="" id="id_effet_ig" maxlength="100" class="form-control" type="text">
+      <label for="id_effet_ig">Effet ig&nbsp;:</label> <input name="effet_ig" value="{{form.effet_ig.value|default_if_none:'Aucun'}}" required="" id="id_effet_ig" maxlength="400" class="form-control" type="text">
     </div>
     <div class="form-group">
       <label for="id_force">Force&nbsp;:</label> <input name="force" value="{{form.force.value|default:'0'}}" max="25" required="" id="id_force" min="0" type="number">

@@ -156,7 +156,7 @@ class Fiche(models.Model):
                                 ('h', "Homme"),
                                 ('f', "Femme")
                             )),
-                            default="Homme")
+                            default="h")
     race = models.CharField(max_length=40,
                             default='Humaine')
     taille = models.FloatField(default='1.70')
@@ -180,7 +180,7 @@ class Fiche(models.Model):
                               ('a', "Personnage jouable"),
                               ('n', "Personnage non joué")
                           )),
-                          default="Personnage joué")
+                          default="p")
     jour_de_naissance = IntegerRangeField(default='1', min_value=1,
                                           max_value=31)
     mois_de_naissance = IntegerRangeField(default='1', min_value=1,
@@ -219,7 +219,7 @@ class Fiche(models.Model):
                                     ('g', "Gauche"),
                                     ('d', "Droite")
                                 )),
-                                default="Droite")
+                                default="d")
     afficher_createur = models.BooleanField(default=True,
                                             choices=(
                                                 (True, 'Oui'),
@@ -282,12 +282,12 @@ class Objet(models.Model):
                                    ('l', "Légendaire"),
                                    ('u', "Unique")
                                )),
-                               default="Commun")
+                               default="c")
     description = models.CharField(max_length=500,
                                    default='Aucune')
     prix = models.IntegerField(default=0)
     poids = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='images/users',
+    image = models.ImageField(upload_to='images/objets',
                               default='images/site/WoWUnknownItem01.PNG')
 
     class Meta:
@@ -309,11 +309,11 @@ class Armure(models.Model):
     objet = models.OneToOneField(Objet,
                                  null=True,
                                  related_name='armure')
-    effet = models.CharField(max_length=100,
+    effet = models.CharField(max_length=300,
                              default='Aucun')
-    autres_effets = models.CharField(max_length=100,
+    autres_effets = models.CharField(max_length=300,
                                      default='Aucun')
-    effet_ig = models.CharField(max_length=100,
+    effet_ig = models.CharField(max_length=400,
                                 default='Aucun')
     force = IntegerRangeField(default=0, min_value=0,
                               max_value=25)

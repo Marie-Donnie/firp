@@ -38,7 +38,7 @@ class Avant_garde(models.Model):
                                 ('h', "Homme"),
                                 ('f', "Femme")
                             )),
-                            default="Homme")
+                            default="h")
     jour_de_naissance = IntegerRangeField(default='1', min_value=1,
                                           max_value=31)
     mois_de_naissance = IntegerRangeField(default='1', min_value=1,
@@ -53,7 +53,7 @@ class Avant_garde(models.Model):
                                     ('e', "Haut-elfe"),
                                     ('h', "Humain")
                                 )),
-                            default="Humain")
+                            default="h")
     ex_prof = models.SmallIntegerField(choices=((
         (1, "Forgeron"),
         (2, "Chasseur"),
@@ -124,13 +124,13 @@ class Avant_garde(models.Model):
                               ('m', "Mort"),
                               ('d', "Disparu")
                             )),
-                            default="Vivant")
+                            default="v")
     pj = models.CharField(max_length=1,
                           choices=((
                               ('p', "Personnage joué"),
                               ('n', "Personnage non joué")
                           )),
-                          default="Personnage joué")
+                          default="p")
     avants = models.ManyToManyField('Avantages')
     desavants = models.ManyToManyField('Desavantages')
     inventaire = models.CharField(max_length=800,
@@ -359,7 +359,7 @@ class Sorcier(models.Model):
 
 class Avantages(models.Model):
     nom = models.CharField(max_length=50, default="Aucun")
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=300)
     points = models.SmallIntegerField(default=0)
 
     class Meta:
@@ -372,7 +372,7 @@ class Avantages(models.Model):
 
 class Desavantages(models.Model):
     nom = models.CharField(max_length=50, default="Aucun")
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=300)
     points = models.SmallIntegerField(default=0)
 
     class Meta:

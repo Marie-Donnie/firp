@@ -76,7 +76,7 @@ function getTooltip() {
       <li><b>Race&nbsp;: </b>{{ fiche.race|capfirst }}</li>
       <li><b>Date de naissance&nbsp;: </b>{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
 	{% endif %}
-	{{fiche.mois_de_naissance}}{% if fiche.jour_mois_de_naissance == 01 %}er mois{% else %}ème mois
+	{{fiche.mois_de_naissance}}{% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois
 	{% endif %}
 	de l'an {{fiche.annee_de_naissance}}</li>
       <li><b>Zone de naissance&nbsp;: </b>{{ fiche.get_zone_de_naissance_display }}</li>

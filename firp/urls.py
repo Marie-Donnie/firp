@@ -63,4 +63,7 @@ urlpatterns = [
     url(r'^', include('fiches.rpg.avant_garde.urls')),
     # url(r'^avant_garde/creer_perso/(?P<perso_id>\d+)/$', views.creer_base,
     #     name='creer_perso'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
