@@ -4,7 +4,10 @@ secret_key
 db.sqlite3
 fiches/media/images/persos/
 fiches/media/images/users/
+fiches/media/images/objets/
 fiches/media/images/site/quest/Portraits
 #*#
 bower_components/
 recaptcha_sk
+fiches/migrations/
+firp/settings.py

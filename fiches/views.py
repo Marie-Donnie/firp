@@ -204,6 +204,15 @@ def edit_fiche(request, fiche_id):
                 data['inventaire_fdg'] = None
             else:
                 data['inventaire'] = None
+                if fiche.equipement and fiche.inventaire_fdg :
+                    data['equipement'] = fiche.equipement.id
+                    data['inventaire_fdg'] = fiche.inventaire_fdg.id
+                else:
+                    name = data['prenom']
+                    if not fiche.equipement:
+                        data['equipement'] = Equipement.objects.create(nom='Equipement de '+name).id
+                    if not fiche.inventaire_fdg:
+                        data['inventaire_fdg'] = Inventaire.objects.create(nom='Inventaire de '+name).id
             form = FicheForm(data, request.FILES, instance=fiche)
             if form.is_valid():
                 save_it = form.save()
