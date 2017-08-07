@@ -472,7 +472,7 @@ def edit_inventaire(request, inventaire_id):
             form = InventaireForm(request.POST, instance=inventaire)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/firp')
             else:
                 print(form.errors)
         else:
@@ -496,7 +496,7 @@ def edit_equipement(request, equipement_id):
             form = EquipementForm(request.POST, instance=equipement)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/firp')
             else:
                 print(form.errors)
         else:
