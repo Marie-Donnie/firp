@@ -60,9 +60,11 @@ class ObjetForm(ModelForm):
 
     class Meta:
         model = Objet
-        fields = ['nom', 'qualite', 'description', 'prix', 'poids', 'image']
+        fields = ['nom', 'qualite', 'description', 'prix', 'poids', 'image',
+                  'createur']
         prefix = 'objet'
-        widgets = {'description': forms.Textarea(), }
+        widgets = {'description': forms.Textarea(),
+                   'createur': forms.HiddenInput(), }
 
 
 class ArmureForm(ModelForm):

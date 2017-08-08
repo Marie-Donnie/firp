@@ -254,9 +254,13 @@ def delete_fiche(request, fiche_id):
 def creer_objet(request):
     if request.user.has_perm('fiches.add_objet'):
         if request.method == 'POST':
-            form = ObjetForm(request.POST, request.FILES)
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=request.user).id
+            form = ObjetForm(data, request.FILES)
+            print(data)
             if form.is_valid():
                 save_it = form.save()
+                print(form)
                 return redirect('detail_objet', objet_id=save_it.id)
             else:
                 print(form.errors)
@@ -282,7 +286,8 @@ def creer_armure(request):
         else:
             form = ArmureForm()
 
-        objets = Objet.objects.all()
+        objets = Objet.objects.filter(createur=request.user)
+        print(objets)
         context = {'form': form, 'objets': objets}
         return render(request, 'fiches/armure.html', context)
 
@@ -398,7 +403,9 @@ def edit_objet(request, objet_id):
     objet = Objet.objects.get(pk=objet_id)
     if request.user.has_perm('fiches.change_object'):
         if request.method == 'POST':
-            form = ObjetForm(request.POST, request.FILES, instance=objet)
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=request.user).id
+            form = ObjetForm(data, request.FILES, instance=objet)
             if form.is_valid():
                 save_it = form.save()
                 return redirect('detail_objet', objet_id=save_it.id)
@@ -430,7 +437,7 @@ def edit_armure(request, armure_id):
         else:
             form = ArmureForm(instance=armure)
 
-        objets = Objet.objects.all()
+        objets = Objet.objects.filter(createur=request.user)
         context = {'form': form, 'objets': objets}
         return render(request, 'fiches/armure.html', context)
 

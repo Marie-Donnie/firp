@@ -14,7 +14,7 @@ from fiches.rpg.avant_garde.models import *
 @login_required
 def creer_base(request):
     utilisateur = request.user
-    if (utilisateur.has_perm('fiche.add_avant_garde')):
+    if (utilisateur.has_perm('fiches.add_avant_garde')):
         if request.method == 'POST':
             data = request.POST.copy()
             if not 'avants' in data:

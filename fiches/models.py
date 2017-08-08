@@ -289,6 +289,9 @@ class Objet(models.Model):
     poids = models.IntegerField(default=0)
     image = models.ImageField(upload_to='images/objets',
                               default='images/site/WoWUnknownItem01.PNG')
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 null=True,
+                                 related_name='objet')
 
     class Meta:
         ordering = ["nom"]
