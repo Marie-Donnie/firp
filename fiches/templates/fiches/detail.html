@@ -315,17 +315,21 @@ function getTooltip() {
 	<h3 class="panel-title">Statistiques</h3>
       </div>
       <div class="panel-body" id="center">
+	{% if perms.fiches.objet_ok %}
+	<b>Effets en jeu :</b>
+	{% for effet in effets_ig %}
+	{% if effet != 'Aucun' %}
+	{{ effet|linebreaksbr }}<br>
+	{% endif %}
+	{% endfor %}<br>
+	{% else %}
 	<b>Effets :</b>
 	{% for effet in effets %}
 	{% if effet != 'Aucun' %}
 	{{ effet|linebreaksbr }}<br>
 	{% endif %}
 	{% endfor %}<br>
-	<b>Effets en jeu :</b>	{% for effet in effets_ig %}
-	{% if effet != 'Aucun' %}
-	{{ effet|linebreaksbr }}<br>
 	{% endif %}
-	{% endfor %}<br>
 	<b>Armure :</b> {{ armure }}<br>
 	<b>Force :</b> {{ force }}<br>
 	<b>Agilité :</b> {{ agi }}<br>
