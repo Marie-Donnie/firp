@@ -208,7 +208,7 @@ div.gallery img {
     /* background-image: url("/static/fiches/images/button.png"); */
     color: #ddd;
     background: #470002;
-    font-weight: bold;
+    /* font-weight: bold; */
     padding: 7px 7px;
     text-decoration: none;
     position: relative;
