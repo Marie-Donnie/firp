@@ -517,27 +517,27 @@ class Equipement(models.Model):
         for method in methods:
             objet = method()
             if objet is not None:
-                effets.append(objet.effet)
-                effets.append(objet.autres_effets)
-                effets_ig.append(objet.effet_ig)
+                effets.append("De \"" + objet.objet.nom + "\" : " + objet.effet)
+                effets.append("De \"" + objet.objet.nom + "\" : " + objet.autres_effets)
+                effets_ig.append("De \"" + objet.objet.nom + "\" : " + objet.effet_ig)
                 force += objet.force
                 intell += objet.intell
                 agi += objet.agi
                 armure += objet.armure
         for anneau in self.get_doigts():
             if anneau is not None:
-                effets.append(anneau.effet)
-                effets.append(anneau.autres_effets)
-                effets_ig.append(anneau.effet_ig)
+                effets.append("De \"" + anneau.objet.nom + "\" : " + anneau.effet)
+                effets.append("De \"" + anneau.objet.nom + "\" : " + anneau.autres_effets)
+                effets_ig.append("De \"" + anneau.objet.nom + "\" : " + anneau.effet_ig)
                 force += anneau.force
                 intell += anneau.intell
                 agi += anneau.agi
                 armure += anneau.armure
         for diver in self.get_divers():
             if diver is not None:
-                effets.append(diver.effet)
-                effets.append(diver.autres_effets)
-                effets_ig.append(diver.effet_ig)
+                effets.append("De \"" + diver.objet.nom + "\" : " + diver.effet)
+                effets.append("De \"" + diver.objet.nom + "\" : " + diver.autres_effets)
+                effets_ig.append("De \"" + diver.objet.nom + "\" : " + diver.effet_ig)
                 force += diver.force
                 intell += diver.intell
                 agi += diver.agi

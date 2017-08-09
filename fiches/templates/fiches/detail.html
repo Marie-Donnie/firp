@@ -318,14 +318,14 @@ function getTooltip() {
 	{% if perms.fiches.objet_ok %}
 	<b>Effets en jeu :</b>
 	{% for effet in effets_ig %}
-	{% if effet != 'Aucun' %}
+	{% if 'Aucun' not in effet %}
 	{{ effet|linebreaksbr }}<br>
 	{% endif %}
 	{% endfor %}<br>
 	{% else %}
 	<b>Effets :</b>
 	{% for effet in effets %}
-	{% if effet != 'Aucun' %}
+	{% if 'Aucun' not in effet %}
 	{{ effet|linebreaksbr }}<br>
 	{% endif %}
 	{% endfor %}<br>
