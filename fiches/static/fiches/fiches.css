@@ -548,8 +548,8 @@ h3 {
 .a-g-class {
     border: 2px solid #470002;
     border-radius : 10px;
-    background-image: -webkit-linear-gradient(top, #001000, #1e0101);
-    background-image: linear-gradient(to bottom, #001000, #1e0101);
+    background-image: -webkit-linear-gradient(top, #100000, #1e0101);
+    background-image: linear-gradient(to bottom, #100000, #1e0101);
     margin: 0% auto;
 }
 
