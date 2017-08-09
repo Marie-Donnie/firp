@@ -401,7 +401,7 @@ def detail_armure(request, armure_id):
 @login_required
 def edit_objet(request, objet_id):
     objet = Objet.objects.get(pk=objet_id)
-    if request.user.has_perm('fiches.change_object'):
+    if request.user.has_perm('fiches.change_objet'):
         if request.method == 'POST':
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=request.user).id
