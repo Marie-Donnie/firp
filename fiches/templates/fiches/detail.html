@@ -330,10 +330,24 @@ function getTooltip() {
 	{% endif %}
 	{% endfor %}<br>
 	{% endif %}
+	{% if runique %}
+	"Set : Immunise à la magie"<br>
+	{% endif %}
+	{% if terradiance %}
+	"Set : + 5 a l'attaque et la défense contre les morts-vivants"<br>
+	{% endif %}
+	{% if armure != 0 %}
 	<b>Armure :</b> {{ armure }}<br>
+	{% endif %}
+	{% if force != 0 %}
 	<b>Force :</b> {{ force }}<br>
+	{% endif %}
+	{% if agilité != 0 %}
 	<b>Agilité :</b> {{ agi }}<br>
+	{% endif %}
+	{% if intelligence != 0 %}
 	<b>Intelligence :</b> {{ intell }}
+	{% endif %}
       </div>
     </div>
   </div>

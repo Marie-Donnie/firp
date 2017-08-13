@@ -150,14 +150,14 @@ def detail_fiche(request, fiche_id):
         pieds = fiche.equipement.get_pieds()
         doigts = fiche.equipement.get_doigts()
         divers = fiche.equipement.get_divers()
-        effets, effets_ig, force, intell, agi, armure = fiche.equipement.effets()
+        effets, effets_ig, force, intell, agi, armure, runique, terradiance = fiche.equipement.effets()
     else:
         mp, am, aa, tete, epaules, torse = None, None, None, None, None, None
         mains, taille, jambes, dos, cou = None, None, None, None, None
         poignets, doigts, divers = None, None, None
         effets, effets_ig, force = None, None, None
         intell, agi, armure = None, None, None
-        pieds = None
+        pieds, runique, terradiance = None
     context = {'fiche': fiche,
                'range': range(nb), 'effets': effets, 'effets_ig': effets_ig,
                'force': force, 'intell': intell, 'agi': agi,
@@ -165,7 +165,7 @@ def detail_fiche(request, fiche_id):
                'epaules': epaules, 'torse': torse, 'mains': mains,
                'taille': taille, 'jambes': jambes, 'dos': dos, 'cou': cou,
                'poignets': poignets, 'doigts': doigts, 'divers': divers,
-               'pieds': pieds}
+               'pieds': pieds, 'runique': runique, 'terradiance': terradiance}
     return render(request, 'fiches/detail.html', context)
 
 
