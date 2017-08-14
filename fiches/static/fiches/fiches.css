@@ -504,6 +504,7 @@ h3 {
 
 .number-inventory {
     position: relative;
+    display: inline-block;
 }
 
 #red {
