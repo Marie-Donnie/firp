@@ -21,6 +21,11 @@
 
   <div class="black">
     <div class="media" id="quest-display">
+      {% if quete.etat == 3 %}
+      <div id="accomplie">
+	Accomplie
+	<div>
+	  {% endif %}
       <div class="media-body quest-attributes">
 	<h4 class="media-heading quest-name">{{quete.nom}}</h4>
 	<span class="quest-objective">{{quete.objectif}}<br></span>
@@ -53,6 +58,11 @@
       {% endif %}
     </div> <!-- media -->
 
+    {% if perms.fiches.objet_ok and quete.etat == 1 %}
+    <div id="centre">
+      <a class="btn btn-default" href="{% url 'reserver_quete' quete.id %}">Réserver</a>
+      </div>
+    {% endif %}
   </div> <!-- black -->
 </div>	 <!-- quest-body -->
 

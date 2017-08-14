@@ -109,3 +109,11 @@ class QueteForm(ModelForm):
         prefix = 'quete'
         widgets = {'objectif': forms.Textarea(),
                    'etat': forms.RadioSelect(), }
+
+
+class PrendreQueteForm(ModelForm):
+
+    class Meta:
+        model = Quete
+        fields = ['etat', 'reservee']
+        widgets = {'etat': forms.HiddenInput(), }

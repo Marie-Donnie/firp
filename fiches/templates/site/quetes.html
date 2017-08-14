@@ -20,7 +20,10 @@
   </div>
 
   <div class="back">
-    {% for quete in quetes %}
+
+    <div id="liste">
+  {% if quetes_list %}
+    {% for quete in quetes_list %}
 
     <div class="media" id="quest-short" onclick="document.location='{% url 'quete' quete.id %}'">
       {% if forloop.counter0|divisibleby:'2' %}
@@ -74,7 +77,39 @@
     </div> <!-- media -->
     {% endfor %}
   </div> <!-- back -->
+<div class="quest-pages">
+    <span>Page {{ quetes_list.number }} sur {{ quetes_list.paginator.num_pages }}</span>
+  <nav aria-label="Page navigation" id="pagination">
+    <ul class="pagination pagination-sm">
+      {% if quetes_list.has_previous %}
+      <li>
+	<a href="?page={{ quetes_list.previous_page_number }}" aria-label="Précédent">
+	  <span aria-hidden="true">&laquo;</span>
+	</a>
+      </li>
+      {% endif %}
 
+      {% for p in quetes_list.paginator.page_range %}
+      <li>
+	<a href="?page={{ p }}">
+	  {{p}}
+	</a>
+      </li>
+      {% endfor %}
+
+      {% if quetes_list.has_next %}
+      <li>
+	<a href="?page={{ quetes_list.next_page_number }}" aria-label="Suivant">
+          <span aria-hidden="true">&raquo;</span>
+	</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div> <!-- quest-pages -->
+{% else %}
+<p>Aucune quête</p>
+{% endif %}
 
 </div> <!-- quest-body -->
 

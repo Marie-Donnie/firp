@@ -536,8 +536,18 @@ def tooltip_armure(request, armure_id):
 
 def quetes(request):
     quetes = Quete.objects.all().order_by('etat', 'creation', 'difficulte', 'nom')
+    paginator = Paginator(quetes, 8)
+    page = request.GET.get('page')
+    try:
+        quetes_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        quetes_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        quetes_list = paginator.page(paginator.num_pages)
 
-    context = {'quetes': quetes}
+    context = {'quetes': quetes, 'quetes_list': quetes_list}
 
     return render(request, 'site/quetes.html', context)
 
@@ -548,3 +558,28 @@ def quete(request, quete_id):
     context = {'quete': quete}
 
     return render(request, 'site/quete.html', context)
+
+@login_required
+def res_quete(request, quete_id):
+    if request.user.has_perm('fiches.objet_ok'):
+        quete = get_object_or_404(Quete, pk=quete_id)
+
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['etat'] = 2
+            form = PrendreQueteForm(data, instance=quete)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('quete', quete_id=save_it.id)
+            else:
+                print(form.errors)
+        else:
+            form = PrendreQueteForm(instance=quete)
+
+        personnages = request.user.fiches.all()
+        context = {'form': form, 'quete': quete, 'personnages': personnages}
+        return render(request, 'site/prendre_quete.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas prendre de quete.")

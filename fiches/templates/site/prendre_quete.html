@@ -1,0 +1,41 @@
+{% extends "site/base.html" %}
+
+{% load filters %}
+{% load l10n %}
+
+{% block script %}
+{% endblock %}
+
+
+{% block title %}{{quete.nom}}{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+<div class="quest-body">
+
+  <div class="page-header" id="quest-header" onclick="document.location='{% url 'quetes' %}'">
+    <div class="quest-head">
+      <h1>Registre de quêtes</h1>
+    </div> <!-- quest-head -->
+  </div>   <!-- page-header -->
+
+  <div id="char_form">
+    <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+      {% csrf_token %}
+
+      <label for="id_reservee">Reservee&nbsp;:</label>
+	<select name="reservee" id="id_reservee">
+	{% for personnage in personnages %}
+	<option value="{{personnage.id}}" selected="">{{personnage.prenom}} {{personnage.nom}}</option>
+	{% endfor %}
+
+
+	</select>
+
+	<input name="etat" value="{{quete.etat}}" id="id_etat" type="hidden"></li>
+
+      <input class="btn btn-default" type="submit" value="Valider" />
+    </form>
+  </div>
+</div>
+{% endblock %}

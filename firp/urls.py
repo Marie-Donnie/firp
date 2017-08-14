@@ -59,6 +59,8 @@ urlpatterns = [
     # Quetes
     url(r'^quetes/$', views.quetes, name='quetes'),
     url(r'^quetes/(?P<quete_id>\d+)/$', views.quete, name='quete'),
+    url(r'^quetes/reserver_quete_(?P<quete_id>\d+)/$', views.res_quete,
+        name='reserver_quete'),
     # RPG
     url(r'^', include('fiches.rpg.avant_garde.urls')),
     # url(r'^avant_garde/creer_perso/(?P<perso_id>\d+)/$', views.creer_base,
