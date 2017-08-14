@@ -450,8 +450,10 @@ class Equipement(models.Model):
         intell = 0
         agi = 0
         armure = 0
-        runique = True
-        terradiance = True
+        run_compte = 0
+        runique = False
+        ter_compte = 0
+        terradiance = False
         methods = [self.get_mp, self.get_am, self.get_tete, self.get_epaules,
                    self.get_torse, self.get_mains, self.get_taille,
                    self.get_jambes, self.get_pieds, self.get_dos, self.get_cou,
@@ -462,8 +464,12 @@ class Equipement(models.Model):
                 effets.append("De \"" + objet.objet.nom + "\" : " + objet.effet)
                 effets.append("De \"" + objet.objet.nom + "\" : " + objet.autres_effets)
                 effets_ig.append("De \"" + objet.objet.nom + "\" : " + objet.effet_ig)
-                runique = runique and ("runique" in objet.objet.nom)
-                terradiance = terradiance and ("terradiance" in objet.objet.nom)
+                m = objet.membre
+                if (m >= 3 and m <=9) or m == 13:
+                    if ("runique" in objet.objet.nom):
+                        run_compte += 1
+                    if ("terradiance" in objet.objet.nom):
+                        ter_compte += 1
                 force += objet.force
                 intell += objet.intell
                 agi += objet.agi
@@ -486,6 +492,10 @@ class Equipement(models.Model):
                 intell += diver.intell
                 agi += diver.agi
                 armure += diver.armure
+        if ter_compte == 8:
+            terradiance = True
+        if run_compte == 8:
+            run_compte = True
         return effets, effets_ig, force, intell, agi, armure, runique, terradiance
 
     def __unicode__(self):
