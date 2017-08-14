@@ -617,3 +617,8 @@ h3.panel-title {
     margin-top: 0;
     margin-bottom: 3px;
 }
+
+
+.tooltip-inner {
+    max-width: 400px;
+}
