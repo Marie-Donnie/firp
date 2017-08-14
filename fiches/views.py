@@ -157,7 +157,7 @@ def detail_fiche(request, fiche_id):
         poignets, doigts, divers = None, None, None
         effets, effets_ig, force = None, None, None
         intell, agi, armure = None, None, None
-        pieds, runique, terradiance = None
+        pieds, runique, terradiance = None, None, None
     context = {'fiche': fiche,
                'range': range(nb), 'effets': effets, 'effets_ig': effets_ig,
                'force': force, 'intell': intell, 'agi': agi,
