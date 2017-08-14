@@ -9,19 +9,26 @@
 	  {% elif objet.qualite == 'l' %}id="objet-legendaire"
 	  {% elif objet.qualite == 'u' %}id="objet-unique"
 	  {% endif %}><b>{{ objet.nom|capfirst }}</b></li>
-      <li><!-- <b>Description&nbsp;: </b> -->{{ objet.description|truncatewords:15 }}</li>
+      <li><i><!-- <b>Description&nbsp;: </b> -->{{ objet.description }}</i></li>
       {% if objet.prix != 0 %}
       <li><b>Prix&nbsp;: </b>
 	{{ objet.prix|p_or }} <img id="money" src="/fiches/media/images/site/UI-GoldIcon.PNG" alt="Souverains">
+	{% if objet.prix|p_argent != 0 %}
 	{{ objet.prix|p_argent }} <img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Souverains">
+	{% endif %}
+	{% if objet.prix|p_cuivre != 0 %}
 	{{ objet.prix|p_cuivre }} <img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Souverains">
+	{% endif %}
       </li>
       {% endif %}
+      {% if objet.poids|kilos != 0 %}
       <li><b>Poids&nbsp;: </b>
-	{% if objet.poids|kilos != 0 %}
-	{{ objet.poids|kilos }} kilos et&nbsp;
+	{{ objet.poids|kilos }} kilo{{ objet.poids|kilos|pluralize }}
+	{% if objet.poids|grammes != 0%}
+	et
+	{{ objet.poids|grammes }} gramme{{ objet.poids|grammes|pluralize }}
 	{% endif %}
-	{{ objet.poids|grammes }} grammes
+	{% endif %}
       </li>
       {% block armure %}
       {% endblock %}
