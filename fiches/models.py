@@ -395,115 +395,53 @@ class Equipement(models.Model):
                         "Peut faire des équipements"),)
 
     def get_mp(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 1:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=1).first()
 
     def get_am(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 2:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=2).first()
 
     def get_tete(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 3:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=3).first()
 
     def get_epaules(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 4:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=4).first()
 
     def get_torse(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 5:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=5).first()
 
     def get_mains(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 6:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=6).first()
 
     def get_taille(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 7:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=7).first()
 
     def get_jambes(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 8:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=8).first()
 
     def get_pieds(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 9:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=9).first()
 
     def get_dos(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 10:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=10).first()
 
     def get_cou(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 11:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=11).first()
 
     def get_doigts(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 12:
-                ret.append(i)
-        if len(ret) < 8:
-            for x in xrange(8 - len(ret)):
-                ret.append(None)
+        ret = list(self.objets.filter(membre=12)[:8].iterator())
+        ret += [None] * (8 - len(ret))
         return ret
 
     def get_poignets(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 13:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=13).first()
 
     def get_divers(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 14:
-                ret.append(i)
-        if len(ret) < 10:
-            for x in xrange(10 - len(ret)):
-                ret.append(None)
+        ret = list(self.objets.filter(membre=14)[:10].iterator())
+        ret += [None] * (8 - len(ret))
         return ret
 
     def get_autre_arme(self):
-        ret = []
-        for i in self.objets.all():
-            if i.membre == 15:
-                ret.append(i)
-        return ret[0] if ret else None
+        return self.objets.filter(membre=15).first()
 
     def effets(self):
         effets = []
