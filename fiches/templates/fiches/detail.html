@@ -9,11 +9,11 @@ $('[data-toggle="objet-tooltip"]').on('mouseenter', getTooltip)
 function getTooltip() {
   var elem = this;
   var tooltipUrl = elem.getAttribute('href') + 'tooltip/';
+  $(elem).off('mouseenter', getTooltip);
   $.ajax(tooltipUrl)
   .done(function(data) {
     $(elem).tooltip({html: true, placement: 'top', title: data});
     $(elem).tooltip('show');
-    $(elem).off('mouseenter', getTooltip);
   });
 }
 
@@ -212,7 +212,7 @@ function getTooltip() {
 	  {% endif %}
 	  {% if aa %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' aa.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ am.objet.image.url }} alt="Autre arme" id="icone">
+	    <img class="inventory-object" src={{ aa.objet.image.url }} alt="Autre arme" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Ammo.PNG alt="Autre main" id="icone">
