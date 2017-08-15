@@ -116,3 +116,17 @@ class PrendreQueteForm(ModelForm):
         model = Quete
         fields = ['etat', 'reservee']
         widgets = {'etat': forms.HiddenInput(), }
+
+
+class OperationForm(ModelForm):
+
+    class Meta:
+        model = Operation
+        fields = '__all__'
+
+
+class MissionForm(ModelForm):
+
+    class Meta:
+        model = Mission
+        fields = '__all__'

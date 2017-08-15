@@ -555,3 +555,74 @@ class Quete(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.nom)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RAPPORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class Operation(models.Model):
+    nom = models.CharField(max_length=100)
+    dirigeant = models.ForeignKey(Fiche,
+                                  null=True,
+                                  blank=True,
+                                  related_name='dirigeant_op')
+
+    class Meta:
+        ordering = ["nom"]
+        verbose_name = "opération"
+        verbose_name_plural = "opérations"
+        default_related_name = 'opération'
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
+
+class Mission(models.Model):
+    operation = models.ForeignKey(Operation,
+                                  null=True,
+                                  blank=True,
+                                  related_name='mission')
+    dirigeant = models.ForeignKey(Fiche,
+                                  null=True,
+                                  blank=True,
+                                  related_name='dirigeant_mission')
+    numero = models.SmallIntegerField(default=0)
+    lieu = models.CharField(max_length=100)
+    jour = IntegerRangeField(default='1', min_value=1,
+                             max_value=31)
+    mois = IntegerRangeField(default='1', min_value=1,
+                             max_value=12)
+    annee = IntegerRangeField(default='0', min_value=0,
+                              max_value=100)
+    type_mis = models.SmallIntegerField(choices=[
+        (1, 'Embuscade'),
+        (2, 'Assaut'),
+        (3, 'Siège'),
+        (4, 'Défense'),
+        (5, 'Escorte'),
+        (7, 'Prendre et tenir'),
+        (8, 'Escarmouche'),
+        (9, 'Bataille rangée'),
+        (10, 'Rechercher et détruire'),
+        (11, 'Sabotage'),
+        (12, 'Infiltration'),
+        (13, 'Espionnage'),
+        (14, 'Sauvetage'),
+        (15, 'Récupération'),
+        (16, 'Assassinat'),
+        (17, 'Incident')
+    ],
+                                        default=8)
+    objectif = models.CharField(max_length=300)
+    participants = models.CharField(max_length=500)
+    deroulement = models.CharField(max_length=6000)
+    signature_url = models.CharField(max_length=100,
+                                     default="c: L. Vaanes")
+
+    class Meta:
+        ordering = ["numero"]
+        verbose_name = "mission"
+        verbose_name_plural = "missions"
+        default_related_name = 'mission'
+
+    def __unicode__(self):
+        return u'%s' % (self.operation.nom + " : " + str(self.numero))
