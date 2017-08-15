@@ -89,7 +89,7 @@ def aff_user(request, user_id):
 def creer_fiche(request):
     utilisateur = request.user
     # Checks wether user can create another fiche or not
-    if ((utilisateur.fiches.count() < 16) or
+    if ((utilisateur.fiches.count() < 7) or
         (utilisateur.has_perm('fiches.plus_de_15_fiches'))):
         if request.method == 'POST':
             # request.POST is not editable, so we have to copy it to hard code a value
