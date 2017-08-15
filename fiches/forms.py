@@ -60,8 +60,7 @@ class ObjetForm(ModelForm):
 
     class Meta:
         model = Objet
-        fields = ['nom', 'qualite', 'description', 'prix', 'poids', 'image',
-                  'createur']
+        fields = '__all__'
         prefix = 'objet'
         widgets = {'description': forms.Textarea(),
                    'createur': forms.HiddenInput(), }
@@ -71,9 +70,9 @@ class ArmureForm(ModelForm):
 
     class Meta:
         model = Armure
-        fields = ['objet', 'effet', 'autres_effets', 'effet_ig',
-                  'force', 'intell', 'agi', 'membre', 'armure']
+        fields = '__all__'
         prefix = 'armure'
+        widgets = {'effet': forms.Textarea(), }
 
 
 class CaseForm(ModelForm):

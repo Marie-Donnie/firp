@@ -17,11 +17,7 @@
 	<h4 class="panel-title">Effet</h3>
       </div>
       <div class="panel-body">
-	{{ armure.effet }}
-	{% if armure.autres_effets != 'Aucun' %}
-	<br>
-	{{ armure.autres_effets|linebreaksbr }}
-	{% endif %}
+	{{ armure.effet|linebreaksbr }}
       </div>
     </div>
   </div>

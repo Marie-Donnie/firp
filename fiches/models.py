@@ -316,10 +316,8 @@ class Armure(models.Model):
     objet = models.OneToOneField(Objet,
                                  null=True,
                                  related_name='armure')
-    effet = models.CharField(max_length=300,
+    effet = models.CharField(max_length=400,
                              default='Aucun')
-    autres_effets = models.CharField(max_length=300,
-                                     default='Aucun')
     effet_ig = models.CharField(max_length=400,
                                 default='Aucun')
     force = IntegerRangeField(default=0, min_value=0,
@@ -464,7 +462,6 @@ class Equipement(models.Model):
             objet = method()
             if objet is not None:
                 effets.append("De \"" + objet.objet.nom + "\" : " + objet.effet)
-                effets.append("De \"" + objet.objet.nom + "\" : " + objet.autres_effets)
                 effets_ig.append("De \"" + objet.objet.nom + "\" : " + objet.effet_ig)
                 m = objet.membre
                 if (m >= 3 and m <=9) or m == 13:
@@ -479,7 +476,6 @@ class Equipement(models.Model):
         for anneau in self.get_doigts():
             if anneau is not None:
                 effets.append("De \"" + anneau.objet.nom + "\" : " + anneau.effet)
-                effets.append("De \"" + anneau.objet.nom + "\" : " + anneau.autres_effets)
                 effets_ig.append("De \"" + anneau.objet.nom + "\" : " + anneau.effet_ig)
                 force += anneau.force
                 intell += anneau.intell
@@ -488,7 +484,6 @@ class Equipement(models.Model):
         for diver in self.get_divers():
             if diver is not None:
                 effets.append("De \"" + diver.objet.nom + "\" : " + diver.effet)
-                effets.append("De \"" + diver.objet.nom + "\" : " + diver.autres_effets)
                 effets_ig.append("De \"" + diver.objet.nom + "\" : " + diver.effet_ig)
                 force += diver.force
                 intell += diver.intell
