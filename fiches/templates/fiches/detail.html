@@ -1,5 +1,7 @@
 
 {% extends "base.html" %}
+
+{% load filters %}
 {% load static %}
 
 {% block script %}
@@ -64,7 +66,7 @@ function getTooltip() {
       {% endif %}
       {{ fiche.nom|capfirst }}
       {% if fiche.ne != 'Non applicable' %}
-      , né{% if fiche.sexe == 'f'%}e{% endif %} {{ fiche.ne }}
+      né{% if fiche.sexe == 'f'%}e{% endif %} {{ fiche.ne }}
       {% endif %}
     </h3>
     {{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}
@@ -75,13 +77,16 @@ function getTooltip() {
       {% if fiche.autres_titres != 'Aucun' %}
       <li><b>Autres titres&nbsp;: </b><span id="attribute_value">{{ fiche.autres_titres|linebreaksbr }}</span></li>
       {% endif %}
+      <li><b>Profession&nbsp;: </b><span id="attribute_value">{{fiche.profession|capfirst }}</span></li>
       <li><b>Sexe&nbsp;: </b><span id="attribute_value">{{ fiche.get_sexe_display }}</span></li>
       <li><b>Race&nbsp;: </b><span id="attribute_value">{{ fiche.race|capfirst }}</span></li>
       <li><b>Date de naissance&nbsp;: </b><span id="attribute_value">{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
 	{% endif %}
 	{{fiche.mois_de_naissance}}{% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois
 	{% endif %}
-	  de l'an {{fiche.annee_de_naissance}}</span></li>
+	  de l'an {{fiche.annee_de_naissance}} <br>
+	  ({{fiche.annee_de_naissance|age}} an{{fiche.annee_de_naissance|age|pluralize}} cette année)
+      </span></li>
       <li><b>Zone de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_naissance_display }}</span></li>
       <li><b>Ville de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_naissance|capfirst  }}</span></li>
       <li><b>Zone de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_residence_display }}</span></li>
@@ -93,12 +98,11 @@ function getTooltip() {
       {% if fiche.signes_dis != 'Aucun' %}
       <li><b>Signes distinctifs&nbsp;: </b><br>{{ fiche.signes_dis|linebreaksbr }}</li>
       {% endif %}
-      <li><b>Profession&nbsp;: </b><span id="attribute_value">{{fiche.profession|capfirst }}</span></li>
     </ul>
     </div>
   </div>
 
-  <div class="media-right">
+  <div class="media-right media-middle">
     <a target="_blank" href={{ fiche.image.url }}>
       <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
     </a>

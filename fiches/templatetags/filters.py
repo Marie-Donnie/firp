@@ -1,4 +1,5 @@
 from django import template
+from datetime import datetime
 
 register = template.Library()
 
@@ -47,3 +48,9 @@ def grammes(value):
 @register.filter
 def pourcent(value, arg):
     return (value * 100) / arg
+
+
+@register.filter
+def age(value):
+    year = datetime.now().year
+    return year - 1980 - value
