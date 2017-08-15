@@ -147,6 +147,8 @@ class Fiche(models.Model):
     prenom = models.CharField(max_length=50)
     autres_prenoms = models.CharField(max_length=200,
                                       default='Aucun')
+    ne = models.CharField(max_length=50,
+                          default='Non applicable')
     titre = models.CharField(max_length=75,
                              default='Aucun')
     autres_titres = models.CharField(max_length=500,
