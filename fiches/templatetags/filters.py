@@ -54,3 +54,33 @@ def pourcent(value, arg):
 def age(value):
     year = datetime.now().year
     return year - 1980 - value
+
+@register.filter
+def mois(value):
+    if value == 1:
+        mois = "Janvier"
+    elif value == 2:
+        mois = "Février"
+    elif value == 3:
+        mois = "Mars"
+    elif value == 4:
+        mois = "Avril"
+    elif value == 5:
+        mois = "Mai"
+    elif value == 6:
+        mois = "Juin"
+    elif value == 7:
+        mois = "Juillet"
+    elif value == 8:
+        mois = "Août"
+    elif value == 9:
+        mois = "Septembre"
+    elif value == 10:
+        mois = "Octobre"
+    elif value == 11:
+        mois = "Novembre"
+    elif value == 12:
+        mois = "Décembre"
+    else:
+        mois = "No"
+    return mois
