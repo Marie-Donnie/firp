@@ -256,6 +256,10 @@ def creer_objet(request):
         if request.method == 'POST':
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=request.user).id
+            url = data['image_url']
+            if url.endswith('.PNG'):
+                url = url[:-4]
+                data['image_url'] = url
             form = ObjetForm(data, request.FILES)
             print(data)
             if form.is_valid():
@@ -405,6 +409,10 @@ def edit_objet(request, objet_id):
         if request.method == 'POST':
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=request.user).id
+            url = data['image_url']
+            if url.endswith('.PNG'):
+                url = url[:-4]
+                data['image_url'] = url
             form = ObjetForm(data, request.FILES, instance=objet)
             if form.is_valid():
                 save_it = form.save()
