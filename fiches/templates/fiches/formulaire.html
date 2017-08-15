@@ -10,9 +10,14 @@
   <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
     {% csrf_token %}
     <div class="form-group">
-      <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
-      <label for="id_prenom">Prenom&nbsp;</label> <input name="prenom" required="" id="id_prenom" maxlength="50" type="text" value="{{form.prenom.value|default_if_none:''}}">
-      <label for="id_autres_prenoms">Autres prenoms&nbsp;</label> <input name="autres_prenoms" value="{{form.autres_prenoms.value|default:'Aucun'}}" required="" id="id_autres_prenoms" maxlength="200" type="text" size="50">
+      <label for="id_nom">Nom&nbsp;</label>
+      <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+      <label for="id_prenom">Prenom&nbsp;</label>
+      <input name="prenom" required="" id="id_prenom" maxlength="50" type="text" value="{{form.prenom.value|default_if_none:''}}">
+      <label for="id_autres_prenoms">Autres prenoms&nbsp;</label>
+      <input name="autres_prenoms" value="{{form.autres_prenoms.value|default:'Aucun'}}" required="" id="id_autres_prenoms" maxlength="200" type="text" size="50">
+      <label for="id_ne">Né(e)&nbsp;</label>
+      <input name="ne" required="" id="id_ne" maxlength="50" type="text" value="{{form.ne.value|default_if_none:'Non applicable'}}">
     </div>
     <div class="form-group">
       <span id="description"><b>Sexe </b></span>

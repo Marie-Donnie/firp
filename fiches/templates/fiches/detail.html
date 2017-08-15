@@ -1,5 +1,6 @@
 
 {% extends "base.html" %}
+{% load static %}
 
 {% block script %}
 $(function () {
@@ -54,44 +55,47 @@ function getTooltip() {
 {% block content %}
 
 <div class="media">
-  <div class="media-body" id="detail-perso">
-
-    <h3>{{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}</h3>
-    <ul>
-      <li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}</li>
-      <li><b>Prénom&nbsp;: </b>{{ fiche.prenom|capfirst }}</li>
-      <!-- <div id="spoiler" style="display:none"> -->
+  <div class="media-body media-middle" id="detail-perso">
+    <div id="center">
+    <h3 id="nom">
+      {{ fiche.prenom|capfirst }}
       {% if fiche.autres_prenoms != 'Aucun' %}
-      <li><b>Autre(s) prénom(s)&nbsp;: </b>{{ fiche.autres_prenoms|linebreaksbr }}</li>
+      {{ fiche.autres_prenoms }}
       {% endif %}
-      <!-- </div> -->
-      <!-- <button title="Click to show/hide content" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Show/hide</button> -->
+      {{ fiche.nom|capfirst }}
+      {% if fiche.ne != 'Non applicable' %}
+      , né{% if fiche.sexe == 'f'%}e{% endif %} {{ fiche.ne }}
+      {% endif %}
+    </h3>
+    {{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}
+    <ul>
       {% if fiche.titre != 'Aucun' %}
-      <li><b>Titre(s) et/ou grade&nbsp;: </b>{{ fiche.titre|capfirst  }}</li>
+      <li><b>Titre(s) et/ou grade&nbsp;: </b><span id="attribute_value">{{ fiche.titre|capfirst  }}</span></li>
       {% endif %}
       {% if fiche.autres_titres != 'Aucun' %}
-      <li><b>Autres titres&nbsp;: </b>{{ fiche.autres_titres|linebreaksbr }}</li>
+      <li><b>Autres titres&nbsp;: </b><span id="attribute_value">{{ fiche.autres_titres|linebreaksbr }}</span></li>
       {% endif %}
-      <li><b>Sexe&nbsp;: </b>{{ fiche.get_sexe_display }}</li>
-      <li><b>Race&nbsp;: </b>{{ fiche.race|capfirst }}</li>
-      <li><b>Date de naissance&nbsp;: </b>{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
+      <li><b>Sexe&nbsp;: </b><span id="attribute_value">{{ fiche.get_sexe_display }}</span></li>
+      <li><b>Race&nbsp;: </b><span id="attribute_value">{{ fiche.race|capfirst }}</span></li>
+      <li><b>Date de naissance&nbsp;: </b><span id="attribute_value">{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
 	{% endif %}
 	{{fiche.mois_de_naissance}}{% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois
 	{% endif %}
-	de l'an {{fiche.annee_de_naissance}}</li>
-      <li><b>Zone de naissance&nbsp;: </b>{{ fiche.get_zone_de_naissance_display }}</li>
-      <li><b>Ville de naissance&nbsp;: </b>{{ fiche.ville_de_naissance|capfirst  }}</li>
-      <li><b>Zone de résidence&nbsp;: </b>{{ fiche.get_zone_de_residence_display }}</li>
-      <li><b>Ville de résidence&nbsp;: </b>{{ fiche.ville_de_residence|capfirst  }}</li>
-      <li><b>Taille&nbsp;: </b>{{ fiche.taille }}m</li>
-      <li><b>Poids&nbsp;: </b>{{ fiche.poids }} kg</li>
-      <li><b>Couleur des yeux&nbsp;: </b>{{ fiche.c_yeux }}</li>
-      <li><b>Couleur des cheveux&nbsp;: </b>{{ fiche.c_cheveux }}</li>
+	  de l'an {{fiche.annee_de_naissance}}</span></li>
+      <li><b>Zone de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_naissance_display }}</span></li>
+      <li><b>Ville de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_naissance|capfirst  }}</span></li>
+      <li><b>Zone de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_residence_display }}</span></li>
+      <li><b>Ville de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_residence|capfirst  }}</span></li>
+      <li><b>Taille&nbsp;: </b><span id="attribute_value">{{ fiche.taille }}m</span></li>
+      <li><b>Poids&nbsp;: </b><span id="attribute_value">{{ fiche.poids }} kg</span></li>
+      <li><b>Couleur des yeux&nbsp;: </b><span id="attribute_value">{{ fiche.c_yeux }}</span></li>
+      <li><b>Couleur des cheveux&nbsp;: </b><span id="attribute_value">{{ fiche.c_cheveux }}</span></li>
       {% if fiche.signes_dis != 'Aucun' %}
       <li><b>Signes distinctifs&nbsp;: </b><br>{{ fiche.signes_dis|linebreaksbr }}</li>
       {% endif %}
-      <li><b>Profession&nbsp;: </b>{{fiche.profession|capfirst }}</li>
+      <li><b>Profession&nbsp;: </b><span id="attribute_value">{{fiche.profession|capfirst }}</span></li>
     </ul>
+    </div>
   </div>
 
   <div class="media-right">
@@ -104,7 +108,7 @@ function getTooltip() {
     <div class="panel-heading">
       <h3 class="panel-title">Description</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body centre">
       {{fiche.description|linebreaksbr}}
     </div>
   </div>
@@ -112,7 +116,7 @@ function getTooltip() {
     <div class="panel-heading">
       <h3 class="panel-title">Historique</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body centre">
       {{fiche.historique|linebreaksbr}}
     </div>
   </div>
@@ -121,7 +125,7 @@ function getTooltip() {
     <div class="panel-heading">
       <h3 class="panel-title">Relations</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body centre">
       {{fiche.relations|linebreaksbr}}
     </div>
   </div>
@@ -133,7 +137,7 @@ function getTooltip() {
 	<div class="panel-heading">
 	  <h3 class="panel-title">Médaille(s)</h3>
 	</div>
-	<div class="panel-body">
+	<div class="panel-body centre">
 	  {{fiche.medailles|linebreaksbr}}
 	</div>
       </div>
@@ -165,7 +169,7 @@ function getTooltip() {
 	    {% for case in fiche.inventaire_fdg.cases.all %}
 	    <!-- <div class="container"> -->
 	    <a class="number-inventory" target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip">
-	      <img class="inventory-object" src={{ case.objet.image.url }} alt="Objet" id="icone">
+	      <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{case.objet.image_url}}.PNG" alt="Objet" id="icone">
 	      {% if case.nombre > 1 %}
 		<span class="bottomright">{{case.nombre}}</span>
 		{% endif %}
@@ -198,91 +202,91 @@ function getTooltip() {
 	<div class="panel-body">
 	  {% if mp %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' mp.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ mp.objet.image.url }} alt="Main principale" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{mp.objet.image_url}}.PNG" alt="Main principale" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-MainHand.PNG alt="Main principale" id="icone">
 	  {% endif %}
 	  {% if am %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' am.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ am.objet.image.url }} alt="Autre main" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{am.objet.image_url}}.PNG" alt="Autre main" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-SecondaryHand.PNG alt="Autre main" id="icone">
 	  {% endif %}
 	  {% if aa %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' aa.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ aa.objet.image.url }} alt="Autre arme" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{aa.objet.image_url}}.PNG" alt="Autre arme" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Ammo.PNG alt="Autre main" id="icone">
 	  {% endif %}
 	  {% if tete %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' tete.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ tete.objet.image.url }} alt="Tête" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{tete.objet.image_url}}.PNG" alt="Tête" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Head.PNG alt="Tête" id="icone">
 	  {% endif %}
 	  {% if cou %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' cou.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ cou.objet.image.url }} alt="Cou" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{cou.objet.image_url}}.PNG" alt="Cou" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Neck.PNG alt="Cou" id="icone">
 	  {% endif %}
 	  {% if epaules %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' epaules.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ epaules.objet.image.url }} alt="Epaules" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{epaules.objet.image_url}}.PNG" alt="Epaules" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Shoulder.PNG alt="Epaules" id="icone">
 	  {% endif %}
 	  {% if dos %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' dos.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ dos.objet.image.url }} alt="Dos" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{dos.objet.image_url}}.PNG" alt="Dos" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Shirt.PNG alt="Dos" id="icone">
 	  {% endif %}
 	  {% if torse %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' torse.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ torse.objet.image.url }} alt="Torse" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{torse.objet.image_url}}.PNG" alt="Torse" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Chest.PNG alt="Torse" id="icone">
 	  {% endif %}
 	  {% if poignets %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' poignets.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ poignets.objet.image.url }} alt="Poignets" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{poignets.objet.image_url}}.PNG" alt="Poignets" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Wrists.PNG alt="Poignets" id="icone">
 	  {% endif %}
 	  {% if mains %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' mains.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ mains.objet.image.url }} alt="Mains" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{mains.objet.image_url}}.PNG" alt="Mains" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Hands.PNG alt="Mains" id="icone">
 	  {% endif %}
 	  {% if taille %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' taille.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ taille.objet.image.url }} alt="Taille" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{taille.objet.image_url}}.PNG" alt="Taille" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Waist.PNG alt="Taille" id="icone">
 	  {% endif %}
 	  {% if jambes %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' jambes.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ jambes.objet.image.url }} alt="Jambes" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{jambes.objet.image_url}}.PNG" alt="Jambes" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Legs.PNG alt="Jambes" id="icone">
 	  {% endif %}
 	  {% if pieds %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' pieds.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ pieds.objet.image.url }} alt="Pieds" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{pieds.objet.image_url}}.PNG" alt="Pieds" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Feet.PNG alt="Pieds" id="icone">
@@ -290,7 +294,7 @@ function getTooltip() {
 	  {% for anneau in doigts %}
 	  {% if anneau %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' anneau.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ anneau.objet.image.url }} alt="Doigt" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{anneau.objet.image_url}}.PNG" alt="Doigt" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-RFinger.PNG alt="Doigt" id="icone">
@@ -299,7 +303,7 @@ function getTooltip() {
 	  {% for diver in divers %}
 	  {% if diver %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' diver.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src={{ diver.objet.image.url }} alt="Divers" id="icone">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{diver.objet.image_url}}.PNG" alt="Divers" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Relic.PNG alt="Divers" id="icone">
@@ -314,7 +318,7 @@ function getTooltip() {
       <div class="panel-heading">
 	<h3 class="panel-title">Statistiques</h3>
       </div>
-      <div class="panel-body" id="center">
+      <div class="panel-body centre">
 	{% if perms.fiches.objet_ok %}
 	<b>Effets en jeu :</b>
 	{% for effet in effets_ig %}

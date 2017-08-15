@@ -27,7 +27,7 @@ class FicheForm(ModelForm):
 
     class Meta:
         model = Fiche
-        fields = ['nom', 'prenom', 'autres_prenoms', 'titre',
+        fields = ['nom', 'prenom', 'autres_prenoms', 'ne', 'titre',
                   'autres_titres', 'sexe', 'race', 'taille',
                   'poids', 'c_yeux', 'c_cheveux', 'signes_dis',
                   'profession', 'medailles', 'etat', 'pj',
