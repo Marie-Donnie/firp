@@ -1,6 +1,7 @@
 {% extends "site/base.html" %}
 
 {% load filters %}
+{% load static %}
 
 {% block script %}
 {% endblock %}
@@ -51,7 +52,7 @@
       {% if quete.cible != 'Aucune' and quete.ennemi %}
 
       <div class="quest-target">
-	<img class="quest-portrait" src={{quete.ennemi.url}} alt="Ennemi portrait">
+	<img class="quest-portrait" src="{% get_media_prefix %}/images/site/quest/Portraits/{{quete.ennemi}}.PNG" alt="Ennemi portrait">
 	<img class="quest-portrait-frame" src="/fiches/media/images/site/quest/UI-TargetingFrame-Elite.PNG" alt="Elite portrait frame">
 	<span class="quest-portrait-name">{{quete.cible}}</span>
       </div> <!-- media-right -->

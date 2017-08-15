@@ -289,13 +289,13 @@ class Objet(models.Model):
                                    default='Aucune')
     prix = models.IntegerField(default=0)
     poids = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='images/objets',
-                              default='images/site/WoWUnknownItem01.PNG')
+    # image = models.ImageField(upload_to='images/objets',
+    #                           default='images/site/WoWUnknownItem01.PNG')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='objet')
-    # image_url = models.CharField(max_length=50,
-    #                              default='WoWUnknownItem01.PNG')
+    image_url = models.CharField(max_length=50,
+                                 default='WoWUnknownItem01')
 
     class Meta:
         ordering = ["nom"]
@@ -546,8 +546,8 @@ class Quete(models.Model):
                                null=True,
                                blank=True,
                                related_name='quete_reussie')
-    ennemi = models.ImageField(upload_to='images/site/quest/ennemis',
-                               default='images/site/quest/Portraits/FollowerPortrait_NoPortrait.png')
+    ennemi = models.CharField(max_length=60,
+                              default='images/site/quest/Portraits/FollowerPortrait_NoPortrait.png')
     creation = models.DateField(default=timezone.now)
 
     class Meta:
