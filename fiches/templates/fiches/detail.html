@@ -7,7 +7,19 @@
 {% block script %}
 $(function () {
 
+/* Well, that's more complicated than it should.
+ * When mousing over an object, we want to display a tooltip with the object info.
+ * But, that info is not in the page, so we need to get it with an ajax call.
+ * Only after the ajax call succeedd we build the Bootstrap tooltip.  However,
+ * if the mouse is still over the object, the tooltip doesn't show because the
+ * listeners for the tooltip are not triggered.  We have to keep track ourselves
+ * of whether the mouse is still on the object using two additional listeners.
+ * Once the tooltip is built and shown (or not), we can destroy all this machinery
+ * and let Bootstrap tooltip handle the rest.
+ */
 $('[data-toggle="objet-tooltip"]').on('mouseenter', getTooltip)
+$('[data-toggle="objet-tooltip"]').on('mouseenter', onMouseEnter)
+$('[data-toggle="objet-tooltip"]').on('mouseleave', onMouseLeave)
 
 function getTooltip() {
   var elem = this;
@@ -16,8 +28,20 @@ function getTooltip() {
   $.ajax(tooltipUrl)
   .done(function(data) {
     $(elem).tooltip({html: true, placement: 'top', title: data});
-    $(elem).tooltip('show');
+    if ($(elem).data("isMouseOnUs")) {
+      $(elem).tooltip('show');
+    }
+    $(elem).off('mouseenter', onMouseEnter);
+    $(elem).off('mouseleave', onMouseLeave);
   });
+}
+
+function onMouseEnter() {
+  $(this).data("isMouseOnUs", true);
+}
+
+function onMouseLeave() {
+  $(this).data("isMouseOnUs", false)
 }
 
 });
