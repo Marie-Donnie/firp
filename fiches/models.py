@@ -268,6 +268,12 @@ class UserProfile(models.Model):
     image = models.ImageField(upload_to='images/users',
                               default='images/site/no-image.png')
     naissance = models.DateField()
+    affichage_date = models.CharField(max_length=1,
+                                      choices=((
+                                          ('n', "Normal"),
+                                          ('l', "Long")
+                                      )),
+                                      default="l")
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

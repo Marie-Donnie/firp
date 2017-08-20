@@ -9,8 +9,9 @@ from fiches.models import *
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['naissance', 'image', 'user']
-        widgets = {'user': forms.HiddenInput()}
+        fields = '__all__'
+        widgets = {'user': forms.HiddenInput(),
+                   'affichage_date': forms.RadioSelect(), }
 
 
 class AllauthSignupForm(forms.Form):
