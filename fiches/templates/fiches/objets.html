@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}Liste des objets{% endblock %}
 {% block page-title %}Liste des objets{% endblock %}
 
@@ -45,8 +47,8 @@
     <tr>
       <!-- <div class="character"> -->
       {% if o.has_equipement %}
-      {% if o.image %}
-      <td><a target="_blank" href="{% url 'detail_armure' o.armure.id %}"><img class="media-object" src={{ o.image.url }} alt="Portrait"></a></td>
+      {% if o.image_url %}
+      <td><a target="_blank" href="{% url 'detail_armure' o.armure.id %}"><img class="media-object" src="{% get_media_prefix %}images/ICONS/{{o.image_url}}.PNG" alt="Portrait"></a></td>
       {% else %}
       <td><a target="_blank" href="{% url 'detail_armure' o.armure.id %}"><img class="media-object" src="/fiches/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
       {% endif %}
@@ -62,8 +64,8 @@
 
       <td><a href="{% url 'detail_armure' o.armure.id %}">{{ o.armure.get_membre_display }}</a></td>
       {% else %}
-      {% if o.image %}
-      <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src={{ o.image.url }} alt="Portrait"></a></td>
+      {% if o.image_url %}
+      <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src="{% get_media_prefix %}images/ICONS/{{o.image_url}}.PNG" alt="Portrait"></a></td>
       {% else %}
       <td><a target="_blank" href="{% url 'detail_objet' o.id %}"><img class="media-object" src="/fiches/media/images/site/WoWUnknownItem01.PNG" alt="Portrait"></a></td>
       {% endif %}
