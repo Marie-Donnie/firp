@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from django import template
 from datetime import datetime
 
@@ -58,29 +60,29 @@ def age(value):
 @register.filter
 def mois(value):
     if value == 1:
-        mois = "Janvier"
+        mois = u"Janvier"
     elif value == 2:
-        mois = "Février"
+        mois = u"Février"
     elif value == 3:
-        mois = "Mars"
+        mois = u"Mars"
     elif value == 4:
-        mois = "Avril"
+        mois = u"Avril"
     elif value == 5:
-        mois = "Mai"
+        mois = u"Mai"
     elif value == 6:
-        mois = "Juin"
+        mois = u"Juin"
     elif value == 7:
-        mois = "Juillet"
+        mois = u"Juillet"
     elif value == 8:
-        mois = "Août"
+        mois = u"Août"
     elif value == 9:
-        mois = "Septembre"
+        mois = u"Septembre"
     elif value == 10:
-        mois = "Octobre"
+        mois = u"Octobre"
     elif value == 11:
-        mois = "Novembre"
+        mois = u"Novembre"
     elif value == 12:
-        mois = "Décembre"
+        mois = u"Décembre"
     else:
-        mois = "No"
+        mois = u"No"
     return mois
