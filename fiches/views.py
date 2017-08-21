@@ -58,6 +58,8 @@ def profile(request):
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
         else:
             form = UserProfileForm(instance=profil)
 
@@ -71,6 +73,8 @@ def profile(request):
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
         else:
             form = UserProfileForm()
 
