@@ -8,7 +8,7 @@
 <form enctype="multipart/form-data" action="" method="post">
   {% csrf_token %}
   <div class="form-group">
-    <label for="id_image">Image&nbsp;:</label>
+    <label for="id_image">Avatar&nbsp;:</label>
     <span id="description">
     {% if form.image.value %}
     Actuellement: <a href="{{MEDIA_URL}}{{form.image.value|default:'site/no-image.png'}}">{{form.image.value|default:'site/no-image.png'}}</a><br>
@@ -20,7 +20,7 @@
     <input name="image" id="id_image" type="file">
   </div>
   <div class="form-group">
-    <label for="id_naissance">Naissance&nbsp;:</label> <input name="naissance" value="{{form.naissance.value|date:'d/m/Y'|default_if_none:'01/01/1990'}}" required="" id="id_naissance" type="text">
+    <label for="id_naissance">Date de naissance&nbsp;:</label> <input name="naissance" value="{{form.naissance.value|date:'d/m/Y'|default_if_none:'01/01/1990'}}" required="" id="id_naissance" type="text">
   </div>
   <div class="form-group">
     <span id="affichage_date"><b>Affichage date&nbsp;:</b></span>
