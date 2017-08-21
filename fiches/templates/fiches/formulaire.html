@@ -431,6 +431,8 @@
       <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
       {% endif %}
+      <label for="id_competences">Compétences&nbsp;</label> <textarea name="competences" class="form-control" id="id_competences" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_competences','charcount8');" onkeydown="countChars('id_competences','charcount8');" onmouseout="countChars('id_competences','charcount8');">{{form.competences.value|default:'Aucune'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount8">0</span>/6000).</span>
     </div>
     <div class="form-group">
       <span id="description"><b>Type de personnage </b></span>

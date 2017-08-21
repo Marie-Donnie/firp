@@ -209,6 +209,8 @@ class Fiche(models.Model):
                                   default='A venir')
     relations = models.CharField(max_length=6000,
                                  default='Aucune')
+    competences = models.CharField(max_length=6000,
+                                   default='Aucune')
     image = models.ImageField(upload_to='images/persos',
                               default='images/site/no-image.png')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,

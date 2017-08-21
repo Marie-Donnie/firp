@@ -36,7 +36,8 @@ class FicheForm(ModelForm):
                   'annee_de_naissance', 'zone_de_naissance',
                   'ville_de_naissance', 'zone_de_residence',
                   'ville_de_residence', 'description', 'historique',
-                  'inventaire', 'relations', 'pseudo_du_personnage',
+                  'inventaire', 'relations',
+                  'competences', 'pseudo_du_personnage',
                   'afficher_pseudo', 'afficher_createur',
                   'afficher_inventaire', 'image', 'main_dir',
                   'inventaire_fdg', 'equipement', 'createur']

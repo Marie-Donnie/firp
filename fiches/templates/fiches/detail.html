@@ -83,61 +83,61 @@ function onMouseLeave() {
 <div class="media">
   <div class="media-body media-middle" id="detail-perso">
     <div id="center">
-    <h3 id="nom">
-      {{ fiche.prenom|capfirst }}
-      {% if fiche.autres_prenoms != 'Aucun' %}
-      {{ fiche.autres_prenoms }}
-      {% endif %}
-      {{ fiche.nom|capfirst }}
-      {% if fiche.ne != 'Non applicable' %}
-      né{% if fiche.sexe == 'f'%}e{% endif %} {{ fiche.ne }}
-      {% endif %}
-    </h3>
-    {{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}
-    <ul>
-      {% if fiche.titre != 'Aucun' %}
-      <li><b>Titre(s) et/ou grade&nbsp;: </b><span id="attribute_value">{{ fiche.titre|capfirst  }}</span></li>
-      {% endif %}
-      {% if fiche.autres_titres != 'Aucun' %}
-      <li><b>Autres titres&nbsp;: </b><span id="attribute_value">{{ fiche.autres_titres|linebreaksbr }}</span></li>
-      {% endif %}
-      <li><b>Profession&nbsp;: </b><span id="attribute_value">{{fiche.profession|capfirst }}</span></li>
-      <li><b>Sexe&nbsp;: </b><span id="attribute_value">{{ fiche.get_sexe_display }}</span></li>
-      <li><b>Race&nbsp;: </b><span id="attribute_value">{{ fiche.race|capfirst }}</span></li>
-      <li><b>Date de naissance&nbsp;: </b>
-	<span id="attribute_value">
-	  {{fiche.jour_de_naissance}}
-	  {% if fiche.jour_de_naissance == 1 %}er{% endif %} <!-- fiche.jour -->
-	  {% if not utilisateur.infos %}
-	  {% if fiche.jour_de_naissance != 1 %}ème{% endif %} <!-- fiche.jour -->
-	  jour du
-	  {{fiche.mois_de_naissance}}
-	  {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %} <!-- fiche.mois -->
-	  de l'an {{fiche.annee_de_naissance}} <br>
-	  {% endif %} <!-- not utilisateurs.infos -->
-	  {% if utilisateur.infos.affichage_date == 'n' %}
-	  {{fiche.mois_de_naissance|mois}} {{fiche.annee_de_naissance}}
-	  {% elif utilisateur.infos.affichage_date == 'l' %}
-	  {% if fiche.jour_de_naissance != 1 %}ème{% endif %}
-	  jour du
-	  {{fiche.mois_de_naissance}}
-	  {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %}
-	  de l'an {{fiche.annee_de_naissance}} <br>
-	  {% endif %}
-	  ({{fiche.annee_de_naissance|age}} an{{fiche.annee_de_naissance|age|pluralize}} cette année)
-      </span></li>
-      <li><b>Zone de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_naissance_display }}</span></li>
-      <li><b>Ville de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_naissance|capfirst  }}</span></li>
-      <li><b>Zone de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_residence_display }}</span></li>
-      <li><b>Ville de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_residence|capfirst  }}</span></li>
-      <li><b>Taille&nbsp;: </b><span id="attribute_value">{{ fiche.taille }}m</span></li>
-      <li><b>Poids&nbsp;: </b><span id="attribute_value">{{ fiche.poids }} kg</span></li>
-      <li><b>Couleur des yeux&nbsp;: </b><span id="attribute_value">{{ fiche.c_yeux }}</span></li>
-      <li><b>Couleur des cheveux&nbsp;: </b><span id="attribute_value">{{ fiche.c_cheveux }}</span></li>
-      {% if fiche.signes_dis != 'Aucun' %}
-      <li><b>Signes distinctifs&nbsp;: </b><br>{{ fiche.signes_dis|linebreaksbr }}</li>
-      {% endif %}
-    </ul>
+      <h3 id="nom">
+	{{ fiche.prenom|capfirst }}
+	{% if fiche.autres_prenoms != 'Aucun' %}
+	{{ fiche.autres_prenoms }}
+	{% endif %}
+	{{ fiche.nom|capfirst }}
+	{% if fiche.ne != 'Non applicable' %}
+	né{% if fiche.sexe == 'f'%}e{% endif %} {{ fiche.ne }}
+	{% endif %}
+      </h3>
+      {{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}
+      <ul>
+	{% if fiche.titre != 'Aucun' %}
+	<li><b>Titre(s) et/ou grade&nbsp;: </b><span id="attribute_value">{{ fiche.titre|capfirst  }}</span></li>
+	{% endif %}
+	{% if fiche.autres_titres != 'Aucun' %}
+	<li><b>Autres titres&nbsp;: </b><span id="attribute_value">{{ fiche.autres_titres|linebreaksbr }}</span></li>
+	{% endif %}
+	<li><b>Profession&nbsp;: </b><span id="attribute_value">{{fiche.profession|capfirst }}</span></li>
+	<li><b>Sexe&nbsp;: </b><span id="attribute_value">{{ fiche.get_sexe_display }}</span></li>
+	<li><b>Race&nbsp;: </b><span id="attribute_value">{{ fiche.race|capfirst }}</span></li>
+	<li><b>Date de naissance&nbsp;: </b>
+	  <span id="attribute_value">
+	    {{fiche.jour_de_naissance}}
+	    {% if fiche.jour_de_naissance == 1 %}er{% endif %} <!-- fiche.jour -->
+	    {% if not utilisateur.infos %}
+	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %} <!-- fiche.jour -->
+	    jour du
+	    {{fiche.mois_de_naissance}}
+	    {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %} <!-- fiche.mois -->
+	    de l'an {{fiche.annee_de_naissance}} <br>
+	    {% endif %} <!-- not utilisateurs.infos -->
+	    {% if utilisateur.infos.affichage_date == 'n' %}
+	    {{fiche.mois_de_naissance|mois}} {{fiche.annee_de_naissance}}
+	    {% elif utilisateur.infos.affichage_date == 'l' %}
+	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %}
+	    jour du
+	    {{fiche.mois_de_naissance}}
+	    {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %}
+	    de l'an {{fiche.annee_de_naissance}} <br>
+	    {% endif %}
+	    ({{fiche.annee_de_naissance|age}} an{{fiche.annee_de_naissance|age|pluralize}} cette année)
+	</span></li>
+	<li><b>Zone de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_naissance_display }}</span></li>
+	<li><b>Ville de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_naissance|capfirst  }}</span></li>
+	<li><b>Zone de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_residence_display }}</span></li>
+	<li><b>Ville de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_residence|capfirst  }}</span></li>
+	<li><b>Taille&nbsp;: </b><span id="attribute_value">{{ fiche.taille }}m</span></li>
+	<li><b>Poids&nbsp;: </b><span id="attribute_value">{{ fiche.poids }} kg</span></li>
+	<li><b>Couleur des yeux&nbsp;: </b><span id="attribute_value">{{ fiche.c_yeux }}</span></li>
+	<li><b>Couleur des cheveux&nbsp;: </b><span id="attribute_value">{{ fiche.c_cheveux }}</span></li>
+	{% if fiche.signes_dis != 'Aucun' %}
+	<li><b>Signes distinctifs&nbsp;: </b><br>{{ fiche.signes_dis|linebreaksbr }}</li>
+	{% endif %}
+      </ul>
     </div>
   </div>
 
@@ -186,6 +186,18 @@ function onMouseLeave() {
       </div>
     </div>
     {% endif %}
+    <div class="col-md-6">
+      <div class="panel panel-defaut" id="details-panels">
+	<div class="panel-heading">
+	  <h3 class="panel-title">Compétences</h3>
+	</div>
+	<div class="panel-body centre">
+	  {{fiche.competences|linebreaksbr}}
+	</div>
+      </div> <!-- panel panel-default -->
+    </div>   <!-- col-md-6 -->
+  </div>   <!-- row -->
+  <div class="row">
     {% if fiche.afficher_inventaire or user.id == fiche.createur.id %}
     {% if fiche.inventaire %}
     <div class="col-md-6">
@@ -196,8 +208,8 @@ function onMouseLeave() {
 	<div class="panel-body">
 	  {{fiche.inventaire|linebreaksbr}}
 	</div>
-      </div>
-    </div>
+      </div> <!-- panel panel-default -->
+    </div>   <!-- col-md-6 -->
     {% elif fiche.inventaire_fdg %}
     <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">
@@ -214,26 +226,24 @@ function onMouseLeave() {
 	    <a class="number-inventory" target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip">
 	      <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{case.objet.image_url}}.PNG" alt="Objet" id="icone">
 	      {% if case.nombre > 1 %}
-		<span class="bottomright">{{case.nombre}}</span>
-		{% endif %}
-	      </a>
+	      <span class="bottomright">{{case.nombre}}</span>
+	      {% endif %}
+	    </a>
 	    <!-- </div> -->
-	  <!-- - {{case.get_nom}}<br> -->
-	  {% endfor %}
-	  {% for i in range %}
-	  <img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">
-	  {% endfor %}
-	  </div>
-	</div>
-      </div>
-    </div>
-    {% endif %}
+	    <!-- - {{case.get_nom}}<br> -->
+	    {% endfor %}
+	    {% for i in range %}
+	    <img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">
+	    {% endfor %}
+	  </div> <!-- inventory -->
+	</div>	 <!-- panel-body -->
+      </div>	 <!-- panel panel-default -->
+    </div>	 <!-- col-md-6 -->
+    {% endif %}	 <!-- fiche.inventaire -->
 
-    {% endif %}
-  </div>
+    {% endif %}	<!-- afficher inventaire -->
 
-  {% if fiche.equipement %}
-  <div class="row">
+    {% if fiche.equipement %}
     <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">
 	<div class="panel-heading">
@@ -352,55 +362,54 @@ function onMouseLeave() {
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Relic.PNG alt="Divers" id="icone">
 	  {% endif %}
 	  {% endfor %}
-	</div>
-      </div>
-    </div>
-    {% if fiche.equipement %}
-    <div class="col-md-6">
-      <div class="panel panel-defaut" id="details-panels">
-	<div class="panel-heading">
-	  <h3 class="panel-title">Statistiques</h3>
-	</div> <!-- panel-heading -->
-	<div class="panel-body centre">
-	  {% if perms.fiches.objet_ok %}
-	  <b>Effets en jeu :</b>
-	  {% for effet in effets_ig %}
-	  {% if 'Aucun' not in effet %}
-	  {{ effet|linebreaksbr }}<br>
-	  {% endif %} <!-- aucun -->
-	  {% endfor %}<br>
-	  {% else %} <!-- perms.fiches.objet_ok -->
-	  <b>Effets :</b>
-	  {% for effet in effets %}
-	  {% if 'Aucun' not in effet %}
-	  {{ effet|linebreaksbr }}<br>
-	  {% endif %} <!-- aucun -->
-	  {% endfor %}<br>
-	  {% endif %} <!-- perms.fiches.objet_ok -->
-	  {% if runique %}
-	  "Set : Immunise à la magie"<br>
-	  {% endif %} <!-- runique -->
-	  {% if terradiance %}
-	  "Set : + 5 a l'attaque et la défense contre les morts-vivants"<br>
-	  {% endif %} <!-- terra -->
-	  {% if armure != 0 %}
-	  <b>Armure :</b> {{ armure }}<br>
-	  {% endif %} <!-- armure -->
-	  {% if force != 0 %}
-	  <b>Force :</b> {{ force }}<br>
-	  {% endif %} <!-- force -->
-	  {% if agi != 0 %}
-	  <b>Agilité :</b> {{ agi }}<br>
-	  {% endif %} <!-- agi -->
-	  {% if intell != 0 %}
-	  <b>Intelligence :</b> {{ intell }}
-	  {% endif %} <!-- intell -->
-	</div> <!-- panel-body centre -->
-      </div>   <!-- panel panel-default -->
-    </div>  <!-- col-md-6 -->
-  {% endif %} <!-- fiche.equimenet -->
-    {% endif %}
-</div>
+	</div> <!-- panel-body -->
+      </div>   <!-- panel-default -->
+    </div>     <!-- col-md-6 -->
+    {% endif %} <!-- fiche.equipement -->
+  </div>       <!-- row -->
+  {% if fiche.equipement %}
+  <div class="panel panel-defaut" id="details-panels">
+    <div class="panel-heading">
+      <h3 class="panel-title">Statistiques</h3>
+    </div> <!-- panel-heading -->
+    <div class="panel-body centre">
+      {% if perms.fiches.objet_ok %}
+      <b>Effets en jeu :</b>
+      {% for effet in effets_ig %}
+      {% if 'Aucun' not in effet %}
+      {{ effet|linebreaksbr }}<br>
+      {% endif %} <!-- aucun -->
+      {% endfor %}<br>
+      {% else %} <!-- perms.fiches.objet_ok -->
+      <b>Effets :</b>
+      {% for effet in effets %}
+      {% if 'Aucun' not in effet %}
+      {{ effet|linebreaksbr }}<br>
+      {% endif %} <!-- aucun -->
+      {% endfor %}<br>
+      {% endif %} <!-- perms.fiches.objet_ok -->
+      {% if runique %}
+      "Set : Immunise à la magie"<br>
+      {% endif %} <!-- runique -->
+      {% if terradiance %}
+      "Set : + 5 a l'attaque et la défense contre les morts-vivants"<br>
+      {% endif %} <!-- terra -->
+      {% if armure != 0 %}
+      <b>Armure :</b> {{ armure }}<br>
+      {% endif %} <!-- armure -->
+      {% if force != 0 %}
+      <b>Force :</b> {{ force }}<br>
+      {% endif %} <!-- force -->
+      {% if agi != 0 %}
+      <b>Agilité :</b> {{ agi }}<br>
+      {% endif %} <!-- agi -->
+      {% if intell != 0 %}
+      <b>Intelligence :</b> {{ intell }}
+      {% endif %} <!-- intell -->
+    </div> <!-- panel-body centre -->
+  </div>   <!-- panel panel-default -->
+  {% endif %} <!-- fiche.equipement -->
+</div>		<!-- media -->
 
 
 {% endblock %}
