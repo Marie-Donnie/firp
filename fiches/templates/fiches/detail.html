@@ -134,6 +134,7 @@ function onMouseLeave() {
 	<li><b>Poids&nbsp;: </b><span id="attribute_value">{{ fiche.poids }} kg</span></li>
 	<li><b>Couleur des yeux&nbsp;: </b><span id="attribute_value">{{ fiche.c_yeux }}</span></li>
 	<li><b>Couleur des cheveux&nbsp;: </b><span id="attribute_value">{{ fiche.c_cheveux }}</span></li>
+	<li><b>Main directrice&nbsp;: </b><span id="attribute_value">{{ fiche.get_main_dir_display }}</span></li>
 	{% if fiche.signes_dis != 'Aucun' %}
 	<li><b>Signes distinctifs&nbsp;: </b><br>{{ fiche.signes_dis|linebreaksbr }}</li>
 	{% endif %}
