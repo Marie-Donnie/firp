@@ -217,3 +217,18 @@ input, textarea {
 #id_reservee {
     color: #000;
 }
+
+.icones-text {
+    border: 1px solid beige;
+    flex: 1;
+}
+
+.icones {
+    width: 64px;
+    height: auto;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+}

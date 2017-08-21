@@ -596,3 +596,29 @@ def res_quete(request, quete_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas prendre de quete.")
+
+
+from os import listdir
+@login_required
+def gallery(request):
+    if request.user.has_perm('fiches.objet_ok'):
+        images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
+        images = listdir(images_url)
+        images_sorted = sorted(images, key=str.lower)
+        paginator = Paginator(images_sorted, 100)
+        page = request.GET.get('page')
+        try:
+            images_list = paginator.page(page)
+            # if page not an integer, display first page of results
+        except PageNotAnInteger:
+            images_list = paginator.page(1)
+            # if page is out of range, display the last page of results
+        except EmptyPage:
+            images_list = paginator.page(paginator.num_pages)
+
+        context = {'images_list': images_list}
+        return render(request, 'site/gallery.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas acceder a la gallerie")
