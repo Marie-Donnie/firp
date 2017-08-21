@@ -19,23 +19,26 @@
     </div> <!-- quest-head -->
   </div>   <!-- page-header -->
 
-  <div id="char_form">
-    <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
-      {% csrf_token %}
+  <div class="back" id="centre">
+    <div id="char_form">
+      <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+	{% csrf_token %}
 
-      <label for="id_reservee">Reservee&nbsp;:</label>
+	<label for="id_reservee">Reservee&nbsp;:</label>
 	<select name="reservee" id="id_reservee">
-	{% for personnage in personnages %}
-	<option value="{{personnage.id}}" selected="">{{personnage.prenom}} {{personnage.nom}}</option>
-	{% endfor %}
+	  {% for personnage in personnages %}
+	  <option value="{{personnage.id}}" selected="">{{personnage.prenom}} {{personnage.nom}}</option>
+	  {% endfor %}
 
 
 	</select>
 
-	<input name="etat" value="{{quete.etat}}" id="id_etat" type="hidden"></li>
+	<input name="etat" value="{{quete.etat}}" id="id_etat" type="hidden">
 
-      <input class="btn btn-default" type="submit" value="Valider" />
-    </form>
+
+	<input class="btn btn-default" type="submit" value="Valider" />
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}
