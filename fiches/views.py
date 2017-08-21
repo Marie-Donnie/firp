@@ -125,7 +125,7 @@ def creer_fiche(request):
 # Display the request Fiche
 def detail_fiche(request, fiche_id):
     fiche = get_object_or_404(Fiche, pk=fiche_id)
-
+    utilisateur = request.user
     if fiche.inventaire_fdg:
         if (fiche.inventaire_fdg.cases.count() < 30):
             nb = 30 - fiche.inventaire_fdg.cases.count()
@@ -165,7 +165,8 @@ def detail_fiche(request, fiche_id):
                'epaules': epaules, 'torse': torse, 'mains': mains,
                'taille': taille, 'jambes': jambes, 'dos': dos, 'cou': cou,
                'poignets': poignets, 'doigts': doigts, 'divers': divers,
-               'pieds': pieds, 'runique': runique, 'terradiance': terradiance}
+               'pieds': pieds, 'runique': runique, 'terradiance': terradiance,
+               'utilisateur': utilisateur}
     return render(request, 'fiches/detail.html', context)
 
 
