@@ -86,3 +86,15 @@ def mois(value):
     else:
         mois = u"No"
     return mois
+
+
+@register.simple_tag
+def url_replace(request, field, value):
+
+    dict_ = request.GET.copy()
+
+    # if dict_.__contains__('csrfmiddlewaretoken'):
+    #     dict_.pop('csrfmiddlewaretoken')
+    dict_[field] = value
+
+    return dict_.urlencode()

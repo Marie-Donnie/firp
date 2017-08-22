@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load l10n %}
+{% load staticfiles %}
 
 {% block title %}Créer/éditer un objet{% endblock %}
 {% block page-title %}Créer/éditer un objet{% endblock %}
@@ -43,6 +44,8 @@
     <div class="form-group">
       <label for="id_image_url">Icône&nbsp;</label>
       <input name="image_url" required="" id="id_image_url" maxlength="50" type="text" value="{{form.image_url.value|default_if_none:'WoWUnknownItem01'}}">
+      <a class="btn btn-default" href="{% url 'gallerie' %}" target="_blank">Voir icônes</a>
+
       <!-- <span id="description"> -->
       <!-- 	{% if form.image.value %} -->
       <!-- 	Actuellement: <a href="{{MEDIA_URL}}{{form.image.value|default:'site/WoWUnknownItem01.PNG'}}">{{form.image.value|default:'site/WoWUnknownItem01.PNG'}}</a><br> -->
@@ -57,4 +60,6 @@
 
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>
+
+
 {% endblock %}

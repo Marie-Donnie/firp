@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load static %}
+{% load filters %}
 
 {% block contenu %}
 
@@ -11,6 +12,13 @@
   <title>Gallerie</title>
 </head>
 <body>
+  <div id="centre">
+    <form action="{% url 'rechercher_gallerie' %}" method="GET">
+      <input type="text" name="recherche"><br>
+      <input type="submit" value="Chercher">
+    </form>
+  </div>
+
   <div id="body">
     {% if images_list %}
     <div class="gallery">
@@ -27,7 +35,11 @@
 	<ul class="pagination pagination-sm">
 	  {% if images_list.has_previous %}
 	  <li>
+	    {% if recherche %}
+	    <a href="?{% url_replace request 'page' images_list.previous_page_number %}" aria-label="Précédent">
+	    {% else %}
 	    <a href="?page={{ images_list.previous_page_number }}" aria-label="Précédent">
+	      {% endif %}
 	      <span aria-hidden="true">&laquo;</span>
 	    </a>
 	  </li>
@@ -35,7 +47,11 @@
 
 	  {% for p in images_list.paginator.page_range %}
 	  <li>
-	    <a href="?page={{ p }}">
+	    {% if recherche %}
+	    <a href="?{% url_replace request 'page' p %}">
+	      {% else %}
+	      <a href="?page={{ p }}">
+		{% endif %}
 	      {{p}}
 	    </a>
 	  </li>
@@ -43,7 +59,11 @@
 
 	  {% if images_list.has_next %}
 	  <li>
-	    <a href="?page={{ images_list.next_page_number }}" aria-label="Suivant">
+	    {% if recherche %}
+	    <a href="?{% url_replace request 'page' images_list.next_page_number %}" aria-label="Suivant">
+	      {% else %}
+	      <a href="?page={{ images_list.next_page_number }}" aria-label="Suivant">
+	      {% endif %}
               <span aria-hidden="true">&raquo;</span>
 	    </a>
 	  </li>
@@ -53,7 +73,7 @@
     </div> <!-- quest-pages -->
     </div>
     {% else %}
-    <p>Aucune quête</p>
+    <p>Aucune icône</p>
     {% endif %}
 
   </div>

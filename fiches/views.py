@@ -599,10 +599,21 @@ def res_quete(request, quete_id):
 
 
 from os import listdir
+from os import walk
 @login_required
 def gallery(request):
     if request.user.has_perm('fiches.objet_ok'):
+        # recherche = ''
         images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
+        # if request.method == 'POST':
+        #     form = request.POST.copy()
+        #     recherche = form['recherche']
+        #     images = []
+        #     for root, dirs, files in walk(images_url):
+        #         for name in files:
+        #             if recherche.lower() in name.lower():
+        #                 images += [name]
+        # else:
         images = listdir(images_url)
         images_sorted = sorted(images, key=str.lower)
         paginator = Paginator(images_sorted, 100)
@@ -617,6 +628,43 @@ def gallery(request):
             images_list = paginator.page(paginator.num_pages)
 
         context = {'images_list': images_list}
+        return render(request, 'site/gallery.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas acceder a la gallerie")
+
+
+
+@login_required
+def gallery_search(request):
+    if request.user.has_perm('fiches.objet_ok'):
+        # if request.method == 'POST':
+        #     form = request.POST.copy()
+        #     recherche = form['recherche']
+        # else:
+        #     recherche = 'lol'
+        # print(recherche)
+        recherche = request.GET.get('recherche')
+        images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
+        images = []
+        for root, dirs, files in walk(images_url):
+            for name in files:
+                if recherche.lower() in name.lower():
+                    images += [name]
+        images_sorted = sorted(images, key=str.lower)
+        paginator = Paginator(images_sorted, 100)
+        page = request.GET.get('page')
+        try:
+            images_list = paginator.page(page)
+            # if page not an integer, display first page of results
+        except PageNotAnInteger:
+            images_list = paginator.page(1)
+            # if page is out of range, display the last page of results
+        except EmptyPage:
+            images_list = paginator.page(paginator.num_pages)
+
+        context = {'images_list': images_list, 'recherche': recherche}
         return render(request, 'site/gallery.html', context)
 
     else:
