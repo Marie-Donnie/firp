@@ -56,12 +56,12 @@ a:hover {
 }
 
 .quest-head {
-    background-image: url("/static/site/images/TitleBannerlarge.PNG");
+    background-image: url("/static/site/images/palbar.PNG");
     background-repeat: no-repeat;
     padding: 5px 1px;
     border: 0px;
     margin: 0%;
-    background-position: center;
+    background-position: center bottom;
 }
 
 #quest-header h1 {
