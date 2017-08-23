@@ -64,13 +64,12 @@ urlpatterns = [
     # RPG
     url(r'^', include('fiches.rpg.avant_garde.urls')),
     # Gallery
-    url(r'^gallerie$', views.gallery, name='gallerie'),
+    url(r'^gallerie/$', views.gallery, name='gallerie'),
     url(r'^gallerie/rechercher/$', views.gallery_search,
         name='rechercher_gallerie'),
-    # url(r'^gallerie/rechercher/(?P<recherche>\D+)$', views.gallery_search,
-    #     name='rechercher_gallerie'),
-    # url(r'^avant_garde/creer_perso/(?P<perso_id>\d+)/$', views.creer_base,
-    #     name='creer_perso'),
+    # Campagnes
+    url(r'campagnes/$', views.campagnes, name='campagnes'),
+    url(r'campagnes/(?P<campagne_id>\d+)/$', views.campagne, name='campagne'),
 ]
 
 if settings.DEBUG:

@@ -121,3 +121,17 @@ class QueteAdmin(admin.ModelAdmin):
     form = QueteForm
 
 admin.site.register(Quete, QueteAdmin)
+
+
+class OperationAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'id')
+    form = OperationForm
+
+admin.site.register(Operation, OperationAdmin)
+
+
+class MissionAdmin(admin.ModelAdmin):
+    list_display = ('numero', 'lieu', 'type_mis', 'id')
+    form = MissionForm
+
+admin.site.register(Mission, MissionAdmin)

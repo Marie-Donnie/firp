@@ -598,6 +598,9 @@ def res_quete(request, quete_id):
         return HttpResponse("Vous ne pouvez pas prendre de quete.")
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GALLERIE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
 from os import listdir
 from os import walk
 @login_required
@@ -670,3 +673,43 @@ def gallery_search(request):
     else:
 
         return HttpResponse("Vous ne pouvez pas acceder a la gallerie")
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CAMPAGNES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
+@login_required
+def campagnes(request):
+    if request.user.has_perm('fiches.objet_ok'):
+        campagnes = Operation.objects.all().order_by('nom', 'dirigeant')
+        paginator = Paginator(campagnes, 8)
+        page = request.GET.get('page')
+        try:
+            campagnes_list = paginator.page(page)
+        # if page not an integer, display first page of results
+        except PageNotAnInteger:
+            campagnes_list = paginator.page(1)
+        # if page is out of range, display the last page of results
+        except EmptyPage:
+            campagnes_list = paginator.page(paginator.num_pages)
+
+        context = {'campagnes': campagnes, 'campagnes_list': campagnes_list}
+
+        return render(request, 'site/campagnes.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas acceder aux campagnes")
+
+
+@login_required
+def campagne(request, campagne_id):
+    if request.user.has_perm('fiches.objet_ok'):
+        campagne = get_object_or_404(Operation, pk=campagne_id)
+
+        context = {'campagne': campagne}
+
+        return render(request, 'site/campagne.html', context)
+    else:
+
+        return HttpResponse("Vous ne pouvez pas acceder aux campagnes")
