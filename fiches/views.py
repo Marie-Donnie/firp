@@ -706,10 +706,34 @@ def campagnes(request):
 def campagne(request, campagne_id):
     if request.user.has_perm('fiches.objet_ok'):
         campagne = get_object_or_404(Operation, pk=campagne_id)
-
-        context = {'campagne': campagne}
+        missions = Mission.objects.filter(operation=campagne).order_by('numero')
+        paginator = Paginator(missions, 8)
+        page = request.GET.get('page')
+        try:
+            missions_list = paginator.page(page)
+        # if page not an integer, display first page of results
+        except PageNotAnInteger:
+            missions_list = paginator.page(1)
+        # if page is out of range, display the last page of results
+        except EmptyPage:
+            missions_list = paginator.page(paginator.num_pages)
+        context = {'campagne': campagne, 'missions_list': missions_list}
 
         return render(request, 'site/campagne.html', context)
+    else:
+
+        return HttpResponse("Vous ne pouvez pas acceder aux campagnes")
+
+
+@login_required
+def mission(request, campagne_id, mission_id):
+    if request.user.has_perm('fiches.objet_ok'):
+        mission = get_object_or_404(Mission, pk=mission_id)
+
+        context = {'mission': mission}
+
+        return render(request, 'site/rapport_mission.html', context)
+
     else:
 
         return HttpResponse("Vous ne pouvez pas acceder aux campagnes")

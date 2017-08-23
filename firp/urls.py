@@ -70,6 +70,8 @@ urlpatterns = [
     # Campagnes
     url(r'campagnes/$', views.campagnes, name='campagnes'),
     url(r'campagnes/(?P<campagne_id>\d+)/$', views.campagne, name='campagne'),
+    url(r'campagnes/(?P<campagne_id>\d+)/(?P<mission_id>\d+)/$', views.mission,
+        name='mission'),
 ]
 
 if settings.DEBUG:

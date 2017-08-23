@@ -1,0 +1,69 @@
+{% extends "site/base.html" %}
+
+{% load filters %}
+{% load static %}
+
+{% block script %}
+{% endblock %}
+
+
+{% block title %}{{quete.nom}}{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+
+<div class="campaign-body">
+
+  <div class="page-header" id="campaign-header" onclick="document.location='{% url 'campagnes' %}'">
+    <div class="campaign-head">
+      <h1>Campagnes</h1>
+    </div> <!-- quest-head -->
+  </div>   <!-- page-header -->
+
+  <div class="fond">
+    {% if missions_list %}
+    <div class="campaigns">
+    {% for mission in missions_list %}
+    <div class="campaign">
+      <a class="btn btn-campaign" href="{% url 'mission' campagne.id mission.id %}">{{ mission }}</a>
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+  <div class="quest-pages">
+    <span>Page {{ missions_list.number }} sur {{ missions_list.paginator.num_pages }}</span>
+    <nav aria-label="Page navigation" id="pagination">
+      <ul class="pagination pagination-sm pagination-campaign">
+	{% if missions_list.has_previous %}
+	<li>
+	  <a href="?page={{ missions_list.previous_page_number }}" aria-label="Précédent">
+	    <span aria-hidden="true">&laquo;</span>
+	  </a>
+	</li>
+	{% endif %}
+
+	{% for p in missions_list.paginator.page_range %}
+	<li>
+	  <a href="?page={{ p }}">
+	    {{p}}
+	  </a>
+	</li>
+	{% endfor %}
+
+	{% if missions_list.has_next %}
+	<li>
+	  <a href="?page={{ missions_list.next_page_number }}" aria-label="Suivant">
+            <span aria-hidden="true">&raquo;</span>
+	  </a>
+	</li>
+	{% endif %}
+      </ul>
+    </nav>
+  </div>
+  {% else %}
+  <p>Aucune mission</p>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -22,15 +22,18 @@
 
   <div class="fond">
     {% if campagnes_list %}
+    <div class="campaigns">
     {% for campagne in campagnes_list %}
-
-    <a class="btn btn-campagne" href="{% url 'campagne' campagne.id %}">{{ campagne }}</a>
+    <div class="campaign">
+      <a class="btn btn-campaign" href="{% url 'campagne' campagne.id %}">{{ campagne }}</a>
+    </div>
     {% endfor %}
+    </div>
   </div>
   <div class="quest-pages">
     <span>Page {{ campagnes_list.number }} sur {{ campagnes_list.paginator.num_pages }}</span>
     <nav aria-label="Page navigation" id="pagination">
-      <ul class="pagination pagination-sm">
+      <ul class="pagination pagination-sm pagination-campaign">
 	{% if campagnes_list.has_previous %}
 	<li>
 	  <a href="?page={{ campagnes_list.previous_page_number }}" aria-label="Précédent">
