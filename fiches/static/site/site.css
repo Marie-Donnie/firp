@@ -45,7 +45,7 @@ a:hover {
     padding: 0px 0px 0px 0px;
     margin: 5px 0px 0px 0px;
     border-bottom: 0;
-    border: 5px ridge #edd5a9;
+    border: 1px ridge #edd5a9;
     border-radius: 3px;
 }
 
@@ -254,7 +254,7 @@ input, textarea {
 #campaign-header {
     background-image: url("/static/site/images/bar2.PNG");
     padding: 0px 0px 0px 0px;
-    border: 5px ridge #474543;
+    border: 1px ridge #474543;
     border-radius: 3px;
     background-size: cover;
     width: 1050px;
@@ -292,7 +292,7 @@ input, textarea {
     margin: 3% auto;
     color: #000;
     background-size: cover;
-    border: 5px groove #edd5a9;
+    border: 1px groove #edd5a9;
     border-radius: 3px;
 }
 
@@ -338,4 +338,47 @@ input, textarea {
 
 .mission {
     text-align: center;
+    padding: 3%;
+}
+
+.mission a {
+    color: #fff;
+    background-color: #c872001a;
+    border: 1px #c8720033 solid;
+    margin: 2%;
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.mission h1 {
+    margin: 3%;
+}
+
+.mission-pages {
+    width: 1050px;
+    margin: auto;
+}
+
+.mission-pager li > a, .mission-pager li > span {
+    color: #fff;
+    background-color: #c872001a;
+    border: 1px #c8720033 solid;
+}
+
+.mission-pager li > a:focus,
+.mission-pager li > a:hover,
+.mission-pager li > span:focus,
+.mission-pager li > span:hover {
+    color: #c87200;
+    background-color: #fefefe;
+    border: 1px #c8720033 solid;
+}
+
+.mission-infos {
+    margin: 1%;
+}
+
+.signature {
+    text-align: right;
+    float: right;
 }

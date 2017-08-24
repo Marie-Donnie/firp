@@ -132,3 +132,6 @@ class MissionForm(ModelForm):
     class Meta:
         model = Mission
         fields = '__all__'
+        widgets = {'objectif': forms.Textarea(),
+                   'participants': forms.Textarea(),
+                   'deroulement': forms.Textarea(), }

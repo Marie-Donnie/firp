@@ -729,8 +729,17 @@ def campagne(request, campagne_id):
 def mission(request, campagne_id, mission_id):
     if request.user.has_perm('fiches.objet_ok'):
         mission = get_object_or_404(Mission, pk=mission_id)
-
-        context = {'mission': mission}
+        missions = Mission.objects.select_related().filter(operation = campagne_id)
+        mission_pre = None
+        mission_sui = None
+        print(missions)
+        for mis in missions:
+            if mis.numero == (mission.numero - 1):
+                mission_pre = mis
+            if mis.numero == (mission.numero + 1):
+                mission_sui = mis
+        context = {'mission': mission, 'mission_pre': mission_pre,
+                   'mission_sui': mission_sui}
 
         return render(request, 'site/rapport_mission.html', context)
 

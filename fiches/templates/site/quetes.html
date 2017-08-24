@@ -49,8 +49,8 @@
 	<h4 class="media-heading">
 	  <a href="{% url 'quete' quete.id %}"><b>{{quete.nom}}</b></a>
 	  {% if quete.etat == 1 %}<img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-services.PNG" alt="Libre">
-	  {% elif quete.etat == 2 %}<img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-scroll.PNG" alt="Accomplie"><a href="{% url 'detail_fiche' quete.reservee.id %}"><span class="quest-lead">{{ quete.reservee.nom }} {{ quete.reservee.prenom }}</span></a>
-	  {% elif quete.etat == 3 %} <img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-book.PNG" alt="Accomplie"><a href="{% url 'detail_fiche' quete.leader.id %}"><span class="quest-lead">{{ quete.leader.nom }} {{ quete.leader.prenom }}</span></a>
+	  {% elif quete.etat == 2 %}<img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-scroll.PNG" alt="Accomplie"><a href="{% url 'detail_fiche' quete.reservee.id %}"><span class="quest-lead">{{ quete.reservee.prenom }} {{ quete.reservee.nom }}</span></a>
+	  {% elif quete.etat == 3 %} <img class="quest-icon" src="/fiches/media/images/site/quest/category-icon-book.PNG" alt="Accomplie"><a href="{% url 'detail_fiche' quete.leader.id %}"><span class="quest-lead">{{ quete.leader.prenom }} {{ quete.leader.nom }} </span></a>
 	  {% endif %}
 	</h4>
 	{{quete.objectif}}

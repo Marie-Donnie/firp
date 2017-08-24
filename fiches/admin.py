@@ -131,7 +131,7 @@ admin.site.register(Operation, OperationAdmin)
 
 
 class MissionAdmin(admin.ModelAdmin):
-    list_display = ('numero', 'lieu', 'type_mis', 'id')
+    list_display = ('numero', 'operation', 'lieu', 'type_mis', 'id')
     form = MissionForm
 
 admin.site.register(Mission, MissionAdmin)

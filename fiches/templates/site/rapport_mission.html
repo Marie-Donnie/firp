@@ -22,34 +22,58 @@
 
   <div class="fond">
     <div class="mission">
-    <h1>{{mission.operation}}</h1>
-    {{ mission.dirigeant }}<br>
-    {{ mission.lieu }}, le {{ mission.jour }}
-    {% if mission.jour == 1 %}er{% endif %} <!-- mission.jour -->
-    {% if not utilisateur.infos %}
-    {% if mission.jour != 1 %}ème{% endif %} <!-- mission.jour -->
-    jour du
-    {{mission.mois}}
-    {% if mission.mois == 01 %}er mois{% else %}ème mois{% endif %} <!-- mission.mois -->
-    de l'an {{mission.annee}} <br>
-    {% endif %} <!-- not utilisateurs.infos -->
-    {% if utilisateur.infos.affichage_date == 'n' %}
-    {{mission.mois|mois}} {{mission.annee}}
-    {% elif utilisateur.infos.affichage_date == 'l' %}
-    {% if mission.jour != 1 %}ème{% endif %}
-    jour du
-    {{mission.mois}}
-    {% if mission.mois == 01 %}er mois{% else %}ème mois{% endif %}
-    de l'an {{mission.annee}} <br>
-    {% endif %}
-    {{ mission.get_type_mis_display }}<br>
-    {{ mission.objectif|linebreaksbr }}<br>
-    {{ mission.participants|linebreaksbr }}<br>
-    {{ mission.deroulement|linebreaksbr }}<br>
-    {% if 'c: ' in mission.signature_url %}
-    {{ mission.signature_url|slice:"3:" }}<br>
-    {% endif %}
-    <div>
+      <h1>{{mission.operation}}</h1>
+      <a href="{% url 'detail_fiche' mission.dirigeant.id %}"><span class="quest-lead">{{ mission.dirigeant.prenom }} {{ mission.dirigeant.nom }}</span></a>
+      {% if mission.autre_dirigeant %}
+      et
+      <a href="{% url 'detail_fiche' mission.autre_dirigeant.id %}"><span class="quest-lead">{{ mission.autre_dirigeant.prenom }} {{ mission.autre_dirigeant.nom }}</span></a>
+      {% endif %}<br>
+      <div class="mission-infos">
+	{{ mission.lieu }}, le {{ mission.jour }}
+	{% if mission.jour == 1 %}er{% endif %} <!-- mission.jour -->
+	{% if not utilisateur.infos %}
+	{% if mission.jour != 1 %}ème{% endif %} <!-- mission.jour -->
+	jour du
+	{{mission.mois}}
+	{% if mission.mois == 01 %}er mois{% else %}ème mois{% endif %} <!-- mission.mois -->
+	de l'an {{mission.annee}} <br>
+	{% endif %} <!-- not utilisateurs.infos -->
+	{% if utilisateur.infos.affichage_date == 'n' %}
+	{{mission.mois|mois}} {{mission.annee}}
+	{% elif utilisateur.infos.affichage_date == 'l' %}
+	{% if mission.jour != 1 %}ème{% endif %}
+	jour du
+	{{mission.mois}}
+	{% if mission.mois == 01 %}er mois{% else %}ème mois{% endif %}
+	de l'an {{mission.annee}} <br>
+	{% endif %}
+	<b>Type :</b><br>
+	{{ mission.get_type_mis_display }}<br>
+	<b>Objectif :</b><br>
+	{{ mission.objectif|linebreaksbr }}<br>
+	<b>Participants :</b><br>
+	{{ mission.participants|linebreaksbr }}<br>
+	<b>Déroulement de la mission :</b><br>
+	{{ mission.deroulement|linebreaksbr }}<br>
+	<div class="signature">
+	  {% if 'c: ' in mission.signature_url %}
+	  {{ mission.signature_url|slice:"3:" }}<br>
+	  {% endif %}
+	</div>
+      </div>
+    </div> <!-- mission -->
+  </div>  <!-- fond -->
+  <div class="mission-pages">
+    <nav aria-label="...">
+      <ul class="pager mission-pager">
+	{% if mission_pre and mission.operation %}
+	<li class="previous mission-p-f"><a href="{% url 'mission' mission.operation.id mission_pre.id %}"><span aria-hidden="true">&larr;</span> Précédente</a></li>
+	{% endif %}
+	{% if mission_sui and mission.operation  %}
+	<li class="next mission-p-f"><a href="{% url 'mission' mission.operation.id mission_sui.id %}">Suivante <span aria-hidden="true">&rarr;</span></a></li>
+	{% endif %}
+      </ul>
+    </nav>
   </div>
 </div>
 

@@ -593,6 +593,10 @@ class Mission(models.Model):
                                   null=True,
                                   blank=True,
                                   related_name='dirigeant_mission')
+    autre_dirigeant = models.ForeignKey(Fiche,
+                                        null=True,
+                                        blank=True,
+                                        related_name='autre_dirigeant')
     numero = models.SmallIntegerField(default=0)
     lieu = models.CharField(max_length=100)
     jour = IntegerRangeField(default='1', min_value=1,
