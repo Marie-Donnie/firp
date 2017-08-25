@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from django.shortcuts import get_object_or_404, render, redirect, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
@@ -746,3 +748,70 @@ def mission(request, campagne_id, mission_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas acceder aux campagnes")
+
+
+@login_required
+def creer_mission(request):
+    if request.user.has_perm('fiches.objet_ok'):
+        caporals = Fiche.objects.filter(titre__iexact='caporal')
+        sergents = Fiche.objects.filter(titre__iexact='sergent')
+        lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
+        capitaines = Fiche.objects.filter(titre__iexact='capitaine')
+        generals = Fiche.objects.filter(titre__iexact='général')
+        colonels = Fiche.objects.filter(titre__iexact='colonel')
+        autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
+        campagnes = Operation.objects.all()
+        if request.method == 'POST':
+            form = MissionForm(request.POST)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('mission', campagne_id=save_it.operation.id,
+                                mission_id=save_it.id )
+            else:
+                print(form.errors)
+        else:
+            form = MissionForm()
+
+        context = {'form': form, 'caporals': caporals, 'sergents': sergents,
+                   'lieutenants': lieutenants, 'capitaines': capitaines,
+                   'generals': generals, 'colonels': colonels,
+                   'autres': autres, 'campagnes': campagnes}
+        return render(request, 'site/mission_edit.html', context)
+
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des rapports.")
+
+
+@login_required
+def edit_mission(request, mission_id):
+    if request.user.has_perm('fiches.objet_ok'):
+        mission = Mission.objects.get(pk=mission_id)
+        caporals = Fiche.objects.filter(titre__iexact='caporal')
+        sergents = Fiche.objects.filter(titre__iexact='sergent')
+        lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
+        capitaines = Fiche.objects.filter(titre__iexact='capitaine')
+        generals = Fiche.objects.filter(titre__iexact='général')
+        colonels = Fiche.objects.filter(titre__iexact='colonel')
+        autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
+        campagnes = Operation.objects.all()
+        if request.method == 'POST':
+
+            form = MissionForm(request.POST, instance=mission)
+            if form.is_valid():
+                save_it = form.save()
+                print(save_it)
+                return redirect('mission', campagne_id=mission.operation.id,
+                                mission_id=mission.id )
+            else:
+                print(form.errors)
+        else:
+            form = MissionForm(instance=mission)
+
+        context = {'form': form, 'caporals': caporals, 'sergents': sergents,
+                   'lieutenants': lieutenants, 'capitaines': capitaines,
+                   'generals': generals, 'colonels': colonels,
+                   'autres': autres, 'campagnes': campagnes}
+        return render(request, 'site/mission_edit.html', context)
+
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des rapports.")

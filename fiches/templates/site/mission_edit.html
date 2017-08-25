@@ -1,0 +1,154 @@
+{% extends "site/base.html" %}
+
+{% load filters %}
+{% load static %}
+
+{% block script %}
+{% endblock %}
+
+
+{% block title %}{{quete.nom}}{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+
+<div class="campaign-body">
+
+  <div class="page-header" id="campaign-header" onclick="document.location='{% url 'campagnes' %}'">
+    <div class="campaign-head">
+      <h1>Campagnes</h1>
+    </div> <!-- quest-head -->
+  </div>   <!-- page-header -->
+
+  <div class="fond">
+    <div id="char_form">
+      <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_operation">Operation&nbsp;:</label> <select name="operation" id="id_operation">
+	{% for campagne in campagnes %}
+	  <option value="{{campagne.id}}"{% if campagne.id in form.operation.value %} selected="" {% endif %}>{{campagne.nom}}</option>
+	{% endfor %}
+      </select>
+      <label for="id_numero">Numéro&nbsp;:</label>
+      <input name="numero" class="petit-nombre" value="{{form.numero.value|default:'1'}}" required="" id="id_numero" type="number">
+      <label for="id_type_mis">Type mission&nbsp;:</label> <select name="type_mis" id="id_type_mis">
+  <option value="1"{% if form.type_mis.value == 1 %} selected="" {% endif %}>Embuscade</option>
+
+  <option value="2"{% if form.type_mis.value == 2 %} selected="" {% endif %}>Assaut</option>
+
+  <option value="3"{% if form.type_mis.value == 3 %} selected="" {% endif %}>Siège</option>
+
+  <option value="4"{% if form.type_mis.value == 4 %} selected="" {% endif %}>Défense</option>
+
+  <option value="5"{% if form.type_mis.value == 5 %} selected="" {% endif %}>Escorte</option>
+
+  <option value="7"{% if form.type_mis.value == 7 %} selected="" {% endif %}>Prendre et tenir</option>
+
+  <option value="8"{% if form.type_mis.value == 8 or forme.type_mis.value == None %} selected="" {% endif %}>Escarmouche</option>
+
+  <option value="9"{% if form.type_mis.value == 9 %} selected="" {% endif %}>Bataille rangée</option>
+
+  <option value="10"{% if form.type_mis.value == 10 %} selected="" {% endif %}>Rechercher et détruire</option>
+
+  <option value="11"{% if form.type_mis.value == 11 %} selected="" {% endif %}>Sabotage</option>
+
+  <option value="12"{% if form.type_mis.value == 12 %} selected="" {% endif %}>Infiltration</option>
+
+  <option value="13"{% if form.type_mis.value == 13 %} selected="" {% endif %}>Espionnage</option>
+
+  <option value="14"{% if form.type_mis.value == 14 %} selected="" {% endif %}>Sauvetage</option>
+
+  <option value="15"{% if form.type_mis.value == 15 %} selected="" {% endif %}>Récupération</option>
+
+  <option value="16"{% if form.type_mis.value == 16 %} selected="" {% endif %}>Assassinat</option>
+
+  <option value="17"{% if form.type_mis.value == 17 %} selected="" {% endif %}>Incident</option>
+
+</select>
+
+    </div>
+    <div class="form-group">
+      <label for="id_dirigeant">Dirigeant&nbsp;:</label> <select name="dirigeant" id="id_dirigeant">
+	{% for general in generals %}
+	<option value="{{general.id}}"{% if general.id in form.dirigeant.value %} selected="" {% endif %}>{{general.nom}} {{general.prenom}}</option>
+	{% endfor %}
+	{% for colonel in colonels %}
+	<option value="{{colonel.id}}"{% if colonel.id in form.dirigeant.value %} selected="" {% endif %}>{{colonel.nom}} {{colonel.prenom}}</option>
+	{% endfor %}
+	{% for capitaine in capitaines %}
+	<option value="{{capitaine.id}}"{% if capitaine.id in form.dirigeant.value %} selected="" {% endif %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
+	{% endfor %}
+	{% for lieutenant in lieutenants %}
+	<option value="{{lieutenant.id}}"{% if lieutenant.id in form.dirigeant.value %} selected="" {% endif %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
+	{% endfor %}
+	{% for sergent in sergents %}
+	<option value="{{sergent.id}}"{% if sergent.id in form.dirigeant.value %} selected="" {% endif %}>{{sergent.nom}} {{sergent.prenom}}</option>
+	{% endfor %}
+	{% for caporal in caporals %}
+	<option value="{{caporal.id}}"{% if caporal.id in form.dirigeant.value %} selected="" {% endif %}>{{caporal.nom}} {{caporal.prenom}}</option>
+	{% endfor %}
+	<option value="">---------</option>
+	{% for autre in autres %}
+	<option value="{{autre.id}}"{% if autre.id in form.dirigeant.value %} selected="" {% endif %}>{{autre.nom}} {{autre.prenom}}</option>
+	{% endfor %}
+
+      </select>
+      <label for="id_autre_dirigeant">Autre dirigeant&nbsp;:</label> <select name="autre_dirigeant" id="id_autre_dirigeant">
+	{% for general in generals %}
+	<option value="{{general.id}}"{% if general.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{general.nom}} {{general.prenom}}</option>
+	{% endfor %}
+	{% for colonel in colonels %}
+	<option value="{{colonel.id}}"{% if colonel.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{colonel.nom}} {{colonel.prenom}}</option>
+	{% endfor %}
+	{% for capitaine in capitaines %}
+	<option value="{{capitaine.id}}"{% if capitaine.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
+	{% endfor %}
+	{% for lieutenant in lieutenants %}
+	<option value="{{lieutenant.id}}"{% if lieutenant.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
+	{% endfor %}
+	{% for sergent in sergents %}
+	<option value="{{sergent.id}}"{% if sergent.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{sergent.nom}} {{sergent.prenom}}</option>
+	{% endfor %}
+	{% for caporal in caporals %}
+	<option value="{{caporal.id}}"{% if caporal.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{caporal.nom}} {{caporal.prenom}}</option>
+	{% endfor %}
+	<option value="">---------</option>
+	{% for autre in autres %}
+	<option value="{{autre.id}}"{% if autre.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{autre.nom}} {{autre.prenom}}</option>
+	{% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_lieu">Lieu&nbsp;:</label>
+      <input name="lieu" required="" id="id_lieu" value="{{form.lieu.value|default:'Aucun'}}" maxlength="100" type="text">
+      <label for="id_jour">Jour&nbsp;:</label>
+      <input name="jour" class="petit-nombre" value="{{form.jour.value|default:'1'}}" max="31" required="" id="id_jour" min="1" type="number">
+      <label for="id_mois">Mois&nbsp;:</label>
+      <input name="mois" class="petit-nombre" value="{{form.mois.value|default:'1'}}" max="12" required="" id="id_mois" min="1" type="number">
+      <label for="id_annee">Année&nbsp;:</label>
+      <input name="annee" class="petit-nombre" value="{{form.annee.value|default:'1'}}" max="100" required="" id="id_annee" min="0" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_objectif">Objectif&nbsp;:</label>
+      <textarea name="objectif" class="form-control" id="id_objectif" required="" rows="2" cols="40" maxlength="300" onkeyup="countChars('id_objectif','charcount1');" onkeydown="countChars('id_objectif','charcount1');" onmouseout="countChars('id_objectif','charcount1');">{{form.objectif.value|default:'Aucun'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 300 caractères (<span id="charcount1">0</span>/300).</span>
+      <label for="id_participants">Participants&nbsp;:</label>
+      <textarea name="participants" class="form-control" id="id_participants" required="" rows="1" cols="40" maxlength="500" onkeyup="countChars('id_participants','charcount2');" onkeydown="countChars('id_participants','charcount2');" onmouseout="countChars('id_participants','charcount2');">{{form.participants.value|default:'Aucun'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 500 caractères (<span id="charcount2">0</span>/500).</span>
+      <label for="id_deroulement">Déroulement&nbsp;:</label>
+      <textarea name="deroulement" class="form-control" id="id_deroulement" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_deroulement','charcount3');" onkeydown="countChars('id_deroulement','charcount3');" onmouseout="countChars('id_deroulement','charcount3');">{{form.deroulement.value|default:'-'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
+    </div>
+        <div class="form-group">
+<label for="id_signature_url">Signature&nbsp;:</label> <input name="signature_url" value="c: L. Vaanes" required="" id="id_signature_url" maxlength="100" type="text">
+	</div>
+	<input class="btn btn-campaign" id="centre" type="submit" value="Valider" />
+      </form>
+    </div>
+  </div>
+
+
+</div>
+
+{% endblock %}

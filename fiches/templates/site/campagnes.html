@@ -59,11 +59,14 @@
 	{% endif %}
       </ul>
     </nav>
-  </div>
+  </div> <!-- quest-pages -->
   {% else %}
   <p>Aucune campagne</p>
-  </div>
-  {% endif %}
-</div>
+  </div> <!-- fond -->
+{% endif %}
+{% if perms.fiches.objet_ok %}
+<a class="btn btn-campaign" href="{% url 'creer_mission' %}">Créer mission</a>
+{% endif %}
+</div> <!-- campaign-body -->
 
 {% endblock %}

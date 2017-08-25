@@ -75,6 +75,9 @@
       </ul>
     </nav>
   </div>
+  {% if perms.fiches.objet_ok %}
+<a class="btn btn-campaign" id="centre" href="{% url 'editer_mission' mission.id %}">Editer mission</a>
+{% endif %}
 </div>
 
 {% endblock %}

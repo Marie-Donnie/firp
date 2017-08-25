@@ -248,7 +248,12 @@ input, textarea {
     width: 1050px;
     height: 722px;
     margin: auto;
+}
 
+.fond optgroup,
+.fond select,
+.fond textarea {
+    color: 000;
 }
 
 #campaign-header {
@@ -302,6 +307,13 @@ input, textarea {
     background: #c872001a;
     border: 1px #c8720033 solid;
     margin: 2%;
+}
+
+.btn-campaign:hover,
+.btn-campaign:focus {
+    color: #c87200;
+    background-color: #fefefe;
+    border: 1px #c8720033 solid;
 }
 
 .campaigns {
@@ -381,4 +393,8 @@ input, textarea {
 .signature {
     text-align: right;
     float: right;
+}
+
+.petit-nombre {
+    width: 50px;
 }
