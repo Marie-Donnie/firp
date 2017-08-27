@@ -637,4 +637,4 @@ class Mission(models.Model):
         default_related_name = 'mission'
 
     def __unicode__(self):
-        return u'%s' % (self.operation.nom + " : " + str(self.numero))
+        return u'%s' % (self.operation.nom + " : " + self.lieu + ", le " + str(self.jour) + "." + str(self.mois) + "." + str(self.annee))
