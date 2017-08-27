@@ -393,6 +393,7 @@ input, textarea {
 .signature {
     text-align: right;
     float: right;
+    margin: 3%;
 }
 
 .petit-nombre {
