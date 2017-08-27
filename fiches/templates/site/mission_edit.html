@@ -34,21 +34,14 @@
       <input name="numero" class="petit-nombre" value="{{form.numero.value|default:'1'}}" required="" id="id_numero" type="number">
       <label for="id_type_mis">Type mission&nbsp;:</label> <select name="type_mis" id="id_type_mis">
   <option value="1"{% if form.type_mis.value == 1 %} selected="" {% endif %}>Embuscade</option>
-
   <option value="2"{% if form.type_mis.value == 2 %} selected="" {% endif %}>Assaut</option>
-
   <option value="3"{% if form.type_mis.value == 3 %} selected="" {% endif %}>Siège</option>
-
   <option value="4"{% if form.type_mis.value == 4 %} selected="" {% endif %}>Défense</option>
-
   <option value="5"{% if form.type_mis.value == 5 %} selected="" {% endif %}>Escorte</option>
-
+  <option value="5"{% if form.type_mis.value == 6 %} selected="" {% endif %}>Voyage</option>
   <option value="7"{% if form.type_mis.value == 7 %} selected="" {% endif %}>Prendre et tenir</option>
-
   <option value="8"{% if form.type_mis.value == 8 or forme.type_mis.value == None %} selected="" {% endif %}>Escarmouche</option>
-
   <option value="9"{% if form.type_mis.value == 9 %} selected="" {% endif %}>Bataille rangée</option>
-
   <option value="10"{% if form.type_mis.value == 10 %} selected="" {% endif %}>Rechercher et détruire</option>
 
   <option value="11"{% if form.type_mis.value == 11 %} selected="" {% endif %}>Sabotage</option>

@@ -611,6 +611,7 @@ class Mission(models.Model):
         (3, 'Siège'),
         (4, 'Défense'),
         (5, 'Escorte'),
+        (6, 'Voyage'),
         (7, 'Prendre et tenir'),
         (8, 'Escarmouche'),
         (9, 'Bataille rangée'),
