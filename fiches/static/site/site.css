@@ -398,3 +398,7 @@ input, textarea {
 .petit-nombre {
     width: 50px;
 }
+
+.mission-lead {
+    display: block;
+}

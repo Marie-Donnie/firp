@@ -23,7 +23,16 @@
   <div class="fond">
     <div class="mission">
       <h1>{{mission.operation}}</h1>
-      <a href="{% url 'detail_fiche' mission.dirigeant.id %}"><span class="quest-lead">{{ mission.dirigeant.prenom }} {{ mission.dirigeant.nom }}</span></a>
+      {% if mission.operation %}
+      <span class="mission-lead">
+      <b>Dirigeant de l'opération :</b>
+      <a href="{% url 'detail_fiche' mission.operation.dirigeant.id %}">
+	 {{ mission.operation.dirigeant.prenom }} {{ mission.operation.dirigeant.nom }}</span></a><br>
+      {% endif %}
+      <span class="mission-lead">
+      <b>Dirigeant{% if mission.autre_dirigeant %}s{% endif %} de la mission :</b>
+      <a href="{% url 'detail_fiche' mission.dirigeant.id %}">
+	{{ mission.dirigeant.prenom }} {{ mission.dirigeant.nom }}</span></a>
       {% if mission.autre_dirigeant %}
       et
       <a href="{% url 'detail_fiche' mission.autre_dirigeant.id %}"><span class="quest-lead">{{ mission.autre_dirigeant.prenom }} {{ mission.autre_dirigeant.nom }}</span></a>
