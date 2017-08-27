@@ -106,7 +106,7 @@
 	{% for caporal in caporals %}
 	<option value="{{caporal.id}}"{% ifequal caporal.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{caporal.nom}} {{caporal.prenom}}</option>
 	{% endfor %}
-	<option value="">---------</option>
+	<option value="" {% if form.autre_dirigeant.value == None %} selected="" {% endif %}>---------</option>
 	{% for autre in autres %}
 	<option value="{{autre.id}}"{% ifequal autre.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{autre.nom}} {{autre.prenom}}</option>
 	{% endfor %}
