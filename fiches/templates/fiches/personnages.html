@@ -4,6 +4,22 @@
 {% block page-title %}Liste des personnages{% endblock %}
 
 {% block content %}
+  <div id="center">
+    <form action="{% url 'rechercher_fiche' %}" method="GET">
+      <label>Rechercher par&nbsp;</label>
+      <select name="recherche" id="id_recherche">
+	<option value="nom" selected="">Nom</option>
+	<option value="prenom">Prénom</option>
+	<option value="titre">Titre</option>
+	<option value="profession">Profession</option>
+	<option value="ville_de_residence">Ville de résidence</option>
+	<option value="competences">Compétence</option>
+      </select>
+      <input type="text" name="valeur"><br>
+      <input type="submit" value="Chercher">
+    </form>
+  </div>
+
 <div id="liste">
   {% if fiches %}
   <span>Page {{ fiches.number }} sur {{ fiches.paginator.num_pages }}</span>

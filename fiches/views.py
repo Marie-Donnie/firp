@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from fiches.models import *
 from fiches.forms import *
 
@@ -253,6 +254,35 @@ def delete_fiche(request, fiche_id):
             return render(request, 'fiches/confirmation_suppression.html', context)
     else:
         return HttpResponse("Vous ne pouvez pas supprimer cette fiche.")
+
+
+@login_required
+def fiche_search(request):
+    valeur = request.GET.get('valeur')
+    recherche = request.GET.get('recherche')
+    Qr = None
+    q = Q(**({"%s__icontains" % recherche: valeur }))
+    if Qr:
+          Qr = Qr | q # or & for filtering
+    else:
+          Qr = q
+    # this you can now combine with other filters, exclude etc.
+    fiches_list = Fiche.objects.filter(Qr)
+
+    paginator = Paginator(fiches_list, 20)
+    page = request.GET.get('page')
+    try:
+        fiches = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        fiches = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        fiches = paginator.page(paginator.num_pages)
+
+    context = {'fiches': fiches}
+
+    return render(request, 'fiches/personnages.html', context)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -608,17 +638,7 @@ from os import walk
 @login_required
 def gallery(request):
     if request.user.has_perm('fiches.objet_ok'):
-        # recherche = ''
         images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
-        # if request.method == 'POST':
-        #     form = request.POST.copy()
-        #     recherche = form['recherche']
-        #     images = []
-        #     for root, dirs, files in walk(images_url):
-        #         for name in files:
-        #             if recherche.lower() in name.lower():
-        #                 images += [name]
-        # else:
         images = listdir(images_url)
         images_sorted = sorted(images, key=str.lower)
         paginator = Paginator(images_sorted, 100)
@@ -644,12 +664,7 @@ def gallery(request):
 @login_required
 def gallery_search(request):
     if request.user.has_perm('fiches.objet_ok'):
-        # if request.method == 'POST':
-        #     form = request.POST.copy()
-        #     recherche = form['recherche']
-        # else:
-        #     recherche = 'lol'
-        # print(recherche)
+
         recherche = request.GET.get('recherche')
         images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
         images = []
