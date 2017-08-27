@@ -71,51 +71,51 @@
     <div class="form-group">
       <label for="id_dirigeant">Dirigeant&nbsp;:</label> <select name="dirigeant" id="id_dirigeant">
 	{% for general in generals %}
-	<option value="{{general.id}}"{% if general.id in form.dirigeant.value %} selected="" {% endif %}>{{general.nom}} {{general.prenom}}</option>
+	<option value="{{general.id}}"{% ifequal general.id form.dirigeant.value %} selected="" {% endifequal %}>{{general.nom}} {{general.prenom}}</option>
 	{% endfor %}
 	{% for colonel in colonels %}
-	<option value="{{colonel.id}}"{% if colonel.id in form.dirigeant.value %} selected="" {% endif %}>{{colonel.nom}} {{colonel.prenom}}</option>
+	<option value="{{colonel.id}}"{% ifequal colonel.id form.dirigeant.value %} selected="" {% endifequal %}>{{colonel.nom}} {{colonel.prenom}}</option>
 	{% endfor %}
 	{% for capitaine in capitaines %}
-	<option value="{{capitaine.id}}"{% if capitaine.id in form.dirigeant.value %} selected="" {% endif %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
+	<option value="{{capitaine.id}}"{% ifequal capitaine.id form.dirigeant.value %} selected="" {% endifequal %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
 	{% endfor %}
 	{% for lieutenant in lieutenants %}
-	<option value="{{lieutenant.id}}"{% if lieutenant.id in form.dirigeant.value %} selected="" {% endif %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
+	<option value="{{lieutenant.id}}"{% ifequal lieutenant.id form.dirigeant.value %} selected="" {% endifequal %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
 	{% endfor %}
 	{% for sergent in sergents %}
-	<option value="{{sergent.id}}"{% if sergent.id in form.dirigeant.value %} selected="" {% endif %}>{{sergent.nom}} {{sergent.prenom}}</option>
+	<option value="{{sergent.id}}"{% ifequal sergent.id form.dirigeant.value %} selected="" {% endifequal %}>{{sergent.nom}} {{sergent.prenom}}</option>
 	{% endfor %}
 	{% for caporal in caporals %}
-	<option value="{{caporal.id}}"{% if caporal.id in form.dirigeant.value %} selected="" {% endif %}>{{caporal.nom}} {{caporal.prenom}}</option>
+	<option value="{{caporal.id}}"{% ifequal caporal.id form.dirigeant.value %} selected="" {% endifequal %}>{{caporal.nom}} {{caporal.prenom}}</option>
 	{% endfor %}
 	<option value="">---------</option>
 	{% for autre in autres %}
-	<option value="{{autre.id}}"{% if autre.id in form.dirigeant.value %} selected="" {% endif %}>{{autre.nom}} {{autre.prenom}}</option>
+	<option value="{{autre.id}}"{% ifequal autre.id form.dirigeant.value %} selected="" {% endifequal %}>{{autre.nom}} {{autre.prenom}}</option>
 	{% endfor %}
 
       </select>
       <label for="id_autre_dirigeant">Autre dirigeant&nbsp;:</label> <select name="autre_dirigeant" id="id_autre_dirigeant">
 	{% for general in generals %}
-	<option value="{{general.id}}"{% if general.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{general.nom}} {{general.prenom}}</option>
+	<option value="{{general.id}}"{% ifequal general.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{general.nom}} {{general.prenom}}</option>
 	{% endfor %}
 	{% for colonel in colonels %}
-	<option value="{{colonel.id}}"{% if colonel.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{colonel.nom}} {{colonel.prenom}}</option>
+	<option value="{{colonel.id}}"{% ifequal colonel.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{colonel.nom}} {{colonel.prenom}}</option>
 	{% endfor %}
 	{% for capitaine in capitaines %}
-	<option value="{{capitaine.id}}"{% if capitaine.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
+	<option value="{{capitaine.id}}"{% ifequal capitaine.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
 	{% endfor %}
 	{% for lieutenant in lieutenants %}
-	<option value="{{lieutenant.id}}"{% if lieutenant.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
+	<option value="{{lieutenant.id}}"{% ifequal lieutenant.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
 	{% endfor %}
 	{% for sergent in sergents %}
-	<option value="{{sergent.id}}"{% if sergent.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{sergent.nom}} {{sergent.prenom}}</option>
+	<option value="{{sergent.id}}"{% ifequal sergent.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{sergent.nom}} {{sergent.prenom}}</option>
 	{% endfor %}
 	{% for caporal in caporals %}
-	<option value="{{caporal.id}}"{% if caporal.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{caporal.nom}} {{caporal.prenom}}</option>
+	<option value="{{caporal.id}}"{% ifequal caporal.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{caporal.nom}} {{caporal.prenom}}</option>
 	{% endfor %}
 	<option value="">---------</option>
 	{% for autre in autres %}
-	<option value="{{autre.id}}"{% if autre.id in form.autre_dirigeant.value %} selected="" {% endif %}>{{autre.nom}} {{autre.prenom}}</option>
+	<option value="{{autre.id}}"{% ifequal autre.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{autre.nom}} {{autre.prenom}}</option>
 	{% endfor %}
       </select>
     </div>
