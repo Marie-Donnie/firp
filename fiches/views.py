@@ -698,7 +698,7 @@ def gallery_search(request):
 @login_required
 def campagnes(request):
     if request.user.has_perm('fiches.objet_ok'):
-        campagnes = Operation.objects.all().order_by('nom', 'dirigeant')
+        campagnes = Operation.objects.all().order_by('-id')
         paginator = Paginator(campagnes, 8)
         page = request.GET.get('page')
         try:
