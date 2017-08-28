@@ -20,8 +20,9 @@
     </div> <!-- quest-head -->
   </div>   <!-- page-header -->
 
-  <div class="fond">
-    <div class="mission">
+  <div id="quest-display" class="media">
+    <div class="mission" id="rapport">
+
       <h1>{{mission.operation}}</h1>
       {% if mission.operation %}
       <span class="mission-lead">
@@ -29,7 +30,6 @@
       <a href="{% url 'detail_fiche' mission.operation.dirigeant.id %}">
 	 {{ mission.operation.dirigeant.prenom }} {{ mission.operation.dirigeant.nom }}</span></a><br>
       {% endif %}
-      <span class="mission-lead">
       <b>Dirigeant{% if mission.autre_dirigeant %}s{% endif %} de la mission :</b>
       <a href="{% url 'detail_fiche' mission.dirigeant.id %}">
 	{{ mission.dirigeant.prenom }} {{ mission.dirigeant.nom }}</span></a>
@@ -56,11 +56,11 @@
 	{% if mission.mois == 01 %}er mois{% else %}ème mois{% endif %}
 	de l'an {{mission.annee}} <br>
 	{% endif %}
-	<b>Type :</b><br>
+	<b>Type :</b>
 	{{ mission.get_type_mis_display }}<br>
-	<b>Objectif :</b><br>
+	<b>Objectif :</b>
 	{{ mission.objectif|linebreaksbr }}<br>
-	<b>Participants :</b><br>
+	<b>Participants :</b>
 	{{ mission.participants|linebreaksbr }}<br>
 	<b>Déroulement de la mission :</b><br>
 	{{ mission.deroulement|linebreaksbr }}<br>
@@ -69,9 +69,10 @@
 	  {{ mission.signature_url|slice:"3:" }}<br>
 	  {% endif %}
 	</div>
-      </div>
+      </div> <!-- mission-infos -->
+
     </div> <!-- mission -->
-  </div>  <!-- fond -->
+  </div> <!-- quest-display -->
   <div class="mission-pages">
     <nav aria-label="...">
       <ul class="pager mission-pager">

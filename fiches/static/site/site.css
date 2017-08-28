@@ -403,3 +403,10 @@ input, textarea {
 .mission-lead {
     display: block;
 }
+
+#rapport {
+    text-align: center;
+    margin: 50px 54px 0px auto;
+    height: 600px;
+    width: 800px;
+}
