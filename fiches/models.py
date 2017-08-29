@@ -131,6 +131,13 @@ ZONES = (
     ("Zandalar", (
         ("Zandalar"),
     )
+    ),
+    ("Mers", (
+        ("Mer Interdite"),
+        ("Mer Voilée"),
+        ("Mer Gelée"),
+        ("Grande Mer")
+    )
     )
 )
 

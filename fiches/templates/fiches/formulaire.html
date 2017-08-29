@@ -248,6 +248,12 @@
 	  <option value="600" {% if form.zone_de_naissance.value == 600%} selected="" {% endif %}>Zandalar</option>
 
 	</optgroup>
+	<optgroup label="Mers">
+	  <option value="700" {% if form.zone_de_naissance.value == 700%} selected="" {% endif %}>Mer Interdite</option>
+	  <option value="701" {% if form.zone_de_naissance.value == 701%} selected="" {% endif %}>Mer Voilée</option>
+	  <option value="702" {% if form.zone_de_naissance.value == 702%} selected="" {% endif %}>Mer Gelée</option>
+	  <option value="703" {% if form.zone_de_naissance.value == 703%} selected="" {% endif %}>Grande Mer</option>
+	</optgroup>
       </select>
       <label for="id_ville_de_naissance">Ville de naissance&nbsp;</label> <input name="ville_de_naissance" value="{{form.ville_de_naissance.value|default:'Inconnue'}}" required="" id="id_ville_de_naissance" maxlength="50" type="text" size="50">
     </div>
@@ -416,6 +422,12 @@
 	<optgroup label="Zandalar">
 	  <option value="600" {% if form.zone_de_residence.value == 600%} selected="" {% endif %}>Zandalar</option>
 
+	</optgroup>
+	<optgroup label="Mers">
+	  <option value="700" {% if form.zone_de_residence.value == 700%} selected="" {% endif %}>Mer Interdite</option>
+	  <option value="701" {% if form.zone_de_residence.value == 701%} selected="" {% endif %}>Mer Voilée</option>
+	  <option value="702" {% if form.zone_de_residence.value == 702%} selected="" {% endif %}>Mer Gelée</option>
+	  <option value="703" {% if form.zone_de_residence.value == 703%} selected="" {% endif %}>Grande Mer</option>
 	</optgroup>
       </select>
       <label for="id_ville_de_residence">Ville de residence&nbsp;</label> <input name="ville_de_residence" value="{{form.ville_de_residence.value|default:'Châtellerie'}}" required="" id="id_ville_de_residence" maxlength="50" type="text" size="50">
