@@ -328,8 +328,9 @@ def creer_armure(request):
             form = ArmureForm()
 
         objets = Objet.objects.filter(createur=request.user)
-        print(objets)
-        context = {'form': form, 'objets': objets}
+        enchantements = Enchantement.objects.all()
+        context = {'form': form, 'objets': objets,
+                   'enchantements': enchantements}
         return render(request, 'fiches/armure.html', context)
 
     else:
@@ -483,7 +484,9 @@ def edit_armure(request, armure_id):
             form = ArmureForm(instance=armure)
 
         objets = Objet.objects.filter(createur=request.user)
-        context = {'form': form, 'objets': objets}
+        enchantements = Enchantement.objects.all()
+        context = {'form': form, 'objets': objets,
+                   'enchantements': enchantements}
         return render(request, 'fiches/armure.html', context)
 
     else:

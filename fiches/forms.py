@@ -102,6 +102,14 @@ class EquipementForm(ModelForm):
         prefix = 'equipement'
 
 
+class EnchantementForm(ModelForm):
+
+    class Meta:
+        model = Enchantement
+        fields = '__all__'
+        prefix = 'enchantement'
+
+
 class QueteForm(ModelForm):
 
     class Meta:

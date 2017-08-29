@@ -4,9 +4,17 @@
 {% load filters %}
 {% load static %}
 
-{% block title %}{{ objet.nom }}{% endblock %}
+{% block title %}
+{{ objet.nom }}
+{% if objet.armure.enchantement %}
+- {{ objet.armure.enchantement.nom }}
+{% endif %}
+{% endblock %}
 {% block page-title %}
 {{ objet.nom }}
+{% if objet.armure.enchantement %}
+- {{ objet.armure.enchantement.nom }}
+{% endif %}
 {% endblock %}
 
 

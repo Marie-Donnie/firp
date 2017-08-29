@@ -72,6 +72,17 @@
 	<option value="15" {% if form.membre.value == 15 or form.membre.value|unlocalize == 'Arme de secours' %} selected="" {% endif %}>Arme de secours</option>
       </select>
     </div>
+    <div class="form-group">
+      <label for="id_enchantement">Enchantement&nbsp;:</label>
+      <select name="enchantement" id="id_enchantement">
+	<option value="" {% if form.enchantement.value == None %} selected="" {% endif %}>---------</option>
+	{% for enchantement in enchantements %}
+	<option value="{{enchantement.id}}"{% if form.enchantement.value == enchantement.id %} selected="" {% endif %}>{{enchantement.nom}}</option>
+	{% endfor %}
+
+      </select>
+
+    </div>
 
     <input class="btn btn-default" type="submit" value="Valider" />
   </form>

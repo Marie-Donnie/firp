@@ -60,6 +60,12 @@ class EquipementAdmin(admin.ModelAdmin):
 admin.site.register(Equipement, EquipementAdmin)
 
 
+class EnchantementAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'id')
+
+admin.site.register(Enchantement, EnchantementAdmin)
+
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 class A_gAdmin(admin.ModelAdmin):
     list_display = ('id', 'nom', 'prenom')

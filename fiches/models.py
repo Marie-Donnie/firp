@@ -276,7 +276,8 @@ class UserProfile(models.Model):
                                 related_name='infos')
     image = models.ImageField(upload_to='images/users',
                               default='images/site/no-image.png')
-    naissance = models.DateField()
+    naissance = models.DateField(blank=True,
+                                 null=True,)
     affichage_date = models.CharField(max_length=1,
                                       choices=((
                                           ('n', "Normal"),
@@ -344,6 +345,10 @@ class Armure(models.Model):
     membre = models.SmallIntegerField(choices=MEMBRES,
                                       default=5)
     armure = models.SmallIntegerField(default=0)
+    enchantement = models.ForeignKey('Enchantement',
+                                      blank=True,
+                                      null=True,
+                                      related_name='armure')
 
     class Meta:
         ordering = ["membre"]
@@ -488,6 +493,12 @@ class Equipement(models.Model):
                 intell += objet.intell
                 agi += objet.agi
                 armure += objet.armure
+                if objet.enchantement is not None:
+                    effets.append("De \"" + objet.enchantement.nom + "\" : " + objet.enchantement.effet)
+                    effets_ig.append("De \"" + objet.enchantement.nom + "\" : " + objet.enchantement.effet_ig)
+                    force += objet.enchantement.force
+                    intell += objet.enchantement.intell
+                    agi += objet.enchantement.agi
         for anneau in self.get_doigts():
             if anneau is not None:
                 effets.append("De \"" + anneau.objet.nom + "\" : " + anneau.effet)
@@ -496,6 +507,12 @@ class Equipement(models.Model):
                 intell += anneau.intell
                 agi += anneau.agi
                 armure += anneau.armure
+                if anneau.enchantement is not None:
+                    effets.append("De \"" + anneau.enchantement.nom + "\" : " + anneau.enchantement.effet)
+                    effets_ig.append("De \"" + anneau.enchantement.nom + "\" : " + anneau.enchantement.effet_ig)
+                    force += anneau.enchantement.force
+                    intell += anneau.enchantement.intell
+                    agi += anneau.enchantement.agi
         for diver in self.get_divers():
             if diver is not None:
                 effets.append("De \"" + diver.objet.nom + "\" : " + diver.effet)
@@ -504,11 +521,37 @@ class Equipement(models.Model):
                 intell += diver.intell
                 agi += diver.agi
                 armure += diver.armure
+                if diver.enchantement is not None:
+                    effets.append("De \"" + diver.enchantement.nom + "\" : " + diver.enchantement.effet)
+                    effets_ig.append("De \"" + diver.enchantement.nom + "\" : " + diver.enchantement.effet_ig)
+                    force += diver.enchantement.force
+                    intell += diver.enchantement.intell
+                    agi += diver.enchantement.agi
         if ter_compte == 8:
             terradiance = True
         if run_compte == 8:
             run_compte = True
         return effets, effets_ig, force, intell, agi, armure, runique, terradiance
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
+
+class Enchantement(models.Model):
+    nom = models.CharField(max_length=50,
+                            default="Enchantement de ")
+    effet = models.CharField(max_length=400,
+                             default='Aucun')
+    effet_ig = models.CharField(max_length=400,
+                                default='Aucun')
+    force = IntegerRangeField(default=0, min_value=0,
+                              max_value=25)
+    intell = IntegerRangeField(default=0, min_value=0,
+                               max_value=25)
+    agi = IntegerRangeField(default=0, min_value=0,
+                            max_value=25)
+    membre = models.SmallIntegerField(choices=MEMBRES,
+                                      default=5)
 
     def __unicode__(self):
         return u'%s' % (self.nom)
