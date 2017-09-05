@@ -193,11 +193,12 @@ def personnages(request):
             # this you can now combine with other filters, exclude etc.
             fiches_list = Fiche.objects.filter(Qr)
         else:
-            fiches_list = Fiche.objects.order_by('nom', 'prenom')
+            fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
+            print(ici)
     else:
-        fiches_list = Fiche.objects.order_by('nom', 'prenom')
+        fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
 
-    paginator = Paginator(fiches_list, 20)
+    paginator = Paginator(fiches_list, 12)
     page = request.GET.get('page')
     try:
         fiches = paginator.page(page)
