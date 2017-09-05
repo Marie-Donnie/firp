@@ -10,5 +10,6 @@
     "license": "GPL3",
     "dependencies": {
 	"jquery": "1.9.1 - 3"
+	"image-picker": "0.3.0"
     }
 }

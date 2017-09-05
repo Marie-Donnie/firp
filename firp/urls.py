@@ -57,6 +57,8 @@ urlpatterns = [
         views.edit_inventaire, name='editer_inventaire'),
     url(r'^objets/editer_equipement/(?P<equipement_id>\d+)/$',
         views.edit_equipement, name='editer_equipement'),
+    url(r'^objets/editer_equip/(?P<equipement_id>\d+)/$',
+        views.edit_equip, name='editer_equip'),
     # Quetes
     url(r'^quetes/$', views.quetes, name='quetes'),
     url(r'^quetes/(?P<quete_id>\d+)/$', views.quete, name='quete'),

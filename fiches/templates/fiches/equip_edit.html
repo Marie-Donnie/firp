@@ -1,0 +1,265 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+{% load static %}
+
+{% block header %}
+<script src="{% static 'bower_components/image-picker/image-picker/image-picker.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{%static 'bower_components/image-picker/image-picker/image-picker.css' %}" />
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  $("select").imagepicker({show_label: true});
+  });
+</script>
+{% endblock %}
+
+
+{% block title %}Créer/éditer l'équipement{% endblock %}
+{% block page-title %}Créer/éditer l'équipement{% endblock %}
+
+{% block content %}
+
+
+
+<div id="char_form">
+  <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
+    </div>
+    <!-- <div class="form-group"> -->
+    <!--   <label for="id_objets">Objets&nbsp;:</label> -->
+    <!--   <select size="14" name="objets" required="" multiple="multiple" id="id_objets" class="form-control"> -->
+
+    <!--     {% for objet in objets %} -->
+    <!--     <option value="{{objet.id}}"{% if objet.id in form.objets.value %} selected="" {% endif %}>{{objet.get_nom}}</option> -->
+    <!--     {% endfor %} -->
+
+    <!--   </select> -->
+    <!-- </div> -->
+
+    <!-- <div class="row"> -->
+    <!--   <div class="col-md-6"> -->
+    <!--     <div class="panel panel-defaut" id="details-panels"> -->
+    <!-- 	<div class="panel-heading"> -->
+    <!-- 	  <h3 class="panel-title">Main principale</h3> -->
+    <!-- 	</div> -->
+    <!-- 	<div class="panel-body centre"> -->
+    <div class="form-group">
+      <label for="id_nom">Main principale&nbsp;</label>
+      <select name="mp"  id="id_mp" class="image-picker show-labels">
+  	<option value=""></option>
+  	{% for mp in mps %}
+  	<option value="{{mp.id}}" {% if mp.id in form.mps.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{mp.objet.image_url}}.PNG" data-img-label="{{mp.get_nom}}">{{mp.get_nom}}</option>
+  	{% endfor %}
+      </select>
+    </div>
+    <!-- 	</div> -->
+    <!--     </div> <\!-- panel panel-default -\-> -->
+    <!--   </div>   <\!-- col-md-6 -\-> -->
+    <!--   <div class="col-md-6"> -->
+    <!--     <div class="panel panel-defaut" id="details-panels"> -->
+    <!--   	<div class="panel-heading"> -->
+    <!--   	  <h3 class="panel-title">Autre main</h3> -->
+    <!--   	</div> -->
+    <!--   	<div class="panel-body centre"> -->
+    <div class="form-group">
+      <label for="id_nom">Autre main&nbsp;</label>
+      <select name="am"  id="id_am" class="image-picker show-labels">
+    	<option value=""></option>
+    	{% for am in ams %}
+    	<option value="{{am.id}}" {% if am.id in form.ams.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{am.objet.image_url}}.PNG" data-img-label="{{am.get_nom}}">{{am.get_nom}}</option>
+    	{% endfor %}
+      </select>
+    </div>
+    <!--   	</div> -->
+    <!--     </div> <\!-- panel panel-default -\-> -->
+    <!--   </div>   <\!-- col-md-6 -\-> -->
+    <!--   <div class="col-md-6"> -->
+    <!--     <div class="panel panel-defaut" id="details-panels"> -->
+    <!--   	<div class="panel-heading"> -->
+    <!--   	  <h3 class="panel-title">Autre arme</h3> -->
+    <!--   	</div> -->
+    <!--   	<div class="panel-body centre"> -->
+    <div class="form-group">
+      <label for="id_nom">Arme secondaire&nbsp;</label>
+      <select name="aa"  id="id_aa" class="image-picker show-labels">
+    	<option value=""></option>
+    	{% for aa in aas %}
+    	<option value="{{aa.id}}" {% if aa.id in form.aas.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{aa.objet.image_url}}.PNG" data-img-label="{{aa.get_nom}}">{{aa.get_nom}}</option>
+    	{% endfor %}
+      </select>
+    </div>
+    <!--   	</Div> -->
+    <!--     </div> <\!-- panel panel-default -\-> -->
+    <!--   </div>   <\!-- col-md-6 -\-> -->
+    <!--   <div class="col-md-6"> -->
+    <!--     <div class="panel panel-defaut" id="details-panels"> -->
+    <!--   	<div class="panel-heading"> -->
+    <!--   	  <h3 class="panel-title">Tête</h3> -->
+    <!--   	</div> -->
+    <!--   	<div class="panel-body centre"> -->
+    <div class="form-group">
+      <label for="id_nom">Tête&nbsp;</label>
+      <select name="tete"  id="id_tete" class="image-picker show-labels">
+    	<option value=""></option>
+    	{% for tete in tetes %}
+    	<option value="{{tete.id}}" {% if tete.id in form.tetes.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{tete.objet.image_url}}.PNG" data-img-label="{{tete.get_nom}}">{{tete.get_nom}}</option>
+    	{% endfor %}
+      </select>
+    </div>
+    <!--   	</div> -->
+    <!--     </div> <\!-- panel panel-default -\-> -->
+    <!--   </div>   <\!-- col-md-6 -\-> -->
+    <!--   <div class="col-md-6"> -->
+    <!--     <div class="panel panel-defaut" id="details-panels"> -->
+    <!--   	<div class="panel-heading"> -->
+    <!--   	  <h3 class="panel-title">Epaules</h3> -->
+    <!--   	</div> -->
+    <!--   	<div class="panel-body centre"> -->
+    <div class="form-group">
+      <label for="id_nom">Epaules&nbsp;</label>
+      <select name="epaule"  id="id_epaule" class="image-picker show-labels">
+    	<option value=""></option>
+    	{% for epaule in epaules %}
+    	<option value="{{epaule.id}}" {% if epaule.id in form.epaules.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{epaule.objet.image_url}}.PNG" data-img-label="{{epaule.get_nom}}">{{epaule.get_nom}}</option>
+    	{% endfor %}
+      </select>
+    </div>
+    <!--   	</div> -->
+    <!--     </div> <\!-- panel panel-default -\-> -->
+    <!--   </div>   <\!-- col-md-6 -\-> -->
+    <!--   <div class="col-md-6"> -->
+    <!--     <div class="panel panel-defaut" id="details-panels"> -->
+    <!--   	<div class="panel-heading"> -->
+    <!--   	  <h3 class="panel-title">Torse</h3> -->
+    <!--   	</div> -->
+    <!--   	<div class="panel-body centre"> -->
+    <div class="form-group">
+      <label for="id_nom">Torse&nbsp;</label>
+      <select name="torse"  id="id_torse" class="image-picker show-labels">
+    	<option value=""></option>
+    	{% for torse in torses %}
+    	<option value="{{torse.id}}" {% if torse.id in form.torses.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{torse.objet.image_url}}.PNG" data-img-label="{{torse.get_nom}}">{{torse.get_nom}}</option>
+    	{% endfor %}
+      </select>
+    </div>
+    <!--   	</div> -->
+    <!--     </div> <\!-- panel panel-default -\-> -->
+    <!--   </div>   <\!-- col-md-6 -\-> -->
+    <!--   <div class="col-md-6"> -->
+    <!--     <div class="panel panel-defaut" id="details-panels"> -->
+    <!--   	<div class="panel-heading"> -->
+    <!--   	  <h3 class="panel-title">Mains</h3> -->
+    <!--   	</div> -->
+    <!--   	<div class="panel-body centre"> -->
+    <div class="form-group">
+      <label for="id_nom">Main&nbsp;</label>
+      <select name="main"  id="id_main" class="image-picker show-labels">
+    	<option value=""></option>
+    	{% for main in mains %}
+    	<option value="{{main.id}}" {% if main.id in form.mains.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{main.objet.image_url}}.PNG" data-img-label="{{main.get_nom}}">{{main.get_nom}}</option>
+    	{% endfor %}
+      </select>
+    </div>
+    <!--   	</div> -->
+    <!--     </div> <\!-- panel panel-default -\-> -->
+    <!--   </div>   <\!-- col-md-6 -\-> -->
+
+    <!--       <div class="col-md-6"> -->
+    <!--     <div class="panel panel-defaut" id="details-panels"> -->
+    <!--   	<div class="panel-heading"> -->
+    <!--   	  <h3 class="panel-title">Taille</h3> -->
+    <!--   	</div> -->
+    <!--   	<div class="panel-body centre"> -->
+    <div class="form-group">
+      <label for="id_nom">Taille&nbsp;</label>
+      <select name="taille"  id="id_taille" class="image-picker show-labels">
+    	<option value=""></option>
+    	{% for taille in tailles %}
+    	<option value="{{taille.id}}" {% if taille.id in form.tailles.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{taille.objet.image_url}}.PNG" data-img-label="{{taille.get_nom}}">{{taille.get_nom}}</option>
+    	{% endfor %}
+      </select>
+    </div>
+    <!--   	</div> -->
+    <!--     </div> <\!-- panel panel-default -\-> -->
+    <!--   	</div>   <\!-- col-md-6 -\-> -->
+
+    <!-- </div>     <\!-- row -\-> -->
+
+    <div class="form-group">
+      <label for="id_nom">Jambes&nbsp;</label>
+      <select name="jambe"  id="id_jambe" class="image-picker show-labels">
+	<option value=""></option>
+	{% for jambe in jambes %}
+	<option value="{{jambe.id}}" {% if jambe.id in form.jambes.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{jambe.objet.image_url}}.PNG" data-img-label="{{jambe.get_nom}}">{{jambe.get_nom}}</option>
+	{% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="id_nom">Dos&nbsp;</label>
+      <select name="do"  id="id_do" class="image-picker show-labels">
+	<option value=""></option>
+	{% for do in dos %}
+	<option value="{{do.id}}" {% if do.id in form.dos.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{do.objet.image_url}}.PNG" data-img-label="{{do.get_nom}}">{{do.get_nom}}</option>
+	{% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="id_nom">Cou&nbsp;</label>
+      <select name="cou"  id="id_cou" class="image-picker show-labels">
+	<option value=""></option>
+	{% for cou in cous %}
+	<option value="{{cou.id}}" {% if cou.id in form.cous.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{cou.objet.image_url}}.PNG" data-img-label="{{cou.get_nom}}">{{cou.get_nom}}</option>
+	{% endfor %}
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="id_nom">Poignets&nbsp;</label>
+      <select name="poignet"  id="id_poignet" class="image-picker show-labels">
+	<option value=""></option>
+	{% for poignet in poignets %}
+	<option value="{{poignet.id}}" {% if poignet.id in form.poignets.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{poignet.objet.image_url}}.PNG" data-img-label="{{poignet.get_nom}}">{{poignet.get_nom}}</option>
+	{% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_nom">Pieds&nbsp;</label>
+      <select name="pied"  id="id_pied" class="image-picker show-labels">
+	<option value=""></option>
+	{% for pied in pieds %}
+	<option value="{{pied.id}}" {% if pied.id in form.pieds.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{pied.objet.image_url}}.PNG" data-img-label="{{pied.get_nom}}">{{pied.get_nom}}</option>
+	{% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_nom">Doigts&nbsp;</label>
+      <select name="doigt"  multiple="multiple" id="id_doigt" class="image-picker show-labels">
+	<option value=""></option>
+	{% for doigt in doigts %}
+	<option value="{{doigt.id}}" {% if doigt.id in form.doigts.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{doigt.objet.image_url}}.PNG" data-img-label="{{doigt.get_nom}}">{{doigt.get_nom}}</option>
+	{% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_nom">Divers&nbsp;</label>
+      <select name="diver" multiple="multiple" id="id_diver" class="image-picker show-labels">
+	<option value=""></option>
+	{% for diver in divers %}
+	<option value="{{diver.id}}" {% if diver.id in form.divers.value %} selected="" {% endif %} data-img-src="/fiches/media/images/ICONS/{{diver.objet.image_url}}.PNG" data-img-label="{{diver.get_nom}}">{{diver.get_nom}}</option>
+	{% endfor %}
+      </select>
+    </div>
+  </form>
+
+    <input class="btn btn-default" type="submit" value="Valider" />
+
+</div>
+
+
+
+{% endblock %}

@@ -180,7 +180,22 @@ def detail_fiche(request, fiche_id):
 # Displays the first name and last name of the latests Fiche model instances
 def personnages(request):
     # fiches = Fiche.objects.order_by('nom', 'prenom')
-    fiches_list = Fiche.objects.order_by('nom', 'prenom')
+    if request.method == 'GET' and 'valeur' in request.GET and 'recherche' in request.GET:
+        if 'recherche' is not None and 'recherche' != '':
+            valeur = request.GET.get('valeur')
+            recherche = request.GET.get('recherche')
+            Qr = None
+            q = Q(**({"%s__icontains" % recherche: valeur }))
+            if Qr:
+                Qr = Qr | q # or & for filtering
+            else:
+                Qr = q
+            # this you can now combine with other filters, exclude etc.
+            fiches_list = Fiche.objects.filter(Qr)
+        else:
+            fiches_list = Fiche.objects.order_by('nom', 'prenom')
+    else:
+        fiches_list = Fiche.objects.order_by('nom', 'prenom')
 
     paginator = Paginator(fiches_list, 20)
     page = request.GET.get('page')
@@ -550,6 +565,8 @@ def edit_equipement(request, equipement_id):
         if request.method == 'POST':
             form = EquipementForm(request.POST, instance=equipement)
             if form.is_valid():
+                print(request.POST)
+                print(form)
                 form.save()
                 return HttpResponseRedirect('/firp')
             else:
@@ -560,6 +577,72 @@ def edit_equipement(request, equipement_id):
         objets = Armure.objects.all()
         context = {'form': form, 'objets': objets}
         return render(request, 'fiches/equipement.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer les equipements.")
+
+
+@login_required
+def edit_equip(request, equipement_id):
+    equipement = Equipement.objects.get(pk=equipement_id)
+    if request.user.has_perm('fiches.change_equipement'):
+        if request.method == 'POST':
+            print("lol cest post")
+            re = request.POST.copy()
+            re.appendlist('objets', re.__getitem__('mp'))
+            re.appendlist('objets', re.__getitem__('am'))
+            re.appendlist('objets', re.__getitem__('aa'))
+            re.appendlist('objets', re.__getitem__('tete'))
+            re.appendlist('objets', re.__getitem__('epaule'))
+            re.appendlist('objets', re.__getitem__('torse'))
+            re.appendlist('objets', re.__getitem__('main'))
+            re.appendlist('objets', re.__getitem__('taille'))
+            re.appendlist('objets', re.__getitem__('jambe'))
+            re.appendlist('objets', re.__getitem__('do'))
+            re.appendlist('objets', re.__getitem__('cou'))
+            re.appendlist('objets', re.__getitem__('poignet'))
+            re.appendlist('objets', re.__getitem__('pied'))
+            doigts = re.getlist('doigt')
+            for doigt in doigts:
+                re.appendlist('objets', doigt)
+            divers = re.getlist('diver')
+            for diver in divers:
+                re.appendlist('objets', diver)
+            form = EquipementForm(re, instance=equipement)
+            if form.is_valid():
+                print(request.POST)
+                print(form)
+                form.save()
+                return HttpResponseRedirect('/firp')
+            else:
+                print(form.errors)
+        else:
+            form = EquipementForm(instance=equipement)
+
+        objets = Armure.objects.all()
+        mps = Armure.objects.filter(membre=1)
+        ams = Armure.objects.filter(membre=2)
+        aas = Armure.objects.filter(membre=15)
+        tetes = Armure.objects.filter(membre=3)
+        epaules = Armure.objects.filter(membre=4)
+        torses = Armure.objects.filter(membre=5)
+        mains = Armure.objects.filter(membre=6)
+        tailles = Armure.objects.filter(membre=7)
+        jambes = Armure.objects.filter(membre=8)
+        dos = Armure.objects.filter(membre=10)
+        cous = Armure.objects.filter(membre=11)
+        poignets = Armure.objects.filter(membre=13)
+        pieds = Armure.objects.filter(membre=9)
+        doigts = Armure.objects.filter(membre=12)
+        divers = Armure.objects.filter(membre=14)
+        context = {'form': form, 'objets': objets, 'mps': mps,
+                   'ams': ams, 'aas': aas, 'tetes': tetes,
+                   'epaules': epaules, 'torses': torses, 'mains': mains,
+                   'tailles': tailles, 'jambes': jambes, 'dos': dos,
+                   'cous': cous, 'poignets': poignets, 'pieds': pieds,
+                   'doigts': doigts, 'divers': divers}
+        return render(request, 'fiches/equip_edit.html', context)
 
     else:
 
