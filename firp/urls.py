@@ -22,6 +22,8 @@ urlpatterns = [
         name='personnages'),
     url(r'^personnages/search=(?P<requete>)$', views.personnages,
         name='personnages'),
+    url(r'^personnages/sort_by/(?P<requete>)$', views.personnages,
+        name='personnages'),
     url(r'^fiches/(?P<fiche_id>\d+)/$', views.detail_fiche,
         name='detail_fiche'),
     url(r'^fiches/editer_fiche/(?P<fiche_id>\d+)/$', views.edit_fiche,
@@ -29,7 +31,7 @@ urlpatterns = [
     url(r'^fiches/supprimer_fiche/(?P<fiche_id>\d+)/$', views.delete_fiche,
         name='supprimer_fiche'),
     url(r'^fiches/creer/$', views.creer_fiche, name='creer_fiche'),
-    url(r'^fiches/rechercher/$', views.fiche_search, name='rechercher_fiche'),
+    url(r'^fiches/rechercher/$', views.personnages, name='rechercher_fiche'),
     # Objets
     url(r'^objets/$', views.objets, name='objets'),
     url(r'^objets/creer_objet/$', views.creer_objet, name='creer_objet'),

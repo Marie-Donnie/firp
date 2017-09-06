@@ -180,6 +180,7 @@ def detail_fiche(request, fiche_id):
 # Displays the first name and last name of the latests Fiche model instances
 def personnages(request):
     # fiches = Fiche.objects.order_by('nom', 'prenom')
+    context = {}
     if request.method == 'GET' and 'valeur' in request.GET and 'recherche' in request.GET:
         if 'recherche' is not None and 'recherche' != '':
             valeur = request.GET.get('valeur')
@@ -192,9 +193,11 @@ def personnages(request):
                 Qr = q
             # this you can now combine with other filters, exclude etc.
             fiches_list = Fiche.objects.filter(Qr)
+            context['recherche'] = recherche
+            context['valeur'] = valeur
         else:
             fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
-            print(ici)
+
     else:
         fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
 
@@ -209,7 +212,7 @@ def personnages(request):
     except EmptyPage:
         fiches = paginator.page(paginator.num_pages)
 
-    context = {'fiches': fiches}
+    context['fiches'] = fiches
 
     return render(request, 'fiches/personnages.html', context)
 

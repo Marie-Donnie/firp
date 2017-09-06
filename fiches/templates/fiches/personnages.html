@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+{% load static %}
+{% load filters %}
+
 {% block title %}Liste des personnages{% endblock %}
 {% block page-title %}Liste des personnages{% endblock %}
 
@@ -27,7 +31,11 @@
     <ul class="pagination pagination-sm">
       {% if fiches.has_previous %}
       <li>
-	<a href="?page={{ fiches.previous_page_number }}" aria-label="Précédent">
+	{% if recherche %}
+	<a href="?{% url_replace request 'page' fiches.previous_page_number %}" aria-label="Précédent">
+	  {% else %}
+	  <a href="?page={{ fiches.previous_page_number }}" aria-label="Précédent">
+	  {% endif %}
 	  <span aria-hidden="true">&laquo;</span>
 	</a>
       </li>
@@ -35,7 +43,11 @@
 
       {% for p in fiches.paginator.page_range %}
       <li>
-	<a href="?page={{ p }}">
+	{% if recherche %}
+	    <a href="?{% url_replace request 'page' p %}">
+	      {% else %}
+	      <a href="?page={{ p }}">
+		{% endif %}
 	  {{p}}
 	</a>
       </li>
@@ -43,7 +55,11 @@
 
       {% if fiches.has_next %}
       <li>
-	<a href="?page={{ fiches.next_page_number }}" aria-label="Suivant">
+	{% if recherche %}
+	<a href="?{% url_replace request 'page' fiches.next_page_number %}" aria-label="Suivant">
+	  {% else %}
+	  <a href="?page={{ fiches.next_page_number }}" aria-label="Suivant">
+	    {% endif %}
           <span aria-hidden="true">&raquo;</span>
 	</a>
       </li>
