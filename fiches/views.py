@@ -225,7 +225,12 @@ def edit_fiche(request, fiche_id):
     if utilisateur == fiche.createur:
         if request.method == 'POST':
             data = request.POST.copy()
+            # Adds creator directly because the field is hidden
             data['createur'] = User.objects.get(username=utilisateur).id
+            """
+            Disables useless fields and creates the required ones depending
+            on the authorization of the user
+            """
             if not(utilisateur.has_perm('fiches.equipement_ok') and
                    utilisateur.has_perm('fiches.inventaire_ok')):
                 data['equipement'] = None
@@ -674,7 +679,7 @@ def tooltip_armure(request, armure_id):
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-
+# Display list of quests
 def quetes(request):
     quetes = Quete.objects.all().order_by('etat', 'creation', 'difficulte', 'nom')
     paginator = Paginator(quetes, 8)
@@ -693,6 +698,7 @@ def quetes(request):
     return render(request, 'site/quetes.html', context)
 
 
+# Display quest
 def quete(request, quete_id):
     quete = get_object_or_404(Quete, pk=quete_id)
 
@@ -700,6 +706,8 @@ def quete(request, quete_id):
 
     return render(request, 'site/quete.html', context)
 
+
+# Enables the reservation of a quest by players
 @login_required
 def res_quete(request, quete_id):
     if request.user.has_perm('fiches.objet_ok'):
@@ -707,6 +715,7 @@ def res_quete(request, quete_id):
 
         if request.method == 'POST':
             data = request.POST.copy()
+            # Puts the quest to the "reserved" state (2)
             data['etat'] = 2
             form = PrendreQueteForm(data, instance=quete)
             if form.is_valid():
@@ -729,6 +738,7 @@ def res_quete(request, quete_id):
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GALLERIE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 
+# Display icon gallery
 from os import listdir
 from os import walk
 @login_required
@@ -736,6 +746,7 @@ def gallery(request):
     if request.user.has_perm('fiches.objet_ok'):
         images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
         images = listdir(images_url)
+        # Sorts images independently of case
         images_sorted = sorted(images, key=str.lower)
         paginator = Paginator(images_sorted, 100)
         page = request.GET.get('page')
@@ -756,7 +767,7 @@ def gallery(request):
         return HttpResponse("Vous ne pouvez pas acceder a la gallerie")
 
 
-
+# Enables the search of an icon
 @login_required
 def gallery_search(request):
     if request.user.has_perm('fiches.objet_ok'):
@@ -764,6 +775,10 @@ def gallery_search(request):
         recherche = request.GET.get('recherche')
         images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
         images = []
+        """
+        Adds every files matching the name given to the returned list,
+        checking everything in lower case
+        """
         for root, dirs, files in walk(images_url):
             for name in files:
                 if recherche.lower() in name.lower():
@@ -791,61 +806,54 @@ def gallery_search(request):
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CAMPAGNES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 
-@login_required
+# Displays campaigns
 def campagnes(request):
-    if request.user.has_perm('fiches.objet_ok'):
-        campagnes = Operation.objects.all().order_by('-id')
-        paginator = Paginator(campagnes, 8)
-        page = request.GET.get('page')
-        try:
-            campagnes_list = paginator.page(page)
-        # if page not an integer, display first page of results
-        except PageNotAnInteger:
-            campagnes_list = paginator.page(1)
-        # if page is out of range, display the last page of results
-        except EmptyPage:
-            campagnes_list = paginator.page(paginator.num_pages)
+    campagnes = Operation.objects.all().order_by('-id')
+    paginator = Paginator(campagnes, 8)
+    page = request.GET.get('page')
+    try:
+        campagnes_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        campagnes_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        campagnes_list = paginator.page(paginator.num_pages)
 
-        context = {'campagnes': campagnes, 'campagnes_list': campagnes_list}
+    context = {'campagnes': campagnes, 'campagnes_list': campagnes_list}
 
-        return render(request, 'site/campagnes.html', context)
-
-    else:
-
-        return HttpResponse("Vous ne pouvez pas acceder aux campagnes")
+    return render(request, 'site/campagnes.html', context)
 
 
-@login_required
+# Display requested campaign
 def campagne(request, campagne_id):
-    if request.user.has_perm('fiches.objet_ok'):
-        campagne = get_object_or_404(Operation, pk=campagne_id)
-        missions = Mission.objects.filter(operation=campagne).order_by('numero')
-        paginator = Paginator(missions, 8)
-        page = request.GET.get('page')
-        try:
-            missions_list = paginator.page(page)
-        # if page not an integer, display first page of results
-        except PageNotAnInteger:
-            missions_list = paginator.page(1)
-        # if page is out of range, display the last page of results
-        except EmptyPage:
-            missions_list = paginator.page(paginator.num_pages)
-        context = {'campagne': campagne, 'missions_list': missions_list}
+    campagne = get_object_or_404(Operation, pk=campagne_id)
+    missions = Mission.objects.filter(operation=campagne).order_by('numero')
+    paginator = Paginator(missions, 8)
+    page = request.GET.get('page')
+    try:
+        missions_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        missions_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        missions_list = paginator.page(paginator.num_pages)
+    context = {'campagne': campagne, 'missions_list': missions_list}
 
-        return render(request, 'site/campagne.html', context)
-    else:
-
-        return HttpResponse("Vous ne pouvez pas acceder aux campagnes")
+    return render(request, 'site/campagne.html', context)
 
 
+# Displays report of the requested mission
 @login_required
 def mission(request, campagne_id, mission_id):
     if request.user.has_perm('fiches.objet_ok'):
         mission = get_object_or_404(Mission, pk=mission_id)
+        # Finds all missions of the campaign
         missions = Mission.objects.select_related().filter(operation = campagne_id)
         mission_pre = None
         mission_sui = None
-        print(missions)
+        # Next and previous missions
         for mis in missions:
             if mis.numero == (mission.numero - 1):
                 mission_pre = mis
@@ -861,16 +869,20 @@ def mission(request, campagne_id, mission_id):
         return HttpResponse("Vous ne pouvez pas acceder aux campagnes")
 
 
+# Enables the creation of missions for players
 @login_required
 def creer_mission(request):
     if request.user.has_perm('fiches.objet_ok'):
+        # Collects the choices for leaders, enabling the sorting by likeliness to lead
         caporals = Fiche.objects.filter(titre__iexact='caporal')
         sergents = Fiche.objects.filter(titre__iexact='sergent')
         lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
         capitaines = Fiche.objects.filter(titre__iexact='capitaine')
         generals = Fiche.objects.filter(titre__iexact='général')
         colonels = Fiche.objects.filter(titre__iexact='colonel')
+        # Gets people from Noirebois (23)
         autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
+        # Gets the choices for campaigns
         campagnes = Operation.objects.all()
         if request.method == 'POST':
             form = MissionForm(request.POST)
@@ -893,9 +905,11 @@ def creer_mission(request):
         return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des rapports.")
 
 
+# Enables the edition of missions for players
 @login_required
 def edit_mission(request, mission_id):
     if request.user.has_perm('fiches.objet_ok'):
+        # Collects the choices for leaders, enabling the sorting by likeliness to lead
         mission = Mission.objects.get(pk=mission_id)
         caporals = Fiche.objects.filter(titre__iexact='caporal')
         sergents = Fiche.objects.filter(titre__iexact='sergent')
@@ -903,7 +917,9 @@ def edit_mission(request, mission_id):
         capitaines = Fiche.objects.filter(titre__iexact='capitaine')
         generals = Fiche.objects.filter(titre__iexact='général')
         colonels = Fiche.objects.filter(titre__iexact='colonel')
+        # Gets people from Noirebois (23)
         autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
+        # Gets the choices for campaigns
         campagnes = Operation.objects.all()
         if request.method == 'POST':
 
