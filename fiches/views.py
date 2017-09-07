@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import os
 from django.shortcuts import get_object_or_404, render, redirect, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
@@ -240,6 +241,11 @@ def edit_fiche(request, fiche_id):
                         data['equipement'] = Equipement.objects.create(nom='Equipement de '+name).id
                     if not fiche.inventaire_fdg:
                         data['inventaire_fdg'] = Inventaire.objects.create(nom='Inventaire de '+name).id
+            # Remove the previous image if a new one is uploaded
+            if 'image' in request.FILES:
+                path = "%s/" % (settings.MEDIA_ROOT)
+                fichier = os.path.join(path, fiche.image.name)
+                os.remove(fichier)
             form = FicheForm(data, request.FILES, instance=fiche)
             if form.is_valid():
                 save_it = form.save()
