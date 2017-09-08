@@ -190,7 +190,7 @@ class Fantassin(models.Model):
                                    max_value=100)
     glaive_lourde = models.SmallIntegerField(choices=((
         (1, "Niveau inférieur"),
-        (2, "Maîtriste du glaive"),
+        (2, "Maîtrise du glaive"),
         (3, "Maîtrise de l'armure lourde")
     )),
                                           default=1)

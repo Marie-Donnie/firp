@@ -552,10 +552,10 @@ h3#nom {
 }
 
 .a-g-class {
-    border: 2px solid #470002;
-    border-radius : 10px;
-    background-image: -webkit-linear-gradient(top, #100000, #1e0101);
-    background-image: linear-gradient(to bottom, #100000, #1e0101);
+    border: 2px solid #290203;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(top, #100000, #180000);
+    background-image: linear-gradient(to bottom, #100000, #180000);
     margin: 0% auto;
 }
 
