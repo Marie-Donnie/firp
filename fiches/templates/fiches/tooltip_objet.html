@@ -8,9 +8,7 @@
 	  {% elif objet.qualite == 'e' %}id="objet-epique"
 	  {% elif objet.qualite == 'l' %}id="objet-legendaire"
 	  {% elif objet.qualite == 'u' %}id="objet-unique"
-	  {% endif %}><b>{{ objet.nom|capfirst }}{% if objet.armure.enchantement %}
-	  - {{ objet.armure.enchantement.nom }}
-	  {% endif %}</b>
+	  {% endif %}><b>{{ objet.nom|capfirst }}</b>{% block enchant %}{% endblock %}
       </li>
       <li><i><!-- <b>Description&nbsp;: </b> -->{{ objet.description }}</i></li>
       {% if objet.prix != 0 %}

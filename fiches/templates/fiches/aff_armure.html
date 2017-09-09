@@ -18,9 +18,6 @@
       </div>
       <div class="panel-body">
 	{{ armure.effet|linebreaksbr }}
-	{% if armure.enchantement %}
-	{{ armure.enchantement.effet|linebreaksbr }}
-	{% endif %}
       </div>
     </div>
   </div>
@@ -35,9 +32,6 @@
       </div>
       <div class="panel-body">
 	{{ armure.effet_ig|linebreaksbr }}
-	{% if armure.enchantement %}
-	{{ armure.enchantement.effet_ig|linebreaksbr }}
-	{% endif %}
       </div>
     </div>
   </div>
@@ -62,50 +56,38 @@
 	  </div>
 	</div>
 	{% endif %}
-	{% if armure.force != 0 or armure.enchantement and armure.enchantement.force != 0 %}
+	{% if armure.force != 0 %}
 	<div class="col-md-3">
 	  <div class="panel panel-defaut" id="details-panels">
 	    <div class="panel-heading">
 	      <h3 class="panel-title">Force</h3>
 	    </div>
 	    <div class="panel-body" id="stat">
-	      {% if armure.enchantement %}
-	      {{ armure.force|add:armure.enchantement.force }}
-	      {% else %}
 	      {{ armure.force }}
-	      {% endif %}
 	    </div>
 	  </div>
 	</div>
 	{% endif %}
-	{% if armure.agi != 0 or armure.enchantement and armure.enchantement.agi != 0 %}
+	{% if armure.agi != 0 %}
 	<div class="col-md-3">
 	  <div class="panel panel-defaut" id="details-panels">
 	    <div class="panel-heading">
 	      <h3 class="panel-title">Agilité</h3>
 	    </div>
 	    <div class="panel-body" id="stat">
-	      {% if armure.enchantement %}
-	      {{ armure.agi|add:armure.enchantement.agi }}
-	      {% else %}
 	      {{ armure.agi }}
-	      {% endif %}
 	    </div>
 	  </div>
 	</div>
 	{% endif %}
-	{% if armure.intell != 0 or armure.enchantement and armure.enchantement.intell != 0 %}
+	{% if armure.intell != 0 %}
 	<div class="col-md-3">
 	  <div class="panel panel-defaut" id="details-panels">
 	    <div class="panel-heading">
 	      <h3 class="panel-title">Intelligence</h3>
 	    </div>
 	    <div class="panel-body" id="stat">
-	      {% if armure.enchantement %}
-	      {{ armure.intell|add:armure.enchantement.intell }}
-	      {% else %}
 	      {{ armure.intell }}
-	      {% endif %}
 	    </div>
 	  </div>
 	</div>

@@ -345,10 +345,6 @@ class Armure(models.Model):
     membre = models.SmallIntegerField(choices=MEMBRES,
                                       default=5)
     armure = models.SmallIntegerField(default=0)
-    enchantement = models.ForeignKey('Enchantement',
-                                      blank=True,
-                                      null=True,
-                                      related_name='armure')
 
     class Meta:
         ordering = ["membre"]
@@ -406,6 +402,9 @@ class Equipement(models.Model):
                            default="Equipement ")
     objets = models.ManyToManyField(Armure,
                                     related_name='equipement')
+    enchantements = models.ManyToManyField('Enchantement',
+                                          blank=True,
+                                          related_name='equipement')
 
     class Meta:
         verbose_name = "equipement"
@@ -415,37 +414,37 @@ class Equipement(models.Model):
                         "Peut faire des équipements"),)
 
     def get_mp(self):
-        return self.objets.filter(membre=1).first()
+        return self.objets.filter(membre=1).first(), self.enchantements.filter(membre=1).first()
 
     def get_am(self):
-        return self.objets.filter(membre=2).first()
+        return self.objets.filter(membre=2).first(), self.enchantements.filter(membre=2).first()
 
     def get_tete(self):
-        return self.objets.filter(membre=3).first()
+        return self.objets.filter(membre=3).first(), self.enchantements.filter(membre=3).first()
 
     def get_epaules(self):
-        return self.objets.filter(membre=4).first()
+        return self.objets.filter(membre=4).first(), self.enchantements.filter(membre=4).first()
 
     def get_torse(self):
-        return self.objets.filter(membre=5).first()
+        return self.objets.filter(membre=5).first(), self.enchantements.filter(membre=5).first()
 
     def get_mains(self):
-        return self.objets.filter(membre=6).first()
+        return self.objets.filter(membre=6).first(), self.enchantements.filter(membre=6).first()
 
     def get_taille(self):
-        return self.objets.filter(membre=7).first()
+        return self.objets.filter(membre=7).first(), self.enchantements.filter(membre=7).first()
 
     def get_jambes(self):
-        return self.objets.filter(membre=8).first()
+        return self.objets.filter(membre=8).first(), self.enchantements.filter(membre=8).first()
 
     def get_pieds(self):
-        return self.objets.filter(membre=9).first()
+        return self.objets.filter(membre=9).first(), self.enchantements.filter(membre=9).first()
 
     def get_dos(self):
-        return self.objets.filter(membre=10).first()
+        return self.objets.filter(membre=10).first(), self.enchantements.filter(membre=10).first()
 
     def get_cou(self):
-        return self.objets.filter(membre=11).first()
+        return self.objets.filter(membre=11).first(), self.enchantements.filter(membre=11).first()
 
     def get_doigts(self):
         ret = list(self.objets.filter(membre=12)[:8].iterator())
@@ -453,7 +452,7 @@ class Equipement(models.Model):
         return ret
 
     def get_poignets(self):
-        return self.objets.filter(membre=13).first()
+        return self.objets.filter(membre=13).first(), self.enchantements.filter(membre=13).first()
 
     def get_divers(self):
         ret = list(self.objets.filter(membre=14)[:10].iterator())
@@ -461,7 +460,7 @@ class Equipement(models.Model):
         return ret
 
     def get_autre_arme(self):
-        return self.objets.filter(membre=15).first()
+        return self.objets.filter(membre=15).first(), self.enchantements.filter(membre=15).first()
 
     def effets(self):
         effets = []
@@ -479,7 +478,7 @@ class Equipement(models.Model):
                    self.get_jambes, self.get_pieds, self.get_dos, self.get_cou,
                    self.get_poignets, self.get_autre_arme]
         for method in methods:
-            objet = method()
+            objet, enchantement = method()
             if objet is not None:
                 effets.append("De \"" + objet.objet.nom + "\" : " + objet.effet)
                 effets_ig.append("De \"" + objet.objet.nom + "\" : " + objet.effet_ig)
@@ -493,12 +492,12 @@ class Equipement(models.Model):
                 intell += objet.intell
                 agi += objet.agi
                 armure += objet.armure
-                if objet.enchantement is not None:
-                    effets.append("De \"" + objet.enchantement.nom + "\" : " + objet.enchantement.effet)
-                    effets_ig.append("De \"" + objet.enchantement.nom + "\" : " + objet.enchantement.effet_ig)
-                    force += objet.enchantement.force
-                    intell += objet.enchantement.intell
-                    agi += objet.enchantement.agi
+                if enchantement is not None:
+                    effets.append("De \"" + enchantement.nom + "\" : " + enchantement.effet)
+                    effets_ig.append("De \"" + enchantement.nom + "\" : " + enchantement.effet_ig)
+                    force += enchantement.force
+                    intell += enchantement.intell
+                    agi += enchantement.agi
         for anneau in self.get_doigts():
             if anneau is not None:
                 effets.append("De \"" + anneau.objet.nom + "\" : " + anneau.effet)
@@ -507,12 +506,6 @@ class Equipement(models.Model):
                 intell += anneau.intell
                 agi += anneau.agi
                 armure += anneau.armure
-                if anneau.enchantement is not None:
-                    effets.append("De \"" + anneau.enchantement.nom + "\" : " + anneau.enchantement.effet)
-                    effets_ig.append("De \"" + anneau.enchantement.nom + "\" : " + anneau.enchantement.effet_ig)
-                    force += anneau.enchantement.force
-                    intell += anneau.enchantement.intell
-                    agi += anneau.enchantement.agi
         for diver in self.get_divers():
             if diver is not None:
                 effets.append("De \"" + diver.objet.nom + "\" : " + diver.effet)
@@ -521,12 +514,6 @@ class Equipement(models.Model):
                 intell += diver.intell
                 agi += diver.agi
                 armure += diver.armure
-                if diver.enchantement is not None:
-                    effets.append("De \"" + diver.enchantement.nom + "\" : " + diver.enchantement.effet)
-                    effets_ig.append("De \"" + diver.enchantement.nom + "\" : " + diver.enchantement.effet_ig)
-                    force += diver.enchantement.force
-                    intell += diver.enchantement.intell
-                    agi += diver.enchantement.agi
         if ter_compte == 8:
             terradiance = True
         if run_compte == 8:

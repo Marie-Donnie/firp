@@ -250,26 +250,38 @@ function onMouseLeave() {
 	<div class="panel-heading">
 	  <h3 class="panel-title">{{fiche.equipement.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
 	  {% if user.id == fiche.createur.id %}
-	  <a href="{% url 'editer_equipement' fiche.equipement.id %}">Editer</a>
+	  <a href="{% url 'editer_equip' fiche.equipement.id %}">Editer</a>
 	  {% endif %}
 	</div>
 	<div class="panel-body">
 	  {% if mp %}
+	  {% if emp %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' emp.id mp.id %}" data-toggle="objet-tooltip">
+	  {% else %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' mp.id %}" data-toggle="objet-tooltip">
+	    {% endif %}
 	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{mp.objet.image_url}}.PNG" alt="Main principale" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-MainHand.PNG alt="Main principale" id="icone">
 	  {% endif %}
 	  {% if am %}
+	  {% if eam %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' eam.id am.id %}" data-toggle="objet-tooltip">
+	  {% else %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' am.id %}" data-toggle="objet-tooltip">
+	    {% endif %}
 	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{am.objet.image_url}}.PNG" alt="Autre main" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-SecondaryHand.PNG alt="Autre main" id="icone">
 	  {% endif %}
 	  {% if aa %}
+	  {% if eaa %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' eaa.id aa.id %}" data-toggle="objet-tooltip">
+	  {% else %}
 	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' aa.id %}" data-toggle="objet-tooltip">
+	    {% endif %}
 	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{aa.objet.image_url}}.PNG" alt="Autre arme" id="icone">
 	  </a>
 	  {% else %}

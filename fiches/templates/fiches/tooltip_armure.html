@@ -1,5 +1,6 @@
 {% extends "fiches/tooltip_objet.html" %}
 
+{% if enchant %}{% block enchant %} - {{ enchant.nom }}{% endblock %}{% endif %}
 
 {% block armure %}
 {% if armure.effet != 'Aucun' %}
@@ -13,26 +14,17 @@
 <!--   {% endif %} -->
   <!-- <li><b>Localisation :</b> {{ armure.get_membre_display }}<br></li> -->
   {% if armure.armure != 0 %}<li><b>Armure :</b> {{ armure.armure }}<br></li>{% endif %}
-  {% if armure.force != 0 or armure.enchantement and armure.enchantement.force != 0 %}
-<li><b>Force :</b> {% if armure.enchantement %}
-	      {{ armure.force|add:armure.enchantement.force }}
-	      {% else %}
-	      {{ armure.force }}
-	      {% endif %}<br></li>
+  {% if armure.force != 0%}
+<li><b>Force :</b>
+	      {{ armure.force }}<br></li>
 {% endif %}
-{% if armure.agi != 0 or armure.enchantement and armure.enchantement.agi != 0  %}
-<li><b>Agilité :</b> 	      {% if armure.enchantement %}
-	      {{ armure.agi|add:armure.enchantement.agi }}
-	      {% else %}
-	      {{ armure.agi }}
-	      {% endif %}<br></li>
+{% if armure.agi != 0  %}
+<li><b>Agilité :</b>
+	      {{ armure.agi }}<br></li>
 {% endif %}
-{% if armure.intell != 0 or armure.enchantement and armure.enchantement.intell != 0  %}
-<li><b>Intelligence :</b> 	      {% if armure.enchantement %}
-	      {{ armure.intell|add:armure.enchantement.intell }}
-	      {% else %}
-	      {{ armure.intell }}
-	      {% endif %}</li>
+{% if armure.intell != 0%}
+<li><b>Intelligence :</b>
+	      {{ armure.intell }}</li>
 {% endif %}
 
 {% endblock %}
