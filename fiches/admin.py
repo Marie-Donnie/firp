@@ -49,13 +49,13 @@ admin.site.register(Case, CaseAdmin)
 
 
 class InventaireAdmin(admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = ('id', 'nom')
 
 admin.site.register(Inventaire, InventaireAdmin)
 
 
 class EquipementAdmin(admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = ('id', 'nom')
 
 admin.site.register(Equipement, EquipementAdmin)
 
