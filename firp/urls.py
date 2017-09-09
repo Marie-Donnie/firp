@@ -45,8 +45,6 @@ urlpatterns = [
         name='detail_objet'),
     url(r'^objets/armure/(?P<armure_id>\d+)/$', views.detail_armure,
         name='detail_armure'),
-    url(r'^objets/armure/(?P<armure_id>\d+)/(?P<enchant_id>\d+)/$', views.detail_armure,
-        name='detail_armure'),
     url(r'^objets/objet/(?P<objet_id>\d+)/tooltip/$', views.tooltip_objet,
         name='tooltip_objet'),
     url(r'^objets/armure/(?P<armure_id>\d+)/(?P<enchant_id>\d+)/tooltip/$', views.tooltip_armure,

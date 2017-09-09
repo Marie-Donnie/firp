@@ -401,6 +401,7 @@ class Equipement(models.Model):
     nom = models.CharField(max_length=50,
                            default="Equipement ")
     objets = models.ManyToManyField(Armure,
+                                    blank=True,
                                     related_name='equipement')
     enchantements = models.ManyToManyField('Enchantement',
                                           blank=True,

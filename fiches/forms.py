@@ -98,7 +98,7 @@ class EquipementForm(ModelForm):
 
     class Meta:
         model = Equipement
-        fields = ['objets', 'nom']
+        fields = '__all__'
         prefix = 'equipement'
 
 

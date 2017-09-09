@@ -23,7 +23,9 @@ $('[data-toggle="objet-tooltip"]').on('mouseleave', onMouseLeave)
 
 function getTooltip() {
   var elem = this;
-  var tooltipUrl = elem.getAttribute('href') + 'tooltip/';
+  var enchant = $(elem).data('enchantement');
+  var enchantPath = enchant ? enchant + '/' : '';
+  var tooltipUrl = elem.getAttribute('href') + enchantPath + 'tooltip/';
   $(elem).off('mouseenter', getTooltip);
   $.ajax(tooltipUrl)
   .done(function(data) {
@@ -255,40 +257,28 @@ function onMouseLeave() {
 	</div>
 	<div class="panel-body">
 	  {% if mp %}
-	  {% if emp %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' emp.id mp.id %}" data-toggle="objet-tooltip">
-	  {% else %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' mp.id %}" data-toggle="objet-tooltip">
-	    {% endif %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' mp.id %}" data-toggle="objet-tooltip" data-enchantement="{{emp.id}}">
 	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{mp.objet.image_url}}.PNG" alt="Main principale" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-MainHand.PNG alt="Main principale" id="icone">
 	  {% endif %}
 	  {% if am %}
-	  {% if eam %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' eam.id am.id %}" data-toggle="objet-tooltip">
-	  {% else %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' am.id %}" data-toggle="objet-tooltip">
-	    {% endif %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' am.id %}" data-toggle="objet-tooltip" data-enchantement="{{eam.id}}">
 	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{am.objet.image_url}}.PNG" alt="Autre main" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-SecondaryHand.PNG alt="Autre main" id="icone">
 	  {% endif %}
 	  {% if aa %}
-	  {% if eaa %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' eaa.id aa.id %}" data-toggle="objet-tooltip">
-	  {% else %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' aa.id %}" data-toggle="objet-tooltip">
-	    {% endif %}
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' aa.id %}" data-toggle="objet-tooltip" data-enchantement="{{eaa.id}}">
 	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{aa.objet.image_url}}.PNG" alt="Autre arme" id="icone">
 	  </a>
 	  {% else %}
 	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Ammo.PNG alt="Autre main" id="icone">
 	  {% endif %}
 	  {% if tete %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' tete.id %}" data-toggle="objet-tooltip">
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' tete.id %}" data-toggle="objet-tooltip" data-enchantement="{{etete.id}}">
 	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{tete.objet.image_url}}.PNG" alt="Tête" id="icone">
 	  </a>
 	  {% else %}

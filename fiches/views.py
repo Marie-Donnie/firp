@@ -609,36 +609,37 @@ def edit_equipement(request, equipement_id):
 
 @login_required
 def edit_equip(request, equipement_id):
-    equipement = Equipement.objects.get(pk=equipement_id)
     if request.user.has_perm('fiches.change_equipement'):
+        equipement = Equipement.objects.get(pk=equipement_id)
         if request.method == 'POST':
             re = request.POST.copy()
             re.pop('objets')
+            re.pop('enchantements')
             if re.__contains__('mp') and re.__getitem__('mp') != '':
                 re.appendlist('objets', re.__getitem__('mp'))
-            if re.__getitem__('am') != '':
+            if re.__contains__('am') and re.__getitem__('am') != '':
                 re.appendlist('objets', re.__getitem__('am'))
-            if re.__getitem__('aa') != '':
+            if re.__contains__('aa') and re.__getitem__('aa') != '':
                 re.appendlist('objets', re.__getitem__('aa'))
-            if re.__getitem__('tete') != '':
+            if re.__contains__('tete') and re.__getitem__('tete') != '':
                 re.appendlist('objets', re.__getitem__('tete'))
-            if re.__getitem__('epaule') != '':
+            if re.__contains__('epaule') and re.__getitem__('epaule') != '':
                 re.appendlist('objets', re.__getitem__('epaule'))
-            if re.__getitem__('torse') != '':
+            if re.__contains__('torse') and re.__getitem__('torse') != '':
                 re.appendlist('objets', re.__getitem__('torse'))
-            if re.__getitem__('main') != '':
+            if re.__contains__('main') and re.__getitem__('main') != '':
                 re.appendlist('objets', re.__getitem__('main'))
-            if re.__getitem__('taille') != '':
+            if re.__contains__('taille') and re.__getitem__('taille') != '':
                 re.appendlist('objets', re.__getitem__('taille'))
-            if re.__getitem__('jambe') != '':
+            if re.__contains__('jambe') and re.__getitem__('jambe') != '':
                 re.appendlist('objets', re.__getitem__('jambe'))
-            if re.__getitem__('do') != '':
+            if re.__contains__('do') and re.__getitem__('do') != '':
                 re.appendlist('objets', re.__getitem__('do'))
-            if re.__getitem__('cou') != '':
+            if re.__contains__('cou') and re.__getitem__('cou') != '':
                 re.appendlist('objets', re.__getitem__('cou'))
-            if re.__getitem__('poignet') != '':
+            if re.__contains__('poignet') and re.__getitem__('poignet') != '':
                 re.appendlist('objets', re.__getitem__('poignet'))
-            if re.__getitem__('pied') != '':
+            if re.__contains__('pied') and re.__getitem__('pied') != '':
                 re.appendlist('objets', re.__getitem__('pied'))
             if re.__contains__('doigt') and re.__getitem__('doigt') != '':
                 doigts = re.getlist('doigt')
@@ -648,11 +649,38 @@ def edit_equip(request, equipement_id):
                 divers = re.getlist('diver')
                 for diver in divers:
                     re.appendlist('objets', diver)
+            if re.__contains__('emp') and re.__getitem__('emp') != '':
+                re.appendlist('enchantements', re.__getitem__('emp'))
+            if re.__contains__('eam') and re.__getitem__('eam') != '':
+                re.appendlist('enchantements', re.__getitem__('eam'))
+            if re.__contains__('eaa') and re.__getitem__('eaa') != '':
+                re.appendlist('enchantements', re.__getitem__('eaa'))
+            if re.__contains__('etete') and re.__getitem__('etete') != '':
+                re.appendlist('enchantements', re.__getitem__('etete'))
+            if re.__contains__('eepaule') and re.__getitem__('eepaule') != '':
+                re.appendlist('enchantements', re.__getitem__('eepaule'))
+            if re.__contains__('etorse') and re.__getitem__('etorse') != '':
+                re.appendlist('enchantements', re.__getitem__('etorse'))
+            if re.__contains__('emain') and re.__getitem__('emain') != '':
+                re.appendlist('enchantements', re.__getitem__('emain'))
+            if re.__contains__('etaille') and re.__getitem__('etaille') != '':
+                re.appendlist('enchantements', re.__getitem__('etaille'))
+            if re.__contains__('ejambe') and re.__getitem__('ejambe') != '':
+                re.appendlist('enchantements', re.__getitem__('ejambe'))
+            if re.__contains__('edo') and re.__getitem__('edo') != '':
+                re.appendlist('enchantements', re.__getitem__('edo'))
+            if re.__contains__('ecou') and re.__getitem__('ecou') != '':
+                re.appendlist('enchantements', re.__getitem__('ecou'))
+            if re.__contains__('epoignet') and re.__getitem__('epoignet') != '':
+                re.appendlist('enchantements', re.__getitem__('epoignet'))
+            if re.__contains__('epied') and re.__getitem__('epied') != '':
+                re.appendlist('enchantements', re.__getitem__('epied'))
+            print(re.getlist('enchantements'))
             form = EquipementForm(re, instance=equipement)
+            print(form)
             if form.is_valid():
                 save_it = form.save()
                 fiche = Fiche.objects.get(equipement=save_it.id)
-                print(fiche)
                 return redirect('detail_fiche', fiche_id=fiche.id)
             else:
                 print(form.errors)
@@ -661,26 +689,46 @@ def edit_equip(request, equipement_id):
 
         objets = Armure.objects.all()
         mps = Armure.objects.filter(membre=1)
+        emps = Enchantement.objects.filter(membre=1)
         ams = Armure.objects.filter(membre=2)
+        eams = Enchantement.objects.filter(membre=2)
         aas = Armure.objects.filter(membre=15)
+        eaas = Enchantement.objects.filter(membre=15)
         tetes = Armure.objects.filter(membre=3)
+        etetes = Enchantement.objects.filter(membre=3)
         epaules = Armure.objects.filter(membre=4)
+        eepaules = Enchantement.objects.filter(membre=4)
         torses = Armure.objects.filter(membre=5)
+        etorses = Enchantement.objects.filter(membre=5)
         mains = Armure.objects.filter(membre=6)
+        emains = Enchantement.objects.filter(membre=6)
         tailles = Armure.objects.filter(membre=7)
+        etailles = Enchantement.objects.filter(membre=7)
         jambes = Armure.objects.filter(membre=8)
+        ejambes = Enchantement.objects.filter(membre=8)
         dos = Armure.objects.filter(membre=10)
+        edos = Enchantement.objects.filter(membre=10)
         cous = Armure.objects.filter(membre=11)
+        ecous = Enchantement.objects.filter(membre=11)
         poignets = Armure.objects.filter(membre=13)
+        epoignets = Enchantement.objects.filter(membre=13)
         pieds = Armure.objects.filter(membre=9)
+        epieds = Enchantement.objects.filter(membre=9)
         doigts = Armure.objects.filter(membre=12)
+        edoigts = Enchantement.objects.filter(membre=12)
         divers = Armure.objects.filter(membre=14)
+        edivers = Enchantement.objects.filter(membre=14)
         context = {'form': form, 'objets': objets, 'mps': mps,
                    'ams': ams, 'aas': aas, 'tetes': tetes,
                    'epaules': epaules, 'torses': torses, 'mains': mains,
                    'tailles': tailles, 'jambes': jambes, 'dos': dos,
                    'cous': cous, 'poignets': poignets, 'pieds': pieds,
-                   'doigts': doigts, 'divers': divers}
+                   'doigts': doigts, 'divers': divers,
+                   'eams': eams, 'eaas': eaas, 'etetes': etetes, 'emps': emps,
+                   'eepaules': eepaules, 'etorses': etorses, 'emains': emains,
+                   'etailles': etailles, 'ejambes': ejambes, 'edos': edos,
+                   'ecous': ecous, 'epoignets': epoignets, 'epieds': epieds,
+                   'edoigts': edoigts, 'edivers': edivers}
         return render(request, 'fiches/equip_edit.html', context)
 
     else:
