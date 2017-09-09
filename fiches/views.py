@@ -143,19 +143,22 @@ def detail_fiche(request, fiche_id):
         nb = 0
 
     if fiche.equipement:
-        mp = fiche.equipement.get_mp()
-        am = fiche.equipement.get_am()
-        aa = fiche.equipement.get_autre_arme()
-        tete = fiche.equipement.get_tete()
-        epaules = fiche.equipement.get_epaules()
-        torse = fiche.equipement.get_torse()
-        mains = fiche.equipement.get_mains()
-        taille = fiche.equipement.get_taille()
-        jambes = fiche.equipement.get_jambes()
-        dos = fiche.equipement.get_dos()
-        cou = fiche.equipement.get_cou()
-        poignets = fiche.equipement.get_poignets()
-        pieds = fiche.equipement.get_pieds()
+        mp, emp = fiche.equipement.get_mp()
+        print(mp)
+        print(emp)
+        print("equipement " + str(fiche.equipement.id))
+        am, eam = fiche.equipement.get_am()
+        aa, eaa = fiche.equipement.get_autre_arme()
+        tete, etete = fiche.equipement.get_tete()
+        epaules, eepaules = fiche.equipement.get_epaules()
+        torse, etorse = fiche.equipement.get_torse()
+        mains, emains = fiche.equipement.get_mains()
+        taille, etaille = fiche.equipement.get_taille()
+        jambes, ejambes = fiche.equipement.get_jambes()
+        dos, edos = fiche.equipement.get_dos()
+        cou, ecou = fiche.equipement.get_cou()
+        poignets, epoignets = fiche.equipement.get_poignets()
+        pieds, epieds = fiche.equipement.get_pieds()
         doigts = fiche.equipement.get_doigts()
         divers = fiche.equipement.get_divers()
         effets, effets_ig, force, intell, agi, armure, runique, terradiance = fiche.equipement.effets()
@@ -166,6 +169,9 @@ def detail_fiche(request, fiche_id):
         effets, effets_ig, force = None, None, None
         intell, agi, armure = None, None, None
         pieds, runique, terradiance = None, None, None
+        emp, eam, eaa, etete, eepaules = None, None, None, None, None
+        etorse, emains, etaille, ejambes = None, None, None, None
+        edos, ecou, epoignets, epieds = None, None, None, None
     context = {'fiche': fiche,
                'range': range(nb), 'effets': effets, 'effets_ig': effets_ig,
                'force': force, 'intell': intell, 'agi': agi,
@@ -174,6 +180,9 @@ def detail_fiche(request, fiche_id):
                'taille': taille, 'jambes': jambes, 'dos': dos, 'cou': cou,
                'poignets': poignets, 'doigts': doigts, 'divers': divers,
                'pieds': pieds, 'runique': runique, 'terradiance': terradiance,
+               'emp': emp, 'eam': eam, 'eaa': eaa, 'etete': etete, 'eepaules': eepaules,
+               'etorse': etorse, 'emains': emains, 'etaille': etaille, 'ejambes': ejambes,
+               'edos': edos, 'ecou': ecou, 'epoignets': epoignets, 'epieds': epieds,
                'utilisateur': utilisateur}
     return render(request, 'fiches/detail.html', context)
 
@@ -603,33 +612,48 @@ def edit_equip(request, equipement_id):
     equipement = Equipement.objects.get(pk=equipement_id)
     if request.user.has_perm('fiches.change_equipement'):
         if request.method == 'POST':
-            print("lol cest post")
             re = request.POST.copy()
-            re.appendlist('objets', re.__getitem__('mp'))
-            re.appendlist('objets', re.__getitem__('am'))
-            re.appendlist('objets', re.__getitem__('aa'))
-            re.appendlist('objets', re.__getitem__('tete'))
-            re.appendlist('objets', re.__getitem__('epaule'))
-            re.appendlist('objets', re.__getitem__('torse'))
-            re.appendlist('objets', re.__getitem__('main'))
-            re.appendlist('objets', re.__getitem__('taille'))
-            re.appendlist('objets', re.__getitem__('jambe'))
-            re.appendlist('objets', re.__getitem__('do'))
-            re.appendlist('objets', re.__getitem__('cou'))
-            re.appendlist('objets', re.__getitem__('poignet'))
-            re.appendlist('objets', re.__getitem__('pied'))
-            doigts = re.getlist('doigt')
-            for doigt in doigts:
-                re.appendlist('objets', doigt)
-            divers = re.getlist('diver')
-            for diver in divers:
-                re.appendlist('objets', diver)
+            re.pop('objets')
+            if re.__contains__('mp') and re.__getitem__('mp') != '':
+                re.appendlist('objets', re.__getitem__('mp'))
+            if re.__getitem__('am') != '':
+                re.appendlist('objets', re.__getitem__('am'))
+            if re.__getitem__('aa') != '':
+                re.appendlist('objets', re.__getitem__('aa'))
+            if re.__getitem__('tete') != '':
+                re.appendlist('objets', re.__getitem__('tete'))
+            if re.__getitem__('epaule') != '':
+                re.appendlist('objets', re.__getitem__('epaule'))
+            if re.__getitem__('torse') != '':
+                re.appendlist('objets', re.__getitem__('torse'))
+            if re.__getitem__('main') != '':
+                re.appendlist('objets', re.__getitem__('main'))
+            if re.__getitem__('taille') != '':
+                re.appendlist('objets', re.__getitem__('taille'))
+            if re.__getitem__('jambe') != '':
+                re.appendlist('objets', re.__getitem__('jambe'))
+            if re.__getitem__('do') != '':
+                re.appendlist('objets', re.__getitem__('do'))
+            if re.__getitem__('cou') != '':
+                re.appendlist('objets', re.__getitem__('cou'))
+            if re.__getitem__('poignet') != '':
+                re.appendlist('objets', re.__getitem__('poignet'))
+            if re.__getitem__('pied') != '':
+                re.appendlist('objets', re.__getitem__('pied'))
+            if re.__contains__('doigt') and re.__getitem__('doigt') != '':
+                doigts = re.getlist('doigt')
+                for doigt in doigts:
+                    re.appendlist('objets', doigt)
+            if re.__contains__('diver') and re.__getitem__('diver') != '':
+                divers = re.getlist('diver')
+                for diver in divers:
+                    re.appendlist('objets', diver)
             form = EquipementForm(re, instance=equipement)
             if form.is_valid():
-                print(request.POST)
-                print(form)
-                form.save()
-                return HttpResponseRedirect('/firp')
+                save_it = form.save()
+                fiche = Fiche.objects.get(equipement=save_it.id)
+                print(fiche)
+                return redirect('detail_fiche', fiche_id=fiche.id)
             else:
                 print(form.errors)
         else:
@@ -670,10 +694,14 @@ def tooltip_objet(request, objet_id):
     return render(request, 'fiches/tooltip_objet.html', context)
 
 
-def tooltip_armure(request, armure_id):
+def tooltip_armure(request, armure_id, enchant_id=None):
     armure = get_object_or_404(Armure, pk=armure_id)
     objet = armure.objet
-    context = {'armure': armure, 'objet': objet}
+    if enchant_id:
+        enchant= get_object_or_404(Enchantement, pk=enchant_id)
+    else:
+        enchant = None
+    context = {'armure': armure, 'objet': objet, 'enchant': enchant}
     return render(request, 'fiches/tooltip_armure.html', context)
 
 
