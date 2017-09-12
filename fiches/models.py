@@ -678,3 +678,29 @@ class Mission(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.operation.nom + " : " + self.lieu + ", le " + str(self.jour) + "." + str(self.mois) + "." + str(self.annee))
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class Classe(models.Model):
+    nom = models.CharField(max_length=50)
+    principes = models.CharField(max_length=1000)
+    image_url = models.CharField(max_length=50,
+                                 default='WoWUnknownItem01')
+    fond_url = models.CharField(max_length=50,
+                                 default='paladinclass.PNG')
+
+class Sort(models.Model):
+    nom = models.CharField(max_length=50)
+    condition = models.CharField(max_length=75)
+    cout = models.CharField(max_length=50)
+    seuil = models.CharField(max_length=10)
+    duree_incant = models.CharField(max_length=50)
+    effet = models.CharField(max_length=400)
+    duree_sort = models.CharField(max_length=50)
+    classe = models.ForeignKey(Classe,
+                               null=True,
+                               blank=True,
+                               related_name='sort')
+    image_url = models.CharField(max_length=50,
+                                 default='WoWUnknownItem01')

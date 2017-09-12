@@ -141,3 +141,17 @@ class MissionAdmin(admin.ModelAdmin):
     form = MissionForm
 
 admin.site.register(Mission, MissionAdmin)
+
+
+class ClasseAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'id')
+    form = ClasseForm
+
+admin.site.register(Classe, ClasseAdmin)
+
+
+class SortAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'id')
+    form = SortForm
+
+admin.site.register(Sort, SortAdmin)

@@ -1,0 +1,27 @@
+{% extends "site/base.html" %}
+
+{% load filters %}
+{% load static %}
+
+{% block script %}
+{% endblock %}
+
+
+{% block title %}Sorts de {{classe.nom}}{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+
+<div class="sorts-body">
+
+  <div class="page-header" id="sorts-header" onclick="document.location='{% url 'classes' %}'">
+    <div class="sorts-head">
+      <h1>Sorts de {{classe.nom}}</h1>
+    </div> <!-- quest-head -->
+  </div>   <!-- page-header -->
+
+  <div class="quest-display">
+  </div>
+</div>
+
+{% endblock %}

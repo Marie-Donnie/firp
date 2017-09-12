@@ -143,3 +143,17 @@ class MissionForm(ModelForm):
         widgets = {'objectif': forms.Textarea(),
                    'participants': forms.Textarea(),
                    'deroulement': forms.Textarea(), }
+
+
+class ClasseForm(ModelForm):
+
+    class Meta:
+        model = Classe
+        fields = '__all__'
+
+
+class SortForm(ModelForm):
+
+    class Meta:
+        model = Sort
+        fields = '__all__'

@@ -1018,3 +1018,42 @@ def edit_mission(request, mission_id):
 
     else:
         return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des rapports.")
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+# Display classes
+def classes(request):
+    classes = Classe.objects.all().order_by('nom')
+    paginator = Paginator(classes, 8)
+    page = request.GET.get('page')
+    try:
+        classes_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        classes_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        classes_list = paginator.page(paginator.num_pages)
+
+    context = {'classes': classes, 'classes_list': classes_list}
+
+    return render(request, 'site/classes.html', context)
+
+# Display list of spells for the required class
+def sorts(request, classe_id):
+    sorts = Sort.objects.filter(classe=classe_id).order_by('nom')
+    paginator = Paginator(sorts, 12)
+    page = request.GET.get('page')
+    try:
+        sorts_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        sorts_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        sorts_list = paginator.page(paginator.num_pages)
+
+    context = {'sorts': sorts, 'sorts_list': sorts_list}
+
+    return render(request, 'site/sorts.html', context)

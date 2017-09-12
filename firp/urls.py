@@ -81,6 +81,9 @@ urlpatterns = [
         name='mission'),
     url(r'campagnes/creer_mission/$', views.creer_mission, name='creer_mission'),
     url(r'campagnes/editer_mission/(?P<mission_id>\d+)/$', views.edit_mission, name='editer_mission'),
+    # Sorts
+    url(r'classes/$', views.classes, name='classes'),
+    url(r'classes/(?P<classe_id>\d+)/$', views.sorts, name='sorts'),
 ]
 
 if settings.DEBUG:
