@@ -515,3 +515,18 @@ input, textarea {
     flex-wrap: wrap;
     margin: 3% 0%;
 }
+
+.sorts {
+    width: 660px;
+    height: 530px;
+    margin: 151px 10px auto 193px;
+    display: flex;
+    flex-wrap: wrap;
+    color: #fefefe;
+}
+
+.sort {
+    width: 310px;
+    height: 80px;
+    margin-top: 0;
+}

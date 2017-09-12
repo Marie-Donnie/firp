@@ -150,6 +150,7 @@ class ClasseForm(ModelForm):
     class Meta:
         model = Classe
         fields = '__all__'
+        widgets = {'principes': forms.Textarea()}
 
 
 class SortForm(ModelForm):
@@ -157,3 +158,4 @@ class SortForm(ModelForm):
     class Meta:
         model = Sort
         fields = '__all__'
+        widgets = {'effet': forms.Textarea()}

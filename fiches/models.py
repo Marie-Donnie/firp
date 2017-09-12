@@ -690,17 +690,34 @@ class Classe(models.Model):
     fond_url = models.CharField(max_length=50,
                                  default='paladin')
 
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
 class Sort(models.Model):
     nom = models.CharField(max_length=50)
-    condition = models.CharField(max_length=75)
-    cout = models.CharField(max_length=50)
-    seuil = models.CharField(max_length=10)
-    duree_incant = models.CharField(max_length=50)
+    condition = models.CharField(max_length=75,
+                                 null=True,
+                                 blank=True,
+                                 default='aucune')
+    cout = models.CharField(max_length=50,
+                            null=True,
+                            blank=True)
+    seuil = models.CharField(max_length=10,
+                             null=True,
+                             blank=True)
+    duree_incant = models.CharField(max_length=50,
+                                    null=True,
+                                    blank=True)
     effet = models.CharField(max_length=400)
-    duree_sort = models.CharField(max_length=50)
+    duree_sort = models.CharField(max_length=50,
+                                  null=True,
+                                  blank=True)
     classe = models.ForeignKey(Classe,
                                null=True,
                                blank=True,
                                related_name='sort')
     image_url = models.CharField(max_length=50,
                                  default='WoWUnknownItem01')
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)

@@ -21,13 +21,23 @@
   </div>   <!-- page-header -->
 
   <div class="black">
-    <div class="quest-display">
+    <div id="quest-display">
+      <div class="sorts">
       {% if sorts_list %}
       {% for sort in sorts %}
+      <div class="media sort">
+	<div class="media-left media-middle sort-media">
+	  <img class="sort-icone" src="{% get_media_prefix %}images/ICONS/{{sort.image_url}}.PNG" alt="{{classe.nom}}" id="icone">
+	</div>
+	<div class="media-body media-middle sort-nom">
+	  {{sort.nom}}
+	</div>
+      </div>
       {% endfor %}
       {% else %}
       Aucun sort.
       {% endif %}
+      </div>
     </div>
   </div>
 </div>
