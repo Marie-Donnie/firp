@@ -21,7 +21,22 @@
   </div>   <!-- page-header -->
 
   <div class="black">
-
+    <div class="classes">
+    {% if classes_list %}
+    {% for classe in classes %}
+    <div class="classe">
+      	  <a href="{% url 'sorts' classe.id %}">
+      <div class="classe-{{classe.fond_url}}">
+	<img class="classe-icone" src="{% get_media_prefix %}images/ICONS/{{classe.image_url}}.PNG" alt="{{classe.nom}}" id="icone">
+	<div class="classe-nom">{{classe.nom}}</div>
+      </div>
+	  </a>
+    </div>
+    {% endfor %}
+    {% else %}
+    Aucune classe.
+    {% endif %}
+    </div>
   </div>
 </div>
 

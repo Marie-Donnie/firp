@@ -1042,6 +1042,11 @@ def classes(request):
 
 # Display list of spells for the required class
 def sorts(request, classe_id):
+    voyelles = ["a","e","i","o","u", "é", "è", "ë", "y"]
+    classe = get_object_or_404(Classe, pk=classe_id)
+    classe_consonne = True
+    if classe.nom[0].lower() in voyelles:
+        classe_consonne = False
     sorts = Sort.objects.filter(classe=classe_id).order_by('nom')
     paginator = Paginator(sorts, 12)
     page = request.GET.get('page')
@@ -1054,6 +1059,7 @@ def sorts(request, classe_id):
     except EmptyPage:
         sorts_list = paginator.page(paginator.num_pages)
 
-    context = {'sorts': sorts, 'sorts_list': sorts_list}
+    context = {'sorts': sorts, 'sorts_list': sorts_list,
+               'classe': classe, 'classe_c': classe_consonne}
 
     return render(request, 'site/sorts.html', context)

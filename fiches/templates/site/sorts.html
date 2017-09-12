@@ -7,7 +7,7 @@
 {% endblock %}
 
 
-{% block title %}Sorts de {{classe.nom}}{% endblock %}
+{% block title %}Sorts {% if classe_c %}du {% else %}de l'{% endif %}{{ classe.nom|lower }}{% endblock %}
 {% block header %}{% endblock %}
 
 {% block content %}
@@ -16,11 +16,19 @@
 
   <div class="page-header" id="sorts-header" onclick="document.location='{% url 'classes' %}'">
     <div class="sorts-head">
-      <h1>Sorts de {{classe.nom}}</h1>
+      <h1>Sorts {% if classe_c %}du {% else %}de l'{% endif %}{{ classe.nom|lower }}</h1>
     </div> <!-- quest-head -->
   </div>   <!-- page-header -->
 
-  <div class="quest-display">
+  <div class="black">
+    <div class="quest-display">
+      {% if sorts_list %}
+      {% for sort in sorts %}
+      {% endfor %}
+      {% else %}
+      Aucun sort.
+      {% endif %}
+    </div>
   </div>
 </div>
 

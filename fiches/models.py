@@ -688,7 +688,7 @@ class Classe(models.Model):
     image_url = models.CharField(max_length=50,
                                  default='WoWUnknownItem01')
     fond_url = models.CharField(max_length=50,
-                                 default='paladinclass.PNG')
+                                 default='paladin')
 
 class Sort(models.Model):
     nom = models.CharField(max_length=50)
