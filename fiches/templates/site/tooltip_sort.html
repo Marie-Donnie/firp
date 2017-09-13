@@ -3,7 +3,7 @@
  <div id"center">
       <b>{{ sort.nom|capfirst }}</b><br>
       <i>{{ sort.effet|linebreaksbr }}</i><br>
-      {% if sort.seuil != None %}{{ sort.seuil }}, {% endif %}{% if sort.cout != None %}{{ sort.cout }} points de mana<br>{% endif %}
+      {% if sort.seuil != None %}{{ sort.seuil }}, {% endif %}{% if sort.cout != None %}{{ sort.cout }}<br>{% endif %}
       {% if sort.duree_incant != None %}<b>Incantation : </b>{{ sort.duree_incant }}<br>{% endif %}
       {% if sort.duree_sort != None %}<b>Durée du sort : </b>{{ sort.duree_sort}}<br>{% endif %}
       {% if sort.condition != None %} {% endif %}
