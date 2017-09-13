@@ -4,6 +4,46 @@
 {% load static %}
 
 {% block script %}
+$(function () {
+
+/* Well, that's more complicated than it should.
+ * When mousing over an object, we want to display a tooltip with the object info.
+ * But, that info is not in the page, so we need to get it with an ajax call.
+ * Only after the ajax call succeed we build the Bootstrap tooltip.  However,
+ * if the mouse is still over the object, the tooltip doesn't show because the
+ * listeners for the tooltip are not triggered.  We have to keep track ourselves
+ * of whether the mouse is still on the object using two additional listeners.
+ * Once the tooltip is built and shown (or not), we can destroy all this machinery
+ * and let Bootstrap tooltip handle the rest.
+ */
+$('[data-toggle="sort-tooltip"]').on('mouseenter', getTooltip)
+$('[data-toggle="sort-tooltip"]').on('mouseenter', onMouseEnter)
+$('[data-toggle="sort-tooltip"]').on('mouseleave', onMouseLeave)
+
+function getTooltip() {
+  var elem = this;
+  var tooltipUrl = elem.getAttribute('data-url');
+  $(elem).off('mouseenter', getTooltip);
+  $.ajax(tooltipUrl)
+  .done(function(data) {
+    $(elem).tooltip({html: true, placement: 'top', title: data});
+    if ($(elem).data("isMouseOnUs")) {
+      $(elem).tooltip('show');
+    }
+    $(elem).off('mouseenter', onMouseEnter);
+    $(elem).off('mouseleave', onMouseLeave);
+  });
+}
+
+function onMouseEnter() {
+  $(this).data("isMouseOnUs", true);
+}
+
+function onMouseLeave() {
+  $(this).data("isMouseOnUs", false)
+}
+
+});
 {% endblock %}
 
 
@@ -24,10 +64,10 @@
     <div id="quest-display">
       <div class="sorts">
       {% if sorts_list %}
-      {% for sort in sorts %}
+      {% for sort in sorts_list %}
       <div class="media sort">
 	<div class="media-left media-middle sort-media">
-	  <img class="sort-icone" src="{% get_media_prefix %}images/ICONS/{{sort.image_url}}.PNG" alt="{{classe.nom}}" id="icone">
+	  <img class="sort-icone" src="{% get_media_prefix %}images/ICONS/{{sort.image_url}}.PNG" alt="{{classe.nom}}" id="icone" data-toggle="sort-tooltip" data-url="{% url 'tooltip_sort' sort.id %}">
 	</div>
 	<div class="media-body media-middle sort-nom">
 	  {{sort.nom}}
@@ -38,6 +78,26 @@
       Aucun sort.
       {% endif %}
       </div>
+          <div class="sorts-pages">
+	    <nav class="sorts-pager">
+	      <span>Page {{ sorts_list.number }}</span>
+	  {% if sorts_list.has_previous %}
+	    <a href="?page={{ sorts_list.previous_page_number }}">
+	      <img src="{% get_media_prefix %}images/site/UI-SpellbookIcon-PrevPage-Up.PNG" alt="Précédent" class="precedent">
+	    </a>
+	    {% else %}
+	    <img src="{% get_media_prefix %}images/site/UI-SpellbookIcon-PrevPage-Disabled.PNG" alt="Pas de précédent" class="precedent">
+	  {% endif %}
+	{% if sorts_list.has_next %}
+	  <a href="?page={{ sorts_list.next_page_number }}">
+	      <img src="{% get_media_prefix %}images/site/UI-SpellbookIcon-NextPage-Up.PNG" alt="Suivant" class="suivant">
+	  </a>
+	  {% else %}
+	  <img src="{% get_media_prefix %}images/site/UI-SpellbookIcon-NextPage-Disabled.PNG" alt="Pas de suivant" class="suivant">
+	{% endif %}
+      </nav>
+	  </div>
+	  <div class="clear"></div>
     </div>
   </div>
 </div>

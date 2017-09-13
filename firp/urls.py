@@ -84,6 +84,8 @@ urlpatterns = [
     # Sorts
     url(r'classes/$', views.classes, name='classes'),
     url(r'classes/(?P<classe_id>\d+)/$', views.sorts, name='sorts'),
+    url(r'^classes/(?P<sort_id>\d+)/tooltip/$', views.tooltip_sort,
+        name='tooltip_sort'),
 ]
 
 if settings.DEBUG:

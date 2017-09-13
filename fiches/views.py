@@ -1023,6 +1023,7 @@ def edit_mission(request, mission_id):
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 # Display classes
+@login_required
 def classes(request):
     classes = Classe.objects.all().order_by('nom')
     paginator = Paginator(classes, 8)
@@ -1041,25 +1042,36 @@ def classes(request):
     return render(request, 'site/classes.html', context)
 
 # Display list of spells for the required class
+@login_required
 def sorts(request, classe_id):
-    voyelles = ["a","e","i","o","u", "é", "è", "ë", "y"]
-    classe = get_object_or_404(Classe, pk=classe_id)
-    classe_consonne = True
-    if classe.nom[0].lower() in voyelles:
-        classe_consonne = False
-    sorts = Sort.objects.filter(classe=classe_id).order_by('nom')
-    paginator = Paginator(sorts, 12)
-    page = request.GET.get('page')
-    try:
-        sorts_list = paginator.page(page)
-    # if page not an integer, display first page of results
-    except PageNotAnInteger:
-        sorts_list = paginator.page(1)
-    # if page is out of range, display the last page of results
-    except EmptyPage:
-        sorts_list = paginator.page(paginator.num_pages)
+    if request.user.has_perm('fiches.objet_ok'):
+        voyelles = ["a","e","i","o","u", "é", "è", "ë", "y"]
+        classe = get_object_or_404(Classe, pk=classe_id)
+        classe_consonne = True
+        if classe.nom[0].lower() in voyelles:
+            classe_consonne = False
+        sorts = Sort.objects.filter(classe=classe_id).order_by('nom')
+        paginator = Paginator(sorts, 12)
+        page = request.GET.get('page')
+        try:
+            sorts_list = paginator.page(page)
+        # if page not an integer, display first page of results
+        except PageNotAnInteger:
+            sorts_list = paginator.page(1)
+        # if page is out of range, display the last page of results
+        except EmptyPage:
+            sorts_list = paginator.page(paginator.num_pages)
 
-    context = {'sorts': sorts, 'sorts_list': sorts_list,
+        context = {'sorts': sorts, 'sorts_list': sorts_list,
                'classe': classe, 'classe_c': classe_consonne}
 
-    return render(request, 'site/sorts.html', context)
+        return render(request, 'site/sorts.html', context)
+
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent voir les sorts")
+
+
+def tooltip_sort(request, sort_id):
+    sort = get_object_or_404(Sort, pk=sort_id)
+    context = {'sort': sort}
+    return render(request, 'site/tooltip_sort.html', context)

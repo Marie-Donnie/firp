@@ -427,6 +427,12 @@ input, textarea {
     height: 90px;
 }
 
+#sorts-header:hover {
+    cursor: pointer;
+    box-shadow: 0 0 3pt 2pt #830205;
+    border-radius: 5px;
+}
+
 #sorts-header h1 {
     color: #fff;
     text-align: center;
@@ -513,7 +519,9 @@ input, textarea {
 .classes {
     display: flex;
     flex-wrap: wrap;
-    margin: 3% 0%;
+    margin: 3% auto;
+    width: 800px;
+    justify-content: space-around;
 }
 
 .sorts {
@@ -522,11 +530,30 @@ input, textarea {
     margin: 151px 10px auto 193px;
     display: flex;
     flex-wrap: wrap;
-    color: #fefefe;
+    color: #f3cb29;
+    text-shadow: 2px 2px #654303;
+    font-size: 120%;
 }
 
 .sort {
     width: 310px;
     height: 80px;
     margin-top: 0;
+}
+
+.sorts-pages {
+    width: 700px;
+    margin: 50px auto;
+}
+
+.sorts-pager {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.tooltip-inner {
+    max-width: 400px;
 }
