@@ -110,6 +110,8 @@ class EnchantementForm(ModelForm):
         prefix = 'enchantement'
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
 class QueteForm(ModelForm):
 
     class Meta:
@@ -128,6 +130,8 @@ class PrendreQueteForm(ModelForm):
         widgets = {'etat': forms.HiddenInput(), }
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% MISSIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
 class OperationForm(ModelForm):
 
     class Meta:
@@ -145,6 +149,8 @@ class MissionForm(ModelForm):
                    'deroulement': forms.Textarea(), }
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
 class ClasseForm(ModelForm):
 
     class Meta:
@@ -159,3 +165,12 @@ class SortForm(ModelForm):
         model = Sort
         fields = '__all__'
         widgets = {'effet': forms.Textarea()}
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class ImageForm(ModelForm):
+
+    class Meta:
+        model = Image
+        fields = '__all__'

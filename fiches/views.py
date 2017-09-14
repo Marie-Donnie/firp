@@ -144,9 +144,6 @@ def detail_fiche(request, fiche_id):
 
     if fiche.equipement:
         mp, emp = fiche.equipement.get_mp()
-        print(mp)
-        print(emp)
-        print("equipement " + str(fiche.equipement.id))
         am, eam = fiche.equipement.get_am()
         aa, eaa = fiche.equipement.get_autre_arme()
         tete, etete = fiche.equipement.get_tete()
@@ -337,10 +334,8 @@ def creer_objet(request):
                 url = url[:-4]
                 data['image_url'] = url
             form = ObjetForm(data, request.FILES)
-            print(data)
             if form.is_valid():
                 save_it = form.save()
-                print(form)
                 return redirect('detail_objet', objet_id=save_it.id)
             else:
                 print(form.errors)
@@ -589,8 +584,6 @@ def edit_equipement(request, equipement_id):
         if request.method == 'POST':
             form = EquipementForm(request.POST, instance=equipement)
             if form.is_valid():
-                print(request.POST)
-                print(form)
                 form.save()
                 return HttpResponseRedirect('/firp')
             else:
@@ -675,9 +668,7 @@ def edit_equip(request, equipement_id):
                 re.appendlist('enchantements', re.__getitem__('epoignet'))
             if re.__contains__('epied') and re.__getitem__('epied') != '':
                 re.appendlist('enchantements', re.__getitem__('epied'))
-            print(re.getlist('enchantements'))
             form = EquipementForm(re, instance=equipement)
-            print(form)
             if form.is_valid():
                 save_it = form.save()
                 fiche = Fiche.objects.get(equipement=save_it.id)
@@ -925,6 +916,13 @@ def campagne(request, campagne_id):
 def mission(request, campagne_id, mission_id):
     if request.user.has_perm('fiches.objet_ok'):
         mission = get_object_or_404(Mission, pk=mission_id)
+        image = None
+        sign = mission.signature_url
+        if sign.startswith( 'i: ' ):
+            sign = sign[3:]
+            print(sign)
+            image = get_object_or_404(Image, nom=sign)
+            print(image.image.url)
         # Finds all missions of the campaign
         missions = Mission.objects.select_related().filter(operation = campagne_id)
         mission_pre = None
@@ -936,7 +934,7 @@ def mission(request, campagne_id, mission_id):
             if mis.numero == (mission.numero + 1):
                 mission_sui = mis
         context = {'mission': mission, 'mission_pre': mission_pre,
-                   'mission_sui': mission_sui}
+                   'mission_sui': mission_sui, 'image': image}
 
         return render(request, 'site/rapport_mission.html', context)
 
@@ -1002,7 +1000,6 @@ def edit_mission(request, mission_id):
             form = MissionForm(request.POST, instance=mission)
             if form.is_valid():
                 save_it = form.save()
-                print(save_it)
                 return redirect('mission', campagne_id=mission.operation.id,
                                 mission_id=mission.id )
             else:
@@ -1075,3 +1072,24 @@ def tooltip_sort(request, sort_id):
     sort = get_object_or_404(Sort, pk=sort_id)
     context = {'sort': sort}
     return render(request, 'site/tooltip_sort.html', context)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+@login_required
+def image(request):
+    if request.user.has_perm('fiches.add_objet'):
+        if request.method == 'POST':
+            form = ImageForm(request.POST, request.FILES)
+            if form.is_valid():
+                save_it = form.save()
+                return HttpResponseRedirect('/')
+            else:
+                print(form.errors)
+        else:
+            form = ImageForm()
+
+        return render(request, 'fiches/image.html', {'form': form})
+
+    else:
+        return HttpResponse("Vous ne pouvez pas ajouter d'images.")

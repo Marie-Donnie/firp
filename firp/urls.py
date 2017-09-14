@@ -86,6 +86,8 @@ urlpatterns = [
     url(r'classes/(?P<classe_id>\d+)/$', views.sorts, name='sorts'),
     url(r'^classes/(?P<sort_id>\d+)/tooltip/$', views.tooltip_sort,
         name='tooltip_sort'),
+    # Images
+    url(r'images/telecharger/$', views.image, name='image_upload'),
 ]
 
 if settings.DEBUG:

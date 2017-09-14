@@ -122,12 +122,16 @@ class CampagneAdmin(admin.ModelAdmin):
 admin.site.register(Campagne, CampagneAdmin)
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
 class QueteAdmin(admin.ModelAdmin):
     list_display = ('nom', 'difficulte', 'id')
     form = QueteForm
 
 admin.site.register(Quete, QueteAdmin)
 
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% MISSIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 class OperationAdmin(admin.ModelAdmin):
     list_display = ('nom', 'id')
@@ -143,6 +147,8 @@ class MissionAdmin(admin.ModelAdmin):
 admin.site.register(Mission, MissionAdmin)
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
 class ClasseAdmin(admin.ModelAdmin):
     list_display = ('nom', 'id')
     form = ClasseForm
@@ -155,3 +161,12 @@ class SortAdmin(admin.ModelAdmin):
     form = SortForm
 
 admin.site.register(Sort, SortAdmin)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'id')
+    form = ImageForm
+
+admin.site.register(Image, SortAdmin)

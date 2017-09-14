@@ -721,3 +721,13 @@ class Sort(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.nom)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class Image(models.Model):
+    nom = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='images/uploads')
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)

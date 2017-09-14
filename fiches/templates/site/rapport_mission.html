@@ -67,6 +67,8 @@
 	<div class="signature">
 	  {% if 'c: ' in mission.signature_url %}
 	  {{ mission.signature_url|slice:"3:" }}<br>
+	  {% elif 'i: ' in mission.signature_url %}
+	  <img src="{{image.image.url}}" alt="Signature">
 	  {% endif %}
 	</div>
       </div> <!-- mission-infos -->
