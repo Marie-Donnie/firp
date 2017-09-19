@@ -667,7 +667,8 @@ class Mission(models.Model):
         (15, 'Récupération'),
         (16, 'Assassinat'),
         (17, 'Incident'),
-        (18, 'Reconnaissance')
+        (18, 'Reconnaissance'),
+        (19, 'Opération clandestine')
     ],
                                         default=8)
     objectif = models.CharField(max_length=300)
