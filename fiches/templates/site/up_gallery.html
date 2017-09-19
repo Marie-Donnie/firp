@@ -20,6 +20,9 @@
   <!-- </div> -->
 
   <div id="body">
+    {% if perms.fiches.veteran %}
+    <a class="btn btn-default" id="center" href="{% url 'image_upload' %}">Télécharger</a>
+    {% endif %}
     {% if images_list %}
     <div class="gallery">
     {% for image in images_list %}
@@ -29,6 +32,7 @@
     </div>
 
     {% endfor %}
+    <div class="clear"></div>
     <div class="quest-pages">
       <span>Page {{ images_list.number }} sur {{ images_list.paginator.num_pages }}</span>
       <nav aria-label="Page navigation" id="pagination">

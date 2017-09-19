@@ -65,6 +65,16 @@
 	  </li>
 	  {% endif %}
 	  <li><a href="{% url 'utilisateurs' %}">Utilisateurs</a></li>
+	  {% if perms.fiches.fdg %}
+	  <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Galleries<span class="caret"></span></a>
+	    <ul class="dropdown-menu">
+	      <li><a href="{% url 'gallerie' %}">Icônes</a></li>
+	      <li><a href="{% url 'upload_gallery' %}">Images téléchargées</a></li>
+	      <li role="separator" class="divider"></li>
+	    </ul>
+	  </li>
+	  {% endif %}
 	</ul>
 	<div class="navbar-right">
 	  {% if user.is_authenticated %}

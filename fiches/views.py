@@ -1019,7 +1019,7 @@ def image(request):
 @permission_required('fiches.veteran', raise_exception=True)
 def upload_gallery(request):
     images = Image.objects.all()
-    paginator = Paginator(images, 100)
+    paginator = Paginator(images, 20)
     page = request.GET.get('page')
     try:
         images_list = paginator.page(page)
