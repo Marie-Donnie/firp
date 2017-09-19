@@ -14,10 +14,10 @@
 
 {% block edition %}
 {% if user.is_authenticated %}
-{% if perms.fiches.change_objet %}
+{% if perms.fiches.veteran %}
 <a class="btn btn-default" href="{% url 'editer_objet' objet.id %}">Editer objet</a>
 {% endif %}
-{% if objet.armure and perms.fiches.change_armure %}
+{% if objet.armure and perms.fiches.veteran %}
 <a class="btn btn-default" href="{% url 'editer_armure' objet.armure.id %}">Editer armure</a>
 {% endif %}
 {% endif %}

@@ -439,7 +439,7 @@
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
       <label for="id_relations">Relations&nbsp;</label> <textarea name="relations" class="form-control" id="id_relations" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_relations','charcount3');" onkeydown="countChars('id_relations','charcount3');" onmouseout="countChars('id_relations','charcount3');">{{form.relations.value|default:'Aucune'}}</textarea>
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
-      {% if not perms.fiches.objet_ok %}
+      {% if not perms.fiches.fdg %}
       <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
       {% endif %}
@@ -468,23 +468,6 @@
       <label for="id_afficher_inventaire">Afficher inventaire&nbsp;</label> <input name="afficher_inventaire" {% if form.afficher_inventaire.value or form.afficher_inventaire.value == None %}checked=""{% endif %} id="id_afficher_inventaire" type="checkbox">
     </div>
 
-    <!-- {% if perms.fiches.equipement_ok and perms.fiches.inventaire_ok %} -->
-    <!-- <div class="form-group"> -->
-    <!--   <label for="id_equipement">Equipement&nbsp;:</label> <select name="equipement" id="id_equipement"> -->
-    <!-- 	<option value="" {% if form.equipement.value == None %} selected="" {% endif %}>Aucun</option> -->
-    <!-- 	{% for equipement in equipements %} -->
-    <!-- 	<option value="{{equipement.id}}" {% if form.equipement.value == equipement.id %} selected="" {% endif %}>{{equipement.nom}}</option> -->
-    <!-- 	{% endfor %} -->
-    <!--   </select> -->
-    <!--   <label for="id_inventaire_fdg">Inventaire&nbsp;:</label> <select name="inventaire_fdg" id="id_inventaire_fdg"> -->
-    <!-- 	<option value="" {% if form.inventaire_fdg.value == None %} selected="" {% endif %}>Aucun</option> -->
-    <!-- 	{% for inventaire in inventaires %} -->
-    <!-- 	<option value="{{inventaire.id}}" {% if form.inventaire_fdg.value == inventaire.id %} selected="" {% endif %}>{{inventaire.nom}}</option> -->
-    <!-- 	{% endfor %} -->
-
-    <!--   </select> -->
-    <!-- </div> -->
-    <!-- {% endif %} -->
 
     <div class="form-group">
       <label for="id_image">Image&nbsp;</label>

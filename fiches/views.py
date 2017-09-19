@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, render, redirect, render_to_resp
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -26,6 +26,13 @@ def handler404(request):
     response = render_to_response('404.html', {},
                                   context_instance=RequestContext(request))
     response.status_code = 404
+    return response
+
+
+def handler403(request):
+    response = render_to_response('403.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 403
     return response
 
 
@@ -323,142 +330,121 @@ def fiche_search(request):
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-@login_required
+
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_objet(request):
-    if request.user.has_perm('fiches.add_objet'):
-        if request.method == 'POST':
-            data = request.POST.copy()
-            data['createur'] = User.objects.get(username=request.user).id
-            url = data['image_url']
-            if url.endswith('.PNG'):
-                url = url[:-4]
-                data['image_url'] = url
-            form = ObjetForm(data, request.FILES)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('detail_objet', objet_id=save_it.id)
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data['createur'] = User.objects.get(username=request.user).id
+        url = data['image_url']
+        if url.endswith('.PNG'):
+            url = url[:-4]
+            data['image_url'] = url
+        form = ObjetForm(data, request.FILES)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('detail_objet', objet_id=save_it.id)
         else:
-            form = ObjetForm()
-
-        return render(request, 'fiches/objet.html', {'form': form})
-
+            print(form.errors)
     else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des objets.")
+        form = ObjetForm()
+
+    return render(request, 'fiches/objet.html', {'form': form})
 
 
-@login_required
+
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_armure(request):
-    if request.user.has_perm('fiches.armure_ok'):
-        if request.method == 'POST':
-            form = ArmureForm(request.POST, request.FILES)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('detail_armure', armure_id=save_it.id)
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        form = ArmureForm(request.POST, request.FILES)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('detail_armure', armure_id=save_it.id)
         else:
-            form = ArmureForm()
-
-        objets = Objet.objects.filter(createur=request.user)
-        enchantements = Enchantement.objects.all()
-        context = {'form': form, 'objets': objets,
-                   'enchantements': enchantements}
-        return render(request, 'fiches/armure.html', context)
-
+            print(form.errors)
     else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des armures.")
+        form = ArmureForm()
+
+    objets = Objet.objects.filter(createur=request.user)
+    enchantements = Enchantement.objects.all()
+    context = {'form': form, 'objets': objets,
+               'enchantements': enchantements}
+    return render(request, 'fiches/armure.html', context)
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_case(request):
-    if request.user.has_perm('fiches.case_ok'):
-        if request.method == 'POST':
-            data = request.POST.copy()
-            data['createur'] = User.objects.get(username=request.user).id
-            form = CaseForm(data, request.FILES)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data['createur'] = User.objects.get(username=request.user).id
+        form = CaseForm(data, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
         else:
-            form = CaseForm()
-
-        objets = Objet.objects.all()
-        context = {'form': form, 'objets': objets}
-        return render(request, 'fiches/case.html', context)
-
+            print(form.errors)
     else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des cases d'inventaire.")
+        form = CaseForm()
+
+    objets = Objet.objects.all()
+    context = {'form': form, 'objets': objets}
+    return render(request, 'fiches/case.html', context)
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_inventaire(request):
-    if request.user.has_perm('fiches.inventaire_ok'):
-        if request.method == 'POST':
-            form = InventaireForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        form = InventaireForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
         else:
-            form = InventaireForm()
-
-        cases = Case.objects.filter(createur=request.user)
-        context = {'form': form, 'cases': cases}
-
-        return render(request, 'fiches/inventaire.html', context)
-
+            print(form.errors)
     else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent gerer leur inventaire.")
+        form = InventaireForm()
+
+    cases = Case.objects.filter(createur=request.user)
+    context = {'form': form, 'cases': cases}
+
+    return render(request, 'fiches/inventaire.html', context)
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_equipement(request):
-    if request.user.has_perm('fiches.equipement_ok'):
-        if request.method == 'POST':
-            form = EquipementForm(request.POST, request.FILES)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        form = EquipementForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
         else:
-            form = EquipementForm()
-
-        objets = Armure.objects.all()
-        context = {'form': form, 'objets': objets}
-
-        return render(request, 'fiches/equipement.html', context)
-
+            print(form.errors)
     else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent gerer leur equipement.")
+        form = EquipementForm()
+
+    objets = Armure.objects.all()
+    context = {'form': form, 'objets': objets}
+
+    return render(request, 'fiches/equipement.html', context)
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def objets(request):
-    if request.user.has_perm('fiches.objet_ok'):
-        objets_list = Objet.objects.order_by('nom')
+    objets_list = Objet.objects.order_by('nom')
 
-        paginator = Paginator(objets_list, 20)
-        page = request.GET.get('page')
-        try:
-            objets = paginator.page(page)
-            # if page not an integer, display first page of results
-        except PageNotAnInteger:
-            objets = paginator.page(1)
-            # if page is out of range, display the last page of results
-        except EmptyPage:
-            objets = paginator.page(paginator.num_pages)
+    paginator = Paginator(objets_list, 20)
+    page = request.GET.get('page')
+    try:
+        objets = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        objets = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        objets = paginator.page(paginator.num_pages)
 
-        context = {'objets': objets}
+    context = {'objets': objets}
 
-        return render(request, 'fiches/objets.html', context)
-    else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent voir la liste des objets.")
+    return render(request, 'fiches/objets.html', context)
 
 
 def detail_objet(request, objet_id):
@@ -474,107 +460,87 @@ def detail_armure(request, armure_id):
     return render(request, 'fiches/aff_armure.html', context)
 
 
-@login_required
+@permission_required('fiches.veteran', raise_exception=True)
 def edit_objet(request, objet_id):
     objet = Objet.objects.get(pk=objet_id)
-    if request.user.has_perm('fiches.change_objet'):
-        if request.method == 'POST':
-            data = request.POST.copy()
-            data['createur'] = User.objects.get(username=request.user).id
-            url = data['image_url']
-            if url.endswith('.PNG'):
-                url = url[:-4]
-                data['image_url'] = url
-            form = ObjetForm(data, request.FILES, instance=objet)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('detail_objet', objet_id=save_it.id)
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data['createur'] = User.objects.get(username=request.user).id
+        url = data['image_url']
+        if url.endswith('.PNG'):
+            url = url[:-4]
+            data['image_url'] = url
+        form = ObjetForm(data, request.FILES, instance=objet)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('detail_objet', objet_id=save_it.id)
         else:
-            form = ObjetForm(instance=objet)
-
-        context = {'form': form}
-
-        return render(request, 'fiches/objet.html', context)
-
+            print(form.errors)
     else:
+        form = ObjetForm(instance=objet)
 
-        return HttpResponse("Vous ne pouvez pas editer les objets.")
+    context = {'form': form}
+
+    return render(request, 'fiches/objet.html', context)
 
 
-@login_required
+@permission_required('fiches.veteran', raise_exception=True)
 def edit_armure(request, armure_id):
     armure = Armure.objects.get(pk=armure_id)
-    if request.user.has_perm('fiches.change_armure'):
-        if request.method == 'POST':
-            form = ArmureForm(request.POST, instance=armure)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('detail_armure', armure_id=save_it.id)
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        form = ArmureForm(request.POST, instance=armure)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('detail_armure', armure_id=save_it.id)
         else:
-            form = ArmureForm(instance=armure)
-
-        objets = Objet.objects.filter(createur=request.user)
-        enchantements = Enchantement.objects.all()
-        context = {'form': form, 'objets': objets,
-                   'enchantements': enchantements}
-        return render(request, 'fiches/armure.html', context)
-
+            print(form.errors)
     else:
+        form = ArmureForm(instance=armure)
 
-        return HttpResponse("Vous ne pouvez pas editer les armures.")
+    objets = Objet.objects.filter(createur=request.user)
+    enchantements = Enchantement.objects.all()
+    context = {'form': form, 'objets': objets,
+               'enchantements': enchantements}
+    return render(request, 'fiches/armure.html', context)
 
 
-@login_required
+@permission_required('fiches.veteran', raise_exception=True)
 def edit_case(request, case_id):
     case = Case.objects.get(pk=case_id)
-    if request.user.has_perm('fiches.change_case'):
-        if request.method == 'POST':
-            data = request.POST.copy()
-            data['createur'] = User.objects.get(username=request.user).id
-            form = CaseForm(data, instance=case)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/')
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data['createur'] = User.objects.get(username=request.user).id
+        form = CaseForm(data, instance=case)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
         else:
-            form = CaseForm(instance=case)
-
-        objets = Objet.objects.all()
-        context = {'form': form, 'objets': objets}
-        return render(request, 'fiches/case.html', context)
-
+            print(form.errors)
     else:
+        form = CaseForm(instance=case)
 
-        return HttpResponse("Vous ne pouvez pas editer les cases.")
+    objets = Objet.objects.all()
+    context = {'form': form, 'objets': objets}
+    return render(request, 'fiches/case.html', context)
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_inventaire(request, inventaire_id):
     inventaire = Inventaire.objects.get(pk=inventaire_id)
-    if request.user.has_perm('fiches.change_inventaire'):
-        if request.method == 'POST':
-            form = InventaireForm(request.POST, instance=inventaire)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/firp')
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        form = InventaireForm(request.POST, instance=inventaire)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/firp')
         else:
-            form = InventaireForm(instance=inventaire)
-
-        cases_perso = inventaire.cases.all()
-        cases = Case.objects.filter(createur=request.user)
-        context = {'form': form, 'cases': cases, 'cases_perso': cases_perso}
-        return render(request, 'fiches/inventaire.html', context)
-
+            print(form.errors)
     else:
+        form = InventaireForm(instance=inventaire)
 
-        return HttpResponse("Vous ne pouvez pas editer les inventaires.")
+    cases_perso = inventaire.cases.all()
+    cases = Case.objects.filter(createur=request.user)
+    context = {'form': form, 'cases': cases, 'cases_perso': cases_perso}
+    return render(request, 'fiches/inventaire.html', context)
 
 
 @login_required
@@ -600,131 +566,126 @@ def edit_equipement(request, equipement_id):
         return HttpResponse("Vous ne pouvez pas editer les equipements.")
 
 
-@login_required
+@permission_required('fiches.veteran', raise_exception=True)
 def edit_equip(request, equipement_id):
-    if request.user.has_perm('fiches.change_equipement'):
-        equipement = Equipement.objects.get(pk=equipement_id)
-        if request.method == 'POST':
-            re = request.POST.copy()
-            re.pop('objets')
-            re.pop('enchantements')
-            if re.__contains__('mp') and re.__getitem__('mp') != '':
-                re.appendlist('objets', re.__getitem__('mp'))
-            if re.__contains__('am') and re.__getitem__('am') != '':
-                re.appendlist('objets', re.__getitem__('am'))
-            if re.__contains__('aa') and re.__getitem__('aa') != '':
-                re.appendlist('objets', re.__getitem__('aa'))
-            if re.__contains__('tete') and re.__getitem__('tete') != '':
-                re.appendlist('objets', re.__getitem__('tete'))
-            if re.__contains__('epaule') and re.__getitem__('epaule') != '':
-                re.appendlist('objets', re.__getitem__('epaule'))
-            if re.__contains__('torse') and re.__getitem__('torse') != '':
-                re.appendlist('objets', re.__getitem__('torse'))
-            if re.__contains__('main') and re.__getitem__('main') != '':
-                re.appendlist('objets', re.__getitem__('main'))
-            if re.__contains__('taille') and re.__getitem__('taille') != '':
-                re.appendlist('objets', re.__getitem__('taille'))
-            if re.__contains__('jambe') and re.__getitem__('jambe') != '':
-                re.appendlist('objets', re.__getitem__('jambe'))
-            if re.__contains__('do') and re.__getitem__('do') != '':
-                re.appendlist('objets', re.__getitem__('do'))
-            if re.__contains__('cou') and re.__getitem__('cou') != '':
-                re.appendlist('objets', re.__getitem__('cou'))
-            if re.__contains__('poignet') and re.__getitem__('poignet') != '':
-                re.appendlist('objets', re.__getitem__('poignet'))
-            if re.__contains__('pied') and re.__getitem__('pied') != '':
-                re.appendlist('objets', re.__getitem__('pied'))
-            if re.__contains__('doigt') and re.__getitem__('doigt') != '':
-                doigts = re.getlist('doigt')
-                for doigt in doigts:
-                    re.appendlist('objets', doigt)
-            if re.__contains__('diver') and re.__getitem__('diver') != '':
-                divers = re.getlist('diver')
-                for diver in divers:
-                    re.appendlist('objets', diver)
-            if re.__contains__('emp') and re.__getitem__('emp') != '':
-                re.appendlist('enchantements', re.__getitem__('emp'))
-            if re.__contains__('eam') and re.__getitem__('eam') != '':
-                re.appendlist('enchantements', re.__getitem__('eam'))
-            if re.__contains__('eaa') and re.__getitem__('eaa') != '':
-                re.appendlist('enchantements', re.__getitem__('eaa'))
-            if re.__contains__('etete') and re.__getitem__('etete') != '':
-                re.appendlist('enchantements', re.__getitem__('etete'))
-            if re.__contains__('eepaule') and re.__getitem__('eepaule') != '':
-                re.appendlist('enchantements', re.__getitem__('eepaule'))
-            if re.__contains__('etorse') and re.__getitem__('etorse') != '':
-                re.appendlist('enchantements', re.__getitem__('etorse'))
-            if re.__contains__('emain') and re.__getitem__('emain') != '':
-                re.appendlist('enchantements', re.__getitem__('emain'))
-            if re.__contains__('etaille') and re.__getitem__('etaille') != '':
-                re.appendlist('enchantements', re.__getitem__('etaille'))
-            if re.__contains__('ejambe') and re.__getitem__('ejambe') != '':
-                re.appendlist('enchantements', re.__getitem__('ejambe'))
-            if re.__contains__('edo') and re.__getitem__('edo') != '':
-                re.appendlist('enchantements', re.__getitem__('edo'))
-            if re.__contains__('ecou') and re.__getitem__('ecou') != '':
-                re.appendlist('enchantements', re.__getitem__('ecou'))
-            if re.__contains__('epoignet') and re.__getitem__('epoignet') != '':
-                re.appendlist('enchantements', re.__getitem__('epoignet'))
-            if re.__contains__('epied') and re.__getitem__('epied') != '':
-                re.appendlist('enchantements', re.__getitem__('epied'))
-            form = EquipementForm(re, instance=equipement)
-            if form.is_valid():
-                save_it = form.save()
-                fiche = Fiche.objects.get(equipement=save_it.id)
-                return redirect('detail_fiche', fiche_id=fiche.id)
-            else:
-                print(form.errors)
+    equipement = Equipement.objects.get(pk=equipement_id)
+    if request.method == 'POST':
+        re = request.POST.copy()
+        re.pop('objets')
+        re.pop('enchantements')
+        if re.__contains__('mp') and re.__getitem__('mp') != '':
+            re.appendlist('objets', re.__getitem__('mp'))
+        if re.__contains__('am') and re.__getitem__('am') != '':
+            re.appendlist('objets', re.__getitem__('am'))
+        if re.__contains__('aa') and re.__getitem__('aa') != '':
+            re.appendlist('objets', re.__getitem__('aa'))
+        if re.__contains__('tete') and re.__getitem__('tete') != '':
+            re.appendlist('objets', re.__getitem__('tete'))
+        if re.__contains__('epaule') and re.__getitem__('epaule') != '':
+            re.appendlist('objets', re.__getitem__('epaule'))
+        if re.__contains__('torse') and re.__getitem__('torse') != '':
+            re.appendlist('objets', re.__getitem__('torse'))
+        if re.__contains__('main') and re.__getitem__('main') != '':
+            re.appendlist('objets', re.__getitem__('main'))
+        if re.__contains__('taille') and re.__getitem__('taille') != '':
+            re.appendlist('objets', re.__getitem__('taille'))
+        if re.__contains__('jambe') and re.__getitem__('jambe') != '':
+            re.appendlist('objets', re.__getitem__('jambe'))
+        if re.__contains__('do') and re.__getitem__('do') != '':
+            re.appendlist('objets', re.__getitem__('do'))
+        if re.__contains__('cou') and re.__getitem__('cou') != '':
+            re.appendlist('objets', re.__getitem__('cou'))
+        if re.__contains__('poignet') and re.__getitem__('poignet') != '':
+            re.appendlist('objets', re.__getitem__('poignet'))
+        if re.__contains__('pied') and re.__getitem__('pied') != '':
+            re.appendlist('objets', re.__getitem__('pied'))
+        if re.__contains__('doigt') and re.__getitem__('doigt') != '':
+            doigts = re.getlist('doigt')
+            for doigt in doigts:
+                re.appendlist('objets', doigt)
+        if re.__contains__('diver') and re.__getitem__('diver') != '':
+            divers = re.getlist('diver')
+            for diver in divers:
+                re.appendlist('objets', diver)
+        if re.__contains__('emp') and re.__getitem__('emp') != '':
+            re.appendlist('enchantements', re.__getitem__('emp'))
+        if re.__contains__('eam') and re.__getitem__('eam') != '':
+            re.appendlist('enchantements', re.__getitem__('eam'))
+        if re.__contains__('eaa') and re.__getitem__('eaa') != '':
+            re.appendlist('enchantements', re.__getitem__('eaa'))
+        if re.__contains__('etete') and re.__getitem__('etete') != '':
+            re.appendlist('enchantements', re.__getitem__('etete'))
+        if re.__contains__('eepaule') and re.__getitem__('eepaule') != '':
+            re.appendlist('enchantements', re.__getitem__('eepaule'))
+        if re.__contains__('etorse') and re.__getitem__('etorse') != '':
+            re.appendlist('enchantements', re.__getitem__('etorse'))
+        if re.__contains__('emain') and re.__getitem__('emain') != '':
+            re.appendlist('enchantements', re.__getitem__('emain'))
+        if re.__contains__('etaille') and re.__getitem__('etaille') != '':
+            re.appendlist('enchantements', re.__getitem__('etaille'))
+        if re.__contains__('ejambe') and re.__getitem__('ejambe') != '':
+            re.appendlist('enchantements', re.__getitem__('ejambe'))
+        if re.__contains__('edo') and re.__getitem__('edo') != '':
+            re.appendlist('enchantements', re.__getitem__('edo'))
+        if re.__contains__('ecou') and re.__getitem__('ecou') != '':
+            re.appendlist('enchantements', re.__getitem__('ecou'))
+        if re.__contains__('epoignet') and re.__getitem__('epoignet') != '':
+            re.appendlist('enchantements', re.__getitem__('epoignet'))
+        if re.__contains__('epied') and re.__getitem__('epied') != '':
+            re.appendlist('enchantements', re.__getitem__('epied'))
+        form = EquipementForm(re, instance=equipement)
+        if form.is_valid():
+            save_it = form.save()
+            fiche = Fiche.objects.get(equipement=save_it.id)
+            return redirect('detail_fiche', fiche_id=fiche.id)
         else:
-            form = EquipementForm(instance=equipement)
-
-        objets = Armure.objects.all()
-        mps = Armure.objects.filter(membre=1)
-        emps = Enchantement.objects.filter(membre=1)
-        ams = Armure.objects.filter(membre=2)
-        eams = Enchantement.objects.filter(membre=2)
-        aas = Armure.objects.filter(membre=15)
-        eaas = Enchantement.objects.filter(membre=15)
-        tetes = Armure.objects.filter(membre=3)
-        etetes = Enchantement.objects.filter(membre=3)
-        epaules = Armure.objects.filter(membre=4)
-        eepaules = Enchantement.objects.filter(membre=4)
-        torses = Armure.objects.filter(membre=5)
-        etorses = Enchantement.objects.filter(membre=5)
-        mains = Armure.objects.filter(membre=6)
-        emains = Enchantement.objects.filter(membre=6)
-        tailles = Armure.objects.filter(membre=7)
-        etailles = Enchantement.objects.filter(membre=7)
-        jambes = Armure.objects.filter(membre=8)
-        ejambes = Enchantement.objects.filter(membre=8)
-        dos = Armure.objects.filter(membre=10)
-        edos = Enchantement.objects.filter(membre=10)
-        cous = Armure.objects.filter(membre=11)
-        ecous = Enchantement.objects.filter(membre=11)
-        poignets = Armure.objects.filter(membre=13)
-        epoignets = Enchantement.objects.filter(membre=13)
-        pieds = Armure.objects.filter(membre=9)
-        epieds = Enchantement.objects.filter(membre=9)
-        doigts = Armure.objects.filter(membre=12)
-        edoigts = Enchantement.objects.filter(membre=12)
-        divers = Armure.objects.filter(membre=14)
-        edivers = Enchantement.objects.filter(membre=14)
-        context = {'form': form, 'objets': objets, 'mps': mps,
-                   'ams': ams, 'aas': aas, 'tetes': tetes,
-                   'epaules': epaules, 'torses': torses, 'mains': mains,
-                   'tailles': tailles, 'jambes': jambes, 'dos': dos,
-                   'cous': cous, 'poignets': poignets, 'pieds': pieds,
-                   'doigts': doigts, 'divers': divers,
-                   'eams': eams, 'eaas': eaas, 'etetes': etetes, 'emps': emps,
-                   'eepaules': eepaules, 'etorses': etorses, 'emains': emains,
-                   'etailles': etailles, 'ejambes': ejambes, 'edos': edos,
-                   'ecous': ecous, 'epoignets': epoignets, 'epieds': epieds,
-                   'edoigts': edoigts, 'edivers': edivers}
-        return render(request, 'fiches/equip_edit.html', context)
-
+            print(form.errors)
     else:
+        form = EquipementForm(instance=equipement)
 
-        return HttpResponse("Vous ne pouvez pas editer les equipements.")
+    objets = Armure.objects.all()
+    mps = Armure.objects.filter(membre=1)
+    emps = Enchantement.objects.filter(membre=1)
+    ams = Armure.objects.filter(membre=2)
+    eams = Enchantement.objects.filter(membre=2)
+    aas = Armure.objects.filter(membre=15)
+    eaas = Enchantement.objects.filter(membre=15)
+    tetes = Armure.objects.filter(membre=3)
+    etetes = Enchantement.objects.filter(membre=3)
+    epaules = Armure.objects.filter(membre=4)
+    eepaules = Enchantement.objects.filter(membre=4)
+    torses = Armure.objects.filter(membre=5)
+    etorses = Enchantement.objects.filter(membre=5)
+    mains = Armure.objects.filter(membre=6)
+    emains = Enchantement.objects.filter(membre=6)
+    tailles = Armure.objects.filter(membre=7)
+    etailles = Enchantement.objects.filter(membre=7)
+    jambes = Armure.objects.filter(membre=8)
+    ejambes = Enchantement.objects.filter(membre=8)
+    dos = Armure.objects.filter(membre=10)
+    edos = Enchantement.objects.filter(membre=10)
+    cous = Armure.objects.filter(membre=11)
+    ecous = Enchantement.objects.filter(membre=11)
+    poignets = Armure.objects.filter(membre=13)
+    epoignets = Enchantement.objects.filter(membre=13)
+    pieds = Armure.objects.filter(membre=9)
+    epieds = Enchantement.objects.filter(membre=9)
+    doigts = Armure.objects.filter(membre=12)
+    edoigts = Enchantement.objects.filter(membre=12)
+    divers = Armure.objects.filter(membre=14)
+    edivers = Enchantement.objects.filter(membre=14)
+    context = {'form': form, 'objets': objets, 'mps': mps,
+               'ams': ams, 'aas': aas, 'tetes': tetes,
+               'epaules': epaules, 'torses': torses, 'mains': mains,
+               'tailles': tailles, 'jambes': jambes, 'dos': dos,
+               'cous': cous, 'poignets': poignets, 'pieds': pieds,
+               'doigts': doigts, 'divers': divers,
+               'eams': eams, 'eaas': eaas, 'etetes': etetes, 'emps': emps,
+               'eepaules': eepaules, 'etorses': etorses, 'emains': emains,
+               'etailles': etailles, 'ejambes': ejambes, 'edos': edos,
+               'ecous': ecous, 'epoignets': epoignets, 'epieds': epieds,
+               'edoigts': edoigts, 'edivers': edivers}
+    return render(request, 'fiches/equip_edit.html', context)
 
 
 def tooltip_objet(request, objet_id):
@@ -775,31 +736,26 @@ def quete(request, quete_id):
 
 
 # Enables the reservation of a quest by players
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def res_quete(request, quete_id):
-    if request.user.has_perm('fiches.objet_ok'):
-        quete = get_object_or_404(Quete, pk=quete_id)
+    quete = get_object_or_404(Quete, pk=quete_id)
 
-        if request.method == 'POST':
-            data = request.POST.copy()
-            # Puts the quest to the "reserved" state (2)
-            data['etat'] = 2
-            form = PrendreQueteForm(data, instance=quete)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('quete', quete_id=save_it.id)
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        data = request.POST.copy()
+        # Puts the quest to the "reserved" state (2)
+        data['etat'] = 2
+        form = PrendreQueteForm(data, instance=quete)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('quete', quete_id=save_it.id)
         else:
-            form = PrendreQueteForm(instance=quete)
-
-        personnages = request.user.fiches.all()
-        context = {'form': form, 'quete': quete, 'personnages': personnages}
-        return render(request, 'site/prendre_quete.html', context)
-
+            print(form.errors)
     else:
+        form = PrendreQueteForm(instance=quete)
 
-        return HttpResponse("Vous ne pouvez pas prendre de quete.")
+    personnages = request.user.fiches.all()
+    context = {'form': form, 'quete': quete, 'personnages': personnages}
+    return render(request, 'site/prendre_quete.html', context)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GALLERIE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -808,66 +764,55 @@ def res_quete(request, quete_id):
 # Display icon gallery
 from os import listdir
 from os import walk
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def gallery(request):
-    if request.user.has_perm('fiches.objet_ok'):
-        images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
-        images = listdir(images_url)
-        # Sorts images independently of case
-        images_sorted = sorted(images, key=str.lower)
-        paginator = Paginator(images_sorted, 100)
-        page = request.GET.get('page')
-        try:
-            images_list = paginator.page(page)
-            # if page not an integer, display first page of results
-        except PageNotAnInteger:
-            images_list = paginator.page(1)
-            # if page is out of range, display the last page of results
-        except EmptyPage:
-            images_list = paginator.page(paginator.num_pages)
+    images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
+    images = listdir(images_url)
+    # Sorts images independently of case
+    images_sorted = sorted(images, key=str.lower)
+    paginator = Paginator(images_sorted, 100)
+    page = request.GET.get('page')
+    try:
+        images_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        images_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        images_list = paginator.page(paginator.num_pages)
 
-        context = {'images_list': images_list}
-        return render(request, 'site/gallery.html', context)
-
-    else:
-
-        return HttpResponse("Vous ne pouvez pas acceder a la gallerie")
+    context = {'images_list': images_list}
+    return render(request, 'site/gallery.html', context)
 
 
 # Enables the search of an icon
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def gallery_search(request):
-    if request.user.has_perm('fiches.objet_ok'):
+    recherche = request.GET.get('recherche')
+    images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
+    images = []
+    """
+    Adds every files matching the name given to the returned list,
+    checking everything in lower case
+    """
+    for root, dirs, files in walk(images_url):
+        for name in files:
+            if recherche.lower() in name.lower():
+                images += [name]
+    images_sorted = sorted(images, key=str.lower)
+    paginator = Paginator(images_sorted, 100)
+    page = request.GET.get('page')
+    try:
+        images_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        images_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        images_list = paginator.page(paginator.num_pages)
 
-        recherche = request.GET.get('recherche')
-        images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
-        images = []
-        """
-        Adds every files matching the name given to the returned list,
-        checking everything in lower case
-        """
-        for root, dirs, files in walk(images_url):
-            for name in files:
-                if recherche.lower() in name.lower():
-                    images += [name]
-        images_sorted = sorted(images, key=str.lower)
-        paginator = Paginator(images_sorted, 100)
-        page = request.GET.get('page')
-        try:
-            images_list = paginator.page(page)
-            # if page not an integer, display first page of results
-        except PageNotAnInteger:
-            images_list = paginator.page(1)
-            # if page is out of range, display the last page of results
-        except EmptyPage:
-            images_list = paginator.page(paginator.num_pages)
-
-        context = {'images_list': images_list, 'recherche': recherche}
-        return render(request, 'site/gallery.html', context)
-
-    else:
-
-        return HttpResponse("Vous ne pouvez pas acceder a la gallerie")
+    context = {'images_list': images_list, 'recherche': recherche}
+    return render(request, 'site/gallery.html', context)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CAMPAGNES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -912,112 +857,96 @@ def campagne(request, campagne_id):
 
 
 # Displays report of the requested mission
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def mission(request, campagne_id, mission_id):
-    if request.user.has_perm('fiches.objet_ok'):
-        mission = get_object_or_404(Mission, pk=mission_id)
-        image = None
-        sign = mission.signature_url
-        if sign.startswith( 'i: ' ):
-            sign = sign[3:]
-            print(sign)
-            image = get_object_or_404(Image, nom=sign)
-            print(image.image.url)
-        # Finds all missions of the campaign
-        missions = Mission.objects.select_related().filter(operation = campagne_id)
-        mission_pre = None
-        mission_sui = None
-        # Next and previous missions
-        for mis in missions:
-            if mis.numero == (mission.numero - 1):
-                mission_pre = mis
-            if mis.numero == (mission.numero + 1):
-                mission_sui = mis
-        context = {'mission': mission, 'mission_pre': mission_pre,
-                   'mission_sui': mission_sui, 'image': image}
+    mission = get_object_or_404(Mission, pk=mission_id)
+    image = None
+    sign = mission.signature_url
+    if sign.startswith( 'i: ' ):
+        sign = sign[3:]
+        image = get_object_or_404(Image, nom=sign)
+    # Finds all missions of the campaign
+    missions = Mission.objects.select_related().filter(operation = campagne_id)
+    mission_pre = None
+    mission_sui = None
+    # Next and previous missions
+    for mis in missions:
+        if mis.numero == (mission.numero - 1):
+            mission_pre = mis
+        if mis.numero == (mission.numero + 1):
+            mission_sui = mis
+    context = {'mission': mission, 'mission_pre': mission_pre,
+               'mission_sui': mission_sui, 'image': image}
 
-        return render(request, 'site/rapport_mission.html', context)
-
-    else:
-
-        return HttpResponse("Vous ne pouvez pas acceder aux campagnes")
+    return render(request, 'site/rapport_mission.html', context)
 
 
 # Enables the creation of missions for players
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_mission(request):
-    if request.user.has_perm('fiches.objet_ok'):
-        # Collects the choices for leaders, enabling the sorting by likeliness to lead
-        caporals = Fiche.objects.filter(titre__iexact='caporal')
-        sergents = Fiche.objects.filter(titre__iexact='sergent')
-        lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
-        capitaines = Fiche.objects.filter(titre__iexact='capitaine')
-        generals = Fiche.objects.filter(titre__iexact='général')
-        colonels = Fiche.objects.filter(titre__iexact='colonel')
-        # Gets people from Noirebois (23)
-        autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
-        # Gets the choices for campaigns
-        campagnes = Operation.objects.all()
-        if request.method == 'POST':
-            form = MissionForm(request.POST)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('mission', campagne_id=save_it.operation.id,
+    # Collects the choices for leaders, enabling the sorting by likeliness to lead
+    caporals = Fiche.objects.filter(titre__iexact='caporal')
+    sergents = Fiche.objects.filter(titre__iexact='sergent')
+    lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
+    capitaines = Fiche.objects.filter(titre__iexact='capitaine')
+    generals = Fiche.objects.filter(titre__iexact='général')
+    colonels = Fiche.objects.filter(titre__iexact='colonel')
+    # Gets people from Noirebois (23)
+    autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
+    # Gets the choices for campaigns
+    campagnes = Operation.objects.all()
+    if request.method == 'POST':
+        form = MissionForm(request.POST)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('mission', campagne_id=save_it.operation.id,
                                 mission_id=save_it.id )
-            else:
-                print(form.errors)
         else:
-            form = MissionForm()
-
-        context = {'form': form, 'caporals': caporals, 'sergents': sergents,
-                   'lieutenants': lieutenants, 'capitaines': capitaines,
-                   'generals': generals, 'colonels': colonels,
-                   'autres': autres, 'campagnes': campagnes}
-        return render(request, 'site/mission_edit.html', context)
-
+            print(form.errors)
     else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des rapports.")
+        form = MissionForm()
+
+    context = {'form': form, 'caporals': caporals, 'sergents': sergents,
+               'lieutenants': lieutenants, 'capitaines': capitaines,
+               'generals': generals, 'colonels': colonels,
+               'autres': autres, 'campagnes': campagnes}
+    return render(request, 'site/mission_edit.html', context)
 
 
 # Enables the edition of missions for players
-@login_required
+@permission_required('fiches.veteran', raise_exception=True)
 def edit_mission(request, mission_id):
-    if request.user.has_perm('fiches.objet_ok'):
-        # Collects the choices for leaders, enabling the sorting by likeliness to lead
-        mission = Mission.objects.get(pk=mission_id)
-        caporals = Fiche.objects.filter(titre__iexact='caporal')
-        sergents = Fiche.objects.filter(titre__iexact='sergent')
-        lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
-        capitaines = Fiche.objects.filter(titre__iexact='capitaine')
-        generals = Fiche.objects.filter(titre__iexact='général')
-        colonels = Fiche.objects.filter(titre__iexact='colonel')
-        # Gets people from Noirebois (23)
-        autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
-        # Gets the choices for campaigns
-        campagnes = Operation.objects.all()
-        if request.method == 'POST':
-
-            form = MissionForm(request.POST, instance=mission)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('mission', campagne_id=mission.operation.id,
-                                mission_id=mission.id )
-            else:
-                print(form.errors)
+    # Collects the choices for leaders, enabling the sorting by likeliness to lead
+    mission = Mission.objects.get(pk=mission_id)
+    caporals = Fiche.objects.filter(titre__iexact='caporal')
+    sergents = Fiche.objects.filter(titre__iexact='sergent')
+    lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
+    capitaines = Fiche.objects.filter(titre__iexact='capitaine')
+    generals = Fiche.objects.filter(titre__iexact='général')
+    colonels = Fiche.objects.filter(titre__iexact='colonel')
+    # Gets people from Noirebois (23)
+    autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
+    # Gets the choices for campaigns
+    campagnes = Operation.objects.all()
+    if request.method == 'POST':
+        form = MissionForm(request.POST, instance=mission)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('mission', campagne_id=mission.operation.id,
+                            mission_id=mission.id )
         else:
-            form = MissionForm(instance=mission)
-
-        context = {'form': form, 'caporals': caporals, 'sergents': sergents,
-                   'lieutenants': lieutenants, 'capitaines': capitaines,
-                   'generals': generals, 'colonels': colonels,
-                   'autres': autres, 'campagnes': campagnes}
-        return render(request, 'site/mission_edit.html', context)
-
+            print(form.errors)
     else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent faire des rapports.")
+        form = MissionForm(instance=mission)
+
+    context = {'form': form, 'caporals': caporals, 'sergents': sergents,
+               'lieutenants': lieutenants, 'capitaines': capitaines,
+               'generals': generals, 'colonels': colonels,
+               'autres': autres, 'campagnes': campagnes}
+    return render(request, 'site/mission_edit.html', context)
 
 
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 # Display classes
 @login_required
@@ -1039,33 +968,29 @@ def classes(request):
     return render(request, 'site/classes.html', context)
 
 # Display list of spells for the required class
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def sorts(request, classe_id):
-    if request.user.has_perm('fiches.objet_ok'):
-        voyelles = ["a","e","i","o","u", "é", "è", "ë", "y"]
-        classe = get_object_or_404(Classe, pk=classe_id)
-        classe_consonne = True
-        if classe.nom[0].lower() in voyelles:
-            classe_consonne = False
-        sorts = Sort.objects.filter(classe=classe_id).order_by('nom')
-        paginator = Paginator(sorts, 12)
-        page = request.GET.get('page')
-        try:
-            sorts_list = paginator.page(page)
-        # if page not an integer, display first page of results
-        except PageNotAnInteger:
-            sorts_list = paginator.page(1)
-        # if page is out of range, display the last page of results
-        except EmptyPage:
-            sorts_list = paginator.page(paginator.num_pages)
+    voyelles = ["a","e","i","o","u", "é", "è", "ë", "y"]
+    classe = get_object_or_404(Classe, pk=classe_id)
+    classe_consonne = True
+    if classe.nom[0].lower() in voyelles:
+        classe_consonne = False
+    sorts = Sort.objects.filter(classe=classe_id).order_by('nom')
+    paginator = Paginator(sorts, 12)
+    page = request.GET.get('page')
+    try:
+        sorts_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        sorts_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        sorts_list = paginator.page(paginator.num_pages)
 
-        context = {'sorts': sorts, 'sorts_list': sorts_list,
+    context = {'sorts': sorts, 'sorts_list': sorts_list,
                'classe': classe, 'classe_c': classe_consonne}
 
-        return render(request, 'site/sorts.html', context)
-
-    else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent voir les sorts")
+    return render(request, 'site/sorts.html', context)
 
 
 def tooltip_sort(request, sort_id):
@@ -1076,44 +1001,34 @@ def tooltip_sort(request, sort_id):
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def image(request):
-    if request.user.has_perm('fiches.add_objet'):
-        if request.method == 'POST':
-            form = ImageForm(request.POST, request.FILES)
-            if form.is_valid():
-                save_it = form.save()
-                return HttpResponseRedirect('/')
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            save_it = form.save()
+            return HttpResponseRedirect('/')
         else:
-            form = ImageForm()
-
-        return render(request, 'fiches/image.html', {'form': form})
-
+            print(form.errors)
     else:
-        return HttpResponse("Vous ne pouvez pas ajouter d'images.")
+        form = ImageForm()
+
+    return render(request, 'fiches/image.html', {'form': form})
 
 
-@login_required
+@permission_required('fiches.veteran', raise_exception=True)
 def upload_gallery(request):
-    if request.user.has_perm('fiches.add_objet'):
-        # images_url = "%s/images/uploads" % (settings.MEDIA_ROOT)
-        images = Image.objects.all()
-        # Sorts images independently of case
-        # images_sorted = sorted(images, key=str.lower)
-        paginator = Paginator(images, 100)
-        page = request.GET.get('page')
-        try:
-            images_list = paginator.page(page)
-            # if page not an integer, display first page of results
-        except PageNotAnInteger:
-            images_list = paginator.page(1)
-            # if page is out of range, display the last page of results
-        except EmptyPage:
-            images_list = paginator.page(paginator.num_pages)
+    images = Image.objects.all()
+    paginator = Paginator(images, 100)
+    page = request.GET.get('page')
+    try:
+        images_list = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        images_list = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        images_list = paginator.page(paginator.num_pages)
 
-        context = {'images_list': images_list}
-        return render(request, 'site/up_gallery.html', context)
-    else:
-        return HttpResponse("Seuls les membres des Fils de Garithos peuvent voir la gallerie")
+    context = {'images_list': images_list}
+    return render(request, 'site/up_gallery.html', context)

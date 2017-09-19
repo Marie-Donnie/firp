@@ -11,38 +11,34 @@ from fiches.rpg.avant_garde.models import *
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AVANT-GARDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_base(request):
     utilisateur = request.user
-    if (utilisateur.has_perm('fiches.add_avant_garde')):
-        if request.method == 'POST':
-            data = request.POST.copy()
-            if not 'avants' in data:
-                data['avants'] = Avantages.objects.get(pk=1)
-            if not 'desavants' in data:
-                data['desavants'] = Desavantages.objects.get(pk=1)
-            data['createur'] = User.objects.get(username=utilisateur).id
-            form = Avant_GardeForm(data, request.FILES)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('detail_perso', perso_id=save_it.id)
-            else:
-                print(form.errors)
+    if request.method == 'POST':
+        data = request.POST.copy()
+        if not 'avants' in data:
+            data['avants'] = Avantages.objects.get(pk=1)
+        if not 'desavants' in data:
+            data['desavants'] = Desavantages.objects.get(pk=1)
+        data['createur'] = User.objects.get(username=utilisateur).id
+        form = Avant_GardeForm(data, request.FILES)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('detail_perso', perso_id=save_it.id)
         else:
-            form = Avant_GardeForm()
-
-        avantages = Avantages.objects.all()
-        desavantages = Desavantages.objects.all()
-        campagnes = Campagne.objects.all()
-        context = {'form': form, 'avantages': avantages,
-                   'desavantages': desavantages, 'campagnes': campagnes}
-        return render(request, 'rpg/avant_garde/global_form.html', context)
-
+            print(form.errors)
     else:
-        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+        form = Avant_GardeForm()
+
+    avantages = Avantages.objects.all()
+    desavantages = Desavantages.objects.all()
+    campagnes = Campagne.objects.all()
+    context = {'form': form, 'avantages': avantages,
+               'desavantages': desavantages, 'campagnes': campagnes}
+    return render(request, 'rpg/avant_garde/global_form.html', context)
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def editer_base(request, base_id):
     base = Avant_garde.objects.get(pk=base_id)
     utilisateur = request.user
@@ -109,149 +105,129 @@ def presentation(request):
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CLASSES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CREATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_apothicaire(request, perso_id):
     utilisateur = request.user
-    if (utilisateur.has_perm('fiche.add_avant_garde')):
-        perso = get_object_or_404(Avant_garde, pk=perso_id)
-        if (utilisateur == perso.createur) and (perso.classe == 4):
-            if request.method == 'POST':
-                data = request.POST.copy()
-                data['perso'] = perso.id
-                form = ApothicaireForm(data)
-                if form.is_valid():
-                    form.save()
-                    return redirect('detail_perso', perso_id=perso_id)
-                else:
-                    print(form.errors)
+    perso = get_object_or_404(Avant_garde, pk=perso_id)
+    if (utilisateur == perso.createur) and (perso.classe == 4):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['perso'] = perso.id
+            form = ApothicaireForm(data)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=perso_id)
             else:
-                form = ApothicaireForm()
-
-            context = {'form': form}
-
-            return render(request, 'rpg/avant_garde/apothicaire.html', context)
+                print(form.errors)
         else:
-            return HttpResponse("La classe apothicaire ne correspond pas a celle du personnage.")
+            form = ApothicaireForm()
 
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/apothicaire.html', context)
     else:
-        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+        return HttpResponse("La classe apothicaire ne correspond pas a celle du personnage.")
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_fantassin(request, perso_id):
     utilisateur = request.user
-    if (utilisateur.has_perm('fiche.add_avant_garde')):
-        perso = get_object_or_404(Avant_garde, pk=perso_id)
-        if (utilisateur == perso.createur) and (perso.classe == 1):
-            if request.method == 'POST':
-                data = request.POST.copy()
-                data['perso'] = perso.id
-                form = FantassinForm(data)
-                if form.is_valid():
-                    form.save()
-                    return redirect('detail_perso', perso_id=perso_id)
-                else:
-                    print(form.errors)
+    perso = get_object_or_404(Avant_garde, pk=perso_id)
+    if (utilisateur == perso.createur) and (perso.classe == 1):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['perso'] = perso.id
+            form = FantassinForm(data)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=perso_id)
             else:
-                form = FantassinForm()
-
-            context = {'form': form}
-
-            return render(request, 'rpg/avant_garde/fantassin.html', context)
+                print(form.errors)
         else:
-            return HttpResponse("La classe fantassin ne correspond pas a celle du personnage.")
+            form = FantassinForm()
 
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/fantassin.html', context)
     else:
-        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+        return HttpResponse("La classe fantassin ne correspond pas a celle du personnage.")
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_arbaletrier(request, perso_id):
     utilisateur = request.user
-    if (utilisateur.has_perm('fiche.add_avant_garde')):
-        perso = get_object_or_404(Avant_garde, pk=perso_id)
-        if (utilisateur == perso.createur) and (perso.classe == 2):
-            if request.method == 'POST':
-                data = request.POST.copy()
-                data['perso'] = perso.id
-                form = ArbaletrierForm(data)
-                if form.is_valid():
-                    form.save()
-                    return redirect('detail_perso', perso_id=perso_id)
-                else:
-                    print(form.errors)
+    perso = get_object_or_404(Avant_garde, pk=perso_id)
+    if (utilisateur == perso.createur) and (perso.classe == 2):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['perso'] = perso.id
+            form = ArbaletrierForm(data)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=perso_id)
             else:
-                form = ArbaletrierForm()
-
-            context = {'form': form}
-
-            return render(request, 'rpg/avant_garde/arbaletrier.html', context)
+                print(form.errors)
         else:
-            return HttpResponse("La classe arbaletrier ne correspond pas a celle du personnage.")
+            form = ArbaletrierForm()
 
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/arbaletrier.html', context)
     else:
-        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+        return HttpResponse("La classe arbaletrier ne correspond pas a celle du personnage.")
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_eclaireur(request, perso_id):
     utilisateur = request.user
-    if (utilisateur.has_perm('fiche.add_avant_garde')):
-        perso = get_object_or_404(Avant_garde, pk=perso_id)
-        if (utilisateur == perso.createur) and (perso.classe == 3):
-            if request.method == 'POST':
-                data = request.POST.copy()
-                data['perso'] = perso.id
-                form = EclaireurForm(data)
-                if form.is_valid():
-                    form.save()
-                    return redirect('detail_perso', perso_id=perso_id)
-                else:
-                    print(form.errors)
+    perso = get_object_or_404(Avant_garde, pk=perso_id)
+    if (utilisateur == perso.createur) and (perso.classe == 3):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['perso'] = perso.id
+            form = EclaireurForm(data)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=perso_id)
             else:
-                form = EclaireurForm()
-
-            context = {'form': form}
-
-            return render(request, 'rpg/avant_garde/eclaireur.html', context)
+                print(form.errors)
         else:
-            return HttpResponse("La classe eclaireur ne correspond pas a celle du personnage.")
+            form = EclaireurForm()
 
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/eclaireur.html', context)
     else:
-        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+        return HttpResponse("La classe eclaireur ne correspond pas a celle du personnage.")
 
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_sorcier(request, perso_id):
     utilisateur = request.user
-    if (utilisateur.has_perm('fiche.add_avant_garde')):
-        perso = get_object_or_404(Avant_garde, pk=perso_id)
-        if (utilisateur == perso.createur) and (perso.classe == 5):
-            if request.method == 'POST':
-                data = request.POST.copy()
-                data['perso'] = perso.id
-                form = SorcierForm(data)
-                if form.is_valid():
-                    form.save()
-                    return redirect('detail_perso', perso_id=perso_id)
-                else:
-                    print(form.errors)
+    perso = get_object_or_404(Avant_garde, pk=perso_id)
+    if (utilisateur == perso.createur) and (perso.classe == 5):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['perso'] = perso.id
+            form = SorcierForm(data)
+            if form.is_valid():
+                form.save()
+                return redirect('detail_perso', perso_id=perso_id)
             else:
-                form = SorcierForm()
-
-            context = {'form': form}
-
-            return render(request, 'rpg/avant_garde/sorcier.html', context)
+                print(form.errors)
         else:
-            return HttpResponse("La classe sorcier ne correspond pas a celle du personnage.")
+            form = SorcierForm()
 
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/sorcier.html', context)
     else:
-        return HttpResponse("Vous ne pouvez pas faire une fiche de l'avant-garde.")
+        return HttpResponse("La classe sorcier ne correspond pas a celle du personnage.")
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDITION %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-@login_required
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_fantassin(request, perso_id):
     fantassin = Fantassin.objects.get(pk=perso_id)
     utilisateur = request.user
@@ -277,7 +253,8 @@ def edit_fantassin(request, perso_id):
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
 
-@login_required
+
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_apothicaire(request, perso_id):
     apothicaire = Apothicaire.objects.get(pk=perso_id)
     utilisateur = request.user
@@ -303,7 +280,8 @@ def edit_apothicaire(request, perso_id):
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
 
-@login_required
+
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_arbaletrier(request, perso_id):
     arbaletrier = Arbaletrier.objects.get(pk=perso_id)
     utilisateur = request.user
@@ -329,7 +307,8 @@ def edit_arbaletrier(request, perso_id):
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
 
-@login_required
+
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_eclaireur(request, perso_id):
     eclaireur = Eclaireur.objects.get(pk=perso_id)
     utilisateur = request.user
@@ -355,7 +334,8 @@ def edit_eclaireur(request, perso_id):
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
 
-@login_required
+
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_sorcier(request, perso_id):
     sorcier = Sorcier.objects.get(pk=perso_id)
     utilisateur = request.user

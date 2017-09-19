@@ -376,21 +376,21 @@ function onMouseLeave() {
       <h3 class="panel-title">Statistiques</h3>
     </div> <!-- panel-heading -->
     <div class="panel-body centre">
-      {% if perms.fiches.objet_ok %}
+      {% if perms.fiches.fdg %}
       <b>Effets en jeu :</b>
       {% for effet in effets_ig %}
       {% if 'Aucun' not in effet %}
       {{ effet|linebreaksbr }}<br>
       {% endif %} <!-- aucun -->
       {% endfor %}<br>
-      {% else %} <!-- perms.fiches.objet_ok -->
+      {% else %} <!-- perms.fiches -->
       <b>Effets :</b>
       {% for effet in effets %}
       {% if 'Aucun' not in effet %}
       {{ effet|linebreaksbr }}<br>
       {% endif %} <!-- aucun -->
       {% endfor %}<br>
-      {% endif %} <!-- perms.fiches.objet_ok -->
+      {% endif %} <!-- perms.fiches -->
       {% if runique %}
       "Set : Immunise à la magie"<br>
       {% endif %} <!-- runique -->

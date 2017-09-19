@@ -60,7 +60,7 @@
 	<div id="center">
 	<a href="{% url 'conseils' %}#fiches">Création et édition de fiches</a><br>
 	<a href="{% url 'conseils' %}#utilisateurs">Gestion utilisateur</a><br>
-	{% if perms.fiches.objet_ok %}
+	{% if perms.fiches.fdg %}
 	<a href="{% url 'conseils' %}#objets">Créer objet/armure/case/inventaire/equipement</a><br>
 	<a href="{% url 'conseils' %}#rpg">Création et édition des personnages de rpg</a><br>
 	{% endif %}

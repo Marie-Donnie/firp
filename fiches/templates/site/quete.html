@@ -59,7 +59,7 @@
       {% endif %}
     </div> <!-- media -->
 
-    {% if perms.fiches.objet_ok and quete.etat == 1 %}
+    {% if perms.fiches.fdg and quete.etat == 1 %}
     <div id="centre">
       <a class="btn btn-default" href="{% url 'reserver_quete' quete.id %}">Réserver</a>
       </div>

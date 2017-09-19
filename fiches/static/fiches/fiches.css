@@ -593,37 +593,37 @@ h3.panel-title {
     margin: 4% auto;
 }
 .index-container:hover .index-image {
-  opacity: 0.3;
+    opacity: 0.3;
 }
 
 .index-container:hover .index-middle {
-  opacity: 1;
+    opacity: 1;
 }
 
 .index-image {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
 }
 
 .index-middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%)
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
 }
 
 .index-text {
-  background-color: #470002;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
+    background-color: #470002;
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
 }
 
 .form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
@@ -642,4 +642,22 @@ h3.panel-title {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.error-garithos {
+    position: relative;
+}
+
+.error-text {
+    font-family: morpheus;
+    position: absolute;
+    top: 135px;
+    left: 550px;
+    font-size: 200%;
+}
+
+.error-buttons {
+    position: absolute;
+    top: 190px;
+    left: 645px;
 }
