@@ -1,0 +1,82 @@
+{% extends "footer.html" %}
+
+{% load staticfiles %}
+{% load static %}
+{% load filters %}
+
+{% block contenu %}
+
+  <!-- Link to my css -->
+  <link rel="stylesheet" href="{%static 'site/site.css' %}">
+
+  <title>Gallerie</title>
+</head>
+<body>
+  <!-- <div id="centre"> -->
+  <!--   <form action="{% url 'rechercher_gallerie' %}" method="GET"> -->
+  <!--     <input type="text" name="recherche"><br> -->
+  <!--     <input type="submit" value="Chercher"> -->
+  <!--   </form> -->
+  <!-- </div> -->
+
+  <div id="body">
+    {% if images_list %}
+    <div class="gallery">
+    {% for image in images_list %}
+    <div class="icones-text">
+    <img class="icones" id="centre" src="{{image.image.url}}" alt="{{image}}"><br>
+    <span id="center">{{ image.nom }}</span>
+    </div>
+
+    {% endfor %}
+    <div class="quest-pages">
+      <span>Page {{ images_list.number }} sur {{ images_list.paginator.num_pages }}</span>
+      <nav aria-label="Page navigation" id="pagination">
+	<ul class="pagination pagination-sm">
+	  {% if images_list.has_previous %}
+	  <li>
+	    {% if recherche %}
+	    <a href="?{% url_replace request 'page' images_list.previous_page_number %}" aria-label="Précédent">
+	    {% else %}
+	    <a href="?page={{ images_list.previous_page_number }}" aria-label="Précédent">
+	      {% endif %}
+	      <span aria-hidden="true">&laquo;</span>
+	    </a>
+	  </li>
+	  {% endif %}
+
+	  {% for p in images_list.paginator.page_range %}
+	  <li>
+	    {% if recherche %}
+	    <a href="?{% url_replace request 'page' p %}">
+	      {% else %}
+	      <a href="?page={{ p }}">
+		{% endif %}
+	      {{p}}
+	    </a>
+	  </li>
+	  {% endfor %}
+
+	  {% if images_list.has_next %}
+	  <li>
+	    {% if recherche %}
+	    <a href="?{% url_replace request 'page' images_list.next_page_number %}" aria-label="Suivant">
+	      {% else %}
+	      <a href="?page={{ images_list.next_page_number }}" aria-label="Suivant">
+	      {% endif %}
+              <span aria-hidden="true">&raquo;</span>
+	    </a>
+	  </li>
+	  {% endif %}
+	</ul>
+      </nav>
+    </div> <!-- quest-pages -->
+    </div>
+    {% else %}
+    <p>Aucune icône</p>
+    {% endif %}
+
+  </div>
+</body>
+
+  {% endblock %}

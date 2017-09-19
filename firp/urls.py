@@ -88,6 +88,7 @@ urlpatterns = [
         name='tooltip_sort'),
     # Images
     url(r'images/telecharger/$', views.image, name='image_upload'),
+    url(r'images/gallerie/$', views.upload_gallery, name='upload_gallery'),
 ]
 
 if settings.DEBUG:

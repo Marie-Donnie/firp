@@ -221,6 +221,7 @@ div.gallery img {
     text-decoration: none;
     position: relative;
     border: 1px solid #6e1618;
+    font-weight: normal;
 }
 
 .btn-default:focus,
@@ -228,7 +229,7 @@ div.gallery img {
     /* background-image: url("/static/fiches/images/button-hover.png"); */
     color: #fefefe;
     background: #7e0609;
-    font-weight: bold;
+    font-weight: normal;
     padding: 7px 7px;
     text-decoration: none;
     position: relative;

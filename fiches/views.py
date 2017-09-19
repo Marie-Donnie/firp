@@ -1093,3 +1093,27 @@ def image(request):
 
     else:
         return HttpResponse("Vous ne pouvez pas ajouter d'images.")
+
+
+@login_required
+def upload_gallery(request):
+    if request.user.has_perm('fiches.add_objet'):
+        # images_url = "%s/images/uploads" % (settings.MEDIA_ROOT)
+        images = Image.objects.all()
+        # Sorts images independently of case
+        # images_sorted = sorted(images, key=str.lower)
+        paginator = Paginator(images, 100)
+        page = request.GET.get('page')
+        try:
+            images_list = paginator.page(page)
+            # if page not an integer, display first page of results
+        except PageNotAnInteger:
+            images_list = paginator.page(1)
+            # if page is out of range, display the last page of results
+        except EmptyPage:
+            images_list = paginator.page(paginator.num_pages)
+
+        context = {'images_list': images_list}
+        return render(request, 'site/up_gallery.html', context)
+    else:
+        return HttpResponse("Seuls les membres des Fils de Garithos peuvent voir la gallerie")
