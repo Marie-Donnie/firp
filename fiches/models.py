@@ -262,7 +262,13 @@ class Fiche(models.Model):
         verbose_name_plural = "fiches"
         default_related_name = 'fiches'
         permissions = (("plus_de_15_fiches",
-                        "Peut faire plus de quinze fiches"),)
+                        "Peut faire plus de quinze fiches"),
+                       ("fdg",
+                       "Est fils de Garithos"),
+                       ("veteran",
+                        "FdG + accès à plus de fonctionnalités."),
+                       ("admin",
+                        "Est admin"),)
 
     def __unicode__(self):
         return u'%s %s' % (self.nom, self.prenom)
