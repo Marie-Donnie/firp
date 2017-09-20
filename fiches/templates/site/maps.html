@@ -1,0 +1,42 @@
+{% extends "site/base.html" %}
+
+{% load filters %}
+{% load static %}
+
+
+{% block title %}Duché de Noirebois{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{%static 'site/maps.css' %}">
+
+  <div class="maps-body">
+
+    <div class="page-header" id="maps-header" onclick="document.location='/'">
+      <div class="maps-head">
+	<h1>Duché de Noirebois</h1>
+      </div>
+    </div>
+
+    <div class="black">
+      <div class="maps">
+	<a class="map_link" target="_blank" href="/fiches/media/images/maps/noirebois.jpg" data-toggle="objet-tooltip">
+	  <img class="map" src="/fiches/media/images/maps/noirebois.jpg" alt="Noirebois" id="noirebois">
+	</a>
+	<a class="map_link" target="_blank" href="/fiches/media/images/maps/comte_vent_est.jpg" data-toggle="objet-tooltip">
+	  <img class="map" src="/fiches/media/images/maps/comte_vent_est.jpg" alt="Comté du vent de l'Est" id="comte_vent_est">
+	</a>
+	<a class="map_link" target="_blank" href="/fiches/media/images/maps/haut_noirebois.jpg" data-toggle="objet-tooltip">
+	  <img class="map" src="/fiches/media/images/maps/haut_noirebois.jpg" alt="Haut-Noirebois" id="haut_noirebois">
+	</a>
+	<a class="map_link" target="_blank" href="/fiches/media/images/maps/comte_aesthran.jpg" data-toggle="objet-tooltip">
+	  <img class="map" src="/fiches/media/images/maps/comte_aesthran.jpg" alt="Comté d'Aesthran" id="comte_aesthran">
+	</a>
+	<a class="map_link" target="_blank" href="/fiches/media/images/maps/iles_du_kraken.png" data-toggle="objet-tooltip">
+	  <img class="map" src="/fiches/media/images/maps/iles_du_kraken.png" alt="Iles du Kraken" id="iles_du_kraken">
+	</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

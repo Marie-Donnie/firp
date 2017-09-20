@@ -1,0 +1,37 @@
+.maps {
+    position: relative;
+}
+
+.map {
+    position: absolute;
+}
+
+#noirebois {
+    width: 600px;
+    top: 430px;
+    left: 183px;
+}
+
+#comte_vent_est {
+    width: 600px;
+    top: 35px;
+    left: 603px;
+}
+
+#haut_noirebois {
+    width: 600px;
+    top: 70px;
+    left: 0px;
+}
+
+#comte_aesthran {
+    width: 600px;
+    top: 838px;
+    left: 519px;
+}
+
+#iles_du_kraken {
+    width: 600px;
+    top: 1300px;
+    left: 600px;
+}

@@ -1032,3 +1032,9 @@ def upload_gallery(request):
 
     context = {'images_list': images_list}
     return render(request, 'site/up_gallery.html', context)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CARTES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+def cartes(request):
+    return render(request, 'site/maps.html', {})
