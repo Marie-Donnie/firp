@@ -1050,9 +1050,7 @@ def gerer_bourse(request, fiche_id, bourse_id):
     if utilisateur == fiche.createur:
         if request.method == 'POST':
             re = request.POST.copy()
-            print(re)
             re['argent'] = int(re['argent'])* 100 + int(re['cuivre']) + int(re['or'])*10000
-            print(re)
             form = BourseForm(re, instance=bourse)
             if form.is_valid():
                 save_it = form.save()

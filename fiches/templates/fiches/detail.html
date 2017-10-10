@@ -211,9 +211,14 @@ function onMouseLeave() {
 	  {% if fiche.bourse %}
 	  {{ fiche.bourse.argent|p_or }} <img id="money" src="/fiches/media/images/site/UI-GoldIcon.PNG" alt="Souverains d'or">
 	  {{ fiche.bourse.argent|p_argent }} <img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Gruaux d'argent">
-	  {{ fiche.bourse.argent|p_cuivre }} <img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Sous de cuivre">
+	  {{ fiche.bourse.argent|p_cuivre }} <img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Sous de cuivre"><br>
+	  {% if user.id == fiche.createur.id %}
+	  <a class="btn btn-default" href="{% url 'gerer_bourse' fiche.id fiche.bourse.id %}">Editer bourse</a>
+	  {% endif %}
 	  {% else %}
+	  {% if user.id == fiche.createur.id %}
 	  <a class="btn btn-default" href="{% url 'creer_bourse' fiche.id %}">Créer bourse</a>
+	  {% endif %}
 	  {% endif %}
 	</div>
       </div> <!-- panel panel-default -->
