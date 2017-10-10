@@ -1038,3 +1038,46 @@ def upload_gallery(request):
 
 def cartes(request):
     return render(request, 'site/maps.html', {})
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMERCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+@permission_required('fiches.fdg', raise_exception=True)
+def gerer_bourse(request, fiche_id, bourse_id):
+    bourse = Bourse.objects.get(pk=bourse_id)
+    fiche = Fiche.objects.get(pk=fiche_id)
+    utilisateur = request.user
+    if utilisateur == fiche.createur:
+        if request.method == 'POST':
+            re = request.POST.copy()
+            print(re)
+            re['argent'] = int(re['argent'])* 100 + int(re['cuivre']) + int(re['or'])*10000
+            print(re)
+            form = BourseForm(re, instance=bourse)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('detail_fiche', fiche_id=fiche_id)
+            else:
+                print(form.errors)
+        else:
+            form = BourseForm(instance=bourse)
+    else:
+        return HttpResponse("Vous ne pouvez pas editer cette bourse.")
+
+    context = {'form': form, 'bourse': bourse}
+    return render(request, 'fiches/bourse.html', context)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def creer_bourse(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    utilisateur = request.user
+    if utilisateur == fiche.createur and not fiche.bourse:
+        bourse_creee = Bourse.objects.create(nom='Bourse de '+fiche.nom+' '+fiche.prenom)
+        fiche.bourse=bourse_creee
+        fiche.save()
+        return redirect('detail_fiche', fiche_id=fiche_id)
+    else:
+        return HttpResponse("Vous ne pouvez pas créer cette bourse.")
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HABITATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+{% load filters %}
+{% load static %}
+
+{% block title %}Créer/éditer une bourse{% endblock %}
+{% block page-title %}Créer/éditer une bourse{% endblock %}
+
+{% block content %}
+<div id="char_form">
+  <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_nom">Nom&nbsp;</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:'Aucun'}}">
+    </div>
+    <div class="form-group">
+      <label for="id_contenu">Contenu&nbsp;</label>
+      <input name="or" value="{{form.argent.value|p_or|default:'0'}}" required="" id="id_or" min="0" type="number">
+      <label for="id_or"><img id="money" src="/fiches/media/images/site/UI-GoldIcon.PNG" alt="Souverains d'or">&nbsp;</label>
+      <input name="argent" value="{{form.argent.value|p_argent|default:'0'}}" required="" id="id_argent" min="0" type="number">
+      <label for="id_argent"><img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Gruaux d'argent">&nbsp;</label>
+      <input name="cuivre" value="{{form.argent.value|p_cuivre|default:'0'}}" required="" id="id_cuivre" min="0" type="number">
+      <label for="id_cuivre"><img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Sous de cuivre">&nbsp;</label>
+    </div>
+
+    <input class="btn btn-default" value="Valider" type="submit">
+  </form>
+
+
+  {% endblock %}

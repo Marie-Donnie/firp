@@ -40,7 +40,7 @@ class FicheForm(ModelForm):
                   'competences', 'pseudo_du_personnage',
                   'afficher_pseudo', 'afficher_createur',
                   'afficher_inventaire', 'image', 'main_dir',
-                  'inventaire_fdg', 'equipement', 'createur']
+                  'inventaire_fdg', 'equipement', 'bourse', 'createur']
         widgets = {'createur': forms.HiddenInput(),
                    'inventaire': forms.Textarea(),
                    'description': forms.Textarea(),
@@ -53,7 +53,8 @@ class FicheForm(ModelForm):
                    'afficher_inventaire': forms.CheckboxInput(),
                    'pj': forms.RadioSelect(),
                    'main_dir': forms.RadioSelect(),
-                   'equipement': forms.HiddenInput(), }
+                   'equipement': forms.HiddenInput(),
+                   'bourse': forms.HiddenInput(), }
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -173,4 +174,37 @@ class ImageForm(ModelForm):
 
     class Meta:
         model = Image
+        fields = '__all__'
+
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMERCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class BourseForm(ModelForm):
+
+    class Meta:
+        model = Bourse
+        fields = '__all__'
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HABITATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class PieceForm(ModelForm):
+
+    class Meta:
+        model = Piece
+        fields = '__all__'
+
+
+class EtageForm(ModelForm):
+
+    class Meta:
+        model = Etage
+        fields = '__all__'
+
+
+class MaisonForm(ModelForm):
+
+    class Meta:
+        model = Maison
         fields = '__all__'

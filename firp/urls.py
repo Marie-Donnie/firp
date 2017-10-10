@@ -31,6 +31,10 @@ urlpatterns = [
     url(r'^fiches/supprimer_fiche/(?P<fiche_id>\d+)/$', views.delete_fiche,
         name='supprimer_fiche'),
     url(r'^fiches/creer/$', views.creer_fiche, name='creer_fiche'),
+    url(r'^fiches/bourse/(?P<fiche_id>\d+)/(?P<bourse_id>\d+)/$', views.gerer_bourse,
+        name='gerer_bourse'),
+    url(r'^fiches/bourse/(?P<fiche_id>\d+)/$', views.creer_bourse,
+        name='creer_bourse'),
     url(r'^fiches/rechercher/$', views.personnages, name='rechercher_fiche'),
     # Objets
     url(r'^objets/$', views.objets, name='objets'),

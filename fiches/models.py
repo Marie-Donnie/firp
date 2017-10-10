@@ -255,6 +255,10 @@ class Fiche(models.Model):
                                       blank=True,
                                       null=True,
                                       related_name='proprietaire')
+    bourse = models.OneToOneField('Bourse',
+                                  blank=True,
+                                  null=True,
+                                  related_name='proprietaire')
 
     class Meta:
         ordering = ["nom", "prenom"]
@@ -738,3 +742,63 @@ class Image(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.nom)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMERCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class Bourse(models.Model):
+    nom = models.CharField(max_length=50,
+                           default='')
+    argent = models.PositiveIntegerField(default=0)
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HABITATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class Piece(models.Model):
+    nom = models.CharField(max_length=50)
+    description = models.CharField(max_length=999)
+    surface = models.SmallIntegerField(default=10)
+    mobilier = models.CharField(max_length=500)
+
+
+class Etage(models.Model):
+    numero = models.SmallIntegerField(default=1)
+    pieces = models.ManyToManyField(Piece,
+                             blank=True,
+                             related_name='etage')
+
+
+class Maison(models.Model):
+    nom = models.CharField(max_length=50)
+    description = models.CharField(max_length=999)
+    type_m = models.SmallIntegerField(choices=[
+        (1, 'Taudis en bois'),
+        (2, 'Cabane en bois'),
+        (3, 'Chaumière'),
+        (4, 'Maison modeste'),
+        (5, 'Maison de pierre'),
+        (6, 'Maison riche'),
+        (7, 'Manoir'),
+        (8, 'Chambre au château'),
+        (9, 'Chambre au monastère')
+    ],
+                                        default=2)
+    ville = models.CharField(max_length=50)
+    rue = models.CharField(max_length=50)
+    numero = models.SmallIntegerField(default=1)
+    materiel_f = models.CharField(max_length=50)
+    materiel_c = models.CharField(max_length=50)
+    surface_etage = models.SmallIntegerField(default=30)
+    nb_etage = models.SmallIntegerField(default=1)
+    nb_habitants = models.SmallIntegerField(default=1)
+    nb_serviteurs = models.SmallIntegerField(default=0)
+    etages = models.ManyToManyField(Etage,
+                             blank=True,
+                             related_name='maison')
+    type_commerce = models.CharField(max_length=50)
+    materiel = models.CharField(max_length=500)
+    prod = models.CharField(max_length=500)
+    rente = models.SmallIntegerField(default=0)

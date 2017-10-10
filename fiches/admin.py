@@ -169,4 +169,36 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ('nom', 'id')
     form = ImageForm
 
-admin.site.register(Image, SortAdmin)
+admin.site.register(Image, ImageAdmin)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% BOURSES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class BourseAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nom', 'argent')
+    form = BourseForm
+
+admin.site.register(Bourse, BourseAdmin)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HABITATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class PieceAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nom')
+    form = PieceForm
+
+admin.site.register(Piece, PieceAdmin)
+
+
+class EtageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'numero')
+    form = EtageForm
+
+admin.site.register(Etage, EtageAdmin)
+
+
+class MaisonAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nom')
+    form = MaisonForm
+
+admin.site.register(Maison, MaisonAdmin)
