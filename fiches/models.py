@@ -246,6 +246,11 @@ class Fiche(models.Model):
                                               (True, 'Oui'),
                                               (False, 'Non'),
                                           ))
+    afficher_bourse = models.BooleanField(default=True,
+                                          choices=(
+                                              (True, 'Oui'),
+                                              (False, 'Non'),
+                                          ))
     creation = models.DateField(default=timezone.now)
     inventaire_fdg = models.OneToOneField('Inventaire',
                                           blank=True,

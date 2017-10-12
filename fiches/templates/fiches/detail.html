@@ -200,7 +200,7 @@ function onMouseLeave() {
       </div> <!-- panel panel-default -->
     </div>   <!-- col-md-6 -->
   </div>   <!-- row -->
-  {% if perms.fiches.fdg %}
+  {% if fiche.afficher_bourse or user.id == fiche.createur.id %}
   <div class="row">
     <div class="col-md-6">
       <div class="panel panel-defaut" id="details-panels">

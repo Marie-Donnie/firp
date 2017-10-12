@@ -36,8 +36,19 @@ $(function () {
       <li><b>Personnages&nbsp;: </b>
 	<ul id="liste_persos">
 	  {% for f in utilisateur.fiches.all %}
-	  {% if f.afficher_createur %}
-	  <li><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+	  {% if f.afficher_createur or utilisateur.id == f.createur.id %}
+	  <li><a href="{% url 'detail_fiche' f.id %}">
+	      {{ f.nom }} {{ f.prenom }}</a>
+	    {% if f.afficher_createur %}
+	    <img class="visi" src="/fiches/media/images/site/UI-MicroButton-LFG-Up.PNG" alt="Personnage visible">
+	    {% endif %}
+	    {% if f.afficher_inventaire %}
+	    <img class="visi" src="/fiches/media/images/site/Button-Backpack-Up.PNG" alt="Inventaire visible">
+	    {% endif %}
+	    {% if f.afficher_bourse and f.bourse %}
+	    <img class="visi" src="/fiches/media/images/site/UI-GroupLoot-Coin-Up.PNG" alt="Bourse visible">
+	    {% endif %}
+	  </li>
 	  {% endif %}
 	  {% endfor %}
 	</ul>

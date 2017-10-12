@@ -39,7 +39,7 @@ class FicheForm(ModelForm):
                   'inventaire', 'relations',
                   'competences', 'pseudo_du_personnage',
                   'afficher_pseudo', 'afficher_createur',
-                  'afficher_inventaire', 'image', 'main_dir',
+                  'afficher_inventaire', 'afficher_bourse', 'image', 'main_dir',
                   'inventaire_fdg', 'equipement', 'bourse', 'createur']
         widgets = {'createur': forms.HiddenInput(),
                    'inventaire': forms.Textarea(),
@@ -51,6 +51,7 @@ class FicheForm(ModelForm):
                    'afficher_pseudo': forms.CheckboxInput(),
                    'afficher_createur': forms.CheckboxInput(),
                    'afficher_inventaire': forms.CheckboxInput(),
+                   'afficher_bourse': forms.CheckboxInput(),
                    'pj': forms.RadioSelect(),
                    'main_dir': forms.RadioSelect(),
                    'equipement': forms.HiddenInput(),
