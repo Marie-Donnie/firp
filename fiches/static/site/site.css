@@ -84,10 +84,10 @@ a:hover {
     background: url("/static/site/images/page.PNG") no-repeat center;
     width: 1000px;
     height: 900px;
-    margin: 3% auto;
+    margin: 0% auto;
     color: #000;
     background-size: cover;
-    border: 5px groove #edd5a9;
+    border: 3px groove #4d3a17;
     border-radius: 3px;
 }
 
@@ -129,7 +129,7 @@ a:hover {
     overflow: hidden;
     border: 5px ridge #edd5a9;
     border-radius: 3px;
-    margin: 3% auto;
+    margin: 0% auto;
 }
 
 .black {
@@ -152,6 +152,7 @@ a:hover {
     color: #fff;
     text-align: center;
     text-shadow: 2px 2px #a97209;
+    font-family: morpheus;
 }
 
 .quest-objective {
@@ -266,7 +267,7 @@ input, textarea {
 #campaign-header {
     background-image: url("/static/site/images/bar2.PNG");
     padding: 0px 0px 0px 0px;
-    border: 1px ridge #474543;
+    border: 1px ridge #262423;
     border-radius: 3px;
     background-size: cover;
     width: 1050px;
