@@ -27,7 +27,7 @@
     <div class="form-group">
       <label for="id_operation">Operation&nbsp;:</label> <select name="operation" id="id_operation">
 	{% for campagne in campagnes %}
-	  <option value="{{campagne.id}}"{% if campagne.id in form.operation.value %} selected="" {% endif %}>{{campagne.nom}}</option>
+	  <option value="{{campagne.id}}"{% if campagne.id == form.operation.value %} selected="" {% endif %}>{{campagne.nom}}</option>
 	{% endfor %}
       </select>
       <label for="id_numero">Numéro&nbsp;:</label>

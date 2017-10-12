@@ -24,7 +24,7 @@
     <div class="mission" id="rapport">
 
       <h1>{{mission.operation}}</h1>
-      {% if mission.operation %}
+      {% if mission.operation and mission.operation.dirigeant %}
       <span class="mission-lead">
       <b>Dirigeant de l'opération :</b>
       <a href="{% url 'detail_fiche' mission.operation.dirigeant.id %}">
