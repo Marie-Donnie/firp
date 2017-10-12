@@ -865,6 +865,7 @@ def mission(request, campagne_id, mission_id):
     if sign.startswith( 'i: ' ):
         sign = sign[3:]
         image = get_object_or_404(Image, nom=sign)
+    count = len(mission.deroulement)
     # Finds all missions of the campaign
     missions = Mission.objects.select_related().filter(operation = campagne_id)
     mission_pre = None
@@ -876,7 +877,8 @@ def mission(request, campagne_id, mission_id):
         if mis.numero == (mission.numero + 1):
             mission_sui = mis
     context = {'mission': mission, 'mission_pre': mission_pre,
-               'mission_sui': mission_sui, 'image': image}
+               'mission_sui': mission_sui, 'image': image,
+               'count': count}
 
     return render(request, 'site/rapport_mission.html', context)
 

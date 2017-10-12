@@ -63,7 +63,9 @@
 	<b>Participants :</b>
 	{{ mission.participants|linebreaksbr }}<br>
 	<b>Déroulement de la mission :</b><br>
-	{{ mission.deroulement|linebreaksbr }}<br>
+	<span {% if count > 2000 %} style="font-size:80%;" {% endif %}>
+	    {{ mission.deroulement|linebreaksbr }}<br>
+	</span>
 	<div class="signature">
 	  {% if 'c: ' in mission.signature_url %}
 	  {{ mission.signature_url|slice:"3:" }}<br>
