@@ -94,8 +94,10 @@ def profile(request):
 
 def aff_user(request, user_id):
     utilisateur = get_object_or_404(User, pk=user_id)
+    user = request.user
+    context = {'utilisateur': utilisateur, 'user': user}
     return render(request, 'fiches/utilisateur.html',
-                  {'utilisateur': utilisateur})
+                  context)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FICHES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

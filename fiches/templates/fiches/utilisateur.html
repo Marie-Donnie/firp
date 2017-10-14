@@ -36,7 +36,7 @@ $(function () {
       <li><b>Personnages&nbsp;: </b>
 	<ul id="liste_persos">
 	  {% for f in utilisateur.fiches.all %}
-	  {% if f.afficher_createur or utilisateur.id == f.createur.id %}
+	  {% if user.id == f.createur.id or f.afficher_createur %}
 	  <li><a href="{% url 'detail_fiche' f.id %}">
 	      {{ f.nom }} {{ f.prenom }}</a>
 	    {% if f.afficher_createur %}
