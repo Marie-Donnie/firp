@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from captcha.fields import ReCaptchaField
+from dal import autocomplete
 from fiches.models import *
 
 
@@ -148,7 +149,9 @@ class MissionForm(ModelForm):
         fields = '__all__'
         widgets = {'objectif': forms.Textarea(),
                    'participants': forms.Textarea(),
-                   'deroulement': forms.Textarea(), }
+                   'deroulement': forms.Textarea(),
+                   'dirigeant': autocomplete.ModelSelect2(url='fiche-autocomplete',
+                                                          attrs={'data-html': True}), }
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
