@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'stopforumspam',
-    'captcha',
+    'snowpenguin.django.recaptcha2',
 )
 
 MIDDLEWARE_CLASSES = (
