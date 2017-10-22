@@ -151,7 +151,7 @@ class MissionForm(ModelForm):
                    'participants': forms.Textarea(),
                    'deroulement': forms.Textarea(),
                    'dirigeant': autocomplete.ModelSelect2(url='fiche-autocomplete',
-                                                          attrs={'data-html': True}), }
+                                                              attrs={'data-html': True}), }
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
