@@ -150,8 +150,7 @@ class MissionForm(ModelForm):
         widgets = {'objectif': forms.Textarea(),
                    'participants': forms.Textarea(),
                    'deroulement': forms.Textarea(),
-                   'dirigeant': autocomplete.ModelSelect2(url='fiche-autocomplete',
-                                                              attrs={'data-html': True}), }
+                   'dirigeant': autocomplete.ModelSelect2(url='fiche-autocomplete'), }
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -212,3 +211,15 @@ class MaisonForm(ModelForm):
     class Meta:
         model = Maison
         fields = '__all__'
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
+# class DocForm(autocomplete.FutureModelForm):
+#     class Meta:
+#         model = Patient
+#         fields = ('doctor',)  # or ('__all__')
+#         widgets = {
+#             'doctor': autocomplete.ModelSelect2(url='doc-autocomplete'),
+#         }
