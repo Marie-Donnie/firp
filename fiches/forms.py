@@ -211,15 +211,3 @@ class MaisonForm(ModelForm):
     class Meta:
         model = Maison
         fields = '__all__'
-
-
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
-
-
-# class DocForm(autocomplete.FutureModelForm):
-#     class Meta:
-#         model = Patient
-#         fields = ('doctor',)  # or ('__all__')
-#         widgets = {
-#             'doctor': autocomplete.ModelSelect2(url='doc-autocomplete'),
-#         }

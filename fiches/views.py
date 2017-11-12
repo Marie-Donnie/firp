@@ -1090,7 +1090,6 @@ def creer_bourse(request, fiche_id):
 
 
 class FicheAutocomplete(autocomplete.Select2QuerySetView):
-    #@login_required
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         if not self.request.user.is_authenticated():
@@ -1099,6 +1098,6 @@ class FicheAutocomplete(autocomplete.Select2QuerySetView):
         qs = Fiche.objects.all()
 
         if self.q:
-            qs = qs.filter(nom__istartswith=self.q)
+            qs = qs.filter(nom__icontains=self.q)
 
         return qs
