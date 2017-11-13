@@ -5,6 +5,6 @@
       <i>{{ sort.effet|linebreaksbr }}</i><br>
       {% if sort.seuil != None %}{{ sort.seuil }}, {% endif %}{% if sort.cout != None %}{{ sort.cout }}<br>{% endif %}
       {% if sort.duree_incant != None %}<b>Incantation : </b>{{ sort.duree_incant }}<br>{% endif %}
-      {% if sort.duree_sort != None %}<b>Durée du sort : </b>{{ sort.duree_sort}}<br>{% endif %}
-      {% if sort.condition != None %} {% endif %}
+      {% if sort.duree_sort != None %}<b>Durée du sort : </b>{{ sort.duree_sort }}<br>{% endif %}
+      {% if sort.condition != 'aucune' %}<b>Condition : </b><span style="color:red;">{{ sort.condition }}<span><br> {% endif %}
 </div>
