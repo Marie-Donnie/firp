@@ -1,4 +1,4 @@
-# firp
+# firp (FIches RolePlay)
 
 This is the code for the site I created for my roleplay guild on World of Warcraft (Eu-Kirin Tor server).
 
