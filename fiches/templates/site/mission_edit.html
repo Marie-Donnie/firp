@@ -23,87 +23,67 @@
   <div class="fond">
     <div id="char_form">
       <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
-    {% csrf_token %}
+	{% csrf_token %}
+
     <div class="form-group">
       <label for="id_operation">Operation&nbsp;:</label> <select name="operation" id="id_operation">
-	{% for campagne in campagnes %}
-	  <option value="{{campagne.id}}"{% if campagne.id == form.operation.value %} selected="" {% endif %}>{{campagne.nom}}</option>
-	{% endfor %}
+    	{% for campagne in campagnes %}
+    	<option value="{{campagne.id}}"{% if campagne.id == form.operation.value %} selected="" {% endif %}>{{campagne.nom}}</option>
+    	{% endfor %}
       </select>
       <label for="id_numero">Numéro&nbsp;:</label>
       <input name="numero" class="petit-nombre" value="{{form.numero.value|default:'1'}}" required="" id="id_numero" type="number">
       <label for="id_type_mis">Type mission{{form.type_mis.value}}&nbsp;:</label> <select name="type_mis" id="id_type_mis">
-  <option value="1"{% if form.type_mis.value == 1 %} selected="" {% endif %}>Embuscade</option>
-  <option value="2"{% if form.type_mis.value == 2 %} selected="" {% endif %}>Assaut</option>
-  <option value="3"{% if form.type_mis.value == 3 %} selected="" {% endif %}>Siège</option>
-  <option value="4"{% if form.type_mis.value == 4 %} selected="" {% endif %}>Défense</option>
-  <option value="5"{% if form.type_mis.value == 5 %} selected="" {% endif %}>Escorte</option>
-  <option value="6"{% if form.type_mis.value == 6 %} selected="" {% endif %}>Voyage</option>
-  <option value="7"{% if form.type_mis.value == 7 %} selected="" {% endif %}>Prendre et tenir</option>
-  <option value="8"{% if form.type_mis.value == 8 or form.type_mis.value == None %} selected="" {% endif %}>Escarmouche</option>
-  <option value="9"{% if form.type_mis.value == 9 %} selected="" {% endif %}>Bataille rangée</option>
-  <option value="10"{% if form.type_mis.value == 10 %} selected="" {% endif %}>Rechercher et détruire</option>
-  <option value="11"{% if form.type_mis.value == 11 %} selected="" {% endif %}>Sabotage</option>
-  <option value="12"{% if form.type_mis.value == 12 %} selected="" {% endif %}>Infiltration</option>
-  <option value="13"{% if form.type_mis.value == 13 %} selected="" {% endif %}>Espionnage</option>
-  <option value="14"{% if form.type_mis.value == 14 %} selected="" {% endif %}>Sauvetage</option>
-  <option value="15"{% if form.type_mis.value == 15 %} selected="" {% endif %}>Récupération</option>
-  <option value="16"{% if form.type_mis.value == 16 %} selected="" {% endif %}>Assassinat</option>
-  <option value="17"{% if form.type_mis.value == 17 %} selected="" {% endif %}>Incident</option>
-  <option value="18"{% if form.type_mis.value == 18 %} selected="" {% endif %}>Reconnaissance</option>
-  <option value="19"{% if form.type_mis.value == 19 %} selected="" {% endif %}>Opération Clandestine</option>
-</select>
+    	<option value="1"{% if form.type_mis.value == 1 %} selected="" {% endif %}>Embuscade</option>
+    	<option value="2"{% if form.type_mis.value == 2 %} selected="" {% endif %}>Assaut</option>
+    	<option value="3"{% if form.type_mis.value == 3 %} selected="" {% endif %}>Siège</option>
+    	<option value="4"{% if form.type_mis.value == 4 %} selected="" {% endif %}>Défense</option>
+    	<option value="5"{% if form.type_mis.value == 5 %} selected="" {% endif %}>Escorte</option>
+    	<option value="6"{% if form.type_mis.value == 6 %} selected="" {% endif %}>Voyage</option>
+    	<option value="7"{% if form.type_mis.value == 7 %} selected="" {% endif %}>Prendre et tenir</option>
+    	<option value="8"{% if form.type_mis.value == 8 or form.type_mis.value == None %} selected="" {% endif %}>Escarmouche</option>
+    	<option value="9"{% if form.type_mis.value == 9 %} selected="" {% endif %}>Bataille rangée</option>
+    	<option value="10"{% if form.type_mis.value == 10 %} selected="" {% endif %}>Rechercher et détruire</option>
+    	<option value="11"{% if form.type_mis.value == 11 %} selected="" {% endif %}>Sabotage</option>
+    	<option value="12"{% if form.type_mis.value == 12 %} selected="" {% endif %}>Infiltration</option>
+    	<option value="13"{% if form.type_mis.value == 13 %} selected="" {% endif %}>Espionnage</option>
+    	<option value="14"{% if form.type_mis.value == 14 %} selected="" {% endif %}>Sauvetage</option>
+    	<option value="15"{% if form.type_mis.value == 15 %} selected="" {% endif %}>Récupération</option>
+    	<option value="16"{% if form.type_mis.value == 16 %} selected="" {% endif %}>Assassinat</option>
+    	<option value="17"{% if form.type_mis.value == 17 %} selected="" {% endif %}>Incident</option>
+    	<option value="18"{% if form.type_mis.value == 18 %} selected="" {% endif %}>Reconnaissance</option>
+    	<option value="19"{% if form.type_mis.value == 19 %} selected="" {% endif %}>Opération Clandestine</option>
+      </select>
 
     </div>
     <div class="form-group">
-      <label for="id_dirigeant">Dirigeant&nbsp;:</label> <select name="dirigeant" id="id_dirigeant">
-	{% for general in generals %}
-	<option value="{{general.id}}"{% ifequal general.id form.dirigeant.value %} selected="" {% endifequal %}>{{general.nom}} {{general.prenom}}</option>
-	{% endfor %}
-	{% for colonel in colonels %}
-	<option value="{{colonel.id}}"{% ifequal colonel.id form.dirigeant.value %} selected="" {% endifequal %}>{{colonel.nom}} {{colonel.prenom}}</option>
-	{% endfor %}
-	{% for capitaine in capitaines %}
-	<option value="{{capitaine.id}}"{% ifequal capitaine.id form.dirigeant.value %} selected="" {% endifequal %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
-	{% endfor %}
-	{% for lieutenant in lieutenants %}
-	<option value="{{lieutenant.id}}"{% ifequal lieutenant.id form.dirigeant.value %} selected="" {% endifequal %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
-	{% endfor %}
-	{% for sergent in sergents %}
-	<option value="{{sergent.id}}"{% ifequal sergent.id form.dirigeant.value %} selected="" {% endifequal %}>{{sergent.nom}} {{sergent.prenom}}</option>
-	{% endfor %}
-	{% for caporal in caporals %}
-	<option value="{{caporal.id}}"{% ifequal caporal.id form.dirigeant.value %} selected="" {% endifequal %}>{{caporal.nom}} {{caporal.prenom}}</option>
-	{% endfor %}
-	<option value="">---------</option>
-	{% for autre in autres %}
-	<option value="{{autre.id}}"{% ifequal autre.id form.dirigeant.value %} selected="" {% endifequal %}>{{autre.nom}} {{autre.prenom}}</option>
-	{% endfor %}
 
-      </select>
+<label for="id_dirigeant">Dirigeant&nbsp;:</label> <select name="dirigeant" data-autocomplete-light-function="select2" id="id_dirigeant" data-autocomplete-light-url="/fiche-autocomplete/" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+
+</select>
       <label for="id_autre_dirigeant">Autre dirigeant&nbsp;:</label> <select name="autre_dirigeant" id="id_autre_dirigeant">
-	{% for general in generals %}
-	<option value="{{general.id}}"{% ifequal general.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{general.nom}} {{general.prenom}}</option>
-	{% endfor %}
-	{% for colonel in colonels %}
-	<option value="{{colonel.id}}"{% ifequal colonel.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{colonel.nom}} {{colonel.prenom}}</option>
-	{% endfor %}
-	{% for capitaine in capitaines %}
-	<option value="{{capitaine.id}}"{% ifequal capitaine.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
-	{% endfor %}
-	{% for lieutenant in lieutenants %}
-	<option value="{{lieutenant.id}}"{% ifequal lieutenant.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
-	{% endfor %}
-	{% for sergent in sergents %}
-	<option value="{{sergent.id}}"{% ifequal sergent.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{sergent.nom}} {{sergent.prenom}}</option>
-	{% endfor %}
-	{% for caporal in caporals %}
-	<option value="{{caporal.id}}"{% ifequal caporal.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{caporal.nom}} {{caporal.prenom}}</option>
-	{% endfor %}
-	<option value="" {% if form.autre_dirigeant.value == None %} selected="" {% endif %}>---------</option>
-	{% for autre in autres %}
-	<option value="{{autre.id}}"{% ifequal autre.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{autre.nom}} {{autre.prenom}}</option>
-	{% endfor %}
+    	{% for general in generals %}
+    	<option value="{{general.id}}"{% ifequal general.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{general.nom}} {{general.prenom}}</option>
+    	{% endfor %}
+    	{% for colonel in colonels %}
+    	<option value="{{colonel.id}}"{% ifequal colonel.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{colonel.nom}} {{colonel.prenom}}</option>
+    	{% endfor %}
+    	{% for capitaine in capitaines %}
+    	<option value="{{capitaine.id}}"{% ifequal capitaine.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{capitaine.nom}} {{capitaine.prenom}}</option>
+    	{% endfor %}
+    	{% for lieutenant in lieutenants %}
+    	<option value="{{lieutenant.id}}"{% ifequal lieutenant.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{lieutenant.nom}} {{lieutenant.prenom}}</option>
+    	{% endfor %}
+    	{% for sergent in sergents %}
+    	<option value="{{sergent.id}}"{% ifequal sergent.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{sergent.nom}} {{sergent.prenom}}</option>
+    	{% endfor %}
+    	{% for caporal in caporals %}
+    	<option value="{{caporal.id}}"{% ifequal caporal.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{caporal.nom}} {{caporal.prenom}}</option>
+    	{% endfor %}
+    	<option value="" {% if form.autre_dirigeant.value == None %} selected="" {% endif %}>---------</option>
+    	{% for autre in autres %}
+    	<option value="{{autre.id}}"{% ifequal autre.id form.autre_dirigeant.value %} selected="" {% endifequal %}>{{autre.nom}} {{autre.prenom}}</option>
+    	{% endfor %}
       </select>
     </div>
     <div class="form-group">
@@ -127,15 +107,18 @@
       <textarea name="deroulement" class="form-control" id="id_deroulement" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_deroulement','charcount3');" onkeydown="countChars('id_deroulement','charcount3');" onmouseout="countChars('id_deroulement','charcount3');">{{form.deroulement.value|default:'-'}}</textarea>
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
     </div>
-        <div class="form-group">
-<label for="id_signature_url">Signature&nbsp;:</label> <input name="signature_url" value="{{form.signature_url.value|default:'c: L. Vaanes'}}" required="" id="id_signature_url" maxlength="100" type="text">
-	</div>
-	<input class="btn btn-campaign" id="centre" type="submit" value="Valider" />
+    <div class="form-group">
+      <label for="id_signature_url">Signature&nbsp;:</label> <input name="signature_url" value="{{form.signature_url.value|default:'c: L. Vaanes'}}" required="" id="id_signature_url" maxlength="100" type="text">
+    </div>
+
+    <input class="btn btn-campaign" id="centre" type="submit" value="Valider" />
       </form>
     </div>
   </div>
-
-
 </div>
+
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+
+{{ form.media }}
 
 {% endblock %}

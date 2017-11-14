@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from dal import autocomplete
 from fiches.models import *
 from fiches.forms import *
 
@@ -1083,3 +1084,20 @@ def creer_bourse(request, fiche_id):
         return HttpResponse("Vous ne pouvez pas créer cette bourse.")
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HABITATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
+class FicheAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated():
+            return Fiche.objects.none()
+
+        qs = Fiche.objects.all()
+
+        if self.q:
+            qs = qs.filter(nom__icontains=self.q)
+
+        return qs

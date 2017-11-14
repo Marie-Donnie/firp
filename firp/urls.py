@@ -95,6 +95,9 @@ urlpatterns = [
     url(r'images/gallerie/$', views.upload_gallery, name='upload_gallery'),
     # Cartes
     url(r'cartes/duche/$', views.cartes, name='cartes'),
+    # Autocomplete
+    url(r'^fiche-autocomplete/$', views.FicheAutocomplete.as_view(),
+        name='fiche-autocomplete'),
 ]
 
 if settings.DEBUG:
