@@ -334,6 +334,16 @@ input, textarea {
     text-align: center;
 }
 
+#campaign-title {
+    color: #830205;
+    font-family: morpheus;
+    background-color: inherit;
+    border: 0px;
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+}
+
 .pagination-campaign > li > a,
 .pagination-campaign > li > span {
     position: relative;

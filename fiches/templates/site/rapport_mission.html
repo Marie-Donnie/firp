@@ -23,7 +23,7 @@
   <div id="quest-display" class="media">
     <div class="mission" id="rapport">
 
-      <h1>{{mission.operation}}</h1>
+      <h1><a href="{% url 'campagne' mission.operation.id %}" id="campaign-title">{{mission.operation}}</a></h1>
       {% if mission.operation and mission.operation.dirigeant %}
       <span class="mission-lead">
       <b>Dirigeant de l'opération :</b>
