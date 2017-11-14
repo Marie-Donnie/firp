@@ -1,9 +1,10 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
+{% load recaptcha2 %}
 
 {% block title %}{% trans "Signup" %}{% endblock %}
-{% block page-title %}{% trans "Signup" %}{% endblock %}
+{% block page-title %}{% trans "Signup" %}{% recaptcha_init %}{% endblock %}
 
 {% block content %}
 
@@ -12,8 +13,7 @@
 <form class="signup account" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
   {{ form.as_p }}
-  {{ form.captcha }}
-  {{ form.captcha.errors }}
+
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}

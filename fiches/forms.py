@@ -2,6 +2,8 @@ from django.forms import ModelForm
 from django import forms
 from captcha.fields import ReCaptchaField
 from dal import autocomplete
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 from fiches.models import *
 
 
@@ -17,7 +19,7 @@ class UserProfileForm(ModelForm):
 
 class AllauthSignupForm(forms.Form):
 
-    captcha = ReCaptchaField()
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
 
     def signup(self, request, user):
         """ Required, or else it throws deprecation warnings """

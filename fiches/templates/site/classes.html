@@ -4,6 +4,9 @@
 {% load static %}
 
 {% block script %}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({html: true, placement: 'right'})
+})
 {% endblock %}
 
 
@@ -24,7 +27,7 @@
     <div class="classes">
       {% if classes_list %}
       {% for classe in classes %}
-      <div class="classe">
+      <div class="classe" data-toggle="tooltip" title="{{classe.principes|linebreaksbr}}">
       	<a href="{% url 'sorts' classe.id %}">
 	  <div class="classe-{{classe.fond_url}}">
 	    <img class="classe-icone" src="{% get_media_prefix %}images/ICONS/{{classe.image_url}}.PNG" alt="{{classe.nom}}" id="icone">
