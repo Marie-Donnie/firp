@@ -95,6 +95,10 @@ urlpatterns = [
     url(r'images/gallerie/$', views.upload_gallery, name='upload_gallery'),
     # Cartes
     url(r'cartes/duche/$', views.cartes, name='cartes'),
+    # Sorts
+    #url(r'classes/$', views.classes, name='classes'),
+    url(r'habitations/creer_maison/(?P<proprietaire_id>\d+)/(?P<type_maison>\d+)/$', views.creer_maison, name='creer_maison'),
+    url(r'habitations/maison/(?P<maison_id>\d+)/$', views.maison, name='maison'),
     # Autocomplete
     url(r'^fiche-autocomplete/$', views.FicheAutocomplete.as_view(),
         name='fiche-autocomplete'),

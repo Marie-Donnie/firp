@@ -1085,6 +1085,28 @@ def creer_bourse(request, fiche_id):
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HABITATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
+@permission_required('fiches.fdg', raise_exception=True)
+def creer_maison(request, proprietaire_id, type_maison):
+    proprietaire = Fiche.objects.get(pk=proprietaire_id)
+    if proprietaire.createur == request.user:
+        if request.method == 'POST':
+            form = MaisonForm(request.POST)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('maison', maison_id=save_it.id )
+            else:
+                print(form.errors)
+        else:
+            form = MaisonForm()
+
+        context = {'form': form, 't_m': type_maison}
+        return render(request, 'site/maison.html', context)
+    else:
+        return HttpResponse("Vous ne pouvez pas créer une maison pour ce personnage.")
+
+@permission_required('fiches.fdg', raise_exception=True)
+def maison(request, maison_id):
+    return HttpResponse("Vous ne pouvez pas voir cette maison.")
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 

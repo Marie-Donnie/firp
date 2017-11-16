@@ -772,8 +772,8 @@ class Piece(models.Model):
 class Etage(models.Model):
     numero = models.SmallIntegerField(default=1)
     pieces = models.ManyToManyField(Piece,
-                             blank=True,
-                             related_name='etage')
+                                    blank=True,
+                                    related_name='etage')
 
 
 class Maison(models.Model):
@@ -801,9 +801,13 @@ class Maison(models.Model):
     nb_habitants = models.SmallIntegerField(default=1)
     nb_serviteurs = models.SmallIntegerField(default=0)
     etages = models.ManyToManyField(Etage,
-                             blank=True,
-                             related_name='maison')
+                                    blank=True,
+                                    related_name='maison')
     type_commerce = models.CharField(max_length=50)
     materiel = models.CharField(max_length=500)
     prod = models.CharField(max_length=500)
     rente = models.SmallIntegerField(default=0)
+    proprietaire = models.ForeignKey(Fiche,
+                                     blank=True,
+                                     null=True,
+                                     related_name='maison')

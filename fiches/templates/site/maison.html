@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+
+{% block title %}Créer/éditer une case d'inventaire{% endblock %}
+{% block page-title %}Créer/éditer une case d'inventaire{% endblock %}
+
+{% block content %}
+<div id="char_form">
+<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+  {% csrf_token %}
+
+  <input name="csrfmiddlewaretoken" value="wBbMZNJ0mOwBRVwU3bTrTE3ixlr6c4d5b0NXvQiCnVmFjnaizdgPC1RE6OAnTerr" type="hidden">
+  <li><label for="id_nom">Nom&nbsp;:</label> <input name="nom" required="" id="id_nom" maxlength="50" type="text"></li>
+<li><label for="id_description">Description&nbsp;:</label> <input name="description" required="" id="id_description" maxlength="999" type="text"></li>
+<li><label for="id_type_m">Type m&nbsp;:</label> <select name="type_m" id="id_type_m">
+  <option value="1">Taudis en bois</option>
+
+  <option value="2" selected="">Cabane en bois</option>
+
+  <option value="3">Chaumière</option>
+
+  <option value="4">Maison modeste</option>
+
+  <option value="5">Maison de pierre</option>
+
+  <option value="6">Maison riche</option>
+
+  <option value="7">Manoir</option>
+
+  <option value="8">Chambre au château</option>
+
+  <option value="9">Chambre au monastère</option>
+
+</select></li>
+<li><label for="id_ville">Ville&nbsp;:</label> <input name="ville" required="" id="id_ville" maxlength="50" type="text"></li>
+<li><label for="id_rue">Rue&nbsp;:</label> <input name="rue" required="" id="id_rue" maxlength="50" type="text"></li>
+<li><label for="id_numero">Numero&nbsp;:</label> <input name="numero" value="1" required="" id="id_numero" type="number"></li>
+<li><label for="id_materiel_f">Materiel f&nbsp;:</label> <input name="materiel_f" required="" id="id_materiel_f" maxlength="50" type="text"></li>
+<li><label for="id_materiel_c">Materiel c&nbsp;:</label> <input name="materiel_c" required="" id="id_materiel_c" maxlength="50" type="text"></li>
+<li><label for="id_surface_etage">Surface etage&nbsp;:</label> <input name="surface_etage" value="30" required="" id="id_surface_etage" type="number"></li>
+<li><label for="id_nb_etage">Nb etage&nbsp;:</label> <input name="nb_etage" value="1" required="" id="id_nb_etage" type="number"></li>
+<li><label for="id_nb_habitants">Nb habitants&nbsp;:</label> <input name="nb_habitants" value="1" required="" id="id_nb_habitants" type="number"></li>
+<li><label for="id_nb_serviteurs">Nb serviteurs&nbsp;:</label> <input name="nb_serviteurs" value="0" required="" id="id_nb_serviteurs" type="number"></li>
+<li><label for="id_etages">Etages&nbsp;:</label> <select name="etages" multiple="multiple" id="id_etages">
+</select></li>
+<li><label for="id_type_commerce">Type commerce&nbsp;:</label> <input name="type_commerce" required="" id="id_type_commerce" maxlength="50" type="text"></li>
+<li><label for="id_materiel">Materiel&nbsp;:</label> <input name="materiel" required="" id="id_materiel" maxlength="500" type="text"></li>
+<li><label for="id_prod">Prod&nbsp;:</label> <input name="prod" required="" id="id_prod" maxlength="500" type="text"></li>
+<li><label for="id_rente">Rente&nbsp;:</label> <input name="rente" value="0" required="" id="id_rente" type="number"></li>
+<li><label for="id_proprietaire">Proprietaire&nbsp;:</label> <select name="proprietaire" id="id_proprietaire">
+  <option value="" selected="">---------</option>
+
+</select></li>
+
+
+
+</form>
+</div>
+{% endblock %}
