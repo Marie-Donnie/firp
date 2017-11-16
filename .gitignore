@@ -16,3 +16,5 @@ fiches/media/images/site/map/index.html
 *.bak
 ICONS
 src/
+static/admin/
+autocomplete_light/
