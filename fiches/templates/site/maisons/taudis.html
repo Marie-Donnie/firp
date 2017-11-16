@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+
+{% block title %}Créer/éditer une maison{% endblock %}
+{% block page-title %}Créer/éditer une maison{% endblock %}
+
+{% block content %}
+<div id="char_form">
+  <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_type_m">Type maison&nbsp;:</label>
+      <select name="type_m" id="id_type_m">
+    	<option value="1">Taudis en bois</option>
+
+    	<option value="2" selected="">Cabane en bois</option>
+
+    	<option value="3">Chaumière</option>
+
+    	<option value="4">Maison modeste</option>
+
+    	<option value="5">Maison de pierre</option>
+
+    	<option value="6">Maison riche</option>
+
+    	<option value="7">Manoir</option>
+
+    	<option value="8">Chambre au château</option>
+
+    	<option value="9">Chambre au monastère</option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="id_nom">Nom&nbsp;:</label>
+      <input name="nom" required="" id="id_nom" maxlength="50" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_description">Description&nbsp;:</label>
+      <textarea name="description" id="id_description" rows="10" cols="40" maxlength="999"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="id_numero">Numero&nbsp;:</label>
+      <input name="numero" value="1" required="" id="id_numero" type="number">
+      <label for="id_ville">Ville&nbsp;:</label>
+      <input name="ville" required="" id="id_ville" maxlength="50" type="text">
+      <label for="id_rue">Rue&nbsp;:</label>
+      <input name="rue" required="" id="id_rue" maxlength="50" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_materiel_f">Materiel de construction (façade)&nbsp;:</label>
+      <input name="materiel_f" required="" id="id_materiel_f" maxlength="50" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_materiel_c">Materiel de construction (toit)&nbsp;:</label>
+      <input name="materiel_c" required="" id="id_materiel_c" maxlength="50" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_surface_etage">Surface par étage&nbsp;:</label>
+      <input name="surface_etage" value="30" required="" id="id_surface_etage" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_nb_etage">Nombre d'étages&nbsp;:</label>
+      <input name="nb_etage" value="1" required="" id="id_nb_etage" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_nb_habitants">Nombre d'habitants&nbsp;:</label>
+      <input name="nb_habitants" value="1" required="" id="id_nb_habitants" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_habitants">Habitants&nbsp;:</label>
+      <textarea name="habitants" id="id_habitants" required="" rows="10" cols="40" maxlength="6000">Aucun</textarea>
+    </div>
+    <div class="form-group">
+      <label for="id_nb_serviteurs">Nombre de serviteurs&nbsp;:</label>
+      <input name="nb_serviteurs" value="0" required="" id="id_nb_serviteurs" type="number">
+    </div>
+    <div class="form-group">
+      <label for="id_etages">Etages&nbsp;:</label>
+      <select name="etages" multiple="multiple" id="id_etages">
+      </select>
+    </div>
+    <h1 style="color:red;">Optionnel : commerce illégal</h1>
+    <div class="form-group">
+      <label for="id_com_ill">Commerce illégal&nbsp;:</label>
+      <input name="com_ill" {% if form.com_ill.value or form.com_ill.value == None %}checked=""{% endif %} id="id_com_ill" type="checkbox">
+    </div>
+    <div class="form-group">
+      <label for="id_type_commerce">Type de commerce illégal&nbsp;:</label>
+      <input name="type_commerce" id="id_type_commerce" maxlength="50" type="text">
+    </div>
+    <div class="form-group">
+      <label for="id_materiel">Materiel&nbsp;:</label>
+      <textarea name="materiel" id="id_materiel" rows="10" cols="40" maxlength="500"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="id_prod">Production&nbsp;:</label>
+      <textarea name="prod" id="id_prod" rows="10" cols="40" maxlength="500"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="id_rente">Rente mensuelle&nbsp;:</label>
+      <input name="rente" value="0" id="id_rente" type="number">
+    </div>
+
+      <input name="proprietaire" id="id_proprietaire" type="hidden" value="">
+      <input class="btn btn-default" type="submit" value="Valider" />
+  </form>
+</div>
+{% endblock %}

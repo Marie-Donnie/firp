@@ -767,13 +767,27 @@ class Piece(models.Model):
     description = models.CharField(max_length=999)
     surface = models.SmallIntegerField(default=10)
     mobilier = models.CharField(max_length=500)
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 null=True,
+                                 related_name='piece')
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
 
 
 class Etage(models.Model):
+    nom = models.CharField(max_length=50,
+                           default='Etage ')
     numero = models.SmallIntegerField(default=1)
     pieces = models.ManyToManyField(Piece,
                                     blank=True,
                                     related_name='etage')
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 null=True,
+                                 related_name='etage')
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
 
 
 class Maison(models.Model):
@@ -799,15 +813,33 @@ class Maison(models.Model):
     surface_etage = models.SmallIntegerField(default=30)
     nb_etage = models.SmallIntegerField(default=1)
     nb_habitants = models.SmallIntegerField(default=1)
+    habitants = models.CharField(max_length=6000,
+                                 default='Aucun')
     nb_serviteurs = models.SmallIntegerField(default=0)
     etages = models.ManyToManyField(Etage,
                                     blank=True,
                                     related_name='maison')
-    type_commerce = models.CharField(max_length=50)
-    materiel = models.CharField(max_length=500)
-    prod = models.CharField(max_length=500)
-    rente = models.SmallIntegerField(default=0)
+    com_ill = models.BooleanField(default=False,
+                                  choices=(
+                                      (True, 'Oui'),
+                                      (False, 'Non'),
+                                  ))
+    type_commerce = models.CharField(max_length=50,
+                                     blank=True,
+                                     null=True)
+    materiel = models.CharField(max_length=500,
+                                     blank=True,
+                                     null=True)
+    prod = models.CharField(max_length=500,
+                                     blank=True,
+                                     null=True)
+    rente = models.SmallIntegerField(default=0,
+                                     blank=True,
+                                     null=True)
     proprietaire = models.ForeignKey(Fiche,
                                      blank=True,
                                      null=True,
                                      related_name='maison')
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)

@@ -572,3 +572,7 @@ input, textarea {
 .select2-results__option {
     color: #000;
 }
+
+.haut {
+    vertical-align: top;
+}

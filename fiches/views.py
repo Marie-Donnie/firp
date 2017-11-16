@@ -1088,7 +1088,9 @@ def creer_bourse(request, fiche_id):
 @permission_required('fiches.fdg', raise_exception=True)
 def creer_maison(request, proprietaire_id, type_maison):
     proprietaire = Fiche.objects.get(pk=proprietaire_id)
-    if proprietaire.createur == request.user:
+    utilisateur = request.user
+    if proprietaire.createur == utilisateur :
+        etages = Etage.objects.filter(createur=utilisateur)
         if request.method == 'POST':
             form = MaisonForm(request.POST)
             if form.is_valid():
@@ -1099,7 +1101,8 @@ def creer_maison(request, proprietaire_id, type_maison):
         else:
             form = MaisonForm()
 
-        context = {'form': form, 't_m': type_maison}
+        context = {'form': form, 't_m': type_maison,
+                   'proprietaire': proprietaire, 'etages': etages }
         return render(request, 'site/maison.html', context)
     else:
         return HttpResponse("Vous ne pouvez pas créer une maison pour ce personnage.")

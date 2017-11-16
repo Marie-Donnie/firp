@@ -213,3 +213,9 @@ class MaisonForm(ModelForm):
     class Meta:
         model = Maison
         fields = '__all__'
+        widgets = {'proprietaire': forms.HiddenInput(),
+                   'description': forms.Textarea(),
+                   'habitants': forms.Textarea(),
+                   'materiel': forms.Textarea(),
+                   'prod': forms.Textarea(),
+                   'afficher_pseudo': forms.CheckboxInput(), }
