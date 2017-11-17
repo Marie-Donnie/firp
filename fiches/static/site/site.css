@@ -576,3 +576,70 @@ input, textarea {
 .haut {
     vertical-align: top;
 }
+
+#house-display {
+    background: url("/static/site/images/house.PNG") no-repeat center;
+    width: 1000px;
+    height: 900px;
+    margin: 3% auto;
+    color: #fefefe;
+    background-size: cover;
+    border: 1px groove #edd5a9;
+    border-radius: 3px;
+}
+
+#human-panel {
+    border: 1px;
+    background-color: #000000;
+    border-color: #470002;
+}
+
+#human-panel-heading {
+    background-image: url("/static/fiches/images/separator.jpg");
+    background-color: #000000;
+    padding: 10px 15px;
+    border: 1px solid #470002;
+    border-radius: 5px;
+    color: #830205;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-color: #470002;
+    text-shadow: -1px -1px #000;
+    display: flex;
+}
+
+#human-panel-title {
+    border: 1px solid #470002;
+    border-radius: 5px;
+    flex: 1;
+    font-family: morpheus;
+}
+
+#human-panel-body {
+    border: 1px solid #470002;
+    border-radius: 5px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+.human-btn {
+    color: #ddd;
+    background: #470002;
+    padding: 7px 7px;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid #6e1618;
+    font-weight: normal;
+}
+
+.human-btn:focus,
+.human-btn:hover {
+    color: #fefefe;
+    background: #7e0609;
+    font-weight: normal;
+    padding: 7px 7px;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid #6e1618;
+}

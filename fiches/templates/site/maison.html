@@ -1,137 +1,140 @@
-{% extends "base.html" %}
+{% extends "site/base.html" %}
 
 {% load l10n %}
 
 {% block title %}Créer/éditer une maison{% endblock %}
-{% block page-title %}Créer/éditer une maison{% endblock %}
+{% block header %}{% endblock %}
 
 {% block script %}
 $('.collapse').collapse()
 {% endblock %}
 
 {% block content %}
-<div id="char_form">
-  <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="id_type_m">Type maison&nbsp;:</label>
-      <select name="type_m" id="id_type_m">
-    	<option value="1">Taudis en bois</option>
+<div class="house-body">
 
-    	<option value="2" selected="">Cabane en bois</option>
+  <div class="page-header" onclick="document.location='{% url 'quetes' %}'">
+    <div id="center">
+      <h1>Registre des habitations</h1>
+    </div> <!-- house-head -->
+  </div>   <!-- page-header -->
 
-    	<option value="3">Chaumière</option>
+  <div class="black">
+    <div class="media" id="house-display">
+      <div id="centre">
+      <div id="char_form">
+	<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+	  {% csrf_token %}
+	  <div class="form-group">
+	    <label for="id_type_m">Type maison&nbsp;</label>
+	    <select name="type_m" id="id_type_m">
+    	      <option value="1">Taudis en bois</option>
 
-    	<option value="4">Maison modeste</option>
+    	      <option value="2" selected="">Cabane en bois</option>
 
-    	<option value="5">Maison de pierre</option>
+    	      <option value="3">Chaumière</option>
 
-    	<option value="6">Maison riche</option>
+    	      <option value="4">Maison modeste</option>
 
-    	<option value="7">Manoir</option>
+    	      <option value="5">Maison de pierre</option>
 
-    	<option value="8">Chambre au château</option>
+    	      <option value="6">Maison riche</option>
 
-    	<option value="9">Chambre au monastère</option>
+    	      <option value="7">Manoir</option>
 
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="id_nom">Nom&nbsp;:</label>
-      <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
-    </div>
-    <div class="form-group">
-      <label for="id_description">Description&nbsp;:</label>
-      <textarea name="description" id="id_description" rows="10" cols="40" maxlength="999">{{form.description.value|default_if_none:''}}</textarea>
-    </div>
+    	      <option value="8">Chambre au château</option>
 
-    <div class="form-group">
-      <label for="id_numero">Numero&nbsp;:</label>
-      <input name="numero" value="{{form.numero.value|default:'1'}}" required="" id="id_numero" type="number">
-      <label for="id_rue">Rue&nbsp;:</label>
-      <input name="rue" required="" id="id_rue" maxlength="50" type="text" value="{{form.rue.value|default_if_none:''}}">
-      <label for="id_ville">Ville&nbsp;:</label>
-      <input name="ville" required="" id="id_ville" maxlength="50" type="text" value="{{form.ville.value|default_if_none:''}}">
-    </div>
-    <div class="form-group">
-      <label for="id_materiel_f">Materiel de construction (façade)&nbsp;:</label>
-      <input name="materiel_f" required="" id="id_materiel_f" maxlength="50" type="text" value="{{form.materiel_f.value|default_if_none:''}}">
-    </div>
-    <div class="form-group">
-      <label for="id_materiel_c">Materiel de construction (toit)&nbsp;:</label>
-      <input name="materiel_c" required="" id="id_materiel_c" maxlength="50" type="text" value="{{form.materiel_c.value|default_if_none:''}}">
-    </div>
-    <div class="form-group">
-      <label for="id_surface_etage">Surface par étage&nbsp;:</label>
-      <input name="surface_etage"  value="{{form.surface_etage.value|default_if_none:'30'}}" required="" id="id_surface_etage" type="number">
-    </div>
-    <div class="form-group">
-      <label for="id_nb_etage">Nombre d'étages&nbsp;:</label>
-      <input name="nb_etage" value="{{form.nb_etage.value|default_if_none:'1'}}" required="" id="id_nb_etage" type="number">
-    </div>
-    <div class="form-group">
-      <label for="id_nb_habitants">Nombre d'habitants&nbsp;:</label>
-      <input name="nb_habitants"  value="{{form.nb_habitants.value|default_if_none:'1'}}" required="" id="id_nb_habitants" type="number">
-    </div>
-    <div class="form-group">
-      <label for="id_habitants">Habitants&nbsp;:</label>
-      <textarea name="habitants" id="id_habitants" required="" rows="10" cols="40" maxlength="6000">{% if form.habitants.value != 'Aucun' %}{{form.habitants.value}}{% else %}{{ proprietaire.prenom }} {{ proprietaire.nom }}{% endif %}
-      </textarea>
-    </div>
-    <div class="form-group">
-      <label for="id_nb_serviteurs">Nombre de serviteurs&nbsp;:</label>
-      <input name="nb_serviteurs" value="{{form.nb_serviteurs.value|default_if_none:'0'}}" required="" id="id_nb_serviteurs" type="number">
-    </div>
-    <div class="form-group">
-      <label for="id_etages">Etages&nbsp;:</label>
-      <select name="etages" multiple="multiple" id="id_etages">
-	{% for etage in etages %}
-    	<option value="{{etage.id}}"{% if etage.id in form.etages.value %} selected="" {% endif %}>{{etage.nom}}</option>
-    	{% endfor %}
-      </select>
-    </div>
+    	      <option value="9">Chambre au monastère</option>
 
-
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-      <div class="panel panel-default">
-	<div class="panel-heading" role="tab" id="headingOne">
-	  <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-	      <span style="color:red;">Optionnel : commerce illégal</span>
-            </a>
-	  </h4>
-	</div>
-	<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-	  <div class="panel-body">
-
-	    <div class="form-group">
-	      <label class="haut" for="id_com_ill">Commerce illégal&nbsp;:</label>
-	      <input name="com_ill" {% if form.com_ill.value or form.com_ill.value == None %}checked=""{% endif %} id="id_com_ill" type="checkbox">
-	      <label for="id_type_commerce">Type de commerce illégal&nbsp;:</label>
-	      <input name="type_commerce" id="id_type_commerce" maxlength="50" type="text">
-	    </div>
-	    <div class="form-group">
-	      <label class="haut" for="id_materiel">Materiel&nbsp;:</label>
-	      <textarea name="materiel" id="id_materiel" rows="10" cols="40" maxlength="500"></textarea>
-	    </div>
-	    <div class="form-group">
-	      <label for="id_prod">Production&nbsp;:</label>
-	      <textarea name="prod" id="id_prod" rows="10" cols="40" maxlength="500"></textarea>
-	    </div>
-	    <div class="form-group">
-	      <label for="id_rente">Rente mensuelle&nbsp;:</label>
-	      <input name="rente" value="0" id="id_rente" type="number">
-
-            </div>
+	    </select>
+	    <label for="id_nom">Nom&nbsp;</label>
+	    <input name="nom" required="" id="id_nom" maxlength="50" type="text" value="{{form.nom.value|default_if_none:''}}">
 	  </div>
+	  <div class="form-group">
+	    <label class="haut" for="id_description">Description&nbsp;</label>
+	    <textarea name="description" id="id_description" rows="5" cols="70" maxlength="999">{{form.description.value|default_if_none:''}}</textarea>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="id_numero">Numero&nbsp;</label>
+	    <input name="numero" value="{{form.numero.value|default:'1'}}" required="" id="id_numero" type="number" size="10">
+	    <label for="id_rue">Rue&nbsp;</label>
+	    <input name="rue" required="" id="id_rue" maxlength="50" type="text" value="{{form.rue.value|default_if_none:''}}">
+	    <label for="id_ville">Ville&nbsp;</label>
+	    <input name="ville" required="" id="id_ville" maxlength="50" type="text" value="{{form.ville.value|default_if_none:''}}">
+	  </div>
+	  <div class="form-group">
+	    <label for="id_materiel_f">Materiel de construction (façade)&nbsp;</label>
+	    <input name="materiel_f" required="" id="id_materiel_f" maxlength="50" type="text" value="{{form.materiel_f.value|default_if_none:''}}">
+	    <label for="id_materiel_c">Materiel de construction (toit)&nbsp;</label>
+	    <input name="materiel_c" required="" id="id_materiel_c" maxlength="50" type="text" value="{{form.materiel_c.value|default_if_none:''}}">
+	  </div>
+	  <div class="form-group">
+	    <label for="id_surface_etage">Surface par étage&nbsp;</label>
+	    <input name="surface_etage"  value="{{form.surface_etage.value|default_if_none:'30'}}" required="" id="id_surface_etage" type="number">
+	    <label for="id_nb_etage">Nombre d'étages&nbsp;</label>
+	    <input name="nb_etage" value="{{form.nb_etage.value|default_if_none:'1'}}" required="" id="id_nb_etage" type="number">
+	    <label for="id_nb_habitants">Nombre d'habitants&nbsp;</label>
+	    <input name="nb_habitants"  value="{{form.nb_habitants.value|default_if_none:'1'}}" required="" id="id_nb_habitants" type="number">
+	  </div>
+	  <div class="form-group">
+	    <label for="id_habitants" class="haut">Habitants&nbsp;</label>
+	    <textarea name="habitants" id="id_habitants" required="" rows="8" cols="50" maxlength="6000">{% if form.habitants.value != 'Aucun' %}{{form.habitants.value}}{% else %}{{ proprietaire.prenom }} {{ proprietaire.nom }}{% endif %}
+	    </textarea>
+	    <label for="id_etages" class="haut">Etages&nbsp;</label>
+	    <select name="etages" multiple="multiple" id="id_etages" size="8">
+	      {% for etage in etages %}
+    	      <option value="{{etage.id}}"{% if etage.id in form.etages.value %} selected="" {% endif %}>{{etage.nom}}</option>
+    	      {% endfor %}
+	    </select>
+	  </div>
+	  <div class="form-group">
+	    <label for="id_nb_serviteurs">Nombre de serviteurs&nbsp;</label>
+	    <input name="nb_serviteurs" value="{{form.nb_serviteurs.value|default_if_none:'0'}}" required="" id="id_nb_serviteurs" type="number">
+	  </div>
+
+
+	  <input class="human-btn" type="submit" value="Valider" />
+
+	  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	    <div class="panel panel-default" id="human-panel">
+	      <div class="panel-heading" role="tab" id="human-panel-heading">
+		<h4 class="panel-title" id="human-panel-title">
+		  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+		    <span style="color:red;">Optionnel : commerce illégal</span>
+		  </a>
+		</h4>
+	      </div>
+	      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+		<div class="panel-body" id="human-panel-body">
+
+		  <div class="form-group">
+		    <label class="haut" for="id_com_ill">Commerce illégal&nbsp;</label>
+		    <input class="haut" name="com_ill" {% if form.com_ill.value or form.com_ill.value == None %}checked=""{% endif %} id="id_com_ill" type="checkbox">
+		    <label class="haut" for="id_type_commerce">Type de commerce illégal&nbsp;</label>
+		    <input class="haut" name="type_commerce" id="id_type_commerce" maxlength="50" type="text">
+		    <label for="id_rente">Rente mensuelle&nbsp;</label>
+		    <input name="rente" value="0" id="id_rente" type="number">
+		  </div>
+		  <div class="form-group">
+		    <label class="haut" for="id_materiel">Materiel&nbsp;</label>
+		    <textarea name="materiel" id="id_materiel" rows="5" cols="40" maxlength="500"></textarea>
+		    <label for="id_prod" class="haut">Production&nbsp;</label>
+		    <textarea name="prod" id="id_prod" rows="5" cols="50" maxlength="500"></textarea>
+		  </div>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+
+
+
+
+	    <input name="proprietaire" id="id_proprietaire" type="hidden" value="">
+	</form>
 	</div>
       </div>
-
-
-
-
-    <input name="proprietaire" id="id_proprietaire" type="hidden" value="">
-    <input class="btn btn-default" type="submit" value="Valider" />
-  </form>
+    </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
