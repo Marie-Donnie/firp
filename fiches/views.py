@@ -1089,6 +1089,7 @@ def creer_bourse(request, fiche_id):
 def creer_maison(request, proprietaire_id, type_maison):
     proprietaire = Fiche.objects.get(pk=proprietaire_id)
     utilisateur = request.user
+    type_maison = int(type_maison)
     if proprietaire.createur == utilisateur :
         etages = Etage.objects.filter(createur=utilisateur)
         if request.method == 'POST':
@@ -1101,9 +1102,15 @@ def creer_maison(request, proprietaire_id, type_maison):
         else:
             form = MaisonForm()
 
-        context = {'form': form, 't_m': type_maison,
-                   'proprietaire': proprietaire, 'etages': etages }
-        return render(request, 'site/maison.html', context)
+        context = {'form': form, 'proprietaire': proprietaire,
+                   'etages': etages }
+        if type_maison == 1:
+            return render(request, 'site/maisons/taudis.html', context)
+        elif type_maison == 2:
+            return render(request, 'site/maison.html', context)
+        else:
+            return render(request, 'site/maison.html', context)
+
     else:
         return HttpResponse("Vous ne pouvez pas créer une maison pour ce personnage.")
 

@@ -643,3 +643,7 @@ input, textarea {
     position: relative;
     border: 1px solid #6e1618;
 }
+
+.greyed {
+    color: #9f9f9f;
+}
