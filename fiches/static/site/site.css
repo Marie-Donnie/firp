@@ -693,3 +693,16 @@ input, textarea {
 .maisons select {
     color: initial;
 }
+
+.lordaeron {
+    background-image: url("/static/site/images/lord2.png");
+    background-repeat: no-repeat;
+    background-size: 20%;
+    margin: auto;
+    background-position: center;
+}
+
+#maisons-header {
+    text-align: center;
+    border-bottom: 1px solid #4d4d4d;
+}

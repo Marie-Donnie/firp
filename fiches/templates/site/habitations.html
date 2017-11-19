@@ -4,10 +4,16 @@
 {% load static %}
 {% load filters %}
 
-{% block title %}{% endblock %}
-{% block header %}<a href={% url 'habitations' %}>Liste des habitations</a>{% endblock %}
+{% block title %}Registre des habitations{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
+  <div class="page-header" id="maisons-header" onclick="document.location='{% url 'habitations' %}'">
+      <h1>Registre des habitations</h1>
+  </div>
+
+<div class="lordaeron">
+
   <div class="maisons" id="center">
     <form action="{% url 'rechercher_maison' %}" method="GET">
       <label>Rechercher par&nbsp;</label>
@@ -21,61 +27,62 @@
     </form>
   </div>
 
-<div class="maisons">
-  {% if maisons %}
+  <div class="maisons">
+    {% if maisons %}
 
-  <table style="width:100%">
-    <tr>
-      <th>Nom</th>
-      <th>Type</th>
-      <th>Adresse</th>
-      <th>Ville</th>
-      <th>Nombre d'habitants</th>
-    </tr>
-    {% for f in maisons %}
-    <tr>
-      <!-- <div class="character"> -->
-      <td><a href="{% url 'detail_maison' f.id %}">{{ f.nom }}</a></td>
-      <td><a href="{% url 'detail_maison' f.id %}">{{ f.type_m }}</a></td>
-      <td><a href="{% url 'detail_maison' f.id %}">{{ f.numero }}{{ f.rue }}</a></td>
-      <td><a href="{% url 'detail_maison' f.id %}">{{ f.ville }}</a></td>
-      <td><a href="{% url 'detail_maison' f.id %}">{{ f.nb_habitants }}</a></td>
-      <!-- </div> -->
-    </tr>
-    {% endfor %}
-  </table>
-  <nav aria-label="Page navigation" id="pagination">
-    <ul class="pagination pagination-sm">
-      {% if maisons.has_previous %}
-      <li>
-	<a href="?page={{ maisons.previous_page_number }}" aria-label="Précédent">
-	  <span aria-hidden="true">&laquo;</span>
-	</a>
-      </li>
-      {% endif %}
-
-      {% for p in maisons.paginator.page_range %}
-      <li>
-	<a href="?page={{ p }}">
-	  {{p}}
-	</a>
-      </li>
+    <table style="width:100%">
+      <tr>
+	<th>Nom</th>
+	<th>Type</th>
+	<th>Adresse</th>
+	<th>Ville</th>
+	<th>Nombre d'habitants</th>
+      </tr>
+      {% for f in maisons %}
+      <tr>
+	<!-- <div class="character"> -->
+	<td><a href="{% url 'detail_maison' f.id %}">{{ f.nom }}</a></td>
+	<td><a href="{% url 'detail_maison' f.id %}">{{ f.type_m }}</a></td>
+	<td><a href="{% url 'detail_maison' f.id %}">{{ f.numero }}{{ f.rue }}</a></td>
+	<td><a href="{% url 'detail_maison' f.id %}">{{ f.ville }}</a></td>
+	<td><a href="{% url 'detail_maison' f.id %}">{{ f.nb_habitants }}</a></td>
+	<!-- </div> -->
+      </tr>
       {% endfor %}
+    </table>
+    <nav aria-label="Page navigation" id="pagination">
+      <ul class="pagination pagination-sm">
+	{% if maisons.has_previous %}
+	<li>
+	  <a href="?page={{ maisons.previous_page_number }}" aria-label="Précédent">
+	    <span aria-hidden="true">&laquo;</span>
+	  </a>
+	</li>
+	{% endif %}
 
-      {% if maisons.has_next %}
-      <li>
-	<a href="?page={{ maisons.next_page_number }}" aria-label="Suivant">
-          <span aria-hidden="true">&raquo;</span>
-	</a>
-      </li>
-      {% endif %}
-    </ul>
-  </nav>
-  <span>Page {{ maisons.number }} sur {{ maisons.paginator.num_pages }}</span>
+	{% for p in maisons.paginator.page_range %}
+	<li>
+	  <a href="?page={{ p }}">
+	    {{p}}
+	  </a>
+	</li>
+	{% endfor %}
+
+	{% if maisons.has_next %}
+	<li>
+	  <a href="?page={{ maisons.next_page_number }}" aria-label="Suivant">
+            <span aria-hidden="true">&raquo;</span>
+	  </a>
+	</li>
+	{% endif %}
+      </ul>
+    </nav>
+    <span>Page {{ maisons.number }} sur {{ maisons.paginator.num_pages }}</span>
+  </div>
+
+  {% else %}
+  <p>Aucune maison</p>
+  {% endif %}
+
 </div>
-
-{% else %}
-<p>Aucune maison</p>
-{% endif %}
-
 {% endblock %}

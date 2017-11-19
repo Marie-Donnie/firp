@@ -12,12 +12,10 @@ $('.collapse').collapse()
 {% block content %}
 <div class="house-body">
 
-  <div class="page-header" onclick="document.location='{% url 'quetes' %}'">
-    <div id="center">
+    <div class="page-header" id="maisons-header" onclick="document.location='{% url 'habitations' %}'">
       <h1>Registre des habitations</h1>
       <h1>Créer un taudis en bois</h1>
-    </div> <!-- house-head -->
-  </div>   <!-- page-header -->
+  </div>
 
   <div class="black">
     <div class="media" id="house-display">
