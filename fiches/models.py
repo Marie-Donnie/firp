@@ -770,6 +770,8 @@ class Piece(models.Model):
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='piece')
+    image = models.ImageField(upload_to='images/maisons',
+                              default='images/site/no-image.png')
 
     def __unicode__(self):
         return u'%s' % (self.nom)
@@ -840,6 +842,8 @@ class Maison(models.Model):
                                      blank=True,
                                      null=True,
                                      related_name='maison')
+    image = models.ImageField(upload_to='images/maisons',
+                              default='images/site/no-image.png')
 
     def __unicode__(self):
         return u'%s' % (self.nom)
