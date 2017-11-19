@@ -1114,9 +1114,54 @@ def creer_maison(request, proprietaire_id, type_maison):
     else:
         return HttpResponse("Vous ne pouvez pas créer une maison pour ce personnage.")
 
-@permission_required('fiches.fdg', raise_exception=True)
-def maison(request, maison_id):
-    return HttpResponse("Vous ne pouvez pas voir cette maison.")
+
+def habitations(request):
+    context = {}
+    if request.method == 'GET' and 'valeur' in request.GET and 'recherche' in request.GET:
+        if 'recherche' is not None and 'recherche' != '':
+            valeur = request.GET.get('valeur')
+            recherche = request.GET.get('recherche')
+            Qr = None
+            q = Q(**({"%s__icontains" % recherche: valeur }))
+            if Qr:
+                Qr = Qr | q # or & for filtering
+            else:
+                Qr = q
+            # this you can now combine with other filters, exclude etc.
+            maisons_list = Maison.objects.filter(Qr)
+            context['recherche'] = recherche
+            context['valeur'] = valeur
+        else:
+            maisons_list = Maison.objects.order_by('nom')
+
+    else:
+        maisons_list = Maison.objects.order_by('nom')
+
+    paginator = Paginator(maisons_list, 12)
+    page = request.GET.get('page')
+    try:
+        maisons = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        maisons = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        maisons = paginator.page(paginator.num_pages)
+
+    context['maisons'] = maisons
+
+    return render(request, 'site/habitations.html', context)
+
+
+# Display the request Fiche
+def detail_maison(request, maison_id):
+    maison = get_object_or_404(Maison, pk=maison_id)
+    utilisateur = request.user
+
+    context = {'maison': maison}
+    return render(request, 'site/detail_maison.html', context)
+
+
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
