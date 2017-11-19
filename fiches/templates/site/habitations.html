@@ -4,11 +4,11 @@
 {% load static %}
 {% load filters %}
 
-{% block title %}Liste des habitations{% endblock %}
+{% block title %}{% endblock %}
 {% block header %}<a href={% url 'habitations' %}>Liste des habitations</a>{% endblock %}
 
 {% block content %}
-  <div id="center">
+  <div class="maisons" id="center">
     <form action="{% url 'rechercher_maison' %}" method="GET">
       <label>Rechercher par&nbsp;</label>
       <select name="recherche" id="id_recherche">
@@ -21,48 +21,9 @@
     </form>
   </div>
 
-<div id="liste">
+<div class="maisons">
   {% if maisons %}
-  <span>Page {{ maisons.number }} sur {{ maisons.paginator.num_pages }}</span>
-  <nav aria-label="Page navigation" id="pagination">
-    <ul class="pagination pagination-sm">
-      {% if maisons.has_previous %}
-      <li>
-	{% if recherche %}
-	<a href="?{% url_replace request 'page' maisons.previous_page_number %}" aria-label="Précédent">
-	  {% else %}
-	  <a href="?page={{ maisons.previous_page_number }}" aria-label="Précédent">
-	  {% endif %}
-	  <span aria-hidden="true">&laquo;</span>
-	</a>
-      </li>
-      {% endif %}
 
-      {% for p in maisons.paginator.page_range %}
-      <li>
-	{% if recherche %}
-	    <a href="?{% url_replace request 'page' p %}">
-	      {% else %}
-	      <a href="?page={{ p }}">
-		{% endif %}
-	  {{p}}
-	</a>
-      </li>
-      {% endfor %}
-
-      {% if maisons.has_next %}
-      <li>
-	{% if recherche %}
-	<a href="?{% url_replace request 'page' maisons.next_page_number %}" aria-label="Suivant">
-	  {% else %}
-	  <a href="?page={{ maisons.next_page_number }}" aria-label="Suivant">
-	    {% endif %}
-          <span aria-hidden="true">&raquo;</span>
-	</a>
-      </li>
-      {% endif %}
-    </ul>
-  </nav>
   <table style="width:100%">
     <tr>
       <th>Nom</th>

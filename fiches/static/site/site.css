@@ -647,3 +647,49 @@ input, textarea {
 .greyed {
     color: #9f9f9f;
 }
+
+.maisons table, tr, td, th{
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border: 1px solid #4d4d4d;
+}
+
+.maisons table tr td a {
+    display:block;
+    height:100%;
+    width:100%;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.maisons .pagination > li > a,
+.maisons .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: 1px;
+    line-height: 1.42857143;
+    color: #fefefe;
+    text-decoration: none;
+    background-color: #470002;
+    border: 1px solid #4d4d4d;
+}
+
+.maisons .pagination > li > a:focus,
+.maisons .pagination > li > a:hover,
+.maisons .pagination > li > span:focus,
+.maisons .pagination > li > span:hover {
+    color: #fff;
+    background-color: #e4cd51;
+    border-color: #fff;
+}
+
+.maisons select {
+    color: initial;
+}
