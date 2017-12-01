@@ -243,6 +243,8 @@ def edit_fiche(request, fiche_id):
             data = request.POST.copy()
             # Adds creator directly because the field is hidden
             data['createur'] = User.objects.get(username=utilisateur).id
+            if (fiche.bourse):
+                data['bourse'] = fiche.bourse.id
             """
             Disables useless fields and creates the required ones depending
             on the authorization of the user
