@@ -10,16 +10,16 @@ $(function () {
 {% endblock %}
 
 {% block edition %}
-{% ifequal user.id utilisateur.id %}
+{% if user.id == utilisateur.id %}
 <a class="btn btn-default navbar-btn" href="{% url 'gestion_profil' %}" data-toggle="tooltip" title="Ajouter ou changer votre image de profil et votre date de naissance">Créer/editer profil</a>
-{% endifequal %}
+{% endif %}
 {% endblock %}
 
 {% block user %}
-{% ifequal user.id utilisateur.id %}
+{% if user.id == utilisateur.id %}
 <a class="btn btn-default navbar-btn" href="{% url 'account_set_password' %}" data-toggle="tooltip" title="Changer le mot de passe de votre compte">Changer le mot de passe</a>
 <a class="btn btn-default navbar-btn" href="{% url 'account_email' %}" data-toggle="tooltip" title="Ajouter un email ou changer votre email principal">Gestion des emails</a>
-{% endifequal %}
+{% endif %}
 {% endblock %}
 
 
