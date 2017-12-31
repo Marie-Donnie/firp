@@ -1178,5 +1178,4 @@ class FicheAutocomplete(autocomplete.Select2QuerySetView):
 
         if self.q:
             qs = qs.filter(nom__icontains=self.q)
-
         return qs

@@ -58,10 +58,10 @@ function onMouseLeave() {
 
 {% block edition %}
 {% if user.is_authenticated %}
-{% ifequal user.id fiche.createur.id %}
+{% if user.id == fiche.createur.id %}
 <a class="btn btn-default" href="{% url 'editer_fiche' fiche.id %}">Editer</a>
 <a class="btn btn-default" href="{% url 'supprimer_fiche' fiche.id %}">Supprimer</a>
-{% endifequal %}
+{% endif %}
 {% endif %}
 {% endblock %}
 {% block user %}
@@ -167,275 +167,276 @@ function onMouseLeave() {
     </div>
   </div>
   {% if fiche.relations != 'Aucune' %}
-  <div class="panel panel-defaut" id="details-panels">
-    <div class="panel-heading">
-      <h3 class="panel-title">Relations</h3>
-    </div>
-    <div class="panel-body centre">
-      {{fiche.relations|linebreaksbr}}
-    </div>
-  </div>
-  {% endif %}
-  <div class="row">
-    {% if fiche.medailles != 'Non applicable/Aucune' %}
-    <div class="col-md-6">
-      <div class="panel panel-defaut" id="details-panels">
-	<div class="panel-heading">
-	  <h3 class="panel-title">Médaille(s)</h3>
-	</div>
-	<div class="panel-body centre">
-	  {{fiche.medailles|linebreaksbr}}
-	</div>
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Relations</h3>
+      </div>
+      <div class="panel-body centre">
+	{{fiche.relations|linebreaksbr}}
       </div>
     </div>
-    {% endif %}
-    <div class="col-md-6">
-      <div class="panel panel-defaut" id="details-panels">
-	<div class="panel-heading">
-	  <h3 class="panel-title">Compétences</h3>
-	</div>
-	<div class="panel-body centre">
-	  {{fiche.competences|linebreaksbr}}
-	</div>
-      </div> <!-- panel panel-default -->
-    </div>   <!-- col-md-6 -->
-  </div>   <!-- row -->
-  {% if fiche.afficher_bourse or user.id == fiche.createur.id %}
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-defaut" id="details-panels">
-	<div class="panel-heading">
-	  <h3 class="panel-title">Bourse</h3>
-	</div>
-	<div class="panel-body centre">
-	  {% if fiche.bourse %}
-	  {{ fiche.bourse.argent|p_or }} <img id="money" src="/fiches/media/images/site/UI-GoldIcon.PNG" alt="Souverains d'or">
-	  {{ fiche.bourse.argent|p_argent }} <img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Gruaux d'argent">
-	  {{ fiche.bourse.argent|p_cuivre }} <img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Sous de cuivre"><br>
-	  {% if user.id == fiche.createur.id %}
-	  <a class="btn btn-default" href="{% url 'gerer_bourse' fiche.id fiche.bourse.id %}">Editer bourse</a>
-	  {% endif %}
-	  {% else %}
-	  {% if user.id == fiche.createur.id %}
-	  <a class="btn btn-default" href="{% url 'creer_bourse' fiche.id %}">Créer bourse</a>
-	  {% endif %}
-	  {% endif %}
-	</div>
-      </div> <!-- panel panel-default -->
-    </div>   <!-- col-md-6 -->
   </div>
   {% endif %}
-  <div class="row">
-    {% if fiche.afficher_inventaire or user.id == fiche.createur.id %}
-    {% if fiche.inventaire %}
-    <div class="col-md-6">
-      <div class="panel panel-defaut" id="details-panels">
-	<div class="panel-heading">
-	  <h3 class="panel-title">Inventaire</h3>
-	</div>
-	<div class="panel-body">
-	  {{fiche.inventaire|linebreaksbr}}
-	</div>
-      </div> <!-- panel panel-default -->
-    </div>   <!-- col-md-6 -->
-    {% elif fiche.inventaire_fdg %}
-    <div class="col-md-6">
-      <div class="panel panel-defaut" id="details-panels">
-	<div class="panel-heading">
-	  <h3 class="panel-title">{{fiche.inventaire_fdg.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-	  {% if user.id == fiche.createur.id %}
-	  <a href="{% url 'editer_inventaire' fiche.inventaire_fdg.id %}">Editer</a>
-	  {% endif %}
-	</div>
-	<div class="panel-body">
-	  <div class="inventory">
-	    {% for case in fiche.inventaire_fdg.cases.all %}
-	    <!-- <div class="container"> -->
-	    <a class="number-inventory" target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip">
-	      <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{case.objet.image_url}}.PNG" alt="Objet" id="icone">
-	      {% if case.nombre > 1 %}
-	      <span class="bottomright">{{case.nombre}}</span>
-	      {% endif %}
-	    </a>
-	    <!-- </div> -->
-	    <!-- - {{case.get_nom}}<br> -->
-	    {% endfor %}
-	    {% for i in range %}
-	    <img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">
-	    {% endfor %}
-	  </div> <!-- inventory -->
-	</div>	 <!-- panel-body -->
-      </div>	 <!-- panel panel-default -->
-    </div>	 <!-- col-md-6 -->
-    {% endif %}	 <!-- fiche.inventaire -->
-
-    {% endif %}	<!-- afficher inventaire -->
-
-    {% if fiche.equipement %}
-    <div class="col-md-6">
-      <div class="panel panel-defaut" id="details-panels">
-	<div class="panel-heading">
-	  <h3 class="panel-title">{{fiche.equipement.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-	  {% if user.id == fiche.createur.id %}
-	  <a href="{% url 'editer_equip' fiche.equipement.id %}">Editer</a>
-	  {% endif %}
-	</div>
-	<div class="panel-body">
-	  {% if mp %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' mp.id %}" data-toggle="objet-tooltip" data-enchantement="{{emp.id}}">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{mp.objet.image_url}}.PNG" alt="Main principale" id="icone">
+  {% if fiche.medailles != 'Non applicable/Aucune' %}
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Médaille(s)</h3>
+      </div>
+      <div class="panel-body centre">
+	{{fiche.medailles|linebreaksbr}}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if fiche.competences != 'Aucune' %}
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Compétences</h3>
+      </div>
+      <div class="panel-body centre">
+	{{fiche.competences|linebreaksbr}}
+      </div>
+    </div> <!-- panel panel-default -->
+  </div>   <!-- col-md-6 -->
+  {% endif %}
+  {% if fiche.afficher_bourse or user.id == fiche.createur.id %}
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Bourse</h3>
+      </div>
+      <div class="panel-body centre">
+	{% if fiche.bourse %}
+	{{ fiche.bourse.argent|p_or }} <img id="money" src="/fiches/media/images/site/UI-GoldIcon.PNG" alt="Souverains d'or">
+	{{ fiche.bourse.argent|p_argent }} <img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Gruaux d'argent">
+	{{ fiche.bourse.argent|p_cuivre }} <img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Sous de cuivre"><br>
+	{% if user.id == fiche.createur.id %}
+	<a class="btn btn-default" href="{% url 'gerer_bourse' fiche.id fiche.bourse.id %}">Editer bourse</a>
+	{% endif %}
+	{% else %}
+	{% if user.id == fiche.createur.id %}
+	<a class="btn btn-default" href="{% url 'creer_bourse' fiche.id %}">Créer bourse</a>
+	{% endif %}
+	{% endif %}
+      </div>
+    </div> <!-- panel panel-default -->
+  </div>   <!-- col-md-6 -->
+  {% endif %}
+  {% if fiche.afficher_inventaire or user.id == fiche.createur.id %}
+  {% if fiche.inventaire %}
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Inventaire</h3>
+      </div>
+      <div class="panel-body">
+	{{fiche.inventaire|linebreaksbr}}
+      </div>
+    </div> <!-- panel panel-default -->
+  </div>   <!-- col-md-6 -->
+  {% elif fiche.inventaire_fdg %}
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">{{fiche.inventaire_fdg.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+	{% if user.id == fiche.createur.id %}
+	<a href="{% url 'editer_inventaire' fiche.inventaire_fdg.id %}">Editer</a>
+	{% endif %}
+      </div>
+      <div class="panel-body">
+	<div class="inventory">
+	  {% for case in fiche.inventaire_fdg.cases.all %}
+	  <!-- <div class="container"> -->
+	  <a class="number-inventory" target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip">
+	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{case.objet.image_url}}.PNG" alt="Objet" id="icone">
+	    {% if case.nombre > 1 %}
+	    <span class="bottomright">{{case.nombre}}</span>
+	    {% endif %}
 	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-MainHand.PNG alt="Main principale" id="icone">
-	  {% endif %}
-	  {% if am %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' am.id %}" data-toggle="objet-tooltip" data-enchantement="{{eam.id}}">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{am.objet.image_url}}.PNG" alt="Autre main" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-SecondaryHand.PNG alt="Autre main" id="icone">
-	  {% endif %}
-	  {% if aa %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' aa.id %}" data-toggle="objet-tooltip" data-enchantement="{{eaa.id}}">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{aa.objet.image_url}}.PNG" alt="Autre arme" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Ammo.PNG alt="Autre main" id="icone">
-	  {% endif %}
-	  {% if tete %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' tete.id %}" data-toggle="objet-tooltip" data-enchantement="{{etete.id}}">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{tete.objet.image_url}}.PNG" alt="Tête" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Head.PNG alt="Tête" id="icone">
-	  {% endif %}
-	  {% if cou %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' cou.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{cou.objet.image_url}}.PNG" alt="Cou" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Neck.PNG alt="Cou" id="icone">
-	  {% endif %}
-	  {% if epaules %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' epaules.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{epaules.objet.image_url}}.PNG" alt="Epaules" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Shoulder.PNG alt="Epaules" id="icone">
-	  {% endif %}
-	  {% if dos %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' dos.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{dos.objet.image_url}}.PNG" alt="Dos" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Shirt.PNG alt="Dos" id="icone">
-	  {% endif %}
-	  {% if torse %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' torse.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{torse.objet.image_url}}.PNG" alt="Torse" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Chest.PNG alt="Torse" id="icone">
-	  {% endif %}
-	  {% if poignets %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' poignets.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{poignets.objet.image_url}}.PNG" alt="Poignets" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Wrists.PNG alt="Poignets" id="icone">
-	  {% endif %}
-	  {% if mains %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' mains.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{mains.objet.image_url}}.PNG" alt="Mains" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Hands.PNG alt="Mains" id="icone">
-	  {% endif %}
-	  {% if taille %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' taille.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{taille.objet.image_url}}.PNG" alt="Taille" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Waist.PNG alt="Taille" id="icone">
-	  {% endif %}
-	  {% if jambes %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' jambes.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{jambes.objet.image_url}}.PNG" alt="Jambes" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Legs.PNG alt="Jambes" id="icone">
-	  {% endif %}
-	  {% if pieds %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' pieds.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{pieds.objet.image_url}}.PNG" alt="Pieds" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Feet.PNG alt="Pieds" id="icone">
-	  {% endif %}
-	  {% for anneau in doigts %}
-	  {% if anneau %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' anneau.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{anneau.objet.image_url}}.PNG" alt="Doigt" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-RFinger.PNG alt="Doigt" id="icone">
-	  {% endif %}
+	  <!-- </div> -->
+	  <!-- - {{case.get_nom}}<br> -->
 	  {% endfor %}
-	  {% for diver in divers %}
-	  {% if diver %}
-	  <a class="number-inventory" target="_blank" href="{% url 'detail_armure' diver.id %}" data-toggle="objet-tooltip">
-	    <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{diver.objet.image_url}}.PNG" alt="Divers" id="icone">
-	  </a>
-	  {% else %}
-	  <img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Relic.PNG alt="Divers" id="icone">
-	  {% endif %}
+	  {% for i in range %}
+	  <img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">
 	  {% endfor %}
-	</div> <!-- panel-body -->
-      </div>   <!-- panel-default -->
-    </div>     <!-- col-md-6 -->
-    {% endif %} <!-- fiche.equipement -->
-  </div>       <!-- row -->
+	</div> <!-- inventory -->
+      </div>	 <!-- panel-body -->
+    </div>	 <!-- panel panel-default -->
+  </div>	 <!-- col-md-6 -->
+  {% endif %}	 <!-- fiche.inventaire -->
+
+  {% endif %}	<!-- afficher inventaire -->
+
   {% if fiche.equipement %}
-  <div class="panel panel-defaut" id="details-panels">
-    <div class="panel-heading">
-      <h3 class="panel-title">Statistiques</h3>
-    </div> <!-- panel-heading -->
-    <div class="panel-body centre">
-      {% if perms.fiches.fdg %}
-      <b>Effets en jeu :</b>
-      {% for effet in effets_ig %}
-      {% if 'Aucun' not in effet %}
-      {{ effet|linebreaksbr }}<br>
-      {% endif %} <!-- aucun -->
-      {% endfor %}<br>
-      {% else %} <!-- perms.fiches -->
-      <b>Effets :</b>
-      {% for effet in effets %}
-      {% if 'Aucun' not in effet %}
-      {{ effet|linebreaksbr }}<br>
-      {% endif %} <!-- aucun -->
-      {% endfor %}<br>
-      {% endif %} <!-- perms.fiches -->
-      {% if runique %}
-      "Set : Immunise à la magie"<br>
-      {% endif %} <!-- runique -->
-      {% if terradiance %}
-      "Set : + 5 a l'attaque et la défense contre les morts-vivants"<br>
-      {% endif %} <!-- terra -->
-      {% if armure != 0 %}
-      <b>Armure :</b> {{ armure }}<br>
-      {% endif %} <!-- armure -->
-      {% if force != 0 %}
-      <b>Force :</b> {{ force }}<br>
-      {% endif %} <!-- force -->
-      {% if agi != 0 %}
-      <b>Agilité :</b> {{ agi }}<br>
-      {% endif %} <!-- agi -->
-      {% if intell != 0 %}
-      <b>Intelligence :</b> {{ intell }}
-      {% endif %} <!-- intell -->
-    </div> <!-- panel-body centre -->
-  </div>   <!-- panel panel-default -->
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">{{fiche.equipement.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+	{% if user.id == fiche.createur.id %}
+	<a href="{% url 'editer_equip' fiche.equipement.id %}">Editer</a>
+	{% endif %}
+      </div>
+      <div class="panel-body">
+	{% if mp %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' mp.id %}" data-toggle="objet-tooltip" data-enchantement="{{emp.id}}">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{mp.objet.image_url}}.PNG" alt="Main principale" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-MainHand.PNG alt="Main principale" id="icone">
+	{% endif %}
+	{% if am %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' am.id %}" data-toggle="objet-tooltip" data-enchantement="{{eam.id}}">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{am.objet.image_url}}.PNG" alt="Autre main" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-SecondaryHand.PNG alt="Autre main" id="icone">
+	{% endif %}
+	{% if aa %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' aa.id %}" data-toggle="objet-tooltip" data-enchantement="{{eaa.id}}">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{aa.objet.image_url}}.PNG" alt="Autre arme" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Ammo.PNG alt="Autre main" id="icone">
+	{% endif %}
+	{% if tete %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' tete.id %}" data-toggle="objet-tooltip" data-enchantement="{{etete.id}}">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{tete.objet.image_url}}.PNG" alt="Tête" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Head.PNG alt="Tête" id="icone">
+	{% endif %}
+	{% if cou %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' cou.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{cou.objet.image_url}}.PNG" alt="Cou" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Neck.PNG alt="Cou" id="icone">
+	{% endif %}
+	{% if epaules %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' epaules.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{epaules.objet.image_url}}.PNG" alt="Epaules" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Shoulder.PNG alt="Epaules" id="icone">
+	{% endif %}
+	{% if dos %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' dos.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{dos.objet.image_url}}.PNG" alt="Dos" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Shirt.PNG alt="Dos" id="icone">
+	{% endif %}
+	{% if torse %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' torse.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{torse.objet.image_url}}.PNG" alt="Torse" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Chest.PNG alt="Torse" id="icone">
+	{% endif %}
+	{% if poignets %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' poignets.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{poignets.objet.image_url}}.PNG" alt="Poignets" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Wrists.PNG alt="Poignets" id="icone">
+	{% endif %}
+	{% if mains %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' mains.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{mains.objet.image_url}}.PNG" alt="Mains" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Hands.PNG alt="Mains" id="icone">
+	{% endif %}
+	{% if taille %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' taille.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{taille.objet.image_url}}.PNG" alt="Taille" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Waist.PNG alt="Taille" id="icone">
+	{% endif %}
+	{% if jambes %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' jambes.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{jambes.objet.image_url}}.PNG" alt="Jambes" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Legs.PNG alt="Jambes" id="icone">
+	{% endif %}
+	{% if pieds %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' pieds.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{pieds.objet.image_url}}.PNG" alt="Pieds" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Feet.PNG alt="Pieds" id="icone">
+	{% endif %}
+	{% for anneau in doigts %}
+	{% if anneau %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' anneau.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{anneau.objet.image_url}}.PNG" alt="Doigt" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-RFinger.PNG alt="Doigt" id="icone">
+	{% endif %}
+	{% endfor %}
+	{% for diver in divers %}
+	{% if diver %}
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' diver.id %}" data-toggle="objet-tooltip">
+	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{diver.objet.image_url}}.PNG" alt="Divers" id="icone">
+	</a>
+	{% else %}
+	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Relic.PNG alt="Divers" id="icone">
+	{% endif %}
+	{% endfor %}
+      </div> <!-- panel-body -->
+    </div>   <!-- panel-default -->
+  </div>     <!-- col-md-6 -->
+  {% endif %} <!-- fiche.equipement -->
+
+  {% if fiche.equipement %}
+  <div class="col-md-6">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Statistiques</h3>
+      </div> <!-- panel-heading -->
+      <div class="panel-body">
+	{% if perms.fiches.fdg %}
+	<b>Effets en jeu :</b>
+	{% for effet in effets_ig %}
+	{% if 'Aucun' not in effet %}
+	{{ effet|linebreaksbr }}<br>
+	{% endif %} <!-- aucun -->
+	{% endfor %}<br>
+	{% else %} <!-- perms.fiches -->
+	<b>Effets :</b>
+	{% for effet in effets %}
+	{% if 'Aucun' not in effet %}
+	{{ effet|linebreaksbr }}<br>
+	{% endif %} <!-- aucun -->
+	{% endfor %}<br>
+	{% endif %} <!-- perms.fiches -->
+	{% if runique %}
+	"Set : Immunise à la magie"<br>
+	{% endif %} <!-- runique -->
+	{% if terradiance %}
+	"Set : + 5 a l'attaque et la défense contre les morts-vivants"<br>
+	{% endif %} <!-- terra -->
+	{% if armure != 0 %}
+	<b>Armure :</b> {{ armure }}<br>
+	{% endif %} <!-- armure -->
+	{% if force != 0 %}
+	<b>Force :</b> {{ force }}<br>
+	{% endif %} <!-- force -->
+	{% if agi != 0 %}
+	<b>Agilité :</b> {{ agi }}<br>
+	{% endif %} <!-- agi -->
+	{% if intell != 0 %}
+	<b>Intelligence :</b> {{ intell }}
+	{% endif %} <!-- intell -->
+      </div> <!-- panel-body centre -->
+    </div>   <!-- panel panel-default -->
+  </div>
   {% endif %} <!-- fiche.equipement -->
 </div>		<!-- media -->
 

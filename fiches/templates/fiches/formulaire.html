@@ -473,6 +473,7 @@
     <div class="form-group">
       <label for="id_image">Image&nbsp;</label>
       <span id="description">
+	<span style="color:red;">Attention : Le nom des images ne doit pas dépasser 100 caractères.<br>
 	{% if form.image.value %}
 	Actuellement: <a href="{{MEDIA_URL}}{{form.image.value|default:'site/no-image.png'}}">{{form.image.value|default:'site/no-image.png'}}</a><br>
 	<span id="description">
