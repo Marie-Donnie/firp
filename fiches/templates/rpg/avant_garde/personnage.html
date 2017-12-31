@@ -59,16 +59,18 @@
 	{% endif %}
       </li>
       <li><b>Grade&nbsp;: </b>{{ fiche.get_grade_rp_display|capfirst }}</li>
-      <li><b>Capacité de combat&nbsp;: </b>{{ fiche.cap_combat }}</li>
-      <li><b>Capacité de tir&nbsp;: </b>{{ fiche.cap_tir }}</li>
-      <li><b>Force&nbsp;: </b>{{ fiche.force }}</li>
-      <li><b>Endurance&nbsp;: </b>{{ fiche.endu }}</li>
-      <li><b>Perception&nbsp;: </b>{{ fiche.perce }}</li>
-      <li><b>Agilité&nbsp;: </b>{{ fiche.agi }}</li>
-      <li><b>Intelligence&nbsp;: </b>{{ fiche.intell }}</li>
-      <li><b>Charisme&nbsp;: </b>{{ fiche.charisme }}</li>
-      <li><b>Force mentale&nbsp;: </b>{{ fiche.force_men}}</li>
-      <li><b>Traits&nbsp;: </b><ul>
+      <li>
+	<span><img class="statistic" src="/fiches/media/images/site/rpg/CCombat.PNG" alt="Capacité de combat">{{ fiche.cap_combat }}</span>
+	<span><img class="statistic" src="/fiches/media/images/site/rpg/CTir.PNG" alt="Capacité de tir">{{ fiche.cap_tir }}
+      	<span><img class="statistic" src="/fiches/media/images/site/Force.PNG" alt="Force">{{ fiche.force }}
+      	<span><img class="statistic" src="/fiches/media/images/site/rpg/Endu.PNG" alt="Endurance">{{ fiche.endu }}
+      	<span><img class="statistic" src="/fiches/media/images/site/rpg/Perce.PNG" alt="Perception">{{ fiche.perce }}
+      	<span><img class="statistic" src="/fiches/media/images/site/Agi.PNG" alt="Agilité">{{ fiche.agi }}
+      	<span><img class="statistic" src="/fiches/media/images/site/Intell.PNG" alt="Intelligence">{{ fiche.intell }}
+      	<span><img class="statistic" src="/fiches/media/images/site/rpg/Charisme.PNG" alt="Charisme">{{ fiche.charisme }}
+      	<span><img class="statistic" src="/fiches/media/images/site/rpg/FM.PNG" alt="Force mentale">{{ fiche.force_men}}</li>
+      <li><b>Traits&nbsp;: </b>
+	<ul>
 	  {% for avant in fiche.avants.all %}
 	  <li id=avantages>
 	    {% if avant.id != 1 %}
@@ -83,7 +85,8 @@
 	    {% endif %}
 	    {{desavant.description}}</li>
 	  {% endfor %}
-	  </ul>
+	</ul>
+	</li>
     </ul>
 
   </div>     <!-- media-body -->
@@ -93,7 +96,14 @@
     </a>
   </div> <!-- media-right -->
   <div>
-    <h4 class="progress-label">Niveau : {{fiche.niveau}}{% if fiche.niveau < 6 %}. Expérience : {{fiche.xp}} points </h4>
+    <h4 class="progress-label">Niveau <!-- {{fiche.niveau}} -->
+      {% if fiche.niveau == 1 %}  <img class="level" src="/fiches/media/images/site/rpg/Achievement_PVP_H_01.PNG" alt="Niveau 1">
+      {% elif fiche.niveau == 2 %}<img class="level" src="/fiches/media/images/site/rpg/Achievement_PVP_H_02.PNG" alt="Niveau 2">
+      {% elif fiche.niveau == 3 %}<img class="level" src="/fiches/media/images/site/rpg/Achievement_PVP_H_03.PNG" alt="Niveau 3">
+      {% elif fiche.niveau == 4 %}<img class="level" src="/fiches/media/images/site/rpg/Achievement_PVP_H_04.PNG" alt="Niveau 4">
+      {% elif fiche.niveau == 5 %}<img class="level" src="/fiches/media/images/site/rpg/Achievement_PVP_H_05.PNG" alt="Niveau 5">
+      {% endif %}
+      {% if fiche.niveau < 6 %} Expérience : {{fiche.xp}} points </h4>
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.xp}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 									{% if fiche.niveau == 1 %} {{fiche.xp|pourcent:100}}%">{{fiche.xp|pourcent:100}}%
 	    {% elif fiche.niveau == 2 %} {{fiche.xp|pourcent:200}}%"> {{fiche.xp|pourcent:200}}%
@@ -115,5 +125,7 @@
 
 
 </div>
+
+{% block classe %}{% endblock %}
 
 {% endblock %}
