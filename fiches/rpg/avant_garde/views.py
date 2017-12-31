@@ -42,7 +42,7 @@ def creer_base(request):
 def editer_base(request, base_id):
     base = Avant_garde.objects.get(pk=base_id)
     utilisateur = request.user
-    if utilisateur == base.createur:
+    if utilisateur == base.createur or is_admin(utilisateur):
         if request.method == 'POST':
             data = request.POST.copy()
             if not 'avants' in data:
@@ -231,7 +231,7 @@ def creer_sorcier(request, perso_id):
 def edit_fantassin(request, perso_id):
     fantassin = Fantassin.objects.get(pk=perso_id)
     utilisateur = request.user
-    if utilisateur == fantassin.perso.createur:
+    if utilisateur == fantassin.perso.createur or is_admin(utilisateur):
         if request.method == 'POST':
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
@@ -258,7 +258,7 @@ def edit_fantassin(request, perso_id):
 def edit_apothicaire(request, perso_id):
     apothicaire = Apothicaire.objects.get(pk=perso_id)
     utilisateur = request.user
-    if utilisateur == apothicaire.perso.createur:
+    if utilisateur == apothicaire.perso.createur or is_admin(utilisateur):
         if request.method == 'POST':
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
@@ -285,7 +285,7 @@ def edit_apothicaire(request, perso_id):
 def edit_arbaletrier(request, perso_id):
     arbaletrier = Arbaletrier.objects.get(pk=perso_id)
     utilisateur = request.user
-    if utilisateur == arbaletrier.perso.createur:
+    if utilisateur == arbaletrier.perso.createur or is_admin(utilisateur):
         if request.method == 'POST':
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
@@ -312,7 +312,7 @@ def edit_arbaletrier(request, perso_id):
 def edit_eclaireur(request, perso_id):
     eclaireur = Eclaireur.objects.get(pk=perso_id)
     utilisateur = request.user
-    if utilisateur == eclaireur.perso.createur:
+    if utilisateur == eclaireur.perso.createur or is_admin(utilisateur):
         if request.method == 'POST':
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
@@ -339,7 +339,7 @@ def edit_eclaireur(request, perso_id):
 def edit_sorcier(request, perso_id):
     sorcier = Sorcier.objects.get(pk=perso_id)
     utilisateur = request.user
-    if utilisateur == sorcier.perso.createur:
+    if utilisateur == sorcier.perso.createur or is_admin(utilisateur):
         if request.method == 'POST':
             data = request.POST.copy()
             data['createur'] = User.objects.get(username=utilisateur).id
@@ -360,3 +360,6 @@ def edit_sorcier(request, perso_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
+
+def is_admin(user):
+    return user.groups.filter(name='Admin').exists()

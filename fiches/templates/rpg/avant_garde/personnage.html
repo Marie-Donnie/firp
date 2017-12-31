@@ -13,7 +13,7 @@
 
 {% block edition %}
 {% if user.is_authenticated %}
-{% if user.id == fiche.createur.id %}
+{% if user.id == fiche.createur.id or perms.fiches.admin %}
 {% if fiche.classe == 1 %}
 {% if not fiche.fantassin %}<a class="btn btn-default" href="{% url 'creer_fantassin' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_fantassin' fiche.fantassin.id %}">Editer classe</a> {% endif %}
 {% elif fiche.classe == 2 %}{% if not fiche.arbaletrier %}<a class="btn btn-default" href="{% url 'creer_arbaletrier' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_arbaletrier' fiche.arbaletrier.id %}">Editer classe</a> {% endif %}
@@ -93,15 +93,14 @@
     </a>
   </div> <!-- media-right -->
   <div>
-    <h4 class="progress-label">Niveau : {{fiche.niveau}}{% if fiche.niveau < 6 %}. Expérience nécessaire pour le prochain niveau : </h4>
+    <h4 class="progress-label">Niveau : {{fiche.niveau}}{% if fiche.niveau < 6 %}. Expérience : {{fiche.xp}} points </h4>
     <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.xp}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 									{% if fiche.niveau == 1 %} {{fiche.xp|pourcent:100}}%"
-	    {% elif fiche.niveau == 2 %} {{fiche.xp|pourcent:200}}%"
-	    {% elif fiche.niveau == 3 %} {{fiche.xp|pourcent:400}}%"
-	    {% elif fiche.niveau == 4 %} {{fiche.xp|pourcent:800}}%"
-	    {% elif fiche.niveau == 5 %} {{fiche.xp|pourcent:1600}}%"
-	   {% endif %}>
-	{{fiche.xp}}%
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.xp}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 									{% if fiche.niveau == 1 %} {{fiche.xp|pourcent:100}}%">{{fiche.xp|pourcent:100}}%
+	    {% elif fiche.niveau == 2 %} {{fiche.xp|pourcent:200}}%"> {{fiche.xp|pourcent:200}}%
+	    {% elif fiche.niveau == 3 %} {{fiche.xp|pourcent:400}}%"> {{fiche.xp|pourcent:400}}%
+	    {% elif fiche.niveau == 4 %} {{fiche.xp|pourcent:800}}%"> {{fiche.xp|pourcent:800}}%
+	    {% elif fiche.niveau == 5 %} {{fiche.xp|pourcent:1600}}%"> {{fiche.xp|pourcent:1600}}%
+	   {% endif %}
       </div> <!-- progress-bar -->
     </div>   <!-- progress -->
     {% else %}</h4>
