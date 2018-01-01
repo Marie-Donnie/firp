@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from fiches.rpg.avant_garde.forms import *
 from fiches.rpg.avant_garde.models import *
+from fiches.rpg.avant_garde.functions import *
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RPG %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -360,6 +361,36 @@ def edit_sorcier(request, perso_id):
     else:
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AFFICHAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+def afficher_fantassin(request, classe_id):
+
+    classe = get_object_or_404(Fantassin, pk=classe_id)
+
+    perso = classe.perso
+
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_fantassin(classe.id)
+    context = {'fiche': perso, 'classe': classe, 'force': force,
+               'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
+               'charisme': charisme, 'force_men': force_men, 'pv_max': pv_max,
+               'cap_combat': cap_combat, 'cap_tir': cap_tir}
+
+    return render(request, 'rpg/avant_garde/display_fantassin.html', context)
+
+def afficher_apothicaire(request, classe_id):
+    classe = get_object_or_404(Apothicaire, pk=classe_id)
+    perso = classe.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_apothicaire(classe_id)
+    context = {'fiche': perso, 'classe': classe, 'force': force,
+               'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
+               'charisme': charisme, 'force_men': force_men, 'pv_max': pv_max,
+               'cap_combat': cap_combat, 'cap_tir': cap_tir}
+
+    return render(request, 'rpg/avant_garde/display_apothicaire.html', context)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FONCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 def is_admin(user):
     return user.groups.filter(name='Admin').exists()

@@ -667,6 +667,28 @@ h3.panel-title {
     height: auto;
 }
 
+.statistics {
+    margin: 1%;
+}
+
 .statistic {
     width: 30px;
+}
+
+.badges {
+    float: right;
+}
+
+.classe-ag {
+    background-image: url("/static/fiches/images/site/hunterbg.png") no-repeat center;
+    width: 727px;
+    height: 500px;
+    margin: 3% auto;
+    color: #000;
+    background-size: cover;
+    border-radius: 3px;
+}
+
+.red {
+    color: #d60006;
 }

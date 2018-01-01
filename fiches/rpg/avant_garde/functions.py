@@ -2,6 +2,7 @@ from fiches.rpg.avant_garde.models import *
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
 def calcul_base(perso_id):
     perso = Avant_garde.objects.get(pk=perso_id)
     force = perso.force
@@ -25,11 +26,11 @@ def calcul_base(perso_id):
         perce = min(perce + 1, 10)
         pv_max = max(pv_max - 1, 0)
         endu = max(endu - 1, 0)
-    if 10 in perso.avants:
+    if 10 in perso.avants.all():
         pv_max = min(pv_max + 1, 10)
-    if 19 in perso.avants:
+    if 19 in perso.avants.all():
         intell = min(intell + 3, 10)
-    if 21 in perso.desavants:
+    if 21 in perso.desavants.all():
         pv_max = max(pv_max - 1, 0)
 
     return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir
@@ -37,7 +38,7 @@ def calcul_base(perso_id):
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FANTASSIN %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-def calcul_fant(perso_id):
+def calcul_fantassin(perso_id):
     fantassin = Fantassin.objects.get(pk=perso_id)
     perso = fantassin.perso
     force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_base(perso.id)
@@ -67,7 +68,7 @@ def calcul_fant(perso_id):
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% APOTHCAIRE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-def calcul_apo(perso_id):
+def calcul_apothicaire(perso_id):
     apo = Apothicaire.objects.get(pk=perso_id)
     perso = apo.perso
     force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_base(perso.id)
@@ -94,13 +95,17 @@ def calcul_apo(perso_id):
     if apo.guerisseur_enfum == 3:
         cap_tir = min(cap_tir + 1, 10)
 
+    return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir
 
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% APOTHCAIRE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% ARBALETRIER %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-def calcul_arba(perso_id):
+def calcul_arbaletrier(perso_id):
     arba = Arbaletrier.objects.get(pk=perso_id)
     perso = arba.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_base(perso.id)
     if perso.niveau >= 3:
         force_men = min(force_men + 1, 10)
     if perso.niveau >= 5:
         force_men = min(force_men + 1, 10)
+
+    return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir

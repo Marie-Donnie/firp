@@ -197,15 +197,15 @@ $(function () {
     <div class="form-group">
       <label for="id_classe">Classe&nbsp;:</label>
       <select name="classe" id="id_classe">
-  <option value="1" {% if form.classe.value == 0 or form.classe.value == None %} selected="" {% endif %}>Fantassin</option>
+  <option value="1" {% if form.classe.value == 1 or form.classe.value == None %} selected="" {% endif %}>Fantassin</option>
 
-  <option value="2" {% if form.classe.value == 0%} selected="" {% endif %}>Arbalétrier</option>
+  <option value="2" {% if form.classe.value == 2%} selected="" {% endif %}>Arbalétrier</option>
 
-  <option value="3" {% if form.classe.value == 0%} selected="" {% endif %}>Eclaireur</option>
+  <option value="3" {% if form.classe.value == 3%} selected="" {% endif %}>Eclaireur</option>
 
-  <option value="4" {% if form.classe.value == 0%} selected="" {% endif %}>Apothicaire de combat</option>
+  <option value="4" {% if form.classe.value == 4%} selected="" {% endif %}>Apothicaire de combat</option>
 
-  <option value="5" {% if form.classe.value == 0%} selected="" {% endif %}>Apprenti sorcier</option>
+  <option value="5" {% if form.classe.value == 5%} selected="" {% endif %}>Apprenti sorcier</option>
 
       </select>
       <span id=red>! REQUIS !</span>
@@ -271,15 +271,15 @@ $(function () {
   <select size="10" name="desavants" multiple="multiple" id="id_desavants" class="form-control">
     {% for desavantage in desavantages %}
     {% if desavantage.id != 1 %}
-	<option value="{{desavantage.id}}"{% if desavantage.id in form.desavants.value %} selected="" {% endif %}>{{desavantage.nom}} : {{desavantage.description}} (-{{desavantage.points}} points de création)</option>
+	<option value="{{desavantage.id}}"{% if desavantage.id in form.desavants.value %} selected="" {% endif %}>{{desavantage.nom}} : {{desavantage.description}} (+{{desavantage.points}} points de création)</option>
 	{% endif %}
 	{% endfor %}
     </select>
 
   </div>
   <div class="form-group">
-    <label for="id_peur">Peur&nbsp;:</label> <input name="peur" value="{{form.peur.value|default:'Aucun'}}" id="id_peur" maxlength="80" type="text">
-    <label for="id_dependances">Dépendances&nbsp;:</label> <input name="dependances" value="{{form.dependances.value|default:'Aucun'}}" id="id_dependances" maxlength="80" type="text">
+    <label for="id_peur">Peur&nbsp;:</label> <input name="peur" value="{{form.peur.value|default:'Sans'}}" id="id_peur" maxlength="80" type="text">
+    <label for="id_dependances">Dépendances&nbsp;:</label> <input name="dependances" value="{{form.dependances.value|default:'Sans'}}" id="id_dependances" maxlength="80" type="text">
     <span>Si désavantages choisis</span>
   </div>
   <div class="form-group">

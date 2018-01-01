@@ -205,7 +205,7 @@ class Fantassin(models.Model):
                                  related_name='fantassin')
 
     def __unicode__(self):
-        return u'%s' % (self.perso.nom)
+        return u'%s, %s' % (self.perso.nom, 'fantassin')
 
 
 class Apothicaire(models.Model):
@@ -241,7 +241,7 @@ class Apothicaire(models.Model):
                                  related_name='apothicaire')
 
     def __unicode__(self):
-        return u'%s' % (self.perso.nom)
+        return u'%s, %s' % (self.perso.nom, 'apothicaire')
 
 
 class Arbaletrier(models.Model):
@@ -264,7 +264,7 @@ class Arbaletrier(models.Model):
                                  related_name='arbaletrier')
 
     def __unicode__(self):
-        return u'%s' % (self.perso.nom)
+        return u'%s, %s' % (self.perso.nom, 'arbalétrier')
 
 
 class Eclaireur(models.Model):
@@ -315,7 +315,7 @@ class Eclaireur(models.Model):
                                  related_name='eclaireur')
 
     def __unicode__(self):
-        return u'%s' % (self.perso.nom)
+        return u'%s, %s' % (self.perso.nom, 'éclaireur')
 
 
 class Sorcier(models.Model):
@@ -354,7 +354,7 @@ class Sorcier(models.Model):
                                  related_name='sorcier')
 
     def __unicode__(self):
-        return u'%s' % (self.perso.nom)
+        return u'%s, %s' % (self.perso.nom, 'sorcier')
 
 
 class Avantages(models.Model):

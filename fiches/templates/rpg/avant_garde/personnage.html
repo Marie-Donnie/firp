@@ -3,6 +3,9 @@
 {% load filters %}
 
 {% block script %}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 {% endblock %}
 
 
@@ -41,10 +44,40 @@
   <div class="media-body">
 
     <h3>{{ fiche.get_pj_display }} et {{ fiche.get_etat_display|lower }}</h3>
+    <span class="badges">
+      {% if fiche.sexe == 'h' %} <!-- males -->
+      {% if fiche.race == 'n' %}
+      <img class="race-icone" src="/fiches/media/images/site/dwarf_male.PNG" alt="Nain" title="Nain">
+      {% elif fiche.race == 'e' %}
+      <img class="race-icone" src="/fiches/media/images/site/HE_male.PNG" alt="Haut-elfe" title="Haut-elfe">
+      {% else %}
+      <img class="race-icone" src="/fiches/media/images/site/human_male.PNG" alt="Humain" title="Humain">
+      {% endif %}
+      {% else %} <!-- females -->
+      {% if fiche.race == 'n' %}
+      <img class="race-icone" src="/fiches/media/images/site/dwarf_female.PNG" alt="Naine" title="Naine">
+      {% elif fiche.race == 'e' %}
+      <img class="race-icone" src="/fiches/media/images/site/HE_female.PNG" alt="Haute-elfe" title="Haute-elfe">
+      {% else %}
+      <img class="race-icone" src="/fiches/media/images/site/human_female.PNG" alt="Humaine" title="Humaine">
+      {% endif %}
+      {% endif %}
+      {% if fiche.classe == 1 %}
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Fantassin.PNG" alt="Fantassin" title="Fantassin">
+      {% elif fiche.classe == 2 %}
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Arbaletrier.PNG" alt="Arbalétrier" title="Arbalétrier">
+      {% elif fiche.classe == 3 %}
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Eclaireur.PNG" alt="Eclaireur" title="Eclaireur">
+      {% elif fiche.classe == 4 %}
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Apothicaire.PNG" alt="Apothicaire de combat" title="Apothicaire de combat">
+      {% elif fiche.classe == 5 %}
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Sorcier.PNG" alt="Apprenti sorcier"title="Apprenti sorcier">
+      {% else %}
+      <img class="classe-icone" src="/fiches/media/images/site/WoWUnknownItem01.PNG" alt="Pas de classe">
+      {% endif %}
+    </span>
     <ul>
       <li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}&nbsp;{{ fiche.prenom|capfirst }}</li>
-      <li><b>Sexe&nbsp;: </b>{{ fiche.get_sexe_display }}</li>
-      <li><b>Race&nbsp;: </b>{{ fiche.get_race_display|capfirst }}</li>
       <li><b>Date de naissance&nbsp;: </b>{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
 	{% endif %}
 	{{fiche.mois_de_naissance}}{% if fiche.jour_mois_de_naissance == 01 %}er mois{% else %}ème mois
@@ -59,16 +92,9 @@
 	{% endif %}
       </li>
       <li><b>Grade&nbsp;: </b>{{ fiche.get_grade_rp_display|capfirst }}</li>
-      <li>
-	<span><img class="statistic" src="/fiches/media/images/site/rpg/CCombat.PNG" alt="Capacité de combat">{{ fiche.cap_combat }}</span>
-	<span><img class="statistic" src="/fiches/media/images/site/rpg/CTir.PNG" alt="Capacité de tir">{{ fiche.cap_tir }}
-      	<span><img class="statistic" src="/fiches/media/images/site/Force.PNG" alt="Force">{{ fiche.force }}
-      	<span><img class="statistic" src="/fiches/media/images/site/rpg/Endu.PNG" alt="Endurance">{{ fiche.endu }}
-      	<span><img class="statistic" src="/fiches/media/images/site/rpg/Perce.PNG" alt="Perception">{{ fiche.perce }}
-      	<span><img class="statistic" src="/fiches/media/images/site/Agi.PNG" alt="Agilité">{{ fiche.agi }}
-      	<span><img class="statistic" src="/fiches/media/images/site/Intell.PNG" alt="Intelligence">{{ fiche.intell }}
-      	<span><img class="statistic" src="/fiches/media/images/site/rpg/Charisme.PNG" alt="Charisme">{{ fiche.charisme }}
-      	<span><img class="statistic" src="/fiches/media/images/site/rpg/FM.PNG" alt="Force mentale">{{ fiche.force_men}}</li>
+      <li>{% block statistic %}{% endblock %}</li>
+      <li><b>Blessures&nbsp;: </b><span {% if fiche.troubles_ment != 'Sans' %}class="red"{% endif %}>{{ fiche.blessures|linebreaksbr }}</span></li>
+      <li><b>Troubles mentaux&nbsp;: </b><span {% if fiche.troubles_ment != 'Sans' %}class="red"{% endif %}>{{ fiche.troubles_ment|linebreaksbr }}</span></li>
       <li><b>Traits&nbsp;: </b>
 	<ul>
 	  {% for avant in fiche.avants.all %}
@@ -81,7 +107,10 @@
 	  {% for desavant in fiche.desavants.all %}
 	  <li id=desavantages>
 	    {% if desavant.id != 1 %}
-	    {{desavant.nom}} :
+	    {{desavant.nom}}
+	    {% if desavant.id == 5 and fiche.peur != 'Sans' %}({{fiche.peur}})
+	    {% elif desavant.id == 23 and fiche.dependances != 'Sans' %}({{fiche.dependances}}){% endif %}
+	    :
 	    {% endif %}
 	    {{desavant.description}}</li>
 	  {% endfor %}
@@ -125,7 +154,6 @@
 
 
 </div>
-
-{% block classe %}{% endblock %}
+    {% block classe %}{% endblock %}
 
 {% endblock %}

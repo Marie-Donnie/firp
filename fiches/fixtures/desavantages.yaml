@@ -25,7 +25,7 @@
 - model: fiches.desavantages
   pk: 5
   fields:
-    nom: Peur (nom de la race ou de l'animal)
+    nom: Peur
     description: Vous avez développé une peur tenace d'un certain type d'adversaires
     points: 2
 - model: fiches.desavantages
@@ -133,7 +133,7 @@
 - model: fiches.desavantages
   pk: 23
   fields:
-    nom: Dépendance (nom du type d'alcool/drogue)
+    nom: Dépendance
     description: Vous êtes dépendant et devez vous trouver de quoi satisfaire cette dépendance (les points de création augmentent selon la rareté de l'alcool/drogue)
     points: 2
 - model: fiches.desavantages

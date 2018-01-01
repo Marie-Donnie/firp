@@ -1,0 +1,31 @@
+{% extends "rpg/avant_garde/personnage.html" %}
+
+{% load filters %}
+
+
+{% block statistic %}
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/rpg/CCombat.PNG" alt="Capacité de combat" title="Capacité de combat">{{ cap_combat }}</a></span>
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/rpg/CTir.PNG" alt="Capacité de tir" title="Capacité de tir">{{ cap_tir }}</span>
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/Force.PNG" alt="Force" title="Force">{{ force }}</span>
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/rpg/Endu.PNG" alt="Endurance" title="Endurance">{{ endu }}</span>
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/rpg/Perception.PNG" alt="Perception" title="Perception">{{ perce }}</span>
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/Agi.PNG" alt="Agilité" title="Agilité">{{ agi }}</span>
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/Intell.PNG" alt="Intelligence" title="Intelligence">{{ intell }}</span>
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/rpg/Charisme.PNG" alt="Charisme" title="Charisme">{{ charisme }}</span>
+<span class="statistics"><img class="statistic" src="/fiches/media/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">{{ force_men}}</span>
+{% endblock %}
+
+
+{% block classe %}
+  <div id="classe-ag-panel">
+    <div class="panel panel-defaut" id="details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Classe</h3>
+      </div>
+      <div class="panel-body centre">
+	<div class="classe-ag">
+	</div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
