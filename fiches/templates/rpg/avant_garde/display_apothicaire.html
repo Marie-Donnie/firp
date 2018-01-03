@@ -2,4 +2,68 @@
 
 
 {% block script %}
+
+{% endblock %}
+
+{% block niveau1 %}
+<img title="De 0 à 100, Permet d'appliquer les premiers soins aux blessés et préparer des anti-poisons."> Médecine
+<span class="bottomright">{{classe.medecine}}</span>
++ 1 Intelligence
+
+{% endblock %}
+
+{% block niveau2 %}
+{% if perso.niveau > 1 %}
+{% if chirurgie != 0 %}
+<img title="De 0 à 100, permet d'éviter les mutilations et sauver les blessés graves.">Chirurgie
+<span class="bottomright">{{chirurgie}}</span>
+{% elif classe.poison != 0 %}
+<img title="De 0 à 100, permet de concocter de poisons">Poison
+<span class="bottomright">{{classe.poison}}</span>
+{% else %}
+Erreur
+{% endif %}
++ 1 Force Mentale
+{% endif %}
+{% endblock %}
+
+{% block niveau3 %}
+{% if perso.niveau > 2 %}
+{% if classe.guerisseur %}
+<img title="+ 1 Intelligence, augmente les pv rendus par la médecine de 1"> Trait Guérisseur
+{% elif classe.alchimie != 0%}
+<img title="De 0 à 100, permet de concocter des fioles contenant des produits mortels et les lancer sur les adversaires"> Alchimie
+<span class="bottomright">{{classe.alchimie}}</span>
+{% else %}
+Erreur
+{% endif %}
+<img title="De 0 à 100, permet de monter à cheval"> Equitation
++ 1 Force Mentale
+{% endif %}
+{% endblock %}
+
+{% block niveau4 %}
+{% if perso.niveau > 3 %}
+{% if classe.scalpel_fioles == 2 %}
+<img title="+ 1 Intelligence, rajoute 30 points à la compétence chirurgie"> Trait maîtrise du scalpel
+{% elif classe.scalpel_fioles == 3 %}
+<img title="+1 Capacité de tir">Trait Art du lancer de fioles
+{% else %}
+Erreur
+{% endif %}
++ 1 Force Mentale
+{% endif %}
+{% endblock %}
+
+{% block niveau5 %}
+{% if perso.niveau > 3 %}
+{% if classe.guerisseur_enfumeur == 2 %}
+Trait Maître guérisseur : + 1 Intelligence, + 1 Force Mentale, Augmente les pv rendus par la médecine de 1
+{% elif classe.guerisseur_enfumeur == 3 %}
+Trait Enfumeur : + 1 Capacité de Tir, permet de toucher les morts-vivants avec les fioles, dote le médecin d'un masque à gaz
+{% else %}
+Erreur
+{% endif %}
++ 1 Force Mentale
+{% endif %}
 {% endblock %}

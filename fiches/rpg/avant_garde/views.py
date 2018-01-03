@@ -381,13 +381,46 @@ def afficher_fantassin(request, classe_id):
 def afficher_apothicaire(request, classe_id):
     classe = get_object_or_404(Apothicaire, pk=classe_id)
     perso = classe.perso
-    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_apothicaire(classe_id)
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir, chirurgie = calcul_apothicaire(classe_id)
     context = {'fiche': perso, 'classe': classe, 'force': force,
                'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
                'charisme': charisme, 'force_men': force_men, 'pv_max': pv_max,
-               'cap_combat': cap_combat, 'cap_tir': cap_tir}
+               'cap_combat': cap_combat, 'cap_tir': cap_tir, 'chirurgie': chirurgie}
 
     return render(request, 'rpg/avant_garde/display_apothicaire.html', context)
+
+def afficher_arbaletrier(request, classe_id):
+    classe = get_object_or_404(Arbaletrier, pk=classe_id)
+    perso = classe.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_arbaletrier(classe_id)
+    context = {'fiche': perso, 'classe': classe, 'force': force,
+               'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
+               'charisme': charisme, 'force_men': force_men, 'pv_max': pv_max,
+               'cap_combat': cap_combat, 'cap_tir': cap_tir,}
+
+    return render(request, 'rpg/avant_garde/display_arbaletrier.html', context)
+
+def afficher_eclaireur(request, classe_id):
+    classe = get_object_or_404(Eclaireur, pk=classe_id)
+    perso = classe.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_eclaireur(classe_id)
+    context = {'fiche': perso, 'classe': classe, 'force': force,
+               'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
+               'charisme': charisme, 'force_men': force_men, 'pv_max': pv_max,
+               'cap_combat': cap_combat, 'cap_tir': cap_tir,}
+
+    return render(request, 'rpg/avant_garde/display_eclaireur.html', context)
+
+def afficher_sorcier(request, classe_id):
+    classe = get_object_or_404(Sorcier, pk=classe_id)
+    perso = classe.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_sorcier(classe_id)
+    context = {'fiche': perso, 'classe': classe, 'force': force,
+               'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
+               'charisme': charisme, 'force_men': force_men, 'pv_max': pv_max,
+               'cap_combat': cap_combat, 'cap_tir': cap_tir, 'mana': mana}
+
+    return render(request, 'rpg/avant_garde/display_sorcier.html', context)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FONCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

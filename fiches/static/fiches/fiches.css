@@ -680,7 +680,7 @@ h3.panel-title {
 }
 
 .classe-ag {
-    background-image: url("/static/fiches/images/site/hunterbg.png") no-repeat center;
+    background: url("/static/site/images/hunterbg.PNG") no-repeat center;
     width: 727px;
     height: 500px;
     margin: 3% auto;

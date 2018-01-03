@@ -72,6 +72,7 @@ def calcul_apothicaire(perso_id):
     apo = Apothicaire.objects.get(pk=perso_id)
     perso = apo.perso
     force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_base(perso.id)
+    chirurgie = apo.chirurgie
     if perso.niveau >= 1:
         intell = min(intell + 1, 10)
     if perso.niveau >= 2:
@@ -86,7 +87,7 @@ def calcul_apothicaire(perso_id):
         intell = min(intell + 1, 10)
     if apo.scalpel_fioles == 2:
         intell = min(intell + 1, 10)
-        apo.chirurgie = min(apo.chirurgie + 30, 100)
+        chirurgie = min(apo.chirurgie + 30, 100)
     elif apo.scalpel_fioles == 3:
         cap_tir = min(cap_tir + 1, 10)
     if apo.guerisseur_enfum == 2:
@@ -95,7 +96,8 @@ def calcul_apothicaire(perso_id):
     if apo.guerisseur_enfum == 3:
         cap_tir = min(cap_tir + 1, 10)
 
-    return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir
+    return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir, chirurgie
+
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% ARBALETRIER %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
@@ -103,9 +105,70 @@ def calcul_arbaletrier(perso_id):
     arba = Arbaletrier.objects.get(pk=perso_id)
     perso = arba.perso
     force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_base(perso.id)
+    if perso.niveau >= 2:
+        cap_tir = min(cap_tir + 1, 10)
     if perso.niveau >= 3:
         force_men = min(force_men + 1, 10)
+        cap_tir = min(cap_tir + 1, 10)
     if perso.niveau >= 5:
+        force_men = min(force_men + 1, 10)
+        cap_tir = min(cap_tir + 1, 10)
+
+    return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% ECLAIREUR %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+def calcul_eclaireur(perso_id):
+    ecl = Eclaireur.objects.get(pk=perso_id)
+    perso = ecl.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_base(perso.id)
+    if perso.niveau >= 2:
+        if (ecl.aigle_vif == 2):
+            perce = min(perce + 1, 10)
+        elif (ecl.aigle_vif == 3):
+            agi = min(agi + 1, 10)
+        force_men = min(force_men + 1, 10)
+    if perso.niveau >= 3:
+        if (ecl.vigilant_rx == 2):
+            perce = min(perce + 1, 10)
+        elif (ecl.vigilant_rx == 3):
+            agi = min(agi + 1, 10)
+        force_men = min(force_men + 1, 10)
+    if perso.niveau >= 4:
+        force_men = min(force_men + 1, 10)
+    if perso.niveau >= 5:
+        if (ecl.silen_rodeur == 2):
+            cap_combat = min(cap_combat + 1, 10)
+            cap_tir = min(cap_tir + 1, 10)
+            agi = min(agi + 1, 10)
+        elif (ecl.silen_rodeur == 3):
+            agi = min(agi + 1, 10)
+            perce = min(perce + 2, 10)
         force_men = min(force_men + 1, 10)
 
     return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORCIER %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+def calcul_sorcier(perso_id):
+    sorcier = Sorcier.objects.get(pk=perso_id)
+    perso = sorcier.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_base(perso.id)
+    mana = 0
+    if perso.niveau >= 2:
+        intell = min(intell + 1, 10)
+    if perso.niveau >= 3:
+        intell = min(intell + 1, 10)
+        force_men = min(force_men + 1, 10)
+    if perso.niveau >= 4:
+        intell = min(intell + 1, 10)
+        force_men = min(force_men + 1, 10)
+    if perso.niveau >= 5:
+        intell = min(intell + 1, 10)
+        force_men = min(force_men + 1, 10)
+        mana += 100
+    mana = intell * 10
+
+    return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir, mana
