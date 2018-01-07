@@ -86,14 +86,7 @@ Trait Enfumeur (+ 1 Capacité de Tir, permet de toucher les morts-vivants avec l
       <label for="id_equitation">Equitation&nbsp;:</label> <input name="equitation" value="{{form.equitation.value|default:'0'}}" max="100" required="" id="id_equitation" min="0" type="number">
     </div>
     <h4>Niveau 4</h4>
-    <div class="form-group">
-      <label for="id_maitr_scalpel">Maîtrise du scalpel&nbsp;:</label> <select name="maitr_scalpel" id="id_maitr_scalpel">
-    	<option value="True"{% if form.maitr_scalpel.value %} selected="" {% endif %}>Oui</option>
 
-    	<option value="False"{% if not form.maitr_scalpel.value or form.maitr_scalpel.value == None %} selected="" {% endif %}>Non</option>
-
-      </select>
-    </div>
     <div class="form-group">
     <label for="id_scalpel_fioles">Maîtrise du scalpel/Art du lancer de fioles&nbsp;:</label> <select id="id_scalpel_fioles" name="scalpel_fioles">
 <option value="1"  {% if form.scalpel_fioles.value == 1 or form.scalpel_fioles.value == None %} selected="" {% endif %}>N'a pas le niveau</option>

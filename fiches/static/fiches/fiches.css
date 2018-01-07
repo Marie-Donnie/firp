@@ -703,7 +703,9 @@ h3.panel-title {
     display: inline-block;
     background-color: #0006;
     border-radius: 10px;
-    padding: 1px;
+    padding: 3px;
+    position: relative;
+    margin: 0px 5px;
 }
 
 .talent-image {
@@ -712,4 +714,14 @@ h3.panel-title {
 
 .niveau-heading {
     padding: 8px 0px;
+}
+
+.talentpoints {
+    position: absolute;
+    bottom: 0px;
+    font-size: 16px;
+    color: #fff;
+    text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black;
+    font-weight: bold;
+    right: 0px;
 }
