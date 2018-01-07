@@ -89,7 +89,7 @@ h1 a {
     margin: 0px 5px;
 }
 
-.container-fluid {
+#woody {
     background-image: url("/static/fiches/images/wood.jpg");
     /* background-size: 100% 100%; */
     /* background-image: linear-gradient(to bottom,#000000 0,#2d0001 100%); */
@@ -691,4 +691,25 @@ h3.panel-title {
 
 .red {
     color: #d60006;
+}
+
+.niveau {
+    border: 1px solid #fcc7811a;
+    border-radius: 5px;
+    color: white;
+}
+
+.talent {
+    display: inline-block;
+    background-color: #0006;
+    border-radius: 10px;
+    padding: 1px;
+}
+
+.talent-image {
+    width: 48px;
+}
+
+.niveau-heading {
+    padding: 8px 0px;
 }

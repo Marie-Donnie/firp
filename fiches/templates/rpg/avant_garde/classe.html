@@ -1,7 +1,8 @@
 {% extends "rpg/avant_garde/personnage.html" %}
 
+{% load staticfiles %}
+{% load static %}
 {% load filters %}
-
 
 {% block statistic %}
 <span class="statistics"><img class="statistic" src="/fiches/media/images/site/rpg/CCombat.PNG" alt="Capacité de combat" title="Capacité de combat">{{ cap_combat }}</a></span>
@@ -25,8 +26,7 @@
       <div class="panel-body centre">
 	<div class="classe-ag">
 	  <div class="container-fluid">
-	    <div class="row" id="niveau1">
-	      <div class="col-xs-12 col-md-8">
+	    <div class="row niveau" id="niveau1">
 		<div class="media">
 		  <div class="media-left media-middle">
 		    <a href="#">
@@ -34,14 +34,12 @@
 		    </a>
 		  </div> <!-- media-left media-middle -->
 		  <div class="media-body">
-		    <h4 class="media-heading">Niveau 1</h4>
+		    <h4 class="media-heading niveau-heading">Niveau 1</h4>
 		    {% block niveau1 %}{% endblock %}
 		  </div> <!-- media-body -->
 		</div>	 <!-- media -->
-	      </div>	 <!-- col-xs  -->
-	    </div>	 <!-- row -->
-	    <div class="row" id="niveau2">
-	      <div class="col-xs-12 col-md-8">
+	    </div>	 <!-- row niveau -->
+	    <div class="row niveau" id="niveau2" {% if fiche.niveau < 2 %} style="opacity: 0.2;" {% endif %}>
 		<div class="media">
 		  <div class="media-left media-middle">
 		    <a href="#">
@@ -49,14 +47,12 @@
 		    </a>
 		  </div> <!-- media-left media-middle -->
 		  <div class="media-body">
-		    <h4 class="media-heading">Niveau 2</h4>
+		    <h4 class="media-heading niveau-heading">Niveau 2</h4>
 		    {% block niveau2 %}{% endblock %}
 		  </div> <!-- media-body -->
 		</div>	 <!-- media -->
-	      </div>	 <!-- col-xs  -->
-	    </div>	 <!-- row -->
-	    <div class="row" id="niveau3">
-	      <div class="col-xs-12 col-md-8">
+	    </div>	 <!-- row niveau -->
+	    <div class="row niveau" id="niveau3" {% if fiche.niveau < 3 %} style="opacity: 0.2;" {% endif %}>
 		<div class="media">
 		  <div class="media-left media-middle">
 		    <a href="#">
@@ -64,14 +60,12 @@
 		    </a>
 		  </div> <!-- media-left media-middle -->
 		  <div class="media-body">
-		    <h4 class="media-heading">Niveau 3</h4>
+		    <h4 class="media-heading niveau-heading">Niveau 3</h4>
 		    {% block niveau3 %}{% endblock %}
 		  </div> <!-- media-body -->
 		</div>	 <!-- media -->
-	      </div>	 <!-- col-xs  -->
-	    </div>	 <!-- row -->
-	    <div class="row" id="niveau4">
-	      <div class="col-xs-12 col-md-8">
+	    </div>	 <!-- row niveau -->
+	    <div class="row niveau" id="niveau4" {% if fiche.niveau < 4 %} style="opacity: 0.2;" {% endif %}>
 		<div class="media">
 		  <div class="media-left media-middle">
 		    <a href="#">
@@ -79,14 +73,12 @@
 		    </a>
 		  </div> <!-- media-left media-middle -->
 		  <div class="media-body">
-		    <h4 class="media-heading">Niveau 4</h4>
+		    <h4 class="media-heading niveau-heading">Niveau 4</h4>
 		    {% block niveau4 %}{% endblock %}
 		  </div> <!-- media-body -->
 		</div>	 <!-- media -->
-	      </div>	 <!-- col-xs  -->
-	    </div>	 <!-- row -->
-	    <div class="row" id="niveau5">
-	      <div class="col-xs-12 col-md-8">
+	    </div>	 <!-- row niveau -->
+	    <div class="row niveau" id="niveau5" {% if fiche.niveau < 5 %} style="opacity: 0.2;" {% endif %}>
 		<div class="media">
 		  <div class="media-left media-middle">
 		    <a href="#">
@@ -94,12 +86,11 @@
 		    </a>
 		  </div> <!-- media-left media-middle -->
 		  <div class="media-body">
-		    <h4 class="media-heading">Niveau 5</h4>
+		    <h4 class="media-heading niveau-heading">Niveau 5</h4>
 		    {% block niveau5 %}{% endblock %}
 		  </div> <!-- media-body -->
 		</div>	 <!-- media -->
-	      </div>	 <!-- col-xs  -->
-	    </div>	 <!-- row -->
+	    </div>	 <!-- row niveau -->
 	  </div>	 <!-- container-fluid -->
 	</div>		 <!-- classe-ag -->
       </div>		 <!-- panel-body centre -->

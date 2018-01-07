@@ -1,69 +1,100 @@
 {% extends "rpg/avant_garde/classe.html" %}
 
+{% load static %}
 
 {% block script %}
 
 {% endblock %}
 
 {% block niveau1 %}
-<img title="De 0 à 100, Permet d'appliquer les premiers soins aux blessés et préparer des anti-poisons."> Médecine
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="De 0 à 100, Permet d'appliquer les premiers soins aux blessés et préparer des anti-poisons."> Médecine
 <span class="bottomright">{{classe.medecine}}</span>
-+ 1 Intelligence
+</div>
+<div class="talent">
+<img class="talent-image" src="/fiches/media/images/site/Intell.PNG" alt="Intelligence" title="Intelligence"> + 1 Intelligence
+</div>
 
 {% endblock %}
 
 {% block niveau2 %}
-{% if perso.niveau > 1 %}
+{% if fiche.niveau > 1 %}
 {% if chirurgie != 0 %}
-<img title="De 0 à 100, permet d'éviter les mutilations et sauver les blessés graves.">Chirurgie
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="De 0 à 100, permet d'éviter les mutilations et sauver les blessés graves.">Chirurgie
 <span class="bottomright">{{chirurgie}}</span>
+</div>
 {% elif classe.poison != 0 %}
-<img title="De 0 à 100, permet de concocter de poisons">Poison
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="De 0 à 100, permet de concocter de poisons">Poison
 <span class="bottomright">{{classe.poison}}</span>
+</div>
 {% else %}
 Erreur
 {% endif %}
-+ 1 Force Mentale
+<div class="talent">
+<img class="talent-image" src="/fiches/media/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
 {% endif %}
 {% endblock %}
 
 {% block niveau3 %}
-{% if perso.niveau > 2 %}
+{% if fiche.niveau > 2 %}
 {% if classe.guerisseur %}
-<img title="+ 1 Intelligence, augmente les pv rendus par la médecine de 1"> Trait Guérisseur
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="+ 1 Intelligence, augmente les pv rendus par la médecine de 1"> Trait Guérisseur
+</div>
 {% elif classe.alchimie != 0%}
-<img title="De 0 à 100, permet de concocter des fioles contenant des produits mortels et les lancer sur les adversaires"> Alchimie
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="De 0 à 100, permet de concocter des fioles contenant des produits mortels et les lancer sur les adversaires"> Alchimie
 <span class="bottomright">{{classe.alchimie}}</span>
+</div>
 {% else %}
 Erreur
 {% endif %}
-<img title="De 0 à 100, permet de monter à cheval"> Equitation
-+ 1 Force Mentale
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="De 0 à 100, permet de monter à cheval"> Equitation
+</div>
+<div class="talent">
+<img class="talent-image" src="/fiches/media/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
 {% endif %}
 {% endblock %}
 
 {% block niveau4 %}
-{% if perso.niveau > 3 %}
+{% if fiche.niveau > 3 %}
 {% if classe.scalpel_fioles == 2 %}
-<img title="+ 1 Intelligence, rajoute 30 points à la compétence chirurgie"> Trait maîtrise du scalpel
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="+ 1 Intelligence, rajoute 30 points à la compétence chirurgie"> Trait maîtrise du scalpel
+</div>
 {% elif classe.scalpel_fioles == 3 %}
-<img title="+1 Capacité de tir">Trait Art du lancer de fioles
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="+1 Capacité de tir">Trait Art du lancer de fioles
+</div>
 {% else %}
 Erreur
 {% endif %}
-+ 1 Force Mentale
+<div class="talent">
+ <img class="talent-image" src="/fiches/media/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale"> + 1 Force Mentale
+</div>
 {% endif %}
 {% endblock %}
 
 {% block niveau5 %}
-{% if perso.niveau > 3 %}
+{% if fiche.niveau > 4 %}
 {% if classe.guerisseur_enfumeur == 2 %}
-Trait Maître guérisseur : + 1 Intelligence, + 1 Force Mentale, Augmente les pv rendus par la médecine de 1
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="+ 1 Intelligence, + 1 Force Mentale, Augmente les pv rendus par la médecine de 1"> Trait Maître guérisseur
+</div>
 {% elif classe.guerisseur_enfumeur == 3 %}
-Trait Enfumeur : + 1 Capacité de Tir, permet de toucher les morts-vivants avec les fioles, dote le médecin d'un masque à gaz
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GhostPirate.PNG" title="+ 1 Capacité de Tir, permet de toucher les morts-vivants avec les fioles, dote le médecin d'un masque à gaz"> Trait Enfumeur
+</div>
 {% else %}
 Erreur
 {% endif %}
-+ 1 Force Mentale
+<div class="talent">
+<img class="talent-image" src="/fiches/media/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
 {% endif %}
 {% endblock %}
