@@ -73,9 +73,11 @@
   Vous avez le niveau pour choisir entre Épéiste ou Crâne dur
 </div>
 {% endif %}
+{% if classe.escalade != 0 %}
 <div class="talent">
-  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mount_RidingHorse.PNG" title="De 0 à 100, permet de monter à cheval"> Équitation
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mount_RidingHorse.PNG" title="De 0 à 100, permet de monter à cheval" alt="Équitation"> Équitation
 </div>
+{% endif %}
 <div class="talent">
 <img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
 </div>

@@ -703,13 +703,13 @@ h3.panel-title {
     display: inline-block;
     background-color: #0006;
     border-radius: 10px;
-    padding: 3px;
+    padding: 2px;
     position: relative;
     margin: 0px 5px;
 }
 
 .talent-image {
-    width: 48px;
+    width: 40px;
 }
 
 .niveau-heading {

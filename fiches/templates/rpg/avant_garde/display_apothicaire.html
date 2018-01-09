@@ -56,12 +56,14 @@
 </div>
 {% else %}
 <div class="talent">
-  Vous avez le niveau pour un des talents
+  Vous pouvez prendre Guérisseur ou Alchimie
 </div>
 {% endif %}
+{% if classe.escalade != 0 %}
 <div class="talent">
   <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mount_RidingHorse.PNG" title="De 0 à 100, permet de monter à cheval" alt="Équitation"> Équitation
 </div>
+{% endif %}
 <div class="talent">
 <img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
 </div>
@@ -80,7 +82,7 @@
 </div>
 {% else %}
 <div class="talent">
-  Vous avez le niveau pour un des talents
+  Vous pouvez prendre Maîtrise du scalpel ou Art du lancer de fioles
 </div>
 {% endif %}
 <div class="talent">
@@ -101,7 +103,7 @@
 </div>
 {% else %}
 <div class="talent">
-  Vous avez le niveau pour un des talents
+  Vous pouvez prendre Maître guérisseur ou Enfumeur
 </div>
 {% endif %}
 <div class="talent">

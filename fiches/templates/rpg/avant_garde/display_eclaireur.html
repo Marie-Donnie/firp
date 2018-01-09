@@ -1,15 +1,163 @@
 {% extends "rpg/avant_garde/classe.html" %}
 
+{% load static %}
+
+
 {% block script %}
+
 {% endblock %}
 
 {% block niveau1 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_ShroudOfConcealment.PNG" alt="Dissimulation" title="De 0 à 100, permet de se cacher dans l'environnement.">Dissimulation
+<span class="talentpoints">{{classe.dissimulation}}</span>
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_MasterOfSubtlety.PNG" alt="Vigilance" title="De 0 à 100, permet de remarquer ce que tout le monde ne peut pas voir, rajoute deux points aux test de perception par dizaine de points.">Vigilance
+<span class="talentpoints">{{classe.vigilance}}</span>
+</div>
+
 {% endblock %}
+
 {% block niveau2 %}
+{% if fiche.niveau > 1 %}
+{% if classe.aigle_vif == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/Perception.PNG" alt="Œil d'aigle" title="+1 Perception"> Œil d'aigle
+</div>
+{% elif classe.aigle_vif == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Agi.PNG" alt="Vif" title="+1 Agilité"> Vif
+</div>
+{% else %}
+<div class="talent">
+  Vous pouvez choisir Œil d'aigle ou Vif
+</div>
+{% endif %}
+{% if classe.escalade != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GrapplingHook.PNG" title="De 0 à 100, détermine la capacité à escalader." alt="Escalade">Escalade
+<span class="talentpoints">{{classe.escalade}}</span>
+</div>
+{% endif %}
+{% if classe.equitation != 0 %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mount_RidingHorse.PNG" title="De 0 à 100, permet de monter à cheval" alt="Équitation"> Équitation
+</div>
+{% endif %}
+{% if classe.pistage != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Hunter_ImprovedTracking.PNG" title="De 0 à 100. Permet de suivre des traces." alt="Pistage">Pistage
+<span class="talentpoints">{{classe.pistage}}</span>
+</div>
+{% elif classe.deguisement != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_Disguise.PNG" title="De 0 à 100, permet de créer un déguisement convaincant pour tromper l'ennemi" alt="Déguisement">Déguisement
+<span class="talentpoints">{{classe.deguisement}}</span>
+</div>
+{% else %}
+<div class="talent">
+  Vous pouvez choisir de mettre des points dans Pistage ou Déguisement
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau3 %}
+{% if fiche.niveau > 2 %}
+{% if classe.vigilant_rx == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/Perception.PNG" alt="Vigilant" title="+1 Perception"> Vigilant
+</div>
+{% elif classe.vigilant_rx == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Agi.PNG" alt="Réflexes éclairs" title="+1 Agilité"> Réflexes éclairs
+</div>
+{% else %}
+<div class="talent">
+  Vous avez le niveau pour choisir entre Vigilant ou Réflexes éclairs
+</div>
+{% endif %}
+{% if classe.natation != 0 %}
+<div class="talent">
+  {% if classe.natation < 51 %}
+			  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Achievement_Zone_Sholazar_03.PNG" title="De 0 à 100, permet de nager." alt="Natation"> Natation
+			  {% else %}
+			  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Achievement_Zone_IceCrown_02.PNG" title="De 0 à 100, permet de nager." alt="Natation"> Natation
+			  {% endif %}
+			  <span class="talentpoints">{{classe.natation}}</span>
+</div>
+{% endif %}
+{% if classe.contorsion != 0 %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_DemonHunter_VengefulRetreat2.PNG" title="De 0 à 100, permet de se glisser dans les endroits les plus étroits ou s'échapper de liens." alt="Contorsionnisme"> Contorsionnisme
+  <span class="talentpoints">{{classe.contorsion}}</span>
+</div>
+{% endif %}
+{% if classe.trap != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Hunter_TrapLauncher.PNG" title="De 0 à 100, permet de poser et fabriquer des pièges." alt="Trappage">Trappage
+<span class="talentpoints">{{classe.trap}}</span>
+</div>
+{% elif classe.depl_silenc != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ability_rogue_vigor.PNG" title="De 0 à 100, permet de ne pratiquement plus faire de bruit en avançant." alt="Déplacement silencieux">Déplacement silencieux
+<span class="talentpoints">{{classe.depl_silenc}}</span>
+</div>
+{% else %}
+<div class="talent">
+  Vous pouvez choisir de mettre des points dans Trappage ou Déplacement silencieux
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau4 %}
+{% if fiche.niveau > 3 %}
+{% if classe.assassin != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_SurpriseAttack.PNG" title="De 0 à 100, augmente la plage critique de 2 points tout les 10 points." alt="Assassinat">Assassinat
+<span class="talentpoints">{{classe.assassin}}</span>
+</div>
+{% elif classe.maitr_anim != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ABILITY_HUNTER_INVIGERATION.PNG" title="De 0 à 100, permet de calmer les animaux voir de les faire combattre pour vous." alt="Maîtrise animale">Maîtrise animale
+<span class="talentpoints">{{classe.maitr_anim}}</span>
+</div>
+{% else %}
+<div class="talent">
+  Vous pouvez choisir de mettre des points dans Assassinat ou Maîtrise animale
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau5 %}
+{% if fiche.niveau > 4 %}
+{% if classe.silen_rodeur == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_Nightblade.PNG" alt="Art de la mort silencieuse" title="+ 1 Capacité de tir, + 1 Capacité de combat, + 1 Agilité, + 10 plage critique"> Art de la mort silencieuse
+</div>
+{% elif classe.silen_rodeur == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Hunter_Pet_GoTo.PNG" alt="Rôdeur" title="+ 1 Agilité, + 2 Perception, Peut dresser un animal">Rôdeur
+</div>
+{% else %}
+<div class="talent">
+  Vous avez le niveau pour choisir entre Art de la mort silencieuse ou Rôdeur
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
