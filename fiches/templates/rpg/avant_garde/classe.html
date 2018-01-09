@@ -32,7 +32,11 @@
 	<h3 class="panel-title">Classe</h3>
       </div>
       <div class="panel-body centre">
+	{% if fiche.classe != 5 %}
 	<div class="classe-ag">
+	  {% else %}
+	  <div class="classe-ag-mage">
+	    {% endif %}
 	  <div class="container-fluid">
 	    <div class="row niveau" id="niveau1">
 		<div class="media">

@@ -689,6 +689,16 @@ h3.panel-title {
     border-radius: 3px;
 }
 
+.classe-ag-mage {
+    background: url("/static/fiches/images/magearbg.PNG") no-repeat center;
+    width: 727px;
+    height: 542px;
+    margin: 3% auto;
+    color: #000;
+    background-size: cover;
+    border-radius: 3px;
+}
+
 .red {
     color: #d60006;
 }
@@ -719,7 +729,7 @@ h3.panel-title {
 .talentpoints {
     position: absolute;
     bottom: 0px;
-    font-size: 16px;
+    font-size: 14px;
     color: #fff;
     text-shadow: 1px 1px 1px black, -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black;
     font-weight: bold;

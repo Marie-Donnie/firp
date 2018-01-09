@@ -1,17 +1,162 @@
 {% extends "rpg/avant_garde/classe.html" %}
 
-{% load filters %}
+{% load static %}
+
 
 {% block script %}
+
 {% endblock %}
 
 {% block niveau1 %}
+<div class="talent">
+  {% if classe.boule_feu != 0 %}
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Fire_Fireball02.PNG" alt="Boule de feu" title="De 0 à 100, détermine le jet de mana à effectuer pour lancer la boule de feu."> Boule de feu
+<span class="talentpoints">{{classe.boule_feu}}</span>
+</div>
+{% endif %}
+{% if classe.trait_feu != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Fire_FireBolt02.PNG" alt="Trait de feu" title="De 0 à 100, détermine le jet de mana à effectuer pour le sort trait de feu."> Trait de feu
+<span class="talentpoints">{{classe.trait_feu}}</span>
+</div>
+{% endif %}
+{% if classe.contresort != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mage_IncantersAbsorbtion.PNG" alt="Contresort" title="De 0 à 100, détermine le jet de mana à effectuer pour le sort contresort."> Contresort
+<span class="talentpoints">{{classe.contresort}}</span>
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Intell.PNG" alt="Intelligence" title="Intelligence"> + 1 Intelligence
+</div>
 {% endblock %}
+
 {% block niveau2 %}
+{% if fiche.niveau > 1 %}
+<div class="talent">
+  {% if classe.nova_feu != 0 %}
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/spell_Shaman_Firenova.PNG" alt="Nova de feu" title="De 0 à 100, étermine le jet de mana à effectuer pour le sort nova de feu."> Nova de feu
+<span class="talentpoints">{{classe.nova_feu}}</span>
+</div>
+{% endif %}
+{% if classe.souffle_dragon != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Monk_BreathofFire.PNG" alt="Souffle du dragon" title="De 0 à 100, étermine le jet de mana à effectuer pour le sort souffle du dragon."> Souffle du dragon
+<span class="talentpoints">{{classe.souffle_dragon}}</span>
+</div>
+{% endif %}
+{% if classe.portail != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Arcane_PortalTolBarad.PNG" alt="Portail" title="De 0 à 100, détermine le jet de mana à effectuer pour le sort portail."> Portail
+<span class="talentpoints">{{classe.portail}}</span>
+</div>
+{% endif %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Nature_LightningShield.PNG" alt="Bouclier de mana" title="Bouclier de mana"> Bouclier de mana
+  <span class="talentpoints">100</span>
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Intell.PNG" alt="Intelligence" title="Intelligence"> + 1 Intelligence
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau3 %}
+{% if fiche.niveau > 2 %}
+<div class="talent">
+  {% if classe.pilier_feu != 0 %}
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mage_FireStarter.PNG" alt="Pilier de feu" title="De 0 à 100, détermine le jet de mana à effectuer pour le sort pilier de feu."> Pilier de feu
+<span class="talentpoints">{{classe.pilier_feu}}</span>
+</div>
+{% endif %}
+{% if classe.explo_pyro != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Mage_InfernoBlast.PNG" alt="Explosion pyrotechnique" title="De 0 à 100, détermine le jet de mana à effectuer pour le sort explosion pyrotechnique."> Explosion pyrotechnique
+<span class="talentpoints">{{classe.explo_pyro}}</span>
+</div>
+{% endif %}
+{% if classe.transfert != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Arcane_Blink.PNG" alt="Transfert" title="De 0 à 100, détermine le jet de mana à effectuer pour le sort transfert."> Transfert
+<span class="talentpoints">{{classe.transfer}}</span>
+</div>
+{% endif %}
+{% if classe.desamorcer_pieges != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Arcane_Arcane01.PNG" title="De 0 à 100, permet au sorcier de désamorcer un piège magique." alt="Désamorcer pièges"> Désamorcer les pièges
+<span class="talentpoints">{{classe.desamorcer_pieges}}</span>
+</div>
+{% elif classe.enchant != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Trade_Engraving.PNG" title="De 0 à 100, permet d'enchanter l'équipement avec le matériel adéquat." alt="Enchantement"> Enchantement
+<span class="talentpoints">{{classe.enchant}}</span>
+</div>
+{% else %}
+<div class="talent">
+  Vous pouvez choisir de mettre des points dans Désamorcer pièges ou Enchantement
+</div>
+{% endif %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ABILITY_MAGE_MOLTENARMOR.PNG" alt="Bouclier de feu" title="Bouclier de feu"> Bouclier de feu
+  <span class="talentpoints">100</span>
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Intell.PNG" alt="Intelligence" title="Intelligence"> + 1 Intelligence
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau4 %}
+{% if fiche.niveau > 3 %}
+{% if classe.pluie_feu != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Shadow_RainOfFire.PNG" alt="Pluie de feu" title="De 0 à 100, détermine le jet de mana à effectuer pour le sort pluie de feu."> Pluie de feu
+<span class="talentpoints">{{classe.pluie_feu}}</span>
+</div>
+{% endif %}
+{% if classe.bombe_vivante != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mage_LivingBomb.PNG" alt="Bombe vivante" title="De 0 à 100, détermine le jet de mana à effectuer pour le sort bombe vivante."> Bombe vivante
+<span class="talentpoints">{{classe.bombe_vivante}}</span>
+</div>
+{% endif %}
+{% if classe.annul_male != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mage_NetherWindPresence.PNG" title="De 0 à 100, permet d'enlever une malédiction frappant un personnage." alt="Annuler la malédiction"> Annuler la malédiction
+<span class="talentpoints">{{classe.annul_male }}</span>
+</div>
+{% elif classe.ana_magique != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Achievement_KirinTor_Offensive.PNG" title="De 0 à 100, permet d'analyser et découvrir les effets d'un objet magique" alt="Analyse magique"> Analyse magique
+<span class="talentpoints">{{classe.ana_magique}}</span>
+</div>
+{% else %}
+<div class="talent">
+  Vous pouvez choisir de mettre des points dans Annuler la malédiction ou Analyse magique
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Intell.PNG" alt="Intelligence" title="Intelligence"> + 1 Intelligence
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau5 %}
+{% if fiche.niveau > 4 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mage_FieryPayback.PNG" alt="Grand sorcier" title="+ 100 pts de mana"> Grand sorcier
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Intell.PNG" alt="Intelligence" title="Intelligence"> + 1 Intelligence
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}

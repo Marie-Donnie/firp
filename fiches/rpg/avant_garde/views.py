@@ -414,7 +414,7 @@ def afficher_eclaireur(request, classe_id):
 def afficher_sorcier(request, classe_id):
     classe = get_object_or_404(Sorcier, pk=classe_id)
     perso = classe.perso
-    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_sorcier(classe_id)
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir, mana = calcul_sorcier(classe_id)
     context = {'fiche': perso, 'classe': classe, 'force': force,
                'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
                'charisme': charisme, 'force_men': force_men, 'pv_max': pv_max,
