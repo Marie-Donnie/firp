@@ -22,12 +22,12 @@
 {% if fiche.niveau > 1 %}
 {% if chirurgie != 0 %}
 <div class="talent">
-<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Trade_Tailoring.PNG" title="De 0 à 100, permet d'éviter les mutilations et sauver les blessés graves." alt="Chirurgie">Chirurgie
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Trade_Tailoring.PNG" title="De 0 à 100, permet d'éviter les mutilations et sauver les blessés graves." alt="Chirurgie"> Chirurgie
 <span class="talentpoints">{{chirurgie}}</span>
 </div>
 {% elif classe.poison != 0 %}
 <div class="talent">
-<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ABILITY_POISONS.PNG" title="De 0 à 100, permet de concocter de poisons" alt="Poison">Poison
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ABILITY_POISONS.PNG" title="De 0 à 100, permet de concocter de poisons" alt="Poison"> Poison
 <span class="talentpoints">{{classe.poison}}</span>
 </div>
 {% else %}
@@ -47,7 +47,7 @@
 {% if fiche.niveau > 2 %}
 {% if classe.guerisseur %}
 <div class="talent">
-  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_FIRST_AID_70_Splint.PNG" title="+ 1 Intelligence, augmente les pv rendus par la médecine de 1" alt="Guérisseur">Guérisseur
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_FIRST_AID_70_Splint.PNG" title="+ 1 Intelligence, augmente les pv rendus par la médecine de 1" alt="Guérisseur"> Guérisseur
 </div>
 {% elif classe.alchimie != 0%}
 <div class="talent">
@@ -65,7 +65,7 @@
 </div>
 {% endif %}
 <div class="talent">
-<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale"> + 1 Force Mentale
 </div>
 {% endif %}
 {% endblock %}
@@ -74,11 +74,11 @@
 {% if fiche.niveau > 3 %}
 {% if classe.scalpel_fioles == 2 %}
 <div class="talent">
-  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_Knife_1h_DraenorCrafted_D_01_A_Alliance.PNG" title="+ 1 Intelligence, rajoute 30 points à la compétence chirurgie" alt="Maîtrise du scalpel">Maîtrise du scalpel
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_Knife_1h_DraenorCrafted_D_01_A_Alliance.PNG" title="+ 1 Intelligence, rajoute 30 points à la compétence chirurgie" alt="Maîtrise du scalpel"> Maîtrise du scalpel
 </div>
 {% elif classe.scalpel_fioles == 3 %}
 <div class="talent">
-  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Rogue_Paralytic_Poison.PNG" title="+1 Capacité de tir" alt="Art du lancer de fioles">Art du lancer de fioles
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Rogue_Paralytic_Poison.PNG" title="+1 Capacité de tir" alt="Art du lancer de fioles"> Art du lancer de fioles
 </div>
 {% else %}
 <div class="talent">
@@ -95,11 +95,11 @@
 {% if fiche.niveau > 4 %}
 {% if classe.guerisseur_enfumeur == 2 %}
 <div class="talent">
-<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Misc_PetHeal.PNG" title="+ 1 Intelligence, + 1 Force Mentale, Augmente les pv rendus par la médecine de 1" alt="Maître guérisseur">Maître guérisseur
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Misc_PetHeal.PNG" title="+ 1 Intelligence, + 1 Force Mentale, Augmente les pv rendus par la médecine de 1" alt="Maître guérisseur"> Maître guérisseur
 </div>
 {% elif classe.guerisseur_enfumeur == 3 %}
 <div class="talent">
-  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ability_rogue_smoke.PNG" title="+ 1 Capacité de Tir, permet de toucher les morts-vivants avec les fioles, dote le médecin d'un masque à gaz" alt="Enfumeur">Enfumeur
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ability_rogue_smoke.PNG" title="+ 1 Capacité de Tir, permet de toucher les morts-vivants avec les fioles, dote le médecin d'un masque à gaz" alt="Enfumeur"> Enfumeur
 </div>
 {% else %}
 <div class="talent">
@@ -107,7 +107,7 @@
 </div>
 {% endif %}
 <div class="talent">
-<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale"> + 1 Force Mentale
 </div>
 {% endif %}
 {% endblock %}

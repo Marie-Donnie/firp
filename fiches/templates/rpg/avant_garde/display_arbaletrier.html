@@ -1,17 +1,89 @@
 {% extends "rpg/avant_garde/classe.html" %}
 
-{% load filters %}
+{% load static %}
+
 
 {% block script %}
+
 {% endblock %}
 
 {% block niveau1 %}
+<div class="talent">
+  {% if classe.focalisation != 0 %}
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ability_toughness.PNG" alt="Focalisation" title="De 0 à 100, détermine la concentration du personnage sur le tir, tout les 10 points, augmente la chance de toucher de 1 au rand."> Focalisation
+<span class="talentpoints">{{classe.focalisation}}</span>
+</div>
+{% endif %}
+{% if classe.couvert != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Defend.PNG" alt="À couvert" title="De 0 à 100, détermine la capacité du personnage à tirer profit de son couvert, augmente de 2 points le bonus de couvert tout les 10 points."> À couvert
+<span class="talentpoints">{{classe.couvert}}</span>
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau2 %}
+{% if fiche.niveau > 1 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/Endu.PNG" alt="Tireur d'élite" title="+1 Capacité de tir"> Tireur d'élite
+</div>
+{% if classe.escalade != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GrapplingHook.PNG" title="De 0 à 100, détermine la capacité à escalader." alt="Escalade">Escalade
+<span class="talentpoints">{{classe.escalade}}</span>
+</div>
+{% endif %}
+{% if classe.coup_crit != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Blackhand_Marked4Death.PNG" title="De 0 à 100, augmente la plage critique d'un point tout les 10 points." alt="Coup critique">Coup critique
+<span class="talentpoints">{{classe.coup_crit}}</span>
+</div>
+{% endif %}
+{% endif %}
 {% endblock %}
+
 {% block niveau3 %}
+{% if fiche.niveau > 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/Endu.PNG" alt="Visée précise" title="+1 Capacité de tir"> Visée précise
+</div>
+{% if classe.vigilance != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GrapplingHook.PNG" title="De 0 à 100, permet de remarquer ce que tout le monde ne peut pas voir, rajoute deux points aux test de perception par dizaine de points." alt="vigilance">Vigilance
+<span class="talentpoints">{{classe.vigilance}}</span>
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau4 %}
+{% if fiche.niveau > 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/Endu.PNG" alt="Maîtrise de l'arbalète" title="L'arbalète ignre deux points d'armure supplémentaires"> Maîtrise de l'arbalète
+</div>
+{% if classe.equitation != 0 %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mount_RidingHorse.PNG" title="De 0 à 100, permet de monter à cheval" alt="Équitation"> Équitation
+</div>
+{% endif %}
+{% endif %}
 {% endblock %}
+
 {% block niveau5 %}
+{% if fiche.niveau > 4 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/Endu.PNG" alt="As du tir" title="+ 1 en Capacité de tir, augmente la plage critique de 10 points"> As du tir
+</div>
+{% if classe.dissimulation != 0 %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mount_RidingHorse.PNG" title="De 0 à 100, permet de se cacher dans l'environnement" alt="Dissimulation"> Dissimulation
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
