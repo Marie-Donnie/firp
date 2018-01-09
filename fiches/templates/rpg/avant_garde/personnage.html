@@ -47,33 +47,33 @@ $(function () {
     <span class="badges">
       {% if fiche.sexe == 'h' %} <!-- males -->
       {% if fiche.race == 'n' %}
-      <img class="race-icone" src="/fiches/media/images/site/dwarf_male.PNG" alt="Nain" title="Nain">
+      <img class="race-icone" src="/fiches/media/images/site/dwarf_male.PNG" alt="Nain" title="Nain : +1 PV, + 1 Force, + 1 Endurance, - 2 Agilité">
       {% elif fiche.race == 'e' %}
-      <img class="race-icone" src="/fiches/media/images/site/HE_male.PNG" alt="Haut-elfe" title="Haut-elfe">
+      <img class="race-icone" src="/fiches/media/images/site/HE_male.PNG" alt="Haut-elfe" title="Haut-elfe : + 1 Agilité, + 1 Capacité de tir, + 1 Perception, - 1 PV, - 1 Endurance">
       {% else %}
-      <img class="race-icone" src="/fiches/media/images/site/human_male.PNG" alt="Humain" title="Humain">
+      <img class="race-icone" src="/fiches/media/images/site/human_male.PNG" alt="Humain" title="Humain : Profil normal">
       {% endif %}
       {% else %} <!-- females -->
       {% if fiche.race == 'n' %}
-      <img class="race-icone" src="/fiches/media/images/site/dwarf_female.PNG" alt="Naine" title="Naine">
+      <img class="race-icone" src="/fiches/media/images/site/dwarf_female.PNG" alt="Naine" title="Naine : +1 PV, + 1 Force, + 1 Endurance, - 2 Agilité">
       {% elif fiche.race == 'e' %}
-      <img class="race-icone" src="/fiches/media/images/site/HE_female.PNG" alt="Haute-elfe" title="Haute-elfe">
+      <img class="race-icone" src="/fiches/media/images/site/HE_female.PNG" alt="Haute-elfe" title="Haute-elfe : + 1 Agilité, + 1 Capacité de tir, + 1 Perception, - 1 PV, - 1 Endurance">
       {% else %}
-      <img class="race-icone" src="/fiches/media/images/site/human_female.PNG" alt="Humaine" title="Humaine">
+      <img class="race-icone" src="/fiches/media/images/site/human_female.PNG" alt="Humaine" title="Humaine : Profil normal">
       {% endif %}
       {% endif %}
       {% if fiche.classe == 1 %}
-      <img class="classe-icone" src="/fiches/media/images/site/rpg/Fantassin.PNG" alt="Fantassin" title="Fantassin">
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Fantassin.PNG" alt="Fantassin" title="Fantassin (Caractéristiques principales : Capacité de combat, Force, Endurance, Force mentale)">
       {% elif fiche.classe == 2 %}
-      <img class="classe-icone" src="/fiches/media/images/site/rpg/Arbaletrier.PNG" alt="Arbalétrier" title="Arbalétrier">
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Arbaletrier.PNG" alt="Arbalétrier" title="Arbalétrier (Caractéristiques principales : Capacité de tir, Force mentale)">
       {% elif fiche.classe == 3 %}
-      <img class="classe-icone" src="/fiches/media/images/site/rpg/Eclaireur.PNG" alt="Eclaireur" title="Eclaireur">
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Eclaireur.PNG" alt="Eclaireur" title="Eclaireur (Caractéristiques principales : Perception, Agilité, Force mentale)">
       {% elif fiche.classe == 4 %}
-      <img class="classe-icone" src="/fiches/media/images/site/rpg/Apothicaire.PNG" alt="Apothicaire de combat" title="Apothicaire de combat">
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Apothicaire.PNG" alt="Apothicaire de combat" title="Apothicaire de combat (Caractéristiques principales : Intelligence, Force mentale)">
       {% elif fiche.classe == 5 %}
-      <img class="classe-icone" src="/fiches/media/images/site/rpg/Sorcier.PNG" alt="Apprenti sorcier"title="Apprenti sorcier">
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Sorcier.PNG" alt="Apprenti sorcier"title="Apprenti sorcier (Caractéristiques principales : Capacité de tir, Agilité, Force mentale)">
       {% else %}
-      <img class="classe-icone" src="/fiches/media/images/site/WoWUnknownItem01.PNG" alt="Pas de classe">
+      <img class="classe-icone" src="/fiches/media/images/site/WoWUnknownItem01.PNG" alt="Pas de classe" title="WTF?">
       {% endif %}
     </span>
     <ul>

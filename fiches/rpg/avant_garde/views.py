@@ -116,8 +116,8 @@ def creer_apothicaire(request, perso_id):
             data['perso'] = perso.id
             form = ApothicaireForm(data)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=perso_id)
+                save_it = form.save()
+                return redirect('afficher_apothicaire', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -140,8 +140,8 @@ def creer_fantassin(request, perso_id):
             data['perso'] = perso.id
             form = FantassinForm(data)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=perso_id)
+                save_it = form.save()
+                return redirect('afficher_fantassin', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -164,8 +164,8 @@ def creer_arbaletrier(request, perso_id):
             data['perso'] = perso.id
             form = ArbaletrierForm(data)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=perso_id)
+                save_it = form.save()
+                return redirect('afficher_arbaletrier', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -188,8 +188,8 @@ def creer_eclaireur(request, perso_id):
             data['perso'] = perso.id
             form = EclaireurForm(data)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=perso_id)
+                save_it = form.save()
+                return redirect('afficher_eclaireur', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -212,8 +212,8 @@ def creer_sorcier(request, perso_id):
             data['perso'] = perso.id
             form = SorcierForm(data)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=perso_id)
+                save_it = form.save()
+                return redirect('afficher_sorcier', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -239,8 +239,8 @@ def edit_fantassin(request, perso_id):
             data['perso'] = fantassin.perso.id
             form = FantassinForm(data, request.FILES, instance=fantassin)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=fantassin.perso.id)
+                save_it = form.save()
+                return redirect('afficher_fantassin', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -266,8 +266,8 @@ def edit_apothicaire(request, perso_id):
             data['perso'] = apothicaire.perso.id
             form = ApothicaireForm(data, request.FILES, instance=apothicaire)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=apothicaire.perso.id)
+                save_it = form.save()
+                return redirect('afficher_apothicaire', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -293,8 +293,8 @@ def edit_arbaletrier(request, perso_id):
             data['perso'] = arbaletrier.perso.id
             form = ArbaletrierForm(data, request.FILES, instance=arbaletrier)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=arbaletrier.perso.id)
+                save_it = form.save()
+                return redirect('afficher_arbaletrier', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -320,8 +320,8 @@ def edit_eclaireur(request, perso_id):
             data['perso'] = eclaireur.perso.id
             form = EclaireurForm(data, request.FILES, instance=eclaireur)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=eclaireur.perso.id)
+                save_it = form.save()
+                return redirect('afficher_eclaireur', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:
@@ -347,8 +347,8 @@ def edit_sorcier(request, perso_id):
             data['perso'] = sorcier.perso.id
             form = SorcierForm(data, request.FILES, instance=sorcier)
             if form.is_valid():
-                form.save()
-                return redirect('detail_perso', perso_id=sorcier.perso.id)
+                save_it = form.save()
+                return redirect('afficher_sorcier', classe_id=save_it.id)
             else:
                 print(form.errors)
         else:

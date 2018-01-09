@@ -16,7 +16,7 @@ def calcul_base(perso_id):
     cap_combat = perso.cap_combat
     cap_tir = perso.cap_tir
     if perso.race == 'n':
-        pv_max = min(pv_max + 1, 10)
+        pv_max = pv_max + 1
         force = min(force + 1, 10)
         endu = min(endu + 1, 10)
         agi = max(agi - 2, 0)
@@ -27,7 +27,7 @@ def calcul_base(perso_id):
         pv_max = max(pv_max - 1, 0)
         endu = max(endu - 1, 0)
     if 10 in perso.avants.all():
-        pv_max = min(pv_max + 1, 10)
+        pv_max = pv_max + 1
     if 19 in perso.avants.all():
         intell = min(intell + 3, 10)
     if 21 in perso.desavants.all():
@@ -49,13 +49,13 @@ def calcul_fantassin(perso_id):
     if fantassin.epe_craned == 2:
         cap_combat = min(cap_combat + 1, 10)
     elif fantassin.epe_craned == 3:
-        pv_max = min(pv_max + 2, 10)
+        pv_max = pv_max + 2
     if fantassin.feroce_impla == 2:
         force = min(force + 1, 10)
         cap_combat = min(cap_combat + 1, 10)
     elif fantassin.feroce_impla == 3:
         endu = min(endu + 1, 10)
-        pv_max = min(pv_max + 2, 10)
+        pv_max = pv_max + 2
     if perso.niveau >= 3:
         force_men = min(force_men + 1, 10)
     if perso.niveau >= 4:

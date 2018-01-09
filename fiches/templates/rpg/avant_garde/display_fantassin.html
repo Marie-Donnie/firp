@@ -1,16 +1,125 @@
 {% extends "rpg/avant_garde/classe.html" %}
 
-{% block script %}
-{% endblock %}
+{% load static %}
 
+
+{% block script %}
+
+{% endblock %}
 
 {% block niveau1 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ability_toughness.PNG" alt="Intimidation" title="De 0 à 100, détermine la capacité à intimider la personne à laquelle le personnage parle."> Intimidation
+<span class="talentpoints">{{classe.intim}}</span>
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Defend.PNG" alt="Parer les flèches" title="De 0 à 100, Permet de parer les flèches et autres projectiles tirer sur le personnage à l'aide d'un bouclier."> Parer les flèches
+<span class="talentpoints">{{classe.parer_fleches}}</span>
+</div>
+
 {% endblock %}
+
 {% block niveau2 %}
+{% if fiche.niveau > 1 %}
+{% if classe.athle_resi == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Force.PNG" alt="Athlétisme" title="+1 Force"> Athlétisme
+</div>
+{% elif classe.athle_resi == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/Endu.PNG" alt="Résistant" title="+1 Endurance"> Résistant
+</div>
+{% else %}
+<div class="talent">
+  Vous avez le niveau pour un des talents
+</div>
+{% endif %}
+{% if classe.escalade != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GrapplingHook.PNG" title="De 0 à 100, détermine la capacité à escalader." alt="Escalade">Escalade
+<span class="talentpoints">{{classe.escalade}}</span>
+</div>
+{% endif %}
+{% if classe.cc != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Blackhand_Marked4Death.PNG" title="De 0 à 100, augmente la plage critique d'un point tout les 10 points." alt="Coup critique">Coup critique
+<span class="talentpoints">{{classe.cc}}</span>
+</div>
+{% elif classe.prot != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Warrior_Intervene.PNG" title="De 0 à 100, permet d'encaisser le coup à la place d'un camarade proche" alt="Protection">Protection
+<span class="talentpoints">{{classe.prot}}</span>
+</div>
+{% else %}
+<div class="talent">
+  Vous pouvez choisir de mettre des points dans Coup critique ou Protection
+</div>
+{% endif %}
+{% endif %}
 {% endblock %}
+
 {% block niveau3 %}
+{% if fiche.niveau > 2 %}
+{% if classe.epe_craned == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_SteelMelee.PNG" alt="Épéiste" title="+1 Capacité de combat"> Épéiste
+</div>
+{% elif classe.epe_craned == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_Misc_Bone_Skull_02.PNG" alt="Crâne dur" title="+2 pv"> Crâne dur
+</div>
+{% else %}
+<div class="talent">
+  Vous avez le niveau pour choisir entre Épéiste ou Crâne dur
+</div>
+{% endif %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mount_RidingHorse.PNG" title="De 0 à 100, permet de monter à cheval"> Équitation
+</div>
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau4 %}
+{% if fiche.niveau > 3 %}
+{% if classe.glaive_lourde == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_Sword_40.PNG" alt="Maîtrise du glaive" title="Rajoute 2 pts de dégâts au glaive"> Maîtrise du glaive
+</div>
+{% elif classe.epe_craned == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Garrison_BlueArmor.PNG" alt="Maîtrise de l'armure lourde" title="Rajoute 2 de sauvegarde d'armure à l'armure lourde"> Maîtrise de l'armure lourde
+</div>
+{% else %}
+<div class="talent">
+  Vous avez le niveau pour choisir entre Maîtrise du glaive ou Maîtrise de l'armure lourde
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
+
 {% block niveau5 %}
+{% if fiche.niveau > 4 %}
+{% if classe.feroce_impla == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Spell_Druid_stamedingroar.PNG" alt="Féroce" title="+ 1 Force, + 1 Capacité de combat, annule le bonus des morts-vivants"> Féroce
+</div>
+{% elif classe.feroce_impla == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Warrior_StalwartProtector.PNG" alt="Implacable" title="+ 1 Endurance, + 2 PV, Permet de rester conscient sous 0 pv avec un test d'endurance"> Implacable
+</div>
+{% else %}
+<div class="talent">
+  Vous avez le niveau pour choisir entre Féroce ou Implacable
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">  + 1 Force Mentale
+</div>
+{% endif %}
 {% endblock %}
