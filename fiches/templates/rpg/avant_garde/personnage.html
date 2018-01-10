@@ -99,6 +99,9 @@ $(function () {
       <li>{% block statistic %}{% endblock %}</li>
       <li><b>Blessures&nbsp;: </b><span {% if fiche.troubles_ment != 'Sans' %}class="red"{% endif %}>{{ fiche.blessures|linebreaksbr }}</span></li>
       <li><b>Troubles mentaux&nbsp;: </b><span {% if fiche.troubles_ment != 'Sans' %}class="red"{% endif %}>{{ fiche.troubles_ment|linebreaksbr }}</span></li>
+      {% if fiche.comp_apprises != 'Aucune' %}
+      <li><b>Compétences apprises :</b> {{ fiche.comp_apprises|linebreaksbr }}
+	{% endif %}
       <li><b>Traits&nbsp;: </b>
 	<ul>
 	  {% for avant in fiche.avants.all %}

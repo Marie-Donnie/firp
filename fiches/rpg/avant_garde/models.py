@@ -144,6 +144,10 @@ class Avant_garde(models.Model):
                                   null=True,
                                   blank=True,
                                   default='Sans')
+    comp_apprises = models.CharField(max_length=800,
+                                     null=True,
+                                     blank=True,
+                                     default='Aucune')
     peur = models.CharField(max_length=80,
                             null=True,
                             blank=True,
