@@ -199,6 +199,9 @@ class PieceForm(ModelForm):
     class Meta:
         model = Piece
         fields = '__all__'
+        widgets = {'description': forms.Textarea(),
+                   'createur': forms.HiddenInput(),
+                   'mobilier': forms.Textarea(), }
 
 
 class EtageForm(ModelForm):
@@ -206,6 +209,7 @@ class EtageForm(ModelForm):
     class Meta:
         model = Etage
         fields = '__all__'
+        widgets = {'createur': forms.HiddenInput(), }
 
 
 class MaisonForm(ModelForm):
