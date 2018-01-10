@@ -24,6 +24,7 @@ $(function () {
 {% elif fiche.classe == 4 %}
 {% if not fiche.apothicaire %}<a class="btn btn-default" href="{% url 'creer_apothicaire' fiche.id %}">Créer classe</a>{% else %} <a class="btn btn-default" href="{% url 'editer_apothicaire' fiche.apothicaire.id %}">Editer classe</a> {% endif %}
 {% elif fiche.classe == 5 %}{% if not fiche.sorcier %}<a class="btn btn-default" href="{% url 'creer_sorcier' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_sorcier' fiche.sorcier.id %}">Editer classe</a> {% endif %}
+{% elif fiche.classe == 6 %}{% if not fiche.rabatteur %}<a class="btn btn-default" href="{% url 'creer_rabatteur' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_rabatteur' fiche.rabatteur.id %}">Editer classe</a> {% endif %}
 {% endif %}
 <a class="btn btn-default" href="{% url 'editer_perso' fiche.id %}">Editer</a>
 {% endif %}
@@ -71,7 +72,9 @@ $(function () {
       {% elif fiche.classe == 4 %}
       <img class="classe-icone" src="/fiches/media/images/site/rpg/Apothicaire.PNG" alt="Apothicaire de combat" title="Apothicaire de combat (Caractéristiques principales : Intelligence, Force mentale)">
       {% elif fiche.classe == 5 %}
-      <img class="classe-icone" src="/fiches/media/images/site/rpg/Sorcier.PNG" alt="Apprenti sorcier"title="Apprenti sorcier (Caractéristiques principales : Capacité de tir, Agilité, Force mentale)">
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Sorcier.PNG" alt="Apprenti sorcier"title="Apprenti sorcier (Caractéristique principale : Intelligence, Force mentale))">
+      {% elif fiche.classe == 6 %}
+      <img class="classe-icone" src="/fiches/media/images/site/rpg/Rabatteur.PNG" alt="Rabatteur"title="Rabatteur (Caractéristiques principales : Capacité de tir, Agilité, Force mentale)">
       {% else %}
       <img class="classe-icone" src="/fiches/media/images/site/WoWUnknownItem01.PNG" alt="Pas de classe" title="WTF?">
       {% endif %}

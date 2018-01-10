@@ -102,6 +102,11 @@ class SorcierAdmin(admin.ModelAdmin):
 
 admin.site.register(Sorcier, SorcierAdmin)
 
+class RabatteurAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+
+admin.site.register(Rabatteur, RabatteurAdmin)
+
 
 class AvantageAdmin(admin.ModelAdmin):
     list_display = ('nom', 'points', 'description', 'id')

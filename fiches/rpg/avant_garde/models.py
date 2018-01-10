@@ -115,7 +115,8 @@ class Avant_garde(models.Model):
         (2, "Arbalétrier"),
         (3, "Eclaireur"),
         (4, "Apothicaire de combat"),
-        (5, "Apprenti sorcier")
+        (5, "Apprenti sorcier"),
+        (6, "Rabatteur")
     )),
                                        default=1)
     etat = models.CharField(max_length=1,
@@ -355,6 +356,51 @@ class Sorcier(models.Model):
 
     def __unicode__(self):
         return u'%s, %s' % (self.perso.nom, 'sorcier')
+
+
+class Rabatteur(models.Model):
+    equitation = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    tir_mouvement = IntegerRangeField(default=0, min_value=0,
+                                     max_value=100)
+    gachette_vif = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Fine gâchette"),
+        (3, "Vif")
+    )),
+                                          default=1)
+    escalade = IntegerRangeField(default=0, min_value=0,
+                                 max_value=100)
+    lance_explosif = IntegerRangeField(default=0, min_value=0,
+                                max_value=100)
+    fabrication_explosifs = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    gachette_rx = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Gâchette facile"),
+        (3, "Réflexes éclairs")
+    )),
+                                            default=1)
+    natation = IntegerRangeField(default=0, min_value=0,
+                                 max_value=100)
+    expert_cheval = IntegerRangeField(default=0, min_value=0,
+                                  max_value=100)
+    appat_ud = IntegerRangeField(default=0, min_value=0,
+                                   max_value=100)
+    desengagement = IntegerRangeField(default=0, min_value=0,
+                                      max_value=100)
+    fusillade_solitaire = models.SmallIntegerField(choices=((
+        (1, "Niveau inférieur"),
+        (2, "Maître de la fusillade"),
+        (3, "Cavalier Solitaire")
+    )),
+                                            default=1)
+    perso = models.OneToOneField(Avant_garde,
+                                 null=True,
+                                 related_name='rabatteur')
+
+    def __unicode__(self):
+        return u'%s, %s' % (self.perso.nom, 'rabatteur')
 
 
 class Avantages(models.Model):

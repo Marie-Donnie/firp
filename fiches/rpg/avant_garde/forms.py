@@ -64,6 +64,14 @@ class SorcierForm(ModelForm):
         prefix = 'sorcier'
         widgets = {'perso': forms.HiddenInput()}
 
+class RabatteurForm(ModelForm):
+
+    class Meta:
+        model = Rabatteur
+        fields = '__all__'
+        prefix = 'rabatteur'
+        widgets = {'perso': forms.HiddenInput()}
+
 
 class CampagneForm(ModelForm):
 

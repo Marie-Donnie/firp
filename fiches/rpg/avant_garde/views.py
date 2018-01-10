@@ -107,30 +107,6 @@ def presentation(request):
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CREATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 @permission_required('fiches.fdg', raise_exception=True)
-def creer_apothicaire(request, perso_id):
-    utilisateur = request.user
-    perso = get_object_or_404(Avant_garde, pk=perso_id)
-    if (utilisateur == perso.createur) and (perso.classe == 4):
-        if request.method == 'POST':
-            data = request.POST.copy()
-            data['perso'] = perso.id
-            form = ApothicaireForm(data)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('afficher_apothicaire', classe_id=save_it.id)
-            else:
-                print(form.errors)
-        else:
-            form = ApothicaireForm()
-
-        context = {'form': form}
-
-        return render(request, 'rpg/avant_garde/apothicaire.html', context)
-    else:
-        return HttpResponse("La classe apothicaire ne correspond pas a celle du personnage.")
-
-
-@permission_required('fiches.fdg', raise_exception=True)
 def creer_fantassin(request, perso_id):
     utilisateur = request.user
     perso = get_object_or_404(Avant_garde, pk=perso_id)
@@ -203,6 +179,30 @@ def creer_eclaireur(request, perso_id):
 
 
 @permission_required('fiches.fdg', raise_exception=True)
+def creer_apothicaire(request, perso_id):
+    utilisateur = request.user
+    perso = get_object_or_404(Avant_garde, pk=perso_id)
+    if (utilisateur == perso.createur) and (perso.classe == 4):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['perso'] = perso.id
+            form = ApothicaireForm(data)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('afficher_apothicaire', classe_id=save_it.id)
+            else:
+                print(form.errors)
+        else:
+            form = ApothicaireForm()
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/apothicaire.html', context)
+    else:
+        return HttpResponse("La classe apothicaire ne correspond pas a celle du personnage.")
+
+
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_sorcier(request, perso_id):
     utilisateur = request.user
     perso = get_object_or_404(Avant_garde, pk=perso_id)
@@ -224,6 +224,30 @@ def creer_sorcier(request, perso_id):
         return render(request, 'rpg/avant_garde/sorcier.html', context)
     else:
         return HttpResponse("La classe sorcier ne correspond pas a celle du personnage.")
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def creer_rabatteur(request, perso_id):
+    utilisateur = request.user
+    perso = get_object_or_404(Avant_garde, pk=perso_id)
+    if (utilisateur == perso.createur) and (perso.classe == 6):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['perso'] = perso.id
+            form = RabatteurForm(data)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('afficher_rabatteur', classe_id=save_it.id)
+            else:
+                print(form.errors)
+        else:
+            form = RabatteurForm()
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/rabatteur.html', context)
+    else:
+        return HttpResponse("La classe rabatteur ne correspond pas a celle du personnage.")
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDITION %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -249,33 +273,6 @@ def edit_fantassin(request, perso_id):
         context = {'form': form}
 
         return render(request, 'rpg/avant_garde/fantassin.html', context)
-
-    else:
-
-        return HttpResponse("Vous ne pouvez pas editer ce personnage.")
-
-
-@permission_required('fiches.fdg', raise_exception=True)
-def edit_apothicaire(request, perso_id):
-    apothicaire = Apothicaire.objects.get(pk=perso_id)
-    utilisateur = request.user
-    if utilisateur == apothicaire.perso.createur or is_admin(utilisateur):
-        if request.method == 'POST':
-            data = request.POST.copy()
-            data['createur'] = User.objects.get(username=utilisateur).id
-            data['perso'] = apothicaire.perso.id
-            form = ApothicaireForm(data, request.FILES, instance=apothicaire)
-            if form.is_valid():
-                save_it = form.save()
-                return redirect('afficher_apothicaire', classe_id=save_it.id)
-            else:
-                print(form.errors)
-        else:
-            form = ApothicaireForm(instance=apothicaire)
-
-        context = {'form': form}
-
-        return render(request, 'rpg/avant_garde/apothicaire.html', context)
 
     else:
 
@@ -337,6 +334,33 @@ def edit_eclaireur(request, perso_id):
 
 
 @permission_required('fiches.fdg', raise_exception=True)
+def edit_apothicaire(request, perso_id):
+    apothicaire = Apothicaire.objects.get(pk=perso_id)
+    utilisateur = request.user
+    if utilisateur == apothicaire.perso.createur or is_admin(utilisateur):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            data['perso'] = apothicaire.perso.id
+            form = ApothicaireForm(data, request.FILES, instance=apothicaire)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('afficher_apothicaire', classe_id=save_it.id)
+            else:
+                print(form.errors)
+        else:
+            form = ApothicaireForm(instance=apothicaire)
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/apothicaire.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer ce personnage.")
+
+
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_sorcier(request, perso_id):
     sorcier = Sorcier.objects.get(pk=perso_id)
     utilisateur = request.user
@@ -362,14 +386,38 @@ def edit_sorcier(request, perso_id):
 
         return HttpResponse("Vous ne pouvez pas editer ce personnage.")
 
+@permission_required('fiches.fdg', raise_exception=True)
+def edit_rabatteur(request, perso_id):
+    rabatteur = Rabatteur.objects.get(pk=perso_id)
+    utilisateur = request.user
+    if utilisateur == rabatteur.perso.createur or is_admin(utilisateur):
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=utilisateur).id
+            data['perso'] = rabatteur.perso.id
+            form = RabatteurForm(data, request.FILES, instance=rabatteur)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('afficher_rabatteur', classe_id=save_it.id)
+            else:
+                print(form.errors)
+        else:
+            form = RabatteurForm(instance=rabatteur)
+
+        context = {'form': form}
+
+        return render(request, 'rpg/avant_garde/rabatteur.html', context)
+
+    else:
+
+        return HttpResponse("Vous ne pouvez pas editer ce personnage.")
+
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AFFICHAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 def afficher_fantassin(request, classe_id):
-
     classe = get_object_or_404(Fantassin, pk=classe_id)
-
     perso = classe.perso
-
     force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_fantassin(classe.id)
     context = {'fiche': perso, 'classe': classe, 'force': force,
                'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
@@ -421,6 +469,17 @@ def afficher_sorcier(request, classe_id):
                'cap_combat': cap_combat, 'cap_tir': cap_tir, 'mana': mana}
 
     return render(request, 'rpg/avant_garde/display_sorcier.html', context)
+
+def afficher_rabatteur(request, classe_id):
+    classe = get_object_or_404(Rabatteur, pk=classe_id)
+    perso = classe.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_rabatteur(classe.id)
+    context = {'fiche': perso, 'classe': classe, 'force': force,
+               'endu': endu, 'perce': perce, 'agi': agi, 'intell': intell,
+               'charisme': charisme, 'force_men': force_men, 'pv_max': pv_max,
+               'cap_combat': cap_combat, 'cap_tir': cap_tir}
+
+    return render(request, 'rpg/avant_garde/display_rabatteur.html', context)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FONCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

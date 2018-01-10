@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+
+{% block script %}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({html: true, placement: 'right'})
+})
+{% endblock %}
+
+{% block title %}Créer/éditer un arbalétrier{% endblock %}
+{% block page-title %}Créer/éditer un arbalétrier{% endblock %}
+
+{% block content %}
+
+
+
+<div class="media">
+  <div class="media-body">
+    <b>Niveau 1</b>
+    <ul>
+      <li>Equitation : De 0 à 100, permet de monter à cheval</li>
+      <li>Tir en mouvement: De 0 à 100, Détermine la capacité du personnage à tirer depuis son cheval, tout les 10 points, augmente la chance de toucher de 1 au rand quand le combattant est monté</li>
+    </ul>
+    <b>Niveau 2</b>
+        <ul>
+<li>Trait Fine gâchette (+ 1 en capacité de tir)<br>
+OU<br>
+  Trait Vif (+ 1 en Agilité)</li>
+<li>Escalade : De 0 à 100, détermine la capacité à... escalader</li>
+<li>Lancé d'explosifs : De 0 à 100, Détermine la capacité du personnage à lancer correctement ses explosifs, tout les 10 points, augmente la chance de lancer correctement son explosif de 1 au rand.</li>
+<li>Fabrication d'explosifs : De 0 à 100, Détermine la faculté du personnage à créer des explosifs avec peu de matériel. Permet de fabriquer des explosifs pendant une longue période de repos.</li>
+<li>+ 1 Force Mentale</li>
+	</ul>
+<b>Niveau 3</b>
+    <ul>
+<li>Trait Gâchette facile (+ 1 en Capacité de tir)<br>
+OU<br>
+  Trait Réflexes éclairs (+ 1 en Agilité)</li>
+<li>Natation : De 0 à 100, permet de nager</li>
+<li>Expert à cheval : De 0 à 100, permet de réaliser des manœuvres bien plus complexes avec sa monture et augmente sa résistance globale</li>
+<li>Appât à morts-vivants : de 0 à 100, détermine l'efficacité des appâts utilisé par le rabatteur</li>
+<li>+ 1 Force Mentale</li>
+    </ul>
+<b>Niveau 4</b>
+    <ul>
+      <li>Désengagement : De 0 à 100, permet au rabatteur de quitter rapidement un combat sans prendre de coups</li>
+      <li>+ 1 Force Mentale</li>
+    </ul>
+<b>Niveau 5</b>
+    <ul>
+<li>Trait Maître de la fusillade (+ 2 Capacité de tir, + 1 Perception, double les dégâts des armes à feu et des explosifs)<br>
+OU<br>
+  Trait Cavalier solitaire (+ 2 Agilité, + 1 Endurance, le cheval est plus rapide, plus résistant, s'il est trop blessé, il quittera le combat pour retrouver son maître plus tard)</li>
+<li>+ 1 Force Mentale</li>
+    </ul>
+  </div>
+
+
+  <div class="media-right media-middle" id="char_form">
+    <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+      {% csrf_token %}
+      <h4>Niveau 1</h4>
+      <div class="form-group">
+	<label for="id_equitation">Equitation&nbsp;:</label> <input name="equitation" value="0" max="100" required="" id="id_equitation" min="0" type="number">
+	<label for="id_tir_mouvement">Tir en mouvement&nbsp;:</label> <input name="tir_mouvement" value="0" max="100" required="" id="id_tir_mouvement" min="0" type="number">
+      </div>
+      <h4>Niveau 2</h4>
+      <div class="form-group">
+	<label for="id_gachette_vif">Fine gâchette/vif&nbsp;:</label> <select name="gachette_vif" id="id_gachette_vif">
+	  <option value="1" selected="">Niveau inférieur</option>
+
+	  <option value="2">Fine gâchette</option>
+
+	  <option value="3">Vif</option>
+
+	</select>
+	<label for="id_escalade">Escalade&nbsp;:</label> <input name="escalade" value="0" max="100" required="" id="id_escalade" min="0" type="number">
+	<label for="id_lance_explosif">Lancé d'explosifs&nbsp;:</label> <input name="lance_explosif" value="0" max="100" required="" id="id_lance_explosif" min="0" type="number">
+	<label for="id_fabrication_explosifs">Fabrication d'explosifs&nbsp;:</label> <input name="fabrication_explosifs" value="0" max="100" required="" id="id_fabrication_explosifs" min="0" type="number">
+	<h4>Niveau 3</h4>
+	<div class="form-group">
+	  <label for="id_gachette_rx">Gâchette facille/Réflexes éclairs&nbsp;:</label> <select name="gachette_rx" id="id_gachette_rx">
+	    <option value="1" selected="">Niveau inférieur</option>
+
+	    <option value="2">Gâchette facile</option>
+
+	    <option value="3">Réflexes éclairs</option>
+
+	  </select>
+	  <label for="id_natation">Natation&nbsp;:</label> <input name="natation" value="0" max="100" required="" id="id_natation" min="0" type="number"><br>
+	  <label for="id_expert_cheval">Expert à cheval&nbsp;:</label> <input name="expert_cheval" value="0" max="100" required="" id="id_expert_cheval" min="0" type="number">
+	  <label for="id_appat_ud">Appât à morts-vivants&nbsp;:</label> <input name="appat_ud" value="0" max="100" required="" id="id_appat_ud" min="0" type="number">
+	</div>
+	<h4>Niveau 4</h4>
+        <div class="form-group">
+	  <label for="id_desengagement">Désengagement&nbsp;:</label> <input name="desengagement" value="0" max="100" required="" id="id_desengagement" min="0" type="number">
+	</div>
+	<h4>Niveau 5</h4>
+	<div class="form-group">
+	  <label for="id_fusillade_solidaire">Maître de la fusillade/Cavalier solitaire&nbsp;:</label> <select name="fusillade_solitaire" id="id_fusillade_solitaire">
+	    <option value="1" selected="">Niveau inférieur</option>
+
+	    <option value="2">Maître de la fusillade</option>
+
+	    <option value="3">Cavalier Solitaire</option>
+
+	  </select>
+	</div>
+
+
+
+</select><input name="perso" id="id_perso" type="hidden">
+
+
+
+
+<input class="btn btn-default" type="submit" value="Valider" />
+</form>
+</div>
+</div>
+{% endblock %}

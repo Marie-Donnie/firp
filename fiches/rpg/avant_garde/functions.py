@@ -169,6 +169,39 @@ def calcul_sorcier(perso_id):
         intell = min(intell + 1, 10)
         force_men = min(force_men + 1, 10)
         mana += 100
-    mana = intell * 10
+
+    mana += intell * 10
 
     return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir, mana
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RABATTEUR %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+def calcul_rabatteur(perso_id):
+    raba = Rabatteur.objects.get(pk=perso_id)
+    perso = raba.perso
+    force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir = calcul_base(perso.id)
+    if perso.niveau >= 2:
+        if (raba.gachette_vif == 2):
+            cap_tir = min(cap_tir + 1, 10)
+        elif (raba.gachette_vif == 3):
+            agi = min(agi + 1, 10)
+        force_men = min(force_men + 1, 10)
+    if perso.niveau >= 3:
+        if (raba.gachette_rx == 2):
+            cap_tir = min(cap_tir + 1, 10)
+        elif (raba.gachette_rx == 3):
+            agi = min(agi + 1, 10)
+        force_men = min(force_men + 1, 10)
+    if perso.niveau >= 4:
+        force_men = min(force_men + 1, 10)
+    if perso.niveau >= 5:
+        if (raba.fusillade_solitaire == 2):
+            cap_tir = min(cap_tir + 2, 10)
+            perce = min(perce + 1, 10)
+        elif (raba.fusillade_solitaire == 3):
+            agi = min(agi + 2, 10)
+            endu = min(endu +1, 10)
+        force_men = min(force_men + 1, 10)
+
+    return force, endu, perce, agi, intell, charisme, force_men, pv_max, cap_combat, cap_tir

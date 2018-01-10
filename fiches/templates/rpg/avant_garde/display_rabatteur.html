@@ -1,0 +1,140 @@
+{% extends "rpg/avant_garde/classe.html" %}
+
+{% load static %}
+
+
+{% block script %}
+
+{% endblock %}
+
+{% block niveau1 %}
+{% if classe.equitation != 0 %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Mount_RidingHorse.PNG" title="De 0 à 100, permet de monter à cheval" alt="Équitation"> Équitation
+  <span class="talentpoints">{{classe.equitation}}</span>
+</div>
+{% endif %}
+{% if classe.tir_mouvement != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Hunter_RunningShot.PNG" alt="Tir en mouvement" title="De 0 à 100, Détermine la capacité du personnage à tirer depuis son cheval, tout les 10 points, augmente la chance de toucher de 1 au rand quand le combattant est monté."> Tir en mouvement
+<span class="talentpoints">{{classe.tir_mouvement}}</span>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block niveau2 %}
+{% if fiche.niveau > 1 %}
+{% if classe.gachette_vif == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/CTir.PNG" alt="Fine gâchette" title="+ 1 en capacité de tir"> Fine gâchette
+</div>
+{% elif classe.gachette_vif == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Agi.PNG" alt="Vif" title="+1 Agilité"> Vif
+</div>
+{% else %}
+<div class="talent">
+  Vous pouvez choisir Fine gâchette ou Vif
+</div>
+{% endif %}
+{% if classe.escalade != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_GrapplingHook.PNG" title="De 0 à 100, détermine la capacité à escalader." alt="Escalade"> Escalade
+<span class="talentpoints">{{classe.escalade}}</span>
+</div>
+{% endif %}
+{% if classe.lance_eplosifs != 0 %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_Gizmo_SuperSapperCharge.PNG" title="De 0 à 100, détermine la capacité du personnage à lancer correctement ses explosifs, tout les 10 points, augmente la chance de lancer correctement son explosif de 1 au rand." alt="Lancé d'explosifs"> Lancé d'explosifs
+  <span class="talentpoints">{{classe.lance_explosifs}}</span>
+</div>
+{% endif %}
+{% if classe.fabrication_explosifs != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_Misc_EngGizmos_38.PNG" title="De 0 à 100, détermine la faculté du personnage à créer des explosifs avec peu de matériel. Permet de fabriquer des explosifs pendant une longue période de repos." alt="Fabrication d'explosifs"> Fabrication d'explosifs
+<span class="talentpoints">{{classe.fabrication_explosifs}}</span>
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale"> + 1 Force Mentale
+</div>
+{% endif %}
+{% endblock %}
+
+{% block niveau3 %}
+{% if fiche.niveau > 2 %}
+{% if classe.gachette_rx == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/CTir.PNG" alt="Gâchette facile" title="+ 1 en capacité de tir"> Gâchette facile
+</div>
+{% elif classe.gachette_rx == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/Agi.PNG" alt="Réflexes éclairs" title="+1 Agilité"> Réflexes éclairs
+</div>
+{% else %}
+<div class="talent">
+  Vous avez le niveau pour choisir entre Gâchette facile ou Réflexes éclairs
+</div>
+{% endif %}
+{% if classe.natation != 0 %}
+<div class="talent">
+  {% if classe.natation < 51 %}
+			  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Achievement_Zone_Sholazar_03.PNG" title="De 0 à 100, permet de nager." alt="Natation"> Natation
+			  {% else %}
+			  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Achievement_Zone_IceCrown_02.PNG" title="De 0 à 100, permet de nager." alt="Natation"> Natation
+			  {% endif %}
+			  <span class="talentpoints">{{classe.natation}}</span>
+</div>
+{% endif %}
+{% if classe.expert_cheval != 0 %}
+<div class="talent">
+  <img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_AlliancePVPMount.PNG" title="De 0 à 100, permet de réaliser des manœuvres bien plus complexes avec sa monture et augmente sa résistance globale." alt="Expert à cheval"> Expert à cheval
+  <span class="talentpoints">{{classe.expert_cheval}}</span>
+</div>
+{% endif %}
+{% if classe.appat_ud != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/INV_GhoulNorthrend.PNG" title="De 0 à 100, détermine l'efficacité des appâts utilisé par le rabatteur." alt="Appât à morts-vivants"> Appât à morts-vivants
+<span class="talentpoints">{{classe.appat_ud}}</span>
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale"> + 1 Force Mentale
+</div>
+{% endif %}
+{% endblock %}
+
+{% block niveau4 %}
+{% if fiche.niveau > 3 %}
+{% if classe.desengagement != 0 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Rogue_Sprint.PNG" title="De 0 à 100, permet au rabatteur de quitter rapidement un combat sans prendre de coups." alt="Désengagement"> Désengagement
+<span class="talentpoints">{{classe.desengagement}}</span>
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale"> + 1 Force Mentale
+</div>
+{% endif %}
+{% endblock %}
+
+{% block niveau5 %}
+{% if fiche.niveau > 4 %}
+{% if classe.fusillade_solitaire == 2 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/Ability_Hunter_RapidRegeneration.PNG" alt="Maître de la fusillade" title="+ 2 Capacité de tir, + 1 Perception, double les dégâts des armes à feu et des explosifs."> Maître de la fusillade
+</div>
+{% elif classe.fusillade_solitaire == 3 %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/ICONS/ABILITY_HUNTER_PATHFINDING2.PNG" alt="Cavalier solitaire" title="+ 2 Agilité, + 1 Endurance, le cheval est plus rapide, plus résistant, s'il est trop blessé, il quittera le combat pour retrouver son maître plus tard."> Cavalier solitaire
+</div>
+{% else %}
+<div class="talent">
+  Vous avez le niveau pour choisir entre Maître de la fusillade ou Cavalier Solitaire
+</div>
+{% endif %}
+<div class="talent">
+<img class="talent-image" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale"> + 1 Force Mentale
+</div>
+{% endif %}
+{% endblock %}
