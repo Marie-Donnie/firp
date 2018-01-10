@@ -23,7 +23,8 @@ a:hover {
     color: #fefefe;
 }
 
-#quest-short.media {
+.quest-short.media {
+    position: relative;
     width: 80%;
     background-color: #000000;
     background-image: url("/static/site/images/parchment-light.jpg");
@@ -35,7 +36,7 @@ a:hover {
     display: flex;
 }
 
-#quest-short:hover {
+.quest-short:hover {
     cursor: pointer;
 }
 
@@ -705,4 +706,15 @@ input, textarea {
 #maisons-header {
     text-align: center;
     border-bottom: 1px solid #4d4d4d;
+}
+
+.accompli {
+    position: absolute;
+    font-size: 60px;
+    color: red;
+    font-weight: bold;
+    transform: rotate(-4deg);
+    left: 405px;
+    font-family: morpheus;
+    top: 1px;
 }

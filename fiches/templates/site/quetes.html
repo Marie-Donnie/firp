@@ -25,7 +25,10 @@
   {% if quetes_list %}
     {% for quete in quetes_list %}
 
-    <div class="media" id="quest-short" onclick="document.location='{% url 'quete' quete.id %}'">
+  <div class="media quest-short" onclick="document.location='{% url 'quete' quete.id %}'">
+	  {% if quete.etat == 3 %}
+    	  <div class="accompli">ACCOMPLIE</div>
+	  {% endif %}
       {% if forloop.counter0|divisibleby:'2' %}
       <div class="media-left media-middle">
 
