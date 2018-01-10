@@ -18,9 +18,8 @@
 <span class="statistics"><img class="statistic" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">{{ force_men}}</span>
 </li>
 <li><b>Points de vie :</b> {{ fiche.pv }}/{{ pv_max }}</li>
-{% if mana %}
-<li><b>Points de mana :</b> {{ mana }}</li>
-{% endif %}
+{% block mana %}
+{% endblock %}
 </ul>
 {% endblock %}
 

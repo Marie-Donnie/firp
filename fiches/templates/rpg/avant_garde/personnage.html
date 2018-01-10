@@ -84,13 +84,13 @@ $(function () {
       <li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}&nbsp;{{ fiche.prenom|capfirst }}</li>
       <li><b>Date de naissance&nbsp;: </b>{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
 	{% endif %}
-	{{fiche.mois_de_naissance}}{% if fiche.jour_mois_de_naissance == 01 %}er mois{% else %}ème mois
+	{{fiche.mois_de_naissance}}{% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois
 	{% endif %}
 	de l'an {{fiche.annee_de_naissance}}</li>
       <li><b>Ville de naissance&nbsp;: </b>{{ fiche.ville_de_naissance|capfirst  }}</li>
       <li><b>Ancienne Profession&nbsp;: </b>
       {% if fiche.ex_prof != 9 %}
-	{{fiche.get_ex_prof_display|capfirst }}
+	{{fiche.get_ex_prof_display|capfirst }} : {{fiche.apt_metier}}
 	{% else %}
 	{{fiche.autre_metier|capfirst}}
 	{% endif %}

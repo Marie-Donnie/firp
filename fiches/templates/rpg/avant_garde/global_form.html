@@ -107,6 +107,8 @@ $(function () {
 <label for="id_autre_metier">Autre métier&nbsp;:</label>
 <input name="autre_metier" value="{{form.autre_metier.value|default:'Aucun'}}" id="id_autre_metier" maxlength="30" type="text">
 <span>
+    <label for="id_apt_metier">Compétence métier&nbsp;:</label>
+    <input name="apt_metier" value="{{form.apt_metier.value|default:1}}" max="20" required="" id="id_apt_metier" min="1" type="number" data-toggle="tooltip" title="Le rand 1d20"><br>
   <ul>
     <li><b>Forgeron :</b> Débloque la compétence Forge à 1d20 pts, qui permet de rendre de la durabilité à l'équipement endommagé. (- 5 pts de création)</li>
 <li><b>Chasseur :</b> Débloque la compétence Chasse à 1d20 pts, qui permet de chasser des animaux pour récupérer de la nourriture (- 2 pts de création)</li>
