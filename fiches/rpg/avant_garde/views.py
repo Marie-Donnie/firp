@@ -54,6 +54,30 @@ def editer_base(request, base_id):
             form = Avant_GardeForm(data, request.FILES, instance=base)
             if form.is_valid():
                 save_it = form.save()
+                if save_it.classe == 1:
+                    fantassin = Fantassin.objects.select_related().filter(perso = save_it.id)
+                    if fantassin:
+                        return redirect('afficher_fantassin', classe_id=fantassin.id)
+                elif save_it.classe == 2:
+                    arbaletrier = Arbaletrier.objects.select_related().filter(perso = save_it.id)
+                    if arbaletrier:
+                        return redirect('afficher_arbaletrier', classe_id=arbaletrier.id)
+                elif save_it.classe == 3:
+                    eclaireur = Eclaireur.objects.select_related().filter(perso = save_it.id)
+                    if eclaireur:
+                        return redirect('afficher_eclaireur', classe_id=eclaireur.id)
+                elif save_it.classe == 4:
+                    apothicaire = Apothicaire.objects.select_related().filter(perso = save_it.id)
+                    if apothicaire:
+                        return redirect('afficher_apothicaire', classe_id=apothicaire.id)
+                elif save_it.classe == 5:
+                    sorcier = Sorcier.objects.select_related().filter(perso = save_it.id)
+                    if sorcier:
+                        return redirect('afficher_sorcier', classe_id=sorcier.id)
+                elif save_it.classe == 6:
+                    rabatteur = Rabatteur.objects.select_related().filter(perso = save_it.id)
+                    if rabatteur:
+                        return redirect('afficher_rabatteur', classe_id=rabatteur.id)
                 return redirect('detail_perso', perso_id=save_it.id)
             else:
                 print(form.errors)
@@ -64,7 +88,6 @@ def editer_base(request, base_id):
         desavantages = Desavantages.objects.all()
         context = {'form': form, 'avantages': avantages,
                    'desavantages': desavantages}
-        print(base.avants)
         return render(request, 'rpg/avant_garde/global_form.html', context)
 
     else:
