@@ -1,0 +1,8 @@
+<td><a href="{% url afficher ident %}">{{ f.nom }} {{ f.prenom }}</a></td>
+<td><a href="{% url afficher ident %}">{{ f.get_classe_display }}</a></td>
+<td><a href="{% url afficher ident %}}">{{ f.get_grade_rp_display }}</a></td>
+{% if f.image %}
+<td><a target="_self" href="{% url afficher ident %}"><img class="media-object" src={{ f.image.url }} alt="Portrait"></a></td>
+{% else %}
+<td><a target="_self" href="{% url afficher ident %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
+{% endif %}

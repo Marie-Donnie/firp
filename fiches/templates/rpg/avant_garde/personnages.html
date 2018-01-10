@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load tags %}
+
 {% block title %}Liste des personnages{% endblock %}
 {% block page-title %}Liste des personnages{% endblock %}
 
@@ -44,13 +46,27 @@
     {% for f in fiches %}
     <tr>
       <!-- <div class="character"> -->
+      {% if f.classe == 1 and f.fantassin %}
+      {% return_line 'fantassin' f %}
+      {% elif f.classe == 2 and f.arbaletrier %}
+      {% return_line 'arbaletrier' f %}
+      {% elif f.classe == 3 and f.eclaireur %}
+      {% return_line 'eclaireur' f %}
+      {% elif f.classe == 4 and f.apothicaire %}
+      {% return_line 'apothicaire' f %}
+      {% elif f.classe == 5 and f.sorcier %}
+      {% return_line 'sorcier' f %}
+      {% elif f.classe == 6 and f.rabatteur %}
+      {% return_line 'rabatteur' f %}
+      {% else %}
       <td><a href="{% url 'detail_perso' f.id %}">{{ f.nom }} {{ f.prenom }}</a></td>
       <td><a href="{% url 'detail_perso' f.id %}">{{ f.get_classe_display }}</a></td>
       <td><a href="{% url 'detail_perso' f.id %}">{{ f.get_grade_rp_display }}</a></td>
       {% if f.image %}
-      <td><a target="_blank" href="{% url 'detail_perso' f.id %}"><img class="media-object" src={{ f.image.url }} alt="Portrait"></a></td>
+      <td><a target="_self" href="{% url 'detail_perso' f.id %}"><img class="media-object" src={{ f.image.url }} alt="Portrait"></a></td>
       {% else %}
-      <td><a target="_blank" href="{% url 'detail_perso' f.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
+      <td><a target="_self" href="{% url 'detail_perso' f.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>
+      {% endif %}
       {% endif %}
       <!-- </div> -->
     </tr>
