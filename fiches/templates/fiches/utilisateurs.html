@@ -44,7 +44,7 @@
     <tr>
       <td><a href="{% url 'utilisateur' u.id %}">{{ u.username }}</a></td>
       <td><a href="{% url 'utilisateur' u.id %}">{{ u.date_joined }}</a></td>
-      {% if u.infos %}
+      {% if u.infos and u.infos.image %}
       <td><a target="_blank" href="{% url 'utilisateur' u.id %}"><img class="media-object" src={{ u.infos.image.url }} alt="Portrait"></a></td>
       {% else %}
       <td><a target="_blank" href="{% url 'utilisateur' u.id %}"><img class="media-object" src="/fiches/media/images/site/no-image.png" alt="Portrait"></a></td>

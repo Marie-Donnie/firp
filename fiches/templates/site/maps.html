@@ -2,11 +2,15 @@
 
 {% load filters %}
 {% load static %}
-{% load leaflet_tags %}
 
 {% block contenu_header %}
-    {% leaflet_js %}
-    {% leaflet_css %}
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+       crossorigin=""/>
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
 <script src="/static/site/maps.js">
 </script>
 
@@ -21,7 +25,7 @@
 
   <div class="maps-body">
 
-    <div class="page-header" id="maps-header" onclick="document.location='/'">
+    <div class="page-header" id="maps-header" onclick="document.location='https://www.filsdegarithos.ovh/'">
       <div class="maps-head">
 	<h1 id="centre">Duché de Noirebois</h1>
       </div>
