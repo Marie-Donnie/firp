@@ -1,7 +1,7 @@
 function init() {
     var map = L.map('map', {
 	crs: L.CRS.Simple,
-	minZoom: -1
+	minZoom: 0
     });
 
     var bounds = [[0,0], [1000,1000]];
