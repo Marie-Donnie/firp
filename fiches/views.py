@@ -1155,7 +1155,7 @@ def habitations(request):
     return render(request, 'site/habitations.html', context)
 
 
-# Display the request Fiche
+# Display the requested house
 def detail_maison(request, maison_id):
     maison = get_object_or_404(Maison, pk=maison_id)
     utilisateur = request.user
@@ -1164,6 +1164,10 @@ def detail_maison(request, maison_id):
     return render(request, 'site/detail_maison.html', context)
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAPS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+def afficher_carte(request):
+    return 'lol'
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 

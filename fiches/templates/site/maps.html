@@ -2,13 +2,22 @@
 
 {% load filters %}
 {% load static %}
+{% load leaflet_tags %}
 
+{% block contenu_header %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+<script src="/static/site/maps.js">
+</script>
+
+<link rel="stylesheet" href="{% static 'site/maps.css' %}">
+ {% endblock %}
 
 {% block title %}Duché de Noirebois{% endblock %}
-{% block header %}{% endblock %}
 
-{% block content %}
-<link rel="stylesheet" href="{%static 'site/maps.css' %}">
+
+{% block contenu %}
+
 
   <div class="maps-body">
 
@@ -20,21 +29,24 @@
 
     <div class="black">
       <div class="maps">
-	<a class="map_link" target="_blank" href="/fiches/media/images/maps/noirebois.jpg" data-toggle="objet-tooltip">
-	  <img class="map" src="/fiches/media/images/maps/noirebois.jpg" alt="Noirebois" id="noirebois">
-	</a>
-	<a class="map_link" target="_blank" href="/fiches/media/images/maps/comte_vent_est.jpg" data-toggle="objet-tooltip">
-	  <img class="map" src="/fiches/media/images/maps/comte_vent_est.jpg" alt="Comté du vent de l'Est" id="comte_vent_est">
-	</a>
-	<a class="map_link" target="_blank" href="/fiches/media/images/maps/haut_noirebois.jpg" data-toggle="objet-tooltip">
-	  <img class="map" src="/fiches/media/images/maps/haut_noirebois.jpg" alt="Haut-Noirebois" id="haut_noirebois">
-	</a>
-	<a class="map_link" target="_blank" href="/fiches/media/images/maps/comte_aesthran.jpg" data-toggle="objet-tooltip">
-	  <img class="map" src="/fiches/media/images/maps/comte_aesthran.jpg" alt="Comté d'Aesthran" id="comte_aesthran">
-	</a>
-	<a class="map_link" target="_blank" href="/fiches/media/images/maps/iles_du_kraken.png" data-toggle="objet-tooltip">
-	  <img class="map" src="/fiches/media/images/maps/iles_du_kraken.png" alt="Iles du Kraken" id="iles_du_kraken">
-	</a>
+
+	<div id="map" style="height: 800px;">
+	</div>
+	<!-- <a class="map_link" target="_blank" href="/fiches/media/images/maps/noirebois.jpg" data-toggle="objet-tooltip"> -->
+	<!--   <img class="map" src="/fiches/media/images/maps/noirebois.jpg" alt="Noirebois" id="noirebois"> -->
+	<!-- </a> -->
+	<!-- <a class="map_link" target="_blank" href="/fiches/media/images/maps/comte_vent_est.jpg" data-toggle="objet-tooltip"> -->
+	<!--   <img class="map" src="/fiches/media/images/maps/comte_vent_est.jpg" alt="Comté du vent de l'Est" id="comte_vent_est"> -->
+	<!-- </a> -->
+	<!-- <a class="map_link" target="_blank" href="/fiches/media/images/maps/haut_noirebois.jpg" data-toggle="objet-tooltip"> -->
+	<!--   <img class="map" src="/fiches/media/images/maps/haut_noirebois.jpg" alt="Haut-Noirebois" id="haut_noirebois"> -->
+	<!-- </a> -->
+	<!-- <a class="map_link" target="_blank" href="/fiches/media/images/maps/comte_aesthran.jpg" data-toggle="objet-tooltip"> -->
+	<!--   <img class="map" src="/fiches/media/images/maps/comte_aesthran.jpg" alt="Comté d'Aesthran" id="comte_aesthran"> -->
+	<!-- </a> -->
+	<!-- <a class="map_link" target="_blank" href="/fiches/media/images/maps/iles_du_kraken.png" data-toggle="objet-tooltip"> -->
+	<!--   <img class="map" src="/fiches/media/images/maps/iles_du_kraken.png" alt="Iles du Kraken" id="iles_du_kraken"> -->
+	<!-- </a> -->
       </div>
     </div>
   </div>

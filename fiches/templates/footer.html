@@ -1,5 +1,6 @@
 {% load staticfiles %}
-
+<!doctype html>
+<html>
 <head>
   <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
 
@@ -31,7 +32,7 @@
   <!-- Link to my css -->
   <link rel="stylesheet" href="{%static 'footer.css' %}">
 
-  {% block header %}{% endblock %}
+  {% block contenu_header %}{% endblock %}
 
 {% block contenu %}{% endblock %}
 
@@ -72,10 +73,11 @@
     {% endif %}
   </div>
 </nav>
-</body>
 <footer>
   <div id="center">
     <img src="/fiches/media/images/site/GitHub-Mark-32px.png" class="github-logo"/>
     <a href="https://github.com/Marie-Donnie/firp">Retrouvez-nous sur Github</a>
   </div>
 </footer>
+</body>
+</html>
