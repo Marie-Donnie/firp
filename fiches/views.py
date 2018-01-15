@@ -3,12 +3,13 @@
 import os
 from django.shortcuts import get_object_or_404, render, redirect, render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.core import serializers
 from dal import autocomplete
 from fiches.models import *
 from fiches.forms import *
@@ -1166,8 +1167,10 @@ def detail_maison(request, maison_id):
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAPS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
-def afficher_carte(request):
-    return 'lol'
+def json_carte(request):
+    quests = serializers.serialize('json', Quete.objects.all(),
+                                   fields=('nom','zone', 'x', 'y', 'etat'))
+    return JsonResponse(quests, safe=False)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 

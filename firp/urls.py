@@ -79,22 +79,23 @@ urlpatterns = [
     url(r'^gallerie/rechercher/$', views.gallery_search,
         name='rechercher_gallerie'),
     # Campagnes
-    url(r'campagnes/$', views.campagnes, name='campagnes'),
-    url(r'campagnes/(?P<campagne_id>\d+)/$', views.campagne, name='campagne'),
-    url(r'campagnes/(?P<campagne_id>\d+)/(?P<mission_id>\d+)/$', views.mission,
+    url(r'^campagnes/$', views.campagnes, name='campagnes'),
+    url(r'^campagnes/(?P<campagne_id>\d+)/$', views.campagne, name='campagne'),
+    url(r'^campagnes/(?P<campagne_id>\d+)/(?P<mission_id>\d+)/$', views.mission,
         name='mission'),
-    url(r'campagnes/creer_mission/$', views.creer_mission, name='creer_mission'),
-    url(r'campagnes/editer_mission/(?P<mission_id>\d+)/$', views.edit_mission, name='editer_mission'),
+    url(r'^campagnes/creer_mission/$', views.creer_mission, name='creer_mission'),
+    url(r'^campagnes/editer_mission/(?P<mission_id>\d+)/$', views.edit_mission, name='editer_mission'),
     # Sorts
-    url(r'classes/$', views.classes, name='classes'),
-    url(r'classes/(?P<classe_id>\d+)/$', views.sorts, name='sorts'),
+    url(r'^classes/$', views.classes, name='classes'),
+    url(r'^classes/(?P<classe_id>\d+)/$', views.sorts, name='sorts'),
     url(r'^classes/(?P<sort_id>\d+)/tooltip/$', views.tooltip_sort,
         name='tooltip_sort'),
     # Images
-    url(r'images/telecharger/$', views.image, name='image_upload'),
-    url(r'images/gallerie/$', views.upload_gallery, name='upload_gallery'),
+    url(r'^images/telecharger/$', views.image, name='image_upload'),
+    url(r'^images/gallerie/$', views.upload_gallery, name='upload_gallery'),
     # Cartes
-    url(r'cartes/duche/$', views.cartes, name='cartes'),
+    url(r'^cartes/duche/$', views.cartes, name='cartes'),
+    url(r'^cartes/duche/quetes_json$', views.json_carte),
     # Habitations
     #url(r'classes/$', views.classes, name='classes'),
     url(r'habitations/creer_maison/(?P<proprietaire_id>\d+)/(?P<type_maison>\d+)/$',
