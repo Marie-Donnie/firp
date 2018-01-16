@@ -42,8 +42,11 @@
     <a target="_self" href="https://www.filsdegarithos.ovh/" class="bottom-bar-button">
       <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Achievement-Up.PNG" alt="Accueil">
     </a>
+    <a target="_self" href="https://www.filsdegarithos.ovh/forum/" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-SOCIALS-UP.PNG" alt="Forum">
+    </a>
     <a target="_self" href="{% url 'index' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG" alt="Fiches">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Sheet.PNG" alt="Fiches">
     </a>
     <a target="_self" href="{% url 'campagnes' %}" class="bottom-bar-button">
       <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Talents-Up.PNG" alt="Campagnes">
@@ -51,10 +54,10 @@
     <a target="_self" href="{% url 'quetes' %}" class="bottom-bar-button">
       <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-QUEST-UP.PNG" alt="Quêtes">
     </a>
-    <a target="_self" href="https://www.filsdegarithos.ovh/forum/" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-SOCIALS-UP.PNG" alt="Forum">
+    <a target="_self" href="{% url 'classes' %}" class="bottom-bar-button">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG" alt="Classes">
     </a>
-    <a target="_self" href="" class="bottom-bar-button">
+    <a target="_self" href="{% url 'cartes' %}" class="bottom-bar-button">
       <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG" alt="Carte">
     </a>
     {% if user.is_authenticated %}
