@@ -1,7 +1,31 @@
 function init() {
+
+    L.CursorHandler = L.Handler.extend({
+
+	addHooks: function () {
+            this._popup = new L.Popup();
+            this._map.on('click', this._open, this);
+	},
+
+	removeHooks: function () {
+            this._map.off('click', this._open, this);
+	},
+
+	_open: function (e) {
+	    this._popup.setLatLng(e.latlng)
+		.setContent(`x, y (${e.latlng.lng},${e.latlng.lat})`);
+            this._popup.openOn(this._map);
+	},
+
+    });
+
+    L.Map.addInitHook('addHandler', 'cursor', L.CursorHandler);
+
+
     var map = L.map('map', {
 	crs: L.CRS.Simple,
-	minZoom: 0
+	minZoom: 0,
+	cursor: true,
     });
 
     var bounds = [[0,0], [1000,1000]];
@@ -32,29 +56,14 @@ function init() {
 	.done(function(data) {
 	    var json = JSON.parse(data);
 	    json.forEach(function(quete) {
-		if (quete.fields.etat !== 3) {
-		    var url = `<a href="/firp/quetes/${quete.pk}">${quete.fields.nom}</a>`;
-		    var icon = quete.fields.etat===1 ? quete_libre : quete_reservee;
-		    L.marker( xy(quete.fields.x, quete.fields.y), {icon: icon})
-			.addTo(map)
-			.bindPopup( L.popup().setContent(url));
-		}
+		var url = `<a href="/firp/quetes/${quete.pk}">${quete.fields.nom}</a>`;
+		var icon = quete.fields.etat===1 ? quete_libre : quete_reservee;
+		L.marker( xy(quete.fields.x, quete.fields.y), {icon: icon})
+		    .addTo(map)
+		    .bindPopup( L.popup().setContent(url));
 	    });
 	});
 
-    // var sol = xy(245, 480.0);
-    // var mizar    = xy( 41.6, 130.1);
-    // var kruegerZ = xy( 0,  56.5);
-    // var deneb    = xy(218.7,   8.3);
-
-    // var popuptest = L.popup(className='lolçamarchepas')
-    // 	.setContent('<a href="http://127.0.0.1:8000/quetes/2/">Une quête suicidaire</a>')
-    // ;
-
-    // L.marker(     sol, {icon: quest}).addTo(map).bindPopup(popuptest);
-    // L.marker(   mizar, {icon: quest}).addTo(map).bindPopup(    'Mizar');
-    // L.marker(kruegerZ, {icon: quest}).addTo(map).bindPopup('Krueger-Z');
-    // L.marker(   deneb, {icon: quest}).addTo(map).bindPopup(    'Deneb');
 }
 
 $(init)
