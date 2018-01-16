@@ -1048,6 +1048,12 @@ def cartes(request):
     return render(request, 'site/maps.html', {})
 
 
+def json_carte(request):
+    quests = serializers.serialize('json', Quete.objects.filter(etat__lt=3),
+                                   fields=('nom','zone', 'x', 'y', 'etat'))
+    return JsonResponse(quests, safe=False)
+
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMERCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 @permission_required('fiches.fdg', raise_exception=True)
@@ -1164,13 +1170,6 @@ def detail_maison(request, maison_id):
     context = {'maison': maison}
     return render(request, 'site/detail_maison.html', context)
 
-
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAPS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
-
-def json_carte(request):
-    quests = serializers.serialize('json', Quete.objects.all(),
-                                   fields=('nom','zone', 'x', 'y', 'etat'))
-    return JsonResponse(quests, safe=False)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
