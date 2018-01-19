@@ -572,7 +572,7 @@ def edit_equipement(request, equipement_id):
         return HttpResponse("Vous ne pouvez pas editer les equipements.")
 
 
-@permission_required('fiches.veteran', raise_exception=True)
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_equip(request, equipement_id):
     equipement = Equipement.objects.get(pk=equipement_id)
     if request.method == 'POST':
