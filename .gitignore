@@ -19,3 +19,5 @@ src/
 static/admin/
 autocomplete_light/
 *.PNG
+*.png
+*.rb
