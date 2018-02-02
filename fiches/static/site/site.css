@@ -259,10 +259,10 @@ input, textarea {
     margin: auto;
 }
 
-.fond optgroup,
-.fond select,
-.fond textarea {
-    color: 000;
+optgroup,
+select,
+textarea {
+    color: #000;
 }
 
 #campaign-header {
