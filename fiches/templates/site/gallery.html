@@ -22,13 +22,14 @@
   <div id="body">
     {% if images_list %}
     <div class="gallery">
-    {% for image in images_list %}
-    <div class="icones-text">
-    <img class="icones" id="centre" src="{% get_media_prefix %}images/ICONS/{{ image}}" alt="{{image}}"><br>
-    <span>{{ image }}</span>
+      {% for image in images_list %}
+      <div class="icones-text">
+	<img class="icones" id="centre" src="{% get_media_prefix %}images/ICONS/{{ image}}" alt="{{image}}"><br>
+	<span>{{ image }}</span>
+      </div>
+      {% endfor %}
     </div>
-
-    {% endfor %}
+    <div class="clear"></div>
     <div class="quest-pages">
       <span>Page {{ images_list.number }} sur {{ images_list.paginator.num_pages }}</span>
       <nav aria-label="Page navigation" id="pagination">
@@ -37,11 +38,11 @@
 	  <li>
 	    {% if recherche %}
 	    <a href="?{% url_replace request 'page' images_list.previous_page_number %}" aria-label="Précédent">
-	    {% else %}
-	    <a href="?page={{ images_list.previous_page_number }}" aria-label="Précédent">
-	      {% endif %}
-	      <span aria-hidden="true">&laquo;</span>
-	    </a>
+	      {% else %}
+	      <a href="?page={{ images_list.previous_page_number }}" aria-label="Précédent">
+		{% endif %}
+		<span aria-hidden="true">&laquo;</span>
+	      </a>
 	  </li>
 	  {% endif %}
 
@@ -52,8 +53,8 @@
 	      {% else %}
 	      <a href="?page={{ p }}">
 		{% endif %}
-	      {{p}}
-	    </a>
+		{{p}}
+	      </a>
 	  </li>
 	  {% endfor %}
 
@@ -63,20 +64,18 @@
 	    <a href="?{% url_replace request 'page' images_list.next_page_number %}" aria-label="Suivant">
 	      {% else %}
 	      <a href="?page={{ images_list.next_page_number }}" aria-label="Suivant">
-	      {% endif %}
-              <span aria-hidden="true">&raquo;</span>
-	    </a>
+		{% endif %}
+		<span aria-hidden="true">&raquo;</span>
+	      </a>
 	  </li>
 	  {% endif %}
 	</ul>
       </nav>
     </div> <!-- quest-pages -->
-    </div>
-    {% else %}
-    <p>Aucune icône</p>
-    {% endif %}
-
   </div>
+  {% else %}
+  <p>Aucune icône</p>
+  {% endif %}
 </body>
 
   {% endblock %}
