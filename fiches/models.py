@@ -359,7 +359,7 @@ class Armure(models.Model):
                             max_value=25)
     membre = models.SmallIntegerField(choices=MEMBRES,
                                       default=5)
-    armure = models.SmallIntegerField(default=0)
+    armure = models.FloatField(default=0)
 
     class Meta:
         ordering = ["membre"]
