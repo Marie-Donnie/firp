@@ -3,9 +3,12 @@
 {% block enchant %}{% if enchant %} - {{ enchant.nom }}{% endif %}{% endblock %}
 
 {% block armure %}
-{% if armure.effet != 'Aucun' %}
+{% if armure.effet != 'Aucun' or enchant and enchant.effet != 'Aucun' %}
 <li>
-<b>Effet(s):</b> {{ armure.effet|linebreaksbr }}
+  <b>Effet(s):</b> {{ armure.effet|linebreaksbr }} <br>
+  {% if enchant %}
+  {{ enchant.effet|linebreaksbr }}
+  {% endif %}
 </li>
 {% endif %}
 <!-- {% if armure.effet_ig != 'Aucun' %} -->
