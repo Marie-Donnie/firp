@@ -79,6 +79,9 @@
 	<div class="navbar-right">
 	  {% if user.is_authenticated %}
 	  <span>Bienvenue, <a href="{% url 'utilisateur' user.id %}">{{ user.username }}</a> !  </span>
+	  {% if perms.fiches.admin %}
+	  <a class="btn btn-default navbar-btn" href="{% url 'admin:index' %}">Administration</a>
+	  {% endif %}
 	  <a class="btn btn-default navbar-btn" href="{% url 'account_logout' %}">Se déconnecter</a>
 	  {% else %}
 	  <a class="btn btn-default navbar-btn" href="{% url 'account_signup' %}">S'inscrire</a>
