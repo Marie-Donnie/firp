@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load l10n %}
+{% load staticfiles %}
+
+{% block title %}Créer/éditer un enchantement{% endblock %}
+{% block page-title %}Créer/éditer un enchantement{% endblock %}
+
+{% block content %}
+<div id="char_form">
+<form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
+  {% csrf_token %}
+
+     <div class="form-group"><label for="id_nom">Nom&nbsp;:</label> <input name="nom" value="{{form.nom.value|default_if_none:'Enchantement de '}}" required="" id="id_nom" maxlength="50" type="text"></div>
+    <div class="form-group"><label for="id_effet">Effet&nbsp;:</label> <input name="effet" value="{{form.effet.value|default_if_none:'Aucun'}}" required="" id="id_effet" maxlength="400" type="text"></div>
+    <div class="form-group"><label for="id_effet_ig">Effet ig&nbsp;:</label> <input name="effet_ig" value="{{form.effet_ig.value|default_if_none:'Aucun'}}" required="" id="id_effet_ig" maxlength="400" type="text"></div>
+    <div class="form-group"><label for="id_force">Force&nbsp;:</label> <input name="force" value="{{form.force.value|default:'0'}}" max="25" required="" id="id_force" min="0" type="number"></div>
+    <div class="form-group"><label for="id_intell">Intell&nbsp;:</label> <input name="intell" value="{{form.intell.value|default:'0'}}" max="25" required="" id="id_intell" min="0" type="number"></div>
+    <div class="form-group"><label for="id_agi">Agi&nbsp;:</label> <input name="agi" value="{{form.agi.value|default:'0'}}" max="25" required="" id="id_agi" min="0" type="number"></div>
+    <div class="form-group"><label for="id_membre">Membre&nbsp;:</label> <select name="membre" id="id_membre">
+	<option value="1" {% if form.membre.value == 1 or form.membre.value|unlocalize == 'Main principale' %} selected="" {% endif %}>Main principale</option>
+
+	<option value="2" {% if form.membre.value == 2 or form.membre.value|unlocalize == 'Autre main' %} selected="" {% endif %}>Autre main</option>
+
+	<option value="3" {% if form.membre.value == 3 or form.membre.value|unlocalize == 'Tête' %} selected="" {% endif %}>Tête</option>
+
+	<option value="4" {% if form.membre.value == 4 or form.membre.value|unlocalize == 'Epaules' %} selected="" {% endif %}>Epaules</option>
+
+	<option value="5" {% if form.membre.value == 5 or form.membre.value|unlocalize == 'Torse' or form.membre.value == None %} selected="" {% endif %}>Torse</option>
+
+	<option value="6" {% if form.membre.value == 6 or form.membre.value|unlocalize == 'Mains' %} selected="" {% endif %}>Mains</option>
+
+	<option value="7" {% if form.membre.value == 7 or form.membre.value|unlocalize == 'Taille' %} selected="" {% endif %}>Taille</option>
+
+	<option value="8" {% if form.membre.value == 8 or form.membre.value|unlocalize == 'Jambes' %} selected="" {% endif %}>Jambes</option>
+
+	<option value="9" {% if form.membre.value == 9 or form.membre.value|unlocalize == 'Pieds' %} selected="" {% endif %}>Pieds</option>
+
+	<option value="10" {% if form.membre.value == 10 or form.membre.value|unlocalize == 'Dos' %} selected="" {% endif %}>Dos</option>
+
+	<option value="11" {% if form.membre.value == 11 or form.membre.value|unlocalize == 'Cou' %} selected="" {% endif %}>Cou</option>
+
+	<option value="12" {% if form.membre.value == 12 or form.membre.value|unlocalize == 'Doigt' %} selected="" {% endif %}>Doigt</option>
+
+	<option value="13" {% if form.membre.value == 13 or form.membre.value|unlocalize == 'Poignets' %} selected="" {% endif %}>Poignets</option>
+
+	<option value="14" {% if form.membre.value == 14 or form.membre.value|unlocalize == 'Divers' %} selected="" {% endif %}>Divers</option>
+
+	<option value="15" {% if form.membre.value == 15 or form.membre.value|unlocalize == 'Arme de secours' %} selected="" {% endif %}>Arme de secours</option>
+
+</select></div>
+
+
+
+
+
+<input class="btn btn-default" type="submit" value="Valider" />
+</form>
+
+
+{% endblock %}

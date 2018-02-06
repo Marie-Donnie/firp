@@ -694,6 +694,23 @@ def edit_equip(request, equipement_id):
     return render(request, 'fiches/equip_edit.html', context)
 
 
+@permission_required('fiches.fdg', raise_exception=True)
+def creer_enchantement(request):
+    if request.method == 'POST':
+        form = EnchantementForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+        else:
+            print(form.errors)
+    else:
+        form = EnchantementForm()
+
+    context = {'form': form,}
+
+    return render(request, 'fiches/enchantement.html', context)
+
+
 def tooltip_objet(request, objet_id):
     objet = get_object_or_404(Objet, pk=objet_id)
     context = {'objet': objet}
