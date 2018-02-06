@@ -309,63 +309,63 @@ function onMouseLeave() {
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Head.PNG alt="Tête" id="icone">
 	{% endif %}
 	{% if cou %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' cou.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' cou.id %}" data-toggle="objet-tooltip" data-enchantement="{{ecou.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{cou.objet.image_url}}.PNG" alt="Cou" id="icone">
 	</a>
 	{% else %}
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Neck.PNG alt="Cou" id="icone">
 	{% endif %}
 	{% if epaules %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' epaules.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' epaules.id %}" data-toggle="objet-tooltip" data-enchantement="{{eepaules.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{epaules.objet.image_url}}.PNG" alt="Epaules" id="icone">
 	</a>
 	{% else %}
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Shoulder.PNG alt="Epaules" id="icone">
 	{% endif %}
 	{% if dos %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' dos.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' dos.id %}" data-toggle="objet-tooltip" data-enchantement="{{edos.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{dos.objet.image_url}}.PNG" alt="Dos" id="icone">
 	</a>
 	{% else %}
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Shirt.PNG alt="Dos" id="icone">
 	{% endif %}
 	{% if torse %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' torse.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' torse.id %}" data-toggle="objet-tooltip" data-enchantement="{{etorse.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{torse.objet.image_url}}.PNG" alt="Torse" id="icone">
 	</a>
 	{% else %}
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Chest.PNG alt="Torse" id="icone">
 	{% endif %}
 	{% if poignets %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' poignets.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' poignets.id %}" data-toggle="objet-tooltip" data-enchantement="{{epoignets.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{poignets.objet.image_url}}.PNG" alt="Poignets" id="icone">
 	</a>
 	{% else %}
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Wrists.PNG alt="Poignets" id="icone">
 	{% endif %}
 	{% if mains %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' mains.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' mains.id %}" data-toggle="objet-tooltip" data-enchantement="{{emains.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{mains.objet.image_url}}.PNG" alt="Mains" id="icone">
 	</a>
 	{% else %}
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Hands.PNG alt="Mains" id="icone">
 	{% endif %}
 	{% if taille %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' taille.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' taille.id %}" data-toggle="objet-tooltip" data-enchantement="{{etaille.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{taille.objet.image_url}}.PNG" alt="Taille" id="icone">
 	</a>
 	{% else %}
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Waist.PNG alt="Taille" id="icone">
 	{% endif %}
 	{% if jambes %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' jambes.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' jambes.id %}" data-toggle="objet-tooltip" data-enchantement="{{ejambes.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{jambes.objet.image_url}}.PNG" alt="Jambes" id="icone">
 	</a>
 	{% else %}
 	<img class="inventory-object" src=/fiches/media/images/site/UI-PaperDoll-Slot-Legs.PNG alt="Jambes" id="icone">
 	{% endif %}
 	{% if pieds %}
-	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' pieds.id %}" data-toggle="objet-tooltip">
+	<a class="number-inventory" target="_blank" href="{% url 'detail_armure' pieds.id %}" data-toggle="objet-tooltip" data-enchantement="{{epieds.id}}">
 	  <img class="inventory-object" src="{% get_media_prefix %}images/ICONS/{{pieds.objet.image_url}}.PNG" alt="Pieds" id="icone">
 	</a>
 	{% else %}
