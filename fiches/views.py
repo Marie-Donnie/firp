@@ -803,8 +803,8 @@ def gallery(request):
     # if page is out of range, display the last page of results
     except EmptyPage:
         images_list = paginator.page(paginator.num_pages)
-
-    context = {'images_list': images_list}
+    recherche = None
+    context = {'images_list': images_list, 'recherche': recherche}
     return render(request, 'site/gallery.html', context)
 
 
