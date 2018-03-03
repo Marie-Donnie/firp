@@ -899,9 +899,11 @@ def mission(request, campagne_id, mission_id):
             mission_pre = mis
         if mis.numero == (mission.numero + 1):
             mission_sui = mis
+    # Finds the user requesting the mission to have a nice display of date
+    utilisateur = request.user
     context = {'mission': mission, 'mission_pre': mission_pre,
                'mission_sui': mission_sui, 'image': image,
-               'count': count}
+               'count': count, 'utilisateur': utilisateur}
 
     return render(request, 'site/rapport_mission.html', context)
 
