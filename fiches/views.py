@@ -214,9 +214,11 @@ def personnages(request):
             context['recherche'] = recherche
             context['valeur'] = valeur
         else:
+            recherche = None
             fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
 
     else:
+        recherche = None
         fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
 
     paginator = Paginator(fiches_list, 12)
@@ -230,7 +232,7 @@ def personnages(request):
     except EmptyPage:
         fiches = paginator.page(paginator.num_pages)
 
-    context['fiches'] = fiches
+    context = {'fiches': fiches, 'recherche': recherche}
 
     return render(request, 'fiches/personnages.html', context)
 
