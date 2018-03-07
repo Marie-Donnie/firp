@@ -82,11 +82,25 @@ $(function () {
     </span>
     <ul>
       <li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}&nbsp;{{ fiche.prenom|capfirst }}</li>
-      <li><b>Date de naissance&nbsp;: </b>{{fiche.jour_de_naissance}}{% if fiche.jour_de_naissance == 01 %}er jour du{% else %}ème jour du
-	{% endif %}
-	{{fiche.mois_de_naissance}}{% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois
-	{% endif %}
-	de l'an {{fiche.annee_de_naissance}}</li>
+      <li><b>Date de naissance&nbsp;: </b> {{fiche.jour_de_naissance}}
+	    {% if fiche.jour_de_naissance == 1 %}er{% endif %} <!-- fiche.jour -->
+	    {% if not utilisateur.infos %}
+	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %} <!-- fiche.jour -->
+	    jour du
+	    {{fiche.mois_de_naissance}}
+	    {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %} <!-- fiche.mois -->
+	    de l'an {{fiche.annee_de_naissance}}
+	    {% endif %} <!-- not utilisateurs.infos -->
+	    {% if utilisateur.infos.affichage_date == 'n' %}
+	    {{fiche.mois_de_naissance|mois}} {{fiche.annee_de_naissance}}
+	    {% elif utilisateur.infos.affichage_date == 'l' %}
+	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %}
+	    jour du
+	    {{fiche.mois_de_naissance}}
+	    {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %}
+	    de l'an {{fiche.annee_de_naissance}}
+	    {% endif %}
+	    ({{fiche.annee_de_naissance|age}} an{{fiche.annee_de_naissance|age|pluralize}} cette année)</li>
       <li><b>Ville de naissance&nbsp;: </b>{{ fiche.ville_de_naissance|capfirst  }}</li>
       <li><b>Ancienne Profession&nbsp;: </b>
       {% if fiche.ex_prof != 9 %}
