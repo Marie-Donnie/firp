@@ -42,7 +42,7 @@
 	  <ul>
 	    {% for f in latest_fiches %}
 	    <div class="character">
-	      <li><a href="{% url 'detail_fiche' f.id %}">{{ f.nom }} {{ f.prenom }}</a></li>
+	      <li><a href="{% url 'detail_fiche' f.id %}">{{ f.prenom|capfirst }} {{ f.nom|capfirst }} <img class="portrait-icone" src={{ f.image.url }} alt="Portrait"> </a></li>
 	    </div>
 	    {% endfor %}
 	  </ul>
