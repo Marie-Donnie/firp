@@ -128,9 +128,10 @@ $(function () {
 	  {% for desavant in fiche.desavants.all %}
 	  <li id=desavantages>
 	    {% if desavant.id != 1 %}
-	    {{desavant.nom}}
-	    {% if desavant.id == 5 and fiche.peur != 'Sans' %}({{fiche.peur}})
-	    {% elif desavant.id == 23 and fiche.dependances != 'Sans' %}({{fiche.dependances}}){% endif %}
+	    {% if desavant.id == 5 and fiche.peur != 'Sans' %}Peur ({{fiche.peur}})
+	    {% elif desavant.id == 23 and fiche.dependances != 'Sans' %}Dépendance ({{fiche.dependances}})
+	    {% else %}{{desavant.nom}}
+	    {% endif %}
 	    :
 	    {% endif %}
 	    {{desavant.description}}</li>
