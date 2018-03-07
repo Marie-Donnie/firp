@@ -69,7 +69,7 @@ class Avant_garde(models.Model):
     autre_metier = models.CharField(max_length=30,
                                     default="Aucun")
     apt_metier = IntegerRangeField(default=1, min_value=1,
-                                   max_value=20)
+                                   max_value=100)
     grade_rp = models.SmallIntegerField(choices=((
         (1, "Soldat"),
         (2, "Caporal"),
