@@ -137,7 +137,16 @@ $(function () {
 	    {{desavant.description}}</li>
 	  {% endfor %}
 	</ul>
-	</li>
+      </li>
+      {% if fiche.campagne.all %}
+      <li><b>Campagnes auxquelles le personnage a déjà participé&nbsp;: </b>
+      	<ul>
+	  {% for camp in fiches.campagne.all %}
+	  <li>{{ camp.nom }}</li>
+      {% endfor %}
+	</ul>
+      </li>
+      {% endif %}
     </ul>
 
   </div>     <!-- media-body -->
