@@ -117,9 +117,9 @@ function onMouseLeave() {
 	    {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %} <!-- fiche.mois -->
 	    de l'an {{fiche.annee_de_naissance}} <br>
 	    {% endif %} <!-- not utilisateurs.infos -->
-	    {% if utilisateur.infos.affichage_date == 'n' %}
+	    {% if utilisateur.infos and utilisateur.infos.affichage_date == 'n' %}
 	    {{fiche.mois_de_naissance|mois}} {{fiche.annee_de_naissance}}
-	    {% elif utilisateur.infos.affichage_date == 'l' %}
+	    {% elif utilisateur.infos and utilisateur.infos.affichage_date == 'l' %}
 	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %}
 	    jour du
 	    {{fiche.mois_de_naissance}}
