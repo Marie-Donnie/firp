@@ -274,7 +274,8 @@ def edit_fiche(request, fiche_id):
             if 'image' in request.FILES:
                 path = "%s/" % (settings.MEDIA_ROOT)
                 fichier = os.path.join(path, fiche.image.name)
-                os.remove(fichier)
+                if fiche.image.name != "images/site/no-image.png":
+                    os.remove(fichier)
             form = FicheForm(data, request.FILES, instance=fiche)
             if form.is_valid():
                 save_it = form.save()
