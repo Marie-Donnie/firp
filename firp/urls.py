@@ -103,6 +103,8 @@ urlpatterns = [
     url(r'habitations/creer_maison/(?P<proprietaire_id>\d+)/(?P<type_maison>\d+)/$',
         views.creer_maison, name='creer_maison'),
     url(r'^habitations/$', views.habitations, name='habitations'),
+    url(r'^habitations/creer_piece/$', views.creer_piece, name='creer_piece'),
+    url(r'^habitations/creer_etage/$', views.creer_etage, name='creer_etage'),
     url(r'^habitations/rechercher/$', views.habitations, name='rechercher_maison'),
     url(r'^habitations/maison/(?P<maison_id>\d+)/$', views.detail_maison,
         name='detail_maison'),

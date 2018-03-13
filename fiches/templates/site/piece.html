@@ -1,0 +1,19 @@
+{% extends "site/base.html" %}
+
+{% load staticfiles %}
+{% load static %}
+{% load filters %}
+
+{% block title %}Créer une pièce{% endblock %}
+{% block contenu_header %}{% endblock %}
+
+{% block content %}
+<div class="page-header" id="maisons-header" onclick="document.location='{% url 'habitations' %}'">
+  <h1>Registre des habitations</h1>
+</div>
+
+<div class="lordaeron">
+
+</div>
+
+{% endblock %}

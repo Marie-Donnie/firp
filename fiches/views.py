@@ -1120,6 +1120,43 @@ def creer_bourse(request, fiche_id):
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HABITATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 @permission_required('fiches.fdg', raise_exception=True)
+def creer_piece(request):
+    utilisateur = request.user
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data['createur'] = User.objects.get(username=request.user).id
+        form = PieceForm(data)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('piece', piece_id=save_it.id )
+        else:
+            print(form.errors)
+    else:
+        form = PieceForm()
+    context = {'form': form}
+    return render(request, 'site/piece.html', context)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def creer_etage(request):
+    utilisateur = request.user
+    pieces = Piece.objects.filter(createur=utilisateur)
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data['createur'] = User.objects.get(username=request.user).id
+        form = EtageForm(data)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('etage', etage_id=save_it.id )
+        else:
+            print(form.errors)
+    else:
+        form = EtageForm()
+    context = {'form': form}
+    return render(request, 'site/etage.html', context)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_maison(request, proprietaire_id, type_maison):
     proprietaire = Fiche.objects.get(pk=proprietaire_id)
     utilisateur = request.user
