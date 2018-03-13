@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load filters %}
+
 {% block title %}Accueil{% endblock %}
 {% block page-title %}Bienvenue dans le registre !{% endblock %}
 
@@ -69,7 +71,26 @@
   </div>
 
 </div>
-
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      	<div class="panel-heading">
+	  <h3 class="panel-title">Anniversaires du mois</h3>
+	</div>
+	<div id="center">
+	  {% if birthdays %}
+	  <ul>
+	  {% for f in birthdays %}
+	  <li><a href="{% url 'detail_fiche' f.id %}">{{ f.prenom|capfirst }} {{ f.nom|capfirst }}</a> : {{ f.annee_de_naissance|age }} an{{ f.annee_de_naissance|age|pluralize }} </li>
+	  {% endfor %}
+	  </ul>
+	  {% else %}
+	  <p>Aucun</p>
+	  {% endif %}
+	</div>
+    </div>
+  </div>
+</div>
 <!-- <div class="row"> -->
 <!--   <div class="col-md-4"> -->
 <!--     <div class="panel panel-default"> -->

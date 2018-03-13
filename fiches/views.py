@@ -19,7 +19,10 @@ from fiches.forms import *
 # Displays the first name and last name of the Fiche model
 def index(request):
     fiches = Fiche.objects.order_by('-creation')[:16]
-    context = {'latest_fiches': fiches}
+    today = datetime.now()
+    month = today.month
+    birthdays = Fiche.objects.filter(mois_de_naissance__exact=month)
+    context = {'latest_fiches': fiches, 'birthdays': birthdays}
 
     return render(request, 'fiches/index.html', context)
 
