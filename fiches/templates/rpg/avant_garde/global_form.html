@@ -73,6 +73,16 @@ $(function () {
 	  </span>
       </div>
       <div class="form-group">
+	<label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">{{form.description.value|default:'A venir'}}</textarea>
+	<span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount1">0</span>/6000).</span>
+	<label for="id_historique">Historique&nbsp;</label> <textarea name="historique" class="form-control" id="id_historique" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_historique','charcount2');" onkeydown="countChars('id_historique','charcount2');" onmouseout="countChars('id_historique','charcount2');">{{form.historique.value|default:'A venir'}}</textarea>
+	<span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
+	<label for="id_equipement">Equipement&nbsp;</label> <textarea name="equipement" class="form-control" id="id_equipement" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_equipement','charcount3');" onkeydown="countChars('id_equipement','charcount3');" onmouseout="countChars('id_equipement','charcount3');">{{form.equipement.value|default:'Aucune'}}</textarea>
+	<span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
+	<label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
+	<span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
+      </div>
+      <div class="form-group">
       <span id="description"><b>Type de personnage </b></span>
 
       <label class="radio-inline" for="id_pj">
@@ -250,14 +260,6 @@ $(function () {
     <div class="form-group">
       <label for="id_troubles_ment">Troubles mentaux&nbsp;:</label>
       <textarea class="form-control" name="troubles_ment" id="id_troubles_ment" maxlength="800" rows="10" cols="40">{{form.troubles_ment.value|default:'Sans'}}</textarea>
-    </div>
-    <div class="form-group">
-      <label for="id_inventaire">Inventaire&nbsp;:</label>
-      <textarea class="form-control" name="inventaire" id="id_inventaire" maxlength="800" rows="10" cols="40">{{form.inventaire.value|default:'Sans'}}</textarea>
-	</div>
-    <div class="form-group">
-      <label for="id_equipement">Equipement&nbsp;:</label>
-      <textarea class="form-control" name="equipement" id="id_equipement" maxlength="800" rows="10" cols="40">{{form.equipement.value|default:'Sans'}}</textarea>
     </div>
     <div class="form-group">
       <label for="id_comp_apprises">Compétences apprises&nbsp;:</label>

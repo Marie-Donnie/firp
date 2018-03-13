@@ -54,6 +54,10 @@ class Avant_garde(models.Model):
                                     ('h', "Humain")
                                 )),
                             default="h")
+    description = models.CharField(max_length=6000,
+                                   default='A venir')
+    historique = models.CharField(max_length=6000,
+                                  default='A venir')
     ex_prof = models.SmallIntegerField(choices=((
         (1, "Forgeron"),
         (2, "Chasseur"),
@@ -136,11 +140,11 @@ class Avant_garde(models.Model):
                           default="p")
     avants = models.ManyToManyField('Avantages')
     desavants = models.ManyToManyField('Desavantages')
-    inventaire = models.CharField(max_length=800,
+    inventaire = models.CharField(max_length=6000,
                                   null=True,
                                   blank=True,
                                   default='Sans')
-    equipement = models.CharField(max_length=800,
+    equipement = models.CharField(max_length=6000,
                                   null=True,
                                   blank=True,
                                   default='Sans')
