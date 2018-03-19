@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^conseils/$', views.conseils, name='conseils'),
+    url(r'^en-savoir-plus/$', views.plus, name='plus'),
     # Users
     url(r'^utilisateurs/$', views.users,
         name='utilisateurs'),

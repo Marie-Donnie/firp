@@ -44,6 +44,9 @@ def handler403(request):
 def conseils(request):
     return render(request, 'fiches/conseils.html', {})
 
+def plus(request):
+    return render(request, 'fiches/plus.html', {})
+
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 # Displays the username of the users
@@ -392,7 +395,7 @@ def creer_case(request):
         form = CaseForm(data, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            return redirect('index')
         else:
             print(form.errors)
     else:
@@ -409,7 +412,7 @@ def creer_inventaire(request):
         form = InventaireForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            return redirect('index')
         else:
             print(form.errors)
     else:
@@ -427,7 +430,7 @@ def creer_equipement(request):
         form = EquipementForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            return redirect('index')
         else:
             print(form.errors)
     else:
@@ -525,7 +528,7 @@ def edit_case(request, case_id):
         form = CaseForm(data, instance=case)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            return redirect('index')
         else:
             print(form.errors)
     else:
@@ -542,8 +545,9 @@ def edit_inventaire(request, inventaire_id):
     if request.method == 'POST':
         form = InventaireForm(request.POST, instance=inventaire)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/firp')
+            save_it = form.save()
+            fiche = Fiche.objects.get(inventaire_fdg=save_it.id)
+            return redirect('detail_fiche', fiche_id=fiche.id)
         else:
             print(form.errors)
     else:
@@ -563,7 +567,7 @@ def edit_equipement(request, equipement_id):
             form = EquipementForm(request.POST, instance=equipement)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/firp')
+                return redirect('index')
             else:
                 print(form.errors)
         else:
@@ -706,7 +710,7 @@ def creer_enchantement(request):
         form = EnchantementForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/')
+            return redirect('index')
         else:
             print(form.errors)
     else:
