@@ -17,7 +17,7 @@ $(function () {
 
 {% block edition %}
 {% if user.is_authenticated %}
-{% if user.id == fiche.createur.id or perms.fiches.admin %}
+{% if user.id == fiche.createur.id or perms.fiche.admin %}
 {% if fiche.classe == 1 %}
 {% if not fiche.fantassin %}<a class="btn btn-default" href="{% url 'creer_fantassin' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_fantassin' fiche.fantassin.id %}">Editer classe</a> {% endif %}
 {% elif fiche.classe == 2 %}{% if not fiche.arbaletrier %}<a class="btn btn-default" href="{% url 'creer_arbaletrier' fiche.id %}">Créer classe</a>{% else %}<a class="btn btn-default" href="{% url 'editer_arbaletrier' fiche.arbaletrier.id %}">Editer classe</a> {% endif %}
@@ -141,9 +141,9 @@ $(function () {
       {% if fiche.campagne.all %}
       <li><b>Campagnes auxquelles le personnage a déjà participé&nbsp;: </b>
       	<ul>
-	  {% for camp in fiches.campagne.all %}
+	  {% for camp in fiche.campagne.all %}
 	  <li>{{ camp.nom }}</li>
-      {% endfor %}
+	  {% endfor %}
 	</ul>
       </li>
       {% endif %}
