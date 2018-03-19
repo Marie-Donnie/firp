@@ -116,10 +116,8 @@ def persos_ag(request):
 
 def detail_perso(request, perso_id):
     fiche = get_object_or_404(Avant_garde, pk=perso_id)
-    campagnes = Campagne.objects.all()
     utilisateur = request.user
-    context = {'fiche': fiche, 'campagnes': campagnes,
-               'utilisateur': utilisateur}
+    context = {'fiche': fiche, 'utilisateur': utilisateur}
 
     return render(request, 'rpg/avant_garde/personnage.html', context)
 
