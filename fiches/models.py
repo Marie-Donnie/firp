@@ -277,7 +277,10 @@ class Fiche(models.Model):
                        ("veteran",
                         "FdG + accès à plus de fonctionnalités."),
                        ("admin",
-                        "Est admin"),)
+                        "Est admin"),
+                       ("allie",
+                        "Est allié"),)
+
 
     def __unicode__(self):
         return u'%s %s' % (self.nom, self.prenom)

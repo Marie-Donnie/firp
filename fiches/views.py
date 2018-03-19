@@ -797,7 +797,7 @@ def res_quete(request, quete_id):
 # Display icon gallery
 from os import listdir
 from os import walk
-@permission_required('fiches.fdg', raise_exception=True)
+@permission_required('fiches.allie', raise_exception=True)
 def gallery(request):
     images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
     images = listdir(images_url)
@@ -819,7 +819,7 @@ def gallery(request):
 
 
 # Enables the search of an icon
-@permission_required('fiches.fdg', raise_exception=True)
+@permission_required('fiches.allie', raise_exception=True)
 def gallery_search(request):
     recherche = request.GET.get('recherche')
     images_url = "%s/images/ICONS" % (settings.MEDIA_ROOT)
@@ -1005,7 +1005,7 @@ def classes(request):
     return render(request, 'site/classes.html', context)
 
 # Display list of spells for the required class
-@permission_required('fiches.fdg', raise_exception=True)
+@permission_required('fiches.allie', raise_exception=True)
 def sorts(request, classe_id):
     voyelles = ["a","e","i","o","u", "é", "è", "ë", "y"]
     classe = get_object_or_404(Classe, pk=classe_id)
