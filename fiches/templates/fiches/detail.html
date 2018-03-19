@@ -65,14 +65,14 @@ function onMouseLeave() {
 {% endif %}
 {% endblock %}
 {% block user %}
-{% if fiche.afficher_createur or user.id == fiche.createur.id %}
+{% if fiche.afficher_createur or not user.is_anonymous and user.id == fiche.createur.id %}
 {% if fiche.createur %}
 <span><b>Créateur :</b> <a href="{% url 'utilisateur' fiche.createur.id %}">{{ fiche.createur }}</a></span>
 {% else %}
 <span><b>Créateur :</b> Aucun</span>
 {% endif %}
 {% endif %}
-{% if fiche.afficher_pseudo or user.id == fiche.createur.id %}
+{% if fiche.afficher_pseudo or not user.is_anonymous and user.id == fiche.createur.id %}
 <span><b>Personnage en jeu :</b> {{ fiche.pseudo_du_personnage }}</span>
 {% endif %}
 <span><b>Date de création : </b> {{ fiche.creation }}</span>
@@ -110,16 +110,16 @@ function onMouseLeave() {
 	  <span id="attribute_value">
 	    {{fiche.jour_de_naissance}}
 	    {% if fiche.jour_de_naissance == 1 %}er{% endif %} <!-- fiche.jour -->
-	    {% if not utilisateur.infos %}
+	    {% if not user.is_anonymous and not utilisateur.infos %}
 	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %} <!-- fiche.jour -->
 	    jour du
 	    {{fiche.mois_de_naissance}}
 	    {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %} <!-- fiche.mois -->
 	    de l'an {{fiche.annee_de_naissance}} <br>
 	    {% endif %} <!-- not utilisateurs.infos -->
-	    {% if utilisateur.infos and utilisateur.infos.affichage_date == 'n' %}
+	    {% if not user.is_anonymous and utilisateur.infos and utilisateur.infos.affichage_date == 'n' %}
 	    {{fiche.mois_de_naissance|mois}} {{fiche.annee_de_naissance}}
-	    {% elif utilisateur.infos and utilisateur.infos.affichage_date == 'l' %}
+	    {% elif not user.is_anonymous and utilisateur.infos and utilisateur.infos.affichage_date == 'l' %}
 	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %}
 	    jour du
 	    {{fiche.mois_de_naissance}}
@@ -202,7 +202,7 @@ function onMouseLeave() {
     </div> <!-- panel panel-default -->
   </div>   <!-- col-md-6 -->
   {% endif %}
-  {% if fiche.afficher_bourse or user.id == fiche.createur.id %}
+  {% if fiche.afficher_bourse or not user.is_anonymous and user.id == fiche.createur.id %}
   <div class="col-md-6">
     <div class="panel panel-defaut" id="details-panels">
       <div class="panel-heading">
@@ -213,11 +213,11 @@ function onMouseLeave() {
 	{{ fiche.bourse.argent|p_or }} <img id="money" src="/fiches/media/images/site/UI-GoldIcon.PNG" alt="Souverains d'or">
 	{{ fiche.bourse.argent|p_argent }} <img id="money" src="/fiches/media/images/site/UI-SilverIcon.PNG" alt="Gruaux d'argent">
 	{{ fiche.bourse.argent|p_cuivre }} <img id="money" src="/fiches/media/images/site/UI-CopperIcon.PNG" alt="Sous de cuivre"><br>
-	{% if user.id == fiche.createur.id %}
+	{% if not user.is_anonymous and user.id == fiche.createur.id %}
 	<a class="btn btn-default" href="{% url 'gerer_bourse' fiche.id fiche.bourse.id %}">Editer bourse</a>
 	{% endif %}
 	{% else %}
-	{% if user.id == fiche.createur.id %}
+	{% if not user.is_anonymous and user.id == fiche.createur.id %}
 	<a class="btn btn-default" href="{% url 'creer_bourse' fiche.id %}">Créer bourse</a>
 	{% endif %}
 	{% endif %}
@@ -225,7 +225,7 @@ function onMouseLeave() {
     </div> <!-- panel panel-default -->
   </div>   <!-- col-md-6 -->
   {% endif %}
-  {% if fiche.afficher_inventaire or user.id == fiche.createur.id %}
+  {% if fiche.afficher_inventaire or not user.is_anonymous and user.id == fiche.createur.id %}
   {% if fiche.inventaire %}
   <div class="col-md-6">
     <div class="panel panel-defaut" id="details-panels">
@@ -242,7 +242,7 @@ function onMouseLeave() {
     <div class="panel panel-defaut" id="details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">{{fiche.inventaire_fdg.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-	{% if user.id == fiche.createur.id %}
+	{% if not user.is_anonymous and user.id == fiche.createur.id %}
 	<a href="{% url 'editer_inventaire' fiche.inventaire_fdg.id %}">Editer</a>
 	{% endif %}
       </div>
@@ -275,7 +275,7 @@ function onMouseLeave() {
     <div class="panel panel-defaut" id="details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">{{fiche.equipement.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-	{% if user.id == fiche.createur.id %}
+	{% if not user.is_anonymous and user.id == fiche.createur.id %}
 	<a href="{% url 'editer_equip' fiche.equipement.id %}">Editer</a>
 	{% endif %}
       </div>
