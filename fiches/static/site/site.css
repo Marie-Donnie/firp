@@ -85,7 +85,7 @@ a:hover {
     background: url("/static/site/images/page.PNG") no-repeat center;
     width: 1000px;
     height: 900px;
-    margin: 0% auto;
+    margin: 1% auto;
     color: #000;
     background-size: cover;
     border: 3px groove #4d3a17;
