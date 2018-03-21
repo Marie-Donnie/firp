@@ -357,7 +357,7 @@ class Armure(models.Model):
     force = IntegerRangeField(default=0, min_value=0,
                               max_value=25)
     intell = IntegerRangeField(default=0, min_value=0,
-                               max_value=25)
+                               max_value=200)
     agi = IntegerRangeField(default=0, min_value=0,
                             max_value=25)
     membre = models.SmallIntegerField(choices=MEMBRES,
