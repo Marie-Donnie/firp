@@ -1,3 +1,6 @@
+
+import os
+
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse
 from django.contrib.auth.models import User
@@ -531,6 +534,45 @@ def afficher_rabatteur(request, classe_id):
 
     return render(request, 'rpg/avant_garde/display_rabatteur.html', context)
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SUPPRESSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+@permission_required('fiches.fdg', raise_exception=True)
+def delete_fiche(request, classe, classe_id):
+    classe = int(classe)
+    if classe == 1:
+        classe = get_object_or_404(Fantassin, pk=classe_id)
+        perso = classe.perso
+    elif classe == 2:
+        classe = get_object_or_404(Arbaletrier, pk=classe_id)
+        perso = classe.perso
+    elif classe == 3:
+        classe = get_object_or_404(Eclaireur, pk=classe_id)
+        perso = classe.perso
+    elif classe == 4:
+        classe = get_object_or_404(Apothicaire, pk=classe_id)
+        perso = classe.perso
+    elif classe == 5:
+        classe = get_object_or_404(Sorcier, pk=classe_id)
+        perso = classe.perso
+    elif classe == 6:
+        classe = get_object_or_404(Rabatteur, pk=classe_id)
+        perso = classe.perso
+    else:
+        print(classe, classe_id)
+    if request.user == perso.createur:
+        context = {'fiche': perso}
+        if request.method == 'POST':
+            path = "%s/" % (settings.MEDIA_ROOT)
+            fichier = os.path.join(path, perso.image.name)
+            if perso.image.name != "images/site/no-image.png":
+                os.remove(fichier)
+            classe.delete()
+            perso.delete()
+            return render(request, 'fiches/fiche_supprimee.html', context)
+        else:
+            return render(request, 'fiches/confirmation_suppression.html', context)
+    else:
+        return HttpResponse("Vous ne pouvez pas supprimer cette fiche.")
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FONCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 

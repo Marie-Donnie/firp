@@ -49,4 +49,6 @@ urlpatterns = [
         views.afficher_sorcier, name='afficher_sorcier'),
     url(r'^avant_garde/afficher_rabatteur/(?P<classe_id>\d+)/$',
         views.afficher_rabatteur, name='afficher_rabatteur'),
+    url(r'^avant_garde/supprimer_fiche/(?P<classe>\d+)/(?P<classe_id>\d+)/$',
+        views.delete_fiche, name='supprimer_fiche'),
 ]
