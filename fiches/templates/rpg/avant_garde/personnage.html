@@ -118,16 +118,16 @@ $(function () {
       <li><b>Nom&nbsp;: </b>{{ fiche.nom|capfirst }}&nbsp;{{ fiche.prenom|capfirst }}</li>
       <li><b>Date de naissance&nbsp;: </b> {{fiche.jour_de_naissance}}
 	    {% if fiche.jour_de_naissance == 1 %}er{% endif %} <!-- fiche.jour -->
-	    {% if not utilisateur.infos %}
+	    {% if user.is_anonymous or not user.is_anonymous and not utilisateur.infos %}
 	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %} <!-- fiche.jour -->
 	    jour du
 	    {{fiche.mois_de_naissance}}
 	    {% if fiche.mois_de_naissance == 01 %}er mois{% else %}ème mois{% endif %} <!-- fiche.mois -->
 	    de l'an {{fiche.annee_de_naissance}}
 	    {% endif %} <!-- not utilisateurs.infos -->
-	    {% if utilisateur.infos.affichage_date == 'n' %}
+	    {% if not user.is_anonymous and utilisateur.infos.affichage_date == 'n' %}
 	    {{fiche.mois_de_naissance|mois}} {{fiche.annee_de_naissance}}
-	    {% elif utilisateur.infos.affichage_date == 'l' %}
+	    {% elif not user.is_anonymous and utilisateur.infos.affichage_date == 'l' %}
 	    {% if fiche.jour_de_naissance != 1 %}ème{% endif %}
 	    jour du
 	    {{fiche.mois_de_naissance}}
