@@ -95,8 +95,9 @@ def editer_base(request, base_id):
         return HttpResponse("Vous ne pouvez pas editer cette fiche de l'avant-garde.")
 
 
+@permission_required('fiches.allie', raise_exception=True)
 def persos_ag(request):
-    fiches_list = Avant_garde.objects.order_by('nom', 'prenom')
+    fiches_list = Avant_garde.objects.order_by('-pj', 'nom', 'prenom')
 
     paginator = Paginator(fiches_list, 20)
     page = request.GET.get('page')
@@ -114,6 +115,7 @@ def persos_ag(request):
     return render(request, 'rpg/avant_garde/personnages.html', context)
 
 
+@permission_required('fiches.allie', raise_exception=True)
 def detail_perso(request, perso_id):
     fiche = get_object_or_404(Avant_garde, pk=perso_id)
     utilisateur = request.user
@@ -122,6 +124,7 @@ def detail_perso(request, perso_id):
     return render(request, 'rpg/avant_garde/personnage.html', context)
 
 
+@permission_required('fiches.allie', raise_exception=True)
 def presentation(request):
     context = {}
     return render(request, 'rpg/avant_garde/presentation.html', context)
@@ -439,6 +442,7 @@ def edit_rabatteur(request, perso_id):
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AFFICHAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
+@permission_required('fiches.allie', raise_exception=True)
 def afficher_fantassin(request, classe_id):
     classe = get_object_or_404(Fantassin, pk=classe_id)
     perso = classe.perso
@@ -452,6 +456,8 @@ def afficher_fantassin(request, classe_id):
 
     return render(request, 'rpg/avant_garde/display_fantassin.html', context)
 
+
+@permission_required('fiches.allie', raise_exception=True)
 def afficher_apothicaire(request, classe_id):
     classe = get_object_or_404(Apothicaire, pk=classe_id)
     perso = classe.perso
@@ -465,6 +471,8 @@ def afficher_apothicaire(request, classe_id):
 
     return render(request, 'rpg/avant_garde/display_apothicaire.html', context)
 
+
+@permission_required('fiches.allie', raise_exception=True)
 def afficher_arbaletrier(request, classe_id):
     classe = get_object_or_404(Arbaletrier, pk=classe_id)
     perso = classe.perso
@@ -478,6 +486,8 @@ def afficher_arbaletrier(request, classe_id):
 
     return render(request, 'rpg/avant_garde/display_arbaletrier.html', context)
 
+
+@permission_required('fiches.allie', raise_exception=True)
 def afficher_eclaireur(request, classe_id):
     classe = get_object_or_404(Eclaireur, pk=classe_id)
     perso = classe.perso
@@ -491,6 +501,8 @@ def afficher_eclaireur(request, classe_id):
 
     return render(request, 'rpg/avant_garde/display_eclaireur.html', context)
 
+
+@permission_required('fiches.allie', raise_exception=True)
 def afficher_sorcier(request, classe_id):
     classe = get_object_or_404(Sorcier, pk=classe_id)
     perso = classe.perso
@@ -504,6 +516,8 @@ def afficher_sorcier(request, classe_id):
 
     return render(request, 'rpg/avant_garde/display_sorcier.html', context)
 
+
+@permission_required('fiches.allie', raise_exception=True)
 def afficher_rabatteur(request, classe_id):
     classe = get_object_or_404(Rabatteur, pk=classe_id)
     perso = classe.perso
