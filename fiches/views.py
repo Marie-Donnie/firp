@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import os
+
 from django.shortcuts import get_object_or_404, render, redirect, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponse, JsonResponse
@@ -306,6 +307,17 @@ def delete_fiche(request, fiche_id):
     if request.user == fiche.createur:
         context = {'fiche': fiche}
         if request.method == 'POST':
+            # remove profile image
+            path = "%s/" % (settings.MEDIA_ROOT)
+            fichier = os.path.join(path, fiche.image.name)
+            if fiche.image.name != "images/site/no-image.png":
+                os.remove(fichier)
+            if fiche.inventaire_fdg:
+                fiche.inventaire_fdg.delete()
+            if fiche.bourse:
+                fiche.bourse.delete()
+            if fiche.equipement:
+                fiche.equipement.delete()
             fiche.delete()
             return render(request, 'fiches/fiche_supprimee.html', context)
         else:
