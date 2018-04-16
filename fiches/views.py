@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.core import serializers
+from django.conf import settings
 from dal import autocomplete
 from fiches.models import *
 from fiches.forms import *
@@ -954,11 +955,12 @@ def creer_mission(request):
             print(form.errors)
     else:
         form = MissionForm()
-
+    index_url = settings.LOGIN_REDIRECT_URL
     context = {'form': form, 'caporals': caporals, 'sergents': sergents,
                'lieutenants': lieutenants, 'capitaines': capitaines,
                'generals': generals, 'colonels': colonels,
-               'autres': autres, 'campagnes': campagnes}
+               'autres': autres, 'campagnes': campagnes,
+               'index_url': index_url}
     return render(request, 'site/mission_edit.html', context)
 
 
@@ -987,11 +989,12 @@ def edit_mission(request, mission_id):
             print(form.errors)
     else:
         form = MissionForm(instance=mission)
-
+    index_url = settings.LOGIN_REDIRECT_URL
     context = {'form': form, 'caporals': caporals, 'sergents': sergents,
                'lieutenants': lieutenants, 'capitaines': capitaines,
                'generals': generals, 'colonels': colonels,
-               'autres': autres, 'campagnes': campagnes}
+               'autres': autres, 'campagnes': campagnes,
+               'index_url': index_url}
     return render(request, 'site/mission_edit.html', context)
 
 

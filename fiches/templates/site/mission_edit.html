@@ -33,7 +33,7 @@
       </select>
       <label for="id_numero">Numéro&nbsp;:</label>
       <input name="numero" class="petit-nombre" value="{{form.numero.value|default:'1'}}" required="" id="id_numero" type="number">
-      <label for="id_type_mis">Type mission{{form.type_mis.value}}&nbsp;:</label> <select name="type_mis" id="id_type_mis">
+      <label for="id_type_mis">Type mission&nbsp;:</label> <select name="type_mis" id="id_type_mis">
     	<option value="1"{% if form.type_mis.value == 1 %} selected="" {% endif %}>Embuscade</option>
     	<option value="2"{% if form.type_mis.value == 2 %} selected="" {% endif %}>Assaut</option>
     	<option value="3"{% if form.type_mis.value == 3 %} selected="" {% endif %}>Siège</option>
@@ -60,9 +60,10 @@
 
       <!-- CAREFUL WHEN UPLOADING THIS DUE TO URL ( the result could not be loaded ) -->
       <label for="id_dirigeant">Dirigeant&nbsp;:</label>
-      <select name="dirigeant" data-autocomplete-light-function="select2" id="id_dirigeant" data-autocomplete-light-url="/fiche-autocomplete/" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+      <select name="dirigeant" data-autocomplete-light-function="select2" id="id_dirigeant" data-autocomplete-light-url="{{ index_url }}fiche-autocomplete/" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
 </select>
-      <label for="id_autre_dirigeant">Autre dirigeant&nbsp;:</label> <select name="autre_dirigeant" id="id_autre_dirigeant">
+      <label for="id_autre_dirigeant">Autre dirigeant&nbsp;:</label>
+      <select name="autre_dirigeant" id="id_autre_dirigeant">
     	{% for general in generals %}
     	<option value="{{general.id}}"{% if general.id == form.autre_dirigeant.value %} selected="" {% endif %}>{{general.nom}} {{general.prenom}}</option>
     	{% endfor %}
