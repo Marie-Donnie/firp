@@ -15,6 +15,7 @@ from django.conf import settings
 from dal import autocomplete
 from fiches.models import *
 from fiches.forms import *
+from fiches.functions import Shops
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -1250,6 +1251,19 @@ def detail_maison(request, maison_id):
 
     context = {'maison': maison}
     return render(request, 'site/detail_maison.html', context)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% UTILS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+@permission_required('fiches.fdg', raise_exception=True)
+def compter_boutiques(request):
+    citoyens = int(request.GET.get('citoyens', '1'))
+
+    shops = Shops()
+
+    context = shops.count_shops(citoyens)
+    context['citoyens'] = citoyens
+    return render(request, 'site/compter_boutiques.html', context)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

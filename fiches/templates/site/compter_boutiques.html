@@ -1,0 +1,81 @@
+{% extends "footer.html" %}
+
+{% load staticfiles %}
+{% load static %}
+{% load filters %}
+
+{% block contenu %}
+
+  <!-- Link to my css -->
+  <link rel="stylesheet" href="{%static 'site/site.css' %}">
+
+  <title>Compter boutiques</title>
+</head>
+<body>
+  <div id="centre">
+    <form action="{% url 'boutiques' %}" method="GET">
+      <input type="text" name="citoyens" value={% if citoyens %}{{ citoyens }}{% else %}"1"{% endif %}><br>
+      <input type="submit" value="Calculer">
+    </form>
+  </div>
+
+  <div id="body">
+    <ul>
+      <li>shoemakers: {{ shoemakers }} </li>
+      <li>butchers: {{ butchers }} </li>
+      <li>furriers: {{ furriers }} </li>
+      <li>fishmongers: {{ fishmongers }} </li>
+      <li>maidservants: {{ maidservants }} </li>
+      <li>beer sellers: {{ beer_sellers }} </li>
+      <li>tailors: {{ tailors }} </li>
+      <li>buckle makers: {{ buckle_makers }} </li>
+      <li>barbers: {{ barbers }} </li>
+      <li>plasterers: {{ plasterers }} </li>
+      <li>jewelers: {{ jewelers }} </li>
+      <li>spice merchants: {{ spice_merchants }} </li>
+      <li>taverns/restaurants: {{ taverns_restaurants }} </li>
+      <li>blacksmiths: {{ blacksmiths }} </li>
+      <li>old clothes: {{ old_clothes }} </li>
+      <li>painters: {{ painters }} </li>
+      <li>pastrycooks: {{ pastrycooks }} </li>
+      <li>licensed doctors: {{ licensed_doctors }} </li>
+      <li>masons: {{ masons }} </li>
+      <li>roofers: {{ roofers }} </li>
+      <li>carpenters: {{ carpenters }} </li>
+      <li>locksmiths: {{ locksmiths }} </li>
+      <li>weavers: {{ weavers }} </li>
+      <li>bathers: {{ bathers }} </li>
+      <li>chandlers: {{ chandlers }} </li>
+      <li>ropemakers: {{ ropemakers }} </li>
+      <li>mercers: {{ mercers }} </li>
+      <li>inns: {{ inns }} </li>
+      <li>coopers: {{ coopers }} </li>
+      <li>tanners: {{ tanners }} </li>
+      <li>bakers: {{ bakers }} </li>
+      <li>copyists: {{ copyists }} </li>
+      <li>watercarriers: {{ watercarriers }} </li>
+      <li>sculptors: {{ sculptors }} </li>
+      <li>scabbardmakers: {{ scabbardmakers }} </li>
+      <li>rugmakers: {{ rugmakers }} </li>
+      <li>wine sellers: {{ wine_sellers }} </li>
+      <li>harness makers: {{ harness_makers }} </li>
+      <li>hatmakers: {{ hatmakers }} </li>
+      <li>bleachers: {{ bleachers }} </li>
+      <li>saddlers: {{ saddlers }} </li>
+      <li>hay merchants: {{ hay_merchants }} </li>
+      <li>chicken butchers: {{ chicken_butchers }} </li>
+      <li>cutlers: {{ cutlers }} </li>
+      <li>pursemakers: {{ pursemakers }} </li>
+      <li>glovemakers: {{ glovemakers }} </li>
+      <li>woodsellers: {{ woodsellers }} </li>
+      <li>woodcarvers: {{ woodcarvers }} </li>
+      <li>magic shops: {{ magic_shops }} </li>
+      <li>booksellers: {{ booksellers }} </li>
+      <li>bookbinders: {{ bookbinders }} </li>
+      <li>illuminators: {{ illuminators }} </li>
+      <li>doctors: {{ doctors }} </li>
+    </ul>
+  </div>
+</body>
+
+  {% endblock %}

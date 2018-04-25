@@ -109,6 +109,8 @@ urlpatterns = [
     url(r'^habitations/rechercher/$', views.habitations, name='rechercher_maison'),
     url(r'^habitations/maison/(?P<maison_id>\d+)/$', views.detail_maison,
         name='detail_maison'),
+    # Utils
+    url(r'^compter_boutiques/$', views.compter_boutiques, name='boutiques'),
     # Autocomplete
     url(r'^fiche-autocomplete/$', views.FicheAutocomplete.as_view(),
         name='fiche-autocomplete'),
