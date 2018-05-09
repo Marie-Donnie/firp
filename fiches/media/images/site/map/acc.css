@@ -1,0 +1,237 @@
+@font-face{
+    font-family: "Morpheus";
+    src: url('../../../../static/MORPHEUS.TTF'),
+    url('../../../../static/MORPHEUS.TTF'); /* IE */
+}
+
+@font-face{
+    font-family: "Cardinal";
+    src: url('Cardinal.ttf'),
+    url('Cardinal.ttf'); /* IE */
+}
+
+body {
+    background-color: #000;
+    color: #fefefe;
+}
+
+h1 {
+    color: #830205;
+    font-family: Morpheus;
+    text-align:	center;
+}
+
+a {
+    color: #a72121;
+}
+
+a:focus,
+a:hover {
+    color: #fefefe;
+}
+
+.page-header {
+    background-color: #000000;
+    margin: 20px auto;
+    font-family: Morpheus;
+    border: 0px;
+}
+
+.image-garithos {
+    width: 30%;
+    margin: 3px	auto;
+    display: block;
+}
+
+.map {
+    background-image: url('chatellerie.PNG');
+    background-repeat: no-repeat;
+    width: 1000px;
+    background-size: 100% auto;
+    height: 800px;
+    margin: auto;
+    position: relative;
+}
+
+.map .buttons {
+    position: absolute;
+
+}
+
+.map .buttons.lit {
+    opacity: 0;
+}
+
+.map .buttons.shut {
+    opacity: 1;
+}
+
+.map a:hover .buttons.lit {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
+    z-index: 100;
+}
+
+.map a:hover .buttons.shut {
+    opacity: 1;
+}
+
+
+/* .map .buttons:hover { */
+/*     box-shadow: 0 0 20px white; */
+/* } */
+
+#forum {
+    left: 428px;
+    top: 133px;
+    transform: scale(.85);
+}
+
+#fiches {
+    left: 172px;
+    top: 40px;
+    transform: scale(1.15);
+}
+
+#quetes {
+    left: 64px;
+    top: 189px;
+}
+
+#campagnes {
+    left: 136px;
+    top: 363px;
+}
+
+#classes {
+    left: 606px;
+    top: 240px;
+}
+
+.map-text {
+    font-family: Morpheus;
+    font-size: 200%;
+    position: absolute;
+    z-index: 100;
+}
+
+a .map-text {
+    color: #fefefe;
+    text-shadow: 1px 1px #830205;
+}
+
+#text-forum {
+    left: 479px;
+    top: 233px;
+}
+
+#text-fiches {
+    left: 234px;
+    top: 174px;
+}
+
+#text-quetes {
+    left: 140px;
+    top: 311px;
+}
+
+#text-campagnes {
+    left: 170px;
+    top: 465px;
+}
+
+#text-classes {
+    left: 698px;
+    top: 369px;
+}
+
+
+#carte {
+    left: 238px;
+    bottom: 156px;
+}
+
+#text-carte {
+    left: 313px;
+    bottom: 165px;
+}
+
+.separator {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0%;
+}
+
+.center {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0%;
+}
+
+#text {
+    margin: 2% 0%;
+    font-size: 14pt;
+    font-family: lucida console;
+}
+
+.presentation {
+    float: left;
+    width: 75%;
+}
+
+.dwarf {
+    float: right;
+}
+
+.league {
+    display: inline-block;
+    float: right;
+    margin: 1% 0%;
+}
+
+.classes {
+    display: flex;
+    justify-content: center;
+}
+
+.character {
+    position: relative;
+    left: 0;
+    margin: 0 -20px;
+}
+
+.character .buttons {
+    position: relative;
+    left: 0;
+}
+
+.character .buttons+.buttons {
+    position: absolute;
+}
+
+.classes .buttons.lit {
+    opacity: 0;
+}
+
+.classes .buttons.shut {
+    opacity: 1;
+}
+
+.classes div:hover .buttons.lit {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
+    z-index: 100;
+}
+
+.classes div:hover .buttons.shut {
+    opacity: 1;
+}
+
+.tooltip-inner {
+    max-width: 400px;
+    font-family: "Lucida Console", Verdana, Arial, Georgia;
+}
