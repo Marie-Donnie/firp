@@ -17,7 +17,7 @@ $(function () {
 
 {% block edition %}
 {% if user.is_authenticated %}
-{% if user.id == fiche.createur.id or perms.fiche.admin %}
+{% if user.id == fiche.createur.id or perms.fiches.admin %}
 {% if fiche.classe == 1 %}
 {% if not fiche.fantassin %}
 <a class="btn btn-default" href="{% url 'creer_fantassin' fiche.id %}">Créer classe</a>
