@@ -11,8 +11,6 @@ bower_components/
 recaptcha_sk
 fiches/migrations/
 firp/settings.py
-fiches/media/images/site/map/acc.css
-fiches/media/images/site/map/index.html
 *.bak
 ICONS
 src/
@@ -21,3 +19,4 @@ autocomplete_light/
 *.PNG
 *.png
 *.rb
+recrutement
