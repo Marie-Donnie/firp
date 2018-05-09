@@ -445,6 +445,8 @@
       {% endif %}
       <label for="id_competences">Compétences&nbsp;</label> <textarea name="competences" class="form-control" id="id_competences" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_competences','charcount8');" onkeydown="countChars('id_competences','charcount8');" onmouseout="countChars('id_competences','charcount8');">{{form.competences.value|default:'Aucune'}}</textarea>
       <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount8">0</span>/6000).</span>
+      <label for="id_autres_informations">Autres informations&nbsp;</label> <textarea name="autres_informations" class="form-control" id="id_autres_informations" required="" rows="5" cols="40" maxlength="600" onkeyup="countChars('id_autres_informations','charcount9');" onkeydown="countChars('id_autres_informations','charcount9');" onmouseout="countChars('id_autres_informations','charcount9');">{{form.autres_informations.value|default:'Aucune'}}</textarea>
+      <span id="helpBlock" class="help-block">Limité à 600 caractères (<span id="charcount9">0</span>/600).</span>
     </div>
     <div class="form-group">
       <span id="description"><b>Type de personnage </b></span>

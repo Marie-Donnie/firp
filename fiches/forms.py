@@ -40,7 +40,8 @@ class FicheForm(ModelForm):
                   'ville_de_naissance', 'zone_de_residence',
                   'ville_de_residence', 'description', 'historique',
                   'inventaire', 'relations',
-                  'competences', 'pseudo_du_personnage',
+                  'competences', 'autres_informations',
+                  'pseudo_du_personnage',
                   'afficher_pseudo', 'afficher_createur',
                   'afficher_inventaire', 'afficher_bourse', 'image', 'main_dir',
                   'inventaire_fdg', 'equipement', 'bourse', 'createur']
