@@ -145,7 +145,7 @@ $(function () {
       </li>
       <li><b>Grade&nbsp;: </b>{{ fiche.get_grade_rp_display|capfirst }}</li>
       <li>{% block statistic %}{% endblock %}</li>
-      <li><b>Blessures&nbsp;: </b><span {% if fiche.troubles_ment != 'Sans' %}class="red"{% endif %}>{{ fiche.blessures|linebreaksbr }}</span></li>
+      <li><b>Blessures&nbsp;: </b><span {% if fiche.blessures != 'Sans' %}class="red"{% endif %}>{{ fiche.blessures|linebreaksbr }}</span></li>
       <li><b>Troubles mentaux&nbsp;: </b><span {% if fiche.troubles_ment != 'Sans' %}class="red"{% endif %}>{{ fiche.troubles_ment|linebreaksbr }}</span></li>
       {% if fiche.comp_apprises != 'Aucune' %}
       <li><b>Compétences apprises :</b> {{ fiche.comp_apprises|linebreaksbr }}
