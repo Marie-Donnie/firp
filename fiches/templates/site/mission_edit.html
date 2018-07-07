@@ -9,16 +9,12 @@
 
 {% block title %}Editer mission{% endblock %}
 {% block contenu_header %}{% endblock %}
+{% block page-title %}<a href="{% url 'campagnes' %}">Campagnes</a>{% endblock %}
 
 {% block content %}
 
 <div class="campaign-body">
 
-  <div class="page-header" id="campaign-header" onclick="document.location='{% url 'campagnes' %}'">
-    <div class="campaign-head">
-      <h1>Campagnes</h1>
-    </div> <!-- quest-head -->
-  </div>   <!-- page-header -->
 
   <div class="fond">
     <div id="char_form">

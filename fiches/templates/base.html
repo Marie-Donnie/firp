@@ -8,12 +8,13 @@
 {% block contenu %}
   <!-- Link to my css -->
   <link rel="stylesheet" href="{%static 'fiches/fiches.css' %}">
+  {% block css %}{% endblock %}
 
   <title>{% block title %}Default Title{% endblock %}</title>
 </head>
 <body>
   <div class="page-header">
-    <h1><a href="{% url 'index' %}">Fiches de personnages</a></h1>
+    <h1><a href="{% url 'index' %}">Fils de Garithos</a></h1>
     <img src="/fiches/media/images/site/garithos.jpg" class="image-garithos"/>
   </div>
 
@@ -67,7 +68,6 @@
 	    </ul>
 	  </li>
 	  {% endif %}
-	  <li><a href="{% url 'utilisateurs' %}">Utilisateurs</a></li>
 	  {% if perms.fiches.allie %}
 	  <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Galleries<span class="caret"></span></a>
@@ -79,6 +79,16 @@
 	    </ul>
 	  </li>
 	  {% endif %}
+	  <li class="dropdown">
+            <a href="{% url 'index' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Site<span class="caret"></span></a>
+	    <ul class="dropdown-menu">
+	      <li><a href="{% url 'campagnes' %}">Campagnes</a></li>
+	      <li><a href="{% url 'quetes' %}">Quêtes</a></li>
+	      <li><a href="{% url 'classes' %}">Classes</a></li>
+	      <li><a href="{% url 'cartes' %}">Carte</a></li>
+	    </ul>
+	  </li>
+	  <li><a href="{% url 'utilisateurs' %}">Utilisateurs</a></li>
 	</ul>
 	<div class="navbar-right">
 	  {% if user.is_authenticated %}
@@ -100,7 +110,7 @@
     <div id="index" class ="panel panel-default">
 
       <div class="panel-heading">
-	<h1 id="page-title">{% block page-title %}Titre{% endblock %}</h1>
+	<h1 id="page-title">{% block page-title %}<a href="{% url 'index' %}">Titre</a>{% endblock%}</h1>
 	<span id="edition">{% block edition %}{% endblock %}</span>
 	<span id="creator">{% block user %}{% endblock %}</span>
       </div>

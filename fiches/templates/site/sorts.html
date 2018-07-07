@@ -49,16 +49,11 @@ function onMouseLeave() {
 
 {% block title %}Sorts {% if classe_c %}du {% else %}de l'{% endif %}{{ classe.nom|lower }}{% endblock %}
 {% block contenu_header %}{% endblock %}
+{% block page-title %}<a href="{% url 'classes' %}">Sorts {% if classe_c %}du {% else %}de l'{% endif %}{{ classe.nom|lower }}</a>{% endblock %}
 
 {% block content %}
 
 <div class="sorts-body">
-
-  <div class="page-header" id="sorts-header" onclick="document.location='{% url 'classes' %}'">
-    <div class="sorts-head">
-      <h1>Sorts {% if classe_c %}du {% else %}de l'{% endif %}{{ classe.nom|lower }}</h1>
-    </div> <!-- quest-head -->
-  </div>   <!-- page-header -->
 
   <div class="black">
     <div id="quest-display">

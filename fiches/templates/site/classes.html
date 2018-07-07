@@ -12,16 +12,12 @@ $(function () {
 
 {% block title %}Sorts{% endblock %}
 {% block contenu_header %}{% endblock %}
+{% block page-title %}<a href="{% url 'classes' %}">Sorts</a>{% endblock %}
 
 {% block content %}
 
 <div class="sorts-body">
 
-  <div class="page-header" id="sorts-header" onclick="document.location='{% url 'classes' %}'">
-    <div class="sorts-head">
-      <h1>Sorts</h1>
-    </div> <!-- quest-head -->
-  </div>   <!-- page-header -->
 
   <div class="black">
     <div class="classes">

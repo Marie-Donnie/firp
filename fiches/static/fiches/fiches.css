@@ -10,8 +10,15 @@ body {
 }
 
 h1 a {
-    color: #830205;
+    color: #fff;
     font-family: morpheus;
+    text-decoration: none;
+}
+
+h1 a:hover {
+    color: #fff;
+    font-family: morpheus;
+    text-decoration: none;
 }
 
 .page-header {
@@ -28,7 +35,7 @@ h1 a {
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
-    color: #470002;
+    color: #e1dede;
     font-size: 36pt;
     text-decoration: none;
     text-shadow: 1px 1px #a10005;

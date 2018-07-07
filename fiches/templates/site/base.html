@@ -1,30 +1,9 @@
-{% extends "footer.html" %}
+{% extends "base.html" %}
 
 {% load staticfiles %}
 
 {% block contenu_header %}{% endblock %}
 
-{% block contenu %}
+{% block css %} <link rel="stylesheet" href="{%static 'site/site.css' %}">{% endblock %}
 
-  <!-- Link to my css -->
-  <link rel="stylesheet" href="{%static 'site/site.css' %}">
-
-  <title>{% block title %}Default Title{% endblock %}</title>
-</head>
-<body>
-
-
-    <!-- {% block header %}Titre{% endblock %} -->
-
-
-    <div id="body">
-      <!-- <nav class="navbar navbar-default navbar-fixed-bottom"> -->
-      <!-- 	<div class="container"> -->
-      <!-- 	  Un truc -->
-      <!-- 	</div> -->
-      <!-- </nav> -->
     {% block content %}Contenu par défaut. Vous ne devriez pas être là :o{% endblock %}
-
-  </div>
-
-{% endblock %}

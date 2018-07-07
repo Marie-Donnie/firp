@@ -8,16 +8,11 @@
 
 {% block title %}Quêtes{% endblock %}
 {% block contenu_header %}{% endblock %}
-
+{% block page-title %}<a href="{% url 'quetes' %}">Registre de quêtes</a>{% endblock %}
 {% block content %}
 
 <div class="quest-body">
 
-  <div class="page-header" id="quest-header" onclick="document.location='{% url 'quetes' %}'">
-    <div class="quest-head">
-      <h1>Registre de quêtes</h1>
-    </div>
-  </div>
 
   <div class="back">
 

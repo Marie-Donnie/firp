@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #1a1919;
+    background-color: #000000;
     color: #fefefe;
 }
 
@@ -79,7 +79,7 @@ h1 {
 #map {
     height: 600px;
     margin: auto;
-    background: #1a1919;
+    background: #000000;
     border: 2px solid #830205;
     border-radius: 4px;
 }

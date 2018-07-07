@@ -9,16 +9,12 @@
 
 {% block title %}{{quete.nom}}{% endblock %}
 {% block contenu_header %}{% endblock %}
+{% block page-title %}<a href="{% url 'quetes' %}">Registre de quêtes</a>{% endblock %}
 
 {% block content %}
 
 <div class="quest-body">
 
-  <div class="page-header" id="quest-header" onclick="document.location='{% url 'quetes' %}'">
-    <div class="quest-head">
-      <h1>Registre de quêtes</h1>
-    </div> <!-- quest-head -->
-  </div>   <!-- page-header -->
 
   <div class="black">
     <div class="media" id="quest-display">
@@ -61,7 +57,7 @@
 
     {% if perms.fiches.fdg and quete.etat == 1 %}
     <div id="centre">
-      <a class="btn btn-default" href="{% url 'reserver_quete' quete.id %}">Réserver</a>
+      <a class="btn quest-btn-default" href="{% url 'reserver_quete' quete.id %}">Réserver</a>
       </div>
     {% endif %}
   </div> <!-- black -->

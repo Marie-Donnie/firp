@@ -15,63 +15,103 @@ Conseils d'utilisation du registre
 
 {% block content %}
 
+
+
 <div class="media">
   <div class="media-body">
-    <a name="fiches"></a>
-    <h3>Création et édition de fiches</h3>
-    <ul>
-      <li>
-	La plupart des champs sont remplis avec des valeurs par défaut. Les nom et prénom du personnages sont requis. Si vous ne comptez pas remplir l'un des champ avec une valeur par défaut, n'y touchez pas, cela permettra un meilleur affichage de votre personnage. En effet, certains champs ne sont simplement pas affichés quand ils n'ont pas leur valeur par défaut.
-      </li>
-      <li>
-	Pour les champs numériques, n'hésitez pas à rentrer une valeur à la main.
-      </li>
-      <li>
-	La date de naissance comprend un jour de 1 à 31, un mois de naissance de 1 à 12 et une année de naissance qui devrait être suffisante pour tous les personnages de World of Warcraft. Faites néanmoins bien attention ; aucune vérification n'est effectuée sur les mois qui n'ont pas plus de 30 jours (et encore moins 28).
-      </li>
-      <li>
-	Par défaut, les zones et lieux de naissance sont réglés sur "Noirebois". Il s'agit du duché fictif où se trouvent les "Fils de Garithos" dans les Maleterres.
-      </li>
-      <li>
-	Pour le type de personnage : mettez joué si le personnage est effectivement joué, personnage non joué sinon. "Personnage jouable" sert pour laisser les gens savoir que le personnage -à priori lié à l'un des vôtres- n'est pas joué, mais qu'ils peuvent vous contacter pour le jouer.
-      </li>
-      <li>
-	Vous pouvez choisir d'afficher ou non le nom du personnage en jeu, le fait que vous êtes son créateur, et l'inventaire. Ces paramètres ne seront visibles que par vous si vous les décochez.
-      <li>
-    </ul>
-    <a name="utilisateurs"></a>
-       <h3>Gestion utilisateur</h3>
-    <ul>
-      <li>
-	Pour créer un compte, vous n'aurez besoin d'entrer que votre adresse mail et un nom d'utilisateur.
-      </li>
-      <li>
-	Vous pouvez ensuite éditer votre profil soit en passant par le menu "utilsateurs" et en vous trouvant dans la liste, soit en cliquant sur votre nom dans la barre en haut ("Bienvenue, xxxx"), soit par l'icône de gestion d'utilisateur dans la barre qui reste en bas à droite de votre écran (<img  src="/fiches/media/images/site/UI-MicroButton-Raid-Up.PNG" alt="Utilisateur">).
-      </li>
-      <li>
-	Vous pourrez voir dans la gestion utilisateur la liste des personnages que vous avez crées, votre date d'inscription. Vous pourrez, via la création/édition de profil, ajouter une date de naissance et un avatar. Vous pouvez également changer votre mot de passe et adresse mail.
-      </li>
-    </ul>
+    <div class="row centre">
+      <div class="col-md-8">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	        <a name="fiches"></a>
+	    <h3 class="panel-title">Création et édition de fiche</h3>
+	  </div>
+	  <div class="index-container">
+	    <ul>
+	      <li>
+		La plupart des champs sont remplis avec des valeurs par défaut. Les nom et prénom du personnages sont requis. Si vous ne comptez pas remplir l'un des champ avec une valeur par défaut, n'y touchez pas, cela permettra un meilleur affichage de votre personnage. En effet, certains champs ne sont simplement pas affichés quand ils n'ont pas leur valeur par défaut. <br><br>
+	      </li>
+	      <li>
+		Pour les champs numériques, n'hésitez pas à rentrer une valeur à la main. <br><br>
+	      </li>
+	      <li>
+		La date de naissance comprend un jour de 1 à 31, un mois de naissance de 1 à 12 et une année de naissance qui devrait être suffisante pour tous les personnages de World of Warcraft. Faites néanmoins bien attention ; aucune vérification n'est effectuée sur les mois qui n'ont pas plus de 30 jours (et encore moins 28). <br><br>
+	      </li>
+	      <li>
+		Par défaut, les zones et lieux de naissance sont réglés sur "Noirebois". Il s'agit du duché fictif où se trouvent les "Fils de Garithos" dans les Maleterres. <br><br>
+	      </li>
+	      <li>
+		Pour le type de personnage : mettez joué si le personnage est effectivement joué, personnage non joué sinon. "Personnage jouable" sert pour laisser les gens savoir que le personnage -à priori lié à l'un des vôtres- n'est pas joué, mais qu'ils peuvent vous contacter pour le jouer. <br><br>
+	      </li>
+	      <li>
+		Vous pouvez choisir d'afficher ou non le nom du personnage en jeu, le fait que vous êtes son créateur, et l'inventaire. Ces paramètres ne seront visibles que par vous si vous les décochez. <br><br>
+	      <li>
+	    </ul>
+	  </div>
+	</div>
+      </div>
+      <div class="col-md-8">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <a name="utilisateurs"></a>
+	    <h3 class="panel-title">Gestion utilisateur</h3>
+	  </div>
+	  <div class="index-container">
+	    <ul>
+	      <li>
+		Pour créer un compte, vous n'aurez besoin d'entrer que votre adresse mail et un nom d'utilisateur.<br><br>
+	      </li>
+	      <li>
+		Vous pouvez ensuite éditer votre profil soit en passant par le menu "utilsateurs" et en vous trouvant dans la liste, soit en cliquant sur votre nom dans la barre en haut ("Bienvenue, xxxx"), soit par l'icône de gestion d'utilisateur dans la barre qui reste en bas à droite de votre écran (<img  src="/fiches/media/images/site/UI-MicroButton-Raid-Up.PNG" alt="Utilisateur">).
+	      </li>
+	      <li>
+		Vous pourrez voir dans la gestion utilisateur la liste des personnages que vous avez crées, votre date d'inscription. Vous pourrez, via la création/édition de profil, ajouter une date de naissance et un avatar. Vous pouvez également changer votre mot de passe et adresse mail.
+	      </li>
+	    </ul>
 
-    {% if perms.fiches.fdg %}
-<a name="objets"></a>
-<h3>Créer objet/armure/case/inventaire/equipement</h3>
-    <ul>
-      <li>
-	Quand vous créez un personnage, un inventaire et un équipement lui sont automatiquement attribués. Ils sont vides et vous devez les éditer directement dans la fiche du personnage après avoir créé éventuellement les objets/armures/cases nécessaires.
-      </li>
-      <li>
-	Ces modèles s'enrobent. Pour faire une case, vous avez besoin d'un objet créé. Pour faire une armure également. Pour l'inventaire, il vous faudra des cases, et pour l'équipement des armures. Vous allez donc créer pas mal d'objets. N'hésitez pas à vérifier qu'un objet n'existe pas déjà avant de l'ajouter.
-      </li>
-    </ul>
-       <a name="rpg"></a>
-       <h3>Création et édition des personnages de rpg</h3>
+	  </div>
+	</div>
+      </div>
 
+
+
+
+      {% if perms.fiches.fdg %}
+
+      <div class="col-md-8">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <a name="objets"></a>
+	    <h3 class="panel-title">Créer objet/armure/case/inventaire/equipement</h3>
+	  </div>
+	  <div class="index-container">
+	    <ul>
+	      <li>
+		Quand vous créez un personnage, un inventaire et un équipement lui sont automatiquement attribués. Ils sont vides et vous devez les éditer directement dans la fiche du personnage après avoir créé éventuellement les objets/armures/cases nécessaires.<br><br>
+	      </li>
+	      <li>
+		Ces modèles s'enrobent. Pour faire une case, vous avez besoin d'un objet créé. Pour faire une armure également. Pour l'inventaire, il vous faudra des cases, et pour l'équipement des armures. Vous allez donc créer pas mal d'objets. N'hésitez pas à vérifier qu'un objet n'existe pas déjà avant de l'ajouter.
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+      </div>
+
+      <div class="col-md-8">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <a name="rpg"></a>
+	    <h3 class="panel-title">Création et édition des personnages de rpg</h3>
+	  </div>
+	  <div class="index-container">
            <ul>
 	     <li>
 	       Rien ne vous interdit de tricher, mais bien sûr, c'est mieux de respecter les règles.
 	     </li>
 	   </ul>
+	  </div>
+	</div>
+      </div>
     {% endif %}
   </div>
 </div>

@@ -14,6 +14,7 @@ h1 {
     font-family: morpheus;
 }
 
+
 a {
     color: #a72121;
 }
@@ -55,6 +56,11 @@ a:hover {
     border-bottom: 0;
     border: 1px ridge #edd5a9;
     border-radius: 3px;
+    background-repeat: no-repeat;
+    padding: 5px 1px;
+    border: 0px;
+    margin: 0%;
+    background-position: center bottom;
 }
 
 #quest-header:hover {
@@ -193,7 +199,7 @@ a:hover {
     border-color: #fff;
 }
 
-.btn-default {
+.quest-btn-default {
     color: #ddd;
     background: #e4b951;
     padding: 7px 7px;
@@ -202,8 +208,8 @@ a:hover {
     border: 1px solid #fff;
 }
 
-.btn-default:focus,
-.btn-default:hover {
+.quest-btn-default:focus,
+.quest-btn-default:hover {
     color: #fefefe;
     background: #e4cd51;
     padding: 7px 7px;
