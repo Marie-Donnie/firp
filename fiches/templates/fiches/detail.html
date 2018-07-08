@@ -47,8 +47,16 @@ function onMouseLeave() {
 }
 
 });
+
 {% endblock %}
 
+{% block contenu_header %}
+<meta property="og:title" content="{{ fiche.prenom|capfirst }} {{ fiche.nom|capfirst }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.filsdegarithos.ovh{{ request.get_full_path }}" />
+<meta property="og:image" content="https://www.filsdegarithos.ovh{{ fiche.image.url }}" />
+<meta property="og:description" content="Sexe: {{ fiche.get_sexe_display }}, Profession : {{fiche.profession|capfirst }}, Race : {{ fiche.race|capfirst }}, Date de naissance :  {{fiche.jour_de_naissance}} {{fiche.mois_de_naissance|mois}} {{fiche.annee_de_naissance}}  ({{fiche.annee_de_naissance|age}} an{{fiche.annee_de_naissance|age|pluralize}} cette année)" />
+{% endblock %}
 
 {% block title %}Fiche de {{ fiche.prenom|capfirst }} {{ fiche.nom|capfirst }}{% endblock %}
 {% block page-title %}
