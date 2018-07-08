@@ -8,7 +8,13 @@
 
 
 {% block title %}{{mission.operation}}{% endblock %}
-{% block contenu_header %}{% endblock %}
+{% block contenu_header %}
+<meta property="og:title" content="{{mission.operation}}, à {{ mission.lieu }}, le {{ mission.jour }} {{mission.mois|mois}} {{mission.annee}}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.filsdegarithos.ovh{{ request.get_full_path }}" />
+<meta property="og:image" content="https://www.filsdegarithos.ovh/static/site/images/page.PNG" />
+<meta property="og:description" content="{{ mission.deroulement|linebreaksbr }}" />
+{% endblock %}
 
 {% block page-title %}<a href="{% url 'campagnes' %}">Campagnes</a>{% endblock %}
 
