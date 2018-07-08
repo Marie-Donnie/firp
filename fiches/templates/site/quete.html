@@ -12,7 +12,7 @@
 <meta property="og:title" content="{{quete.nom}}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.filsdegarithos.ovh{{ request.get_full_path }}" />
-<meta property="og:image" content="{% if quete.cible != 'Aucune' and quete.ennemi %}{% get_media_prefix %}/images/site/quest/Portraits/{{quete.ennemi}}.PNG{% else %}https://www.filsdegarithos.ovh/static/site/images/page.PNG{% endif %}" />
+<meta property="og:image" content="{% if quete.cible != 'Aucune' and quete.ennemi %}https://www.filsdegarithos.ovh{% get_media_prefix %}images/site/quest/Portraits/{{quete.ennemi}}.PNG{% else %}https://www.filsdegarithos.ovh/static/site/images/page.PNG{% endif %}" />
 <meta property="og:description" content="{{quete.get_zone_display}} - {{quete.localisation}}, {{quete.get_difficulte_display}}. Objectif : {{quete.objectif}} " />
 {% endblock %}
 {% block page-title %}<a href="{% url 'quetes' %}">Registre de quêtes</a>{% endblock %}
