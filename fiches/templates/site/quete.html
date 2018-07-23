@@ -9,7 +9,7 @@
 
 {% block title %}{{quete.nom}}{% endblock %}
 {% block contenu_header %}
-<meta property="og:title" content="{{quete.nom}}" />
+<meta property="og:title" content="{{quete.nom}}{% if quete.etat == 2 %} - Réservée {% elif quete.etat == 3 %} - Accomplie {% endif %}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.filsdegarithos.ovh{{ request.get_full_path }}" />
 <meta property="og:image" content="{% if quete.cible != 'Aucune' and quete.ennemi %}https://www.filsdegarithos.ovh{% get_media_prefix %}images/site/quest/Portraits/{{quete.ennemi}}.PNG{% else %}https://www.filsdegarithos.ovh/static/site/images/page.PNG{% endif %}" />
