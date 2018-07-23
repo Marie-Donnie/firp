@@ -904,7 +904,6 @@ def campagne(request, campagne_id):
 
 
 # Displays report of the requested mission
-@permission_required('fiches.fdg', raise_exception=True)
 def mission(request, campagne_id, mission_id):
     mission = get_object_or_404(Mission, pk=mission_id)
     image = None
