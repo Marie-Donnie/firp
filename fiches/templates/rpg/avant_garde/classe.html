@@ -4,6 +4,16 @@
 {% load static %}
 {% load filters %}
 
+{% block contenu_header %}
+<meta property="og:title" content="{{ fiche.prenom|capfirst }} {{ fiche.nom|capfirst }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.filsdegarithos.ovh{{ request.get_full_path }}" />
+<meta property="og:image" content="https://www.filsdegarithos.ovh{{ fiche.image.url }}" />
+<meta property="og:description" content="
+CC : {% if fiche.pj == 'p' %}{{ cap_combat }}{% else %}{{ fiche.cap_combat }} {% endif %}, CT : {% if fiche.pj == 'p' %}{{ cap_tir }}{% else %}{{ fiche.cap_tir }} {% endif %}, F : {% if fiche.pj == 'p' %}{{ force }}{% else %}{{ fiche.force }} {% endif %}, E : {% if fiche.pj == 'p' %}{{ endu }}{% else %}{{ fiche.endu }} {% endif %}, A : {% if fiche.pj == 'p' %}{{ agi }}{% else %}{{ fiche.agi }} {% endif %}, I : {% if fiche.pj == 'p' %}{{ intell }}{% else %}{{ fiche.intell }} {% endif %}, C : {% if fiche.pj == 'p' %}{{ charisme }}{% else %}{{ fiche.charisme }} {% endif %}, FM : {% if fiche.pj == 'p' %}{{ force_men }}{% else %}{{ fiche.force_men }} {% endif %}, PV : {{ fiche.pv }}/{% if fiche.pj == 'p' %}{{ pv_max }}{% else %}{{ fiche.pv_max }} {% endif %}, Classe : {{ fiche.get_classe_display }}, Grade : {{ fiche.get_grade_rp_display }}, Niveau : {{ fiche.niveau }}" />
+{% endblock %}
+
+
 {% block statistic %}
     <ul>
       <li>
