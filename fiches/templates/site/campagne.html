@@ -24,7 +24,7 @@ $(function () {
     <div class="campaigns">
     {% for mission in missions_list %}
     <div class="campaign">
-      <a class="btn btn-campaign" href="{% url 'mission' campagne.id mission.id %}" data-toggle="tooltip" data-placement="top" title="Accessible uniquement aux Fils de Garithos">{{ mission }}</a>
+      <a class="btn btn-campaign" href="{% url 'mission' campagne.id mission.id %}" data-toggle="tooltip" data-placement="top" title="Voir la mission">{{ mission }}</a>
     </div>
     {% endfor %}
     </div>
