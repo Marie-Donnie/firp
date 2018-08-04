@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="shared.js"></script>
+    <script src="client.js"></script>
+    <style>
+      html { background: #aaa; }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #holder {
+        width: 1200px;
+        height: 700px;
+        margin: auto;
+        overflow: scroll;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="stamp">
+      <img id="gh" src="troupes.png" width="20">
+    </button>
+    <button id="erase">
+      Erase
+    </button>
+    <input id="zoom" type="range" min="10" value="100" />
+    <div id="holder"></div>
+  </body>
+</html>
