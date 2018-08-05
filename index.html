@@ -22,32 +22,56 @@
         position: relative;
         cursor: none;
       }
-      #palette button img {
+      .palette button img {
         width: 24px;
         height: 24px;
+      }
+      .palette[data-layer="horde"] button {
+        background-color: red;
       }
     </style>
   </head>
   <body>
-    <nav id="palette">
-      <button class="stamp" data-action="stamp" data-stamp="troupes">
-        <img src="stamps/troupes.png">
-      </button>
-      <button class="stamp" data-action="stamp" data-stamp="github">
-        <img src="stamps/github.png">
-      </button>
-      <button id="pencil" data-action="pencil">
-        Pencil
-      </button>
-      <button id="erase" data-action="erase">
-        Erase
-      </button>
-      <button id="nuke" data-action="nuke">
-        Nuke
-      </button>
-    </nav>
-    <input id="zoom" type="range" min="10" value="100" />
-    <input id="scale" type="range" min="10" max="200" value="100" />
+    <div id="controls">
+      <div id="palettes">
+        <div class="palette">
+          <button data-action="stamp" data-stamp="troupes">
+            <img src="stamps/troupes.png">
+          </button>
+          <button data-action="stamp" data-stamp="github">
+            <img src="stamps/github.png">
+          </button>
+          <button data-action="pencil">
+            Pencil
+          </button>
+          <button data-action="erase">
+            Erase
+          </button>
+          <button data-action="nuke">
+            Nuke
+          </button>
+        </div>
+        <div class="palette" data-layer="horde">
+          <button data-action="stamp" data-stamp="troupes">
+            <img src="stamps/troupes.png">
+          </button>
+          <button data-action="stamp" data-stamp="github">
+            <img src="stamps/github.png">
+          </button>
+          <button data-action="pencil">
+            Pencil
+          </button>
+          <button data-action="erase">
+            Erase
+          </button>
+          <button data-action="nuke">
+            Nuke
+          </button>
+        </div>
+      </div>
+      <input id="zoom" type="range" min="10" value="100" />
+      <input id="scale" type="range" min="10" max="200" value="100" />
+    </div>
     <div id="holder"></div>
   </body>
 </html>

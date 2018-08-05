@@ -9,7 +9,7 @@ const layers = Object.create(null)
 function newLayer(id) {
   const l = {
     id,
-    color: randomColor(),
+    color: id === 'horde' ? 'red' : randomColor(),
     dirty: false,
     canvas: new Canvas(S.width, S.height),
   }
@@ -89,13 +89,17 @@ wss.on('connection', function connection(ws) {
       // Send current state to client
       const allLayers = Object.values(layers)
       allLayers.sort((a, b) => {
-        // BG is first
+        // BG is first, 'horde' is last
         if (a.id === 'bg') {
           return -1
         } else if (b.id == 'bg') {
           return +1
+        } else if (a.id === 'horde') {
+          return +1
+        } else if (b.id === 'horde') {
+          return -1
         } else {
-          return a.id < b.id
+          return parseInt(a.id) < parseInt(b.id)
         }
       })
 
@@ -125,20 +129,23 @@ wss.on('connection', function connection(ws) {
     }
 
     case 'draw': {
-      //console.debug(`Message from ${id}:`, m)
+      console.debug(`Message from ${id}:`, m)
+
+      const [layer_id, ...draw_args] = args
+      const draw_id = layer_id === 'horde' ? layer_id : id
 
       // Broadcast it back prefixed with user ID
       wss.broadcast(JSON.stringify({
         type: 'draw',
-        id,
-        cmd: args,
+        id: draw_id,
+        cmd: draw_args,
       }))
 
       // Draw it on the local layer
-      const ctx = layers[id].canvas.getContext('2d')
-      ctx.fillStyle = layers[id].color
-      S.draw(ctx, args, stamps, createCanvas, canvasToImg)
-      layers[id].dirty = true
+      const ctx = layers[draw_id].canvas.getContext('2d')
+      ctx.fillStyle = layers[draw_id].color
+      S.draw(ctx, draw_args, stamps, createCanvas, canvasToImg)
+      layers[draw_id].dirty = true
       break
     }
     }
@@ -150,8 +157,10 @@ const saveMs = 5000
 
 function saveToPNG(layer) {
   layer.canvas.toBuffer(function(err, png) {
+    // TODO: save in proper place
     const filename = `layer${layer.id}.png`
     fs.writeFile(filename, png, function(err) {
+      // TODO: check for error
       //console.log("Saved", filename)
     })
   })

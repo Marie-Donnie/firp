@@ -7,6 +7,7 @@ let zoom = 1
 let scale = 1
 let stamp = ''
 let action = 'erase'
+let actionLayer = ''
 
 const layers = Object.create(null)
 let preview
@@ -16,7 +17,7 @@ function start() {
 
   const stamps = Object.create(null)
   Array.prototype.forEach.call(
-    document.querySelectorAll('.stamp'),
+    document.querySelectorAll('.palette button[data-action="stamp"]'),
     s => {
       const img = s.children[0]
       stamps[s.getAttribute('data-stamp')] = img
@@ -93,9 +94,9 @@ function start() {
       const [x, y] = [mx / zoom, my / zoom]
 
       if (lastPoint != null) {
-        ws.send(`draw ${action} ${x} ${y} ${scale} ${lastPoint.x} ${lastPoint.y}`)
+        ws.send(`draw ${actionLayer} ${action} ${x} ${y} ${scale} ${lastPoint.x} ${lastPoint.y}`)
       } else {
-        ws.send(`draw ${action} ${x} ${y} ${scale}`)
+        ws.send(`draw ${actionLayer} ${action} ${x} ${y} ${scale}`)
       }
       lastPoint = {x, y}
     }
@@ -114,7 +115,7 @@ function start() {
     // Turn into canvas coordinates
     const [x, y] = [mx / zoom, my / zoom]
 
-    ws.send(`draw ${action} ${x} ${y} ${scale} ${stamp}`)
+    ws.send(`draw ${actionLayer} ${action} ${x} ${y} ${scale} ${stamp}`)
   })
 
   // Preview stamp below cursor
@@ -161,10 +162,21 @@ function start() {
     preview.style.transform = `scale(${scale * zoom})`
   })
 
-  document.getElementById('palette')
+  document.getElementById('palettes')
     .addEventListener('click', function(ev) {
       const newAction = ev.target.getAttribute('data-action')
-      if (newAction !== 'nuke') {
+      actionLayer = ev.target.parentNode.getAttribute('data-layer') || ''
+      if (newAction === 'nuke') {
+        let msg
+        if (actionLayer === 'horde') {
+          msg = "Voulez-vous écraser tout le calque de la Horde ?"
+        } else {
+          msg = "Voulez-vous écraser tout votre calque ?"
+        }
+        if (window.confirm(msg)) {
+          ws.send(`draw ${actionLayer} nuke`)
+        }
+      } else {
         action = newAction
 
         if (action === 'stamp') {
@@ -190,12 +202,7 @@ function start() {
     })
   scale = document.getElementById('scale').value / 100
 
-  document.getElementById('nuke')
-    .addEventListener('click', function() {
-      ws.send('draw nuke')
-    })
-
-  updatePreview(document.getElementById('erase'))
+  updatePreview(document.querySelector('button[data-action="erase"]'))
 }
 
 function createCanvas() {
@@ -210,6 +217,8 @@ function newLayer(id, color) {
   canvas.width = S.width
   canvas.height = S.height
   canvas.setAttribute('data-id', id)
+  // TODO: insert new canvas in proper order
+  // to ensure every client has the same view
   holder.insertBefore(canvas, preview)
   layers[id] = { id, color, canvas }
   return layers[id]
