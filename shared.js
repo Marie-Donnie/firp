@@ -38,7 +38,7 @@ const S = (function(){
         ctx.save()
         ctx.translate(args[0], args[1])
         // Flip
-        //ctx.scale(-1, 1)
+        ctx.scale(args[2], args[2])
         ctx.drawImage(canvasToImg(colored),
                       -s/2, -s/2, s, s)
         ctx.restore()

@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', start)
 // Draw all server commands on corresponding canvas
 
 let zoom = 1
+let stampScale = 1
 let action = 'erase'
 
 const layers = Object.create(null)
@@ -74,13 +75,6 @@ function start() {
     Object.values(layers).forEach(rescale)
   }
 
-  document.getElementById('zoom')
-    .addEventListener('change', function() {
-      zoom = this.value / 100
-      rescaleAll()
-    })
-  zoom = document.getElementById('zoom').value / 100
-
   holder.addEventListener('click', function(ev) {
     // Mouse coordinates
     const [mx, my] = [ev.layerX, ev.layerY]
@@ -88,13 +82,26 @@ function start() {
     // Turn into canvas coordinates
     const [x, y] = [mx / zoom, my / zoom]
 
-    ws.send(`draw ${action} ${x} ${y}`)
+    ws.send(`draw ${action} ${x} ${y} ${stampScale}`)
   })
 
   document.getElementById('stamp')
     .addEventListener('click', _ => action = 'stamp')
   document.getElementById('erase')
     .addEventListener('click', _ => action = 'erase')
+
+  document.getElementById('zoom')
+    .addEventListener('change', function() {
+      zoom = this.value / 100
+      rescaleAll()
+    })
+  zoom = document.getElementById('zoom').value / 100
+
+  document.getElementById('scale')
+    .addEventListener('change', function() {
+      stampScale = this.value / 100
+    })
+  stampScale = document.getElementById('scale').value / 100
 }
 
 function createCanvas() {
