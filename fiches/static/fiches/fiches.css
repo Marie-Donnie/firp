@@ -337,12 +337,12 @@ h3#nom {
     margin-left: auto;
 }
 
-#details-panels h3{
+.details-panels h3{
     margin: 0;
     color: #bf0005;
 }
 
-#details-panels h4{
+.details-panels h4{
     margin: 0 auto;
     color: #bf0005;
     text-align: center;
@@ -586,6 +586,7 @@ h3#nom {
 h3.panel-title {
     color: #d43e40;
     margin: 0% auto;
+    font-weight: bold;
 }
 
 .rules {

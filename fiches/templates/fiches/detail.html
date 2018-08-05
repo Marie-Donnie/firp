@@ -158,7 +158,7 @@ function onMouseLeave() {
     </a>
   </div>
 
-  <div class="panel panel-defaut" id="details-panels">
+  <div class="panel panel-defaut details-panels">
     <div class="panel-heading">
       <h3 class="panel-title">Description</h3>
     </div>
@@ -166,7 +166,7 @@ function onMouseLeave() {
       {{fiche.description|linebreaksbr}}
     </div>
   </div>
-  <div class="panel panel-defaut" id="details-panels">
+  <div class="panel panel-defaut details-panels">
     <div class="panel-heading">
       <h3 class="panel-title">Historique</h3>
     </div>
@@ -176,7 +176,7 @@ function onMouseLeave() {
   </div>
   {% if fiche.relations != 'Aucune' %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">Relations</h3>
       </div>
@@ -188,7 +188,7 @@ function onMouseLeave() {
   {% endif %}
   {% if fiche.medailles != 'Non applicable/Aucune' %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">Médaille(s)</h3>
       </div>
@@ -200,7 +200,7 @@ function onMouseLeave() {
   {% endif %}
   {% if fiche.competences != 'Aucune' %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">Compétences</h3>
       </div>
@@ -212,7 +212,7 @@ function onMouseLeave() {
   {% endif %}
   {% if fiche.autres_informations != 'Aucune' %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">Autres informations</h3>
       </div>
@@ -224,7 +224,7 @@ function onMouseLeave() {
   {% endif %}
   {% if fiche.afficher_bourse or not user.is_anonymous and user.id == fiche.createur.id %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">Bourse</h3>
       </div>
@@ -248,7 +248,7 @@ function onMouseLeave() {
   {% if fiche.afficher_inventaire or not user.is_anonymous and user.id == fiche.createur.id %}
   {% if fiche.inventaire %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">Inventaire</h3>
       </div>
@@ -259,7 +259,7 @@ function onMouseLeave() {
   </div>   <!-- col-md-6 -->
   {% elif fiche.inventaire_fdg %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">{{fiche.inventaire_fdg.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
 	{% if not user.is_anonymous and user.id == fiche.createur.id %}
@@ -292,7 +292,7 @@ function onMouseLeave() {
 
   {% if fiche.equipement %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">{{fiche.equipement.nom}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
 	{% if not user.is_anonymous and user.id == fiche.createur.id %}
@@ -416,7 +416,7 @@ function onMouseLeave() {
 
   {% if fiche.equipement %}
   <div class="col-md-6">
-    <div class="panel panel-defaut" id="details-panels">
+    <div class="panel panel-defaut details-panels">
       <div class="panel-heading">
 	<h3 class="panel-title">Statistiques</h3>
       </div> <!-- panel-heading -->
