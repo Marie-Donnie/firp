@@ -25,7 +25,6 @@ function start() {
   const ws = new WebSocket('ws://' + window.location.hostname + ':8000')
   ws.addEventListener('open', function connected(ev) {
     console.debug('Connected to server')
-    console.debug('Sending auth token')
 
     // TODO: grab token from page
     ws.send('auth ' + Math.floor(Math.random() * 10))
@@ -37,7 +36,7 @@ function start() {
   ws.addEventListener('message', function incoming(ev) {
     const m = JSON.parse(ev.data)
 
-    console.debug('Message received:', m)
+    //console.debug('Message received:', m)
 
     switch (m.type) {
       // Get existing layers
@@ -81,6 +80,19 @@ function start() {
   function rescaleAll() {
     Object.values(layers).forEach(rescale)
   }
+
+  holder.addEventListener('mousemove', function(ev) {
+    // Erase if the left button is held down
+    if (ev.buttons === 1 && action === 'erase') {
+      // Mouse coordinates
+      const [mx, my] = [ev.layerX, ev.layerY]
+
+      // Turn into canvas coordinates
+      const [x, y] = [mx / zoom, my / zoom]
+
+      ws.send(`draw erase ${x} ${y} ${scale}`)
+    }
+  })
 
   holder.addEventListener('click', function(ev) {
     // Mouse coordinates

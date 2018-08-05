@@ -59,7 +59,7 @@ const users = Object.create(null)
 const authMaxWait = 5000
 
 wss.on('connection', function connection(ws) {
-  console.log('Client connected')
+  //console.log('Client connected')
 
   // Drop client if he does not send an auth message
   // before 5sec
@@ -74,7 +74,7 @@ wss.on('connection', function connection(ws) {
 
     switch (cmd) {
     case 'auth': {
-      console.debug(`Auth request:`, m)
+      //console.debug(`Auth request:`, m)
 
       // Ask Django for actual user ID
       id = djangoAuth(args[0])
@@ -125,7 +125,7 @@ wss.on('connection', function connection(ws) {
     }
 
     case 'draw': {
-      console.debug(`Message from ${id}:`, m)
+      //console.debug(`Message from ${id}:`, m)
 
       // Broadcast it back prefixed with user ID
       wss.broadcast(JSON.stringify({
@@ -152,7 +152,7 @@ function saveToPNG(layer) {
   layer.canvas.toBuffer(function(err, png) {
     const filename = `layer${layer.id}.png`
     fs.writeFile(filename, png, function(err) {
-      console.log("Saved", filename)
+      //console.log("Saved", filename)
     })
   })
   layer.dirty = false
