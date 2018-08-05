@@ -6,7 +6,7 @@ const S = require('../fiches/static/site/council/shared')
 
 // Configuragion
 const djangoHost = 'http://localhost:8000'
-const layerDir = __dirname + '/layers'
+const layerDir = __dirname + '/../fiches/static/site/council/layers'
 const stampDir = __dirname + '/../fiches/static/site/council/stamps'
 const saveMs = 5000
 const authMaxWait = 5000
