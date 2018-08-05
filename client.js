@@ -163,15 +163,18 @@ function start() {
 
   document.getElementById('palette')
     .addEventListener('click', function(ev) {
-      action = ev.target.getAttribute('data-action')
+      const newAction = ev.target.getAttribute('data-action')
+      if (newAction !== 'nuke') {
+        action = newAction
 
-      if (action === 'stamp') {
-        stamp = ev.target.getAttribute('data-stamp')
-      } else {
-        stamp = ''
+        if (action === 'stamp') {
+          stamp = ev.target.getAttribute('data-stamp')
+        } else {
+          stamp = ''
+        }
+
+        updatePreview(ev.target)
       }
-
-      updatePreview(ev.target)
     })
 
   document.getElementById('zoom')
@@ -186,6 +189,11 @@ function start() {
       scale = this.value / 100
     })
   scale = document.getElementById('scale').value / 100
+
+  document.getElementById('nuke')
+    .addEventListener('click', function() {
+      ws.send('draw nuke')
+    })
 
   updatePreview(document.getElementById('erase'))
 }

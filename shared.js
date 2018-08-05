@@ -1,7 +1,9 @@
 const S = (function(){
+  const width = 1857
+  const height = 2142
+
   return {
-    width: 1857,
-    height: 2142,
+    width, height,
 
     draw(ctx, m, stamps, createCanvas, canvasToImg) {
       let [cmd, ...args] = m
@@ -39,6 +41,11 @@ const S = (function(){
         ctx.drawImage(canvasToImg(colored),
                       -size/2, -size/2, size, size)
         ctx.restore()
+        break
+      }
+
+      case 'nuke': {
+        ctx.clearRect(0, 0, width, height)
         break
       }
 
