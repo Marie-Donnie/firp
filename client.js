@@ -34,7 +34,7 @@ function start() {
   })
   ws.addEventListener('close', function closed() {
     console.debug('Disconnected from server')
-    // TODO: notify user
+    disableInteraction()
   })
   ws.addEventListener('message', function incoming(ev) {
     const m = JSON.parse(ev.data)
