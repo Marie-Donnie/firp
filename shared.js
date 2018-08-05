@@ -9,11 +9,13 @@ const S = (function(){
       const x = parseFloat(args[0])
       const y = parseFloat(args[1])
       const scale = parseFloat(args[2])
-      const stamp = stamps[args[3]]
+      const lastX = parseFloat(args[3])
+      const lastY = parseFloat(args[4])
 
       switch (cmd) {
       case 'stamp': {
         const size = 200
+        const stamp = stamps[args[3]]
 
         // Create a new sprite
         const colored = createCanvas()
@@ -48,6 +50,25 @@ const S = (function(){
         ctx.scale(scale, scale)
         ctx.clearRect(-size/2, -size/2, size, size)
         ctx.restore()
+        break
+      }
+
+      case 'pencil': {
+        const size = 200
+        ctx.lineWidth = scale * 40
+        ctx.strokeStyle = ctx.fillStyle
+        ctx.lineCap = 'round'
+        ctx.lineJoin = 'round'
+
+        ctx.beginPath()
+
+        if (Number.isNaN(lastX)) {
+          ctx.moveTo(x, y)
+        } else {
+          ctx.moveTo(lastX, lastY)
+        }
+        ctx.lineTo(x, y)
+        ctx.stroke()
         break
       }
       }

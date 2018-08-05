@@ -81,16 +81,29 @@ function start() {
     Object.values(layers).forEach(rescale)
   }
 
+  let lastPoint
   holder.addEventListener('mousemove', function(ev) {
-    // Erase if the left button is held down
-    if (ev.buttons === 1 && action === 'erase') {
+    // Erase or pencil if the left button is held down
+    if (ev.buttons === 1
+        && (action === 'erase' || action === 'pencil')) {
       // Mouse coordinates
       const [mx, my] = [ev.layerX, ev.layerY]
 
       // Turn into canvas coordinates
       const [x, y] = [mx / zoom, my / zoom]
 
-      ws.send(`draw erase ${x} ${y} ${scale}`)
+      if (lastPoint != null) {
+        ws.send(`draw ${action} ${x} ${y} ${scale} ${lastPoint.x} ${lastPoint.y}`)
+      } else {
+        ws.send(`draw ${action} ${x} ${y} ${scale}`)
+      }
+      lastPoint = {x, y}
+    }
+  })
+
+  holder.addEventListener('mousedown', function(ev) {
+    if (ev.buttons === 1) {
+      lastPoint = null
     }
   })
 
@@ -126,6 +139,14 @@ function start() {
     case 'erase': {
       ctx.fillStyle = 'white'
       ctx.fillRect(0, 0, 200, 200)
+      break
+    }
+
+    case 'pencil': {
+      ctx.fillStyle = 'black'
+      ctx.beginPath()
+      ctx.arc(100, 100, 25, 0, 2 * Math.PI)
+      ctx.fill()
       break
     }
     }
