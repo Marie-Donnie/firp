@@ -6,13 +6,15 @@ document.addEventListener('DOMContentLoaded', start)
 let zoom = 1
 let scale = 1
 let stamp = ''
-let action = 'erase'
+let action = 'pencil'
 let actionLayer = ''
 
 const layers = Object.create(null)
 let preview
 
 function start() {
+  disableInteraction()
+
   const holder = document.getElementById('holder')
 
   const stamps = Object.create(null)
@@ -55,6 +57,7 @@ function start() {
       })
       rescaleAll()
       removeSpinner()
+      enableInteraction()
       break
     }
 
@@ -203,7 +206,7 @@ function start() {
     })
   scale = document.getElementById('scale').value / 100
 
-  updatePreview(document.querySelector('button[data-action="erase"]'))
+  updatePreview(document.querySelector('button[data-action="pencil"]'))
 }
 
 function createCanvas() {
@@ -229,10 +232,27 @@ function canvasToImg(canvas) {
   return canvas
 }
 
-function enableInteraction() {
+function disableInteraction() {
+  // Disable all buttons and hide preview
+  // until we have established a server connection
+
+  const elems = document.querySelectorAll('button')
+  Array.prototype.forEach.call(elems, b => {
+    b.disabled = true
+  })
+
+  document.querySelector('html')
+    .classList.add('disconnected')
 }
 
-function disableInteraction() {
+function enableInteraction() {
+  const elems = document.querySelectorAll('button')
+  Array.prototype.forEach.call(elems, b => {
+    b.disabled = false
+  })
+
+  document.querySelector('html')
+    .classList.remove('disconnected')
 }
 
 function removeSpinner() {

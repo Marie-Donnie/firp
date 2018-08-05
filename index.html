@@ -14,6 +14,9 @@
         pointer-events: none;
         opacity: 0.7;
       }
+      .disconnected #preview {
+        display: none;
+      }
       #holder {
         width: 1200px;
         height: 700px;
@@ -21,6 +24,9 @@
         overflow: scroll;
         position: relative;
         cursor: none;
+      }
+      .disconnected #holder {
+        cursor: auto;
       }
       .palette button img {
         width: 24px;
