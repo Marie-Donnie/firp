@@ -54,6 +54,7 @@ function start() {
         }
       })
       rescaleAll()
+      removeSpinner()
       break
     }
 
@@ -226,4 +227,14 @@ function newLayer(id, color) {
 
 function canvasToImg(canvas) {
   return canvas
+}
+
+function enableInteraction() {
+}
+
+function disableInteraction() {
+}
+
+function removeSpinner() {
+  document.querySelector('.spinner').remove()
 }
