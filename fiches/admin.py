@@ -207,3 +207,11 @@ class MaisonAdmin(admin.ModelAdmin):
     form = MaisonForm
 
 admin.site.register(Maison, MaisonAdmin)
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONSEIL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class LegendeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nom')
+    form = LegendeForm
+
+admin.site.register(Legende, LegendeAdmin)

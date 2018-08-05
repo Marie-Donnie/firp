@@ -281,8 +281,9 @@ class Fiche(models.Model):
                        ("admin",
                         "Est admin"),
                        ("allie",
-                        "Est allié"),)
-
+                        "Est allié"),
+                       ("chef",
+                        "Est chef"),)
 
     def __unicode__(self):
         return u'%s %s' % (self.nom, self.prenom)
@@ -849,6 +850,41 @@ class Maison(models.Model):
                                      related_name='maison')
     image = models.ImageField(upload_to='images/maisons',
                               default='images/site/no-image.png')
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONSEIL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
+
+# class Chef(models.Model):
+#     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+#                                  null=True,
+#                                  related_name='chef')
+#     image = models.ImageField(upload_to='images/conseil',
+#                               default='images/site/no-image.png')
+
+#     class Meta:
+#         permissions = (("chef_ok",
+#                         "Est un chef"),)
+
+class Legende(models.Model):
+    nom = models.CharField(max_length=75,
+                           default='Légende')
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 null=True,
+                                 related_name='legende')
+    description = models.CharField(max_length=6000,
+                                   default='A venir')
+    image = models.ImageField(upload_to='images/persos',
+                              default='images/site/no-image.png')
+
+    class Meta:
+        verbose_name = "légende"
+        verbose_name_plural = "légendes"
+        default_related_name = 'légende'
 
     def __unicode__(self):
         return u'%s' % (self.nom)

@@ -1,0 +1,59 @@
+{% extends "site/base.html" %}
+
+
+{% block title %}Conseil de guerre de Lordaeron{% endblock %}
+{% block page-title %}Conseil de guerre de Lordaeron{% endblock %}
+
+{% block content %}
+{% for l in legende_noirebois %}
+  <div class="panel panel-defaut details-panels">
+    <div class="panel-heading conseil-heading">
+      <h3 class="panel-title conseil-titre">{{ l.nom }}</h3>
+      {% if user.is_authenticated %}
+      {% if user.id == l.createur.id or perms.fiches.admin %}
+      <span class="edition">
+	<a  href="{% url 'editer_legende' %}">Éditer notes</a></span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="panel-body">
+      <img class="guilde-icone" src="{{MEDIA_URL}}{{ l.image }}" style="float: left;" />
+      {{ l.description|linebreaksbr }}
+    </div>
+  </div>
+  {% endfor %}
+  {% for l in legendes_allies %}
+  <div class="panel panel-default details-panels">
+    <div class="panel-heading conseil-heading">
+      <h3 class="panel-title conseil-titre">{{ l.nom }}</h3>
+      {% if user.is_authenticated %}
+      {% if user.id == l.createur.id or perms.fiches.admin %}
+      <span class="edition">
+	<a  href="{% url 'editer_legende' %}">Éditer notes</a></span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="panel-body">
+      <img class="guilde-icone" src="{{MEDIA_URL}}{{ l.image }}" style="float: left;" />
+      {{ l.description|linebreaksbr }}
+    </div>
+  </div>
+  {% endfor %}
+  {% for l in legende_horde %}
+  <div class="panel panel-defaut details-panels">
+    <div class="panel-heading conseil-heading">
+      <h3 class="panel-title conseil-titre">{{ l.nom }}</h3>
+      {% if user.is_authenticated %}
+      {% if user.id == l.createur.id or perms.fiches.admin %}
+      <span class="edition">
+	<a  href="{% url 'editer_legende' %}">Éditer notes</a></span>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="panel-body">
+      <img class="guilde-icone" src="{{MEDIA_URL}}{{ l.image }}" style="float: left;" />
+      {{ l.description|linebreaksbr }}
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

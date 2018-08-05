@@ -741,3 +741,24 @@ textarea {
     font-size: 60px;
     font-size: 4vw;
 }
+
+h3.conseil-titre {
+    font-family: morpheus;
+    color: white;
+    font-weight: bold;
+    margin: 0%;
+}
+
+.guilde-icone {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60px;
+    height: 60px;
+    border: none;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.conseil-heading {
+    justify-content: space-between;
+}

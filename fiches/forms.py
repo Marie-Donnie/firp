@@ -224,3 +224,13 @@ class MaisonForm(ModelForm):
                    'materiel': forms.Textarea(),
                    'prod': forms.Textarea(),
                    'afficher_pseudo': forms.CheckboxInput(), }
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMERCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+class LegendeForm(ModelForm):
+
+    class Meta:
+        model = Legende
+        fields = '__all__'
+        widgets = {'description': forms.Textarea(), }

@@ -109,6 +109,11 @@ urlpatterns = [
     url(r'^habitations/rechercher/$', views.habitations, name='rechercher_maison'),
     url(r'^habitations/maison/(?P<maison_id>\d+)/$', views.detail_maison,
         name='detail_maison'),
+    # Conseil
+    url(r'^conseil/$', views.conseil, name='conseil'),
+    url(r'^conseil/en_cours/$', views.conseil_en_cours, name='conseil_en_cours'),
+    url(r'^conseil/editer_notes/$', views.edit_legende,
+        name='editer_legende'),
     # Utils
     url(r'^compter_boutiques/$', views.compter_boutiques, name='boutiques'),
     # Autocomplete

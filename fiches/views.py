@@ -1252,6 +1252,61 @@ def detail_maison(request, maison_id):
     return render(request, 'site/detail_maison.html', context)
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONSEIL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+
+def conseil(request):
+    legende_noirebois = Legende.objects.all().filter(nom__icontains='Noirebois')
+    legendes_allies = Legende.objects.all().exclude(nom__icontains='Noirebois').exclude(nom__icontains='Horde')
+    legende_horde = Legende.objects.all().filter(nom__icontains='Horde')
+
+    context = {'legende_noirebois': legende_noirebois, 'legendes_allies': legendes_allies,
+               'legende_horde': legende_horde}
+
+    return render(request, 'site/conseil.html', context)
+
+
+@permission_required('fiches.chef', raise_exception=True)
+def conseil_en_cours(request):
+
+    return render(request, 'site/conseil_en_cours.html', context)
+
+@permission_required('fiches.chef', raise_exception=True)
+def edit_legende(request):
+    chef = User.objects.get(username=request.user).id
+    legende_filter = Legende.objects.all().filter(createur=chef)
+    # if there is already a legend
+    if legende_filter:
+        legende = legende_filter[0]
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = chef
+            form = LegendeForm(data, request.FILES, instance=legende)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('conseil')
+            else:
+                print(form.errors)
+        else:
+            form = LegendeForm(instance=legende)
+    else:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = chef
+            form = LegendeForm(data, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('conseil')
+            else:
+                print(form.errors)
+        else:
+            form = LegendeForm()
+
+    context = {'form': form}
+
+    return render(request, 'site/legende_edit.html', context)
+
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% UTILS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 @permission_required('fiches.fdg', raise_exception=True)
