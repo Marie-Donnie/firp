@@ -875,7 +875,8 @@ class Legende(models.Model):
                            default='Légende')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
-                                 related_name='legende')
+                                 related_name='legende',
+                                 related_query_name='legende')
     description = models.CharField(max_length=6000,
                                    default='A venir')
     image = models.ImageField(upload_to='images/persos',

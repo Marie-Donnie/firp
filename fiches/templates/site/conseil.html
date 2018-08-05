@@ -56,4 +56,7 @@
     </div>
   </div>
   {% endfor %}
+  {% if user.is_authenticated and perms.fiches.chef and not a_legende %}
+  <a class="btn btn-default" href="{% url 'editer_legende' %}">Créer une légende</a>
+  {% endif %}
 {% endblock %}
