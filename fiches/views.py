@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import os
+import uuid
 
 from django.shortcuts import get_object_or_404, render, redirect, render_to_response
 from django.template import RequestContext
@@ -9,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.core import serializers
 from django.conf import settings
@@ -1276,7 +1278,16 @@ def conseil(request):
 
 @permission_required('fiches.chef', raise_exception=True)
 def conseil_en_cours(request):
+    # first delete associated tokens
+    user = User.objects.get(username=request.user)
+    user_tokens = Token.objects.all().filter(createur=user.id)
+    user_tokens.delete()
+    # then create new token and save it
+    token = uuid.uuid4().hex
+    token_object = Token.objects.create(token=token, createur=user)
+    token_object.save()
 
+    context = {'token': token}
     return render(request, 'site/conseil_en_cours.html', context)
 
 @permission_required('fiches.chef', raise_exception=True)
@@ -1313,6 +1324,25 @@ def edit_legende(request):
     context = {'form': form}
 
     return render(request, 'site/legende_edit.html', context)
+
+
+def get_id(request, token):
+    try:
+        found_token = Token.objects.get(token=token)
+        return HttpResponse(found_token.createur.id)
+    except ObjectDoesNotExist:
+        return HttpResponse(status=403)
+
+
+def delete_token(request, token):
+    if request.method == 'DELETE':
+        try:
+            found_token = Token.objects.get(token=token)
+            found_token.delete()
+        except ObjectDoesNotExist:
+            return HttpResponse(status=403)
+    else:
+        return HttpResponse(status=404)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% UTILS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

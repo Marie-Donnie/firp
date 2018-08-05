@@ -1,1 +1,12 @@
-{% csrf_token %}
+
+{% extends "site/base.html" %}
+
+
+{% block title %}Conseil de guerre de Lordaeron en session{% endblock %}
+{% block page-title %}Conseil de guerre de Lordaeron en session{% endblock %}
+
+{% block content %}
+
+<input name="token" value="{{ token }}" type="hidden">
+
+{% endblock %}

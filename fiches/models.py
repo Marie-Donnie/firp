@@ -889,3 +889,12 @@ class Legende(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.nom)
+
+
+class Token(models.Model):
+    token = models.CharField(max_length=75,
+                           null=True)
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 null=True,
+                                 related_name='token',
+                                 related_query_name='token')

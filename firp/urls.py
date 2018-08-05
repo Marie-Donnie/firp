@@ -114,6 +114,10 @@ urlpatterns = [
     url(r'^conseil/en_cours/$', views.conseil_en_cours, name='conseil_en_cours'),
     url(r'^conseil/editer_notes/$', views.edit_legende,
         name='editer_legende'),
+    url(r'^conseil/get_id/(?P<token>\w+)$', views.get_id,
+        name='get_id'),
+    url(r'^conseil/delete_token/(?P<token>\w+)$', views.delete_token,
+        name='delete_token'),
     # Utils
     url(r'^compter_boutiques/$', views.compter_boutiques, name='boutiques'),
     # Autocomplete
