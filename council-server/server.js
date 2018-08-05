@@ -1,11 +1,11 @@
 const WebSocket = require('ws')
 const Canvas = require('canvas')
 const fs = require('fs')
-const S = require('./shared')
+const S = require('../fiches/static/site/council/shared')
 
 // Configuragion
 const layerDir = __dirname + '/layers'
-const stampDir = __dirname + '/stamps'
+const stampDir = __dirname + '/../fiches/static/site/council/stamps'
 const saveMs = 5000
 const authMaxWait = 5000
 
