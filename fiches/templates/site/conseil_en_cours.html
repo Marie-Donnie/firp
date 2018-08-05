@@ -13,7 +13,7 @@
 <script src="/static/site/council/client.js"></script>
 <style>
   html { background: #aaa; }
-  canvas {
+  #holder > * {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,14 +45,14 @@
   }
 
   .spinner {
-    margin: 100px auto 0;
+    margin: 150px auto 0;
     width: 70px;
     text-align: center;
   }
 
   .spinner > div {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     background-color: #7e0609;
 
     border-radius: 100%;
@@ -128,7 +128,8 @@
   <input id="scale" type="range" min="10" max="200" value="100" />
 </div>
 <div id="holder">
-  <div class="spinner">
+  <img class="resize" src="/static/site/council/bg.png" />
+  <div class="spinner resize">
     <div class="bounce1"></div>
     <div class="bounce2"></div>
     <div class="bounce3"></div>

@@ -5,6 +5,41 @@
 {% block page-title %}Conseil de guerre de Lordaeron{% endblock %}
 
 {% block content %}
+
+<style>
+  #holder {
+    width: 1200px;
+    height: 700px;
+    margin: auto;
+    overflow: scroll;
+    position: relative;
+  }
+  #holder img {
+    position: absolute;
+  }
+</style>
+<input id="zoom" type="range" min="20" value="100" />
+<div id="holder">
+  <img src="/static/site/council/bg.png" />
+  {% for img in all_layers %}
+  <img src="/static/site/council/layers/{{ img }}" />
+  {% endfor %}
+</div>
+
+<script>
+  const zoomInput = document.getElementById('zoom')
+  zoomInput.addEventListener('change', rescaleAll)
+
+  function rescaleAll() {
+    const zoom = this.value / 100
+    const imgs = document.querySelectorAll('#holder img')
+    Array.prototype.forEach.call(imgs, im => {
+      im.style.width  = im.naturalWidth * zoom + 'px'
+    })
+  }
+  rescaleAll.apply(zoomInput)
+</script>
+
 {% for l in legende_noirebois %}
   <div class="panel panel-defaut details-panels">
     <div class="panel-heading conseil-heading">

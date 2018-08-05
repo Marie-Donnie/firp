@@ -77,13 +77,14 @@ function start() {
     }
   })
 
-  function rescale(layer) {
-    layer.canvas.style.width  = S.width  * zoom + 'px'
-    layer.canvas.style.height = S.height * zoom + 'px'
+  function rescale(elem) {
+    elem.style.width  = S.width  * zoom + 'px'
+    elem.style.height = S.height * zoom + 'px'
   }
 
   function rescaleAll() {
-    Object.values(layers).forEach(rescale)
+    const layers = document.querySelectorAll('#holder .resize')
+    Array.prototype.forEach.call(layers, rescale)
   }
 
   let lastPoint
@@ -199,6 +200,7 @@ function start() {
       rescaleAll()
     })
   zoom = document.getElementById('zoom').value / 100
+  rescaleAll()
 
   document.getElementById('scale')
     .addEventListener('change', function() {
@@ -221,6 +223,7 @@ function newLayer(id, color) {
   canvas.width = S.width
   canvas.height = S.height
   canvas.setAttribute('data-id', id)
+  canvas.classList.add('resize')
   // TODO: insert new canvas in proper order
   // to ensure every client has the same view
   holder.insertBefore(canvas, preview)

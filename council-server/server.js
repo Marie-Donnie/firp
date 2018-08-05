@@ -97,21 +97,6 @@ wss.on('connection', function connection(ws) {
 
         // Send current state to client
         const allLayers = Object.values(layers)
-        allLayers.sort((a, b) => {
-          // BG is first, 'horde' is last
-          if (a.id === 'bg') {
-            return -1
-          } else if (b.id == 'bg') {
-            return +1
-          } else if (a.id === 'horde') {
-            return +1
-          } else if (b.id === 'horde') {
-            return -1
-          } else {
-            return parseInt(a.id) < parseInt(b.id)
-          }
-        })
-
         ws.send(JSON.stringify({
           type: 'layers',
           layers: allLayers.map(l => ({
