@@ -160,8 +160,8 @@ setInterval(function serialize() {
 
 function randomColor(alpha = 1.0) {
   const h = Math.round(Math.random()*360)
-  const s = Math.round(40 + Math.random()*30)
-  const l = Math.round(20 + Math.random()*50)
+  const s = Math.round(60 + Math.random()*30)
+  const l = Math.round(50 + Math.random()*30)
   return `hsla(${h}, ${s}%, ${l}%, ${alpha})`
 }
 
