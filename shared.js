@@ -6,12 +6,13 @@ const S = (function(){
     draw(ctx, m, stamps, createCanvas, canvasToImg) {
       let [cmd, ...args] = m
 
+      const x = parseFloat(args[0])
+      const y = parseFloat(args[1])
+      const scale = parseFloat(args[2])
+      const stamp = stamps[args[3]]
+
       switch (cmd) {
       case 'stamp': {
-        const x = parseFloat(args[0])
-        const y = parseFloat(args[1])
-        const scale = parseFloat(args[2])
-        const stamp = stamps[args[3]]
         const size = 200
 
         // Create a new sprite
@@ -41,10 +42,12 @@ const S = (function(){
 
       case 'erase': {
         const size = 200
-        const x = parseFloat(args[0])
-        const y = parseFloat(args[1])
 
-        ctx.clearRect(x - size/2, y - size/2, size, size)
+        ctx.save()
+        ctx.translate(x, y)
+        ctx.scale(scale, scale)
+        ctx.clearRect(-size/2, -size/2, size, size)
+        ctx.restore()
         break
       }
       }

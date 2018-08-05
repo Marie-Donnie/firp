@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', start)
 // Draw all server commands on corresponding canvas
 
 let zoom = 1
-let stampScale = 1
+let scale = 1
 let stamp = ''
 let action = 'erase'
 
@@ -89,7 +89,7 @@ function start() {
     // Turn into canvas coordinates
     const [x, y] = [mx / zoom, my / zoom]
 
-    ws.send(`draw ${action} ${x} ${y} ${stampScale} ${stamp}`)
+    ws.send(`draw ${action} ${x} ${y} ${scale} ${stamp}`)
   })
 
   // Preview stamp below cursor
@@ -125,7 +125,7 @@ function start() {
 
     preview.style.left = (mx - 100) + 'px'
     preview.style.top = (my - 100) + 'px'
-    preview.style.transform = `scale(${stampScale * zoom})`
+    preview.style.transform = `scale(${scale * zoom})`
   })
 
   document.getElementById('palette')
@@ -150,9 +150,9 @@ function start() {
 
   document.getElementById('scale')
     .addEventListener('change', function() {
-      stampScale = this.value / 100
+      scale = this.value / 100
     })
-  stampScale = document.getElementById('scale').value / 100
+  scale = document.getElementById('scale').value / 100
 
   updatePreview(document.getElementById('erase'))
 }
