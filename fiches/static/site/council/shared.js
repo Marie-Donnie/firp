@@ -3,7 +3,7 @@ const S = (function(){
   const height = 2142
 
   return {
-    port: 8000,
+    port: 8080,
 
     width, height,
 

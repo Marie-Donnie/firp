@@ -29,8 +29,8 @@ function start() {
   ws.addEventListener('open', function connected(ev) {
     console.debug('Connected to server')
 
-    // TODO: grab token from page
-    ws.send('auth ' + Math.floor(Math.random() * 10))
+    const tk = document.querySelector('input[name="token"]')
+    ws.send('auth ' + tk.value)
   })
   ws.addEventListener('close', function closed() {
     console.debug('Disconnected from server')

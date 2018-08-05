@@ -1,9 +1,11 @@
 const WebSocket = require('ws')
 const Canvas = require('canvas')
 const fs = require('fs')
+const http = require('http')
 const S = require('../fiches/static/site/council/shared')
 
 // Configuragion
+const djangoHost = 'http://localhost:8000'
 const layerDir = __dirname + '/layers'
 const stampDir = __dirname + '/../fiches/static/site/council/stamps'
 const saveMs = 5000
@@ -82,54 +84,58 @@ wss.on('connection', function connection(ws) {
       //console.debug(`Auth request:`, m)
 
       // Ask Django for actual user ID
-      id = djangoAuth(args[0])
+      djangoAuth(args[0], function(auth_id) {
+        id = auth_id
 
-      // Drop client if ID is invalid
-      if (id === false) {
-        ws.terminate()
-      }
+        // Drop client if ID is invalid
+        if (id === false) {
+          ws.terminate()
+          return
+        }
 
-      clearTimeout(authTimeout)
+        clearTimeout(authTimeout)
 
-      // Send current state to client
-      const allLayers = Object.values(layers)
-      allLayers.sort((a, b) => {
-        // BG is first, 'horde' is last
-        if (a.id === 'bg') {
-          return -1
-        } else if (b.id == 'bg') {
-          return +1
-        } else if (a.id === 'horde') {
-          return +1
-        } else if (b.id === 'horde') {
-          return -1
-        } else {
-          return parseInt(a.id) < parseInt(b.id)
+        // Send current state to client
+        const allLayers = Object.values(layers)
+        allLayers.sort((a, b) => {
+          // BG is first, 'horde' is last
+          if (a.id === 'bg') {
+            return -1
+          } else if (b.id == 'bg') {
+            return +1
+          } else if (a.id === 'horde') {
+            return +1
+          } else if (b.id === 'horde') {
+            return -1
+          } else {
+            return parseInt(a.id) < parseInt(b.id)
+          }
+        })
+
+        ws.send(JSON.stringify({
+          type: 'layers',
+          layers: allLayers.map(l => ({
+            id: l.id,
+            color: l.color,
+            canvas: l.canvas.toDataURL(),
+          }))
+        }))
+
+        // If the layer existed, we already loaded it
+        // and broadcasted it to clients.
+        // If it didn't exist yet, then we create a new
+        // one and inform clients.
+        if (!layers[id]) {
+          newLayer(id)
+
+          wss.broadcast(JSON.stringify({
+            type: 'new',
+            id,
+            color: layers[id].color,
+          }))
         }
       })
 
-      ws.send(JSON.stringify({
-        type: 'layers',
-        layers: allLayers.map(l => ({
-          id: l.id,
-          color: l.color,
-          canvas: l.canvas.toDataURL(),
-        }))
-      }))
-
-      // If the layer existed, we already loaded it
-      // and broadcasted it to clients.
-      // If it didn't exist yet, then we create a new
-      // one and inform clients.
-      if (!layers[id]) {
-        newLayer(id)
-
-        wss.broadcast(JSON.stringify({
-          type: 'new',
-          id,
-          color: layers[id].color,
-        }))
-      }
       break
     }
 
@@ -198,7 +204,17 @@ function canvasToImg(canvas) {
 }
 
 // Return an user ID as int, or false if the token is invalid
-function djangoAuth(token) {
-  // TODO: actually contact Django auth endpoint
-  return token
+function djangoAuth(token, cb) {
+  http.get(djangoHost + '/conseil/get_id/' + token, res => {
+
+    if (res.statusCode !== 200) {
+      return cb(false)
+    }
+
+    res.setEncoding('utf8')
+    let data = ''
+    res.on('data', d => { data += d })
+    res.on('end',  () => { return cb(data) })
+  })
+    .on('error', e => { return cb(false) })
 }
