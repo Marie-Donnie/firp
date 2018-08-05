@@ -23,7 +23,7 @@ function start() {
       stamps[s.getAttribute('data-stamp')] = img
     })
 
-  const ws = new WebSocket('ws://' + window.location.hostname + ':8000')
+  const ws = new WebSocket('ws://' + window.location.hostname + ':' + S.port)
   ws.addEventListener('open', function connected(ev) {
     console.debug('Connected to server')
 

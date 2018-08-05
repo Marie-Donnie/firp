@@ -3,6 +3,8 @@ const S = (function(){
   const height = 2142
 
   return {
+    port: 8000,
+
     width, height,
 
     draw(ctx, m, stamps, createCanvas, canvasToImg) {

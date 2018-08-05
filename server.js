@@ -3,6 +3,12 @@ const Canvas = require('canvas')
 const fs = require('fs')
 const S = require('./shared')
 
+// Configuragion
+const layerDir = __dirname + '/layers'
+const stampDir = __dirname + '/stamps'
+const saveMs = 5000
+const authMaxWait = 5000
+
 // Init canvas and stamps
 const layers = Object.create(null)
 
@@ -18,17 +24,17 @@ function newLayer(id) {
 }
 
 const stamps = Object.create(null)
-const stampFiles = fs.readdirSync(__dirname + '/stamps')
+const stampFiles = fs.readdirSync(stampDir)
 stampFiles.forEach(f => {
   const name = f.split('.')[0]
 
   const img = new Canvas.Image()
-  img.src = fs.readFileSync(__dirname + '/stamps/' + f)
+  img.src = fs.readFileSync(stampDir + '/' + f)
   stamps[name] = img
 })
 
 // Load all existing layers
-const layerFiles = fs.readdirSync(__dirname + '/layers')
+const layerFiles = fs.readdirSync(layerDir)
 layerFiles.forEach(f => {
   // Files are `id.png`
   const id = f.split('.')[0]
@@ -38,13 +44,13 @@ layerFiles.forEach(f => {
 
   // Restore layer image from disk
   const img = new Canvas.Image()
-  img.src = fs.readFileSync(__dirname + '/layers/' + f)
+  img.src = fs.readFileSync(layerDir + '/' + f)
   const ctx = l.canvas.getContext('2d')
   ctx.drawImage(img, 0, 0)
 })
 
 // Create WebSocket server
-const wss = new WebSocket.Server({port: 8000})
+const wss = new WebSocket.Server({port: S.port})
 
 // Add broadcast function
 wss.broadcast = function broadcast(data) {
@@ -56,7 +62,6 @@ wss.broadcast = function broadcast(data) {
 }
 
 const users = Object.create(null)
-const authMaxWait = 5000
 
 wss.on('connection', function connection(ws) {
   //console.log('Client connected')
@@ -129,7 +134,7 @@ wss.on('connection', function connection(ws) {
     }
 
     case 'draw': {
-      console.debug(`Message from ${id}:`, m)
+      //console.debug(`Message from ${id}:`, m)
 
       const [layer_id, ...draw_args] = args
       const draw_id = layer_id === 'horde' ? layer_id : id
@@ -153,15 +158,17 @@ wss.on('connection', function connection(ws) {
 })
 
 // Save all dirty layers to PNG periodically
-const saveMs = 5000
-
 function saveToPNG(layer) {
   layer.canvas.toBuffer(function(err, png) {
-    // TODO: save in proper place
-    const filename = `layer${layer.id}.png`
+    if (err) {
+      console.error('Error creating PNG from layer, cannot save')
+      return
+    }
+    const filename = layerDir + '/' + layer.id + '.png'
     fs.writeFile(filename, png, function(err) {
-      // TODO: check for error
-      //console.log("Saved", filename)
+      if (err) {
+        console.error('Error saving layer ' + filename)
+      }
     })
   })
   layer.dirty = false
