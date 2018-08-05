@@ -8,6 +8,7 @@ let stampScale = 1
 let action = 'erase'
 
 const layers = Object.create(null)
+let preview
 
 function start() {
   const holder = document.getElementById('holder')
@@ -85,10 +86,47 @@ function start() {
     ws.send(`draw ${action} ${x} ${y} ${stampScale}`)
   })
 
+  // Preview stamp below cursor
+  preview = document.createElement('canvas')
+  preview.id = 'preview'
+  preview.width = 200
+  preview.height = 200
+  holder.appendChild(preview)
+
+  holder.addEventListener('mousemove', function(ev) {
+    // Mouse coordinates
+    const [mx, my] = [ev.layerX, ev.layerY]
+
+    preview.style.left = (mx - 100) + 'px'
+    preview.style.top = (my - 100) + 'px'
+    preview.style.transform = `scale(${stampScale * zoom})`
+  })
+
   document.getElementById('stamp')
-    .addEventListener('click', _ => action = 'stamp')
+    .addEventListener('click', _ => {
+      action = 'stamp'
+
+      // Update preview
+      const ctx = preview.getContext('2d')
+      ctx.clearRect(0,0,200,200)
+      ctx.fillStyle = 'black'
+      ctx.drawImage(stamps[0], 0, 0, 200, 200)
+    })
   document.getElementById('erase')
-    .addEventListener('click', _ => action = 'erase')
+    .addEventListener('click', _ => {
+      action = 'erase'
+
+      // Update preview
+      const ctx = preview.getContext('2d')
+      ctx.clearRect(0,0,200,200)
+      ctx.fillStyle = 'white'
+      ctx.fillRect(0, 0, 200, 200)
+    })
+  // @Temp: choose erase by default
+  const ctx = preview.getContext('2d')
+  ctx.clearRect(0,0,200,200)
+  ctx.fillStyle = 'white'
+  ctx.fillRect(0, 0, 200, 200)
 
   document.getElementById('zoom')
     .addEventListener('change', function() {
@@ -116,7 +154,7 @@ function newLayer(id, color) {
   canvas.width = S.width
   canvas.height = S.height
   canvas.setAttribute('data-id', id)
-  holder.appendChild(canvas)
+  holder.insertBefore(canvas, preview)
   layers[id] = { id, color, canvas }
   return layers[id]
 }
