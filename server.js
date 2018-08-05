@@ -6,7 +6,7 @@ const S = require('./shared')
 // Init canvas and stamps
 const layers = Object.create(null)
 
-function addLayer(id) {
+function newLayer(id) {
   const l = {
     id,
     color: randomColor(),
@@ -16,19 +16,28 @@ function addLayer(id) {
   layers[id] = l
   return l
 }
-addLayer('bg')
-addLayer('surface')
 
 const stamps = []
 stamps[0] = new Canvas.Image()
 stamps[0].src = fs.readFileSync(__dirname + '/troupes.png')
 
-// @Temp: load a map instead
-const bg = layers['bg'].canvas.getContext('2d')
-bg.fillStyle = '#fff'
-bg.fillRect(0,0,S.width,S.height)
+// Load all existing layers
+const layerFiles = fs.readdirSync(__dirname + '/layers')
+layerFiles.forEach(f => {
+  // Files are `id.png`
+  const id = f.split('.')[0]
 
-// Run server
+  // Register new layer
+  const l = newLayer(id)
+
+  // Restore layer image from disk
+  const img = new Canvas.Image()
+  img.src = fs.readFileSync(__dirname + '/layers/' + f)
+  const ctx = l.canvas.getContext('2d')
+  ctx.drawImage(img, 0, 0)
+})
+
+// Create WebSocket server
 const wss = new WebSocket.Server({port: 8000})
 
 // Add broadcast function
@@ -40,49 +49,92 @@ wss.broadcast = function broadcast(data) {
   })
 }
 
-const users = []
+const users = Object.create(null)
+const authMaxWait = 5000
 
 wss.on('connection', function connection(ws) {
   console.log('Client connected')
 
-  users.push(ws)
-  const id = users.length - 1
+  // Drop client if he does not send an auth message
+  // before 5sec
+  const authTimeout = setTimeout(function dropClient() {
+    ws.terminate()
+  }, authMaxWait)
 
-  // Send current state to client
-  ws.send(JSON.stringify({
-    type: 'layers',
-    layers: Object.values(layers).map(l => ({
-      id: l.id,
-      color: l.color,
-      canvas: l.canvas.toDataURL(),
-    }))
-  }))
-
-  // Allocate new layer
-  addLayer(id)
-
-  // Broadcast a new client
-  // TODO: retrieve saved layer from Django
-  wss.broadcast(JSON.stringify({
-    type: 'join',
-    id,
-    color: layers[id].color,
-  }))
+  let id = false
 
   ws.on('message', function incoming(m) {
-    console.log(`Message from ${id}:`, m)
+    const [cmd, ...args] = m.split(' ')
 
-    // Broadcast it back prefixed with user ID
-    wss.broadcast(JSON.stringify({
-      type: 'draw',
-      id,
-      cmd: m,
-    }))
+    switch (cmd) {
+    case 'auth': {
+      console.debug(`Auth request:`, m)
 
-    // Draw it on the local layers
-    const ctx = layers[id].canvas.getContext('2d')
-    S.draw(ctx, m, stamps, createCanvas, canvasToImg)
-    layers[id].dirty = true
+      // Ask Django for actual user ID
+      id = djangoAuth(args[0])
+
+      // Drop client if ID is invalid
+      if (id === false) {
+        ws.terminate()
+      }
+
+      clearTimeout(authTimeout)
+
+      // Send current state to client
+      const allLayers = Object.values(layers)
+      allLayers.sort((a, b) => {
+        // BG is first
+        if (a.id === 'bg') {
+          return -1
+        } else if (b.id == 'bg') {
+          return +1
+        } else {
+          return a.id < b.id
+        }
+      })
+
+      ws.send(JSON.stringify({
+        type: 'layers',
+        layers: allLayers.map(l => ({
+          id: l.id,
+          color: l.color,
+          canvas: l.canvas.toDataURL(),
+        }))
+      }))
+
+      // If the layer existed, we already loaded it
+      // and broadcasted it to clients.
+      // If it didn't exist yet, then we create a new
+      // one and inform clients.
+      if (!layers[id]) {
+        newLayer(id)
+
+        wss.broadcast(JSON.stringify({
+          type: 'new',
+          id,
+          color: layers[id].color,
+        }))
+      }
+      break
+    }
+
+    case 'draw': {
+      console.debug(`Message from ${id}:`, m)
+
+      // Broadcast it back prefixed with user ID
+      wss.broadcast(JSON.stringify({
+        type: 'draw',
+        id,
+        cmd: args,
+      }))
+
+      // Draw it on the local layer
+      const ctx = layers[id].canvas.getContext('2d')
+      S.draw(ctx, args, stamps, createCanvas, canvasToImg)
+      layers[id].dirty = true
+      break
+    }
+    }
   })
 })
 
@@ -120,4 +172,10 @@ function canvasToImg(canvas) {
   const img = new Canvas.Image()
   img.src = canvas.toBuffer()
   return img
+}
+
+// Return an user ID as int, or false if the token is invalid
+function djangoAuth(token) {
+  // TODO: actually contact Django auth endpoint
+  return token
 }

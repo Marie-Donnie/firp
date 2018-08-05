@@ -1,10 +1,10 @@
 const S = (function(){
   return {
-    width: 4000,
-    height: 4000,
+    width: 1857,
+    height: 2142,
 
     draw(ctx, m, stamps, createCanvas, canvasToImg) {
-      let [cmd, ...args] = m.split(' ')
+      let [cmd, ...args] = m
       args = args.map(parseFloat)
 
       switch (cmd) {

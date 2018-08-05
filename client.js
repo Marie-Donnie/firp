@@ -15,54 +15,44 @@ function start() {
   stamps[0] = document.getElementById("gh")
 
   const ws = new WebSocket('ws://localhost:8000')
-  ws.addEventListener('open', function(ev) {
-    console.log('Connected to server')
+  ws.addEventListener('open', function connected(ev) {
+    console.debug('Connected to server')
+    console.debug('Sending auth token')
+
+    // TODO: grab token from page
+    ws.send('auth 1')
   })
-  ws.addEventListener('message', function(ev) {
+  ws.addEventListener('close', function closed() {
+    console.debug('Disconnected from server')
+    // TODO: notify user
+  })
+  ws.addEventListener('message', function incoming(ev) {
     const m = JSON.parse(ev.data)
 
-    console.log('Message received:', m)
+    console.debug('Message received:', m)
 
     switch (m.type) {
       // Get existing layers
     case 'layers': {
       m.layers.forEach(l => {
-        const c = document.createElement('canvas')
-        c.width = S.width
-        c.height = S.height
-        c.setAttribute('data-id', l.id)
-        holder.append(c)
+        const layer = newLayer(l.id, l.color)
 
         // Restore canvas from saved state
-        const ctx = c.getContext('2d')
+        const ctx = layer.canvas.getContext('2d')
         const img = document.createElement('img')
         img.src = l.canvas
-        ctx.drawImage(img, 0, 0)
-
-        layers[l.id] = {
-          id: l.id,
-          color: l.color,
-          canvas: c,
+        img.onload = function imageLoaded() {
+          ctx.drawImage(img, 0, 0)
         }
-
-        rescale()
       })
+      rescaleAll()
       break
     }
 
-    case 'join': {
-      // When a user joins, create a new layer
-      const c = document.createElement('canvas')
-      c.width = S.width
-      c.height = S.height
-      c.setAttribute('data-id', m.id)
-      holder.append(c)
-      layers[m.id] = {
-        id: m.id,
-        color: m.color,
-        canvas: c,
-      }
-      rescale()
+    case 'new': {
+      // When a new user joins the fray, create layer
+      const l = newLayer(m.id, m.color)
+      rescale(l)
       break
     }
 
@@ -75,17 +65,19 @@ function start() {
     }
   })
 
-  function rescale() {
-    Object.values(layers).forEach(l => {
-      l.canvas.style.width = S.width * zoom + 'px'
-      l.canvas.style.height = S.height * zoom + 'px'
-    })
+  function rescale(layer) {
+    layer.canvas.style.width  = S.width  * zoom + 'px'
+    layer.canvas.style.height = S.height * zoom + 'px'
+  }
+
+  function rescaleAll() {
+    Object.values(layers).forEach(rescale)
   }
 
   document.getElementById('zoom')
     .addEventListener('change', function() {
       zoom = this.value / 100
-      rescale()
+      rescaleAll()
     })
   zoom = document.getElementById('zoom').value / 100
 
@@ -96,7 +88,7 @@ function start() {
     // Turn into canvas coordinates
     const [x, y] = [mx / zoom, my / zoom]
 
-    ws.send(`${action} ${x} ${y}`)
+    ws.send(`draw ${action} ${x} ${y}`)
   })
 
   document.getElementById('stamp')
@@ -110,6 +102,16 @@ function createCanvas() {
   c.width = 200
   c.height = 200
   return c
+}
+
+function newLayer(id, color) {
+  const canvas = document.createElement('canvas')
+  canvas.width = S.width
+  canvas.height = S.height
+  canvas.setAttribute('data-id', id)
+  holder.appendChild(canvas)
+  layers[id] = { id, color, canvas }
+  return layers[id]
 }
 
 function canvasToImg(canvas) {
