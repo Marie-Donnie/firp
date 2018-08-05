@@ -17,9 +17,15 @@ function newLayer(id) {
   return l
 }
 
-const stamps = []
-stamps[0] = new Canvas.Image()
-stamps[0].src = fs.readFileSync(__dirname + '/troupes.png')
+const stamps = Object.create(null)
+const stampFiles = fs.readdirSync(__dirname + '/stamps')
+stampFiles.forEach(f => {
+  const name = f.split('.')[0]
+
+  const img = new Canvas.Image()
+  img.src = fs.readFileSync(__dirname + '/stamps/' + f)
+  stamps[name] = img
+})
 
 // Load all existing layers
 const layerFiles = fs.readdirSync(__dirname + '/layers')

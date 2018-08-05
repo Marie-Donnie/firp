@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', start)
 
 let zoom = 1
 let stampScale = 1
+let stamp = ''
 let action = 'erase'
 
 const layers = Object.create(null)
@@ -13,16 +14,21 @@ let preview
 function start() {
   const holder = document.getElementById('holder')
 
-  const stamps = []
-  stamps[0] = document.getElementById("gh")
+  const stamps = Object.create(null)
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.stamp'),
+    s => {
+      const img = s.children[0]
+      stamps[s.getAttribute('data-stamp')] = img
+    })
 
-  const ws = new WebSocket('ws://localhost:8000')
+  const ws = new WebSocket('ws://' + window.location.hostname + ':8000')
   ws.addEventListener('open', function connected(ev) {
     console.debug('Connected to server')
     console.debug('Sending auth token')
 
     // TODO: grab token from page
-    ws.send('auth 1')
+    ws.send('auth ' + Math.floor(Math.random() * 10))
   })
   ws.addEventListener('close', function closed() {
     console.debug('Disconnected from server')
@@ -83,7 +89,7 @@ function start() {
     // Turn into canvas coordinates
     const [x, y] = [mx / zoom, my / zoom]
 
-    ws.send(`draw ${action} ${x} ${y} ${stampScale}`)
+    ws.send(`draw ${action} ${x} ${y} ${stampScale} ${stamp}`)
   })
 
   // Preview stamp below cursor
@@ -92,6 +98,26 @@ function start() {
   preview.width = 200
   preview.height = 200
   holder.appendChild(preview)
+
+  function updatePreview(button) {
+    const action = button.getAttribute('data-action')
+    const ctx = preview.getContext('2d')
+    ctx.clearRect(0,0,200,200)
+
+    switch (action) {
+    case 'stamp': {
+      const img = button.children[0]
+      ctx.drawImage(img, 0, 0, 200, 200)
+      break
+    }
+
+    case 'erase': {
+      ctx.fillStyle = 'white'
+      ctx.fillRect(0, 0, 200, 200)
+      break
+    }
+    }
+  }
 
   holder.addEventListener('mousemove', function(ev) {
     // Mouse coordinates
@@ -102,31 +128,18 @@ function start() {
     preview.style.transform = `scale(${stampScale * zoom})`
   })
 
-  document.getElementById('stamp')
-    .addEventListener('click', _ => {
-      action = 'stamp'
+  document.getElementById('palette')
+    .addEventListener('click', function(ev) {
+      action = ev.target.getAttribute('data-action')
 
-      // Update preview
-      const ctx = preview.getContext('2d')
-      ctx.clearRect(0,0,200,200)
-      ctx.fillStyle = 'black'
-      ctx.drawImage(stamps[0], 0, 0, 200, 200)
-    })
-  document.getElementById('erase')
-    .addEventListener('click', _ => {
-      action = 'erase'
+      if (action === 'stamp') {
+        stamp = ev.target.getAttribute('data-stamp')
+      } else {
+        stamp = ''
+      }
 
-      // Update preview
-      const ctx = preview.getContext('2d')
-      ctx.clearRect(0,0,200,200)
-      ctx.fillStyle = 'white'
-      ctx.fillRect(0, 0, 200, 200)
+      updatePreview(ev.target)
     })
-  // @Temp: choose erase by default
-  const ctx = preview.getContext('2d')
-  ctx.clearRect(0,0,200,200)
-  ctx.fillStyle = 'white'
-  ctx.fillRect(0, 0, 200, 200)
 
   document.getElementById('zoom')
     .addEventListener('change', function() {
@@ -140,6 +153,8 @@ function start() {
       stampScale = this.value / 100
     })
   stampScale = document.getElementById('scale').value / 100
+
+  updatePreview(document.getElementById('erase'))
 }
 
 function createCanvas() {

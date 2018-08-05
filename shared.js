@@ -5,27 +5,21 @@ const S = (function(){
 
     draw(ctx, m, stamps, createCanvas, canvasToImg) {
       let [cmd, ...args] = m
-      args = args.map(parseFloat)
 
       switch (cmd) {
-      case 'line': {
-        ctx.lineWidth = 10
-        ctx.beginPath()
-        ctx.moveTo(args[0], args[1])
-        ctx.lineTo(args[2], args[3])
-        ctx.stroke()
-        break
-      }
-
       case 'stamp': {
-        const s = 200
+        const x = parseFloat(args[0])
+        const y = parseFloat(args[1])
+        const scale = parseFloat(args[2])
+        const stamp = stamps[args[3]]
+        const size = 200
 
         // Create a new sprite
         const colored = createCanvas()
 
         // Paste the original sprite
         const c = colored.getContext('2d')
-        c.drawImage(stamps[0], 0, 0, 200, 200)
+        c.drawImage(stamp, 0, 0, 200, 200)
 
         // Apply a colored overlay where the original sprite isn't transparent
         c.globalCompositeOperation = 'source-in'
@@ -36,19 +30,21 @@ const S = (function(){
         // on the layer
 
         ctx.save()
-        ctx.translate(args[0], args[1])
+        ctx.translate(x, y)
         // Flip
-        ctx.scale(args[2], args[2])
+        ctx.scale(scale, scale)
         ctx.drawImage(canvasToImg(colored),
-                      -s/2, -s/2, s, s)
+                      -size/2, -size/2, size, size)
         ctx.restore()
         break
       }
 
       case 'erase': {
-        const s = 200
-        ctx.clearRect(args[0] - s/2,
-                      args[1] - s/2, s, s)
+        const size = 200
+        const x = parseFloat(args[0])
+        const y = parseFloat(args[1])
+
+        ctx.clearRect(x - size/2, y - size/2, size, size)
         break
       }
       }

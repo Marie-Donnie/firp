@@ -22,15 +22,24 @@
         position: relative;
         cursor: none;
       }
+      #palette button img {
+        width: 24px;
+        height: 24px;
+      }
     </style>
   </head>
   <body>
-    <button id="stamp">
-      <img id="gh" src="troupes.png" width="20">
-    </button>
-    <button id="erase">
-      Erase
-    </button>
+    <nav id="palette">
+      <button class="stamp" data-action="stamp" data-stamp="troupes">
+        <img src="stamps/troupes.png">
+      </button>
+      <button class="stamp" data-action="stamp" data-stamp="github">
+        <img src="stamps/github.png">
+      </button>
+      <button id="erase" data-action="erase">
+        Erase
+      </button>
+    </nav>
     <input id="zoom" type="range" min="10" value="100" />
     <input id="scale" type="range" min="10" value="100" />
     <div id="holder"></div>
