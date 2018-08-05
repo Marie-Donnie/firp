@@ -130,6 +130,7 @@ wss.on('connection', function connection(ws) {
 
       // Draw it on the local layer
       const ctx = layers[id].canvas.getContext('2d')
+      ctx.fillStyle = layers[id].color
       S.draw(ctx, args, stamps, createCanvas, canvasToImg)
       layers[id].dirty = true
       break
