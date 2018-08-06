@@ -36,12 +36,28 @@
   .disconnected #holder {
     cursor: auto;
   }
+  .palette button {
+    width: 45px;
+    height: 45px;
+  }
   .palette button img {
-    width: 24px;
-    height: 24px;
+    width: 27px;
+    height: 27px;
   }
   .palette[data-layer="horde"] button {
     background-color: red;
+  }
+  .palette[data-layer="horde"] button:hover {
+    background-color: #7e0609;
+  }
+
+  .btn-chef {
+  background-color: beige;
+  color: black;
+  }
+
+  .stamp {
+      border-radius: 50%;
   }
 
   .spinner {
@@ -90,38 +106,48 @@
 <div id="controls">
   <div id="palettes">
     <div class="palette">
-      <button data-action="stamp" data-stamp="troupes">
+      <button class="btn btn-default btn-chef stamp" data-action="stamp" data-stamp="troupes">
         <img src="/static/site/council/stamps/troupes.png">
       </button>
-      <button data-action="stamp" data-stamp="github">
-        <img src="/static/site/council/stamps/github.png">
+      <button class="btn btn-default btn-chef stamp" data-action="stamp" data-stamp="cavalerie">
+        <img src="/static/site/council/stamps/cavalerie.png">
       </button>
-      <button data-action="pencil">
-        Pencil
+      <button class="btn btn-default btn-chef stamp" data-action="stamp" data-stamp="gallion">
+        <img src="/static/site/council/stamps/gallion.png">
       </button>
-      <button data-action="erase">
-        Erase
+      <button class="btn btn-default btn-chef stamp" data-action="stamp" data-stamp="chariot">
+        <img src="/static/site/council/stamps/chariot.png">
       </button>
-      <button data-action="nuke">
-        Nuke
+      <button class="btn btn-default btn-chef" data-action="pencil">
+        <img src="/static/site/council/pencil.png">
+      </button>
+      <button class="btn btn-default btn-chef" data-action="erase">
+        <img src="/static/site/council/eraser.png">
+      </button>
+      <button class="btn btn-default btn-chef" data-action="nuke">
+        <img src="/static/site/council/nuke.png">
       </button>
     </div>
     <div class="palette" data-layer="horde">
-      <button data-action="stamp" data-stamp="troupes">
+      <button class="btn btn-default stamp" data-action="stamp" data-stamp="troupes">
         <img src="/static/site/council/stamps/troupes.png">
       </button>
-      <button data-action="stamp" data-stamp="github">
-        <img src="/static/site/council/stamps/github.png">
+      <button class="btn btn-default stamp" data-action="stamp" data-stamp="cavalerie">
+        <img src="/static/site/council/stamps/cavalerie.png">
       </button>
-      <button data-action="pencil">
-        Pencil
+      <button class="btn btn-default stamp" data-action="stamp" data-stamp="gallion">
+        <img src="/static/site/council/stamps/gallion.png">
       </button>
-      <button data-action="erase">
-        Erase
+      <button class="btn btn-default stamp" data-action="stamp" data-stamp="chariot">
+        <img src="/static/site/council/stamps/chariot.png">
+      <button class="btn btn-default" data-action="pencil">
+        <img src="/static/site/council/pencil.png">
       </button>
-      <button data-action="nuke">
-        Nuke
+      <button class="btn btn-default" data-action="erase">
+        <img src="/static/site/council/eraser.png">
       </button>
+      <button class="btn btn-default" data-action="nuke">
+        <img src="/static/site/council/nuke.png">
     </div>
   </div>
   <label>Zoom :</label> <input id="zoom" type="range" min="10" max="200" value="100" />
