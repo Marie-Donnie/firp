@@ -1,6 +1,6 @@
 const S = (function(){
-  const width = 1857
-  const height = 2142
+  const width = 1924
+  const height = 2227
 
   return {
     port: 8080,
