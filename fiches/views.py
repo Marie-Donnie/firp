@@ -1258,14 +1258,17 @@ def detail_maison(request, maison_id):
 
 
 def conseil(request):
-    utilisateur = User.objects.get(username=request.user)
-    a_legende = False
-    if utilisateur.has_perm('fiches.chef'):
-        legende_utilisateur = Legende.objects.all().filter(createur=utilisateur.id)
-        if legende_utilisateur:
-            a_legende = True
+    if request.user.is_authenticated():
+        utilisateur = User.objects.get(username=request.user)
+        if utilisateur.has_perm('fiches.chef'):
+            legende_utilisateur = Legende.objects.all().filter(createur=utilisateur.id)
+            if legende_utilisateur:
+                a_legende = True
         else:
             a_legende = False
+    else:
+        a_legende = False
+
     legende_noirebois = Legende.objects.all().filter(nom__icontains='Noirebois')
     legendes_allies = Legende.objects.all().exclude(nom__icontains='Noirebois').exclude(nom__icontains='Horde')
     legende_horde = Legende.objects.all().filter(nom__icontains='Horde')
