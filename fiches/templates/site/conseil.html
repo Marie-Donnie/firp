@@ -5,6 +5,11 @@
 {% block page-title %}Conseil de guerre de Lordaeron{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated and perms.fiches.chef %}
+<div class="centre">
+  <a class="btn btn-default btn-council" href="{% url 'conseil_en_cours' %}">Session de conseil</a>
+</div>
+{% endif %}
 
 <style>
   #holder {

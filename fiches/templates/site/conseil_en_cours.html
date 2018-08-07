@@ -50,7 +50,16 @@
   .palette[data-layer="horde"] button:hover {
     background-color: #7e0609;
   }
-
+  .btn-council {
+  text-shadow: 0 0px 0 #fff;
+  font-weight: bold;
+  background: #470002;
+  padding: 7px 7px;
+  text-decoration: none;
+  position: relative;
+  border: 1px solid #6e1618;
+  margin: 1% auto;
+  }
   .btn-chef {
   background-color: beige;
   color: black;
@@ -106,6 +115,7 @@
 <div id="controls">
   <div id="palettes">
     <div class="palette">
+      <label>Joueur :</label>
       <button class="btn btn-default btn-chef stamp" data-action="stamp" data-stamp="troupes">
         <img src="/static/site/council/stamps/troupes.png">
       </button>
@@ -129,6 +139,7 @@
       </button>
     </div>
     <div class="palette" data-layer="horde">
+      <label>Horde : </label>
       <button class="btn btn-default stamp" data-action="stamp" data-stamp="troupes">
         <img src="/static/site/council/stamps/troupes.png">
       </button>
@@ -148,6 +159,8 @@
       </button>
       <button class="btn btn-default" data-action="nuke">
         <img src="/static/site/council/nuke.png">
+      </button>
+       (attention, change les troupes pour tout le monde)
     </div>
   </div>
   <label>Zoom :</label> <input id="zoom" type="range" min="10" max="200" value="100" />
@@ -162,4 +175,8 @@
   </div>
 </div>
 
+<div class="centre">
+  <a class="btn btn-default btn-council" href="{% url 'conseil' %}">Revenir à la carte</a><br>
+  Conseil : vous pouvez Ctrl + clic pour ouvrir un nouvel onglet et pouvoir voir et éditer la légende
+</div>
 {% endblock %}
