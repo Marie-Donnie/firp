@@ -1258,6 +1258,7 @@ def detail_maison(request, maison_id):
 
 
 def conseil(request):
+    a_legende = False
     if request.user.is_authenticated():
         utilisateur = User.objects.get(username=request.user)
         if utilisateur.has_perm('fiches.chef'):
