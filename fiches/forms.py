@@ -113,6 +113,7 @@ class EnchantementForm(ModelForm):
     class Meta:
         model = Enchantement
         fields = '__all__'
+        widgets = {'createur': forms.HiddenInput(), }
         prefix = 'enchantement'
 
 

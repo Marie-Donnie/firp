@@ -561,6 +561,9 @@ class Enchantement(models.Model):
                             max_value=25)
     membre = models.SmallIntegerField(choices=MEMBRES,
                                       default=5)
+    createur = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 null=True,
+                                 related_name='enchantement')
 
     def __unicode__(self):
         return u'%s' % (self.nom)

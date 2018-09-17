@@ -14,11 +14,13 @@
 
 {% block edition %}
 {% if user.is_authenticated %}
-{% if perms.fiches.veteran %}
+{% if perms.fiches.veteran or perms.fiches.fdg and user.id == objet.createur.id %}
 <a class="btn btn-default" href="{% url 'editer_objet' objet.id %}">Editer objet</a>
 {% endif %}
-{% if objet.armure and perms.fiches.veteran %}
+{% if objet.armure %}
+{% if perms.fiches.veteran or perms.fiches.fdg and user.id == objet.createur.id%}
 <a class="btn btn-default" href="{% url 'editer_armure' objet.armure.id %}">Editer armure</a>
+{% endif %}
 {% endif %}
 {% endif %}
 {% endblock %}

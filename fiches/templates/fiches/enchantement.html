@@ -15,8 +15,8 @@
     <div class="form-group"><label for="id_effet">Effet&nbsp;:</label> <input name="effet" value="{{form.effet.value|default_if_none:'Aucun'}}" required="" id="id_effet" maxlength="400" type="text"></div>
     <div class="form-group"><label for="id_effet_ig">Effet ig&nbsp;:</label> <input name="effet_ig" value="{{form.effet_ig.value|default_if_none:'Aucun'}}" required="" id="id_effet_ig" maxlength="400" type="text"></div>
     <div class="form-group"><label for="id_force">Force&nbsp;:</label> <input name="force" value="{{form.force.value|default:'0'}}" max="25" required="" id="id_force" min="0" type="number"></div>
-    <div class="form-group"><label for="id_intell">Intell&nbsp;:</label> <input name="intell" value="{{form.intell.value|default:'0'}}" max="25" required="" id="id_intell" min="0" type="number"></div>
-    <div class="form-group"><label for="id_agi">Agi&nbsp;:</label> <input name="agi" value="{{form.agi.value|default:'0'}}" max="25" required="" id="id_agi" min="0" type="number"></div>
+    <div class="form-group"><label for="id_intell">Intelligence/mana&nbsp;:</label> <input name="intell" value="{{form.intell.value|default:'0'}}" max="25" required="" id="id_intell" min="0" type="number"></div>
+    <div class="form-group"><label for="id_agi">Agilité&nbsp;:</label> <input name="agi" value="{{form.agi.value|default:'0'}}" max="25" required="" id="id_agi" min="0" type="number"></div>
     <div class="form-group"><label for="id_membre">Membre&nbsp;:</label> <select name="membre" id="id_membre">
 	<option value="1" {% if form.membre.value == 1 or form.membre.value|unlocalize == 'Main principale' %} selected="" {% endif %}>Main principale</option>
 
@@ -51,7 +51,7 @@
 </select></div>
 
 
-
+<input name="createur" id="id_createur" type="hidden" value="">
 
 
 <input class="btn btn-default" type="submit" value="Valider" />
