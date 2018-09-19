@@ -1,0 +1,113 @@
+
+{% extends "base.html" %}
+
+{% load filters %}
+{% load static %}
+
+{% block title %}
+{{ enchantement.nom }}
+{% endblock %}
+{% block page-title %}
+{{ enchantement.nom }}
+{% endblock %}
+
+
+{% block edition %}
+{% if user.is_authenticated %}
+{% if perms.fiches.fdg and user.id == enchantement.createur.id %}
+<a class="btn btn-default" href="{% url 'editer_enchantement' enchantement.id %}">Editer enchantement</a>
+{% endif %}
+{% if enchantement.armure %}
+{% if perms.fiches.fdg and user.id == enchantement.createur.id%}
+<a class="btn btn-default" href="{% url 'editer_armure' enchantement.armure.id %}">Editer armure</a>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endblock %}
+{% block user %}
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="media">
+
+  <b>{{ enchantement.nom|capfirst }}</b>
+  <div class="row">
+    {% if enchantement.effet != 'Aucun' %}
+    <div class="col-md-10">
+      <div class="panel panel-defaut details-panels">
+	<div class="panel-heading">
+	  <h4 class="panel-title">Effet</h4>
+	</div>
+	<div class="panel-body">
+	  {{ enchantement.effet|linebreaksbr }}
+	</div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <div class="row">
+    {% if enchantement.effet_ig != 'Aucun' %}
+    <div class="col-md-10">
+      <div class="panel panel-defaut details-panels">
+	<div class="panel-heading">
+	  <h4 class="panel-title">Effet en jeu</h4>
+	</div>
+	<div class="panel-body">
+	  {{ enchantement.effet_ig|linebreaksbr }}
+	</div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="col-md-10" id="stats-panel">
+    <div class="panel panel-defaut details-panels">
+      <div class="panel-heading" id="localisation">
+	<h4 class="panel-title">Equipe : {{ enchantement.get_membre_display }}</h4>
+      </div>
+      <div class="panel-body">
+	<div class="row">
+	  {% if enchantement.force != 0 %}
+	  <div class="col-md-3">
+	    <div class="panel panel-defaut details-panels">
+	      <div class="panel-heading">
+		<h3 class="panel-title">Force</h3>
+	      </div>
+	      <div class="panel-body" id="stat">
+		{{ enchantement.force }}
+	      </div>
+	    </div>
+	  </div>
+	  {% endif %}
+	  {% if enchantement.agi != 0 %}
+	  <div class="col-md-3">
+	    <div class="panel panel-defaut details-panels">
+	      <div class="panel-heading">
+		<h3 class="panel-title">Agilité</h3>
+	      </div>
+	      <div class="panel-body" id="stat">
+		{{ enchantement.agi }}
+	      </div>
+	    </div>
+	  </div>
+	  {% endif %}
+	  {% if enchantement.intell != 0 %}
+	  <div class="col-md-3">
+	    <div class="panel panel-defaut details-panels">
+	      <div class="panel-heading">
+		<h3 class="panel-title">Intelligence</h3>
+	      </div>
+	      <div class="panel-body" id="stat">
+		{{ enchantement.intell }}
+	      </div>
+	    </div>
+	  </div>
+	  {% endif %}
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

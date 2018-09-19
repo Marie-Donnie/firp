@@ -70,6 +70,12 @@ urlpatterns = [
         views.edit_equip, name='editer_equip'),
     url(r'^objets/creer_enchantement/$', views.creer_enchantement,
         name='creer_enchantement'),
+    url(r'^objets/editer_enchantement/(?P<enchantement_id>\d+)/$',
+        views.edit_enchantement, name='editer_enchantement'),
+    url(r'^objets/enchantement/(?P<enchantement_id>\d+)/$', views.detail_enchantement,
+        name='detail_enchantement'),
+    url(r'^objets/objets_enchantements/$', views.objets_enchantements,
+        name='objets_enchantements'),
     # Quetes
     url(r'^quetes/$', views.quetes, name='quetes'),
     url(r'^quetes/(?P<quete_id>\d+)/$', views.quete, name='quete'),

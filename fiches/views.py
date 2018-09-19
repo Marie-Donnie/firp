@@ -729,46 +729,6 @@ def edit_equip(request, equipement_id):
     return render(request, 'fiches/equip_edit.html', context)
 
 
-@permission_required('fiches.fdg', raise_exception=True)
-def creer_enchantement(request):
-    if request.method == 'POST':
-        data = request.POST.copy()
-        data['createur'] = User.objects.get(username=request.user).id
-        form = EnchantementForm(data, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-        else:
-            print(form.errors)
-    else:
-        form = EnchantementForm()
-
-    context = {'form': form,}
-
-    return render(request, 'fiches/enchantement.html', context)
-
-@permission_required('fiches.fdg', raise_exception=True)
-def edit_enchantement(request, enchantement_id):
-    enchantement = Enchantement.objects.get(pk=enchantement_id)
-    if request.user.id == enchantement.createur.id :
-        if request.method == 'POST':
-            data = request.POST.copy()
-            data['createur'] = User.objects.get(username=request.user).id
-            form = EnchantementForm(data, instance=enchantement)
-            if form.is_valid():
-                form.save()
-                return redirect('index')
-            else:
-                print(form.errors)
-        else:
-            form = EnchantementForm(instance=enchantement)
-
-        context = {'form': form}
-        return render(request, 'fiches/enchantement.html', context)
-    else:
-        return HttpResponse(status=403)
-
-
 def tooltip_objet(request, objet_id):
     objet = get_object_or_404(Objet, pk=objet_id)
     context = {'objet': objet}
@@ -784,6 +744,63 @@ def tooltip_armure(request, armure_id, enchant_id=None):
         enchant = None
     context = {'armure': armure, 'objet': objet, 'enchant': enchant}
     return render(request, 'fiches/tooltip_armure.html', context)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def creer_enchantement(request):
+    if request.method == 'POST':
+        data = request.POST.copy()
+        data['createur'] = User.objects.get(username=request.user).id
+        form = EnchantementForm(data, request.FILES)
+        if form.is_valid():
+            save_it = form.save()
+            return redirect('detail_enchantement', enchantement_id=save_it.id)
+        else:
+            print(form.errors)
+    else:
+        form = EnchantementForm()
+
+    context = {'form': form,}
+
+    return render(request, 'fiches/enchantement.html', context)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def edit_enchantement(request, enchantement_id):
+    enchantement = Enchantement.objects.get(pk=enchantement_id)
+    if request.user.id == enchantement.createur.id :
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=request.user).id
+            form = EnchantementForm(data, instance=enchantement)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('detail_enchantement', enchantement_id=save_it.id)
+            else:
+                print(form.errors)
+        else:
+            form = EnchantementForm(instance=enchantement)
+
+        context = {'form': form}
+        return render(request, 'fiches/enchantement.html', context)
+    else:
+        return HttpResponse(status=403)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def objets_enchantements(request):
+    utilisateur = get_object_or_404(User, pk=request.user.id)
+    user = request.user
+    context = {'utilisateur': utilisateur, 'user': user}
+    return render(request, 'fiches/objets_enchants.html',
+                  context)
+
+
+def detail_enchantement(request, enchantement_id):
+    enchantement = get_object_or_404(Enchantement, pk=enchantement_id)
+    context = {'enchantement': enchantement}
+    return render(request, 'fiches/aff_enchantement.html', context)
+
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
