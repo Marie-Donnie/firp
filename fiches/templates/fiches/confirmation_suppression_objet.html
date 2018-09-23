@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Confimation suppression de {{ objet.nom }}{% endblock %}
+{% block page-title %}Confirmation suppression de {{ objet.nom }}{% endblock %}
+
+{% block content %}
+
+<div id="center">
+  Êtes-vous certain de supprimer l'objet <b>{{objet.nom}}</b> ?<br>
+  {% if objet.armure %} Cela supprimera également l'armure associée.<br>
+  Cette armure est utilisée par :
+  <ul>
+    {% for p_e in proprietaires_equipements %}
+    <li>
+      <a href="{% url 'detail_fiche' p_e.id %}">{{p_e.prenom }} {{ p_e.nom }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if objet.case %} Cela supprimera également les cases associées.<br>
+  Cet objet est utilisé par :
+  <ul>
+    {% for p_i in proprietaires_inventaires %}
+    <li>
+      <a href="{% url 'detail_fiche' p_i.id %}">{{p_i.prenom }} {{ p_i.nom }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+
+<div id="center">
+  <div class="row">
+    <div class="col-md-1 col-md-offset-5">
+      <form action="" method="post">
+	{% csrf_token %}
+	<input class="btn btn-default" type="submit" value="Oui">
+      </form>
+    </div>
+    <div class="col-md-1">
+      <a class="btn btn-default" href="{% url 'index' %}">Non</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

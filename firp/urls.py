@@ -58,6 +58,8 @@ urlpatterns = [
         name='tooltip_armure'),
     url(r'^objets/editer_objet/(?P<objet_id>\d+)/$', views.edit_objet,
         name='editer_objet'),
+    url(r'^objets/supprimer_objet/(?P<objet_id>\d+)/$', views.delete_objet,
+        name='supprimer_objet'),
     url(r'^objets/editer_armure/(?P<armure_id>\d+)/$', views.edit_armure,
         name='editer_armure'),
     url(r'^objets/editer_case/(?P<case_id>\d+)/$', views.edit_case,

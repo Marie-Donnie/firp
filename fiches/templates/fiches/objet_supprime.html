@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Objet supprimé{% endblock %}
+{% block page-title %}Objet supprimé : {{objet.nom}}{% endblock %}
+
+{% block content %}
+<div id="center">Votre objet "{{objet.nom}}" a bien été supprimé{% if objet.armure %}, ainsi que l'armure {{objet.armure.nom}} associé{% endif %}.
+  Cliquez <a href="{% url 'index' %}">ici</a> pour revenir à la page d'accueil.</div>
+
+
+{% endblock %}

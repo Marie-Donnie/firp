@@ -519,6 +519,50 @@ def edit_objet(request, objet_id):
 
 
 @permission_required('fiches.fdg', raise_exception=True)
+def delete_objet(request, objet_id):
+    objet = Objet.objects.get(pk=objet_id)
+    if request.user == objet.createur:
+        # check if an object is associated with an armor
+        a_armure =  objet.has_equipement()
+        proprietaires_equipements = []
+        proprietaires_inventaires = []
+        # if there is an armor, we want to return every character
+        # that has this particular armor in their equipement
+        if a_armure and objet.armure.equipement:
+            # we first list all equipements that have this armor
+            # object and armor are linked by a one to one relationship,
+            # so we can get the armor directly from the object
+            # armor and equipement are linked by a many to many relationship,
+            # so we have to get a query set of equipements for a particular armor
+            equipements = list(objet.armure.equipement.all())
+            # then we get the owner of these equipements
+            for e in equipements:
+            # equipement and characters are linked by a one to one relationship,
+            # so for each equipement we can find the corresponding character (fiche)
+                proprietaires_equipements += list(Fiche.objects.filter(equipement=e))
+        # same for the inventory, as an object can also be in an inventory as it is
+        cases = list(Case.objects.filter(objet=objet))
+        inventaires = []
+        if len(cases) > 0:
+            for c in cases:
+                inventaires += list(c.inventaire.all())
+            for i in inventaires:
+                proprietaires_inventaires += list(Fiche.objects.filter(inventaire_fdg=i))
+        context = {'objet': objet,
+                   'proprietaires_equipements': proprietaires_equipements,
+                   'proprietaires_inventaires': proprietaires_inventaires}
+        if request.method == 'POST':
+            if a_armure:
+                objet.armure.delete()
+            objet.delete()
+            return render(request, 'fiches/objet_supprime.html', context)
+        else:
+            return render(request, 'fiches/confirmation_suppression_objet.html', context)
+    else:
+        return HttpResponse("Vous ne pouvez pas supprimer cet objet.")
+
+
+@permission_required('fiches.fdg', raise_exception=True)
 def edit_armure(request, armure_id):
     armure = Armure.objects.get(pk=armure_id)
     if request.user.id == armure.objet.createur.id :
@@ -800,6 +844,7 @@ def detail_enchantement(request, enchantement_id):
     enchantement = get_object_or_404(Enchantement, pk=enchantement_id)
     context = {'enchantement': enchantement}
     return render(request, 'fiches/aff_enchantement.html', context)
+
 
 
 

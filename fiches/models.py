@@ -425,8 +425,8 @@ class Equipement(models.Model):
                                     blank=True,
                                     related_name='equipement')
     enchantements = models.ManyToManyField('Enchantement',
-                                          blank=True,
-                                          related_name='equipement')
+                                           blank=True,
+                                           related_name='equipement')
 
     class Meta:
         verbose_name = "equipement"
