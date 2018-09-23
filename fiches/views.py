@@ -423,6 +423,31 @@ def creer_case(request):
 
 
 @permission_required('fiches.fdg', raise_exception=True)
+def creer_case_perso(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    if request.user.id == fiche.createur.id:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            data['createur'] = User.objects.get(username=request.user).id
+            form = CaseForm(data)
+            if form.is_valid():
+                save_it = form.save()
+                #case = Case.objects.get(pk=save_it)
+                fiche.inventaire_fdg.cases.add(save_it)
+                return redirect('detail_fiche', fiche_id=fiche_id)
+            else:
+                print(form.errors)
+        else:
+            form = CaseForm()
+
+        objets = Objet.objects.all()
+        context = {'form': form, 'objets': objets}
+        return render(request, 'fiches/case.html', context)
+    else:
+        return HttpResponse(status=403)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
 def creer_inventaire(request):
     if request.method == 'POST':
         form = InventaireForm(request.POST, request.FILES)

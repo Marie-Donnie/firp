@@ -280,6 +280,7 @@ function onMouseLeave() {
 	  <!-- - {{case.get_nom}}<br> -->
 	  {% endfor %}
 	  {% for i in range %}
+	  {% if forloop.first %}<a href="{% url 'creer_case_perso' fiche.id %}" title="Ajouter une case"><img class="media-object" src="/fiches/media/images/site/UI-GuildBankFrame-NewTab.PNG" alt="Ajouter une case" id="icone"></a>{% endif %}
 	  <img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">
 	  {% endfor %}
 	</div> <!-- inventory -->
