@@ -43,7 +43,7 @@ admin.site.register(Armure, ArmureAdmin)
 
 
 class CaseAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'get_nom')
+    list_display = ('nombre', 'get_nom', 'id')
 
 admin.site.register(Case, CaseAdmin)
 
