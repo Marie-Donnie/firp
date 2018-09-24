@@ -633,6 +633,39 @@ def edit_case(request, case_id):
         return HttpResponse(status=403)
 
 
+# API point to edit the cardinality of an object in a cell
+@permission_required('fiches.fdg', raise_exception=True)
+def edit_case_number(request, case_id, valeur):
+    case = Case.objects.get(pk=case_id)
+    if request.user.id == case.createur.id or request.user.has_perm('fiches.admin'):
+        if request.method == 'POST':
+            # update the values of the cell number
+            if int(valeur) < 1:
+                return HttpResponse(status=406)
+            case.nombre = valeur
+            case.save(update_fields=['nombre'])
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=405)
+    else:
+        return HttpResponse(status=403)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def delete_case(request, case_id):
+    try:
+        case = Case.objects.get(pk=case_id)
+    except ObjectDoesNotExist:
+        return HttpResponse(status=404)
+    if request.user.id == case.createur.id or request.user.has_perm('fiches.admin'):
+        if request.method == 'DELETE':
+            case.delete()
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=405)
+    else:
+        return HttpResponse(status=403)
+
 @permission_required('fiches.fdg', raise_exception=True)
 def edit_inventaire(request, inventaire_id):
     inventaire = Inventaire.objects.get(pk=inventaire_id)

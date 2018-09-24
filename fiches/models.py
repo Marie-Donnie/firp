@@ -390,7 +390,7 @@ class Case(models.Model):
                                  related_name='cases')
 
     class Meta:
-        ordering = ["nombre", "objet"]
+        ordering = ["objet", "nombre"]
         verbose_name = "case"
         verbose_name_plural = "cases"
         default_related_name = 'case'
