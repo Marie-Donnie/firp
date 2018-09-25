@@ -2,8 +2,8 @@
 
 {% load static %}
 
-{% block title %}Objets et enchantements crées par {{ utilisateur.username|capfirst }}{% endblock %}
-{% block page-title %}Objets et enchantements crées par {{ utilisateur.username|capfirst }}{% endblock %}
+{% block title %}Objets et enchantements créés par {{ utilisateur.username|capfirst }}{% endblock %}
+{% block page-title %}Objets et enchantements créés par {{ utilisateur.username|capfirst }}{% endblock %}
 
 {% block script %}
 $(function () {
@@ -39,7 +39,11 @@ $(function () {
 	     {% elif o.qualite == 'e' %}id="objet-epique"
 	     {% elif o.qualite == 'l' %}id="objet-legendaire"
 	     {% elif o.qualite == 'u' %}id="objet-unique"
-	     {% endif %}>{{ o.nom }}</a></li>
+	     {% endif %}>{{ o.nom }}</a>
+	  <a target="_blank" href="{% url 'copier_armure' o.armure.id %}">
+	    <img class="portrait-icone" src="/fiches/media/images/site/Spell_Nature_MirrorImage.PNG" alt="Portrait">
+	  </a>
+	  </li>
 	  {% else %}
 	  <li>
 	    {% if o.image_url %}

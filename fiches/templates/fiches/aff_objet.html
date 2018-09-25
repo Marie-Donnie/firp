@@ -22,6 +22,7 @@
 {% if perms.fiches.admin or perms.fiches.fdg and user.id == objet.createur.id%}
 <a class="btn btn-default" href="{% url 'editer_armure' objet.armure.id %}">Editer armure</a>
 {% endif %}
+<a class="btn btn-default" href="{% url 'copier_armure' objet.armure.id %}">Copier armure</a>
 {% endif %}
 {% endif %}
 {% endblock %}

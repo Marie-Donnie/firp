@@ -359,6 +359,15 @@ def fiche_search(request):
     return render(request, 'fiches/personnages.html', context)
 
 
+@login_required
+def mes_persos(request):
+    utilisateur = get_object_or_404(User, pk=request.user.id)
+    user = request.user
+    context = {'utilisateur': utilisateur, 'user': user}
+    return render(request, 'fiches/mes_personnages.html',
+                  context)
+
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 
@@ -401,6 +410,18 @@ def creer_armure(request):
     context = {'form': form, 'objets': objets,
                'enchantements': enchantements}
     return render(request, 'fiches/armure.html', context)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def copier_armure(request, armure_id):
+    armure = Armure.objects.get(pk=armure_id)
+    objet = armure.objet
+    objet.pk = None
+    objet.save()
+    armure.pk = None
+    armure.objet = objet
+    armure.save()
+    return redirect('detail_armure', armure_id=armure.id)
 
 
 @permission_required('fiches.fdg', raise_exception=True)
