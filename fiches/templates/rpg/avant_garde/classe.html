@@ -14,7 +14,60 @@ CC : {% if fiche.pj == 'p' %}{{ cap_combat }}{% else %}{{ fiche.cap_combat }} {%
 {% endblock %}
 
 
+
 {% block statistic %}
+
+ <script type="text/javascript">
+
+function getCookie(name) {
+var cookieValue = null;
+if (document.cookie && document.cookie != '') {
+var cookies = document.cookie.split(';');
+for (var i = 0; i < cookies.length; i++) {
+		    var cookie = jQuery.trim(cookies[i]);
+		    // Does this cookie string begin with the name we want?
+		    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+		    }
+		    }
+		    }
+		    return cookieValue;
+		    }
+		    var csrftoken = getCookie('csrftoken');
+		    function update_hp(elem) {
+		    var url = $(elem).data("action")
+		    var div = $(elem).closest("div.pv")
+		    var nombre = +div.attr("data-pv")
+		    var segments = url.split("/")
+		    var delta = +segments.pop()
+		    var nouveau_nombre = nombre+delta
+		    segments.push(nouveau_nombre)
+		    var url_finale = segments.join("/")
+		    var progress_bar = div.find(".progress-bar")
+		    var pv_max = +progress_bar.attr("aria-valuemax")
+		    $.post(url_finale, null, function(result) {
+		    div.attr("data-pv", nouveau_nombre)
+		    $("span.pv").text(nouveau_nombre)
+		    progress_bar.attr("aria-valuenow", nouveau_nombre).text(nouveau_nombre).css("width", (nouveau_nombre * 100 / pv_max) + "%")
+		    })
+		    }
+
+	function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+			    }
+
+			    $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+		    </script>
+
     <ul>
       <li>
 <span class="statistics"><img class="statistic" src="{% get_media_prefix %}/images/site/rpg/CCombat.PNG" alt="Capacité de combat" title="Capacité de combat">{% if fiche.pj == 'p' %}{{ cap_combat }}{% else %}{{ fiche.cap_combat }} {% endif %}</a></span>
@@ -27,7 +80,16 @@ CC : {% if fiche.pj == 'p' %}{{ cap_combat }}{% else %}{{ fiche.cap_combat }} {%
 <span class="statistics"><img class="statistic" src="{% get_media_prefix %}/images/site/rpg/Charisme.PNG" alt="Charisme" title="Charisme">{% if fiche.pj == 'p' %}{{ charisme }}{% else %}{{ fiche.charisme }} {% endif %}</span>
 <span class="statistics"><img class="statistic" src="{% get_media_prefix %}/images/site/rpg/FM.PNG" alt="Force mentale" title="Force mentale">{% if fiche.pj == 'p' %}{{ force_men }}{% else %}{{ fiche.force_men }} {% endif %}</span>
 </li>
-<li><b>Points de vie :</b> {{ fiche.pv }}/{% if fiche.pj == 'p' %}{{ pv_max }}{% else %}{{ fiche.pv_max }} {% endif %}</li>
+<li><div class="pv" data-pv="{{ fiche.pv }}"><b>Points de vie :</b> <span class="pv">{{ fiche.pv }}</span>/{% if fiche.pj == 'p' %}{{ pv_max }}{% else %}{{ fiche.pv_max }} {% endif %}
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{fiche.pv}}" aria-valuemin="0" aria-valuemax="{% if fiche.pj == 'p' %}{{ pv_max }}{% else %}{{ fiche.pv_max }}{% endif %}" style="min-width: 2em; width: {% if fiche.pj == 'p' %}{{ fiche.pv|pourcent:pv_max }}{% else %}{{ fiche.pv|pourcent:fiche.pv_max }}{% endif %}%">
+	{{ fiche.pv }}
+      </div> <!-- progress-bar -->
+    </div>   <!-- progress -->
+    <img class="statistic" src="{% get_media_prefix %}/images/site/Spell_ChargeNegative.PNG" alt="Objet" onclick="update_hp(this)" data-action="{% url 'changer_pv' fiche.id -1 %}">
+    <img class="statistic" src="{% get_media_prefix %}/images/site/Spell_ChargePositive.PNG" alt="Objet" onclick="update_hp(this)" data-action="{% url 'changer_pv' fiche.id 1 %}">
+    <div>
+</li>
 {% block mana %}
 {% endblock %}
 </ul>

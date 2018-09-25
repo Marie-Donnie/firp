@@ -3,11 +3,11 @@
 {% load filters %}
 {% load tags %}
 
-{% block script %}
+ <script type="text/javascript">
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
-{% endblock %}
+ </script>
 
 
 {% block title %}Fiche de {{ fiche.prenom|capfirst }} {{ fiche.nom|capfirst }}{% endblock %}

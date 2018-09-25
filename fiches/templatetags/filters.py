@@ -57,6 +57,7 @@ def age(value):
     year = datetime.now().year
     return year - 1980 - value
 
+
 @register.filter
 def mois(value):
     if value == 1:

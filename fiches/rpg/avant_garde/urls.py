@@ -51,4 +51,6 @@ urlpatterns = [
         views.afficher_rabatteur, name='afficher_rabatteur'),
     url(r'^avant_garde/supprimer_fiche/(?P<classe>\d+)/(?P<classe_id>\d+)/$',
         views.delete_fiche, name='supprimer_fiche'),
+    url(r'^avant_garde/(?P<perso_id>\d+)/changer_pv/-?(?P<valeur>\d+)$',
+        views.update_pv, name='changer_pv'),
 ]

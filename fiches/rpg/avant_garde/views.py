@@ -574,6 +574,24 @@ def delete_fiche(request, classe, classe_id):
     else:
         return HttpResponse("Vous ne pouvez pas supprimer cette fiche.")
 
+
+@permission_required('fiches.fdg', raise_exception=True)
+def update_pv(request, perso_id, valeur):
+    perso = get_object_or_404(Avant_garde, pk=perso_id)
+    if request.user.id == perso.createur.id or request.user.has_perm('fiches.admin'):
+        if request.method == 'POST':
+            # update the values of the cell number
+            if int(valeur) < 1 or int(valeur) > perso.pv_max:
+                return HttpResponse(status=406)
+            perso.pv = valeur
+            perso.save(update_fields=['pv'])
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=405)
+    else:
+        return HttpResponse(status=403)
+
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FONCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 def is_admin(user):
