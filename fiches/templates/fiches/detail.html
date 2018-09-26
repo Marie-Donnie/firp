@@ -368,7 +368,7 @@ function getCookie(name) {
 	  </script>
 	  {% endcomment %}
 	  <div class="number-inventory" data-number="{{ case.nombre }}">
-	  <a target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip" data-case-id="{{ case.id }}">
+	  <a target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip" data-case-id="{{ case.id }}" {% if case.objet.description|length > 30 %}class="large"{% endif %}>
 	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{case.objet.image_url}}.PNG" alt="Objet" id="icone">
 	    <span class="bottomright">{{case.nombre}}</span>
           </a>
