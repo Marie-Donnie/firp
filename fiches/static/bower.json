@@ -1,15 +1,15 @@
 {
-    "name": "fdg-fiches",
-    "version": "0.1.0",
-    "homepage": "https://github.com/Marie-Donnie/firp",
-    "authors": [
-	"Marie-Donnie"
-    ],
-    "description": "Web application",
-    "main": "index.html",
-    "license": "GPL3",
-    "dependencies": {
-	"jquery": "1.9.1 - 3"
-	"image-picker": "0.3.0"
-    }
+  "name": "fdg-fiches",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Marie-Donnie/firp",
+  "authors": [
+    "Marie-Donnie"
+  ],
+  "description": "Web application",
+  "main": "index.html",
+  "license": "GPL3",
+  "dependencies": {
+    "jquery": "3.*",
+    "image-picker": "0.3.*"
+  }
 }
