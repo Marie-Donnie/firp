@@ -164,7 +164,8 @@ class Avant_garde(models.Model):
                                       blank=True)
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
-                                 related_name='avant_garde')
+                                 related_name='avant_garde',
+                                 on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["nom", "prenom"]
@@ -213,7 +214,8 @@ class Fantassin(models.Model):
                                           default=1)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
-                                 related_name='fantassin')
+                                 related_name='fantassin',
+                                 on_delete=models.CASCADE)
 
     def __unicode__(self):
         return u'%s, %s' % (self.perso.nom, 'fantassin')
@@ -249,7 +251,8 @@ class Apothicaire(models.Model):
                                           default=1)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
-                                 related_name='apothicaire')
+                                 related_name='apothicaire',
+                                 on_delete=models.CASCADE)
 
     def __unicode__(self):
         return u'%s, %s' % (self.perso.nom, 'apothicaire')
@@ -272,7 +275,8 @@ class Arbaletrier(models.Model):
                                       max_value=100)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
-                                 related_name='arbaletrier')
+                                 related_name='arbaletrier',
+                                 on_delete=models.CASCADE)
 
     def __unicode__(self):
         return u'%s, %s' % (self.perso.nom, 'arbalétrier')
@@ -323,7 +327,8 @@ class Eclaireur(models.Model):
                                           default=1)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
-                                 related_name='eclaireur')
+                                 related_name='eclaireur',
+                                 on_delete=models.CASCADE)
 
     def __unicode__(self):
         return u'%s, %s' % (self.perso.nom, 'éclaireur')
@@ -362,7 +367,8 @@ class Sorcier(models.Model):
                                     max_value=100)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
-                                 related_name='sorcier')
+                                 related_name='sorcier',
+                                 on_delete=models.CASCADE)
 
     def __unicode__(self):
         return u'%s, %s' % (self.perso.nom, 'sorcier')
@@ -407,7 +413,8 @@ class Rabatteur(models.Model):
                                             default=1)
     perso = models.OneToOneField(Avant_garde,
                                  null=True,
-                                 related_name='rabatteur')
+                                 related_name='rabatteur',
+                                 on_delete=models.CASCADE)
 
     def __unicode__(self):
         return u'%s, %s' % (self.perso.nom, 'rabatteur')

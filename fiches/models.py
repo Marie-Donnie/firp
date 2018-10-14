@@ -224,7 +224,8 @@ class Fiche(models.Model):
                               default='images/site/no-image.png')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
-                                 related_name='fiches')
+                                 related_name='fiches',
+                                 on_delete=models.CASCADE)
     pseudo_du_personnage = models.CharField(max_length=30,
                                             default="?")
     main_dir = models.CharField(max_length=1,
@@ -257,15 +258,18 @@ class Fiche(models.Model):
     inventaire_fdg = models.OneToOneField('Inventaire',
                                           blank=True,
                                           null=True,
-                                          related_name='proprietaire')
+                                          related_name='proprietaire',
+                                          on_delete=models.SET_NULL)
     equipement = models.OneToOneField('Equipement',
                                       blank=True,
                                       null=True,
-                                      related_name='proprietaire')
+                                      related_name='proprietaire',
+                                      on_delete=models.SET_NULL)
     bourse = models.OneToOneField('Bourse',
                                   blank=True,
                                   null=True,
-                                  related_name='proprietaire')
+                                  related_name='proprietaire',
+                                  on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ["nom", "prenom"]
@@ -294,7 +298,8 @@ class Fiche(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 null=True,
-                                related_name='infos')
+                                related_name='infos',
+                                on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/users',
                               default='images/site/no-image.png')
     naissance = models.DateField(blank=True,
@@ -330,7 +335,8 @@ class Objet(models.Model):
     #                           default='images/site/WoWUnknownItem01.PNG')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
-                                 related_name='objet')
+                                 related_name='objet',
+                                 on_delete=models.SET_NULL)
     image_url = models.CharField(max_length=50,
                                  default='WoWUnknownItem01')
 
@@ -352,7 +358,8 @@ class Objet(models.Model):
 class Armure(models.Model):
     objet = models.OneToOneField(Objet,
                                  null=True,
-                                 related_name='armure')
+                                 related_name='armure',
+                                 on_delete=models.CASCADE)
     effet = models.CharField(max_length=400,
                              default='Aucun')
     effet_ig = models.CharField(max_length=400,
@@ -384,10 +391,12 @@ class Case(models.Model):
                                max_value=99)
     objet = models.ForeignKey(Objet,
                               null=True,
-                              related_name='case')
+                              related_name='case',
+                              on_delete=models.CASCADE)
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
-                                 related_name='cases')
+                                 related_name='cases',
+                                 on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["objet", "nombre"]
@@ -563,7 +572,8 @@ class Enchantement(models.Model):
                                       default=5)
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
-                                 related_name='enchantement')
+                                 related_name='enchantement',
+                                 on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return u'%s' % (self.nom)
@@ -606,11 +616,13 @@ class Quete(models.Model):
     reservee = models.ForeignKey(Fiche,
                                  blank=True,
                                  null=True,
-                                 related_name='quete_reservee')
+                                 related_name='quete_reservee',
+                                 on_delete=models.SET_NULL)
     leader = models.ForeignKey(Fiche,
                                null=True,
                                blank=True,
-                               related_name='quete_reussie')
+                               related_name='quete_reussie',
+                               on_delete=models.SET_NULL)
     ennemi = models.CharField(max_length=60,
                               default='images/site/quest/Portraits/FollowerPortrait_NoPortrait.png')
     creation = models.DateField(default=timezone.now)
@@ -634,7 +646,8 @@ class Operation(models.Model):
     dirigeant = models.ForeignKey(Fiche,
                                   null=True,
                                   blank=True,
-                                  related_name='dirigeant_op')
+                                  related_name='dirigeant_op',
+                                  on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ["nom"]
@@ -650,15 +663,18 @@ class Mission(models.Model):
     operation = models.ForeignKey(Operation,
                                   null=True,
                                   blank=True,
-                                  related_name='mission')
+                                  related_name='mission',
+                                  on_delete=models.SET_NULL)
     dirigeant = models.ForeignKey(Fiche,
                                   null=True,
                                   blank=True,
-                                  related_name='dirigeant_mission')
+                                  related_name='dirigeant_mission',
+                                  on_delete=models.SET_NULL)
     autre_dirigeant = models.ForeignKey(Fiche,
                                         null=True,
                                         blank=True,
-                                        related_name='autre_dirigeant')
+                                        related_name='autre_dirigeant',
+                                        on_delete=models.SET_NULL)
     numero = models.SmallIntegerField(default=0)
     lieu = models.CharField(max_length=100)
     jour = IntegerRangeField(default='1', min_value=1,
@@ -740,7 +756,8 @@ class Sort(models.Model):
     classe = models.ForeignKey(Classe,
                                null=True,
                                blank=True,
-                               related_name='sort')
+                               related_name='sort',
+                               on_delete=models.SET_NULL)
     image_url = models.CharField(max_length=50,
                                  default='WoWUnknownItem01')
 
@@ -778,7 +795,8 @@ class Piece(models.Model):
     mobilier = models.CharField(max_length=500)
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
-                                 related_name='piece')
+                                 related_name='piece',
+                                 on_delete=models.SET_NULL)
     image = models.ImageField(upload_to='images/maisons',
                               default='images/site/no-image.png')
 
@@ -795,7 +813,8 @@ class Etage(models.Model):
                                     related_name='etage')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
-                                 related_name='etage')
+                                 related_name='etage',
+                                 on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return u'%s' % (self.nom)
@@ -850,7 +869,8 @@ class Maison(models.Model):
     proprietaire = models.ForeignKey(Fiche,
                                      blank=True,
                                      null=True,
-                                     related_name='maison')
+                                     related_name='maison',
+                                     on_delete=models.SET_NULL)
     image = models.ImageField(upload_to='images/maisons',
                               default='images/site/no-image.png')
 
@@ -879,7 +899,8 @@ class Legende(models.Model):
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='legende',
-                                 related_query_name='legende')
+                                 related_query_name='legende',
+                                 on_delete=models.SET_NULL)
     description = models.CharField(max_length=6000,
                                    default='A venir')
     image = models.ImageField(upload_to='images/persos',
@@ -900,4 +921,5 @@ class Token(models.Model):
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='token',
-                                 related_query_name='token')
+                                 related_query_name='token',
+                                 on_delete=models.CASCADE)

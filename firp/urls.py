@@ -6,7 +6,7 @@ from fiches import views
 
 urlpatterns = [
     # General
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^conseils/$', views.conseils, name='conseils'),
     url(r'^en-savoir-plus/$', views.plus, name='plus'),
