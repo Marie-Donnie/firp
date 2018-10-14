@@ -8,23 +8,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
+import logging
+logger = logging.getLogger(__name__)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+# Base settings, useful for development.
+# Override in production in the settings_local.py file.
+#
+# For a reminder of settings to use in production, see
+# https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('secret_key') as f:
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = 'DEFAULT_SECRET_KEY_PLEASE_CHANGE_ME'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
-
 
 # Application definition
 
@@ -189,13 +192,16 @@ SFS_LOG_EXPIRE = 1  # days
 
 SFS_ALL_POST_REQUESTS = True
 
-
-with open('recaptcha_sk') as f:
-    recaptcha_sk = f.read().strip()
-
+# Recaptcha
 RECAPTCHA_PUBLIC_KEY = '6LegJysUAAAAAAPuJRH5DpjfqWAeg-8ksUuHX_uG'
-RECAPTCHA_PRIVATE_KEY = recaptcha_sk
+RECAPTCHA_PRIVATE_KEY = 'DEFAULT PRIVATE KEY PLEASE CHANGE ME'
 
 RECAPTCHA_USE_SSL = True
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'fiches.forms.AllauthSignupForm'
+
+# Load local settings, which may override the default ones
+if os.path.isfile("settings_local.py"):
+    from settings_local import *
+else:
+    logger.warning("Warning: no settings_local.py")

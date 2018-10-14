@@ -1,0 +1,15 @@
+# You don't want DEBUG=True in production
+DEBUG = False
+
+# Generate a random secret key and set it here
+SECRET_KEY = "DEFAULT_SECRET_KEY_PLEASE_CHANGE_ME"
+
+# Set the hostname of your production server
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+
+# If using HTTPS (you should), set these:
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# If using Recaptcha, set the private key here
+# RECAPTCHA_PRIVATE_KEY = "PRIVATE_KEY"
