@@ -21,3 +21,4 @@ autocomplete_light/
 *.rb
 *.ttf
 recrutement
+/firp/settings_local.py

@@ -14,8 +14,44 @@ https://www.filsdegarithos.ovh/
 
 The forum is a simple phpbb.
 
-___
+## How to test locally
+Clone this repository, install the dependencies and run the Django server.
 
-Images credits:
+You probably want to use a virtualenv to install the dependencies:
+
+```sh
+git clone https://github.com/Marie-Donnie/firp.git
+cd firp
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Then you'll want the JS dependencies:
+
+```sh
+cd fiches/static
+bower install
+```
+
+To initialize the SQLite DB, do:
+
+```sh
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Finally, to run the server:
+
+```sh
+python manage.py runserver
+```
+
+## How to deploy
+Copy the `firp/settings_local.py.sample` to `firp/settings_local.py` and edit
+it.  Any deployment-specific configuration should go into this file, as the
+`settings.py` file is used for development.
+
+## Images credits
 
 Most images belong to Blizzard, since this is a fansite.
