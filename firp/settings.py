@@ -201,7 +201,7 @@ RECAPTCHA_USE_SSL = True
 ACCOUNT_SIGNUP_FORM_CLASS = 'fiches.forms.AllauthSignupForm'
 
 # Load local settings, which may override the default ones
-if os.path.isfile("settings_local.py"):
-    from settings_local import *
+if os.path.isfile(os.path.join(os.path.dirname(__file__), "settings_local.py")):
+    from .settings_local import *
 else:
-    logger.warning("Warning: no settings_local.py")
+    print("Warning: no settings_local.py")
