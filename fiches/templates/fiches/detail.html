@@ -7,99 +7,98 @@
 {% block script %}
 $(function () {
 
-/* Well, that's more complicated than it should.
- * When mousing over an object, we want to display a tooltip with the object info.
- * But, that info is not in the page, so we need to get it with an ajax call.
- * Only after the ajax call succeedd we build the Bootstrap tooltip.  However,
- * if the mouse is still over the object, the tooltip doesn't show because the
- * listeners for the tooltip are not triggered.  We have to keep track ourselves
- * of whether the mouse is still on the object using two additional listeners.
- * Once the tooltip is built and shown (or not), we can destroy all this machinery
- * and let Bootstrap tooltip handle the rest.
- */
-$('[data-toggle="objet-tooltip"]').on('mouseenter', getTooltip)
-$('[data-toggle="objet-tooltip"]').on('mouseenter', onMouseEnter)
-$('[data-toggle="objet-tooltip"]').on('mouseleave', onMouseLeave)
+  /* Well, that's more complicated than it should.
+   * When mousing over an object, we want to display a tooltip with the object info.
+   * But, that info is not in the page, so we need to get it with an ajax call.
+   * Only after the ajax call succeedd we build the Bootstrap tooltip.  However,
+   * if the mouse is still over the object, the tooltip doesn't show because the
+   * listeners for the tooltip are not triggered.  We have to keep track ourselves
+   * of whether the mouse is still on the object using two additional listeners.
+   * Once the tooltip is built and shown (or not), we can destroy all this machinery
+   * and let Bootstrap tooltip handle the rest.
+   */
+  $('[data-toggle="objet-tooltip"]').on('mouseenter', getTooltip)
+  $('[data-toggle="objet-tooltip"]').on('mouseenter', onMouseEnter)
+  $('[data-toggle="objet-tooltip"]').on('mouseleave', onMouseLeave)
 
-function getTooltip() {
-  var elem = this;
-  var enchant = $(elem).data('enchantement');
-  var enchantPath = enchant ? enchant + '/' : '';
-  var tooltipUrl = elem.getAttribute('href') + enchantPath + 'tooltip/';
-  $(elem).off('mouseenter', getTooltip);
-  $.ajax(tooltipUrl)
-  .done(function(data) {
-    $(elem).tooltip({html: true, placement: 'top', title: data});
-    if ($(elem).data("isMouseOnUs")) {
-      $(elem).tooltip('show');
-    }
-    $(elem).off('mouseenter', onMouseEnter);
-    $(elem).off('mouseleave', onMouseLeave);
-  });
-}
+  function getTooltip() {
+    var elem = this;
+    var enchant = $(elem).data('enchantement');
+    var enchantPath = enchant ? enchant + '/' : '';
+    var tooltipUrl = elem.getAttribute('href') + enchantPath + 'tooltip/';
+    $(elem).off('mouseenter', getTooltip);
+    $.ajax(tooltipUrl)
+      .done(function(data) {
+        $(elem).tooltip({html: true, placement: 'top', title: data});
+        if ($(elem).data("isMouseOnUs")) {
+          $(elem).tooltip('show');
+        }
+        $(elem).off('mouseenter', onMouseEnter);
+        $(elem).off('mouseleave', onMouseLeave);
+      });
+  }
 
-function onMouseEnter() {
-  $(this).data("isMouseOnUs", true);
-}
+  function onMouseEnter() {
+    $(this).data("isMouseOnUs", true);
+  }
 
-function onMouseLeave() {
-  $(this).data("isMouseOnUs", false)
-}
+  function onMouseLeave() {
+    $(this).data("isMouseOnUs", false)
+  }
 
 });
 
-function getCookie(name) {
-var cookieValue = null;
-if (document.cookie && document.cookie != '') {
-var cookies = document.cookie.split(';');
-for (var i = 0; i < cookies.length; i++) {
-		    var cookie = jQuery.trim(cookies[i]);
-		    // Does this cookie string begin with the name we want?
-		    if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-		    }
-		    }
-		    }
-		    return cookieValue;
-		    }
-		    var csrftoken = getCookie('csrftoken');
-		    function update_number(elem) {
-		    var url = $(elem).data("action")
-		    var div = $(elem).closest(".number-inventory")
-		    var nombre = +div.attr("data-number")
-		    var segments = url.split("/")
-		    var delta = +segments.pop()
-		    var nouveau_nombre = nombre+delta
-		    segments.push(nouveau_nombre)
-		    var url_finale = segments.join("/")
-		    $.post(url_finale, null, function(result) {
-		    div.attr("data-number", nouveau_nombre)
-		    div.find(".bottomright").text(nouveau_nombre)
-		    })
-		    }
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+	var cookie = jQuery.trim(cookies[i]);
+	// Does this cookie string begin with the name we want?
+	if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+	}
+      }
+    }
+    return cookieValue;
+  }
+  var csrftoken = getCookie('csrftoken');
+  function update_number(elem) {
+    var url = $(elem).data("action")
+    var div = $(elem).closest(".number-inventory")
+    var nombre = +div.attr("data-number")
+    var segments = url.split("/")
+    var delta = +segments.pop()
+    var nouveau_nombre = nombre+delta
+    segments.push(nouveau_nombre)
+    var url_finale = segments.join("/")
+    $.post(url_finale, null, function(result) {
+      div.attr("data-number", nouveau_nombre)
+      div.find(".bottomright").text(nouveau_nombre)
+    })
+  }
 
-		    function delete_case(elem) {
-		    var url = $(elem).data("action")
-		    $.ajax(url,
-		    {
-		    type: 'DELETE',
-		    success: function(result) {
-		    var div = $(elem).closest(".number-inventory")
-		    div.replaceWith('<img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">')
-		    }})
-		    }
+  function delete_case(elem) {
+    var url = $(elem).data("action")
+    $.ajax(url, {
+      type: 'DELETE',
+      success: function(result) {
+	var div = $(elem).closest(".number-inventory")
+	div.replaceWith('<img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">')
+      }})
+  }
 
-	function csrfSafeMethod(method) {
+  function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-			    }
+  }
 
-			    $.ajaxSetup({
+  $.ajaxSetup({
     beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
+      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
     }
 });
 
