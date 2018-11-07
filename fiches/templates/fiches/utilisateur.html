@@ -4,9 +4,11 @@
 {% block page-title %}{{ utilisateur.username|capfirst }}{% endblock %}
 
 {% block script %}
+<script>
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+</script>
 {% endblock %}
 
 {% block edition %}

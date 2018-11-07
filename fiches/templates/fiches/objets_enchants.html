@@ -6,9 +6,11 @@
 {% block page-title %}Objets et enchantements créés par {{ utilisateur.username|capfirst }}{% endblock %}
 
 {% block script %}
+<script>
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+</script>
 {% endblock %}
 
 {% block content %}

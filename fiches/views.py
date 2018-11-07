@@ -313,6 +313,39 @@ def edit_fiche(request, fiche_id):
 
         return HttpResponse("Vous ne pouvez pas editer cette fiche.")
 
+# API point to edit a fiche 'description'
+@permission_required('fiches.fdg', raise_exception=True)
+def edit_fiche_description(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    if request.user.id != fiche.createur.id and not request.user.has_perm('fiches.admin'):
+        return HttpResponse(status=403)
+
+    if request.method != 'POST':
+        return HttpResponse(status=405)
+
+    # Update the text
+    fiche.description = request.POST['content']
+    fiche.save(update_fields=['description'])
+    # TODO: does writing to the object directly enforces the constraints like
+    # length?
+    return HttpResponse(status=200)
+
+# API point to edit a fiche 'historique'
+@permission_required('fiches.fdg', raise_exception=True)
+def edit_fiche_historique(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    if request.user.id != fiche.createur.id and not request.user.has_perm('fiches.admin'):
+        return HttpResponse(status=403)
+
+    if request.method != 'POST':
+        return HttpResponse(status=405)
+
+    # Update the text
+    fiche.historique = request.POST['content']
+    fiche.save(update_fields=['historique'])
+    # TODO: does writing to the object directly enforces the constraints like
+    # length?
+    return HttpResponse(status=200)
 
 @login_required
 def delete_fiche(request, fiche_id):
