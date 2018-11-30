@@ -94,7 +94,7 @@
 	  <ul>
 	    {% for f in birthdays %}
 	    {% if f.etat != 'MO' %}
-	    <li><a href="{% url 'detail_fiche' f.id %}">{{ f.prenom|capfirst }} {{ f.nom|capfirst }}</a> : {{ f.annee_de_naissance|age }} an{{ f.annee_de_naissance|age|pluralize }} </li>
+	    <li><a href="{% url 'detail_fiche' f.id %}">{{ f.prenom|capfirst }} {{ f.nom|capfirst }}</a> : {{ f.annee_de_naissance|age }} an{{ f.annee_de_naissance|age|pluralize }} le {{ f.jour_de_naissance }} </li>
 	    {% endif %}
 	  {% endfor %}
 	  </ul>
