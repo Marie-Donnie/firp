@@ -1,0 +1,67 @@
+
+{% load staticfiles %}
+<!doctype html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+  <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+    $('#title').focus();
+    $('#text').autosize();
+    });
+  </script>
+
+
+  <!-- Link to my css -->
+  <link rel="stylesheet" href="{%static 'rpg/fallout/fallout.css' %}">
+
+  <title>{% block title %}Index{% endblock %}</title>
+</head>
+<body>
+
+<div class="overlay"></div>
+<div class="scanline"></div>
+<div class="wrapper">
+  <div class="content clearfix">
+
+    <header class="site clearfix">
+      <div class="col one">
+	<img src="http://aldanna.free.fr/RP/nadzieja.png" alt="591 Industries" width="740" height="729" id="logo-v" />
+      </div>
+      <div class="col two">
+	<h4>591 Industries (tm) <br /> <b>H</b>euristically <b>E</b>ncrypted <b>R</b>eal-Time <b>O</b>perating <b>S</b>ystem (HEROS)</h4>
+	<p>----------------------------------------</p>
+	<p>HEROS v 1.0.0</p>
+	<p>(c)2015 591 Industries</p>
+	<p>- Server 591 -</p>
+      </div>
+    </header>
+
+    <nav class="site clear">
+      <ul>
+	<li><a href="#" title="">Retour système principal</a></li>
+	<li><a href="#" title="">Nous contacter</a></li>
+      </ul>
+    </nav>
+
+    <!-- <p>System Administrator Integrated Message System (SAIMS)</p> -->
+    <p>Administrateur système (SYSADM) - Marie-Donnie matricule 1-45-97-6320</p>
+
+    <p class="clear"><br /></p>
+
+    <p>Bienvenue dans le système d'enregistrement des individus</p><br />
+
+    <!-- <form> -->
+    <!--   <label>Name >></label><input type="text" /><br /> -->
+    <!--   <label>Email >></label><input type="text" /><br /> -->
+    <!--   <label>Subject >></label><input type="text" /><br /> -->
+    <!--   <label>Message >></label><textarea id="text" rows="1"></textarea><br /><br /><br /> -->
+    <!--   <input type="submit" value="Submit" /> -->
+    <!--   <a class="button" alt="" href="index.html">Cancel</a> -->
+    <!-- </form> -->
+  </div>
+  <footer>
+    <a href="https://codepen.io/mackorichardson/pen/vNMRpK">Theme by Mack Richardson<a>
+  </footer>
+</div>

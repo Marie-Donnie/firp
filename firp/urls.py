@@ -94,6 +94,7 @@ urlpatterns = [
         name='reserver_quete'),
     # RPG
     url(r'^', include('fiches.rpg.avant_garde.urls')),
+    url(r'^', include('fiches.rpg.fallout.urls')),
     # Gallery
     url(r'^gallerie/$', views.gallery, name='gallerie'),
     url(r'^gallerie/rechercher/$', views.gallery_search,
