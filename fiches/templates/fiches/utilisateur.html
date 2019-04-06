@@ -38,6 +38,8 @@ $(function () {
 	  {% for f in utilisateur.fiches.all %}
 	  {% if user.id == f.createur.id or f.afficher_createur %}
 	  <li><a href="{% url 'detail_fiche' f.id %}">
+
+	    <img class="portrait-icone" style="width:40px;height:40px"src={{ f.image.url }} alt="Portrait">
 	      {{ f.prenom }} {{ f.nom }}</a>
 	    {% if f.afficher_createur %}
 	    <img class="visi" src="/fiches/media/images/site/UI-MicroButton-LFG-Up.PNG" alt="Personnage visible">
