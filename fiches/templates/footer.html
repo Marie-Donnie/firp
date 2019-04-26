@@ -41,39 +41,39 @@
 <nav class="navbar navbar-default navbar-fixed-bottom" id="bottom-bar">
   <div class="container" id="bottom-bar-container">
     <a target="_self" href="https://www.filsdegarithos.ovh/" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Achievement-Up.PNG" alt="Accueil">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Achievement-Up.PNG" alt="Accueil" data-toggle="tooltip" data-placement="top" title="Accueil">
     </a>
     <a target="_self" href="https://www.filsdegarithos.ovh/forum/" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-SOCIALS-UP.PNG" alt="Forum">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-SOCIALS-UP.PNG" alt="Forum" data-toggle="tooltip" data-placement="top" title="Forum">
     </a>
     <a target="_self" href="{% url 'index' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Sheet.PNG" alt="Fiches">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Sheet.PNG" alt="Fiches" data-toggle="tooltip" data-placement="top" title="Fiches">
     </a>
     <a target="_self" href="{% url 'campagnes' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Talents-Up.PNG" alt="Campagnes">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Talents-Up.PNG" alt="Campagnes" data-toggle="tooltip" data-placement="top" title="Campagnes">
     </a>
     <a target="_self" href="{% url 'quetes' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-QUEST-UP.PNG" alt="Quêtes">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-QUEST-UP.PNG" alt="Quêtes" data-toggle="tooltip" data-placement="top" title="Quêtes">
     </a>
     <a target="_self" href="{% url 'classes' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG" alt="Classes">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG" alt="Classes" data-toggle="tooltip" data-placement="top" title="Classes">
     </a>
     <a target="_self" href="{% url 'cartes' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG" alt="Carte">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG" alt="Carte" data-toggle="tooltip" data-placement="top" title="Carte">
     </a>
     {% if user.is_authenticated %}
     <a target="_self" href="{% url 'utilisateur' user.id %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Raid-Up.PNG" alt="Utilisateur">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Raid-Up.PNG" alt="Profil utilisateur" data-toggle="tooltip" data-placement="top" title="Profil utilisateur">
     </a>
     <a target="_self" href="{% url 'account_logout' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/logout.PNG" alt="Se déconnecter">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/logout.PNG" alt="Se déconnecter" data-toggle="tooltip" data-placement="top" title="Se déconnecter">
     </a>
     {% else %}
     <a target="_self" href="{% url 'account_signup' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/register.PNG" alt="S'inscrire">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/register.PNG" alt="S'inscrire" data-toggle="tooltip" data-placement="top" title="S'inscrire">
     </a>
     <a target="_self" href="{% url 'account_login' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/login.PNG" alt="Se connecter">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/login.PNG" alt="Se connecter" data-toggle="tooltip" data-placement="top" title="Se connecter">
     </a>
     {% endif %}
   </div>
