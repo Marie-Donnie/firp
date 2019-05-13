@@ -174,7 +174,7 @@ class Fiche(models.Model):
                               default='Marron')
     c_cheveux = models.CharField(max_length=30,
                                  default='Brun')
-    signes_dis = models.CharField(max_length=200,
+    signes_dis = models.CharField(max_length=600,
                                   default='Aucun')
     profession = models.CharField(max_length=75,
                                   default='Prostipute')
