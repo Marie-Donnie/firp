@@ -15,9 +15,7 @@
       <input name="nom" required="" id="id_nom" value="{{form.nom.value|default:'Légende'}}" maxlength="75" type="text">
     </div>
     <div class="form-group">
-      <label for="id_description">Description&nbsp;:</label>
-      <textarea name="description" class="form-control" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount');" onkeydown="countChars('id_description','charcount');" onmouseout="countChars('id_description','charcount');">{{form.description.value|default:'Aucun'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount">0</span>/6000).</span>
+      {% include "field_snippet.html" with field=form.description %}
     </div>
     <div class="form-group">
       <label for="id_image">Image&nbsp;</label>

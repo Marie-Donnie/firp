@@ -145,9 +145,6 @@ urlpatterns = [
         name='delete_token'),
     # Utils
     url(r'^compter_boutiques/$', views.compter_boutiques, name='boutiques'),
-    # Autocomplete
-    url(r'^fiche-autocomplete/$', views.FicheAutocomplete.as_view(),
-        name='fiche-autocomplete'),
 ]
 
 if settings.DEBUG:

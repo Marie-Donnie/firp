@@ -1,6 +1,7 @@
 from django.forms import ModelForm
+from django.db.models import Q
+from fiches import widgets
 from django import forms
-from dal import autocomplete
 from snowpenguin.django.recaptcha2.fields import ReCaptchaField
 from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 from fiches.models import *
@@ -45,13 +46,18 @@ class FicheForm(ModelForm):
                   'afficher_inventaire', 'afficher_bourse', 'image', 'main_dir',
                   'inventaire_fdg', 'equipement', 'bourse', 'createur',
                   'gallerie']
+        labels = {
+            'signes_dis': 'Signes distinctifs',
+        }
         widgets = {'createur': forms.HiddenInput(),
-                   'inventaire': forms.Textarea(),
-                   'description': forms.Textarea(),
-                   'historique': forms.Textarea(),
-                   'relations': forms.Textarea(),
-                   'autres_titres': forms.Textarea(),
-                   'medailles': forms.Textarea(),
+                   'inventaire': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 10}),
+                   'description': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 10}),
+                   'historique': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 10}),
+                   'relations': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 10}),
+                   'competences': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 10}),
+                   'autres_titres': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 2}),
+                   'medailles': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 6}),
+                   'signes_dis': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 2}),
                    'afficher_pseudo': forms.CheckboxInput(),
                    'afficher_createur': forms.CheckboxInput(),
                    'afficher_inventaire': forms.CheckboxInput(),
@@ -88,8 +94,9 @@ class ObjetForm(ModelForm):
         model = Objet
         fields = '__all__'
         prefix = 'objet'
-        widgets = {'description': forms.Textarea(),
-                   'createur': forms.HiddenInput(), }
+        widgets = {
+            'description': widgets.LimitedTextarea(attrs={'class': 'form-control', 'rows': 5, 'cols': 20}),
+            'createur': forms.HiddenInput(), }
 
 
 class ArmureForm(ModelForm):
@@ -98,7 +105,8 @@ class ArmureForm(ModelForm):
         model = Armure
         fields = '__all__'
         prefix = 'armure'
-        widgets = {'effet': forms.Textarea(), }
+        widgets = {
+            'effet': widgets.LimitedTextarea(attrs={'class': 'form-control', 'rows': 5, 'cols': 20}),}
 
 
 class CaseForm(ModelForm):
@@ -163,16 +171,53 @@ class OperationForm(ModelForm):
         model = Operation
         fields = '__all__'
 
+# Ranked by decreasing order of importance
+leader_titles = ['général', 'colonel', 'capitaine', 'lieutenant', 'sergent', 'caporal']
+
+# Used by the leader_sort custom template filter to sort the leaders by
+# decreasing rank.
+def leader_key(fiche):
+    try:
+        rank = leader_titles.index(fiche.titre.lower())
+    except ValueError:
+        rank = len(leader_titles)
+    return '%d,%s,%s' % (rank, fiche.nom, fiche.prenom)
+
+def leaders():
+    query = Q()
+    for title in leader_titles:
+        query |= Q(titre__iexact=title)
+    query |= Q(zone_de_residence=23)
+    return Fiche.objects.filter(query)
+
+class LeaderChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        if obj.titre.lower() in leader_titles:
+            return '%s %s %s' % (obj.titre, obj.nom, obj.prenom)
+        else:
+            return str(obj)
 
 class MissionForm(ModelForm):
+    dirigeant = LeaderChoiceField(queryset=leaders())
+    dirigeant.widget = widgets.DynamicSelect()
+
+    autre_dirigeant = LeaderChoiceField(queryset=leaders())
+    autre_dirigeant.widget = widgets.DynamicSelect()
 
     class Meta:
         model = Mission
         fields = '__all__'
-        widgets = {'objectif': forms.Textarea(),
-                   'participants': forms.Textarea(),
-                   'deroulement': forms.Textarea(),
-                   'dirigeant': autocomplete.ModelSelect2(url='fiche-autocomplete'), }
+        labels = {
+            'operation': 'Opération',
+            'numero': 'Numéro',
+            'type_mis': 'Type mission',
+            'annee': 'Année',
+            'deroulement': 'Déroulement',
+            'signature_url': 'Signature',
+        }
+        widgets = {'objectif': widgets.LimitedTextarea(attrs={'class': 'form-control', 'rows': 2}),
+                   'participants': widgets.LimitedTextarea(attrs={'class': 'form-control', 'rows': 1}),
+                   'deroulement': widgets.LimitedTextarea(attrs={'class': 'form-control', 'rows': 10}), }
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -252,4 +297,4 @@ class LegendeForm(ModelForm):
     class Meta:
         model = Legende
         fields = '__all__'
-        widgets = {'description': forms.Textarea(), }
+        widgets = {'description': widgets.LimitedTextarea(attrs={'class':'form-control'}), }

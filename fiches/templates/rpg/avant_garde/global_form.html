@@ -75,14 +75,10 @@ $(function () {
 	  </span>
       </div>
       <div class="form-group">
-	<label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">{{form.description.value|default:'A venir'}}</textarea>
-	<span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount1">0</span>/6000).</span>
-	<label for="id_historique">Historique&nbsp;</label> <textarea name="historique" class="form-control" id="id_historique" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_historique','charcount2');" onkeydown="countChars('id_historique','charcount2');" onmouseout="countChars('id_historique','charcount2');">{{form.historique.value|default:'A venir'}}</textarea>
-	<span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
-	<label for="id_equipement">Equipement&nbsp;</label> <textarea name="equipement" class="form-control" id="id_equipement" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_equipement','charcount3');" onkeydown="countChars('id_equipement','charcount3');" onmouseout="countChars('id_equipement','charcount3');">{{form.equipement.value|default:'Aucune'}}</textarea>
-	<span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
-	<label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
-	<span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
+	{% include "field_snippet.html" with field=form.description %}
+        {% include "field_snippet.html" with field=form.historique %}
+        {% include "field_snippet.html" with field=form.equipement %}
+        {% include "field_snippet.html" with field=form.inventaire %}
       </div>
       <div class="form-group">
       <span id="description"><b>Type de personnage </b></span>
@@ -311,4 +307,8 @@ $(function () {
 </div>
 <input class="btn btn-default" type="submit" value="Valider" />
 </form>
+
+
+{{ form.media }}
+
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from django import forms
+from fiches import widgets
 from fiches.rpg.avant_garde.models import *
 
 
@@ -11,6 +12,12 @@ class Avant_GardeForm(ModelForm):
         model = Avant_garde
         fields = '__all__'
         prefix = 'ag'
+        widgets = {
+            'description': widgets.LimitedTextarea(attrs={'class':'form-control'}),
+            'historique': widgets.LimitedTextarea(attrs={'class':'form-control'}),
+            'equipement': widgets.LimitedTextarea(attrs={'class':'form-control'}),
+            'inventaire': widgets.LimitedTextarea(attrs={'class':'form-control'}),
+        }
 
 # class Classe_agForm(ModelForm):
 

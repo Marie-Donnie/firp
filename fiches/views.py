@@ -15,7 +15,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.core import serializers
 from django.conf import settings
-from dal import autocomplete
 from fiches.models import *
 from fiches.forms import *
 from fiches.functions import Shops
@@ -1196,56 +1195,36 @@ def mission(request, campagne_id, mission_id):
 
     return render(request, 'site/rapport_mission.html', context)
 
+def form_groups(form, groups):
+    return [[form[k] for k in g] for g in groups]
 
 # Enables the creation of missions for players
 @permission_required('fiches.fdg', raise_exception=True)
 def creer_mission(request, campagne_id):
-    # Collects the choices for leaders, enabling the sorting by likeliness to lead
-    caporals = Fiche.objects.filter(titre__iexact='caporal')
-    sergents = Fiche.objects.filter(titre__iexact='sergent')
-    lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
-    capitaines = Fiche.objects.filter(titre__iexact='capitaine')
-    generals = Fiche.objects.filter(titre__iexact='général')
-    colonels = Fiche.objects.filter(titre__iexact='colonel')
-    # Gets people from Noirebois (23)
-    autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
-    # Gets the choices for campaigns
-    campagnes = Operation.objects.all()
-    campagne = Operation.objects.get(pk=campagne_id)
     if request.method == 'POST':
         form = MissionForm(request.POST)
         if form.is_valid():
             save_it = form.save()
             return redirect('mission', campagne_id=save_it.operation.id,
-                                mission_id=save_it.id )
+                            mission_id=save_it.id )
         else:
             print(form.errors)
     else:
-        form = MissionForm()
-    index_url = settings.LOGIN_REDIRECT_URL
-    context = {'form': form, 'caporals': caporals, 'sergents': sergents,
-               'lieutenants': lieutenants, 'capitaines': capitaines,
-               'generals': generals, 'colonels': colonels,
-               'autres': autres, 'campagnes': campagnes,
-               'index_url': index_url, 'campagne': campagne}
+        form = MissionForm(initial={'operation': campagne_id})
+    context = {'form': form,
+               'formgroups': form_groups(form, [['operation', 'numero', 'type_mis'],
+                                                ['dirigeant', 'autre_dirigeant'],
+                                                ['lieu', 'jour', 'mois', 'annee'],
+                                                ['objectif', 'participants', 'deroulement',],
+                                                ['signature_url',]])}
     return render(request, 'site/mission_edit.html', context)
 
 
 # Enables the edition of missions for players
 @permission_required('fiches.veteran', raise_exception=True)
 def edit_mission(request, mission_id):
-    # Collects the choices for leaders, enabling the sorting by likeliness to lead
     mission = Mission.objects.get(pk=mission_id)
-    caporals = Fiche.objects.filter(titre__iexact='caporal')
-    sergents = Fiche.objects.filter(titre__iexact='sergent')
-    lieutenants = Fiche.objects.filter(titre__iexact='lieutenant')
-    capitaines = Fiche.objects.filter(titre__iexact='capitaine')
-    generals = Fiche.objects.filter(titre__iexact='général')
-    colonels = Fiche.objects.filter(titre__iexact='colonel')
-    # Gets people from Noirebois (23)
-    autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
-    # Gets the choices for campaigns
-    campagnes = Operation.objects.all()
+
     if request.method == 'POST':
         form = MissionForm(request.POST, instance=mission)
         if form.is_valid():
@@ -1255,13 +1234,13 @@ def edit_mission(request, mission_id):
         else:
             print(form.errors)
     else:
-        form = MissionForm(instance=mission)
-    index_url = settings.LOGIN_REDIRECT_URL
-    context = {'form': form, 'caporals': caporals, 'sergents': sergents,
-               'lieutenants': lieutenants, 'capitaines': capitaines,
-               'generals': generals, 'colonels': colonels,
-               'autres': autres, 'campagnes': campagnes,
-               'index_url': index_url, 'campagne': mission.operation}
+        form = MissionForm(instance=mission, initial={'operation': mission.operation})
+    context = {'form': form,
+               'formgroups': form_groups(form, [['operation', 'numero', 'type_mis'],
+                                                ['dirigeant', 'autre_dirigeant'],
+                                                ['lieu', 'jour', 'mois', 'annee'],
+                                                ['objectif', 'participants', 'deroulement',],
+                                                ['signature_url',]])}
     return render(request, 'site/mission_edit.html', context)
 
 
@@ -1634,19 +1613,3 @@ def compter_boutiques(request):
     context = shops.count_shops(citoyens)
     context['citoyens'] = citoyens
     return render(request, 'site/compter_boutiques.html', context)
-
-
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% AUTOCOMPLETE %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
-
-
-class FicheAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        # Don't forget to filter out results depending on the visitor !
-        if not self.request.user.is_authenticated:
-            return Fiche.objects.none()
-
-        qs = Fiche.objects.all()
-
-        if self.q:
-            qs = qs.filter(nom__icontains=self.q)
-        return qs

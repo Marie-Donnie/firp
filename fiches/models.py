@@ -698,8 +698,8 @@ class Mission(models.Model):
                                         blank=True,
                                         related_name='autre_dirigeant',
                                         on_delete=models.SET_NULL)
-    numero = models.SmallIntegerField(default=0)
-    lieu = models.CharField(max_length=100)
+    numero = models.PositiveSmallIntegerField(default=1)
+    lieu = models.CharField(max_length=100, default='Aucun')
     jour = IntegerRangeField(default='1', min_value=1,
                              max_value=31)
     mois = IntegerRangeField(default='1', min_value=1,
@@ -728,9 +728,9 @@ class Mission(models.Model):
         (19, 'Opération clandestine')
     ],
                                         default=8)
-    objectif = models.CharField(max_length=300)
-    participants = models.CharField(max_length=500)
-    deroulement = models.CharField(max_length=6000)
+    objectif = models.CharField(max_length=300, default='Aucun')
+    participants = models.CharField(max_length=500, default='Aucun')
+    deroulement = models.CharField(max_length=6000, default='-')
     signature_url = models.CharField(max_length=100,
                                      default="c: L. Vaanes")
 
