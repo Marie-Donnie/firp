@@ -40,7 +40,6 @@ INSTALLED_APPS = (
    'allauth',
    'allauth.account',
    'allauth.socialaccount',
-   'stopforumspam',
    'snowpenguin.django.recaptcha2',
    'leaflet',
 )
@@ -53,7 +52,6 @@ MIDDLEWARE = (
    'django.contrib.auth.middleware.AuthenticationMiddleware',
    'django.contrib.messages.middleware.MessageMiddleware',
    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   'stopforumspam.middleware.StopForumSpamMiddleware',
 )
 
 ROOT_URLCONF = 'firp.urls'

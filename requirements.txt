@@ -1,6 +1,5 @@
 django>=2.2, <2.3
 django-allauth>=0.32.0
-stopforumspam>=1.8
 django-recaptcha2>=1.0.3
 django-leaflet>=0.24.0
 six>=1.10.0
