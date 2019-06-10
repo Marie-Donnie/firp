@@ -2,6 +2,7 @@
 
 import os
 import uuid
+import datetime
 
 from django.shortcuts import get_object_or_404, render, redirect, render_to_response
 from django.template import RequestContext
@@ -1525,6 +1526,12 @@ def delete_token(request, token):
             return HttpResponse(status=403)
     else:
         return HttpResponse(status=404)
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% UTILS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+
+def get_weather():
+    date = datetime.datetime.now()
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% UTILS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
