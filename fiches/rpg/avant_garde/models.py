@@ -26,8 +26,8 @@ class Campagne(models.Model):
     image = models.ImageField(upload_to='images/rpg/campagne',
                               default='images/site/avant-garde.jpg')
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Avant_garde(models.Model):
@@ -171,8 +171,8 @@ class Avant_garde(models.Model):
         ordering = ["nom", "prenom"]
         permissions = (("avant_garde", "A accès à l'avant-garde"),)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Fantassin(models.Model):
@@ -217,8 +217,8 @@ class Fantassin(models.Model):
                                  related_name='fantassin',
                                  on_delete=models.CASCADE)
 
-    def __unicode__(self):
-        return u'%s, %s' % (self.perso.nom, 'fantassin')
+    def __str__(self):
+        return '%s, %s' % (self.perso.nom, 'fantassin')
 
 
 class Apothicaire(models.Model):
@@ -254,8 +254,8 @@ class Apothicaire(models.Model):
                                  related_name='apothicaire',
                                  on_delete=models.CASCADE)
 
-    def __unicode__(self):
-        return u'%s, %s' % (self.perso.nom, 'apothicaire')
+    def __str__(self):
+        return '%s, %s' % (self.perso.nom, 'apothicaire')
 
 
 class Arbaletrier(models.Model):
@@ -278,8 +278,8 @@ class Arbaletrier(models.Model):
                                  related_name='arbaletrier',
                                  on_delete=models.CASCADE)
 
-    def __unicode__(self):
-        return u'%s, %s' % (self.perso.nom, 'arbalétrier')
+    def __str__(self):
+        return '%s, %s' % (self.perso.nom, 'arbalétrier')
 
 
 class Eclaireur(models.Model):
@@ -330,8 +330,8 @@ class Eclaireur(models.Model):
                                  related_name='eclaireur',
                                  on_delete=models.CASCADE)
 
-    def __unicode__(self):
-        return u'%s, %s' % (self.perso.nom, 'éclaireur')
+    def __str__(self):
+        return '%s, %s' % (self.perso.nom, 'éclaireur')
 
 
 class Sorcier(models.Model):
@@ -370,8 +370,8 @@ class Sorcier(models.Model):
                                  related_name='sorcier',
                                  on_delete=models.CASCADE)
 
-    def __unicode__(self):
-        return u'%s, %s' % (self.perso.nom, 'sorcier')
+    def __str__(self):
+        return '%s, %s' % (self.perso.nom, 'sorcier')
 
 
 class Rabatteur(models.Model):
@@ -416,8 +416,8 @@ class Rabatteur(models.Model):
                                  related_name='rabatteur',
                                  on_delete=models.CASCADE)
 
-    def __unicode__(self):
-        return u'%s, %s' % (self.perso.nom, 'rabatteur')
+    def __str__(self):
+        return '%s, %s' % (self.perso.nom, 'rabatteur')
 
 
 class Avantages(models.Model):
@@ -429,8 +429,8 @@ class Avantages(models.Model):
         ordering = ["nom"]
         default_related_name = "avantage"
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Desavantages(models.Model):
@@ -442,5 +442,5 @@ class Desavantages(models.Model):
         ordering = ["nom"]
         default_related_name = "désavantage"
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
