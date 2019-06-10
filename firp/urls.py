@@ -39,6 +39,9 @@ urlpatterns = [
     url(r'^fiches/bourse/(?P<fiche_id>\d+)/$', views.creer_bourse,
         name='creer_bourse'),
     url(r'^fiches/rechercher/$', views.personnages, name='rechercher_fiche'),
+    url(r'^fiches/gallerie/(?P<fiche_id>\d+)/$', views.upload_gallery_perso, name='gallerie_perso'),
+    url(r'^fiches/creer_gallerie/(?P<fiche_id>\d+)/$', views.creer_gallerie, name='creer_gallerie'),
+    url(r'^fiches/image/(?P<fiche_id>\d+)/$', views.image_perso, name='image_perso_upload'),
     # Objets
     url(r'^objets/$', views.objets, name='objets'),
     url(r'^objets/objets/creer_objet/$', views.creer_objet, name='creer_objet'),

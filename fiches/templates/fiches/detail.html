@@ -191,14 +191,10 @@ for (var i = 0; i < cookies.length; i++) {
 	    {% endif %}
 	    ({{fiche.annee_de_naissance|age}} an{{fiche.annee_de_naissance|age|pluralize}} cette année)
 	</span></li>
-	<li><b>Zone de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_naissance_display }}</span></li>
-	<li><b>Ville de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_naissance|capfirst  }}</span></li>
-	<li><b>Zone de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_residence_display }}</span></li>
-	<li><b>Ville de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.ville_de_residence|capfirst  }}</span></li>
-	<li><b>Taille&nbsp;: </b><span id="attribute_value">{{ fiche.taille }}m</span></li>
-	<li><b>Poids&nbsp;: </b><span id="attribute_value">{{ fiche.poids }} kg</span></li>
-	<li><b>Couleur des yeux&nbsp;: </b><span id="attribute_value">{{ fiche.c_yeux }}</span></li>
-	<li><b>Couleur des cheveux&nbsp;: </b><span id="attribute_value">{{ fiche.c_cheveux }}</span></li>
+	<li><b>Lieu de naissance&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_naissance_display }}, à {{ fiche.ville_de_naissance|capfirst  }}</span></li>
+	<li><b>Lieu de résidence&nbsp;: </b><span id="attribute_value">{{ fiche.get_zone_de_residence_display }}, à {{ fiche.ville_de_residence|capfirst  }}</span></li>
+	<li><b>Taille&nbsp;: </b><span id="attribute_value">{{ fiche.taille }}m <b>Poids&nbsp;: </b><span id="attribute_value">{{ fiche.poids }} kg</span></li>
+	<li><b>Couleur des yeux&nbsp;: </b><span id="attribute_value">{{ fiche.c_yeux }} <b>Couleur des cheveux&nbsp;: </b><span id="attribute_value">{{ fiche.c_cheveux }}</span></li>
 	<li><b>Main directrice&nbsp;: </b><span id="attribute_value">{{ fiche.get_main_dir_display }}</span></li>
 	{% if fiche.signes_dis != 'Aucun' %}
 	<li><b>Signes distinctifs&nbsp;: </b><br>{{ fiche.signes_dis|linebreaksbr }}</li>
@@ -560,6 +556,59 @@ function getCookie(name) {
   </div>
   {% endif %} <!-- fiche.equipement -->
 </div>		<!-- media -->
+
+
+	{% if fiche.gallerie %}
+  <div class="col-lg-12">
+    <div class="panel panel-defaut details-panels">
+      <div class="panel-heading">
+	<h3 class="panel-title">Gallerie</h3>
+	{% if user.is_authenticated and user.id == fiche.createur.id %}
+
+	<a href="{% url 'gallerie_perso' fiche.id %}">Editer gallerie</a>
+	{% endif %}
+
+      </div>
+      <div class="panel-body">
+	<div id="gallerie" class="carousel slide" data-ride="carousel">
+	  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+	    {% for image in images %}
+	    <li data-target="#gallerie" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
+	    {% endfor %}
+	  </ol>
+	  <!-- Wrapper for slides -->
+	  <div class="carousel-inner" role="listbox">
+	    {% for image in images %}
+	    <div class="item {% if forloop.counter0 == 0 %}active{% endif %}">
+	      <img src="{{ image.image.url }}" alt="{{ image.definition }}">
+	      <div class="carousel-caption">
+		<h4>{{ image.definition}}</h4>
+		<p>{{ image.source }}</p>
+	      </div>
+	    </div>
+	    {% endfor %}
+	  </div>
+
+	  <!-- Controls -->
+	  <a class="left carousel-control" href="#gallerie" role="button" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	    <span class="sr-only">Précédent</span>
+	  </a>
+	  <a class="right carousel-control" href="#gallerie" role="button" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	    <span class="sr-only">Suivant</span>
+	  </a>
+	</div>
+      </div>
+    </div>
+    {% else %}
+    	{% if user.is_authenticated and user.id == fiche.createur.id %}
+	<a href="{% url 'creer_gallerie' fiche.id %}">Créer gallerie</a>
+	{% endif %}
+	{% endif %}
+  </div>
+
 
 
 {% endblock %}

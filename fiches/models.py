@@ -270,6 +270,11 @@ class Fiche(models.Model):
                                   null=True,
                                   related_name='proprietaire',
                                   on_delete=models.SET_NULL)
+    gallerie = models.OneToOneField('GalleriePerso',
+                                    blank=True,
+                                    null=True,
+                                    related_name='proprietaire',
+                                    on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ["nom", "prenom"]
@@ -291,6 +296,23 @@ class Fiche(models.Model):
 
     def __unicode__(self):
         return u'%s %s' % (self.nom, self.prenom)
+
+
+class ImagePerso(models.Model):
+    source = models.CharField(max_length=500)
+    nom_perso = models.CharField(max_length=500)
+    definition = models.CharField(max_length=500,
+                                  default='Une image du personnage')
+    image = models.ImageField(upload_to='images/persos')
+    gallerie = models.ForeignKey('GalleriePerso',
+                                 related_name='image',
+                                 on_delete=models.CASCADE)
+
+
+class GalleriePerso(models.Model):
+    nom_perso = models.CharField(max_length=500)
+
+
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

@@ -130,11 +130,15 @@ def creer_fiche(request):
             if not(utilisateur.has_perm('fiches.equipement_ok')):
                 data['equipement'] = None
                 data['inventaire_fdg'] = None
+                data['gallerie'] = None
             else:
                 data['inventaire'] = None
                 name = data['prenom']
                 data['equipement'] = Equipement.objects.create(nom='Equipement de '+name).id
                 data['inventaire_fdg'] = Inventaire.objects.create(nom='Inventaire de '+name).id
+                path = "%s/" % (settings.MEDIA_ROOT)
+                noms = '%s_%s' % (name, data['nom'])
+                data['gallerie'] = GalleriePerso.objects.create(nom_perso=noms).id
             # get the completed form
             form = FicheForm(data, request.FILES)
             if form.is_valid():
@@ -150,7 +154,7 @@ def creer_fiche(request):
         return render(request, 'fiches/formulaire.html', context)
 
     else:
-        return HttpResponse("Vous ne pouvez pas faire plus de quinze fiches. Seuls les membres des Fils de Garithos le peuvent.")
+        return HttpResponse("Vous ne pouvez pas faire plus de six fiches. Seuls les membres des Fils de Garithos le peuvent.")
 
 
 # Display the request Fiche
@@ -192,6 +196,10 @@ def detail_fiche(request, fiche_id):
         emp, eam, eaa, etete, eepaules = None, None, None, None, None
         etorse, emains, etaille, ejambes = None, None, None, None
         edos, ecou, epoignets, epieds = None, None, None, None
+    if fiche.gallerie:
+        images = fiche.gallerie.image.all()
+    else:
+        images = None
     context = {'fiche': fiche,
                'range': range(nb), 'effets': effets, 'effets_ig': effets_ig,
                'force': force, 'intell': intell, 'agi': agi,
@@ -203,7 +211,7 @@ def detail_fiche(request, fiche_id):
                'emp': emp, 'eam': eam, 'eaa': eaa, 'etete': etete, 'eepaules': eepaules,
                'etorse': etorse, 'emains': emains, 'etaille': etaille, 'ejambes': ejambes,
                'edos': edos, 'ecou': ecou, 'epoignets': epoignets, 'epieds': epieds,
-               'utilisateur': utilisateur}
+               'utilisateur': utilisateur, 'images': images}
     return render(request, 'fiches/detail.html', context)
 
 
@@ -367,6 +375,55 @@ def mes_persos(request):
     context = {'utilisateur': utilisateur, 'user': user}
     return render(request, 'fiches/mes_personnages.html',
                   context)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def creer_gallerie(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    if request.user == fiche.createur and not fiche.gallerie:
+        path = "%s/" % (settings.MEDIA_ROOT)
+        noms = '%s_%s' % (fiche.prenom, fiche.nom)
+        gallerie_creee = GalleriePerso.objects.create(nom_perso=noms)
+        fiche.gallerie = gallerie_creee
+        fiche.save()
+        return redirect('detail_fiche', fiche_id=fiche_id)
+    else:
+        return HttpResponse(status=403)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def image_perso(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    if request.user == fiche.createur:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            noms = '%s_%s' % (fiche.prenom, fiche.nom)
+            data['nom_perso'] = ''.join(e for e in noms if e.isalnum())
+            data['gallerie'] = fiche.gallerie.id
+            form = ImagePersoForm(data, request.FILES)
+            if form.is_valid():
+                save_it = form.save()
+                return redirect('detail_fiche', fiche_id=fiche_id)
+            else:
+                print(form.errors)
+        else:
+            form = ImagePersoForm()
+        context = {'form': form, 'fiche': fiche}
+        return render(request, 'fiches/image.html', context)
+    else:
+        return HttpResponse(status=403)
+
+
+@permission_required('fiches.fdg', raise_exception=True)
+def upload_gallery_perso(request, fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    if request.user == fiche.createur:
+        context = {'fiche': fiche}
+        images = fiche.gallerie.image.all()
+        context = {'images_list': images, 'fiche': fiche}
+        return render(request, 'fiches/up_gallery.html', context)
+    else:
+        return HttpResponse(status=403)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -1227,7 +1284,7 @@ def tooltip_sort(request, sort_id):
     return render(request, 'site/tooltip_sort.html', context)
 
 
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
 @permission_required('fiches.fdg', raise_exception=True)
 def image(request):

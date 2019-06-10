@@ -43,7 +43,8 @@ class FicheForm(ModelForm):
                   'pseudo_du_personnage',
                   'afficher_pseudo', 'afficher_createur',
                   'afficher_inventaire', 'afficher_bourse', 'image', 'main_dir',
-                  'inventaire_fdg', 'equipement', 'bourse', 'createur']
+                  'inventaire_fdg', 'equipement', 'bourse', 'createur',
+                  'gallerie']
         widgets = {'createur': forms.HiddenInput(),
                    'inventaire': forms.Textarea(),
                    'description': forms.Textarea(),
@@ -59,6 +60,24 @@ class FicheForm(ModelForm):
                    'main_dir': forms.RadioSelect(),
                    'equipement': forms.HiddenInput(),
                    'bourse': forms.HiddenInput(), }
+
+
+class ImagePersoForm(ModelForm):
+
+    class Meta:
+        model = ImagePerso
+        fields = '__all__'
+        widgets = {'nom_perso': forms.HiddenInput(),
+                   'definition': forms.Textarea(),
+                   'gallerie': forms.HiddenInput(), }
+
+
+class GalleriePersoForm(ModelForm):
+
+    class Meta:
+        model = GalleriePerso
+        fields = '__all__'
+
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

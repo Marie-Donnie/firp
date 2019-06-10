@@ -1,0 +1,49 @@
+{% extends "site/base.html" %}
+
+{% load staticfiles %}
+{% load static %}
+{% load filters %}
+
+{% block title %}Gallerie de {{ fiche.prenom }} {{ fiche.nom }}{% endblock %}
+{% block contenu_header %}{% endblock %}
+{% block page-title %}<a href="{% url 'detail_fiche' fiche.id %}">Revenir à la fiche</a>{% endblock %}
+{% block content %}
+
+  <!-- Link to my css -->
+  <link rel="stylesheet" href="{%static 'site/site.css' %}">
+
+  <title>Gallerie</title>
+</head>
+<body>
+  <!-- <div id="centre"> -->
+  <!--   <form action="{% url 'rechercher_gallerie' %}" method="GET"> -->
+  <!--     <input type="text" name="recherche"><br> -->
+  <!--     <input type="submit" value="Chercher"> -->
+  <!--   </form> -->
+  <!-- </div> -->
+
+  <div id="body">
+    {% if user.is_authenticated and perms.fiches.fdg %}
+    {% if user.id == fiche.createur.id %}
+    <a class="btn btn-default" id="center" href="{% url 'image_perso_upload' fiche.id %}">Télécharger</a>
+    {% endif %}
+    {% endif %}
+    {% if images_list %}
+    <div class="gallery">
+    {% for image in images_list %}
+    <div class="icones-text">
+    <img class="icones" id="centre" src="{{image.image.url}}" alt="{{image}}"><br>
+    <span id="center">{{ image.definition }}</span>
+    </div>
+
+    {% endfor %}
+    <div class="clear"></div>
+
+    {% else %}
+    <p>Aucune image</p>
+    {% endif %}
+
+  </div>
+</body>
+
+  {% endblock %}
