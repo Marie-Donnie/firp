@@ -84,10 +84,11 @@ class Personnage(models.Model):
                           )),
                           default="p")
     talents = models.ManyToManyField('Talents')
-    inventaire = models.CharField(max_length=6000,
-                                  null=True,
-                                  blank=True,
-                                  default='Sans')
+    inventaire = models.OneToOneField('Inventaire',
+                                      blank=True,
+                                      null=True,
+                                      related_name='proprietaire',
+                                      on_delete=models.SET_NULL)
     equipement = models.CharField(max_length=6000,
                                   null=True,
                                   blank=True,
@@ -113,6 +114,43 @@ class Talent(models.Model):
     class Meta:
         ordering = ["nom"]
         default_related_name = "avantage"
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
+
+class Inventaire(models.Model):
+    nom = models.CharField(max_length=50,
+                           default="Inventaire ")
+    cases = models.ManyToManyField(Case,
+                                   related_name='inventaire')
+
+    class Meta:
+        verbose_name = "inventaire"
+        verbose_name_plural = "inventaires"
+        default_related_name = 'inventaire'
+        permissions = (("inventaire_ok",
+                        "Peut faire des inventaires"),)
+
+    def __unicode__(self):
+        return u'%s' % (self.nom)
+
+
+class Equipement(models.Model):
+    nom = models.CharField(max_length=75)
+    description = models.CharField(max_length=500,
+                                   default='Aucune')
+    sd = models.IntegerField(default=0)
+    etat = IntegerRangeField(default=0, min_value=0,
+                               max_value=100)
+
+    class Meta:
+        ordering = ["nom"]
+        verbose_name = "equipement"
+        verbose_name_plural = "equipements"
+        default_related_name = "equipement"
+        permissions = (("equipement_ok",
+                        "Peut faire des equipements"),)
 
     def __unicode__(self):
         return u'%s' % (self.nom)
