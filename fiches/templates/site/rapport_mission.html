@@ -16,7 +16,7 @@
 <meta property="og:description" content="{{ mission.get_type_mis_display }} - Objectif : {{ mission.objectif|linebreaksbr }} Déroulement : {{ mission.deroulement|linebreaksbr }}" />
 {% endblock %}
 
-{% block page-title %}<a href="{% url 'campagnes' %}">Campagnes</a>{% endblock %}
+{% block page-title %}<a href="{% url 'campagne' mission.operation.id %}">{{mission.operation}}</a>{% endblock %}
 
 {% block content %}
 
