@@ -15,7 +15,7 @@
 
 <div class="campaign-body">
 
-
+{{ campagne }}
   <div class="fond">
     <div id="char_form">
       <form enctype="multipart/form-data" action="" method="post" class="form-horizontal">
@@ -23,8 +23,8 @@
 
     <div class="form-group">
       <label for="id_operation">Operation&nbsp;:</label> <select name="operation" id="id_operation">
-    	{% for campagne in campagnes %}
-    	<option value="{{campagne.id}}"{% if campagne.id == form.operation.value %} selected="" {% endif %}>{{campagne.nom}}</option>
+    	{% for campagn in campagnes %}
+    	<option value="{{campagn.id}}"{% if campagn.id == campagne.id %} selected="" {% endif %}>{{campagn.nom}}</option>
     	{% endfor %}
       </select>
       <label for="id_numero">Numéro&nbsp;:</label>

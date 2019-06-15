@@ -1166,7 +1166,7 @@ def mission(request, campagne_id, mission_id):
 
 # Enables the creation of missions for players
 @permission_required('fiches.fdg', raise_exception=True)
-def creer_mission(request):
+def creer_mission(request, campagne_id):
     # Collects the choices for leaders, enabling the sorting by likeliness to lead
     caporals = Fiche.objects.filter(titre__iexact='caporal')
     sergents = Fiche.objects.filter(titre__iexact='sergent')
@@ -1178,6 +1178,7 @@ def creer_mission(request):
     autres = Fiche.objects.filter(zone_de_residence=23).order_by('nom', 'prenom')
     # Gets the choices for campaigns
     campagnes = Operation.objects.all()
+    campagne = Operation.objects.get(pk=campagne_id)
     if request.method == 'POST':
         form = MissionForm(request.POST)
         if form.is_valid():
@@ -1193,7 +1194,7 @@ def creer_mission(request):
                'lieutenants': lieutenants, 'capitaines': capitaines,
                'generals': generals, 'colonels': colonels,
                'autres': autres, 'campagnes': campagnes,
-               'index_url': index_url}
+               'index_url': index_url, 'campagne': campagne}
     return render(request, 'site/mission_edit.html', context)
 
 
@@ -1227,7 +1228,7 @@ def edit_mission(request, mission_id):
                'lieutenants': lieutenants, 'capitaines': capitaines,
                'generals': generals, 'colonels': colonels,
                'autres': autres, 'campagnes': campagnes,
-               'index_url': index_url}
+               'index_url': index_url, 'campagne': mission.operation}
     return render(request, 'site/mission_edit.html', context)
 
 

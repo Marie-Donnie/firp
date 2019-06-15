@@ -107,7 +107,7 @@ urlpatterns = [
     url(r'^campagnes/(?P<campagne_id>\d+)/$', views.campagne, name='campagne'),
     url(r'^campagnes/(?P<campagne_id>\d+)/(?P<mission_id>\d+)/$', views.mission,
         name='mission'),
-    url(r'^campagnes/creer_mission/$', views.creer_mission, name='creer_mission'),
+    url(r'^campagnes/creer_mission/(?P<campagne_id>\d+)/$', views.creer_mission, name='creer_mission'),
     url(r'^campagnes/editer_mission/(?P<mission_id>\d+)/$', views.edit_mission, name='editer_mission'),
     # Sorts
     url(r'^classes/$', views.classes, name='classes'),
