@@ -299,7 +299,8 @@ class Fiche(models.Model):
 
 
 class ImagePerso(models.Model):
-    source = models.CharField(max_length=500)
+    source = models.CharField(max_length=500,
+                              default='Sans')
     nom_perso = models.CharField(max_length=500)
     definition = models.CharField(max_length=500,
                                   default='Une image du personnage')

@@ -802,3 +802,8 @@ h3.panel-title {
     object-fit: cover;
     border-radius: 50%;
 }
+
+.image-gallerie {
+    max-width: 75vw;
+    max-height: 75vh;
+}
