@@ -1,0 +1,35 @@
+.edit-controls {
+  position: absolute;
+  right: 5px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
+  text-align: center;
+  background: #333;
+  color: #fff;
+  border: 1px solid #666;
+}
+
+textarea.invalid {
+  background: #411;
+  border: 1px solid #b00;
+}
+
+button:disabled {
+  color: #888;
+}
+
+button.edit {
+  visibility: hidden;
+}
+
+.panel.editable:hover button.edit {
+  visibility: visible;
+}
+
+.panel.editable .panel-heading {
+  position: relative;
+}

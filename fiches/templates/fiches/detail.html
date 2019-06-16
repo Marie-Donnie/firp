@@ -5,34 +5,9 @@
 {% load static %}
 
 {% block css %}
-<style>
-textarea {
-  width: 100%;
-  height: 100px;
-  resize: vertical;
-  text-align: center;
-  background: #333;
-  color: #fff;
-  border: 1px solid #666;
-}
-
-textarea.invalid {
-  background: #411;
-  border: 1px solid #b00;
-}
-
-button:disabled {
-  color: #888;
-}
-
-button.edit {
-  visibility: hidden;
-}
-
-.panel.editable:hover button.edit {
-  visibility: visible;
-}
-</style>
+{% if user.is_authenticated %}
+<link rel="stylesheet" href="{% static 'widgets/live-edit.css' %}">
+{% endif %}
 {% endblock %}
 
 {% block script %}
@@ -135,64 +110,11 @@ $(function () {
     }
   });
 
-  // Start editing the component
-  // TODO: include only when authenticated with editing rights?
-  function edit(root) {
-    const controls = root.find('.edit-controls')
-    const content_holder = root.find('.edit-content')
-    const endpoint = root.data('endpoint')
-
-    // Pull content from div
-    const content = content_holder
-          .html()
-          .replace(/<br>/g, '\n')
-          .trim()
-
-    // Replace by textarea
-    const textarea = $('<textarea>')
-          .val(content)
-          .on('input', _ => enable_save())
-    content_holder.html(textarea)
-
-    // Replace the controls
-    const old_controls = controls.html()
-    const new_controls = $(
-      `<button class="cancel">Annuler</button>
-       <button class="save" disabled>Enregistrer</button>`)
-    $(new_controls[0])
-      .on('click', _ => restore())
-    const save_button = $(new_controls[2])
-      .on('click', _ => save())
-    controls.html(new_controls)
-
-    // Enable the save button
-    function enable_save() {
-      save_button.prop('disabled', false)
-    }
-
-    // Send the text content of EL to the server for saving.
-    function save() {
-      const newcontent = textarea.val().trim()
-      $.post(endpoint, {content: newcontent})
-        .done(_ => {
-          restore(newcontent)
-          // TODO: maybe flash green?
-        })
-        .fail(_ => {
-          textarea.addClass('invalid')
-        })
-
-      // TODO: on error, include error message
-    }
-
-    // Restore controls and content
-    function restore(newcontent = content) {
-      controls.html(old_controls)
-      content_holder.html(newcontent.replace(/\n/g, '<br>'))
-    }
-  }
-
 </script>
+
+{% if user.is_authenticated %}
+<script src="{% static 'widgets/live-edit.js' %}"></script>
+{% endif %}
 {% endblock %}
 
 {% block contenu_header %}
@@ -299,38 +221,12 @@ $(function () {
     </a>
   </div>
 
-  <div class="panel panel-defaut details-panels editable"
-       data-endpoint="{% url 'edit_fiche_description' fiche.id %}">
-    <div class="panel-heading">
-      <h3 class="panel-title">Description</h3>
-      {% if user.is_authenticated %}
-      <div class="edit-controls">
-        <button class="edit" onclick="edit($(this).closest('.panel'))">Editer</button>
-      </div>
-      {% endif %}
-    </div>
-    <div class="panel-body centre">
-      <div class="edit-content">
-        {{fiche.description|linebreaksbr}}
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-defaut details-panels editable"
-       data-endpoint="{% url 'edit_fiche_historique' fiche.id %}">
-    <div class="panel-heading">
-      <h3 class="panel-title">Historique</h3>
-      {% if user.is_authenticated %}
-      <div class="edit-controls">
-        <button class="edit" onclick="edit($(this).closest('.panel'))">Editer</button>
-      </div>
-      {% endif %}
-    </div>
-    <div class="panel-body centre">
-      <div class="edit-content">
-        {{fiche.historique|linebreaksbr}}
-      </div>
-    </div>
-  </div>
+  {% url 'edit_fiche_description' fiche.id as desc_endpoint %}
+  {% include "widgets/editable-textarea.html" with title="Description" content=fiche.description endpoint=desc_endpoint %}
+
+  {% url 'edit_fiche_historique' fiche.id as histo_endpoint %}
+  {% include "widgets/editable-textarea.html" with title="Historique" content=fiche.historique endpoint=histo_endpoint %}
+
   {% if fiche.relations != 'Aucune' %}
   <div class="col-md-6">
     <div class="panel panel-defaut details-panels">
