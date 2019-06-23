@@ -29,6 +29,17 @@ class FicheAdmin(admin.ModelAdmin):
 admin.site.register(Fiche, FicheAdmin)
 
 
+class GalleriePersoAdmin(admin.ModelAdmin):
+    list_display = ('nom_perso', 'id')
+
+admin.site.register(GalleriePerso, GalleriePersoAdmin)
+
+class ImagePersoAdmin(admin.ModelAdmin):
+    list_display = ('nom_perso', 'id')
+
+admin.site.register(ImagePerso, ImagePersoAdmin)
+
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 class ObjetAdmin(admin.ModelAdmin):
     list_display = ('nom', 'qualite', 'id')

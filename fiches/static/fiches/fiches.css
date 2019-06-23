@@ -807,3 +807,8 @@ h3.panel-title {
     max-width: 75vw;
     max-height: 75vh;
 }
+
+
+.carousel-caption {
+    text-shadow: 0 1px 2px rgb(0, 0, 0);
+}

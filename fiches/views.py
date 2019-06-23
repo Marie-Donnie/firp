@@ -278,15 +278,20 @@ def edit_fiche(request, fiche_id):
                 data['inventaire_fdg'] = None
             else:
                 data['inventaire'] = None
+                name = data['prenom']
                 if fiche.equipement and fiche.inventaire_fdg :
                     data['equipement'] = fiche.equipement.id
                     data['inventaire_fdg'] = fiche.inventaire_fdg.id
                 else:
-                    name = data['prenom']
                     if not fiche.equipement:
                         data['equipement'] = Equipement.objects.create(nom='Equipement de '+name).id
                     if not fiche.inventaire_fdg:
                         data['inventaire_fdg'] = Inventaire.objects.create(nom='Inventaire de '+name).id
+                if fiche.gallerie :
+                    data['gallerie'] = fiche.gallerie.id
+                else:
+                    noms = '%s_%s' % (name, data['nom'])
+                    data['gallerie'] = GalleriePerso.objects.create(nom_perso=noms).id
             # Remove the previous image if a new one is uploaded
             if 'image' in request.FILES:
                 path = "%s/" % (settings.MEDIA_ROOT)
