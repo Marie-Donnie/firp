@@ -1,0 +1,15 @@
+<div class="panel panel-defaut details-panels editable" data-endpoint="{{ endpoint }}">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ title }}</h3>
+    {% if user.is_authenticated %}
+    <div class="edit-controls">
+      <button class="edit" onclick="edit($(this).closest('.panel'))">Éditer</button>
+    </div>
+    {% endif %}
+  </div>
+  <div class="panel-body centre">
+    <div class="edit-content">
+      {{ content|linebreaksbr }}
+    </div>
+  </div>
+</div>

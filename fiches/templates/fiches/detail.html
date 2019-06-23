@@ -4,105 +4,117 @@
 {% load filters %}
 {% load static %}
 
+{% block css %}
+{% if user.is_authenticated %}
+<link rel="stylesheet" href="{% static 'widgets/live-edit.css' %}">
+{% endif %}
+{% endblock %}
+
 {% block script %}
+<script>
 $(function () {
 
-/* Well, that's more complicated than it should.
- * When mousing over an object, we want to display a tooltip with the object info.
- * But, that info is not in the page, so we need to get it with an ajax call.
- * Only after the ajax call succeedd we build the Bootstrap tooltip.  However,
- * if the mouse is still over the object, the tooltip doesn't show because the
- * listeners for the tooltip are not triggered.  We have to keep track ourselves
- * of whether the mouse is still on the object using two additional listeners.
- * Once the tooltip is built and shown (or not), we can destroy all this machinery
- * and let Bootstrap tooltip handle the rest.
- */
-$('[data-toggle="objet-tooltip"]').on('mouseenter', getTooltip)
-$('[data-toggle="objet-tooltip"]').on('mouseenter', onMouseEnter)
-$('[data-toggle="objet-tooltip"]').on('mouseleave', onMouseLeave)
+  /* Well, that's more complicated than it should.
+   * When mousing over an object, we want to display a tooltip with the object info.
+   * But, that info is not in the page, so we need to get it with an ajax call.
+   * Only after the ajax call succeedd we build the Bootstrap tooltip.  However,
+   * if the mouse is still over the object, the tooltip doesn't show because the
+   * listeners for the tooltip are not triggered.  We have to keep track ourselves
+   * of whether the mouse is still on the object using two additional listeners.
+   * Once the tooltip is built and shown (or not), we can destroy all this machinery
+   * and let Bootstrap tooltip handle the rest.
+   */
+  $('[data-toggle="objet-tooltip"]').on('mouseenter', getTooltip)
+  $('[data-toggle="objet-tooltip"]').on('mouseenter', onMouseEnter)
+  $('[data-toggle="objet-tooltip"]').on('mouseleave', onMouseLeave)
 
-function getTooltip() {
-  var elem = this;
-  var enchant = $(elem).data('enchantement');
-  var enchantPath = enchant ? enchant + '/' : '';
-  var tooltipUrl = elem.getAttribute('href') + enchantPath + 'tooltip/';
-  $(elem).off('mouseenter', getTooltip);
-  $.ajax(tooltipUrl)
-  .done(function(data) {
-    $(elem).tooltip({html: true, placement: 'top', title: data});
-    if ($(elem).data("isMouseOnUs")) {
-      $(elem).tooltip('show');
-    }
-    $(elem).off('mouseenter', onMouseEnter);
-    $(elem).off('mouseleave', onMouseLeave);
-  });
-}
+  function getTooltip() {
+    var elem = this;
+    var enchant = $(elem).data('enchantement');
+    var enchantPath = enchant ? enchant + '/' : '';
+    var tooltipUrl = elem.getAttribute('href') + enchantPath + 'tooltip/';
+    $(elem).off('mouseenter', getTooltip);
+    $.ajax(tooltipUrl)
+      .done(function(data) {
+        $(elem).tooltip({html: true, placement: 'top', title: data});
+        if ($(elem).data("isMouseOnUs")) {
+          $(elem).tooltip('show');
+        }
+        $(elem).off('mouseenter', onMouseEnter);
+        $(elem).off('mouseleave', onMouseLeave);
+      });
+  }
 
-function onMouseEnter() {
-  $(this).data("isMouseOnUs", true);
-}
+  function onMouseEnter() {
+    $(this).data("isMouseOnUs", true);
+  }
 
-function onMouseLeave() {
-  $(this).data("isMouseOnUs", false)
-}
+  function onMouseLeave() {
+    $(this).data("isMouseOnUs", false)
+  }
 
 });
 
-function getCookie(name) {
-var cookieValue = null;
-if (document.cookie && document.cookie != '') {
-var cookies = document.cookie.split(';');
-for (var i = 0; i < cookies.length; i++) {
-		    var cookie = jQuery.trim(cookies[i]);
-		    // Does this cookie string begin with the name we want?
-		    if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-		    }
-		    }
-		    }
-		    return cookieValue;
-		    }
-		    var csrftoken = getCookie('csrftoken');
-		    function update_number(elem) {
-		    var url = $(elem).data("action")
-		    var div = $(elem).closest(".number-inventory")
-		    var nombre = +div.attr("data-number")
-		    var segments = url.split("/")
-		    var delta = +segments.pop()
-		    var nouveau_nombre = nombre+delta
-		    segments.push(nouveau_nombre)
-		    var url_finale = segments.join("/")
-		    $.post(url_finale, null, function(result) {
-		    div.attr("data-number", nouveau_nombre)
-		    div.find(".bottomright").text(nouveau_nombre)
-		    })
-		    }
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
 
-		    function delete_case(elem) {
-		    var url = $(elem).data("action")
-		    $.ajax(url,
-		    {
-		    type: 'DELETE',
-		    success: function(result) {
-		    var div = $(elem).closest(".number-inventory")
-		    div.replaceWith('<img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">')
-		    }})
-		    }
+  var csrftoken = getCookie('csrftoken');
+  function update_number(elem) {
+    var url = $(elem).data("action")
+    var div = $(elem).closest(".number-inventory")
+    var nombre = +div.attr("data-number")
+    var segments = url.split("/")
+    var delta = +segments.pop()
+    var nouveau_nombre = nombre+delta
+    segments.push(nouveau_nombre)
+    var url_finale = segments.join("/")
+    $.post(url_finale, null, function(result) {
+      div.attr("data-number", nouveau_nombre)
+      div.find(".bottomright").text(nouveau_nombre)
+    })
+  }
 
-	function csrfSafeMethod(method) {
+  function delete_case(elem) {
+    var url = $(elem).data("action")
+    $.ajax(url, {
+      type: 'DELETE',
+      success: function(result) {
+	var div = $(elem).closest(".number-inventory")
+	div.replaceWith('<img class="media-object" src="/fiches/media/images/site/UI-EmptySlot-White.PNG" alt="Vide" id="icone">')
+      }})
+  }
+
+  function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-			    }
+  }
 
-			    $.ajaxSetup({
+  $.ajaxSetup({
     beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
+      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
     }
-});
+  });
 
+</script>
+
+{% if user.is_authenticated %}
+<script src="{% static 'widgets/live-edit.js' %}"></script>
+{% endif %}
 {% endblock %}
 
 {% block contenu_header %}
@@ -209,22 +221,12 @@ for (var i = 0; i < cookies.length; i++) {
     </a>
   </div>
 
-  <div class="panel panel-defaut details-panels">
-    <div class="panel-heading">
-      <h3 class="panel-title">Description</h3>
-    </div>
-    <div class="panel-body centre">
-      {{fiche.description|linebreaksbr}}
-    </div>
-  </div>
-  <div class="panel panel-defaut details-panels">
-    <div class="panel-heading">
-      <h3 class="panel-title">Historique</h3>
-    </div>
-    <div class="panel-body centre">
-      {{fiche.historique|linebreaksbr}}
-    </div>
-  </div>
+  {% url 'edit_fiche_description' fiche.id as desc_endpoint %}
+  {% include "widgets/editable-textarea.html" with title="Description" content=fiche.description endpoint=desc_endpoint %}
+
+  {% url 'edit_fiche_historique' fiche.id as histo_endpoint %}
+  {% include "widgets/editable-textarea.html" with title="Historique" content=fiche.historique endpoint=histo_endpoint %}
+
   {% if fiche.relations != 'Aucune' %}
   <div class="col-md-6">
     <div class="panel panel-defaut details-panels">

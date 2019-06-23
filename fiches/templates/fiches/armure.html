@@ -20,9 +20,7 @@
       </select>
     </div>
     <div class="form-group">
-
-      <label for="id_effet">Effet&nbsp;:</label> <textarea name="effet" required="" id="id_effet" maxlength="400" class="form-control" rows="5" cols="20" maxlength="300" onkeyup="countChars('id_effet','charcount1');" onkeydown="countChars('id_effet','charcount1');" onmouseout="countChars('id_effet','charcount1');">{{form.effet.value|default_if_none:'Aucun'}}</textarea>
-<span id="helpBlock" class="help-block">Limité à 400 caractères (<span id="charcount1">0</span>/400).</span>
+      {% include "field_snippet.html" with field=form.effet %}
     </div>
     <div class="form-group">
       <label for="id_effet_ig">Effet ig&nbsp;:</label> <input name="effet_ig" value="{{form.effet_ig.value|default_if_none:'Aucun'}}" required="" id="id_effet_ig" maxlength="400" class="form-control" type="text">
@@ -76,6 +74,6 @@
     <input class="btn btn-default" type="submit" value="Valider" />
   </form>
 
-
+{{ form.media }}
 
   {% endblock %}

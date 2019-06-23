@@ -102,8 +102,8 @@ class Personnage(models.Model):
         ordering = ["nom", "prenom"]
         permissions = (("fallout", "A accès à fallout"),)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Talent(models.Model):
@@ -115,9 +115,8 @@ class Talent(models.Model):
         ordering = ["nom"]
         default_related_name = "avantage"
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
-
+    def __str__(self):
+        return '%s' % (self.nom)
 
 class Inventaire(models.Model):
     nom = models.CharField(max_length=50,
@@ -132,8 +131,8 @@ class Inventaire(models.Model):
         permissions = (("inventaire_ok",
                         "Peut faire des inventaires"),)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Equipement(models.Model):
@@ -152,5 +151,5 @@ class Equipement(models.Model):
         permissions = (("equipement_ok",
                         "Peut faire des equipements"),)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)

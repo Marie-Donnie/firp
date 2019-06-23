@@ -75,4 +75,4 @@ element was cloned with data - which should be the case.
     }
 
     document.csrftoken = getCookie('csrftoken');
-})(yl.jQuery);
+})(jQuery);

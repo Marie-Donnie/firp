@@ -294,8 +294,8 @@ class Fiche(models.Model):
                        ("chef",
                         "Est chef"),)
 
-    def __unicode__(self):
-        return u'%s %s' % (self.nom, self.prenom)
+    def __str__(self):
+        return '%s %s' % (self.nom, self.prenom)
 
 
 class ImagePerso(models.Model):
@@ -374,8 +374,8 @@ class Objet(models.Model):
     def has_equipement(self):
         return hasattr(self, 'armure')
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Armure(models.Model):
@@ -446,8 +446,8 @@ class Inventaire(models.Model):
         permissions = (("inventaire_ok",
                         "Peut faire des inventaires"),)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Equipement(models.Model):
@@ -574,8 +574,8 @@ class Equipement(models.Model):
             run_compte = True
         return effets, effets_ig, force, intell, agi, armure, runique, terradiance
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Enchantement(models.Model):
@@ -598,8 +598,8 @@ class Enchantement(models.Model):
                                  related_name='enchantement',
                                  on_delete=models.SET_NULL)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% QUETES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -658,8 +658,8 @@ class Quete(models.Model):
         permissions = (("quete_ok",
                         "Peut prendre des quêtes"),)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% RAPPORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -678,8 +678,8 @@ class Operation(models.Model):
         verbose_name_plural = "opérations"
         default_related_name = 'opération'
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Mission(models.Model):
@@ -698,8 +698,8 @@ class Mission(models.Model):
                                         blank=True,
                                         related_name='autre_dirigeant',
                                         on_delete=models.SET_NULL)
-    numero = models.SmallIntegerField(default=0)
-    lieu = models.CharField(max_length=100)
+    numero = models.PositiveSmallIntegerField(default=1)
+    lieu = models.CharField(max_length=100, default='Aucun')
     jour = IntegerRangeField(default='1', min_value=1,
                              max_value=31)
     mois = IntegerRangeField(default='1', min_value=1,
@@ -728,9 +728,9 @@ class Mission(models.Model):
         (19, 'Opération clandestine')
     ],
                                         default=8)
-    objectif = models.CharField(max_length=300)
-    participants = models.CharField(max_length=500)
-    deroulement = models.CharField(max_length=6000)
+    objectif = models.CharField(max_length=300, default='Aucun')
+    participants = models.CharField(max_length=500, default='Aucun')
+    deroulement = models.CharField(max_length=6000, default='-')
     signature_url = models.CharField(max_length=100,
                                      default="c: L. Vaanes")
 
@@ -740,8 +740,8 @@ class Mission(models.Model):
         verbose_name_plural = "missions"
         default_related_name = 'mission'
 
-    def __unicode__(self):
-        return u'%s' % (self.operation.nom + " : " + self.lieu + ", le " + str(self.jour) + "." + str(self.mois) + "." + str(self.annee))
+    def __str__(self):
+        return '%s : %s, le %d . %d . %d' % (self.operation.nom, self.lieu, self.jour, self.mois, self.annee)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% SORTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -754,8 +754,8 @@ class Classe(models.Model):
     fond_url = models.CharField(max_length=50,
                                  default='paladin')
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 class Sort(models.Model):
     nom = models.CharField(max_length=50)
@@ -784,8 +784,8 @@ class Sort(models.Model):
     image_url = models.CharField(max_length=50,
                                  default='WoWUnknownItem01')
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% IMAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -794,8 +794,8 @@ class Image(models.Model):
     nom = models.CharField(max_length=50)
     image = models.ImageField(upload_to='images/uploads')
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% COMMERCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -805,8 +805,8 @@ class Bourse(models.Model):
                            default='')
     argent = models.PositiveIntegerField(default=0)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% HABITATIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -823,8 +823,8 @@ class Piece(models.Model):
     image = models.ImageField(upload_to='images/maisons',
                               default='images/site/no-image.png')
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Etage(models.Model):
@@ -839,8 +839,8 @@ class Etage(models.Model):
                                  related_name='etage',
                                  on_delete=models.SET_NULL)
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Maison(models.Model):
@@ -897,8 +897,8 @@ class Maison(models.Model):
     image = models.ImageField(upload_to='images/maisons',
                               default='images/site/no-image.png')
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONSEIL %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -934,8 +934,8 @@ class Legende(models.Model):
         verbose_name_plural = "légendes"
         default_related_name = 'légende'
 
-    def __unicode__(self):
-        return u'%s' % (self.nom)
+    def __str__(self):
+        return '%s' % (self.nom)
 
 
 class Token(models.Model):

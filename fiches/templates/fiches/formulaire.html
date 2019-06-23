@@ -56,12 +56,11 @@
       <label for="id_poids">Poids&nbsp;</label> <input name="poids" value="{{form.poids.value|default:'70'|unlocalize}}" step="any" required="" id="id_poids" type="number"><span>kg</span>
     </div>
     <div class="form-group">
-      <label for="id_c_yeux">Couleur des yeux&nbsp;</label> <input name="c_yeux" required="" id="id_c_yeux" maxlength="30" type="text" value="{{form.c_yeux.value|default_if_none:'Marron'}}">
+      `<label for="id_c_yeux">Couleur des yeux&nbsp;</label> <input name="c_yeux" required="" id="id_c_yeux" maxlength="30" type="text" value="{{form.c_yeux.value|default_if_none:'Marron'}}">
       <label for="id_c_cheveux">Couleur des cheveux&nbsp;</label> <input name="c_cheveux" required="" id="id_c_cheveux" maxlength="30" type="text" value="{{form.c_cheveux.value|default_if_none:'Brun'}}">
     </div>
     <div class="form-group">
-      <label for="id_signes_dis">Signes distinctifs&nbsp;</label> <textarea class="form-control" name="signes_dis" id="id_signes_dis" required="" rows="2" cols="40" maxlength="600" onkeyup="countChars('id_signes_dis','charcount5');" onkeydown="countChars('id_signes_dis,'charcount5');" onmouseout="countChars('id_signes_dis','charcount5');">{{form.signes_dis.value|default:'Aucun'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 600 caractères (<span id="charcount5">0</span>/600).</span>
+      {% include "field_snippet.html" with field=form.signes_dis %}
       </div>
     <div class="form-group">
       <label for="id_profession">Profession&nbsp;</label> <input name="profession" value="{{form.profession.value|default:'Prostipute'}}" required="" id="id_profession" maxlength="75" type="text" size="75">
@@ -70,12 +69,10 @@
       <label for="id_titre">Titre et/ou grade&nbsp;</label> <input name="titre" value="{{form.titre.value|default:'Aucun'}}" required="" id="id_titre" maxlength="75" type="text" size="75">
     </div>
     <div class="form-group">
-      <label for="id_autres_titres">Autres titres&nbsp;</label> <textarea class="form-control" name="autres_titres" id="id_autres_titres" required="" rows="2" cols="40" maxlength="500" onkeyup="countChars('id_autres_titres','charcount6');" onkeydown="countChars('id_autres_titres','charcount6');" onmouseout="countChars('id_autres_titres','charcount6');">{{form.autres_titres.value|default:'Aucun'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 500 caractères (<span id="charcount6">0</span>/500).</span>
+      {% include "field_snippet.html" with field=form.autres_titres %}
     </div>
     <div class="form-group">
-      <label for="id_medailles">Medailles&nbsp;</label> <textarea class="form-control" name="medailles" id="id_medailles" required="" rows="6" cols="40" maxlength="3000" onkeyup="countChars('id_medailles','charcount7');" onkeydown="countChars('id_medailles','charcount7');" onmouseout="countChars('id_medailles','charcount7');">{{form.medailles.value|default:'Non applicable/Aucune'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 3000 caractères (<span id="charcount7">0</span>/3000).</span>
+      {% include "field_snippet.html" with field=form.medailles %}
     </div>
     <div class="form-group">
       <label for="id_jour_de_naissance">Jour de naissance&nbsp;</label> <input name="jour_de_naissance" value="{{form.jour_de_naissance.value|default:'1'}}" max="31" required="" id="id_jour_de_naissance" min="1" type="number">
@@ -433,20 +430,14 @@
       <label for="id_ville_de_residence">Ville de residence&nbsp;</label> <input name="ville_de_residence" value="{{form.ville_de_residence.value|default:'Châtellerie'}}" required="" id="id_ville_de_residence" maxlength="50" type="text" size="50">
     </div>
     <div class="form-group">
-      <label for="id_description">Description&nbsp;</label> <textarea class="form-control" name="description" id="id_description" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_description','charcount1');" onkeydown="countChars('id_description','charcount1');" onmouseout="countChars('id_description','charcount1');">{{form.description.value|default:'A venir'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount1">0</span>/6000).</span>
-      <label for="id_historique">Historique&nbsp;</label> <textarea name="historique" class="form-control" id="id_historique" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_historique','charcount2');" onkeydown="countChars('id_historique','charcount2');" onmouseout="countChars('id_historique','charcount2');">{{form.historique.value|default:'A venir'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount2">0</span>/6000).</span>
-      <label for="id_relations">Relations&nbsp;</label> <textarea name="relations" class="form-control" id="id_relations" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_relations','charcount3');" onkeydown="countChars('id_relations','charcount3');" onmouseout="countChars('id_relations','charcount3');">{{form.relations.value|default:'Aucune'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount3">0</span>/6000).</span>
+      {% include "field_snippet.html" with field=form.description %}
+      {% include "field_snippet.html" with field=form.historique %}
+      {% include "field_snippet.html" with field=form.relations %}
       {% if not perms.fiches.fdg %}
-      <label for="id_inventaire">Inventaire&nbsp;</label> <textarea class="form-control" name="inventaire" id="id_inventaire" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_inventaire','charcount4');" onkeydown="countChars('id_inventaire','charcount4');" onmouseout="countChars('id_inventaire','charcount4');">{{form.inventaire.value|default:'A venir'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount4">0</span>/6000).</span>
+      {% include "field_snippet.html" with field=form.inventaire %}
       {% endif %}
-      <label for="id_competences">Compétences&nbsp;</label> <textarea name="competences" class="form-control" id="id_competences" required="" rows="10" cols="40" maxlength="6000" onkeyup="countChars('id_competences','charcount8');" onkeydown="countChars('id_competences','charcount8');" onmouseout="countChars('id_competences','charcount8');">{{form.competences.value|default:'Aucune'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 6000 caractères (<span id="charcount8">0</span>/6000).</span>
-      <label for="id_autres_informations">Autres informations&nbsp;</label> <textarea name="autres_informations" class="form-control" id="id_autres_informations" required="" rows="5" cols="40" maxlength="600" onkeyup="countChars('id_autres_informations','charcount9');" onkeydown="countChars('id_autres_informations','charcount9');" onmouseout="countChars('id_autres_informations','charcount9');">{{form.autres_informations.value|default:'Aucune'}}</textarea>
-      <span id="helpBlock" class="help-block">Limité à 600 caractères (<span id="charcount9">0</span>/600).</span>
+      {% include "field_snippet.html" with field=form.competences %}
+      {% include "field_snippet.html" with field=form.autres_informations %}
     </div>
     <div class="form-group">
       <span id="description"><b>Type de personnage </b></span>
@@ -489,4 +480,7 @@
     <input class="btn btn-default" type="submit" value="Valider" />
 </div>
 </form>
+
+{{ form.media }}
+
 {% endblock %}

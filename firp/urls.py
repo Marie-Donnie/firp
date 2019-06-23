@@ -29,6 +29,10 @@ urlpatterns = [
         name='mes_personnages'),
     url(r'^fiches/(?P<fiche_id>\d+)/$', views.detail_fiche,
         name='detail_fiche'),
+    url(r'^fiches/(?P<fiche_id>\d+)/description/edit$', views.edit_fiche_description,
+        name='edit_fiche_description'),
+    url(r'^fiches/(?P<fiche_id>\d+)/historique/edit$', views.edit_fiche_historique,
+        name='edit_fiche_historique'),
     url(r'^fiches/editer_fiche/(?P<fiche_id>\d+)/$', views.edit_fiche,
         name='editer_fiche'),
     url(r'^fiches/supprimer_fiche/(?P<fiche_id>\d+)/$', views.delete_fiche,
@@ -141,9 +145,6 @@ urlpatterns = [
         name='delete_token'),
     # Utils
     url(r'^compter_boutiques/$', views.compter_boutiques, name='boutiques'),
-    # Autocomplete
-    url(r'^fiche-autocomplete/$', views.FicheAutocomplete.as_view(),
-        name='fiche-autocomplete'),
 ]
 
 if settings.DEBUG:
