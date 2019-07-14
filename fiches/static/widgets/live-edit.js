@@ -37,8 +37,10 @@ function edit(root) {
     const newcontent = textarea.val().trim()
     $.post(endpoint, {content: newcontent})
       .fail(_ => {
-        textarea.addClass('invalid')
-        // TODO: on error, include error message
+	  controls.html(new_controls)
+	  content_holder.html(textarea)
+          textarea.addClass('invalid')
+          // TODO: on error, include error message
       })
 
     restore(newcontent)

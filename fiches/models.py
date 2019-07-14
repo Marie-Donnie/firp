@@ -231,7 +231,8 @@ class Fiche(models.Model):
     main_dir = models.CharField(max_length=1,
                                 choices=((
                                     ('g', "Gauche"),
-                                    ('d', "Droite")
+                                    ('d', "Droite"),
+                                    ('a', "Ambidextre"),
                                 )),
                                 default="d")
     afficher_createur = models.BooleanField(default=True,

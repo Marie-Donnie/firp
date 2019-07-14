@@ -49,6 +49,9 @@
       <label class="radio-inline" for="id_main_dir">
 	<input type="radio" name="main_dir" id="id_main_dir" value="d" {% if form.main_dir.value == 'd' or form.main_dir.value == 'Droite' or form.main_dir.value == None %} checked="checked" {% endif %}> Droite
       </label>
+      <label class="radio-inline" for="id_main_dir">
+	<input type="radio" name="main_dir" id="id_main_dir" value="a" {% if form.main_dir.value == 'a' or form.main_dir.value == 'Ambidextre' or form.main_dir.value == None %} checked="checked" {% endif %}> Ambidextre
+      </label>
     </div>
     <div class="form-group">
       <label for="id_race">Race&nbsp;</label> <input name="race" value="{{form.race.value|default:'Aucun'}}" required="" id="id_race" maxlength="40" type="text">

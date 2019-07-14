@@ -342,6 +342,21 @@ def edit_fiche_description(request, fiche_id):
 def edit_fiche_historique(request, fiche_id):
     return edit_fiche_field('historique', request, fiche_id)
 
+# API point to edit a fiche 'relations'
+@permission_required('fiches.fdg', raise_exception=True)
+def edit_fiche_relations(request, fiche_id):
+    return edit_fiche_field('relations', request, fiche_id)
+
+# API point to edit a fiche 'competences'
+@permission_required('fiches.fdg', raise_exception=True)
+def edit_fiche_competences(request, fiche_id):
+    return edit_fiche_field('competences', request, fiche_id)
+
+# API point to edit a fiche 'medailles'
+@permission_required('fiches.fdg', raise_exception=True)
+def edit_fiche_medailles(medailles, fiche_id):
+    return edit_fiche_field('medailles', request, fiche_id)
+
 @login_required
 def delete_fiche(request, fiche_id):
     fiche = Fiche.objects.get(pk=fiche_id)

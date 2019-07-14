@@ -1,9 +1,9 @@
 <div class="panel panel-defaut details-panels editable" data-endpoint="{{ endpoint }}">
   <div class="panel-heading">
     <h3 class="panel-title">{{ title }}</h3>
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user.id == fiche.createur.id %}
     <div class="edit-controls">
-      <button class="edit" onclick="edit($(this).closest('.panel'))">Éditer</button>
+      <a onclick="edit($(this).closest('.panel'))">Éditer</a>
     </div>
     {% endif %}
   </div>
