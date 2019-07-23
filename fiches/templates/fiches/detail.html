@@ -514,11 +514,14 @@ function getCookie(name) {
 	{% endfor %}<br>
 	{% endif %} <!-- perms.fiches -->
 	{% if runique %}
-	"Set : Immunise à la magie"<br>
+	<b>Set : Immunise à la magie</b><br>
 	{% endif %} <!-- runique -->
 	{% if terradiance %}
-	"Set : + 5 a l'attaque et la défense contre les morts-vivants"<br>
+	<b>Set : + 5 a l'attaque et la défense contre les morts-vivants</b><br>
 	{% endif %} <!-- terra -->
+	{% if resist != 0 %}
+	<b> {{ resist }} d'armure supplémentaire sur chaque localisation</b> <br>
+	{% endif %}
 	{% if armure != 0 %}
 	<b>Armure :</b> {{ armure }}<br>
 	{% endif %} <!-- armure -->

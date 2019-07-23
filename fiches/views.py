@@ -184,14 +184,14 @@ def detail_fiche(request, fiche_id):
         pieds, epieds = fiche.equipement.get_pieds()
         doigts = fiche.equipement.get_doigts()
         divers = fiche.equipement.get_divers()
-        effets, effets_ig, force, intell, agi, armure, runique, terradiance = fiche.equipement.effets()
+        effets, effets_ig, force, intell, agi, armure, runique, terradiance, resist = fiche.equipement.effets()
     else:
         mp, am, aa, tete, epaules, torse = None, None, None, None, None, None
         mains, taille, jambes, dos, cou = None, None, None, None, None
         poignets, doigts, divers = None, None, None
         effets, effets_ig, force = None, None, None
         intell, agi, armure = None, None, None
-        pieds, runique, terradiance = None, None, None
+        pieds, runique, terradiance, resist = None, None, None, 0
         emp, eam, eaa, etete, eepaules = None, None, None, None, None
         etorse, emains, etaille, ejambes = None, None, None, None
         edos, ecou, epoignets, epieds = None, None, None, None
@@ -210,7 +210,7 @@ def detail_fiche(request, fiche_id):
                'emp': emp, 'eam': eam, 'eaa': eaa, 'etete': etete, 'eepaules': eepaules,
                'etorse': etorse, 'emains': emains, 'etaille': etaille, 'ejambes': ejambes,
                'edos': edos, 'ecou': ecou, 'epoignets': epoignets, 'epieds': epieds,
-               'utilisateur': utilisateur, 'images': images}
+               'utilisateur': utilisateur, 'images': images, 'resist': resist}
     return render(request, 'fiches/detail.html', context)
 
 

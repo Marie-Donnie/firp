@@ -528,6 +528,7 @@ class Equipement(models.Model):
         runique = False
         ter_compte = 0
         terradiance = False
+        resist = 0
         methods = [self.get_mp, self.get_am, self.get_tete, self.get_epaules,
                    self.get_torse, self.get_mains, self.get_taille,
                    self.get_jambes, self.get_pieds, self.get_dos, self.get_cou,
@@ -553,6 +554,8 @@ class Equipement(models.Model):
                     force += enchantement.force
                     intell += enchantement.intell
                     agi += enchantement.agi
+                    if ("résistance" in enchantement.nom):
+                        resist += 1
         for anneau in self.get_doigts():
             if anneau is not None:
                 effets.append("\"" + anneau.objet.nom + "\" : " + anneau.effet)
@@ -572,8 +575,8 @@ class Equipement(models.Model):
         if ter_compte == 8:
             terradiance = True
         if run_compte == 8:
-            run_compte = True
-        return effets, effets_ig, force, intell, agi, armure, runique, terradiance
+            runique = True
+        return effets, effets_ig, force, intell, agi, armure, runique, terradiance, resist
 
     def __str__(self):
         return '%s' % (self.nom)
