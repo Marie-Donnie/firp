@@ -476,8 +476,9 @@
 	  Modifier:
 	</span>
 	{% endif %}
-      </span>
+	</span>
       <input name="image" id="id_image" type="file">
+      <label for="id_source_img">Source de l'image&nbsp;</label> <input name="source_img" value="{{form.source_img.value|default:'Inconnue'}}" required="" id="id_source_img" maxlength="600" type="text">
       <input name="createur" id="id_createur" type="hidden" value="">
     </div>
     <input class="btn btn-default" type="submit" value="Valider" />
