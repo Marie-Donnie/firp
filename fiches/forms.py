@@ -198,10 +198,10 @@ class LeaderChoiceField(forms.ModelChoiceField):
             return str(obj)
 
 class MissionForm(ModelForm):
-    dirigeant = LeaderChoiceField(queryset=leaders())
+    dirigeant = LeaderChoiceField(queryset=leaders(), required=False)
     dirigeant.widget = widgets.DynamicSelect()
 
-    autre_dirigeant = LeaderChoiceField(queryset=leaders())
+    autre_dirigeant = LeaderChoiceField(queryset=leaders(), required=False)
     autre_dirigeant.widget = widgets.DynamicSelect()
 
     class Meta:
