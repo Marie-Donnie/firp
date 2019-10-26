@@ -45,7 +45,7 @@ class FicheForm(ModelForm):
                   'afficher_pseudo', 'afficher_createur',
                   'afficher_inventaire', 'afficher_bourse', 'image', 'main_dir',
                   'inventaire_fdg', 'equipement', 'bourse', 'createur',
-                  'gallerie']
+                  'gallerie', 'source_img']
         labels = {
             'signes_dis': 'Signes distinctifs',
         }
