@@ -32,17 +32,26 @@ def index(request):
     return render(request, 'fiches/index.html', context)
 
 
-def handler404(request):
-    response = render_to_response('404.html', {},
-                                  context_instance=RequestContext(request))
+def handler404(request, exception):
+    response = render(request, '404.html', {})
     response.status_code = 404
     return response
 
 
-def handler403(request):
-    response = render_to_response('403.html', {},
-                                  context_instance=RequestContext(request))
+def handler403(request, exception):
+    error = 403
+    error_text = "Vous n'avez pas accès à cette page."
+    context = {'error': error, 'error_text': error_text}
+    response = render(request, 'error.html', context)
     response.status_code = 403
+    return response
+
+def handler500(request):
+    error = 500
+    error_text = "Oopsie, il y a un bug sur le site. Merci de le reporter."
+    context = {'error': error, 'error_text': error_text}
+    response = render(request, 'error.html', context)
+    response.status_code = 500
     return response
 
 

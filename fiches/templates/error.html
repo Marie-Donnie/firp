@@ -16,14 +16,14 @@
   <!-- Link to my css -->
   <link rel="stylesheet" href="{%static 'fiches/fiches.css' %}">
 
-  <title>403</title>
+  <title>{{ error }}</title>
 </head>
 <body>
 
   <div class="error-garithos">
     <img src="/fiches/media/images/site/garithos3.png">
     <div class="error-text">
-      Vous n'avez pas accès à cette page.
+      {{ error_text }}
     </div>
     <div class="error-buttons">
       <a class="btn btn-default" href="{% url 'account_login' %}">Se connecter</a>
