@@ -773,6 +773,9 @@ class Sort(models.Model):
     seuil = models.CharField(max_length=10,
                              null=True,
                              blank=True)
+    cooldown = models.CharField(max_length=20,
+                             null=True,
+                             blank=True)
     duree_incant = models.CharField(max_length=50,
                                     null=True,
                                     blank=True)
