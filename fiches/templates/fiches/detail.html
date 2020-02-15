@@ -219,6 +219,9 @@ $(function () {
     <a target="_blank" href={{ fiche.image.url }}>
       <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
     </a>
+    <div class="centre">
+      {% if fiche.source_img != "Inconnue" %}{{ fiche.source_img }}{% endif %}
+    </div>
   </div>
 
   {% url 'edit_fiche_description' fiche.id as desc_endpoint %}

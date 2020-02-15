@@ -4,6 +4,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 from fiches import views
 
+handler404 = views.handler404
+handler403 = views.handler403
+handler500 = views.handler500
+
 urlpatterns = [
     # General
     url(r'^admin/', admin.site.urls),

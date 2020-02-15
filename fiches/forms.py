@@ -45,7 +45,7 @@ class FicheForm(ModelForm):
                   'afficher_pseudo', 'afficher_createur',
                   'afficher_inventaire', 'afficher_bourse', 'image', 'main_dir',
                   'inventaire_fdg', 'equipement', 'bourse', 'createur',
-                  'gallerie']
+                  'gallerie', 'source_img']
         labels = {
             'signes_dis': 'Signes distinctifs',
         }
@@ -198,10 +198,10 @@ class LeaderChoiceField(forms.ModelChoiceField):
             return str(obj)
 
 class MissionForm(ModelForm):
-    dirigeant = LeaderChoiceField(queryset=leaders())
+    dirigeant = LeaderChoiceField(queryset=leaders(), required=False)
     dirigeant.widget = widgets.DynamicSelect()
 
-    autre_dirigeant = LeaderChoiceField(queryset=leaders())
+    autre_dirigeant = LeaderChoiceField(queryset=leaders(), required=False)
     autre_dirigeant.widget = widgets.DynamicSelect()
 
     class Meta:

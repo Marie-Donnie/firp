@@ -1,5 +1,6 @@
 from django.forms import widgets
 
+
 class DynamicSelect(widgets.Select):
     template_name = 'widgets/dynamic-select.html'
 

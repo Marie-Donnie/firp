@@ -222,6 +222,10 @@ class Fiche(models.Model):
                                            default='Aucune')
     image = models.ImageField(upload_to='images/persos',
                               default='images/site/no-image.png')
+    source_img = models.CharField(max_length=600,
+                                  null=True,
+                                  blank=True,
+                                  default='Inconnue')
     createur = models.ForeignKey(settings.AUTH_USER_MODEL,
                                  null=True,
                                  related_name='fiches',
