@@ -350,10 +350,12 @@ function getCookie(name) {
 	  <a target="_blank" href="{% url 'detail_objet' case.objet.id %}" data-toggle="objet-tooltip" data-case-id="{{ case.id }}" {% if case.objet.description|length > 30 %}class="large"{% endif %}>
 	    <img class="inventory-object" src="{% get_media_prefix %}/images/ICONS/{{case.objet.image_url}}.PNG" alt="Objet" id="icone">
 	    <span class="bottomright">{{case.nombre}}</span>
-          </a>
+</a>
+          {% if not user.is_anonymous and user.id == fiche.createur.id %}
           <img class="upperleft decrease-number" src="{% get_media_prefix %}/images/site/Spell_ChargeNegative.PNG" alt="Objet" onclick="update_number(this)" data-action="{% url 'changer_cardinalite_case' case.id -1 %}">
 	  <img class="upperleft delete-case" src="{% get_media_prefix %}/images/site/icon-noloot.PNG" alt="Objet" onclick="delete_case(this)" data-action="{% url 'supprimer_case' case.id %}">
 	  <img class="upperright" src="{% get_media_prefix %}/images/site/Spell_ChargePositive.PNG" alt="Objet" onclick="update_number(this)" data-action="{% url 'changer_cardinalite_case' case.id 1 %}">
+	  {% endif %}
 	  </div>
 	  <!-- </div> -->
 	  <!-- - {{case.get_nom}}<br> -->
