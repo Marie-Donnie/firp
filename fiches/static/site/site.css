@@ -88,7 +88,7 @@ a:hover {
 }
 
 #quest-display {
-    background: url("/static/site/images/page.PNG") no-repeat center;
+    /* background: url("/static/site/images/page.PNG") no-repeat center;  */
     max-width: 1000px;
     min-height: 900px;
     margin: 1% auto;
@@ -98,6 +98,11 @@ a:hover {
     border-radius: 3px;
     width: 100%;
     background-color: #cbac73;
+    background-image: url("/static/site/images/page-header.png"),
+                          url("/static/site/images/page-footer.png"),
+                          url("/static/site/images/page-middle.png");
+    background-position: top, bottom, center;
+    background-repeat: no-repeat, no-repeat, repeat-y;
 }
 
 .quest-target {
@@ -265,7 +270,7 @@ input, textarea {
 }
 
 .campaign-body {
-    width: 80%;
+    width: 100%;
     background-color: #000;
     margin: 0% auto;
     padding: 0% 0% 4% 0%;
@@ -428,9 +433,9 @@ textarea {
     border: 1px #c8720033 solid;
 }
 
-.mission-infos {
-    margin: 1%;
-    margin-left: 13%;
+#rapport .mission-infos {
+    margin: 0;
+    font-size: 16px;
 }
 
 .signature {
@@ -448,8 +453,10 @@ textarea {
 }
 
 #rapport {
-    text-align: center;
-    margin: 50px 54px 0px auto;
+    margin: 50px 80px 200px 150px;
+    text-align: left;
+    text-shadow: 0px 1px 2px #0064,
+                 0 0 4px #f908;
 }
 
 #sorts-header {
