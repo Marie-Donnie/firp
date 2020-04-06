@@ -2,6 +2,8 @@
 function edit(root) {
   const controls = root.find('.edit-controls')
   const content_holder = root.find('.edit-content')
+  const pretty_content_holder = root.find('.pretty-content')
+  const has_pretty_content_holder = pretty_content_holder.length > 0
   const endpoint = root.data('endpoint')
 
   // Pull content from div
@@ -27,6 +29,13 @@ function edit(root) {
         .on('click', _ => save())
   controls.html(new_controls)
 
+  // Hide pretty contents if they exist
+  if (has_pretty_content_holder)
+  {
+    pretty_content_holder.hide()
+    content_holder.show()
+  }
+
   // Enable the save button
   function enable_save() {
     save_button.prop('disabled', false)
@@ -35,6 +44,9 @@ function edit(root) {
   // Send the text content of EL to the server for saving.
   function save() {
     const newcontent = textarea.val().trim()
+    if (has_pretty_content_holder)
+      content_holder.hide()
+
     $.post(endpoint, {content: newcontent})
       .fail(_ => {
 	  controls.html(new_controls)
@@ -42,13 +54,22 @@ function edit(root) {
           textarea.addClass('invalid')
           // TODO: on error, include error message
       })
-
-    restore(newcontent)
+      .done(answer => {
+	if (has_pretty_content_holder)
+	  pretty_content_holder.html(answer)
+	restore(newcontent)
+      })
   }
 
   // Restore controls and content
   function restore(newcontent = content) {
     controls.html(old_controls)
     content_holder.html(newcontent.replace(/\n/g, '<br>'))
+
+    if (has_pretty_content_holder)
+    {
+      pretty_content_holder.show()
+      content_holder.hide()
+    }
   }
 }

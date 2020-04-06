@@ -15,6 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.core import serializers
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from fiches.models import *
 from fiches.forms import *
 from fiches.functions import Shops
@@ -219,7 +220,8 @@ def detail_fiche(request, fiche_id):
                'emp': emp, 'eam': eam, 'eaa': eaa, 'etete': etete, 'eepaules': eepaules,
                'etorse': etorse, 'emains': emains, 'etaille': etaille, 'ejambes': ejambes,
                'edos': edos, 'ecou': ecou, 'epoignets': epoignets, 'epieds': epieds,
-               'utilisateur': utilisateur, 'images': images, 'resist': resist}
+               'utilisateur': utilisateur, 'images': images, 'resist': resist,
+               'pretty_relations': pretty_print_relations(fiche.id)}
     return render(request, 'fiches/detail.html', context)
 
 
@@ -354,7 +356,9 @@ def edit_fiche_historique(request, fiche_id):
 # API point to edit a fiche 'relations'
 @permission_required('fiches.fdg', raise_exception=True)
 def edit_fiche_relations(request, fiche_id):
-    return edit_fiche_field('relations', request, fiche_id)
+    edit_fiche_field('relations', request, fiche_id)
+    context = { 'pretty_relations': pretty_print_relations(fiche_id) }
+    return render(request, 'fiches/relation_pretty.html', context)
 
 # API point to edit a fiche 'competences'
 @permission_required('fiches.fdg', raise_exception=True)
@@ -365,6 +369,33 @@ def edit_fiche_competences(request, fiche_id):
 @permission_required('fiches.fdg', raise_exception=True)
 def edit_fiche_medailles(medailles, fiche_id):
     return edit_fiche_field('medailles', request, fiche_id)
+
+
+def pretty_print_relations(fiche_id):
+    fiche = Fiche.objects.get(pk=fiche_id)
+    relations_finale = []
+    if fiche.relations:
+        relations_split = [str.strip() for str in fiche.relations.splitlines()]
+        for relation in relations_split:
+            exists = False
+            relation_name = relation
+            relation_link = None
+            if relation.startswith('#'):
+                number, name = relation[1:].split(' ', maxsplit=1)
+                #number = relation[1:].split(' ', maxsplit=1)[0]
+                #leftovers = relation[1:].split(' ', maxsplit=1)[1]
+                if number.isdecimal():
+                    try:
+                        relation_link = Fiche.objects.get(pk=number)
+                        relation_name = name
+                        exists = True
+                    except ObjectDoesNotExist:
+                        pass
+            relations_finale.append({'exists': exists,
+                                     'name': relation_name,
+                                     'link': relation_link})
+    return relations_finale
+
 
 @login_required
 def delete_fiche(request, fiche_id):

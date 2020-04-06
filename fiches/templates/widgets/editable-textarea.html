@@ -8,8 +8,18 @@
     {% endif %}
   </div>
   <div class="panel-body centre">
-    <div class="edit-content">
-      {{ content|linebreaksbr }}
-    </div>
+    {% if content_template %}
+      <div class="pretty-content">
+	{% include content_template %}
+      </div>
+      <div class="edit-content" style="display: none">
+	{{ content|linebreaksbr }}
+      </div>
+    {% else %}
+      <div class="edit-content">
+	{{ content|linebreaksbr }}
+      </div>
+    {% endif %}
+
   </div>
 </div>

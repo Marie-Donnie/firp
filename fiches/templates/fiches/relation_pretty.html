@@ -1,0 +1,7 @@
+{% for relation in pretty_relations %}
+{% if relation.exists %}
+<a href="{% url 'detail_fiche' relation.link.id %}">{{ relation.link.prenom }} {{ relation.link.nom }}</a> {{ relation.name }}<br>
+{% else %}
+{{ relation.name }}<br>
+{% endif %}
+{% endfor %}

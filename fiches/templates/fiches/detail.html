@@ -232,7 +232,8 @@ $(function () {
 
   {% if fiche.relations != 'Aucune' %}
   {% url 'edit_fiche_relations' fiche.id as relations_endpoint %}
-  {% include "widgets/editable-textarea.html" with title="Relations" content=fiche.relations endpoint=relations_endpoint %}
+  {% include "widgets/editable-textarea.html" with title="Relations" content=fiche.relations endpoint=relations_endpoint content_template="fiches/relation_pretty.html" %}
+
   {% endif %}
   {% if fiche.medailles != 'Non applicable/Aucune' %}
   {% url 'edit_fiche_medailles' fiche.id as medailles_endpoint %}
