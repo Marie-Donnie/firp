@@ -520,7 +520,7 @@ h3#nom {
     display: none;
 }
 
-.upperright {
+.number-inventory .upperright {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -528,7 +528,12 @@ h3#nom {
     display: none;
 }
 
-.upperleft {
+.number-inventory .upperright:hover, .number-inventory .upperleft:hover {
+  width: 35px;
+  cursor: pointer;
+}
+
+.number-inventory .upperleft {
     position: absolute;
     top: 0px;
     left: 0px;
