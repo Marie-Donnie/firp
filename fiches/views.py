@@ -225,48 +225,6 @@ def detail_fiche(request, fiche_id):
     return render(request, 'fiches/detail.html', context)
 
 
-# Displays the first name and last name of the latests Fiche model instances
-def personnages(request):
-    # fiches = Fiche.objects.order_by('nom', 'prenom')
-    context = {}
-    if request.method == 'GET' and 'valeur' in request.GET and 'recherche' in request.GET:
-        if 'recherche' is not None and 'recherche' != '':
-            valeur = request.GET.get('valeur')
-            recherche = request.GET.get('recherche')
-            Qr = None
-            q = Q(**({"%s__icontains" % recherche: valeur }))
-            if Qr:
-                Qr = Qr | q # or & for filtering
-            else:
-                Qr = q
-            # this you can now combine with other filters, exclude etc.
-            fiches_list = Fiche.objects.filter(Qr)
-            context['recherche'] = recherche
-            context['valeur'] = valeur
-        else:
-            recherche = None
-            fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
-
-    else:
-        recherche = None
-        fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
-
-    paginator = Paginator(fiches_list, 12)
-    page = request.GET.get('page')
-    try:
-        fiches = paginator.page(page)
-    # if page not an integer, display first page of results
-    except PageNotAnInteger:
-        fiches = paginator.page(1)
-    # if page is out of range, display the last page of results
-    except EmptyPage:
-        fiches = paginator.page(paginator.num_pages)
-
-    context = {'fiches': fiches, 'recherche': recherche}
-
-    return render(request, 'fiches/personnages.html', context)
-
-
 @login_required
 def edit_fiche(request, fiche_id):
     fiche = Fiche.objects.get(pk=fiche_id)
@@ -422,6 +380,48 @@ def delete_fiche(request, fiche_id):
         return HttpResponse("Vous ne pouvez pas supprimer cette fiche.")
 
 
+# Displays the list of all characters
+def personnages(request):
+    # fiches = Fiche.objects.order_by('nom', 'prenom')
+    context = {}
+    if request.method == 'GET' and 'valeur' in request.GET and 'recherche' in request.GET:
+        if 'recherche' is not None and 'recherche' != '':
+            valeur = request.GET.get('valeur')
+            recherche = request.GET.get('recherche')
+            Qr = None
+            q = Q(**({"%s__icontains" % recherche: valeur }))
+            if Qr:
+                Qr = Qr | q # or & for filtering
+            else:
+                Qr = q
+            # this you can now combine with other filters, exclude etc.
+            fiches_list = Fiche.objects.filter(Qr)
+            context['recherche'] = recherche
+            context['valeur'] = valeur
+        else:
+            recherche = None
+            fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
+
+    else:
+        recherche = None
+        fiches_list = Fiche.objects.order_by('-pj', 'nom', 'prenom')
+
+    paginator = Paginator(fiches_list, 12)
+    page = request.GET.get('page')
+    try:
+        fiches = paginator.page(page)
+    # if page not an integer, display first page of results
+    except PageNotAnInteger:
+        fiches = paginator.page(1)
+    # if page is out of range, display the last page of results
+    except EmptyPage:
+        fiches = paginator.page(paginator.num_pages)
+
+    context = {'fiches': fiches, 'recherche': recherche}
+
+    return render(request, 'fiches/personnages.html', context)
+
+# unused
 @login_required
 def fiche_search(request):
     valeur = request.GET.get('valeur')

@@ -1,4 +1,7 @@
 hiver:
+  dates:
+    debut:
+    fin:
   temperature:
     minimum: -10
     maximum: 6
