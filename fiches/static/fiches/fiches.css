@@ -291,8 +291,10 @@ div.gallery img {
     width: 8%;
 }
 
-input, textarea {
-    color: initial;
+input, textarea, .form-control {
+  background: #333;
+  color: #fff;
+  border: 1px solid #666;
 }
 
 select {
