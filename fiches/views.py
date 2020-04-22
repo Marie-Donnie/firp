@@ -159,7 +159,7 @@ def creer_fiche(request):
         else:
             form = FicheForm()
 
-        context = {'form': form}
+        context = {'form': form, 'is_new_fiche': True, 'title_verb': 'Créer'}
         return render(request, 'fiches/formulaire.html', context)
 
     else:
@@ -278,7 +278,9 @@ def edit_fiche(request, fiche_id):
         equipements = Equipement.objects.all()
         inventaires = Inventaire.objects.all()
         context = {'form': form, 'equipements': equipements,
-                   'inventaires': inventaires}
+                   'inventaires': inventaires,
+                   'is_new_fiche': False,
+                   'title_verb': 'Éditer' }
 
         return render(request, 'fiches/formulaire.html', context)
 
