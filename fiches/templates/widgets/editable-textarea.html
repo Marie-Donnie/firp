@@ -1,13 +1,13 @@
-<div class="panel panel-defaut details-panels editable" data-endpoint="{{ endpoint }}">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{ title }}</h3>
+<div class="card details-cards editable" data-endpoint="{{ endpoint }}">
+  <div class="card-header">
+    <h3 class="card-title">{{ title }}</h3>
     {% if user.is_authenticated and user.id == fiche.createur.id %}
     <div class="edit-controls">
-      <a onclick="edit($(this).closest('.panel'))">Éditer</a>
+      <button class="btn-default small-btn" onclick="edit($(this).closest('.card'))">Éditer</button>
     </div>
     {% endif %}
   </div>
-  <div class="panel-body centre">
+  <div class="card-body centre">
     {% if content_template %}
       <div class="pretty-content">
 	{% include content_template %}

@@ -7,7 +7,11 @@
 body {
     background-color: #000000;
     color: #fefefe;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
 }
+
 
 h1 a {
     color: #fff;
@@ -75,7 +79,7 @@ h1 a:hover {
     border-radius: 0;
 }
 
-.navbar-default {
+.navbar-site {
     background-color: #000000;
     border-color: #470002;
     margin-left: 7%;
@@ -85,8 +89,7 @@ h1 a:hover {
 }
 
 .navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 5px;
+    padding: 10px 15px;
 }
 
 /* .navbar-default .navbar-collapse, .navbar-default .navbar-form { */
@@ -149,15 +152,16 @@ div.gallery img {
     overflow: visible;
 }
 
-.panel {
+.card {
     border: 1px;
     background-color: #000000;
     border-color: #470002;
 }
 
-.panel .panel-heading {
+.card .card-header {
     background-image: url("/static/fiches/images/separator.jpg");
     background-color: #000000;
+    background-repeat: repeat-x;
     padding: 10px 15px;
     border: 1px solid #470002;
     border-radius: 5px;
@@ -170,25 +174,31 @@ div.gallery img {
     display: flex;
 }
 
-.panel-heading .h1 {
+.card-header .h1 {
     border: 1px solid #470002;
     border-radius: 5px;
     flex: 1;
 }
 
-.panel-body {
+h3.card-title {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+
+.card-body {
     border: 1px solid #470002;
     border-radius: 5px;
     margin-top: 0px;
     margin-bottom: 40px;
 }
 
-.navbar-default .navbar-nav > li > a{
+.navbar-site .navbar-nav > li > a{
     color: #fefefe;
 }
 
-.navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > li > a:hover {
+.navbar-site .navbar-nav > li > a:focus,
+.navbar-site .navbar-nav > li > a:hover {
     color: #a72121;
 }
 
@@ -337,17 +347,18 @@ h3#nom {
     margin-left: auto;
 }
 
-.details-panels h3{
+.details-cards h3{
     margin: 0;
     color: #bf0005;
 }
 
-.details-panels h4{
+.details-cards h4{
     margin: 0 auto;
     color: #bf0005;
     text-align: center;
     color: #fefefe;
     text-shadow: 1px 1px #fefefe;
+    font-size: 1rem;
 }
 
 .pagination > li > a, .pagination > li > span {
@@ -417,7 +428,7 @@ h3#nom {
     vertical-align: middle;
 }
 
-#stats-panel {
+#stats-card {
     padding: 0;
 }
 
@@ -478,14 +489,14 @@ h3#nom {
     white-space: nowrap;
 }
 
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:focus,
-.navbar-default .navbar-nav > .open > a:hover {
+.navbar-site .navbar-nav > .open > a,
+.navbar-site .navbar-nav > .open > a:focus,
+.navbar-site .navbar-nav > .open > a:hover {
     color: #fff;
     background-color: #470002;
 }
 
-.navbar-default .navbar-nav > .open > a {
+.navbar-site .navbar-nav > .open > a {
     background-image: none;
     background-color: #470002;
 }
@@ -628,7 +639,7 @@ h3#nom {
     padding: 0% 0%;
 }
 
-h3.panel-title {
+h3.card-title {
     color: #d43e40;
     margin: 0% auto;
     font-weight: bold;
@@ -697,8 +708,8 @@ h3.panel-title {
 .centre {
     text-align: center;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
 }
 
 .error-garithos {
@@ -734,6 +745,11 @@ h3.panel-title {
 
 .badges {
     float: right;
+}
+
+.niveaux {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .classe-ag {
@@ -811,4 +827,10 @@ h3.panel-title {
 
 .carousel-caption {
     text-shadow: 0 1px 2px rgb(0, 0, 0);
+}
+
+.small-button,
+ .small-button:hover {
+    padding-top: 0;
+    padding-bottom: 0;
 }

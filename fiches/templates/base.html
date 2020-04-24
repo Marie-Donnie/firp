@@ -20,20 +20,14 @@
     <img src="/fiches/media/images/site/garithos.jpg" class="image-garithos"/>
   </div>
 
-  <nav class="navbar navbar-default">
-    <div class="container-fluid" id="woody">
-      <div class="navbar-header">
-	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-	</button>
-	<!-- <a class="navbar-brand" href="#">Les fils de Garithos</a> -->
-      </div>
+  <nav class="navbar navbar-expand-lg navbar-site" id="woody">
+    <!-- <div class="container-fluid" id="woody"> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
       <div class="collapse navbar-collapse" id="main-navbar">
       <!-- <div id="navbar" class="navbar-collapse collapse"> -->
-	<ul class="nav navbar-nav">
+	<ul class="nav navbar-nav mr-auto mt-2 mt-lg-0">
       	  <li><a href="{% url 'index' %}">Accueil</a></li>
 	  <li class="dropdown">
             <a href="{% url 'personnages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personnages <span class="caret"></span></a>
@@ -50,11 +44,11 @@
             <a href="{% url 'objets' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Objets <span class="caret"></span></a>
 	    <ul class="dropdown-menu">
 	      <li><a href="{% url 'objets' %}">Objets</a></li>
-	      <li role="separator" class="divider"></li>
+	      <li role="separator" class="divider"><div class="dropdown-divider"></div></li>
 	      <li><a href="{% url 'creer_objet' %}" target="_blank">Créer un objet</a></li>
 	      <li><a href="{% url 'creer_armure' %}">Créer une armure</a></li>
 	      <li><a href="{% url 'creer_enchantement' %}" target="_blank">Créer un enchantement</a></li>
-	      <li role="separator" class="divider"></li>
+	     <li role="separator" class="divider"><div class="dropdown-divider"></div></li>
 	      <li><a href="{% url 'objets_enchantements' %}">Mes objets et enchantements</a></li>
 	    </ul>
 	  </li>
@@ -68,7 +62,6 @@
 	      {% if perms.fiches.fdg %}
 	      <li><a href="{% url 'creer_perso' %}">Créer un personnage</a></li>
 	      {% endif %}
-	      <li role="separator" class="divider"></li>
 	    </ul>
 	  </li>
 	  {% if user.is_authenticated and perms.fiches.allie %}
@@ -85,11 +78,47 @@
 	  <li class="dropdown">
             <a href="{% url 'index' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Site<span class="caret"></span></a>
 	    <ul class="dropdown-menu">
-	      <li><a href="{% url 'campagnes' %}">Campagnes</a></li>
-	      <li><a href="{% url 'quetes' %}">Quêtes</a></li>
-	      <li><a href="{% url 'classes' %}">Classes et sorts</a></li>
-	      <li><a href="{% url 'cartes' %}">Carte</a></li>
-	      <li><a href="{% url 'conseil' %}">Conseil de Lordaeron</a></li>
+	      <li>
+		<a href="{% url 'campagnes' %}">
+		  <img class="navbar-button bottom-bar-images"
+		       src="/fiches/media/images/site/UI-MicroButton-Talents-Up.PNG"
+		       alt="Campagnes" data-toggle="tooltip"
+		       data-placement="top" title="Campagnes">
+		  Campagnes
+		</a>
+	      </li>
+	      <li>
+		<a href="{% url 'quetes' %}">
+		  <img class="navbar-button bottom-bar-images"
+		       src="/fiches/media/images/site/UI-MICROBUTTON-QUEST-UP.PNG"
+		       alt="Quêtes" data-toggle="tooltip"
+		       data-placement="top" title="Quêtes">
+		  Quêtes
+		</a>
+	      </li>
+	      <li>
+		<a href="{% url 'classes' %}">
+		  <img class="navbar-button bottom-bar-images"
+		       src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG"
+		       alt="Classes et sorts" data-toggle="tooltip"
+		       data-placement="top" title="Classes et sorts">
+		  Classes et sorts
+		</a>
+	      </li>
+	      <li>
+		<a href="{% url 'cartes' %}">
+		  <img class="navbar-button bottom-bar-images"
+		       src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG"
+		       alt="Carte" data-toggle="tooltip"
+		       data-placement="top" title="Carte">
+		  Carte
+		</a>
+	      </li>
+	      <li>
+		<a href="{% url 'conseil' %}">
+		  Conseil de Lordaeron
+		</a>
+	      </li>
 	    </ul>
 	  </li>
 	  <li><a href="{% url 'utilisateurs' %}">Utilisateurs</a></li>
@@ -106,19 +135,19 @@
 	  <a class="btn btn-default navbar-btn" href="{% url 'account_login' %}">Se connecter</a>
 	  {% endif %}
 	</div>
-      </div>
+      <!-- </div> -->
     </div>
   </nav>
 
   <div id="content">
-    <div id="index" class ="panel panel-default">
+    <div id="index" class ="card">
 
-      <div class="panel-heading">
+      <div class="card-header">
 	<h1 id="page-title">{% block page-title %}<a href="{% url 'index' %}">Titre</a>{% endblock%}</h1>
 	<span id="edition">{% block edition %}{% endblock %}</span>
 	<span id="creator">{% block user %}{% endblock %}</span>
       </div>
-      <div id="body" class="panel-body">
+      <div id="body" class="card-body">
 	{% block content %}Contenu par défaut. Vous ne devriez pas être là :o{% endblock %}
 
       </div>

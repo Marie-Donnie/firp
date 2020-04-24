@@ -101,12 +101,12 @@ for (var i = 0; i < cookies.length; i++) {
 
 
 {% block classe %}
-  <div id="classe-ag-panel">
-    <div class="panel panel-default details-panels">
-      <div class="panel-heading">
-	<h3 class="panel-title">Classe</h3>
+  <div id="classe-ag-card">
+    <div class="card card-default details-cards">
+      <div class="card-header">
+	<h3 class="card-title">Classe</h3>
       </div>
-      <div class="panel-body centre">
+      <div class="card-body centre">
 	{% if fiche.classe != 5 %}
 	<div class="classe-ag">
 	  {% else %}
@@ -114,8 +114,8 @@ for (var i = 0; i < cookies.length; i++) {
 	    {% endif %}
 	  <div class="container-fluid">
 	    <div class="row niveau" id="niveau1">
-		<div class="media">
-		  <div class="media-left media-middle">
+		<div class="media niveaux">
+		  <div class="media-left media-middle align-self-center">
 		    <a href="#">
 		      <img class=" level" src="{% get_media_prefix %}/images/site/rpg/Achievement_PVP_H_01.PNG" alt="Niveau 1">
 		    </a>
@@ -127,8 +127,8 @@ for (var i = 0; i < cookies.length; i++) {
 		</div>	 <!-- media -->
 	    </div>	 <!-- row niveau -->
 	    <div class="row niveau" id="niveau2" {% if fiche.niveau < 2 %} style="opacity: 0.2;" {% endif %}>
-		<div class="media">
-		  <div class="media-left media-middle">
+		<div class="media niveaux">
+		  <div class="media-left media-middle align-self-center">
 		    <a href="#">
 		      <img class=" level" src="{% get_media_prefix %}/images/site/rpg/Achievement_PVP_H_02.PNG" alt="Niveau 2">
 		    </a>
@@ -140,8 +140,8 @@ for (var i = 0; i < cookies.length; i++) {
 		</div>	 <!-- media -->
 	    </div>	 <!-- row niveau -->
 	    <div class="row niveau" id="niveau3" {% if fiche.niveau < 3 %} style="opacity: 0.2;" {% endif %}>
-		<div class="media">
-		  <div class="media-left media-middle">
+		<div class="media niveaux">
+		  <div class="media-left media-middle align-self-center">
 		    <a href="#">
 		      <img class=" level" src="{% get_media_prefix %}/images/site/rpg/Achievement_PVP_H_03.PNG" alt="Niveau 3">
 		    </a>
@@ -153,8 +153,8 @@ for (var i = 0; i < cookies.length; i++) {
 		</div>	 <!-- media -->
 	    </div>	 <!-- row niveau -->
 	    <div class="row niveau" id="niveau4" {% if fiche.niveau < 4 %} style="opacity: 0.2;" {% endif %}>
-		<div class="media">
-		  <div class="media-left media-middle">
+		<div class="media niveaux">
+		  <div class="media-left media-middle align-self-center">
 		    <a href="#">
 		      <img class=" level" src="{% get_media_prefix %}/images/site/rpg/Achievement_PVP_H_04.PNG" alt="Niveau 4">
 		    </a>
@@ -166,10 +166,10 @@ for (var i = 0; i < cookies.length; i++) {
 		</div>	 <!-- media -->
 	    </div>	 <!-- row niveau -->
 	    <div class="row niveau" id="niveau5" {% if fiche.niveau < 5 %} style="opacity: 0.2;" {% endif %}>
-		<div class="media">
+		<div class="media niveaux">
 		  <div class="media-left media-middle">
 		    <a href="#">
-		      <img class=" level" src="{% get_media_prefix %}/images/site/rpg/Achievement_PVP_H_05.PNG" alt="Niveau 5">
+		      <img class=" level" src="{% get_media_prefix %}/images/site/rpg/Achievement_PVP_H_05.PNG" alt="Niveau 5 align-self-center">
 		    </a>
 		  </div> <!-- media-left media-middle -->
 		  <div class="media-body">
@@ -180,7 +180,7 @@ for (var i = 0; i < cookies.length; i++) {
 	    </div>	 <!-- row niveau -->
 	  </div>	 <!-- container-fluid -->
 	</div>		 <!-- classe-ag -->
-      </div>		 <!-- panel-body centre -->
-    </div>		 <!-- panel panel-default -->
-  </div>		 <!-- classe-ag-panel -->
+      </div>		 <!-- card-body centre -->
+    </div>		 <!-- card card-default -->
+  </div>		 <!-- classe-ag-card -->
 {% endblock %}

@@ -21,8 +21,8 @@ function edit(root) {
   // Replace the controls
   const old_controls = controls.html()
   const new_controls = $(
-    `<button class="cancel">Annuler</button>
-       <button class="save" disabled>Enregistrer</button>`)
+    `<button class="btn-default cancel">Annuler</button>
+       <button class="btn-default save" disabled>Enregistrer</button>`)
   $(new_controls[0])
     .on('click', _ => restore())
   const save_button = $(new_controls[2])

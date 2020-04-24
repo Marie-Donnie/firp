@@ -269,6 +269,11 @@ input, textarea {
     flex-wrap: wrap;
 }
 
+.entire-gallery {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .campaign-body {
     width: 100%;
     background-color: #000;
@@ -768,4 +773,65 @@ h3.conseil-titre {
 
 .conseil-heading {
     justify-content: space-between;
+}
+
+
+.icons-gallery {
+    max-width: 250px;
+    word-break: break-word;
+}
+
+
+.button {
+    /* background-image: url("/static/fiches/images/button.png"); */
+    color: #ddd;
+    background: #470002;
+    /* font-weight: bold; */
+    padding: 7px 7px;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid #6e1618;
+    font-weight: normal;
+    max-width: 300px;
+    margin-bottom: 1%;
+}
+
+.button:focus,
+.button:hover {
+    /* background-image: url("/static/fiches/images/button-hover.png"); */
+    color: #fefefe;
+    background: #7e0609;
+    font-weight: normal;
+    padding: 7px 7px;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid #6e1618;
+    max-width: 300px;
+    margin-bottom: 1%;
+}
+
+.gallery-pagination {
+    flex-wrap: wrap;
+}
+
+.gallery-pagination > li > a,
+.gallery-pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #ddd;
+    text-decoration: none;
+    background-color: #470002;
+    border: 1px solid #6e1618;
+}
+
+.gallery-pagination > li > a:focus,
+.gallery-pagination > li > a:hover,
+.gallery-pagination > li > span:focus,
+.gallery-pagination > li > span:hover {
+    color: #fefefe;
+    background-color: #7e0609;
+    border: 1px solid #6e1618;
 }

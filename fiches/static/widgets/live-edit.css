@@ -1,6 +1,7 @@
-.edit-controls {
-  position: absolute;
-  right: 5px;
+.edit-controls button,
+ .edit-controls button:hover {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 textarea {
@@ -26,10 +27,10 @@ button.edit {
   visibility: hidden;
 }
 
-.panel.editable:hover button.edit {
+.card.editable:hover button.edit {
   visibility: visible;
 }
 
-.panel.editable .panel-heading {
+.card.editable .card-header {
   position: relative;
 }

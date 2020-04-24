@@ -4,14 +4,15 @@
 <head>
   <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- <\!-- Optional theme -\-> -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+  <!-- <\!-- Latest compiled and minified JavaScript -\-> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
 
   {% block script %}{% endblock %}
 
@@ -22,7 +23,7 @@
 
 {% block contenu %}{% endblock %}
 
-<nav class="navbar navbar-default navbar-fixed-bottom" id="bottom-bar">
+<nav class="navbar fixed-bottom" id="bottom-bar">
   <div class="container" id="bottom-bar-container">
     <a target="_self" href="https://www.filsdegarithos.ovh/" class="bottom-bar-button">
       <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Achievement-Up.PNG" alt="Accueil" data-toggle="tooltip" data-placement="top" title="Accueil">
@@ -40,7 +41,7 @@
       <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MICROBUTTON-QUEST-UP.PNG" alt="Quêtes" data-toggle="tooltip" data-placement="top" title="Quêtes">
     </a>
     <a target="_self" href="{% url 'classes' %}" class="bottom-bar-button">
-      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG" alt="Classes" data-toggle="tooltip" data-placement="top" title="Classes">
+      <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-Spellbook-Up.PNG" alt="Classes et sorts" data-toggle="tooltip" data-placement="top" title="Classes et sorts">
     </a>
     <a target="_self" href="{% url 'cartes' %}" class="bottom-bar-button">
       <img class="navbar-button bottom-bar-images" src="/fiches/media/images/site/UI-MicroButton-World-Up.PNG" alt="Carte" data-toggle="tooltip" data-placement="top" title="Carte">
@@ -65,5 +66,8 @@
 <footer>
 
 </footer>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

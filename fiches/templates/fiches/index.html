@@ -9,10 +9,10 @@
 
 <div class="row">
   <div class="col-md-12">
-    <div class="panel panel-default">
-      	<div class="panel-heading">
-	  <h3 class="panel-title">Bienvenue dans le registre !</h3>
-	</div>
+    <div class="card ">
+      	<!-- <div class="card-header"> -->
+	<!--   <h3 class="card-title"></h3> -->
+	<!-- </div> -->
 	<div class="rules">
 	  Ici, vous pouvez créer les fiches de vos personnages. Même si le site a été fait pour les Fils de Garithos, tout le monde peut créer ses propres fiches. Les non-membres sont néanmoins limités à six fiches et n'ont pas accès à l'inventaire et l'équipement améliorés.<br><br>
 	  Quelques règles s'appliquent : le site est fait pour la guilde principalement. Nous nous réservons donc le droit de supprimer des fiches qui ne respectent pas l'un des principes suivants : pas de trolls, pas de contenu adulte (y a f-list pour ça), pas de fiches darksasuke, pas de contenu qui cherche à contourner l'utilisation prévue. Si le contenu ne nous plaît pas, nous essaierons dans la mesure de possible de le modérer ou de le signaler à son auteur. Bien entendu, nous ne comptons pas supprimer des fiches parce que nous n'aimons pas le personnage ou son propriétaire.<br>
@@ -21,25 +21,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      	<div class="panel-heading">
-	  <h3 class="panel-title">Créer une fiche</h3>
+  <div class="col-sm-6">
+    <div class="card">
+      	<div class="card-header">
+	  <h3 class="card-title">Dernières fiches créées</h3>
 	</div>
-	<div class="index-container">
-	  <img class="index-image" src="/fiches/media/images/site/crea_perso.png">
-	  <div class="index-middle">
-	    <div class="index-text"><a href="{% url 'creer_fiche' %}">Créer une fiche</a></div>
-	  </div>
-	</div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      	<div class="panel-heading">
-	  <h3 class="panel-title">Dernières fiches créées</h3>
-	</div>
-	<div id="center">
+	<div class= "container" id="center">
 	  {% if latest_fiches %}
 	  <ul>
 	    {% for f in latest_fiches %}
@@ -54,11 +41,29 @@
 	</div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-6">
     <div>
-      <div class="panel panel-default">
-	<div class="panel-heading">
-	  <h3 class="panel-title">Conseils d'utilisation</h3>
+      <div class="card">
+      <div class="card-header">
+	<h3 class="card-title">Anniversaires du mois</h3>
+      </div>
+      <div id="center">
+	{% if birthdays %}
+	<ul>
+	  {% for f in birthdays %}
+	  {% if f.etat != 'MO' %}
+	  <li><a href="{% url 'detail_fiche' f.id %}">{{ f.prenom|capfirst }} {{ f.nom|capfirst }}</a> : {{ f.annee_de_naissance|age }} an{{ f.annee_de_naissance|age|pluralize }} le {{ f.jour_de_naissance }} </li>
+	  {% endif %}
+	  {% endfor %}
+	</ul>
+	{% else %}
+	<p>Aucun</p>
+	{% endif %}
+      </div>
+    </div>
+      <div class="card">
+	<div class="card-header">
+	  <h3 class="card-title">Conseils d'utilisation</h3>
 	</div>
 	<div id="center">
 	  <a href="{% url 'conseils' %}#fiches">Création et édition de fiches</a><br>
@@ -68,69 +73,22 @@
 	  <a href="{% url 'conseils' %}#rpg">Création et édition des personnages de rpg</a><br>
 	  {% endif %}
 	</div> <!-- center -->
-      </div>   <!-- panel panel-default -->
+      </div>   <!-- card card-default -->
     </div>
     <div>
-      <div class="panel panel-default">
-	<div class="panel-heading">
-	  <h3 class="panel-title">En savoir plus</h3>
+      <div class="card">
+	<div class="card-header">
+	  <h3 class="card-title">En savoir plus</h3>
 	</div>
 	<div id="center">
 	  <a href="{% url 'plus' %}">En savoir plus sur le site</a><br>
 	</div> <!-- center -->
-      </div>   <!-- panel panel-default -->
-    </div>
-  </div>
-
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      	<div class="panel-heading">
-	  <h3 class="panel-title">Anniversaires du mois</h3>
-	</div>
-	<div id="center">
-	  {% if birthdays %}
-	  <ul>
-	    {% for f in birthdays %}
-	    {% if f.etat != 'MO' %}
-	    <li><a href="{% url 'detail_fiche' f.id %}">{{ f.prenom|capfirst }} {{ f.nom|capfirst }}</a> : {{ f.annee_de_naissance|age }} an{{ f.annee_de_naissance|age|pluralize }} le {{ f.jour_de_naissance }} </li>
-	    {% endif %}
-	  {% endfor %}
-	  </ul>
-	  {% else %}
-	  <p>Aucun</p>
-	  {% endif %}
-	</div>
+      </div>   <!-- card card-default -->
     </div>
   </div>
 </div>
-<!-- <div class="row"> -->
-<!--   <div class="col-md-4"> -->
-<!--     <div class="panel panel-default"> -->
-<!--       	<div class="panel-heading"> -->
-<!-- 	  <h3 class="panel-title">Créer des fiches</h3> -->
-<!-- 	</div> -->
-<!-- 	Dublabla -->
-<!--     </div> -->
-<!--   </div> -->
-<!--   <div class="col-md-4"> -->
-<!--     <div class="panel panel-default"> -->
-<!--       	<div class="panel-heading"> -->
-<!-- 	  <h3 class="panel-title">Créer des fiches</h3> -->
-<!-- 	</div> -->
-<!-- 	Dublabla -->
-<!--     </div> -->
-<!--   </div> -->
-<!--   <div class="col-md-4"> -->
-<!--     <div class="panel panel-default"> -->
-<!--       	<div class="panel-heading"> -->
-<!-- 	  <h3 class="panel-title">Dernières fiches créées</h3> -->
-<!-- 	</div> -->
 
-<!--     </div> -->
-<!--   </div> -->
-<!-- </div> -->
+
 
 
 {% endblock %}

@@ -37,11 +37,11 @@
   <div class="row">
     {% if enchantement.effet != 'Aucun' %}
     <div class="col-md-10">
-      <div class="panel panel-defaut details-panels">
-	<div class="panel-heading">
-	  <h4 class="panel-title">Effet</h4>
+      <div class="card card-defaut details-cards">
+	<div class="card-header">
+	  <h4 class="card-title">Effet</h4>
 	</div>
-	<div class="panel-body">
+	<div class="card-body">
 	  {{ enchantement.effet|linebreaksbr }}
 	</div>
       </div>
@@ -51,31 +51,31 @@
   <div class="row">
     {% if enchantement.effet_ig != 'Aucun' %}
     <div class="col-md-10">
-      <div class="panel panel-defaut details-panels">
-	<div class="panel-heading">
-	  <h4 class="panel-title">Effet en jeu</h4>
+      <div class="card card-defaut details-cards">
+	<div class="card-header">
+	  <h4 class="card-title">Effet en jeu</h4>
 	</div>
-	<div class="panel-body">
+	<div class="card-body">
 	  {{ enchantement.effet_ig|linebreaksbr }}
 	</div>
       </div>
     </div>
     {% endif %}
   </div>
-  <div class="col-md-10" id="stats-panel">
-    <div class="panel panel-defaut details-panels">
-      <div class="panel-heading" id="localisation">
-	<h4 class="panel-title">Equipe : {{ enchantement.get_membre_display }}</h4>
+  <div class="col-md-10" id="stats-card">
+    <div class="card card-defaut details-cards">
+      <div class="card-header" id="localisation">
+	<h4 class="card-title">Equipe : {{ enchantement.get_membre_display }}</h4>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
 	<div class="row">
 	  {% if enchantement.force != 0 %}
 	  <div class="col-md-3">
-	    <div class="panel panel-defaut details-panels">
-	      <div class="panel-heading">
-		<h3 class="panel-title">Force</h3>
+	    <div class="card card-defaut details-cards">
+	      <div class="card-header">
+		<h3 class="card-title">Force</h3>
 	      </div>
-	      <div class="panel-body" id="stat">
+	      <div class="card-body" id="stat">
 		{{ enchantement.force }}
 	      </div>
 	    </div>
@@ -83,11 +83,11 @@
 	  {% endif %}
 	  {% if enchantement.agi != 0 %}
 	  <div class="col-md-3">
-	    <div class="panel panel-defaut details-panels">
-	      <div class="panel-heading">
-		<h3 class="panel-title">Agilité</h3>
+	    <div class="card card-defaut details-cards">
+	      <div class="card-header">
+		<h3 class="card-title">Agilité</h3>
 	      </div>
-	      <div class="panel-body" id="stat">
+	      <div class="card-body" id="stat">
 		{{ enchantement.agi }}
 	      </div>
 	    </div>
@@ -95,11 +95,11 @@
 	  {% endif %}
 	  {% if enchantement.intell != 0 %}
 	  <div class="col-md-3">
-	    <div class="panel panel-defaut details-panels">
-	      <div class="panel-heading">
-		<h3 class="panel-title">Intelligence</h3>
+	    <div class="card card-defaut details-cards">
+	      <div class="card-header">
+		<h3 class="card-title">Intelligence</h3>
 	      </div>
-	      <div class="panel-body" id="stat">
+	      <div class="card-body" id="stat">
 		{{ enchantement.intell }}
 	      </div>
 	    </div>

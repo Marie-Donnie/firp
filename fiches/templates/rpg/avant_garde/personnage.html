@@ -189,6 +189,7 @@ $(function () {
       <img class="media-object" src={{ fiche.image.url }} alt="Portrait">
     </a>
   </div> <!-- media-right -->
+</div>
   <div>
     <h4 class="progress-label">Niveau <!-- {{fiche.niveau}} -->
       {% if fiche.niveau == 1 %}  <img class="level" src="/fiches/media/images/site/rpg/Achievement_PVP_H_01.PNG" alt="Niveau 1">
@@ -222,41 +223,41 @@ $(function () {
     {% block classe %}{% endblock %}
 
 
-  <div class="panel panel-defaut details-panels">
-    <div class="panel-heading">
-      <h3 class="panel-title">Description</h3>
+  <div class="card card-defaut details-cards">
+    <div class="card-header">
+      <h3 class="card-title">Description</h3>
     </div>
-    <div class="panel-body centre">
+    <div class="card-body centre">
       {{fiche.description|linebreaksbr}}
     </div>
   </div>
-  <div class="panel panel-defaut details-panels">
-    <div class="panel-heading">
-      <h3 class="panel-title">Historique</h3>
+  <div class="card card-defaut details-cards">
+    <div class="card-header">
+      <h3 class="card-title">Historique</h3>
     </div>
-    <div class="panel-body centre">
+    <div class="card-body centre">
       {{fiche.historique|linebreaksbr}}
     </div>
   </div>
   <div class="col-md-6">
-    <div class="panel panel-defaut details-panels">
-      <div class="panel-heading">
-	<h3 class="panel-title">Inventaire</h3>
+    <div class="card card-defaut details-cards">
+      <div class="card-header">
+	<h3 class="card-title">Inventaire</h3>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
 	{{fiche.inventaire|linebreaksbr}}
       </div>
-    </div> <!-- panel panel-default -->
+    </div> <!-- card card-default -->
   </div>   <!-- col-md-6 -->
   <div class="col-md-6">
-    <div class="panel panel-defaut details-panels">
-      <div class="panel-heading">
-	<h3 class="panel-title">Equipement</h3>
+    <div class="card card-defaut details-cards">
+      <div class="card-header">
+	<h3 class="card-title">Equipement</h3>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
 	{{fiche.equipement|linebreaksbr}}
       </div>
-    </div> <!-- panel panel-default -->
+    </div> <!-- card card-default -->
   </div>   <!-- col-md-6 -->
 
 {% endblock %}

@@ -23,9 +23,8 @@ footer {
 }
 
 #bottom-bar-container {
-    margin: 6px auto;
     width: 340px;
-    padding-left: 8px;
+    padding: 0px;
 }
 
 .bottom-bar-images {

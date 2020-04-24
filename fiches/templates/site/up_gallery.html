@@ -1,17 +1,13 @@
-{% extends "footer.html" %}
+{% extends "site/base.html" %}
 
-{% load staticfiles %}
 {% load static %}
 {% load filters %}
 
-{% block contenu %}
+{% block title %}Gallerie d'images{% endblock %}
+{% block contenu_header %}{% endblock %}
+{% block page-title %}{% endblock %}
 
-  <!-- Link to my css -->
-  <link rel="stylesheet" href="{%static 'site/site.css' %}">
-
-  <title>Gallerie</title>
-</head>
-<body>
+{% block content %}
   <!-- <div id="centre"> -->
   <!--   <form action="{% url 'rechercher_gallerie' %}" method="GET"> -->
   <!--     <input type="text" name="recherche"><br> -->
@@ -21,22 +17,21 @@
 
   <div id="body">
     {% if perms.fiches.veteran %}
-    <a class="btn btn-default" id="center" href="{% url 'image_upload' %}">Télécharger</a>
+    <a class="btn btn-default button" id="center" href="{% url 'image_upload' %}">Téléverser</a>
     {% endif %}
     {% if images_list %}
-    <div class="gallery">
+    <div class="entire-gallery container">
     {% for image in images_list %}
     <div class="icones-text">
     <img class="icones" id="centre" src="{{image.image.url}}" alt="{{image}}"><br>
     <span id="center">{{ image.nom }}</span>
     </div>
-
     {% endfor %}
     <div class="clear"></div>
-    <div class="quest-pages">
+    <div class="quest-pages container">
       <span>Page {{ images_list.number }} sur {{ images_list.paginator.num_pages }}</span>
       <nav aria-label="Page navigation" id="pagination">
-	<ul class="pagination pagination-sm">
+	<ul class="pagination pagination-sm gallery-pagination">
 	  {% if images_list.has_previous %}
 	  <li>
 	    {% if recherche %}
