@@ -301,8 +301,10 @@ h3.card-title {
     width: 8%;
 }
 
-input, textarea {
-    color: initial;
+input, textarea, .form-control {
+  background: #333;
+  color: #fff;
+  border: 1px solid #666;
 }
 
 select {
@@ -529,7 +531,7 @@ h3#nom {
     display: none;
 }
 
-.upperright {
+.number-inventory .upperright {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -537,7 +539,12 @@ h3#nom {
     display: none;
 }
 
-.upperleft {
+.number-inventory .upperright:hover, .number-inventory .upperleft:hover {
+  width: 35px;
+  cursor: pointer;
+}
+
+.number-inventory .upperleft {
     position: absolute;
     top: 0px;
     left: 0px;
