@@ -841,3 +841,8 @@ h3.card-title {
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.navbar-btn,
+.navbar-btn:hover {
+    padding: 0 7px;
+}
