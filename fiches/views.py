@@ -1358,7 +1358,7 @@ def image(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             save_it = form.save()
-            return HttpResponseRedirect('/')
+            return redirect('upload_gallery')
         else:
             print(form.errors)
     else:
@@ -1367,7 +1367,7 @@ def image(request):
     return render(request, 'fiches/image.html', {'form': form})
 
 
-@permission_required('fiches.veteran', raise_exception=True)
+@permission_required('fiches.fdg', raise_exception=True)
 def upload_gallery(request):
     images = Image.objects.all()
     paginator = Paginator(images, 20)
