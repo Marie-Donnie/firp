@@ -5,7 +5,7 @@
       <i>{{ sort.effet|linebreaksbr }}</i><br>
       {% if sort.seuil != None %}{{ sort.seuil }}, {% endif %}{% if sort.cout != None %}{{ sort.cout }}<br>{% endif %}
       <b>Incantation : </b>{% if sort.duree_incant != None %}{{ sort.duree_incant }}{% else %}Instantané{% endif %}<br>
-      {% if sort.duree_cooldown != None %}<b>Temps de recharge : </b>{{ sort.cooldown }}<br>{% endif %}
+      {% if sort.cooldown != None %}<b>Temps de recharge : </b>{{ sort.cooldown }}<br>{% endif %}
       {% if sort.duree_sort != None %}<b>Durée du sort : </b>{{ sort.duree_sort }}<br>{% endif %}
       {% if sort.condition != 'aucune' %}<b>Condition : </b><span style="color:red;">{{ sort.condition }}<span><br> {% endif %}
 </div>
