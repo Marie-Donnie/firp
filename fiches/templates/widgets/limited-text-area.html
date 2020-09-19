@@ -1,6 +1,5 @@
 <textarea name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}
           onkeyup="countChars('{{ widget.attrs.id }}', 'charcount_{{ widget.name }}')"
           onkeydown="countChars('{{ widget.attrs.id }}', 'charcount_{{ widget.name }}')"
-          onmouseout="countChars('{{ widget.attrs.id }}', 'charcount_{{ widget.name }}')">
-  {% if widget.value %}{{ widget.value }}{% endif %}</textarea>
+          onmouseout="countChars('{{ widget.attrs.id }}', 'charcount_{{ widget.name }}')">{% if widget.value %}{{ widget.value }}{% endif %}</textarea>
 <span class="help-block">Limité à {{ widget.attrs.maxlength }} caractères (<span id="charcount_{{ widget.name }}">0</span>/{{ widget.attrs.maxlength }}).</span>
