@@ -357,6 +357,32 @@ def pretty_print_relations(fiche_id):
     return relations_finale
 
 
+def pretty_print_membres(famille_id):
+    famille = Famille.objects.get(pk=fiche_id)
+    membres_finale = []
+    if famille.membres:
+        membres_split = [str.strip() for str in famille.membres.splitlines()]
+        for membre in membres_split:
+            exists = False
+            membre_name = membre
+            membre_link = None
+            if relation.startswith('#'):
+                number, name = relation[1:].split(' ', maxsplit=1)
+                #number = relation[1:].split(' ', maxsplit=1)[0]
+                #leftovers = relation[1:].split(' ', maxsplit=1)[1]
+                if number.isdecimal():
+                    try:
+                        membre_link = Fiche.objects.get(pk=number)
+                        relation_name = name
+                        exists = True
+                    except ObjectDoesNotExist:
+                        pass
+            membres_finale.append({'exists': exists,
+                                   'name': membre_name,
+                                   'link': membre_link})
+    return membres_finale
+
+
 @login_required
 def delete_fiche(request, fiche_id):
     fiche = Fiche.objects.get(pk=fiche_id)
@@ -509,6 +535,50 @@ def upload_gallery_perso(request, fiche_id):
         return render(request, 'fiches/up_gallery.html', context)
     else:
         return HttpResponse(status=403)
+
+
+@login_required
+def creer_famille(request):
+    utilisateur = request.user
+    # Checks wether user can create another fiche or not
+    if utilisateur.has_perm('fiches.plus_de_15_fiches'):
+        if request.method == 'POST':
+            # request.POST is not editable, so we have to copy it to hard code a value
+            data = request.POST.copy()
+            # get the completed form
+            form = FamilleForm(data, request.FILES)
+            if form.is_valid():
+                # get the saved form to redirect to the created fiche
+                save_it = form.save()
+                return redirect('famille', famille_id=save_it.id)
+            else:
+                print(form.errors)
+        else:
+            form = FamilleForm()
+
+        context = {'form': form}
+        return render(request, 'fiches/famille.html', context)
+
+    else:
+        return HttpResponse("Vous ne pouvez pas faire de famille. Seuls les membres des Fils de Garithos le peuvent.")
+
+
+# Displays the families
+def familles(request):
+    context = {}
+    familles = Familles.objects.order_by('nom')
+
+    context = {'familles': familles}
+
+    return render(request, 'fiches/familles.html', context)
+
+# Display the request Fiche
+def famille(request, famille_id):
+    famille = get_object_or_404(Famille, pk=famille_id)
+
+    context = {'famille': famille,
+               'pretty_membres': pretty_print_membres(famille.id)}
+    return render(request, 'familles/detail.html', context)
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #

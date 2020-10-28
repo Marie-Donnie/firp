@@ -85,6 +85,17 @@ class GalleriePersoForm(ModelForm):
         fields = '__all__'
 
 
+class FamilleForm(ModelForm):
+
+    class Meta:
+        model = Famille
+        fields = '__all__'
+        labels = {
+            'signes_dis': 'Signes distinctifs',
+        }
+        widgets = {'historique': widgets.LimitedTextarea(attrs={'class':'form-control', 'rows': 10}),
+                   'noble': forms.CheckboxInput(),}
+
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% OBJETS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 
