@@ -326,6 +326,11 @@ class Famille(models.Model):
     historique = models.CharField(max_length=6000)
     membres = models.CharField(max_length=6000,
                                  default='Aucune')
+    noble = models.BooleanField(default=True,
+                                choices=(
+                                    (True, 'Oui'),
+                                    (False, 'Non'),
+                                ))
 
 
 

@@ -56,6 +56,10 @@ urlpatterns = [
     url(r'^fiches/gallerie/(?P<fiche_id>\d+)/$', views.upload_gallery_perso, name='gallerie_perso'),
     url(r'^fiches/creer_gallerie/(?P<fiche_id>\d+)/$', views.creer_gallerie, name='creer_gallerie'),
     url(r'^fiches/image/(?P<fiche_id>\d+)/$', views.image_perso, name='image_perso_upload'),
+    url(r'^creer_famille/$', views.creer_famille, name='creer_famille'),
+    url(r'^familles/$', views.familles, name='familles'),
+    url(r'^famille/(?P<famille_id>\d+)/$', views.famille,
+        name='famille'),
     # Objets
     url(r'^objets/$', views.objets, name='objets'),
     url(r'^objets/objets/creer_objet/$', views.creer_objet, name='creer_objet'),
