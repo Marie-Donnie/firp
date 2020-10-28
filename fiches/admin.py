@@ -10,7 +10,12 @@ from fiches.rpg.avant_garde.forms import *
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 class UserAdministration(admin.ModelAdmin):
-    list_display = ['username', 'first_name']
+    list_display = ('id', 'username', 'email')
+    list_filter = ['groups']
+    list_display_links = ('id', 'username')
+    save_as = True
+    save_on_top = True
+    search_fields = ['username', 'email']
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdministration)
@@ -24,8 +29,12 @@ admin.site.register(UserProfile, ProfileAdministration)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FICHES %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 class FicheAdmin(admin.ModelAdmin):
-    list_display = ('nom', 'prenom', 'id')
-
+    list_display = ('id', 'nom', 'prenom', 'createur')
+    list_filter = ['createur', 'profession', 'nom']
+    list_display_links = ('id', 'nom')
+    save_as = True
+    save_on_top = True
+    search_fields = ['nom', 'prenom', 'sexe', 'profession']
 admin.site.register(Fiche, FicheAdmin)
 
 
