@@ -319,6 +319,15 @@ class GalleriePerso(models.Model):
     nom_perso = models.CharField(max_length=500)
 
 
+class Famille(models.Model):
+    nom = models.CharField(max_length=200)
+    devise = models.CharField(max_length=500)
+    image = models.ImageField(upload_to='images/persos')
+    historique = models.CharField(max_length=6000)
+    membres = models.CharField(max_length=6000,
+                                 default='Aucune')
+
+
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% USERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
