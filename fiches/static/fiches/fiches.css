@@ -202,6 +202,10 @@ h3.card-title {
     color: #a72121;
 }
 
+#nav-button {
+    background: url("/static/site/images/INV_Garrison_Blueprints3.PNG") center;
+}
+
 #page-title {
     flex: 1 ;
     font-family: morpheus;
