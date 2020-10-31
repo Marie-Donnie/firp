@@ -21,15 +21,14 @@
   </div>
 
   <nav class="navbar navbar-expand-lg navbar-site" id="woody">
-    <!-- <div class="container-fluid" id="woody"> -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation" id="nav-button">
     <span class="navbar-toggler-icon"></span>
   </button>
       <div class="collapse navbar-collapse" id="main-navbar">
-      <!-- <div id="navbar" class="navbar-collapse collapse"> -->
-	<ul class="nav navbar-nav mr-auto mt-2 mt-lg-0">
-      	  <li><a href="{% url 'index' %}">Accueil</a></li>
-	  <li class="dropdown">
+	<ul class="navbar-nav mr-auto">
+      	  <li class="nav-item active">
+	    <a href="{% url 'index' %}">Accueil</a></li>
+	  <li class="nav-item dropdown">
             <a href="{% url 'personnages' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personnages <span class="caret"></span></a>
 	    <ul class="dropdown-menu">
       	      <li><a href="{% url 'personnages' %}">Liste des personnages</a></li>
@@ -40,7 +39,7 @@
 	    </ul>
 	  </li>
 	  {% if perms.fiches.fdg %}
-	  <li class="dropdown">
+	  <li class="nav-item dropdown">
             <a href="{% url 'objets' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Objets <span class="caret"></span></a>
 	    <ul class="dropdown-menu">
 	      <li><a href="{% url 'objets' %}">Liste des objets</a></li>

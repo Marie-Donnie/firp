@@ -26,8 +26,8 @@ h1 a:hover {
 }
 
 .page-header {
-    border: 1px solid #470002;
-    border-radius: 5px;
+    /* border: 1px solid #470002; */
+    /* border-radius: 5px; */
     background-color: #000000;
     margin-top: 20px;
     margin-left: 7%;
@@ -107,6 +107,10 @@ h1 a:hover {
     border-color: #470002;
 }
 
+#woody ul {
+    margin: 0%;
+}
+
 .navbar-collapse {
     padding-right:0;
 }
@@ -163,8 +167,8 @@ div.gallery img {
     background-color: #000000;
     background-repeat: repeat-x;
     padding: 10px 15px;
-    border: 1px solid #470002;
-    border-radius: 5px;
+    /* border: 1px solid #470002; */
+    /* border-radius: 5px; */
     color: #830205;
     margin-top: 0;
     margin-left: 0;
@@ -187,8 +191,8 @@ h3.card-title {
 }
 
 .card-body {
-    border: 1px solid #470002;
-    border-radius: 5px;
+    /* border: 1px solid #470002; */
+    /* border-radius: 5px; */
     margin-top: 0px;
     margin-bottom: 40px;
 }
@@ -200,6 +204,10 @@ h3.card-title {
 .navbar-site .navbar-nav > li > a:focus,
 .navbar-site .navbar-nav > li > a:hover {
     color: #a72121;
+}
+
+#nav-button {
+    background: url("/static/site/images/INV_Garrison_Blueprints3.PNG") center;
 }
 
 #page-title {
