@@ -167,8 +167,8 @@ div.gallery img {
     background-color: #000000;
     background-repeat: repeat-x;
     padding: 10px 15px;
-    border: 1px solid #470002;
-    border-radius: 5px;
+    /* border: 1px solid #470002; */
+    /* border-radius: 5px; */
     color: #830205;
     margin-top: 0;
     margin-left: 0;
