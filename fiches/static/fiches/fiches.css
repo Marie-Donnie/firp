@@ -26,8 +26,8 @@ h1 a:hover {
 }
 
 .page-header {
-    border: 1px solid #470002;
-    border-radius: 5px;
+    /* border: 1px solid #470002; */
+    /* border-radius: 5px; */
     background-color: #000000;
     margin-top: 20px;
     margin-left: 7%;
@@ -105,6 +105,10 @@ h1 a:hover {
     /* background-image: linear-gradient(to bottom,#000000 0,#2d0001 100%); */
     background-color: #000000;
     border-color: #470002;
+}
+
+#woody ul {
+    margin: 0%;
 }
 
 .navbar-collapse {
@@ -187,8 +191,8 @@ h3.card-title {
 }
 
 .card-body {
-    border: 1px solid #470002;
-    border-radius: 5px;
+    /* border: 1px solid #470002; */
+    /* border-radius: 5px; */
     margin-top: 0px;
     margin-bottom: 40px;
 }
