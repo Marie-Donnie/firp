@@ -47,6 +47,8 @@ Finally, to run the server:
 python manage.py runserver
 ```
 
+For any other informations on how to deploy a Django application : [Django tutorials](https://docs.djangoproject.com/en/2.2/intro/)
+
 ## How to deploy
 Copy the `firp/settings_local.py.sample` to `firp/settings_local.py` and edit
 it.  Any deployment-specific configuration should go into this file, as the
