@@ -1,5 +1,4 @@
-saison:
-  nom: hiver
+hiver:
   temperature:
     minimum: -10
     maximum: 6
@@ -18,10 +17,7 @@ saison:
     minimum: 78
     maximum: 83
     brouillard: 12
-
-
-saison:
-  nom: printemps
+printemps:
   temperature:
     minimum: 3
     maximum: 15
@@ -40,10 +36,7 @@ saison:
     minimum: 65
     maximum: 78
     brouillard: 17
-
-
-saison:
-  nom: ete
+ete:
   temperature:
     minimum: 12
     maximum: 20
@@ -62,10 +55,7 @@ saison:
     minimum: 64
     maximum: 90
     brouillard: 20
-
-
-saison:
-  nom: automne
+automne:
   temperature:
     minimum: -2
     maximum: 15

@@ -2,6 +2,9 @@ from django.db import models
 from datetime import datetime
 
 
+import yaml
+
+
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
 class IntegerRangeField(models.SmallIntegerField):
     def __init__(self, verbose_name=None, name=None, min_value=None,
@@ -84,3 +87,42 @@ class Shops:
         for (key, value) in self.sv.iteritems():
             result[key] = citizens / value
         return result
+
+
+def read_yaml(file_path):
+    with open(file_path, 'r') as stream:
+        try:
+            return yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+
+
+# TEST FUNCTIONS
+# import functions
+# yaml = functions.read_yaml("yaml/weather.yml")
+# functions.get_season(yaml, "ete")
+# functions.get_temperatures(yaml, "ete")
+# functions.get_temperature(yaml, "ete", "minimum")
+
+def get_season(yaml, saison):
+    return yaml[saison]
+
+
+def get_temperatures(yaml, saison):
+    return get_season(yaml, saison)['temperature']
+
+
+def get_temperature(yaml, saison, param):
+    return get_temperatures(yaml, saison)[param]
+
+
+def get_ciel(yaml, saison):
+    return get_season(yaml, saison)['ciel']
+
+
+def get_vent(yaml, saison):
+    return get_season(yaml, saison)['vent']
+
+
+def get_humidite(yaml, saison):
+    return get_season(yaml, saison)['humidite']
