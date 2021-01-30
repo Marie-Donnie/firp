@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 import yaml
+import math
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%% #
@@ -85,7 +86,9 @@ class Shops:
     def count_shops(self, citizens):
         result = dict()
         for (key, value) in self.sv.items():
-            result[key] = citizens / value
+            div = citizens / value
+            print(div)
+            result[key] = truncate(div, 2)
         return result
 
 
@@ -95,6 +98,21 @@ def read_yaml(file_path):
             return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             print(exc)
+
+
+def truncate(number, decimals=0):
+    """
+    Returns a value truncated to a specific number of decimal places.
+    """
+    if not isinstance(decimals, int):
+        raise TypeError("decimal places must be an integer.")
+    elif decimals < 0:
+        raise ValueError("decimal places has to be 0 or more.")
+    elif decimals == 0:
+        return math.trunc(number)
+
+    factor = 10.0 ** decimals
+    return math.trunc(number * factor) / factor
 
 
 # TEST FUNCTIONS
