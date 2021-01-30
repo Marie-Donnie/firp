@@ -84,7 +84,7 @@ class Shops:
 
     def count_shops(self, citizens):
         result = dict()
-        for (key, value) in self.sv.iteritems():
+        for (key, value) in self.sv.items():
             result[key] = citizens / value
         return result
 
